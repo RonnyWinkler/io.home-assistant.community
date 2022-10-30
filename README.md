@@ -1,4 +1,4 @@
-# Home-Assistant integation for Homey by Athom
+# Home-Assistant integation for Homey
 
 This application allows you to add your home-assistant (http://home-assistant.io) devices to your Homey.
 
@@ -7,24 +7,21 @@ This application allows you to add your home-assistant (http://home-assistant.io
 - Homey :)
 
 ## The list of currently support types:
-- sensors
-- binary_sensors
+- sensors, binary sensors
 - switches
 - light
 - scenes
 - scripts
+- media player
 
 ## Getting started
 To connect the application to your home-assistant instance you will need to create a `Long Lived Access Token` in home-assistant. You can create a token on your home-assistant account profile page (https://www.home-assistant.io/docs/authentication/).
 
 You will also need to know the ip-address/hostname of your home-assistant instance.
 
-Install the application on your Homey and then go into the application settings.
-
-Fill in the correct address (e.g. http://127.0.0.1:8123) and the access token you have created inside home-assistant and then press "Save changes".
-
-In case you have entered the correct settings it should show "Successfully connected".
-
+Install the application on your Homey.
+Then start the pairing of a new device. The first time you will be asked for the login information.
+Fill in the correct address (e.g. http://127.0.0.1:8123) and the access token you have created inside home-assistant and go on in paiting process.
 Now you can add the devices you want to use within Homey
 
 ## Flow action
