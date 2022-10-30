@@ -161,7 +161,7 @@
           {
             "name": "device",
             "type": "device",
-            "filter": "driver_id=sensor|compound"
+            "filter": "driver_id=sensor"
           }
         ],
         "id": "measure_generic_changed"
@@ -193,7 +193,7 @@
           {
             "name": "device",
             "type": "device",
-            "filter": "driver_id=sensor|compound"
+            "filter": "driver_id=sensor"
           }
         ],
         "id": "measure_numeric_changed"
@@ -360,128 +360,6 @@
     ]
   },
   "drivers": [
-    {
-      "capabilitiesOptions": {
-        "button.reconnect": {
-          "maintenanceAction": true,
-          "title": {
-            "en": "Reconnect",
-            "de": "Neu verbinden",
-            "nl": "Opnieuw verbinden"
-          },
-          "desc": {
-            "en": "Reconnect and reload entities.",
-            "de": "Neu verbinden und Entitäten neu laden.",
-            "nl": "Maak opnieuw verbinding en laad entiteiten opnieuw."
-          }
-        }
-      },
-      "pair": [
-        {
-          "id": "loading",
-          "template": "loading",
-          "navigation": {
-            "next": "list_devices"
-          }
-        },
-        {
-          "id": "login_credentials",
-          "template": "login_credentials",
-          "navigation": {
-            "next": "list_devices"
-          },
-          "options": {
-            "logo": "logo.png",
-            "usernameLabel": {
-              "en": "Server"
-            },
-            "usernamePlaceholder": {
-              "en": "http://192.168.xxx.xxx:8123"
-            },
-            "passwordLabel": {
-              "en": "Token"
-            },
-            "passwordPlaceholder": {
-              "en": "Long-lived access token"
-            }
-          }
-        },
-        {
-          "id": "list_devices",
-          "template": "list_devices",
-          "navigation": {
-            "next": "add_devices"
-          },
-          "options": {
-            "singular": true
-          }
-        },
-        {
-          "id": "add_devices",
-          "template": "add_devices"
-        }
-      ],
-      "repair": [
-        {
-          "id": "login_credentials",
-          "template": "login_credentials",
-          "navigation": {
-            "next": "done"
-          },
-          "options": {
-            "logo": "logo.png",
-            "usernameLabel": {
-              "en": "Server"
-            },
-            "usernamePlaceholder": {
-              "en": "http://192.168.xxx.xxx:8123"
-            },
-            "passwordLabel": {
-              "en": "Token"
-            },
-            "passwordPlaceholder": {
-              "en": "Long-lived access token"
-            }
-          }
-        },
-        {
-          "id": "done",
-          "template": "done"
-        }
-      ],
-      "id": "binary_sensor",
-      "name": {
-        "en": "Binary sensor",
-        "de": "Binärsensor",
-        "nl": "Binaire sensor"
-      },
-      "class": "sensor",
-      "capabilities": [
-        "onoff",
-        "alarm_battery",
-        "alarm_co",
-        "alarm_co2",
-        "alarm_contact",
-        "alarm_fire",
-        "alarm_generic",
-        "alarm_heat",
-        "alarm_motion",
-        "alarm_pm25",
-        "alarm_smoke",
-        "alarm_tamper",
-        "alarm_water",
-        "button.reconnect"
-      ],
-      "energy": {
-        "batteries": [
-          "OTHER"
-        ]
-      },
-      "images": {
-        "large": "/drivers/binary_sensor/assets/images/large.png",
-        "small": "/drivers/binary_sensor/assets/images/small.png"
-      }
-    },
     {
       "capabilitiesOptions": {
         "button.reconnect": {

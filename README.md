@@ -3,7 +3,7 @@
 This application allows you to add your home-assistant (http://home-assistant.io) devices to your Homey.
 
 ## Requirements
-- Home-assistant 0.78+
+- Home-assistant
 - Homey :)
 
 ## The list of currently support types:
@@ -34,7 +34,7 @@ Besides the ability to add devices and use them in your Homey flows there is als
 Because Homey and home-assistant are modeled differently when it comes to devices it makes sense to group multiple sensors from home-assistant into one Homey device.
 
 To do so you will have to install a custom component in your home-assistant installation:
-https://github.com/rogro82/io.homeassistant/blob/master/custom_component/homey.py
+https://github.com/RonnyWinkler/io.home-assistant.community/tree/main/custom_components/homey
 
 After adding the custom component you can now declare the homey platform in your home-assistant configuration and define your devices.
 
@@ -63,3 +63,12 @@ to: (value) => { return value * 100; }
 ```
 
 After reloading your home-assistant configuration you can add it in Homey by selecting `Compound` in the `Choose a device` dialog.
+
+## Origin
+This app is based on the initial version by Rob Groenendijk
+https://github.com/rogro82/io.homeassistant
+Thanks for showing the way :)
+
+## Contributors
+- Jeroen Nijssen
+- Peter Dwarswaard
