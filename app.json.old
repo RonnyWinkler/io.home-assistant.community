@@ -1,0 +1,375 @@
+{
+  "id": "io.home-assistant.community",
+  "version": "0.0.1",
+  "compatibility": ">=5.0.0",
+  "sdk": 3,
+  "brandColor": "#038FC7",
+  "name": {
+    "en": "Home Assistant"
+  },
+  "description": {
+    "en": "Connect to Home Assistant",
+    "de": "Verbinde dich mit Home Assistant",
+    "nl": "Koppelen met Home Assitant"
+  },
+  "category": [
+    "appliances"
+  ],
+  "tags": {
+    "en": [
+      "home-assistant",
+      "hass"
+    ]
+  },
+  "permissions": [],
+  "images": {
+    "large": "/assets/images/large.png",
+    "small": "/assets/images/small.png"
+  },
+  "author": {
+    "name": "Rob Groenendijk",
+    "email": "rogro82@gmail.com"
+  },
+  "capabilities": {
+    "measure_generic": {
+      "type": "string",
+      "title": {
+          "nl": "Waarde",
+          "en": "Value"
+      },
+      "getable": true,
+      "setable": false
+    },
+    "measure_numeric": {
+      "type": "number",
+      "title": {
+          "nl": "Waarde",
+          "en": "Value"
+      },
+      "getable": true,
+      "setable": false
+    }
+  },
+  "drivers": [
+    {
+      "id": "light",
+      "name": {
+        "en": "Light",
+        "nl": "Lamp"
+      },
+      "class": "light",
+      "capabilities": [
+        "onoff",
+        "dim",
+        "light_hue",
+        "light_saturation",
+        "light_temperature"
+      ],
+      "capabilitiesOptions": {
+        "dim": {
+          "opts": {
+            "duration": true
+          }
+        },
+        "light_hue": {
+          "opts": {
+            "duration": true
+          }
+        },
+        "light_saturation": {
+          "opts": {
+            "duration": true
+          }
+        },
+        "light_temperature": {
+          "opts": {
+            "duration": true
+          }
+        }
+      },
+      "images": {
+        "large": "drivers/bulb/assets/images/large.jpg",
+        "small": "drivers/bulb/assets/images/small.jpg"
+      },
+      "pair": [
+        {
+          "id": "list_devices",
+          "template": "list_devices",
+          "navigation": {
+            "next": "add_devices"
+          }
+        },
+        {
+          "id": "add_devices",
+          "template": "add_devices"
+        }
+      ]
+    },
+    {
+      "id": "scene",
+      "name": {
+        "en": "Scene",
+        "nl": "Scene"
+      },
+      "class": "button",
+      "capabilities": [
+        "button"
+      ],
+      "images": {
+        "large": "drivers/bulb/assets/images/large.jpg",
+        "small": "drivers/bulb/assets/images/small.jpg"
+      },
+      "pair": [
+        {
+          "id": "list_devices",
+          "template": "list_devices",
+          "navigation": {
+            "next": "add_devices"
+          }
+        },
+        {
+          "id": "add_devices",
+          "template": "add_devices"
+        }
+      ]
+    },
+    {
+      "id": "script",
+      "name": {
+        "en": "Script",
+        "nl": "Script"
+      },
+      "class": "button",
+      "capabilities": [
+        "button"
+      ],
+      "images": {
+        "large": "drivers/bulb/assets/images/large.jpg",
+        "small": "drivers/bulb/assets/images/small.jpg"
+      },
+      "pair": [
+        {
+          "id": "list_devices",
+          "template": "list_devices",
+          "navigation": {
+            "next": "add_devices"
+          }
+        },
+        {
+          "id": "add_devices",
+          "template": "add_devices"
+        }
+      ]
+    },
+    {
+      "id": "switch",
+      "name": {
+        "en": "Switch",
+        "nl": "Schakelaar"
+      },
+      "class": "socket",
+      "capabilities": [
+        "onoff"
+      ],
+      "images": {
+        "large": "drivers/bulb/assets/images/large.jpg",
+        "small": "drivers/bulb/assets/images/small.jpg"
+      },
+      "pair": [
+        {
+          "id": "list_devices",
+          "template": "list_devices",
+          "navigation": {
+            "next": "choose_slave"
+          }
+        },
+        {
+          "id": "choose_slave",
+          "template": "choose_slave",
+          "navigation": {
+            "next": "add_devices"
+          }
+        },
+        {
+          "id": "add_devices",
+          "template": "add_devices"
+        }
+      ]
+    },
+    {
+      "id": "sensor",
+      "name": {
+        "en": "Sensor",
+        "nl": "Sensor"
+      },
+      "class": "sensor",
+      "capabilities": [
+        "measure_generic",
+        "measure_numeric",
+        "measure_battery",
+        "measure_co",
+        "measure_co2",
+        "measure_current",
+        "measure_gust_angle",
+        "measure_gust_strength",
+        "measure_humidity",
+        "measure_luminance",
+        "measure_noise",
+        "measure_pm25",
+        "measure_power",
+        "measure_pressure",
+        "measure_rain",
+        "measure_temperature",
+        "measure_ultraviolet",
+        "measure_voltage",
+        "measure_water",
+        "measure_wind_angle",
+        "measure_wind_strength"
+      ],
+      "images": {
+        "large": "drivers/bulb/assets/images/large.jpg",
+        "small": "drivers/bulb/assets/images/small.jpg"
+      },      
+      "pair": [
+        {
+          "id": "list_devices",
+          "template": "list_devices",
+          "navigation": {
+            "next": "add_devices"
+          }
+        },
+        {
+          "id": "add_devices",
+          "template": "add_devices"
+        }
+      ]
+    },
+    {
+      "id": "binary_sensor",
+      "name": {
+        "en": "Binary sensor",
+        "nl": "Binaire sensor"
+      },
+      "class": "sensor",
+      "capabilities": [
+        "onoff",
+        "alarm_battery",
+        "alarm_co",
+        "alarm_co2",
+        "alarm_contact",
+        "alarm_fire",
+        "alarm_generic",
+        "alarm_heat",
+        "alarm_motion",
+        "alarm_pm25",
+        "alarm_smoke",
+        "alarm_tamper",
+        "alarm_water"
+      ],
+      "images": {
+        "large": "drivers/bulb/assets/images/large.jpg",
+        "small": "drivers/bulb/assets/images/small.jpg"
+      },      
+      "pair": [
+        {
+          "id": "list_devices",
+          "template": "list_devices",
+          "navigation": {
+            "next": "add_devices"
+          }
+        },
+        {
+          "id": "add_devices",
+          "template": "add_devices"
+        }
+      ]
+    },
+    {
+      "id": "compound",
+      "name": {
+        "en": "Compound",
+        "nl": "Samengesteld"
+      },
+      "class": "sensor",
+      "capabilities": [
+        "onoff",
+        "locked",
+        "alarm_battery",
+        "alarm_co",
+        "alarm_co2",
+        "alarm_contact",
+        "alarm_fire",
+        "alarm_generic",
+        "alarm_heat",
+        "alarm_motion",
+        "alarm_pm25",
+        "alarm_smoke",
+        "alarm_tamper",
+        "alarm_water",
+        "measure_generic",
+        "measure_numeric",
+        "measure_battery",
+        "measure_co",
+        "measure_co2",
+        "measure_current",
+        "measure_gust_angle",
+        "measure_gust_strength",
+        "measure_humidity",
+        "measure_luminance",
+        "measure_noise",
+        "measure_pm25",
+        "measure_power",
+        "measure_pressure",
+        "measure_rain",
+        "measure_temperature",
+        "measure_ultraviolet",
+        "measure_voltage",
+        "measure_water",
+        "measure_wind_angle",
+        "measure_wind_strength"
+      ],
+      "images": {
+        "large": "drivers/bulb/assets/images/large.jpg",
+        "small": "drivers/bulb/assets/images/small.jpg"
+      },      
+      "pair": [
+        {
+          "id": "list_devices",
+          "template": "list_devices",
+          "navigation": {
+            "next": "add_devices"
+          }
+        },
+        {
+          "id": "add_devices",
+          "template": "add_devices"
+        }
+      ]
+    }
+  ],
+  "flow": {
+    "actions": [
+      {
+				"id": "callService",
+				"title": {
+					"en": "Call service",
+					"nl": "Roep service aan"
+				},
+				"args": [
+					{
+						"name": "domain",
+						"type": "text"
+          },
+          {
+						"name": "service",
+						"type": "text"
+          },
+          {
+						"name": "data",
+						"type": "text"
+					}
+				]
+			}
+    ]
+  }
+}

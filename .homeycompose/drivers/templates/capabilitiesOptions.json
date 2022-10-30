@@ -1,0 +1,17 @@
+{
+    "capabilitiesOptions": {
+        "button.reconnect": {
+            "maintenanceAction": true,
+            "title": {
+                "en": "Reconnect",
+                "de": "Neu verbinden",
+                "nl": "Opnieuw verbinden"
+            },
+            "desc": {
+                "en": "Reconnect and reload entities.",
+                "de": "Neu verbinden und Entitäten neu laden.",
+                "nl": "Maak opnieuw verbinding en laad entiteiten opnieuw."
+            }
+        }
+    }
+}

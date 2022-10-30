@@ -1,0 +1,45 @@
+{
+    "pair": [
+        {
+            "id": "loading",
+            "template": "loading",
+            "navigation": {
+              "next": "list_devices"
+            }
+        },
+        {
+            "id": "login_credentials",
+            "template": "login_credentials",
+            "navigation": {
+                "next": "list_devices"
+            },
+            "options": {
+                "logo": "logo.png",
+                "usernameLabel": { 
+                    "en": "Server" 
+                },
+                "usernamePlaceholder": { 
+                    "en": "http://192.168.xxx.xxx:8123" 
+                },
+                "passwordLabel": { 
+                    "en": "Token" 
+                },
+                "passwordPlaceholder": { 
+                    "en": "Long-lived access token" 
+                }
+            }
+        },
+        {
+            "id": "list_devices",
+            "template": "list_devices",
+            "navigation": {
+                "next": "add_devices"
+            },
+            "options": { "singular": true }
+        },
+        {
+            "id": "add_devices",
+            "template": "add_devices"
+        }
+    ]
+}

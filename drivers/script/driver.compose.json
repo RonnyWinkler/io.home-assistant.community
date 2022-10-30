@@ -1,0 +1,19 @@
+{
+    "id": "script",
+    "name": {
+      "en": "Script",
+      "de": "Skript",
+      "nl": "Script"
+    },
+    "class": "button",
+    "capabilities": [
+      "button",
+    
+      "button.reconnect"
+    ],
+    "images": {
+      "large": "/drivers/script/assets/images/large.png",
+      "small": "/drivers/script/assets/images/small.png"
+    },
+    "$extends": [ "capabilitiesOptions", "pair", "repair" ]
+  }

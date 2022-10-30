@@ -1,0 +1,39 @@
+{
+    "highlight": true,
+    "title": {
+        "en": "Select media source.",
+        "de": "Wähle Medienquelle.",
+        "nl": "Selecteer mediabron"
+    },
+    "titleFormatted": {
+        "en": "Change to media source [[source]].",
+        "de": "Wechsel zur Medienquelle [[source]].",
+        "nl": "Wijzig naar mediabron [[source]]"
+    },
+    "hint": {
+        "en": "The source list it provided by the devie or the HomeAssistand integration and ca include physical inputs like HDMI and apps.",
+        "de": "Die Quellenliste wird vom Gerät oder der HomeAssistand-Integration bereitgestellt und kann physische Eingänge wie HDMI und Apps enthalten.",
+        "nl": "De bronnenlijst die wordt geleverd door de devie of de HomeAssistand-integratie en bevat fysieke ingangen zoals HDMI en apps."
+    },
+    "args": [
+        {
+            "type": "autocomplete",
+            "name": "source",
+            "title": { 
+                "en": "Media source",
+                "de": "Medienquelle",
+                "nl": "Mediabron"
+            },
+            "placeholder": { 
+                "en": "Select the media source",
+                "de": "Wähle die Medienquelle",
+                "nl": "Selecteer de mediabron"
+            }
+        },
+        {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=media"
+        }
+    ]
+}

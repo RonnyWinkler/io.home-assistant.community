@@ -1,0 +1,39 @@
+{
+    "highlight": true,
+    "title": {
+        "en": "Select sound mode.",
+        "de": "Wähle Klangmodus.",
+        "nl": "Selecteer geluidsmodus"
+    },
+    "titleFormatted": {
+        "en": "Change to sound mode [[mode]].",
+        "de": "Wechsel zum Klangmodus [[mode]].",
+        "nl": "Wijzig naar geluidsmodus [[mode]]"
+    },
+    "hint": {
+        "en": "The sound mode list it provided by the devie or the HomeAssistand integration.",
+        "de": "Die Klangmodis werden vom Gerät oder der HomeAssistand-Integration bereitgestellt.",
+        "nl": "De geluidsmodus die wordt geleverd door de devie of de HomeAssistand-integratie."
+    },
+    "args": [
+        {
+            "type": "autocomplete",
+            "name": "mode",
+            "title": { 
+                "en": "Sound mode",
+                "de": "Klangmodus",
+                "nl": "Geluidsmodus"
+            },
+            "placeholder": { 
+                "en": "Select the sound mode",
+                "de": "Wähle den Klangmodus",
+                "nl": "Selecteer de geluidsmodus"
+            }
+        },
+        {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=media"
+        }
+    ]
+}

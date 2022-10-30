@@ -1,0 +1,19 @@
+{
+    "id": "scene",
+    "name": {
+      "en": "Scene",
+      "de": "Szene",
+      "nl": "Scene"
+    },
+    "class": "button",
+    "capabilities": [
+      "button",
+    
+      "button.reconnect"
+    ],
+    "images": {
+      "large": "/drivers/scene/assets/images/large.png",
+      "small": "/drivers/scene/assets/images/small.png"
+  },
+  "$extends": [ "capabilitiesOptions", "pair", "repair" ]
+}

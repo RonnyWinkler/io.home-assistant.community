@@ -1,0 +1,46 @@
+{
+  "id": "sensor",
+  "name": {
+    "en": "Sensor",
+    "de": "Sensor",
+    "nl": "Sensor"
+  },
+  "class": "sensor",
+  "capabilities": [
+    "measure_generic",
+    "measure_numeric",
+    "measure_battery",
+    "measure_co",
+    "measure_co2",
+    "measure_current",
+    "measure_gust_angle",
+    "measure_gust_strength",
+    "measure_humidity",
+    "measure_luminance",
+    "measure_noise",
+    "measure_pm25",
+    "measure_power",
+    "measure_pressure",
+    "measure_rain",
+    "measure_temperature",
+    "measure_ultraviolet",
+    "measure_voltage",
+    "measure_water",
+    "measure_wind_angle",
+    "measure_wind_strength",
+    "meter_gas",
+    "meter_water",
+    "meter_power",
+    "meter_rain",
+    
+    "button.reconnect"
+  ],
+  "energy": {
+    "batteries": ["OTHER"]
+  },
+  "images": {
+    "large": "/drivers/sensor/assets/images/large.png",
+    "small": "/drivers/sensor/assets/images/small.png"
+  },
+  "$extends": [ "capabilitiesOptions", "pair", "repair" ]
+}

@@ -1,0 +1,63 @@
+{
+  "id": "compound",
+  "name": {
+    "en": "Compound",
+    "de": "Verbund",
+    "nl": "Samengesteld"
+  },
+  "class": "sensor",
+  "capabilities": [
+    "onoff",
+    "button",
+    "locked",
+    "dim",
+
+    "alarm_battery",
+    "alarm_co",
+    "alarm_co2",
+    "alarm_contact",
+    "alarm_fire",
+    "alarm_generic",
+    "alarm_heat",
+    "alarm_motion",
+    "alarm_pm25",
+    "alarm_smoke",
+    "alarm_tamper",
+    "alarm_water",
+    "measure_generic",
+    "measure_numeric",
+    "measure_battery",
+    "measure_co",
+    "measure_co2",
+    "measure_current",
+    "measure_gust_angle",
+    "measure_gust_strength",
+    "measure_humidity",
+    "measure_luminance",
+    "measure_noise",
+    "measure_pm25",
+    "measure_power",
+    "measure_pressure",
+    "measure_rain",
+    "measure_temperature",
+    "measure_ultraviolet",
+    "measure_voltage",
+    "measure_water",
+    "measure_wind_angle",
+    "measure_wind_strength",
+    "meter_gas",
+    "meter_water",
+    "meter_power",
+    "meter_rain",
+    
+    "button.reconnect"
+  ],
+  "energy": {
+    "batteries": ["OTHER"]
+  },
+  "images": {
+      "large": "/drivers/compound/assets/images/large.png",
+      "small": "/drivers/compound/assets/images/small.png"
+  },
+  "$extends": [ "capabilitiesOptions", "pair", "repair" ]
+}

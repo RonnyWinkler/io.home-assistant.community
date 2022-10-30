@@ -1,0 +1,27 @@
+{
+    "id": "callService",
+    "title": { 
+        "en": "Call service",
+        "de": "Dienst aufrufen",
+        "nl": "Roep service aan"
+    },
+    "titleFormatted": { 
+        "en": "Call service [[service]] of domain [[domain]] with data [[data]]",
+        "de": "Dienst [[service]] der Domäne [[domain]] mit den Daten [[data]] aufrufen",
+        "nl": "Bel service [[service]] van domein [[domain]] met data [[data]]"
+    },
+    "args": [
+        {
+            "name": "domain",
+            "type": "text"
+        },
+        {
+            "name": "service",
+            "type": "text"
+        },
+        {
+            "name": "data",
+            "type": "text"
+        }
+    ]
+}

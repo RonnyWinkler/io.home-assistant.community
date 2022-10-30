@@ -1,0 +1,12 @@
+{
+    "type": "string",
+    "title": {
+        "en": "Value",
+        "de": "Wert",
+        "nl": "Waarde"
+    },
+    "getable": true,
+    "setable": false,
+    "insights": true,
+    "icon": "/assets/capability_icons/measure_generic.svg"
+}

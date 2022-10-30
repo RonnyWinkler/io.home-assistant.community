@@ -1,0 +1,76 @@
+{
+    "title": {
+        "en": "Value changed",
+        "de": "Wert hat sich geändert",
+        "nl": "Waarde gewijzigd"
+    },
+    "titleFormatted": {
+        "en": "Value of capability [[capability]] changed",
+        "de": "Wert des Attributs [[capability]] hat sich geändert",
+        "nl": "Waarde van capability [[capability]] gewijzigd"
+    },
+    "hint": {
+        "en": "Triggers when the value of capability [[capability]] changes. Select one of the capabilities defined in compound definition and use the result token of the corresponding type",
+        "de": "Wird ausgelöst, wenn sich der Wert des Attributs [[capability]] ändert. Wähle eines der in der Compound-Definition definierten Attribute aus und verwende den Ergebnistoken des entsprechenden Typs.",
+        "nl": "Wordt geactiveerd wanneer de waarde van capability [[capability]] verandert. Selecteer een van de mogelijkheden die zijn gedefinieerd in de compound definitie en gebruik het resultaattoken van het overeenkomstige type"
+    },
+    "tokens": [
+        {
+            "name": "capability",
+            "type": "string",
+            "title": {
+                "en": "Capability",
+                "de": "Attribut",
+                "nl": "Capability"
+            }
+        },
+        {
+            "name": "value_boolean",
+            "type": "boolean",
+            "title": {
+                "en": "Value",
+                "de": "Wert",
+                "nl": "Waarde"
+            }
+        },
+        {
+            "name": "value_string",
+            "type": "string",
+            "title": {
+                "en": "Value",
+                "de": "Wert",
+                "nl": "Waarde"
+            }
+        },
+        {
+            "name": "value_number",
+            "type": "number",
+            "title": {
+                "en": "Value",
+                "de": "Wert",
+                "nl": "Waarde"
+            }
+        }
+    ],
+    "args": [
+        {
+            "type": "autocomplete",
+            "name": "capability",
+            "title": { 
+                "en": "Capability",
+                "de": "Attribut",
+                "nl": "Capability"
+            },
+            "placeholder": { 
+                "en": "Select a device capability",
+                "de": "Wähle ein Geräte-Attibut",
+                "nl": "Selecteer een apparaat capability"
+            }
+        },
+        {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=compound"
+        }
+    ]
+}

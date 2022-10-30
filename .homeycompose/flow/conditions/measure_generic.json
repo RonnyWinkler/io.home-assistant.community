@@ -1,0 +1,23 @@
+{
+    "title": {
+        "en": "Value (text) !{{is|isn't}}",
+        "de": "Wert (Text) !{{ist|ist nicht}}",
+        "nl": "Waarde (tekst) !{{is|is niet}}"
+    },
+    "titleFormatted": {
+        "en": "Value (text) !{{is|isn't}} [[value]]",
+        "de": "Wert (Text) !{{ist|ist nicht}} [[value]]",
+        "nl": "Waarde (tekst) !{{is|is niet}} [[value]]"
+    },
+    "args": [
+        {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=sensor|compound"
+        },
+        {
+            "name": "value",
+            "type": "text"
+        }
+    ]
+}

@@ -1,0 +1,28 @@
+{
+    "title": {
+        "en": "Value (text) changed",
+        "de": "Wert (Text) hat sich geändert",
+        "nl": "Waarde (tekst) gewijzigd"
+    },
+    "hint": {
+        "en": "Triggers when the text value changes.",
+        "de": "Wird ausgelöst, wenn sich der Textwert ändert.",
+        "nl": "Wordt geactiveerd wanneer de tekstwaarde verandert."
+    },
+    "tokens": [{
+            "name": "measure_generic",
+            "type": "string",
+            "title": {
+                "en": "Value",
+                "de": "Wert",
+                "nl": "Waarde"
+            },
+            "example": "home"
+        }
+    ],
+    "args": [{
+        "name": "device",
+        "type": "device",
+        "filter": "driver_id=sensor|compound"
+    }]
+}

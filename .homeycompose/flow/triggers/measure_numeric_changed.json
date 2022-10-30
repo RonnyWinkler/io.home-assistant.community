@@ -1,0 +1,28 @@
+{
+    "title": {
+        "en": "Value (numeric) changed",
+        "de": "Wert (numerisch) hat sich geändert",
+        "nl": "Waarde (numeriek) gewijzigd"
+    },
+    "hint": {
+        "en": "Triggers when the numeric value changes.",
+        "de": "Wird ausgelöst, wenn sich der numerische Wert ändert.",
+        "nl": "Wordt geactiveerd wanneer de numerieke waarde verandert."
+    },
+    "tokens": [{
+            "name": "measure_numeric",
+            "type": "number",
+            "title": {
+                "en": "Value",
+                "de": "Wert",
+                "nl": "Waarde"
+            },
+            "example": 10
+        }
+    ],
+    "args": [{
+        "name": "device",
+        "type": "device",
+        "filter": "driver_id=sensor|compound"
+    }]
+}

@@ -1,0 +1,19 @@
+{
+    "id": "switch",
+    "name": {
+      "en": "Switch",
+      "de": "Schalter",
+      "nl": "Schakelaar"
+    },
+    "class": "socket",
+    "capabilities": [
+      "onoff",
+    
+      "button.reconnect"
+    ],
+    "images": {
+      "large": "/drivers/switch/assets/images/large.png",
+      "small": "/drivers/switch/assets/images/small.png"
+  },
+  "$extends": [ "capabilitiesOptions", "pair", "repair" ]
+}

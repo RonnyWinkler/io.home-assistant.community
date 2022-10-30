@@ -1,0 +1,1359 @@
+{
+  "_comment": "This file is generated. Please edit .homeycompose/app.json instead.",
+  "id": "io.home-assistant.community",
+  "version": "0.0.1",
+  "compatibility": ">=5.0.0",
+  "sdk": 3,
+  "brandColor": "#038FC7",
+  "name": {
+    "en": "Home Assistant"
+  },
+  "description": {
+    "en": "Connect to Home Assistant",
+    "de": "Verbinde dich mit Home Assistant",
+    "nl": "Koppelen met Home Assitant"
+  },
+  "category": [
+    "appliances"
+  ],
+  "tags": {
+    "en": [
+      "home-assistant",
+      "hass",
+      "home assistant"
+    ]
+  },
+  "source": "https://github.com/RonnyWinkler/io.homeassistant",
+  "homeyCommunityTopicId": 0,
+  "permissions": [],
+  "images": {
+    "large": "/assets/images/large.png",
+    "small": "/assets/images/small.png"
+  },
+  "author": {
+    "name": "Ronny Winkler",
+    "email": "ronny.winkler@web.de"
+  },
+  "contributors": {
+    "developers": [
+      {
+        "name": "Rob Groenendijk",
+        "email": "rogro82@gmail.com"
+      },
+      {
+        "name": "Jeroen Nijssen"
+      },
+      {
+        "name": "Peter Dwarswaard"
+      }
+    ]
+  },
+  "contributing": {
+    "donate": {
+      "paypal": {
+        "username": "winklerronny"
+      }
+    }
+  },
+  "flow": {
+    "triggers": [
+      {
+        "title": {
+          "en": "Value changed",
+          "de": "Wert hat sich geändert",
+          "nl": "Waarde gewijzigd"
+        },
+        "titleFormatted": {
+          "en": "Value of capability [[capability]] changed",
+          "de": "Wert des Attributs [[capability]] hat sich geändert",
+          "nl": "Waarde van capability [[capability]] gewijzigd"
+        },
+        "hint": {
+          "en": "Triggers when the value of capability [[capability]] changes. Select one of the capabilities defined in compound definition and use the result token of the corresponding type",
+          "de": "Wird ausgelöst, wenn sich der Wert des Attributs [[capability]] ändert. Wähle eines der in der Compound-Definition definierten Attribute aus und verwende den Ergebnistoken des entsprechenden Typs.",
+          "nl": "Wordt geactiveerd wanneer de waarde van capability [[capability]] verandert. Selecteer een van de mogelijkheden die zijn gedefinieerd in de compound definitie en gebruik het resultaattoken van het overeenkomstige type"
+        },
+        "tokens": [
+          {
+            "name": "capability",
+            "type": "string",
+            "title": {
+              "en": "Capability",
+              "de": "Attribut",
+              "nl": "Capability"
+            }
+          },
+          {
+            "name": "value_boolean",
+            "type": "boolean",
+            "title": {
+              "en": "Value",
+              "de": "Wert",
+              "nl": "Waarde"
+            }
+          },
+          {
+            "name": "value_string",
+            "type": "string",
+            "title": {
+              "en": "Value",
+              "de": "Wert",
+              "nl": "Waarde"
+            }
+          },
+          {
+            "name": "value_number",
+            "type": "number",
+            "title": {
+              "en": "Value",
+              "de": "Wert",
+              "nl": "Waarde"
+            }
+          }
+        ],
+        "args": [
+          {
+            "type": "autocomplete",
+            "name": "capability",
+            "title": {
+              "en": "Capability",
+              "de": "Attribut",
+              "nl": "Capability"
+            },
+            "placeholder": {
+              "en": "Select a device capability",
+              "de": "Wähle ein Geräte-Attibut",
+              "nl": "Selecteer een apparaat capability"
+            }
+          },
+          {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=compound"
+          }
+        ],
+        "id": "capability_changed"
+      },
+      {
+        "title": {
+          "en": "Value (text) changed",
+          "de": "Wert (Text) hat sich geändert",
+          "nl": "Waarde (tekst) gewijzigd"
+        },
+        "hint": {
+          "en": "Triggers when the text value changes.",
+          "de": "Wird ausgelöst, wenn sich der Textwert ändert.",
+          "nl": "Wordt geactiveerd wanneer de tekstwaarde verandert."
+        },
+        "tokens": [
+          {
+            "name": "measure_generic",
+            "type": "string",
+            "title": {
+              "en": "Value",
+              "de": "Wert",
+              "nl": "Waarde"
+            },
+            "example": "home"
+          }
+        ],
+        "args": [
+          {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=sensor|compound"
+          }
+        ],
+        "id": "measure_generic_changed"
+      },
+      {
+        "title": {
+          "en": "Value (numeric) changed",
+          "de": "Wert (numerisch) hat sich geändert",
+          "nl": "Waarde (numeriek) gewijzigd"
+        },
+        "hint": {
+          "en": "Triggers when the numeric value changes.",
+          "de": "Wird ausgelöst, wenn sich der numerische Wert ändert.",
+          "nl": "Wordt geactiveerd wanneer de numerieke waarde verandert."
+        },
+        "tokens": [
+          {
+            "name": "measure_numeric",
+            "type": "number",
+            "title": {
+              "en": "Value",
+              "de": "Wert",
+              "nl": "Waarde"
+            },
+            "example": 10
+          }
+        ],
+        "args": [
+          {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=sensor|compound"
+          }
+        ],
+        "id": "measure_numeric_changed"
+      }
+    ],
+    "conditions": [
+      {
+        "title": {
+          "en": "Value (text) !{{is|isn't}}",
+          "de": "Wert (Text) !{{ist|ist nicht}}",
+          "nl": "Waarde (tekst) !{{is|is niet}}"
+        },
+        "titleFormatted": {
+          "en": "Value (text) !{{is|isn't}} [[value]]",
+          "de": "Wert (Text) !{{ist|ist nicht}} [[value]]",
+          "nl": "Waarde (tekst) !{{is|is niet}} [[value]]"
+        },
+        "args": [
+          {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=sensor|compound"
+          },
+          {
+            "name": "value",
+            "type": "text"
+          }
+        ],
+        "id": "measure_generic"
+      },
+      {
+        "title": {
+          "en": "Value (numeric) !{{is|isn't}} higher than",
+          "de": "Wert (numerisch) !{{ist|ist nicht}} größer als",
+          "nl": "Waarde (numeriek) !{{is|is niet}} hoger dan"
+        },
+        "titleFormatted": {
+          "en": "Value (numeric) !{{is|isn't}} higher than [[value]]",
+          "de": "Wert (numerisch) !{{ist|ist nicht}} größer als [[value]]",
+          "nl": "Waarde (numeriek) !{{is|is niet}} hoger dan [[value]]"
+        },
+        "args": [
+          {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=sensor|compound"
+          },
+          {
+            "name": "value",
+            "type": "number"
+          }
+        ],
+        "id": "measure_numeric"
+      }
+    ],
+    "actions": [
+      {
+        "id": "callService",
+        "title": {
+          "en": "Call service",
+          "de": "Dienst aufrufen",
+          "nl": "Roep service aan"
+        },
+        "titleFormatted": {
+          "en": "Call service [[service]] of domain [[domain]] with data [[data]]",
+          "de": "Dienst [[service]] der Domäne [[domain]] mit den Daten [[data]] aufrufen",
+          "nl": "Bel service [[service]] van domein [[domain]] met data [[data]]"
+        },
+        "args": [
+          {
+            "name": "domain",
+            "type": "text"
+          },
+          {
+            "name": "service",
+            "type": "text"
+          },
+          {
+            "name": "data",
+            "type": "text"
+          }
+        ]
+      },
+      {
+        "highlight": true,
+        "title": {
+          "en": "Select sound mode.",
+          "de": "Wähle Klangmodus.",
+          "nl": "Selecteer geluidsmodus"
+        },
+        "titleFormatted": {
+          "en": "Change to sound mode [[mode]].",
+          "de": "Wechsel zum Klangmodus [[mode]].",
+          "nl": "Wijzig naar geluidsmodus [[mode]]"
+        },
+        "hint": {
+          "en": "The sound mode list it provided by the devie or the HomeAssistand integration.",
+          "de": "Die Klangmodis werden vom Gerät oder der HomeAssistand-Integration bereitgestellt.",
+          "nl": "De geluidsmodus die wordt geleverd door de devie of de HomeAssistand-integratie."
+        },
+        "args": [
+          {
+            "type": "autocomplete",
+            "name": "mode",
+            "title": {
+              "en": "Sound mode",
+              "de": "Klangmodus",
+              "nl": "Geluidsmodus"
+            },
+            "placeholder": {
+              "en": "Select the sound mode",
+              "de": "Wähle den Klangmodus",
+              "nl": "Selecteer de geluidsmodus"
+            }
+          },
+          {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=media"
+          }
+        ],
+        "id": "mediaSelectSoundMode"
+      },
+      {
+        "highlight": true,
+        "title": {
+          "en": "Select media source.",
+          "de": "Wähle Medienquelle.",
+          "nl": "Selecteer mediabron"
+        },
+        "titleFormatted": {
+          "en": "Change to media source [[source]].",
+          "de": "Wechsel zur Medienquelle [[source]].",
+          "nl": "Wijzig naar mediabron [[source]]"
+        },
+        "hint": {
+          "en": "The source list it provided by the devie or the HomeAssistand integration and ca include physical inputs like HDMI and apps.",
+          "de": "Die Quellenliste wird vom Gerät oder der HomeAssistand-Integration bereitgestellt und kann physische Eingänge wie HDMI und Apps enthalten.",
+          "nl": "De bronnenlijst die wordt geleverd door de devie of de HomeAssistand-integratie en bevat fysieke ingangen zoals HDMI en apps."
+        },
+        "args": [
+          {
+            "type": "autocomplete",
+            "name": "source",
+            "title": {
+              "en": "Media source",
+              "de": "Medienquelle",
+              "nl": "Mediabron"
+            },
+            "placeholder": {
+              "en": "Select the media source",
+              "de": "Wähle die Medienquelle",
+              "nl": "Selecteer de mediabron"
+            }
+          },
+          {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=media"
+          }
+        ],
+        "id": "mediaSelectSource"
+      }
+    ]
+  },
+  "drivers": [
+    {
+      "capabilitiesOptions": {
+        "button.reconnect": {
+          "maintenanceAction": true,
+          "title": {
+            "en": "Reconnect",
+            "de": "Neu verbinden",
+            "nl": "Opnieuw verbinden"
+          },
+          "desc": {
+            "en": "Reconnect and reload entities.",
+            "de": "Neu verbinden und Entitäten neu laden.",
+            "nl": "Maak opnieuw verbinding en laad entiteiten opnieuw."
+          }
+        }
+      },
+      "pair": [
+        {
+          "id": "loading",
+          "template": "loading",
+          "navigation": {
+            "next": "list_devices"
+          }
+        },
+        {
+          "id": "login_credentials",
+          "template": "login_credentials",
+          "navigation": {
+            "next": "list_devices"
+          },
+          "options": {
+            "logo": "logo.png",
+            "usernameLabel": {
+              "en": "Server"
+            },
+            "usernamePlaceholder": {
+              "en": "http://192.168.xxx.xxx:8123"
+            },
+            "passwordLabel": {
+              "en": "Token"
+            },
+            "passwordPlaceholder": {
+              "en": "Long-lived access token"
+            }
+          }
+        },
+        {
+          "id": "list_devices",
+          "template": "list_devices",
+          "navigation": {
+            "next": "add_devices"
+          },
+          "options": {
+            "singular": true
+          }
+        },
+        {
+          "id": "add_devices",
+          "template": "add_devices"
+        }
+      ],
+      "repair": [
+        {
+          "id": "login_credentials",
+          "template": "login_credentials",
+          "navigation": {
+            "next": "done"
+          },
+          "options": {
+            "logo": "logo.png",
+            "usernameLabel": {
+              "en": "Server"
+            },
+            "usernamePlaceholder": {
+              "en": "http://192.168.xxx.xxx:8123"
+            },
+            "passwordLabel": {
+              "en": "Token"
+            },
+            "passwordPlaceholder": {
+              "en": "Long-lived access token"
+            }
+          }
+        },
+        {
+          "id": "done",
+          "template": "done"
+        }
+      ],
+      "id": "binary_sensor",
+      "name": {
+        "en": "Binary sensor",
+        "de": "Binärsensor",
+        "nl": "Binaire sensor"
+      },
+      "class": "sensor",
+      "capabilities": [
+        "onoff",
+        "alarm_battery",
+        "alarm_co",
+        "alarm_co2",
+        "alarm_contact",
+        "alarm_fire",
+        "alarm_generic",
+        "alarm_heat",
+        "alarm_motion",
+        "alarm_pm25",
+        "alarm_smoke",
+        "alarm_tamper",
+        "alarm_water",
+        "button.reconnect"
+      ],
+      "energy": {
+        "batteries": [
+          "OTHER"
+        ]
+      },
+      "images": {
+        "large": "/drivers/binary_sensor/assets/images/large.png",
+        "small": "/drivers/binary_sensor/assets/images/small.png"
+      }
+    },
+    {
+      "capabilitiesOptions": {
+        "button.reconnect": {
+          "maintenanceAction": true,
+          "title": {
+            "en": "Reconnect",
+            "de": "Neu verbinden",
+            "nl": "Opnieuw verbinden"
+          },
+          "desc": {
+            "en": "Reconnect and reload entities.",
+            "de": "Neu verbinden und Entitäten neu laden.",
+            "nl": "Maak opnieuw verbinding en laad entiteiten opnieuw."
+          }
+        }
+      },
+      "pair": [
+        {
+          "id": "loading",
+          "template": "loading",
+          "navigation": {
+            "next": "list_devices"
+          }
+        },
+        {
+          "id": "login_credentials",
+          "template": "login_credentials",
+          "navigation": {
+            "next": "list_devices"
+          },
+          "options": {
+            "logo": "logo.png",
+            "usernameLabel": {
+              "en": "Server"
+            },
+            "usernamePlaceholder": {
+              "en": "http://192.168.xxx.xxx:8123"
+            },
+            "passwordLabel": {
+              "en": "Token"
+            },
+            "passwordPlaceholder": {
+              "en": "Long-lived access token"
+            }
+          }
+        },
+        {
+          "id": "list_devices",
+          "template": "list_devices",
+          "navigation": {
+            "next": "add_devices"
+          },
+          "options": {
+            "singular": true
+          }
+        },
+        {
+          "id": "add_devices",
+          "template": "add_devices"
+        }
+      ],
+      "repair": [
+        {
+          "id": "login_credentials",
+          "template": "login_credentials",
+          "navigation": {
+            "next": "done"
+          },
+          "options": {
+            "logo": "logo.png",
+            "usernameLabel": {
+              "en": "Server"
+            },
+            "usernamePlaceholder": {
+              "en": "http://192.168.xxx.xxx:8123"
+            },
+            "passwordLabel": {
+              "en": "Token"
+            },
+            "passwordPlaceholder": {
+              "en": "Long-lived access token"
+            }
+          }
+        },
+        {
+          "id": "done",
+          "template": "done"
+        }
+      ],
+      "id": "compound",
+      "name": {
+        "en": "Compound",
+        "de": "Verbund",
+        "nl": "Samengesteld"
+      },
+      "class": "sensor",
+      "capabilities": [
+        "onoff",
+        "button",
+        "locked",
+        "dim",
+        "alarm_battery",
+        "alarm_co",
+        "alarm_co2",
+        "alarm_contact",
+        "alarm_fire",
+        "alarm_generic",
+        "alarm_heat",
+        "alarm_motion",
+        "alarm_pm25",
+        "alarm_smoke",
+        "alarm_tamper",
+        "alarm_water",
+        "measure_generic",
+        "measure_numeric",
+        "measure_battery",
+        "measure_co",
+        "measure_co2",
+        "measure_current",
+        "measure_gust_angle",
+        "measure_gust_strength",
+        "measure_humidity",
+        "measure_luminance",
+        "measure_noise",
+        "measure_pm25",
+        "measure_power",
+        "measure_pressure",
+        "measure_rain",
+        "measure_temperature",
+        "measure_ultraviolet",
+        "measure_voltage",
+        "measure_water",
+        "measure_wind_angle",
+        "measure_wind_strength",
+        "meter_gas",
+        "meter_water",
+        "meter_power",
+        "meter_rain",
+        "button.reconnect"
+      ],
+      "energy": {
+        "batteries": [
+          "OTHER"
+        ]
+      },
+      "images": {
+        "large": "/drivers/compound/assets/images/large.png",
+        "small": "/drivers/compound/assets/images/small.png"
+      }
+    },
+    {
+      "pair": [
+        {
+          "id": "loading",
+          "template": "loading",
+          "navigation": {
+            "next": "list_devices"
+          }
+        },
+        {
+          "id": "login_credentials",
+          "template": "login_credentials",
+          "navigation": {
+            "next": "list_devices"
+          },
+          "options": {
+            "logo": "logo.png",
+            "usernameLabel": {
+              "en": "Server"
+            },
+            "usernamePlaceholder": {
+              "en": "http://192.168.xxx.xxx:8123"
+            },
+            "passwordLabel": {
+              "en": "Token"
+            },
+            "passwordPlaceholder": {
+              "en": "Long-lived access token"
+            }
+          }
+        },
+        {
+          "id": "list_devices",
+          "template": "list_devices",
+          "navigation": {
+            "next": "add_devices"
+          },
+          "options": {
+            "singular": true
+          }
+        },
+        {
+          "id": "add_devices",
+          "template": "add_devices"
+        }
+      ],
+      "repair": [
+        {
+          "id": "login_credentials",
+          "template": "login_credentials",
+          "navigation": {
+            "next": "done"
+          },
+          "options": {
+            "logo": "logo.png",
+            "usernameLabel": {
+              "en": "Server"
+            },
+            "usernamePlaceholder": {
+              "en": "http://192.168.xxx.xxx:8123"
+            },
+            "passwordLabel": {
+              "en": "Token"
+            },
+            "passwordPlaceholder": {
+              "en": "Long-lived access token"
+            }
+          }
+        },
+        {
+          "id": "done",
+          "template": "done"
+        }
+      ],
+      "id": "light",
+      "name": {
+        "en": "Light",
+        "de": "Licht",
+        "nl": "Lamp"
+      },
+      "class": "light",
+      "capabilities": [
+        "onoff",
+        "dim",
+        "light_hue",
+        "light_saturation",
+        "light_temperature",
+        "button.reconnect"
+      ],
+      "capabilitiesOptions": {
+        "dim": {
+          "opts": {
+            "duration": true
+          }
+        },
+        "light_hue": {
+          "opts": {
+            "duration": true
+          }
+        },
+        "light_saturation": {
+          "opts": {
+            "duration": true
+          }
+        },
+        "light_temperature": {
+          "opts": {
+            "duration": true
+          }
+        },
+        "button.reconnect": {
+          "maintenanceAction": true,
+          "title": {
+            "en": "Reconnect",
+            "de": "Neu verbinden",
+            "nl": "Opnieuw verbinden"
+          },
+          "desc": {
+            "en": "Reconnect and reload entities.",
+            "de": "Neu verbinden und Entitäten neu laden.",
+            "nl": "Maak opnieuw verbinding en laad entiteiten opnieuw."
+          }
+        }
+      },
+      "images": {
+        "large": "/drivers/light/assets/images/large.png",
+        "small": "/drivers/light/assets/images/small.png"
+      }
+    },
+    {
+      "capabilitiesOptions": {
+        "button.reconnect": {
+          "maintenanceAction": true,
+          "title": {
+            "en": "Reconnect",
+            "de": "Neu verbinden",
+            "nl": "Opnieuw verbinden"
+          },
+          "desc": {
+            "en": "Reconnect and reload entities.",
+            "de": "Neu verbinden und Entitäten neu laden.",
+            "nl": "Maak opnieuw verbinding en laad entiteiten opnieuw."
+          }
+        }
+      },
+      "pair": [
+        {
+          "id": "loading",
+          "template": "loading",
+          "navigation": {
+            "next": "list_devices"
+          }
+        },
+        {
+          "id": "login_credentials",
+          "template": "login_credentials",
+          "navigation": {
+            "next": "list_devices"
+          },
+          "options": {
+            "logo": "logo.png",
+            "usernameLabel": {
+              "en": "Server"
+            },
+            "usernamePlaceholder": {
+              "en": "http://192.168.xxx.xxx:8123"
+            },
+            "passwordLabel": {
+              "en": "Token"
+            },
+            "passwordPlaceholder": {
+              "en": "Long-lived access token"
+            }
+          }
+        },
+        {
+          "id": "list_devices",
+          "template": "list_devices",
+          "navigation": {
+            "next": "add_devices"
+          },
+          "options": {
+            "singular": true
+          }
+        },
+        {
+          "id": "add_devices",
+          "template": "add_devices"
+        }
+      ],
+      "repair": [
+        {
+          "id": "login_credentials",
+          "template": "login_credentials",
+          "navigation": {
+            "next": "done"
+          },
+          "options": {
+            "logo": "logo.png",
+            "usernameLabel": {
+              "en": "Server"
+            },
+            "usernamePlaceholder": {
+              "en": "http://192.168.xxx.xxx:8123"
+            },
+            "passwordLabel": {
+              "en": "Token"
+            },
+            "passwordPlaceholder": {
+              "en": "Long-lived access token"
+            }
+          }
+        },
+        {
+          "id": "done",
+          "template": "done"
+        }
+      ],
+      "id": "media",
+      "name": {
+        "en": "Media player",
+        "de": "Media Player",
+        "nl": "Mediaspeler"
+      },
+      "class": "speaker",
+      "capabilities": [
+        "onoff",
+        "volume_set",
+        "volume_up",
+        "volume_down",
+        "volume_mute",
+        "speaker_playing",
+        "speaker_next",
+        "speaker_prev",
+        "speaker_shuffle",
+        "speaker_repeat",
+        "speaker_artist",
+        "speaker_album",
+        "speaker_track",
+        "speaker_duration",
+        "speaker_position",
+        "button.reconnect"
+      ],
+      "images": {
+        "large": "/drivers/media/assets/images/large.png",
+        "small": "/drivers/media/assets/images/small.png"
+      }
+    },
+    {
+      "capabilitiesOptions": {
+        "button.reconnect": {
+          "maintenanceAction": true,
+          "title": {
+            "en": "Reconnect",
+            "de": "Neu verbinden",
+            "nl": "Opnieuw verbinden"
+          },
+          "desc": {
+            "en": "Reconnect and reload entities.",
+            "de": "Neu verbinden und Entitäten neu laden.",
+            "nl": "Maak opnieuw verbinding en laad entiteiten opnieuw."
+          }
+        }
+      },
+      "pair": [
+        {
+          "id": "loading",
+          "template": "loading",
+          "navigation": {
+            "next": "list_devices"
+          }
+        },
+        {
+          "id": "login_credentials",
+          "template": "login_credentials",
+          "navigation": {
+            "next": "list_devices"
+          },
+          "options": {
+            "logo": "logo.png",
+            "usernameLabel": {
+              "en": "Server"
+            },
+            "usernamePlaceholder": {
+              "en": "http://192.168.xxx.xxx:8123"
+            },
+            "passwordLabel": {
+              "en": "Token"
+            },
+            "passwordPlaceholder": {
+              "en": "Long-lived access token"
+            }
+          }
+        },
+        {
+          "id": "list_devices",
+          "template": "list_devices",
+          "navigation": {
+            "next": "add_devices"
+          },
+          "options": {
+            "singular": true
+          }
+        },
+        {
+          "id": "add_devices",
+          "template": "add_devices"
+        }
+      ],
+      "repair": [
+        {
+          "id": "login_credentials",
+          "template": "login_credentials",
+          "navigation": {
+            "next": "done"
+          },
+          "options": {
+            "logo": "logo.png",
+            "usernameLabel": {
+              "en": "Server"
+            },
+            "usernamePlaceholder": {
+              "en": "http://192.168.xxx.xxx:8123"
+            },
+            "passwordLabel": {
+              "en": "Token"
+            },
+            "passwordPlaceholder": {
+              "en": "Long-lived access token"
+            }
+          }
+        },
+        {
+          "id": "done",
+          "template": "done"
+        }
+      ],
+      "id": "scene",
+      "name": {
+        "en": "Scene",
+        "de": "Szene",
+        "nl": "Scene"
+      },
+      "class": "button",
+      "capabilities": [
+        "button",
+        "button.reconnect"
+      ],
+      "images": {
+        "large": "/drivers/scene/assets/images/large.png",
+        "small": "/drivers/scene/assets/images/small.png"
+      }
+    },
+    {
+      "capabilitiesOptions": {
+        "button.reconnect": {
+          "maintenanceAction": true,
+          "title": {
+            "en": "Reconnect",
+            "de": "Neu verbinden",
+            "nl": "Opnieuw verbinden"
+          },
+          "desc": {
+            "en": "Reconnect and reload entities.",
+            "de": "Neu verbinden und Entitäten neu laden.",
+            "nl": "Maak opnieuw verbinding en laad entiteiten opnieuw."
+          }
+        }
+      },
+      "pair": [
+        {
+          "id": "loading",
+          "template": "loading",
+          "navigation": {
+            "next": "list_devices"
+          }
+        },
+        {
+          "id": "login_credentials",
+          "template": "login_credentials",
+          "navigation": {
+            "next": "list_devices"
+          },
+          "options": {
+            "logo": "logo.png",
+            "usernameLabel": {
+              "en": "Server"
+            },
+            "usernamePlaceholder": {
+              "en": "http://192.168.xxx.xxx:8123"
+            },
+            "passwordLabel": {
+              "en": "Token"
+            },
+            "passwordPlaceholder": {
+              "en": "Long-lived access token"
+            }
+          }
+        },
+        {
+          "id": "list_devices",
+          "template": "list_devices",
+          "navigation": {
+            "next": "add_devices"
+          },
+          "options": {
+            "singular": true
+          }
+        },
+        {
+          "id": "add_devices",
+          "template": "add_devices"
+        }
+      ],
+      "repair": [
+        {
+          "id": "login_credentials",
+          "template": "login_credentials",
+          "navigation": {
+            "next": "done"
+          },
+          "options": {
+            "logo": "logo.png",
+            "usernameLabel": {
+              "en": "Server"
+            },
+            "usernamePlaceholder": {
+              "en": "http://192.168.xxx.xxx:8123"
+            },
+            "passwordLabel": {
+              "en": "Token"
+            },
+            "passwordPlaceholder": {
+              "en": "Long-lived access token"
+            }
+          }
+        },
+        {
+          "id": "done",
+          "template": "done"
+        }
+      ],
+      "id": "script",
+      "name": {
+        "en": "Script",
+        "de": "Skript",
+        "nl": "Script"
+      },
+      "class": "button",
+      "capabilities": [
+        "button",
+        "button.reconnect"
+      ],
+      "images": {
+        "large": "/drivers/script/assets/images/large.png",
+        "small": "/drivers/script/assets/images/small.png"
+      }
+    },
+    {
+      "capabilitiesOptions": {
+        "button.reconnect": {
+          "maintenanceAction": true,
+          "title": {
+            "en": "Reconnect",
+            "de": "Neu verbinden",
+            "nl": "Opnieuw verbinden"
+          },
+          "desc": {
+            "en": "Reconnect and reload entities.",
+            "de": "Neu verbinden und Entitäten neu laden.",
+            "nl": "Maak opnieuw verbinding en laad entiteiten opnieuw."
+          }
+        }
+      },
+      "pair": [
+        {
+          "id": "loading",
+          "template": "loading",
+          "navigation": {
+            "next": "list_devices"
+          }
+        },
+        {
+          "id": "login_credentials",
+          "template": "login_credentials",
+          "navigation": {
+            "next": "list_devices"
+          },
+          "options": {
+            "logo": "logo.png",
+            "usernameLabel": {
+              "en": "Server"
+            },
+            "usernamePlaceholder": {
+              "en": "http://192.168.xxx.xxx:8123"
+            },
+            "passwordLabel": {
+              "en": "Token"
+            },
+            "passwordPlaceholder": {
+              "en": "Long-lived access token"
+            }
+          }
+        },
+        {
+          "id": "list_devices",
+          "template": "list_devices",
+          "navigation": {
+            "next": "add_devices"
+          },
+          "options": {
+            "singular": true
+          }
+        },
+        {
+          "id": "add_devices",
+          "template": "add_devices"
+        }
+      ],
+      "repair": [
+        {
+          "id": "login_credentials",
+          "template": "login_credentials",
+          "navigation": {
+            "next": "done"
+          },
+          "options": {
+            "logo": "logo.png",
+            "usernameLabel": {
+              "en": "Server"
+            },
+            "usernamePlaceholder": {
+              "en": "http://192.168.xxx.xxx:8123"
+            },
+            "passwordLabel": {
+              "en": "Token"
+            },
+            "passwordPlaceholder": {
+              "en": "Long-lived access token"
+            }
+          }
+        },
+        {
+          "id": "done",
+          "template": "done"
+        }
+      ],
+      "id": "sensor",
+      "name": {
+        "en": "Sensor",
+        "de": "Sensor",
+        "nl": "Sensor"
+      },
+      "class": "sensor",
+      "capabilities": [
+        "measure_generic",
+        "measure_numeric",
+        "measure_battery",
+        "measure_co",
+        "measure_co2",
+        "measure_current",
+        "measure_gust_angle",
+        "measure_gust_strength",
+        "measure_humidity",
+        "measure_luminance",
+        "measure_noise",
+        "measure_pm25",
+        "measure_power",
+        "measure_pressure",
+        "measure_rain",
+        "measure_temperature",
+        "measure_ultraviolet",
+        "measure_voltage",
+        "measure_water",
+        "measure_wind_angle",
+        "measure_wind_strength",
+        "meter_gas",
+        "meter_water",
+        "meter_power",
+        "meter_rain",
+        "button.reconnect"
+      ],
+      "energy": {
+        "batteries": [
+          "OTHER"
+        ]
+      },
+      "images": {
+        "large": "/drivers/sensor/assets/images/large.png",
+        "small": "/drivers/sensor/assets/images/small.png"
+      }
+    },
+    {
+      "capabilitiesOptions": {
+        "button.reconnect": {
+          "maintenanceAction": true,
+          "title": {
+            "en": "Reconnect",
+            "de": "Neu verbinden",
+            "nl": "Opnieuw verbinden"
+          },
+          "desc": {
+            "en": "Reconnect and reload entities.",
+            "de": "Neu verbinden und Entitäten neu laden.",
+            "nl": "Maak opnieuw verbinding en laad entiteiten opnieuw."
+          }
+        }
+      },
+      "pair": [
+        {
+          "id": "loading",
+          "template": "loading",
+          "navigation": {
+            "next": "list_devices"
+          }
+        },
+        {
+          "id": "login_credentials",
+          "template": "login_credentials",
+          "navigation": {
+            "next": "list_devices"
+          },
+          "options": {
+            "logo": "logo.png",
+            "usernameLabel": {
+              "en": "Server"
+            },
+            "usernamePlaceholder": {
+              "en": "http://192.168.xxx.xxx:8123"
+            },
+            "passwordLabel": {
+              "en": "Token"
+            },
+            "passwordPlaceholder": {
+              "en": "Long-lived access token"
+            }
+          }
+        },
+        {
+          "id": "list_devices",
+          "template": "list_devices",
+          "navigation": {
+            "next": "add_devices"
+          },
+          "options": {
+            "singular": true
+          }
+        },
+        {
+          "id": "add_devices",
+          "template": "add_devices"
+        }
+      ],
+      "repair": [
+        {
+          "id": "login_credentials",
+          "template": "login_credentials",
+          "navigation": {
+            "next": "done"
+          },
+          "options": {
+            "logo": "logo.png",
+            "usernameLabel": {
+              "en": "Server"
+            },
+            "usernamePlaceholder": {
+              "en": "http://192.168.xxx.xxx:8123"
+            },
+            "passwordLabel": {
+              "en": "Token"
+            },
+            "passwordPlaceholder": {
+              "en": "Long-lived access token"
+            }
+          }
+        },
+        {
+          "id": "done",
+          "template": "done"
+        }
+      ],
+      "id": "switch",
+      "name": {
+        "en": "Switch",
+        "de": "Schalter",
+        "nl": "Schakelaar"
+      },
+      "class": "socket",
+      "capabilities": [
+        "onoff",
+        "button.reconnect"
+      ],
+      "images": {
+        "large": "/drivers/switch/assets/images/large.png",
+        "small": "/drivers/switch/assets/images/small.png"
+      }
+    }
+  ],
+  "capabilities": {
+    "measure_generic": {
+      "type": "string",
+      "title": {
+        "en": "Value",
+        "de": "Wert",
+        "nl": "Waarde"
+      },
+      "getable": true,
+      "setable": false,
+      "insights": true,
+      "icon": "/assets/capability_icons/measure_generic.svg"
+    },
+    "measure_numeric": {
+      "type": "number",
+      "title": {
+        "en": "Value",
+        "de": "Wert",
+        "nl": "Waarde"
+      },
+      "getable": true,
+      "setable": false,
+      "insights": true,
+      "icon": "/assets/capability_icons/measure_numeric.svg"
+    }
+  }
+}
