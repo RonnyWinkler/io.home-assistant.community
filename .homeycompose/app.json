@@ -1,6 +1,6 @@
 {
   "id": "io.home-assistant.community",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "compatibility": ">=5.0.0",
   "sdk": 3,
   "brandColor": "#038FC7",
@@ -22,7 +22,7 @@
       "home assistant"
     ]
   },
-  "source": "https://github.com/RonnyWinkler/io.homeassistant",
+  "source": "https://github.com/RonnyWinkler/io.home-assistant.community",
   "homeyCommunityTopicId": 0,
   "permissions": [],
   "images": {
@@ -36,8 +36,7 @@
   "contributors": {
     "developers": [
       {
-        "name": "Rob Groenendijk",
-        "email": "rogro82@gmail.com"
+        "name": "Rob Groenendijk"
       },
       {
         "name": "Jeroen Nijssen"

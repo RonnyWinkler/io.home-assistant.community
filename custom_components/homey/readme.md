@@ -39,11 +39,6 @@ In addition you can set a title for each capability (optional):
 You can set an icon for your compound device:
 livingroom_compound:
   name: Livingroom environment
-  icon: "measure_temperature"
+  icon: measure_temperature
 
 A list of icons can be found in Icons.txt
-
-In addition you can use mdi icons:
-livingroom_compound:
-  name: Livingroom environment
-  icon: mdi:sofa-single
