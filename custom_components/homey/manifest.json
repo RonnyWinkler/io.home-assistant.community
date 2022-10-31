@@ -2,7 +2,7 @@
     "domain": "homey",
     "name": "homey",
 	"version": "1.0.0",	
-    "documentation": "https://github.com/RonnyWinkler/io.homeassistant",
+    "documentation": "https://github.com/RonnyWinkler/io.home-assistant.community",
     "requirements": [],
     "dependencies": [],
     "codeowners": [
