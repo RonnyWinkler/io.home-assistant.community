@@ -49,6 +49,10 @@ class CompoundDevice extends Homey.Device {
         this.timeoutInitDevice = this.homey.setTimeout(async () => this.onInitDevice().catch(e => console.log(e)), 5 * 1000 );
     }
 
+    async onUninit(){
+
+    }
+    
     async updateCapabilities(){
         // Add new capabilities (if not already added)
         if (!this.hasCapability('button.reconnect'))
@@ -146,6 +150,9 @@ class CompoundDevice extends Homey.Device {
 
     async onInitDevice(){
         // Init device on satrtup with latest data to have initial values before HA sends updates
+        this.homey.clearTimeout(this.timeoutInitDevice);
+        this.timeoutInitDevice = null;
+
         this.log('Device init data. ID: '+this.entityId+" Name: "+this.getName()+" Class: "+this.getClass());
         
         Object.keys(this.compoundCapabilities).forEach(key => {
@@ -201,7 +208,9 @@ class CompoundDevice extends Homey.Device {
                                     tokens.value_boolean = value;
                                     break;
                             }
-                            this.homey.app._flowTriggerCapabilityChanged.trigger(this, tokens, state);
+                            if (this.homey.app){
+                                await this.homey.app._flowTriggerCapabilityChanged.trigger(this, tokens, state);
+                            }
                         }
                     }
                     catch(error) {

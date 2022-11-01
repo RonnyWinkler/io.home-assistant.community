@@ -15,11 +15,6 @@ class SwitchDevice extends Homey.Device {
 
         this._client.registerDevice(this.entityId, this);
 
-        let entity = this._client.getEntity(this.entityId);
-        if(entity) { 
-            this.onEntityUpdate(entity);
-        }
-
         this.registerCapabilityListener('onoff', async (value, opts) => {
             await this.onCapabilityOnoff(value, opts);
         });
@@ -28,6 +23,10 @@ class SwitchDevice extends Homey.Device {
         this.registerCapabilityListener('button.reconnect', async () => {
             await this.clientReconnect()
         });
+
+        // Init device with a short timeout to wait for initial entities
+        this.timeoutInitDevice = this.homey.setTimeout(async () => this.onInitDevice().catch(e => console.log(e)), 5 * 1000 );
+
     }
 
     async updateCapabilities(){
@@ -45,6 +44,18 @@ class SwitchDevice extends Homey.Device {
     onDeleted() {
         this.log('device deleted');
         this._client.unregisterDevice(this.entityId);
+    }
+
+    async onInitDevice(){
+        // Init device on satrtup with latest data to have initial values before HA sends updates
+        this.homey.clearTimeout(this.timeoutInitDevice);
+        this.timeoutInitDevice = null;
+
+        this.log('Device init data. ID: '+this.entityId+" Name: "+this.getName()+" Class: "+this.getClass());
+        let entity = this._client.getEntity(this.entityId);
+        if (entity){
+            this.onEntityUpdate(entity);
+        }
     }
 
     async onCapabilityOnoff( value, opts ) {

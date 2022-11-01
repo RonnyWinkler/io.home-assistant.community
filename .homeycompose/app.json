@@ -1,6 +1,6 @@
 {
   "id": "io.home-assistant.community",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "compatibility": ">=5.0.0",
   "sdk": 3,
   "brandColor": "#038FC7",
@@ -10,7 +10,7 @@
   "description": {
     "en": "Connect to Home Assistant",
     "de": "Verbinde dich mit Home Assistant",
-    "nl": "Koppelen met Home Assitant"
+    "nl": "Koppelen met Home Assistant"
   },
   "category": [
     "appliances"
@@ -23,7 +23,7 @@
     ]
   },
   "source": "https://github.com/RonnyWinkler/io.home-assistant.community",
-  "homeyCommunityTopicId": 0,
+  "homeyCommunityTopicId": 71477,
   "permissions": [],
   "images": {
     "large": "/assets/images/large.png",

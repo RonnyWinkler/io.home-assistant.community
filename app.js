@@ -12,6 +12,7 @@ class App extends Homey.App {
 	
 	async onInit() {
 		await super.onInit();
+		this.homey.on('unload', async () => await this.onUninit());
 
 		this.log('Home-Assistant is running...');
 
@@ -110,6 +111,12 @@ class App extends Homey.App {
 				await this._reconnectClient();
 			}
 		});
+	}
+
+	async onUninit(){
+		console.log("App onUninit() - close connection");
+		await this._client.close();
+		this._client = null;
 	}
 
 	getClient() {

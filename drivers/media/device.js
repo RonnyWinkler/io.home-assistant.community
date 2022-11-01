@@ -155,6 +155,9 @@ class MediaDevice extends Homey.Device {
 
     async onInitDevice(){
         // Init device on satrtup with latest data to have initial values before HA sends updates
+        this.homey.clearTimeout(this.timeoutInitDevice);
+        this.timeoutInitDevice = null;
+
         this.log('Device init data. ID: '+this.entityId+" Name: "+this.getName()+" Class: "+this.getClass());
         let entity = this._client.getEntity(this.capability);
         if (entity){

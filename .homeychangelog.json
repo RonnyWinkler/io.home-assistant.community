@@ -2,5 +2,9 @@
   "0.1.0": {
     "en": "Initial release of Home Assistant Community app",
     "de": "Initiales Release der Home Assistant Community App"
+  },
+  "0.1.1": {
+    "en": "Updated: App image, Community thread; Added: Instant entity refresh without app restart/manual reconnect.",
+    "de": "Aktualisiert: App-Bild, Community-Thread; Ergänzt: Direkte Aktualisierung der Eititäten ohne App-Restart oder manuellem Auffrischen."
   }
 }
