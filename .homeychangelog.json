@@ -5,6 +5,14 @@
   },
   "0.1.1": {
     "en": "Updated: App image, Community thread; Added: Instant entity refresh without app restart/manual reconnect.",
-    "de": "Aktualisiert: App-Bild, Community-Thread; Ergänzt: Direkte Aktualisierung der Eititäten ohne App-Restart oder manuellem Auffrischen."
+    "de": "Aktualisiert: App-Bild, Community-Thread; Ergänzt: Direkte Aktualisierung der Entitäten ohne App-Restart oder manuellem Auffrischen."
+  },
+  "0.1.2": {
+    "en": "Fixed app crash on restart/update.",
+    "de": "App-Absturz bei Neustart/Aktualisierung korrigiert."
+  },
+  "0.1.3": {
+    "en": "Fixed device list in pairing dialog.",
+    "de": "Geräte-Liste in Pairing-Dialog korrigiert."
   }
 }

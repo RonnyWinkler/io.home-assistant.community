@@ -26,4 +26,4 @@ There's no need for configuring things up front, you can start right away by add
 from here we will use HA as short for Home Assistant  -
 
 When successfully saved, you can install devices without interruption.
-When you add a new device on your HA instance, you'll need to refresh the entity list in the Homey HA app, by either restarting it or by pressing the 'reconnect' button via the settings of any already paired HA app device.
+After adding a new device on your HA instance, the entity list in Homey is refreshed instantly and you can directly add your new entity as Homey device.

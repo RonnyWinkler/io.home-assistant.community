@@ -111,13 +111,13 @@ class BaseDriver extends Homey.Driver {
             await session.showView("login_credentials");
         }
         else{
-            devices = await this.getDevices(client);
+            devices = await this.getDeviceList(client);
         }
 
         return devices;
     }
 
-    async getDevices(client){
+    async getDeviceList(client){
         // redefine in sub classes and return the driver dependent devices 
     }
 

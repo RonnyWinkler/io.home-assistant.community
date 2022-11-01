@@ -23,5 +23,4 @@ Es muss nichts vorkonfiguriert werden. Du kannst sofort mit dem Hinzufügen des 
 ab hier verwenden wir HA als Abkürzung für Home Assistant -
 
 Wenn das Gerät erfolgreich gespeichert wurde, kannst du weitere HA-Geräte ohne weitere Einstellungen installieren.
-Wenn im HA-System ein neues Gerät hinzufügt wurde, muss Sie die Entitätsliste in der Homey HA-App aktualisiesrt werde, indem die App neu gestartet wird.
-Alternativ kann durch Drücken der Schaltfläche „Neu verbinden“ über die Einstellungen eines bereits gekoppelten HA-App-Geräts das Laden gestartet werden.
+Nachdem in der HA-Instanz ein neues Gerät hinzugefügt wurde, wird die Entitätsliste in Homey sofort aktualisiert und die neue Entität kann direkt als Homey-Gerät hinzufügt werden.
