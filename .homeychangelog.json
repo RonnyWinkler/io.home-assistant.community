@@ -14,5 +14,9 @@
   "0.1.3": {
     "en": "Fixed device list in pairing dialog.",
     "de": "Geräte-Liste in Pairing-Dialog korrigiert."
+  },
+  "0.1.4": {
+    "en": "Added some error handling",
+    "de": "Fehlerprüfung erweitert."
   }
 }

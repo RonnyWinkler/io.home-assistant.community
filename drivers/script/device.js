@@ -31,9 +31,14 @@ class ScriptDevice extends Homey.Device {
 
     async updateCapabilities(){
         // Add new capabilities (if not already added)
-        if (!this.hasCapability('button.reconnect'))
-        {
-          await this.addCapability('button.reconnect');
+        try{
+            if (!this.hasCapability('button.reconnect'))
+            {
+            await this.addCapability('button.reconnect');
+            }
+        }
+        catch(error){
+            this.error("Error adding capability: "+Error.message);
         }
     }
 
