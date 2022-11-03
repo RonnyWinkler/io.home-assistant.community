@@ -92,6 +92,7 @@ class App extends Homey.App {
 				return result.name.toLowerCase().includes(query.toLowerCase());
 			});
 		});
+		this._flowTriggerButtonPressed = this.homey.flow.getDeviceTriggerCard('button_pressed');
 		
 		// Flow contitions
 		this._flowConditionMeasureNumeric = this.homey.flow.getConditionCard('measure_numeric')

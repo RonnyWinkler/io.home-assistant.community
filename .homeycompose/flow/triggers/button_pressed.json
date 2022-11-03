@@ -1,0 +1,17 @@
+{
+    "title": {
+        "en": "Button was pressed",
+        "de": "Taste wurde gedrückt",
+        "nl": "Er is op de knop gedrukt"
+    },
+    "hint": {
+        "en": "Triggers when the button was pressed in Home Assistant.",
+        "de": "Wird ausgelöst, wenn die Taste in Home Assistant gedrückt wurde.",
+        "nl": "Wordt geactiveerd wanneer de knop wordt ingedrukt in Home Assistant."
+    },
+    "args": [{
+        "name": "device",
+        "type": "device",
+        "filter": "driver_id=button"
+    }]
+}

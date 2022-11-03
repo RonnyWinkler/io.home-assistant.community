@@ -26,5 +26,9 @@
   "0.1.6": {
     "en": "Added device 'Button'",
     "de": "Gerät 'Taste' hinzugefügt."
+  },
+  "0.1.7": {
+    "en": "Added button pressed trigger",
+    "de": "Taste-gedrückt Ereignis hinzugefügt."
   }
 }

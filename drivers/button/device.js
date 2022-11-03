@@ -8,8 +8,8 @@ class ButtonDevice extends Homey.Device {
         await this.updateCapabilities();
 
         this._client = this.homey.app.getClient();
-
         this.entityId = this.getData().id;
+        this.lastState = null;
 
         this.log('Device init. ID: '+this.entityId+" Name: "+this.getName()+" Class: "+this.getClass());
 
@@ -25,7 +25,7 @@ class ButtonDevice extends Homey.Device {
         });
 
         // Init device with a short timeout to wait for initial entities
-        // this.timeoutInitDevice = this.homey.setTimeout(async () => this.onInitDevice().catch(e => console.log(e)), 5 * 1000 );
+        this.timeoutInitDevice = this.homey.setTimeout(async () => this.onInitDevice().catch(e => console.log(e)), 5 * 1000 );
 
     }
 
@@ -51,17 +51,17 @@ class ButtonDevice extends Homey.Device {
         this._client.unregisterDevice(this.entityId);
     }
 
-    // async onInitDevice(){
-    //     // Init device on satrtup with latest data to have initial values before HA sends updates
-    //     this.homey.clearTimeout(this.timeoutInitDevice);
-    //     this.timeoutInitDevice = null;
+    async onInitDevice(){
+        // Init device on satrtup with latest data to have initial values before HA sends updates
+        this.homey.clearTimeout(this.timeoutInitDevice);
+        this.timeoutInitDevice = null;
 
-    //     this.log('Device init data. ID: '+this.entityId+" Name: "+this.getName()+" Class: "+this.getClass());
-    //     let entity = this._client.getEntity(this.entityId);
-    //     if (entity){
-    //         this.onEntityUpdate(entity);
-    //     }
-    // }
+        this.log('Device init data. ID: '+this.entityId+" Name: "+this.getName()+" Class: "+this.getClass());
+        let entity = this._client.getEntity(this.entityId);
+        if (entity){
+            this.onEntityUpdate(entity);
+        }
+    }
 
     async onCapabilityOnoff( value, opts ) {
        // this._client.turnOnOff(this.entityId, value);
@@ -72,10 +72,16 @@ class ButtonDevice extends Homey.Device {
    }
 
     async onEntityUpdate(data) {
-        // Button 
-        // if(data) {
-        //     await this.setCapabilityValue("button", data.state == "on");
-        // }
+        // First update, just remember the current state (last press)
+        if (this.lastState == null){
+            this.lastState = data.state;
+            return;
+        }
+        // New update, raise flow trigger
+        if (this.lastState != data.state){
+            this.lastState = data.state;
+            this.homey.app._flowTriggerButtonPressed.trigger(this);
+        }
     }
 
     async clientReconnect(){
