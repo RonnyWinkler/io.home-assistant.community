@@ -11,7 +11,6 @@ const Client = require('./lib/Client.js');
 class App extends Homey.App {
 	
 	async onInit() {
-		await super.onInit();
 		this.homey.on('unload', async () => await this.onUninit());
 
 		this.log('Home-Assistant is running...');

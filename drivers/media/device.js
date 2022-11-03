@@ -26,11 +26,6 @@ class MediaDevice extends Homey.Device {
 
         this._client.registerDevice(this.entityId, this);
 
-        let entity = this._client.getEntity(this.entityId);
-        if(entity) { 
-            await this.onEntityUpdate(entity);
-        }
-
         // if(this.hasCapability("button")) {
         //     this.registerCapabilityListener('button', async (value, opts) => {this.onCapabilityButton(value, opts)});
         // }
@@ -171,8 +166,7 @@ class MediaDevice extends Homey.Device {
     }
 
     async onEntityUpdate(data) {
-        let entityId = data.entity_id;
-        if(data == null) {
+        if(data == null || data.entity_id == null) {
             return;
         }
 
