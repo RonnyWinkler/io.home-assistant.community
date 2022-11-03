@@ -20,7 +20,5 @@ Um diese App zu verwenden, installiere sie einfach aus dem Homey App Store https
 Es muss nichts vorkonfiguriert werden. Du kannst sofort mit dem Hinzufügen des ersten Geräts beginnen. Beim ersten Gerät mmuss die lokale IP-Adresse des Home Assistant-Systems eingegeben werden, zusammen mit dem sogenannten „Longlived Token“
 → Wenn du noch keines hast, erstelle einen im Home Assistant-Profil „http://your.homeassistant.IPaddress:8123/profile“;
 
-ab hier verwenden wir HA als Abkürzung für Home Assistant -
-
-Wenn das Gerät erfolgreich gespeichert wurde, kannst du weitere HA-Geräte ohne weitere Einstellungen installieren.
-Nachdem in der HA-Instanz ein neues Gerät hinzugefügt wurde, wird die Entitätsliste in Homey sofort aktualisiert und die neue Entität kann direkt als Homey-Gerät hinzufügt werden.
+Wenn das Gerät erfolgreich gespeichert wurde, kannst du weitere Home Assistant-Geräte ohne weitere Einstellungen installieren.
+Nachdem in der Home Assistant-Instanz ein neues Gerät hinzugefügt wurde, wird die Entitätsliste in Homey sofort aktualisiert, und die neue Entität kann direkt als Homey-Gerät hinzufügt werden.
