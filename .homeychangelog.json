@@ -22,5 +22,9 @@
   "0.1.5": {
     "en": "Added some error handling",
     "de": "Fehlerprüfung erweitert."
+  },
+  "0.1.6": {
+    "en": "Added device 'Button'",
+    "de": "Gerät 'Taste' hinzugefügt."
   }
 }

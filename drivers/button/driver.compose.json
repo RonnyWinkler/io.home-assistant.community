@@ -1,0 +1,19 @@
+{
+    "id": "button",
+    "name": {
+      "en": "Button",
+      "de": "Taste",
+      "nl": "Knop"
+    },
+    "class": "socket",
+    "capabilities": [
+      "button",
+    
+      "button.reconnect"
+    ],
+    "images": {
+      "large": "/drivers/button/assets/images/large.png",
+      "small": "/drivers/button/assets/images/small.png"
+  },
+  "$extends": [ "capabilitiesOptions", "pair", "repair" ]
+}
