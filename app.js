@@ -89,7 +89,7 @@ class App extends Homey.App {
 		this._flowActionCallServiceEntity = this.homey.flow.getActionCard('callServiceEntity');
 		this._flowActionCallServiceEntity.registerRunListener(async (args, state) => {
 			try{
-				await this._onFlowActionCallServiceSelection(args);
+				await this._onFlowActionCallServiceEntity(args);
 				return true;
 			}
 			catch(error){
@@ -178,8 +178,8 @@ class App extends Homey.App {
 		await this._client.callService(args.domain, args.service, args.data);
 	}
 
-	async _onFlowActionCallServiceSelection(args) {
-		this.log("Call service. Domain: "+args.domain+" Service: "+args.service+" Data: "+args.data);
+	async _onFlowActionCallServiceEntity(args) {
+		this.log("Call entity service. Service: "+args.service.id+" Entity: "+args.entity.id+" Data: "+args.data);
 		try{
 			let data = args.data;
 			if (args.entity){
