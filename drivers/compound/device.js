@@ -101,7 +101,12 @@ class CompoundDevice extends Homey.Device {
         return result;
     }
 
-    inputConverter(capability) {
+    inputConverter(compoundCapability) {
+        let capability = compoundCapability;
+        if (capability.indexOf(".") > -1){
+            capability = capability.split(".")[0];
+        }
+
         let capabilityConverter = this.compoundCapabilitiesConverters[capability];
 
         if(capabilityConverter != null) {
@@ -123,7 +128,12 @@ class CompoundDevice extends Homey.Device {
         }
     }
 
-    outputConverter(capability) {
+    outputConverter(compoundCapability) {
+        let capability = compoundCapability;
+        if (capability.indexOf(".") > -1){
+            capability = capability.split(".")[0];
+        }
+
         let capabilityConverter = this.compoundCapabilitiesConverters[capability];
         if(capabilityConverter != null) {
             if(capabilityConverter.to && typeof capabilityConverter.to === "function") {
@@ -159,22 +169,34 @@ class CompoundDevice extends Homey.Device {
         this.timeoutInitDevice = null;
 
         this.log('Device init data. ID: '+this.entityId+" Name: "+this.getName()+" Class: "+this.getClass());
-        
+        let updatedEntities = [];
         Object.keys(this.compoundCapabilities).forEach(key => {
-            let entity = this._client.getEntity(this.compoundCapabilities[key]);
+            let entityId = this.getCompoundEntityId(this.compoundCapabilities[key]);
+            let entity = this._client.getEntity(entityId);
             if (entity){
-                this.onEntityUpdate(entity);
+                if (updatedEntities.indexOf(entityId) == -1){
+                    updatedEntities.push(entityId);
+                    this.onEntityUpdate(entity);
+                }
             }
         });
+    }
 
+    getCompoundEntityId(compoundEntity){
+        return compoundEntity.split(".")[0]+"."+compoundEntity.split(".")[1];
+    }
+    getCompoundEntityAttribut(compoundEntity){
+        return compoundEntity.split(".")[2];
     }
 
     async onEntityUpdate(data){
         try {
-            let entityId = data.entity_id;
+            // let entityId = data.entity_id;
             
             Object.keys(this.compoundCapabilities).forEach(async (key) => {
-                if(this.compoundCapabilities[key] == entityId) {
+                // Is the entity_id of the compound entity equal (entity itself or entity_id of attribute) 
+                let entityId = this.getCompoundEntityId(this.compoundCapabilities[key]);
+                if(entityId == data.entity_id) {
     
                     // console.log("---------------------------------------------------------------");
                     // console.log("update compound device:", this.entityId);
@@ -182,9 +204,17 @@ class CompoundDevice extends Homey.Device {
                     // console.log("update compound by entity:", entityId);
     
                     let convert = this.inputConverter(key);
-                    let value = convert(data.state);
+
+                    let value = null;
+                    let attribute = this.getCompoundEntityAttribut(this.compoundCapabilities[key]);
+                    if (attribute == undefined){
+                        value = convert(data.state);
+                    }
+                    else{
+                        value = convert(data.attributes[attribute]);
+                    }
                     if (value == null || value == undefined)
-                        this.log("Update compound device. Value convert error: "+this.entityId+" key: "+key+" entity: "+entityId+" HA state: "+data.state+" converted:"+value);
+                        //this.log("Update compound device. Value convert error: "+this.entityId+" key: "+key+" entity: "+entityId+" HA state: "+data.state+" converted:"+value);
     
                     try {
                         let oldValue = this.getCapabilityValue(key);
@@ -229,6 +259,67 @@ class CompoundDevice extends Homey.Device {
             this.error("CapabilitiesUpdate error: "+ error.message);
         }
     }
+
+    // async onEntityUpdate(data){
+    //     try {
+    //         let entityId = data.entity_id;
+            
+    //         Object.keys(this.compoundCapabilities).forEach(async (key) => {
+    //             if(this.compoundCapabilities[key] == entityId) {
+    
+    //                 // console.log("---------------------------------------------------------------");
+    //                 // console.log("update compound device:", this.entityId);
+    //                 // console.log("update compound capability:", key);
+    //                 // console.log("update compound by entity:", entityId);
+    
+    //                 let convert = this.inputConverter(key);
+    //                 let value = convert(data.state);
+    //                 if (value == null || value == undefined)
+    //                     this.log("Update compound device. Value convert error: "+this.entityId+" key: "+key+" entity: "+entityId+" HA state: "+data.state+" converted:"+value);
+    
+    //                 try {
+    //                     let oldValue = this.getCapabilityValue(key);
+    //                     await this.setCapabilityValue(key, value);
+    //                     if (oldValue!=value){
+    //                         // trigger flow
+    //                         let state = {
+    //                             capability: {
+    //                                 id: key
+    //                             }
+    //                         };
+    //                         let tokens = {
+    //                             capability: key,
+    //                             value_string: '',
+    //                             value_number: 0,
+    //                             value_boolean: false
+    //                         };
+    //                         switch (this.getCapabilityType(key)){
+    //                             case "string":
+    //                                 tokens.value_string = value;
+    //                                 break;
+    //                             case "number":
+    //                                 tokens.value_number = value;
+    //                                 break;
+    //                             case "boolean":
+    //                                 tokens.value_boolean = value;
+    //                                 break;
+    //                         }
+    //                         if (this.homey.app){
+    //                             await this.homey.app._flowTriggerCapabilityChanged.trigger(this, tokens, state);
+    //                         }
+    //                     }
+    //                 }
+    //                 catch(error) {
+    //                     this.error("Update compound device error: "+this.entityId+" key: "+key+" entity: "+entityId+" value:"+value+" error: "+error.message);
+    //                 }
+    //              }
+    //         });
+                
+    //     }
+    //     catch(error) {
+    //         this.error("CapabilitiesUpdate error: "+ error.message);
+    //     }
+    // }
 
     async _onCapabilitiesSet(valueObj, optsObj) {
         try{
