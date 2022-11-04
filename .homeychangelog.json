@@ -30,5 +30,9 @@
   "0.1.7": {
     "en": "Added button pressed trigger",
     "de": "Taste-gedrückt Ereignis hinzugefügt."
+  },
+  "0.1.8": {
+    "en": "Added call entity service action card with autocompletion list.",
+    "de": "Entitäts-Service Aktionskarte mit Autovervollständigungsliste ergänzt."
   }
 }

@@ -282,6 +282,11 @@
           "de": "Dienst [[service]] der Domäne [[domain]] mit den Daten [[data]] aufrufen",
           "nl": "Bel service [[service]] van domein [[domain]] met data [[data]]"
         },
+        "hint": {
+          "en": "Example for light.turn_on: service=turn_on, domain=light, data={'brightness':100, 'entity_id':'light.entityname'}",
+          "de": "Beispiel für light.turn_on: service=turn_on, domain=light, data={'brightness':100, 'entity_id':'light.entityname'}",
+          "nl": "Voorbeeld voor light.turn_on: service=turn_on, domain=light, data={'brightness':100, 'entity_id':'light.entityname'}"
+        },
         "args": [
           {
             "name": "domain",
@@ -296,6 +301,69 @@
             "type": "text"
           }
         ]
+      },
+      {
+        "highlight": true,
+        "title": {
+          "en": "Call service with selection",
+          "de": "Dienst aufrufen mit Selektion",
+          "nl": "Roep service aan met selectie"
+        },
+        "titleFormatted": {
+          "en": "Call service [[service]] for entity [[entity]] with data [[data]]",
+          "de": "Dienst [[service]] für Entität [[entity]] mit den Daten [[data]] aufrufen",
+          "nl": "Bel service [[service]] voor entiteit [[entity]] met data [[data]]"
+        },
+        "hint": {
+          "en": "Call an entity service using a service/entity autocompletion list.",
+          "de": "Dienst für eine Entität aufrufe nmithilfe einer Dienst-/Entitäts-Autovervollständigungsliste",
+          "nl": "Roep een entiteitsservice aan met behulp van een lijst voor automatisch aanvullen van services/entiteiten."
+        },
+        "args": [
+          {
+            "type": "autocomplete",
+            "name": "service",
+            "title": {
+              "en": "Service",
+              "de": "Dienst",
+              "nl": "Service"
+            },
+            "placeholder": {
+              "en": "Select the service",
+              "de": "Wähle den Dienst",
+              "nl": "Selecteer de dienst"
+            }
+          },
+          {
+            "type": "autocomplete",
+            "name": "entity",
+            "title": {
+              "en": "Entity",
+              "de": "Entität",
+              "nl": "Entiteit"
+            },
+            "placeholder": {
+              "en": "Select the entity",
+              "de": "Wähle die Entität",
+              "nl": "selecteer de entiteit"
+            }
+          },
+          {
+            "type": "text",
+            "name": "data",
+            "title": {
+              "en": "Data",
+              "de": "Daten",
+              "nl": "Gegevens"
+            },
+            "placeholder": {
+              "en": "{\"parameter\": \"value\"}",
+              "de": "{\"Parameter\": \"Wert\"}",
+              "nl": "{\"parameter\": \"waarde\"}"
+            }
+          }
+        ],
+        "id": "callServiceEntity"
       },
       {
         "highlight": true,

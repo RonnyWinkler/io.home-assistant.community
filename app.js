@@ -6,12 +6,17 @@ if (process.env.DEBUG === '1')
 'use strict';
 
 const Homey = require('homey');
+const { join } = require('path');
 const Client = require('./lib/Client.js');
 
 class App extends Homey.App {
 	
 	async onInit() {
 		this.homey.on('unload', async () => await this.onUninit());
+
+		// Autocomplete Lists:
+		this.entityList = {};
+		this.serviceList = {};
 
 		this.log('Home-Assistant is running...');
 
@@ -81,6 +86,34 @@ class App extends Homey.App {
 			});
 		});
 
+		this._flowActionCallServiceEntity = this.homey.flow.getActionCard('callServiceEntity');
+		this._flowActionCallServiceEntity.registerRunListener(async (args, state) => {
+			try{
+				await this._onFlowActionCallServiceSelection(args);
+				return true;
+			}
+			catch(error){
+				this.error("Error executing flowAction 'callServiceSelection': "+  error.message);
+				throw new Error(error.message);
+			}
+		});
+		this._flowActionCallServiceEntity.registerArgumentAutocompleteListener('service', async (query, args) => {
+			this.serviceList = await this._getAutocompleteServiceList();
+			return this.serviceList.filter((result) => { 
+				return result.name.toLowerCase().includes(query.toLowerCase());
+			});
+		});
+		this._flowActionCallServiceEntity.registerArgumentAutocompleteListener('entity', async (query, args) => {
+			let listCount = Object.keys(this.entityList).length;
+			let entityCount = this._client.getEntitiesCount();
+			if ( listCount != entityCount){
+				this.entityList = await this._getAutocompleteEntityList();
+			}
+			return this.entityList.filter((result) => { 
+				return result.name.toLowerCase().includes(query.toLowerCase());
+			});
+		});
+
 		// Flow trigger for all capabilities
 		this._flowTriggerCapabilityChanged = this.homey.flow.getDeviceTriggerCard('capability_changed');
 		this._flowTriggerCapabilityChanged.registerRunListener(async (args, state) => {
@@ -92,8 +125,10 @@ class App extends Homey.App {
 				return result.name.toLowerCase().includes(query.toLowerCase());
 			});
 		});
-		this._flowTriggerButtonPressed = this.homey.flow.getDeviceTriggerCard('button_pressed');
 		
+		// Flow Trigger: Buttopn pressed
+		this._flowTriggerButtonPressed = this.homey.flow.getDeviceTriggerCard('button_pressed');
+
 		// Flow contitions
 		this._flowConditionMeasureNumeric = this.homey.flow.getConditionCard('measure_numeric')
 		.registerRunListener(async (args, state) => {
@@ -141,6 +176,65 @@ class App extends Homey.App {
 	async _onFlowActionCallService(args) {
 		this.log("Call service. Domain: "+args.domain+" Service: "+args.service+" Data: "+args.data);
 		await this._client.callService(args.domain, args.service, args.data);
+	}
+
+	async _onFlowActionCallServiceSelection(args) {
+		this.log("Call service. Domain: "+args.domain+" Service: "+args.service+" Data: "+args.data);
+		try{
+			let data = args.data;
+			if (args.entity){
+				let json = JSON.parse(data);
+				json["entity_id"] = args.entity.id;
+				data = JSON.stringify(json);
+			}
+			await this._client.callService(args.service.id.split('.')[0], args.service.id.split('.')[1], data);
+
+		}
+		catch(error){
+			throw new Error(error.message);
+		}
+	}
+
+	async _getAutocompleteServiceList(){
+		let domainServices = await this._client.getServices();
+		let domains = Object.keys(domainServices);
+		this.sortKeys(domains);
+		let result = [];
+		for (let i=0; i<domains.length; i++){
+			let services = Object.keys(domainServices[domains[i]]); 
+			for (let j=0; j<services.length; j++){
+
+				result.push({
+					id: domains[i]+"."+services[j],
+					name: domains[i]+"."+services[j]
+				})
+			}
+		}
+		return result;
+	}
+
+	async _getAutocompleteEntityList(){
+		let entities = this._client.getEntities();
+		let keys = Object.keys(entities);
+		this.sortKeys(keys);
+		let result = [];
+		for (let i=0; i<keys.length; i++){
+			result.push({
+				id: keys[i],
+				name: keys[i]
+			})
+		}
+		return result;
+	}
+
+	sortKeys(keys){
+		keys.sort(function(a, b){
+			let x = a.toLowerCase();
+			let y = b.toLowerCase();
+			if (x < y) {return -1;}
+			if (x > y) {return 1;}
+			return 0;
+		});
 	}
 
 	async clientReconnect(){

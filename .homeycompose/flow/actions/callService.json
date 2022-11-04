@@ -10,6 +10,11 @@
         "de": "Dienst [[service]] der Domäne [[domain]] mit den Daten [[data]] aufrufen",
         "nl": "Bel service [[service]] van domein [[domain]] met data [[data]]"
     },
+    "hint": {
+        "en": "Example for light.turn_on: service=turn_on, domain=light, data={'brightness':100, 'entity_id':'light.entityname'}",
+        "de": "Beispiel für light.turn_on: service=turn_on, domain=light, data={'brightness':100, 'entity_id':'light.entityname'}",
+        "nl": "Voorbeeld voor light.turn_on: service=turn_on, domain=light, data={'brightness':100, 'entity_id':'light.entityname'}"
+    },
     "args": [
         {
             "name": "domain",
