@@ -185,7 +185,7 @@ class App extends Homey.App {
 			if (args.entity){
 				let json = JSON.parse(data);
 				json["entity_id"] = args.entity.id;
-				data = JSON.stringify(json);
+				data = this.jsonUnescape(JSON.stringify(json));
 			}
 			await this._client.callService(args.service.id.split('.')[0], args.service.id.split('.')[1], data);
 
@@ -238,7 +238,11 @@ class App extends Homey.App {
 	}
 
 	jsonEscape(str)  {
+		// return str.replace(/\n/g, " ").replace(/\r/g, " ").replace(/\t/g, " ");
 		return str.replace(/\n/g, "\\\\n").replace(/\r/g, "\\\\r").replace(/\t/g, "\\\\t");
+	}
+	jsonUnescape(str)  {
+		return str.replace(/\\n/g, "\n").replace(/\\r/g, "\r").replace(/\\t/g, "\t");
 	}
 
 	async clientReconnect(){
