@@ -181,7 +181,7 @@ class App extends Homey.App {
 	async _onFlowActionCallServiceEntity(args) {
 		this.log("Call entity service. Service: "+args.service.id+" Entity: "+args.entity.id+" Data: "+args.data);
 		try{
-			let data = args.data;
+			let data = this.jsonEscape(args.data);
 			if (args.entity){
 				let json = JSON.parse(data);
 				json["entity_id"] = args.entity.id;
@@ -235,6 +235,10 @@ class App extends Homey.App {
 			if (x > y) {return 1;}
 			return 0;
 		});
+	}
+
+	jsonEscape(str)  {
+		return str.replace(/\n/g, "\\\\n").replace(/\r/g, "\\\\r").replace(/\t/g, "\\\\t");
 	}
 
 	async clientReconnect(){
