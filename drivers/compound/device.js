@@ -10,7 +10,12 @@ const defaultValueConverter = {
 }
 
 const defaultStringConverter = {
-    from: (state) => state,
+    from: (state) => {
+        if (state != undefined){
+            return state.toString();
+        }
+        else return "";
+    },
     to: (value) => value
 }
 
