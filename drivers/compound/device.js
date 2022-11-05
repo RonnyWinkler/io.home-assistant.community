@@ -14,7 +14,7 @@ const defaultStringConverter = {
         if (state != undefined){
             return state.toString();
         }
-        else return "";
+        else return state;
     },
     to: (value) => value
 }
@@ -218,9 +218,14 @@ class CompoundDevice extends Homey.Device {
                     else{
                         value = convert(data.attributes[attribute]);
                     }
-                    if (value == null || value == undefined)
-                        //this.log("Update compound device. Value convert error: "+this.entityId+" key: "+key+" entity: "+entityId+" HA state: "+data.state+" converted:"+value);
-    
+                    if (value == null || value == undefined){
+                        if (attribute == undefined){
+                            this.log("Update compound device from entity. Value convert error: "+this.entityId+" key: "+key+" entity: "+entityId+" HA state: "+data.state+" converted:"+value);
+                        }
+                        else{
+                            this.log("Update compound device from attribute. Value convert error: "+this.entityId+" key: "+key+" entity: "+entityId+" HA state: "+data.attributes[attribute]+" converted:"+value);
+                        }
+                    }
                     try {
                         let oldValue = this.getCapabilityValue(key);
                         await this.setCapabilityValue(key, value);
