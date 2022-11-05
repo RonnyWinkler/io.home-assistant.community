@@ -34,5 +34,9 @@
   "0.1.8": {
     "en": "Added call entity service action card with autocompletion list.",
     "de": "Entitäts-Service Aktionskarte mit Autovervollständigungsliste ergänzt."
+  },
+  "0.1.9": {
+    "en": "Fixed play/pause service for media player. Added units in YAML for compound device.",
+    "de": "Play/Pause-Dienstfür Medienspieler korrigiert. Einheit für YAML-Definition der Verbund-Geräte ergänzt."
   }
 }

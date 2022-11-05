@@ -342,7 +342,7 @@ class MediaDevice extends Homey.Device {
             });
         }
         else{
-            await this._client.callService("media_player", "media_play_pause", {
+            await this._client.callService("media_player", "media_pause", {
                 "entity_id": entityId
             });
         }

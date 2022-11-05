@@ -14,7 +14,7 @@ const defaultStringConverter = {
         if (state != undefined){
             return state.toString();
         }
-        else return state;
+        else return "";
     },
     to: (value) => value
 }
@@ -46,9 +46,9 @@ class CompoundDevice extends Homey.Device {
         }, CAPABILITIES_SET_DEBOUNCE);
 
         // maintenance actions
-        this.registerCapabilityListener('button.reconnect', async () => {
-            await this.clientReconnect()
-        });
+        // this.registerCapabilityListener('button.reconnect', async () => {
+        //     await this.clientReconnect()
+        // });
 
         // Init device with a short timeout to wait for initial entities
         this.timeoutInitDevice = this.homey.setTimeout(async () => this.onInitDevice().catch(e => console.log(e)), 5 * 1000 );
@@ -211,14 +211,17 @@ class CompoundDevice extends Homey.Device {
                     let convert = this.inputConverter(key);
 
                     let value = null;
+                    let entityValue = null;
                     let attribute = this.getCompoundEntityAttribut(this.compoundCapabilities[key]);
                     if (attribute == undefined){
+                        entityValue = data.state;
                         value = convert(data.state);
                     }
                     else{
+                        data.state = data.attributes[attribute];
                         value = convert(data.attributes[attribute]);
                     }
-                    if (value == null || value == undefined){
+                    if ( (value == null || value == undefined) && (entityValue != value) ){
                         if (attribute == undefined){
                             this.log("Update compound device from entity. Value convert error: "+this.entityId+" key: "+key+" entity: "+entityId+" HA state: "+data.state+" converted:"+value);
                         }
@@ -336,6 +339,9 @@ class CompoundDevice extends Homey.Device {
             let keys = Object.keys(valueObj);
             for (let i=0; i<keys.length; i++){
                 let key = keys[i];
+                if (key == 'button.reconnect'){
+                    await this.clientReconnect();          
+                }
                 if (key.startsWith("onoff")){
                     this.onCapabilityOnoff(key, valueObj[keys[i]]);
                 }
