@@ -2,10 +2,42 @@
 
 const Homey = require('homey');
 
+// files
+const http = require('http');
+const https = require('https');
+const fs = require('fs');
+
+function download(url, path, encoding){
+    var file = fs.createWriteStream(path);
+    return new Promise((resolve, reject) => {
+      var responseSent = false;
+      const action = url.startsWith('https') ? https.get : http.get;
+      action(url, response => {
+        if(encoding) {
+            response.setEncoding(encoding);
+        }
+        response.pipe(file);
+        file.on('finish', () =>{
+          file.close(() => {
+            if(responseSent)  return;
+            responseSent = true;
+            resolve();
+          });
+        });
+      }).on('error', err => {
+          if(responseSent)  return;
+          responseSent = true;
+          reject(err);
+      });
+    });
+}
+
+
 class BaseDriver extends Homey.Driver {
 
     onPair(session) {
         this.log("onPair()");
+        this.selectedDevices = [];
 
         session.setHandler('showView', async (view) => {
             return await this.onShowView(session, view);
@@ -17,6 +49,68 @@ class BaseDriver extends Homey.Driver {
 
         session.setHandler("login", async (data) => {
             return await this.checkLogin(data); 
+        });
+
+        session.setHandler('list_devices_selection', async (data) => {
+            // this.log("handler: list_devices_selection");
+            return await this.onListDeviceSelection(session, data);
+        });
+      
+
+        session.setHandler('setRemoteIcon', async (item) => {
+            this.log('setRemoteIcon: ' + item.url);
+            // if(DEBUG) listFiles("./userdata");
+            const root = "../../";
+            let deviceFile = "";
+            for(let i=0; i<this.selectedDevices.length; i++){
+                deviceFile  = await this.downloadIcon(item.url, this.selectedDevices[i].data.id);
+                let path = root + deviceFile;
+                if (!this.selectedDevices[i].store){
+                    this.selectedDevices[i]["store"]={};
+                }
+                this.selectedDevices[i].store["icon"] = path;
+                this.selectedDevices[i]["icon"] = path;
+            }
+            const file = deviceFile;
+            return file;
+        });
+    
+        session.setHandler('setIcon', async (svg) => {
+            this.log('setIcon: ' + svg);
+            for(let i=0; i<this.selectedDevices.length; i++){
+                this.selectedDevices[i].store.icon = svg;
+                this.selectedDevices[i].icon = svg
+            }
+            return svg;
+        });
+
+        session.setHandler('saveIcon', async (data) => {
+            try {
+                this.log('saveIcon: ' + JSON.stringify(data));
+                // if(DEBUG) listFiles("./userdata");
+                const root = '../../';
+                let deviceIconCurrent = "";
+                for(let i=0; i<this.selectedDevices.length; i++){
+
+                    this.uploadIcon(data, this.selectedDevices[i].data.id);
+                    deviceIconCurrent = "../userdata/"+ this.selectedDevices[i].data.id +".svg";
+            
+                    if (!this.selectedDevices[i].store){
+                        this.selectedDevices[i]["store"]={};
+                    }
+                    this.selectedDevices[i].store["icon"] = root + deviceIconCurrent;
+                    this.selectedDevices[i]["icon"] = root + deviceIconCurrent;
+                }            
+                const deviceIcon = deviceIconCurrent;
+                return deviceIcon;
+        
+            } catch (error) {
+                this.error('saveIcon ERROR ' + JSON.stringify(error));
+            }
+        });
+    
+        session.setHandler('install', (data) => {
+            return this.selectedDevices;
         });
     }
 
@@ -115,6 +209,35 @@ class BaseDriver extends Homey.Driver {
         }
 
         return devices;
+    }
+
+    async onListDeviceSelection(session, data){
+        this.log("handler: list_devices_selection: ");
+        this.log(data);
+        this.selectedDevices = data;
+        return;
+    }
+
+    tryRemoveIcon(id) {
+        try {
+            const path = `../userdata/${id}.svg`;
+            fs.unlinkSync(path);
+        } catch(error) {
+            this.error("Error removing device icon. Perhaps only driver icon was used. Error: "+error.message);
+        }
+    }
+
+    async downloadIcon(url, id) {
+        const path = `../userdata/${id}.svg`;
+        await download(url, path);
+        //await download(url, path, 'base64');
+        return path;
+    }
+
+    uploadIcon(img, id) {
+        const path = "../userdata/"+ id +".svg";
+        const base64 = img.replace("data:image/svg+xml;base64,", '');
+        fs.writeFileSync(path, base64, 'base64');
     }
 
     async getDeviceList(client){

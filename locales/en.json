@@ -1,1 +1,9 @@
-{}
+{
+    "pair": {
+        "title": {
+            "ready": "Ready",
+            "device_added": "Device was added",
+            "icon": "Icon"
+        }
+    }
+}

@@ -498,15 +498,21 @@
           "id": "list_devices",
           "template": "list_devices",
           "navigation": {
-            "next": "add_devices"
+            "next": "icon"
           },
           "options": {
             "singular": true
           }
         },
         {
-          "id": "add_devices",
-          "template": "add_devices"
+          "id": "icon",
+          "navigation": {
+            "next": "add_devices",
+            "prev": "list_devices"
+          }
+        },
+        {
+          "id": "add_devices"
         }
       ],
       "repair": [
@@ -603,15 +609,21 @@
           "id": "list_devices",
           "template": "list_devices",
           "navigation": {
-            "next": "add_devices"
+            "next": "icon"
           },
           "options": {
             "singular": true
           }
         },
         {
-          "id": "add_devices",
-          "template": "add_devices"
+          "id": "icon",
+          "navigation": {
+            "next": "add_devices",
+            "prev": "list_devices"
+          }
+        },
+        {
+          "id": "add_devices"
         }
       ],
       "repair": [
@@ -738,15 +750,21 @@
           "id": "list_devices",
           "template": "list_devices",
           "navigation": {
-            "next": "add_devices"
+            "next": "icon"
           },
           "options": {
             "singular": true
           }
         },
         {
-          "id": "add_devices",
-          "template": "add_devices"
+          "id": "icon",
+          "navigation": {
+            "next": "add_devices",
+            "prev": "list_devices"
+          }
+        },
+        {
+          "id": "add_devices"
         }
       ],
       "repair": [
@@ -882,15 +900,21 @@
           "id": "list_devices",
           "template": "list_devices",
           "navigation": {
-            "next": "add_devices"
+            "next": "icon"
           },
           "options": {
             "singular": true
           }
         },
         {
-          "id": "add_devices",
-          "template": "add_devices"
+          "id": "icon",
+          "navigation": {
+            "next": "add_devices",
+            "prev": "list_devices"
+          }
+        },
+        {
+          "id": "add_devices"
         }
       ],
       "repair": [
@@ -1001,15 +1025,21 @@
           "id": "list_devices",
           "template": "list_devices",
           "navigation": {
-            "next": "add_devices"
+            "next": "icon"
           },
           "options": {
             "singular": true
           }
         },
         {
-          "id": "add_devices",
-          "template": "add_devices"
+          "id": "icon",
+          "navigation": {
+            "next": "add_devices",
+            "prev": "list_devices"
+          }
+        },
+        {
+          "id": "add_devices"
         }
       ],
       "repair": [
@@ -1106,15 +1136,21 @@
           "id": "list_devices",
           "template": "list_devices",
           "navigation": {
-            "next": "add_devices"
+            "next": "icon"
           },
           "options": {
             "singular": true
           }
         },
         {
-          "id": "add_devices",
-          "template": "add_devices"
+          "id": "icon",
+          "navigation": {
+            "next": "add_devices",
+            "prev": "list_devices"
+          }
+        },
+        {
+          "id": "add_devices"
         }
       ],
       "repair": [
@@ -1211,15 +1247,21 @@
           "id": "list_devices",
           "template": "list_devices",
           "navigation": {
-            "next": "add_devices"
+            "next": "icon"
           },
           "options": {
             "singular": true
           }
         },
         {
-          "id": "add_devices",
-          "template": "add_devices"
+          "id": "icon",
+          "navigation": {
+            "next": "add_devices",
+            "prev": "list_devices"
+          }
+        },
+        {
+          "id": "add_devices"
         }
       ],
       "repair": [
@@ -1345,15 +1387,21 @@
           "id": "list_devices",
           "template": "list_devices",
           "navigation": {
-            "next": "add_devices"
+            "next": "icon"
           },
           "options": {
             "singular": true
           }
         },
         {
-          "id": "add_devices",
-          "template": "add_devices"
+          "id": "icon",
+          "navigation": {
+            "next": "add_devices",
+            "prev": "list_devices"
+          }
+        },
+        {
+          "id": "add_devices"
         }
       ],
       "repair": [

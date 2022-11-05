@@ -67,7 +67,7 @@ class CompoundDevice extends Homey.Device {
             }
         }
         catch(error){
-            this.error("Error adding capability: "+Error.message);
+            this.error("Error adding capability: "+error.message);
         }
     }
 
@@ -273,6 +273,7 @@ class CompoundDevice extends Homey.Device {
         }
     }
 
+    // Version without attributes
     // async onEntityUpdate(data){
     //     try {
     //         let entityId = data.entity_id;
@@ -373,7 +374,7 @@ class CompoundDevice extends Homey.Device {
     }
 
     async onCapabilityLocked( capability, value, opts ) {
-        console.log("onCapabilityLocked", value);
+        this.log("onCapabilityLocked", value);
         await this._client.turnOnOff(this.compoundCapabilities[capability], value);
     }
 
@@ -388,6 +389,15 @@ class CompoundDevice extends Homey.Device {
 
     async clientReconnect(){
         await this.homey.app.clientReconnect();
+    }
+
+    async onDeleted() {
+        this.driver.tryRemoveIcon(this.getData().id);
+        
+        if (this.timeoutInitDevice){
+            this.homey.clearTimeout(this.timeoutInitDevice);
+            this.timeoutInitDevice = null;    
+        }
     }
 }
 

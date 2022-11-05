@@ -34,7 +34,7 @@ class SensorDevice extends Homey.Device {
             }
         }
         catch(error){
-            this.error("Error adding capability: "+Error.message);
+            this.error("Error adding capability: "+error.message);
         }
     }
 
@@ -86,14 +86,24 @@ class SensorDevice extends Homey.Device {
                 await this.setCapabilityValue(this.capability, parseFloat(data.state));
             }
         }
-        catch(ex) {
-            this.log("error", ex);
+        catch(error) {
+            this.error("CapabilitiesUpdate error: "+ error.message);
         }
     }
 
     async clientReconnect(){
         await this.homey.app.clientReconnect();
     }
+
+    async onDeleted() {
+        this.driver.tryRemoveIcon(this.getData().id);
+        
+        if (this.timeoutInitDevice){
+            this.homey.clearTimeout(this.timeoutInitDevice);
+            this.timeoutInitDevice = null;    
+        }
+    }
+
 }
 
 module.exports = SensorDevice;

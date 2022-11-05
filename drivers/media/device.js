@@ -100,7 +100,7 @@ class MediaDevice extends Homey.Device {
             }
         }
         catch(error){
-            this.error("Error adding capability: "+Error.message);
+            this.error("Error adding capability: "+error.message);
         }
     }
 
@@ -272,8 +272,8 @@ class MediaDevice extends Homey.Device {
                 await this.setStoreValue("canSelectSoundMode", true);
             }
         }
-        catch(error){
-            throw new Error("Device update error: "+error.message);
+        catch(error) {
+            this.error("CapabilitiesUpdate error: "+ error.message);
         }
     }
     // onCapabilityButton( value, opts ) {
@@ -485,6 +485,16 @@ class MediaDevice extends Homey.Device {
     async clientReconnect(){
         await this.homey.app.clientReconnect();
     }
+
+    async onDeleted() {
+        this.driver.tryRemoveIcon(this.getData().id);
+        
+        if (this.timeoutInitDevice){
+            this.homey.clearTimeout(this.timeoutInitDevice);
+            this.timeoutInitDevice = null;    
+        }
+    }
+
 }
 
 module.exports = MediaDevice;

@@ -76,6 +76,15 @@ class SwitchDevice extends Homey.Device {
     async clientReconnect(){
         await this.homey.app.clientReconnect();
     }
+    
+    async onDeleted() {
+        this.driver.tryRemoveIcon(this.getData().id);
+        
+        if (this.timeoutInitDevice){
+            this.homey.clearTimeout(this.timeoutInitDevice);
+            this.timeoutInitDevice = null;    
+        }
+    }
 }
 
 module.exports = SwitchDevice;

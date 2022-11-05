@@ -38,7 +38,7 @@ class ButtonDevice extends Homey.Device {
             }
         }
         catch(error){
-            this.error("Error adding capability: "+Error.message);
+            this.error("Error adding capability: "+error.message);
         }
     }
 
@@ -72,21 +72,36 @@ class ButtonDevice extends Homey.Device {
    }
 
     async onEntityUpdate(data) {
-        // First update, just remember the current state (last press)
-        if (this.lastState == null){
-            this.lastState = data.state;
-            return;
+        try{
+            // First update, just remember the current state (last press)
+            if (this.lastState == null){
+                this.lastState = data.state;
+                return;
+            }
+            // New update, raise flow trigger
+            if (this.lastState != data.state){
+                this.lastState = data.state;
+                this.homey.app._flowTriggerButtonPressed.trigger(this);
+            }
         }
-        // New update, raise flow trigger
-        if (this.lastState != data.state){
-            this.lastState = data.state;
-            this.homey.app._flowTriggerButtonPressed.trigger(this);
+        catch(error) {
+            this.error("CapabilitiesUpdate error: "+ error.message);
         }
     }
 
     async clientReconnect(){
         await this.homey.app.clientReconnect();
     }
+
+    async onDeleted() {
+        this.driver.tryRemoveIcon(this.getData().id);
+        
+        if (this.timeoutInitDevice){
+            this.homey.clearTimeout(this.timeoutInitDevice);
+            this.timeoutInitDevice = null;    
+        }
+    }
+
 }
 
 module.exports = ButtonDevice;
