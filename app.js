@@ -12,7 +12,9 @@ const Client = require('./lib/Client.js');
 class App extends Homey.App {
 	
 	async onInit() {
+		// Homey events
 		this.homey.on('unload', async () => await this.onUninit());
+		this.homey.on('memwarn', async (data) => await this.onMemwarn(data));
 
 		// Autocomplete Lists:
 		this.entityList = {};
@@ -128,6 +130,7 @@ class App extends Homey.App {
 		
 		// Flow Trigger: Buttopn pressed
 		this._flowTriggerButtonPressed = this.homey.flow.getDeviceTriggerCard('button_pressed');
+		this._flowTriggerAppMemwarn = this.homey.flow.getTriggerCard('app_memwarn');
 
 		// Flow contitions
 		this._flowConditionMeasureNumeric = this.homey.flow.getConditionCard('measure_numeric')
@@ -153,6 +156,11 @@ class App extends Homey.App {
 		await this._client.close();
 		this._client = null;
 		this.log("App onUninit() - finished");
+	}
+
+	async onMemwarn(data){
+		this.error("A memory warning has occured.");
+		this._flowTriggerAppMemwarn.trigger(data);
 	}
 
 	getClient() {

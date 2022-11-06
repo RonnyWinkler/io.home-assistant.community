@@ -1,7 +1,7 @@
 {
   "_comment": "This file is generated. Please edit .homeycompose/app.json instead.",
   "id": "io.home-assistant.community",
-  "version": "0.1.9",
+  "version": "0.2.0",
   "compatibility": ">=5.0.0",
   "sdk": 3,
   "brandColor": "#038FC7",
@@ -56,6 +56,46 @@
   },
   "flow": {
     "triggers": [
+      {
+        "title": {
+          "en": "Memory warning",
+          "de": "Speicherwarnung",
+          "nl": "Geheugen waarschuwing"
+        },
+        "titleFormatted": {
+          "en": "A memory warning has occurred",
+          "de": "Eine speicherwarnung ist aufgetreten",
+          "nl": "Er is een geheugenwaarschuwing opgetreden"
+        },
+        "hint": {
+          "en": "Triggers when the app is consuming too much memory.",
+          "de": "Wird ausgelöst, wenn die app zu viel speicher verbraucht.",
+          "nl": "Wordt geactiveerd wanneer de app te veel geheugen verbruikt."
+        },
+        "tokens": [
+          {
+            "name": "count",
+            "type": "number",
+            "example": 5,
+            "title": {
+              "en": "Number of warnings sent",
+              "de": "Anzahl bereits gesendeter Warnungen",
+              "nl": "Aantal verzonden waarschuwingen"
+            }
+          },
+          {
+            "name": "limit",
+            "type": "number",
+            "example": 25,
+            "title": {
+              "en": "Number of maximum warnings until the app is killed",
+              "de": "Anzahl der maximalen Warnungen, bis die App beendet wird",
+              "nl": "Aantal maximale waarschuwingen totdat de app wordt uitgeschakeld"
+            }
+          }
+        ],
+        "id": "app_memwarn"
+      },
       {
         "title": {
           "en": "Button was pressed",
