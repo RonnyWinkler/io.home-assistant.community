@@ -393,7 +393,13 @@ class CompoundDevice extends Homey.Device {
 
     async onDeleted() {
         this.driver.tryRemoveIcon(this.getData().id);
-        
+
+        // dynamic capability icons are not possible using capabilitiesOptions
+        // Object.keys(this.getData().capabilitiesMdiIcons).forEach(async (key) => {
+        //     let id = this.getData().id + "." + key;
+        //     this.driver.tryRemoveIcon(id);
+        // });
+
         if (this.timeoutInitDevice){
             this.homey.clearTimeout(this.timeoutInitDevice);
             this.timeoutInitDevice = null;    

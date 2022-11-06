@@ -1,0 +1,19 @@
+Diese Homey-App fügt viele Geräte, Skripte & Szenen deiner Home Assistant-Installation hinzu.
+Aktuell werden folgende Gerätetypen unterstützt:
+
+- Compound (kombiniertes Gerät)
+- Beleuchtung
+- Media-Player
+- Sensoren
+- Binäre Sensoren
+- Szenen
+- Skripte
+- Schalter
+- Dienste (Start über Flows)
+
+Installation und Verwendung:
+Um diese App zu verwenden, installiere sie einfach aus dem Homey App Store https://homey.app/a/io.home-assistant.community/
+Es muss nichts vorkonfiguriert werden. Du kannst sofort mit dem Hinzufügen des ersten Geräts beginnen. Beim ersten Gerät mmuss die lokale IP-Adresse des Home Assistant-Systems eingegeben werden, zusammen mit dem sogenannten „Longlived Token“
+→ Wenn du noch keines hast, erstelle einen im Home Assistant-Profil „http://your.homeassistant.IPaddress:8123/profile“;
+Wenn das Gerät erfolgreich gespeichert wurde, kannst du weitere Home Assistant-Geräte ohne weitere Einstellungen installieren.
+Nachdem in der Home Assistant-Instanz ein neues Gerät hinzugefügt wurde, wird die Entitätsliste in Homey sofort aktualisiert, und die neue Entität kann direkt als Homey-Gerät hinzufügt werden.

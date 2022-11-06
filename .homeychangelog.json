@@ -38,5 +38,9 @@
   "0.1.9": {
     "en": "Fixed play/pause service for media player. Added units in YAML for compound device.",
     "de": "Play/Pause-Dienstfür Medienspieler korrigiert. Einheit für YAML-Definition der Verbund-Geräte ergänzt."
+  },
+  "0.2.0": {
+    "en": "Added icon upload for device pairing including mdi icon selection (https://materialdesignicons.com).",
+    "de": "Icon-Upload für die Gerätekopplung hinzugefügt, einschließlich mdi-Iconauswahl (https://materialdesignicons.com)."
   }
 }

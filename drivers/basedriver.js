@@ -38,6 +38,7 @@ class BaseDriver extends Homey.Driver {
     onPair(session) {
         this.log("onPair()");
         this.selectedDevices = [];
+        let installed = false;
 
         session.setHandler('showView', async (view) => {
             return await this.onShowView(session, view);
@@ -109,9 +110,44 @@ class BaseDriver extends Homey.Driver {
             }
         });
     
-        session.setHandler('install', (data) => {
+        session.setHandler('install', async (data) => {
+            this.log('install devies');
+
+            // dynamic icon defifinition for capabilities is not possible using capabilitiesOptions
+            // Only icons defined in capability.json are used :(
+            // for(let i=0; i<this.selectedDevices.length; i++){
+            //     if (this.selectedDevices[i].data.capabilitiesMdiIcons){
+            //         let keys = Object.keys(this.selectedDevices[i].data.capabilitiesMdiIcons);
+            //         for(let j=0; j<keys.length; j++){
+            //             let id = this.selectedDevices[i].data.id + "." + keys[j];
+            //             // Read icon from mdi JSON
+            //             let url =   "https://raw.githubusercontent.com/Templarian/MaterialDesign-SVG/master/svg/"+ 
+            //                         this.selectedDevices[i].data.capabilitiesMdiIcons[keys[j]] +
+            //                         ".svg";
+            //             // write icon to /userdata
+            //             let path = await this.downloadIcon(url, id);
+
+            //             // update device capability icon
+            //             this.selectedDevices[i].capabilitiesOptions[keys[j]]["icon"] = path;
+            //         }
+            //     }
+            // }
+
+            installed = true;
             return this.selectedDevices;
         });
+
+        session.setHandler('disconnect', async () => {
+            if(installed) {
+                this.log("Pairing is finished");
+            } else {
+                this.log("User aborted");
+                for(let i=0; i<this.selectedDevices.length; i++){
+                    this.tryRemoveIcon(this.selectedDevices[i].data.id);
+                }
+            }
+        });
+
     }
 
     async onRepair(session, device) {
@@ -222,6 +258,7 @@ class BaseDriver extends Homey.Driver {
         try {
             const path = `../userdata/${id}.svg`;
             fs.unlinkSync(path);
+            this.log("Icon removed: "+path);
         } catch(error) {
             this.error("Error removing device icon. Perhaps only driver icon was used. Error: "+error.message);
         }

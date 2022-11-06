@@ -1,24 +1,21 @@
-Diese Homey-App fügt Unterstützung für viele Geräte, Skripte & Szenen deiner Home Assistant-Installation hinzu.
+Diese Home-Assistant Community-App bietet die Möglichkeit, Home-Assistant-Geräte in Homey zur Verfügung zu stellen. 
 
-Aktuell werden folgende Gerätetypen unterstützt:
+Derzeit unterstützte Typen:
+- Licht
+- Schalter / Boolesche Schalter
+- Sensoren / Binäre-Sensoren
+- Mediaplayer
+- Szenen
+- Skripte
+- Dienste (über Flow gestartet)
 
-Compound (kombiniertes Gerät)
-Beleuchtung
-Media-Player
-Sensoren
-Binäre Sensoren
-Szenen
-Skripte
-Schalter
-Dienste (Start über Flows)
+Einstieg:
+Um die App mit Home Assistant zu verbinden, muss zuvor in Home Assistant ein „Long Lived Access Token“ erstellt werden (https://www.home-assistant.io/docs/authentication/).
+Die IP-Adresse/Hostname und der Port der Home Assistant Instanz muss bekannt sein.
+Beim Kopplungsprozess zum Hinzufügen neuer Geräte wird beim ersten Aufruf der Anmeldebildschirm angezeigt, wo die IP-Adresse und der Token einzugeben ist.
 
-
-- Installation und Verwendung
-
-Um diese App zu verwenden, installiere sie einfach aus dem Homey App Store https://homey.app/a/io.home-assistant.community/
-
-Es muss nichts vorkonfiguriert werden. Du kannst sofort mit dem Hinzufügen des ersten Geräts beginnen. Beim ersten Gerät mmuss die lokale IP-Adresse des Home Assistant-Systems eingegeben werden, zusammen mit dem sogenannten „Longlived Token“
-→ Wenn du noch keines hast, erstelle einen im Home Assistant-Profil „http://your.homeassistant.IPaddress:8123/profile“;
-
-Wenn das Gerät erfolgreich gespeichert wurde, kannst du weitere Home Assistant-Geräte ohne weitere Einstellungen installieren.
-Nachdem in der Home Assistant-Instanz ein neues Gerät hinzugefügt wurde, wird die Entitätsliste in Homey sofort aktualisiert, und die neue Entität kann direkt als Homey-Gerät hinzufügt werden.
+Verbund-Gerät (Compound):
+Da Homey und Home Assistant in Bezug auf Geräte unterschiedlich modelliert sind, ist es sinnvoll, mehrere Sensoren von Home Assistant in einem Homey-Gerät zu gruppieren.
+Dazu muss eine benutzerdefinierte Komponente in Home Assistant installiert werden.
+Nach dem Hinzufügen der Komponente können mehrere Home Assistant Entitäten in der YAML Definition zu einem Verbund zusammengefasst werden.
+Details und Beispiele sind in Github abrufbar: https://github.com/RonnyWinkler/homeassistant.homey

@@ -337,6 +337,7 @@
           {
             "type": "autocomplete",
             "name": "entity",
+            "required": false,
             "title": {
               "en": "Entity",
               "de": "Entität",

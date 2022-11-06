@@ -93,7 +93,7 @@ class App extends Homey.App {
 				return true;
 			}
 			catch(error){
-				this.error("Error executing flowAction 'callServiceSelection': "+  error.message);
+				this.error("Error executing flowAction 'callServiceEntity': "+  error.message);
 				throw new Error(error.message);
 			}
 		});
@@ -179,7 +179,12 @@ class App extends Homey.App {
 	}
 
 	async _onFlowActionCallServiceEntity(args) {
-		this.log("Call entity service. Service: "+args.service.id+" Entity: "+args.entity.id+" Data: "+args.data);
+		if (args.entity){
+			this.log("Call entity service. Service: "+args.service.id+" | Entity: "+args.entity.id+" | Data: "+args.data);
+		}
+		else{
+			this.log("Call entity service. Service: "+args.service.id+" | Entity: not selected | Data: "+args.data);
+		}
 		try{
 			let data = this.jsonEscape(args.data);
 			if (args.entity){
