@@ -1,0 +1,87 @@
+{
+    "highlight": true,
+    "title": {
+        "en": "Select thermostat mode",
+        "de": "Wähle Thermostat-Modus",
+        "nl": "Selecteer thermostaatmodus"
+    },
+    "titleFormatted": {
+        "en": "Select thermostat mode [[mode]].",
+        "de": "Wähle Thermostat-Modus [[mode]].",
+        "nl": "Selecteer thermostaatmodus [[mode]]"
+    },
+    "args": [
+        {
+            "type": "dropdown",
+            "name": "mode",
+            "title": { 
+                "en": "Thermostat mode",
+                "de": "Thermostat-Modus",
+                "nl": "Thermostaatmodus"
+            },
+            "values": [
+                {
+                  "id": "off",
+                  "title": {
+                    "en": "Off",
+                    "de": "Aus",
+                    "nl": "Uit"
+                  }
+                },
+                {
+                  "id": "heat",
+                  "title": {
+                    "en": "Heating",
+                    "de": "Heizen",
+                    "nl": "Warmte"
+                  }
+                },
+                {
+                  "id": "cool",
+                  "title": {
+                    "en": "Cooling",
+                    "de": "Kühlen",
+                    "nl": "Koel"
+                  }
+                },
+                {
+                  "id": "heat_cool",
+                  "title": {
+                    "en": "Heating/Cooling",
+                    "de": "Heizen/Kühlen",
+                    "nl": "Warmte/Koel"
+                  }
+                },
+                {
+                  "id": "auto",
+                  "title": {
+                    "en": "Automatic",
+                    "de": "Automatisch",
+                    "nl": "Automatisch"
+                  }
+                },
+                {
+                  "id": "dry",
+                  "title": {
+                    "en": "Dry/Humidity",
+                    "de": "Trocken/Feuchtigkeit",
+                    "nl": "Droog/vochtigheid"
+                  }
+                },
+                {
+                  "id": "fan_only",
+                  "title": {
+                    "en": "Fan only",
+                    "de": "Nur Lüfter",
+                    "nl": "Alleen fans"
+                  }
+                }
+              ]
+        },
+        {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=climate"
+        }
+    ]
+}

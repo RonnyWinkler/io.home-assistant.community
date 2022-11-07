@@ -196,6 +196,38 @@
       },
       {
         "title": {
+          "en": "Thermostat mode changed",
+          "de": "Thermostat-Modus hat sich geändert",
+          "nl": "Thermostaatmodus gewijzigd"
+        },
+        "hint": {
+          "en": "Triggers when the Thermostat mode changes.",
+          "de": "Wird ausgelöst, wenn sich der Thermostat-Modus ändert.",
+          "nl": "Wordt geactiveerd wanneer de thermostaatmodus verandert."
+        },
+        "tokens": [
+          {
+            "name": "mode",
+            "type": "string",
+            "title": {
+              "en": "Mode",
+              "de": "Modus",
+              "nl": "Modus"
+            },
+            "example": "heat"
+          }
+        ],
+        "args": [
+          {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=climate"
+          }
+        ],
+        "id": "climate_mode_changed"
+      },
+      {
+        "title": {
           "en": "Value (text) changed",
           "de": "Wert (Text) hat sich geändert",
           "nl": "Waarde (tekst) gewijzigd"
@@ -260,6 +292,93 @@
       }
     ],
     "conditions": [
+      {
+        "title": {
+          "en": "Thermostat mode !{{is|isn't}}",
+          "de": "Thermostat-Modus !{{ist|ist nicht}}",
+          "nl": "Thermostaatmodus !{{is|is niet}}"
+        },
+        "titleFormatted": {
+          "en": "Thermostat mode !{{is|isn't}} [[mode]]",
+          "de": "Thermostat-Modus !{{ist|ist nicht}} [[mode]]",
+          "nl": "thermostaatmodus !{{is|is niet}} [[mode]]"
+        },
+        "args": [
+          {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=climate"
+          },
+          {
+            "name": "mode",
+            "type": "dropdown",
+            "title": {
+              "en": "Thermostat mode",
+              "de": "Thermostat-Modus",
+              "nl": "Thermostaatmodus"
+            },
+            "values": [
+              {
+                "id": "off",
+                "title": {
+                  "en": "Off",
+                  "de": "Aus",
+                  "nl": "Uit"
+                }
+              },
+              {
+                "id": "heat",
+                "title": {
+                  "en": "Heating",
+                  "de": "Heizen",
+                  "nl": "Warmte"
+                }
+              },
+              {
+                "id": "cool",
+                "title": {
+                  "en": "Cooling",
+                  "de": "Kühlen",
+                  "nl": "Koel"
+                }
+              },
+              {
+                "id": "heat_cool",
+                "title": {
+                  "en": "Heating/Cooling",
+                  "de": "Heizen/Kühlen",
+                  "nl": "Warmte/Koel"
+                }
+              },
+              {
+                "id": "auto",
+                "title": {
+                  "en": "Automatic",
+                  "de": "Automatisch",
+                  "nl": "Automatisch"
+                }
+              },
+              {
+                "id": "dry",
+                "title": {
+                  "en": "Dry/Humidity",
+                  "de": "Trocken/Feuchtigkeit",
+                  "nl": "Droog/vochtigheid"
+                }
+              },
+              {
+                "id": "fan_only",
+                "title": {
+                  "en": "Fan only",
+                  "de": "Nur Lüfter",
+                  "nl": "Alleen fans"
+                }
+              }
+            ]
+          }
+        ],
+        "id": "climate_mode"
+      },
       {
         "title": {
           "en": "Value (text) !{{is|isn't}}",
@@ -405,6 +524,94 @@
           }
         ],
         "id": "callServiceEntity"
+      },
+      {
+        "highlight": true,
+        "title": {
+          "en": "Select thermostat mode",
+          "de": "Wähle Thermostat-Modus",
+          "nl": "Selecteer thermostaatmodus"
+        },
+        "titleFormatted": {
+          "en": "Select thermostat mode [[mode]].",
+          "de": "Wähle Thermostat-Modus [[mode]].",
+          "nl": "Selecteer thermostaatmodus [[mode]]"
+        },
+        "args": [
+          {
+            "type": "dropdown",
+            "name": "mode",
+            "title": {
+              "en": "Thermostat mode",
+              "de": "Thermostat-Modus",
+              "nl": "Thermostaatmodus"
+            },
+            "values": [
+              {
+                "id": "off",
+                "title": {
+                  "en": "Off",
+                  "de": "Aus",
+                  "nl": "Uit"
+                }
+              },
+              {
+                "id": "heat",
+                "title": {
+                  "en": "Heating",
+                  "de": "Heizen",
+                  "nl": "Warmte"
+                }
+              },
+              {
+                "id": "cool",
+                "title": {
+                  "en": "Cooling",
+                  "de": "Kühlen",
+                  "nl": "Koel"
+                }
+              },
+              {
+                "id": "heat_cool",
+                "title": {
+                  "en": "Heating/Cooling",
+                  "de": "Heizen/Kühlen",
+                  "nl": "Warmte/Koel"
+                }
+              },
+              {
+                "id": "auto",
+                "title": {
+                  "en": "Automatic",
+                  "de": "Automatisch",
+                  "nl": "Automatisch"
+                }
+              },
+              {
+                "id": "dry",
+                "title": {
+                  "en": "Dry/Humidity",
+                  "de": "Trocken/Feuchtigkeit",
+                  "nl": "Droog/vochtigheid"
+                }
+              },
+              {
+                "id": "fan_only",
+                "title": {
+                  "en": "Fan only",
+                  "de": "Nur Lüfter",
+                  "nl": "Alleen fans"
+                }
+              }
+            ]
+          },
+          {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=climate"
+          }
+        ],
+        "id": "climateMode"
       },
       {
         "highlight": true,
@@ -598,6 +805,121 @@
       "images": {
         "large": "/drivers/button/assets/images/large.png",
         "small": "/drivers/button/assets/images/small.png"
+      }
+    },
+    {
+      "capabilitiesOptions": {
+        "button.reconnect": {
+          "maintenanceAction": true,
+          "title": {
+            "en": "Reconnect",
+            "de": "Neu verbinden",
+            "nl": "Opnieuw verbinden"
+          },
+          "desc": {
+            "en": "Reconnect and reload entities.",
+            "de": "Neu verbinden und Entitäten neu laden.",
+            "nl": "Maak opnieuw verbinding en laad entiteiten opnieuw."
+          }
+        }
+      },
+      "pair": [
+        {
+          "id": "loading",
+          "template": "loading",
+          "navigation": {
+            "next": "list_devices"
+          }
+        },
+        {
+          "id": "login_credentials",
+          "template": "login_credentials",
+          "navigation": {
+            "next": "list_devices"
+          },
+          "options": {
+            "logo": "logo.png",
+            "usernameLabel": {
+              "en": "Server"
+            },
+            "usernamePlaceholder": {
+              "en": "http://192.168.xxx.xxx:8123"
+            },
+            "passwordLabel": {
+              "en": "Token"
+            },
+            "passwordPlaceholder": {
+              "en": "Long-lived access token"
+            }
+          }
+        },
+        {
+          "id": "list_devices",
+          "template": "list_devices",
+          "navigation": {
+            "next": "icon"
+          },
+          "options": {
+            "singular": true
+          }
+        },
+        {
+          "id": "icon",
+          "navigation": {
+            "next": "add_devices",
+            "prev": "list_devices"
+          }
+        },
+        {
+          "id": "add_devices"
+        }
+      ],
+      "repair": [
+        {
+          "id": "login_credentials",
+          "template": "login_credentials",
+          "navigation": {
+            "next": "done"
+          },
+          "options": {
+            "logo": "logo.png",
+            "usernameLabel": {
+              "en": "Server"
+            },
+            "usernamePlaceholder": {
+              "en": "http://192.168.xxx.xxx:8123"
+            },
+            "passwordLabel": {
+              "en": "Token"
+            },
+            "passwordPlaceholder": {
+              "en": "Long-lived access token"
+            }
+          }
+        },
+        {
+          "id": "done",
+          "template": "done"
+        }
+      ],
+      "id": "climate",
+      "name": {
+        "en": "Thermostat",
+        "de": "Thermostat",
+        "nl": "Thermostaat"
+      },
+      "class": "thermostat",
+      "capabilities": [
+        "measure_temperature",
+        "target_temperature",
+        "measure_humidity",
+        "climate_mode",
+        "climate_mode fan",
+        "button.reconnect"
+      ],
+      "images": {
+        "large": "/drivers/switch/assets/images/large.png",
+        "small": "/drivers/switch/assets/images/small.png"
       }
     },
     {
@@ -1491,6 +1813,229 @@
     }
   ],
   "capabilities": {
+    "climate_action": {
+      "type": "enum",
+      "title": {
+        "en": "Activity",
+        "de": "Aktivität",
+        "nl": "Werkzaamheid"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "values": [
+        {
+          "id": "off",
+          "title": {
+            "en": "Off",
+            "de": "Aus",
+            "nl": "Uit"
+          }
+        },
+        {
+          "id": "idle",
+          "title": {
+            "en": "Idle",
+            "de": "Leerlauf",
+            "nl": "inactief"
+          }
+        },
+        {
+          "id": "cooling",
+          "title": {
+            "en": "Cooling",
+            "de": "Kühlen",
+            "nl": "Koel"
+          }
+        },
+        {
+          "id": "heating",
+          "title": {
+            "en": "Heating",
+            "de": "Heizen",
+            "nl": "Warmte"
+          }
+        },
+        {
+          "id": "fan",
+          "title": {
+            "en": "Fan",
+            "de": "Ventilator",
+            "nl": "Fan"
+          }
+        },
+        {
+          "id": "drying",
+          "title": {
+            "en": "Drying",
+            "de": "Trocken",
+            "nl": "Droog"
+          }
+        }
+      ]
+    },
+    "climate_mode": {
+      "type": "enum",
+      "title": {
+        "en": "Thermostat mode",
+        "de": "Thermostat-Modus",
+        "nl": "Thermostaat modus"
+      },
+      "getable": true,
+      "setable": true,
+      "uiComponent": "picker",
+      "values": [
+        {
+          "id": "off",
+          "title": {
+            "en": "Off",
+            "de": "Aus",
+            "nl": "Uit"
+          }
+        },
+        {
+          "id": "heat",
+          "title": {
+            "en": "Heating",
+            "de": "Heizen",
+            "nl": "Warmte"
+          }
+        },
+        {
+          "id": "cool",
+          "title": {
+            "en": "Cooling",
+            "de": "Kühlen",
+            "nl": "Koel"
+          }
+        },
+        {
+          "id": "heat_cool",
+          "title": {
+            "en": "Heating/Cooling",
+            "de": "Heizen/Kühlen",
+            "nl": "Warmte/Koel"
+          }
+        },
+        {
+          "id": "auto",
+          "title": {
+            "en": "Automatic",
+            "de": "Automatisch",
+            "nl": "Automatisch"
+          }
+        },
+        {
+          "id": "dry",
+          "title": {
+            "en": "Dry/Humidity",
+            "de": "Trocken/Feuchtigkeit",
+            "nl": "Droog/vochtigheid"
+          }
+        },
+        {
+          "id": "fan_only",
+          "title": {
+            "en": "Fan only",
+            "de": "Nur Lüfter",
+            "nl": "Alleen fans"
+          }
+        }
+      ]
+    },
+    "climate_mode fan": {
+      "type": "enum",
+      "title": {
+        "en": "Fan mode",
+        "de": "Ventilator-Modus",
+        "nl": "Fan modus"
+      },
+      "getable": true,
+      "setable": true,
+      "uiComponent": "picker",
+      "values": [
+        {
+          "id": "off",
+          "title": {
+            "en": "Off",
+            "de": "Aus",
+            "nl": "Uit"
+          }
+        },
+        {
+          "id": "on",
+          "title": {
+            "en": "On",
+            "de": "An",
+            "nl": "Aan"
+          }
+        },
+        {
+          "id": "auto",
+          "title": {
+            "en": "Automatic",
+            "de": "Automatisch",
+            "nl": "Automatisch"
+          }
+        },
+        {
+          "id": "low",
+          "title": {
+            "en": "Low",
+            "de": "Niedrig",
+            "nl": "Laag"
+          }
+        },
+        {
+          "id": "medium",
+          "title": {
+            "en": "Medium",
+            "de": "Mittel",
+            "nl": "Medium"
+          }
+        },
+        {
+          "id": "high",
+          "title": {
+            "en": "High",
+            "de": "Hoch",
+            "nl": "Hoog"
+          }
+        },
+        {
+          "id": "top",
+          "title": {
+            "en": "Top",
+            "de": "Oben",
+            "nl": "Bovenkant"
+          }
+        },
+        {
+          "id": "middle",
+          "title": {
+            "en": "Middle",
+            "de": "Mitte",
+            "nl": "Midden"
+          }
+        },
+        {
+          "id": "focus",
+          "title": {
+            "en": "Focused",
+            "de": "Fokusiert",
+            "nl": "gefocust"
+          }
+        },
+        {
+          "id": "diffuse",
+          "title": {
+            "en": "Diffuse",
+            "de": "Diffus",
+            "nl": "Diffuus"
+          }
+        }
+      ]
+    },
     "measure_generic": {
       "type": "string",
       "title": {

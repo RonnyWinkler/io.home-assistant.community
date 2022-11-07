@@ -1,0 +1,28 @@
+{
+    "title": {
+        "en": "Thermostat mode changed",
+        "de": "Thermostat-Modus hat sich geändert",
+        "nl": "Thermostaatmodus gewijzigd"
+    },
+    "hint": {
+        "en": "Triggers when the Thermostat mode changes.",
+        "de": "Wird ausgelöst, wenn sich der Thermostat-Modus ändert.",
+        "nl": "Wordt geactiveerd wanneer de thermostaatmodus verandert."
+    },
+    "tokens": [{
+            "name": "mode",
+            "type": "string",
+            "title": {
+                "en": "Mode",
+                "de": "Modus",
+                "nl": "Modus"
+            },
+            "example": "heat"
+        }
+    ],
+    "args": [{
+        "name": "device",
+        "type": "device",
+        "filter": "driver_id=climate"
+    }]
+}

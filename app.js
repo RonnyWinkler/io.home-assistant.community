@@ -115,6 +115,17 @@ class App extends Homey.App {
 				return result.name.toLowerCase().includes(query.toLowerCase());
 			});
 		});
+		this._flowActionClimateMode = this.homey.flow.getActionCard('climateMode');
+		this._flowActionClimateMode.registerRunListener(async (args, state) => {
+			try{
+				await args.device.onCapabilityClimateMode(args.mode);
+				return true;
+			}
+			catch(error){
+				this.error("Error executing flowAction 'climateMode': "+  error.message);
+				throw new Error(error.message);
+			}
+		});
 
 		// Flow trigger for all capabilities
 		this._flowTriggerCapabilityChanged = this.homey.flow.getDeviceTriggerCard('capability_changed');
@@ -135,11 +146,15 @@ class App extends Homey.App {
 		// Flow contitions
 		this._flowConditionMeasureNumeric = this.homey.flow.getConditionCard('measure_numeric')
 		.registerRunListener(async (args, state) => {
-		  return (args.device.getCapabilityValue('measure_numeric') > args.value);
+			return (args.device.getCapabilityValue('measure_numeric') > args.value);
 		})
 		this._flowConditionMeasureNumeric = this.homey.flow.getConditionCard('measure_generic')
 		.registerRunListener(async (args, state) => {
-		  return (args.device.getCapabilityValue('measure_generic') == args.value);
+		  	return (args.device.getCapabilityValue('measure_generic') == args.value);
+		})
+		this._flowConditionClimateMode = this.homey.flow.getConditionCard('climate_mode')
+		.registerRunListener(async (args, state) => {
+			return (args.device.getCapabilityValue('climate_mode') == args.value);
 		})
   
 		// App events

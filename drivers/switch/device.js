@@ -38,7 +38,7 @@ class SwitchDevice extends Homey.Device {
             }
         }
         catch(error){
-            this.error("Error adding capability: "+Error.message);
+            this.error("Error adding capability: "+error.message);
         }
     }
 

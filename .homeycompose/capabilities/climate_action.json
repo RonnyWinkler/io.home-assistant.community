@@ -1,0 +1,63 @@
+{
+  "type": "enum",
+  "title": {
+    "en": "Activity",
+    "de": "Aktivität",
+    "nl": "Werkzaamheid"
+  },
+  "getable": true,
+  "setable": false,
+  "insights": true,
+  "icon": "/assets/capability_icons/climate_action.svg",
+  "uiComponent": "sensor",
+  "values": [
+    {
+      "id": "off",
+      "title": {
+        "en": "Off",
+        "de": "Aus",
+        "nl": "Uit"
+      }
+    },
+    {
+      "id": "idle",
+      "title": {
+        "en": "Idle",
+        "de": "Leerlauf",
+        "nl": "inactief"
+      }
+    },
+    {
+      "id": "cooling",
+      "title": {
+        "en": "Cooling",
+        "de": "Kühlen",
+        "nl": "Koel"
+      }
+    },
+    {
+      "id": "heating",
+      "title": {
+        "en": "Heating",
+        "de": "Heizen",
+        "nl": "Warmte"
+      }
+    },
+    {
+      "id": "fan",
+      "title": {
+        "en": "Fan",
+        "de": "Ventilator",
+        "nl": "Fan"
+      }
+    },
+    {
+      "id": "drying",
+      "title": {
+        "en": "Drying",
+        "de": "Trocken",
+        "nl": "Droog"
+      }
+    }
+  ]
+}
