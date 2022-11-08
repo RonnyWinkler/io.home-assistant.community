@@ -244,6 +244,7 @@ class LightDevice extends Homey.Device {
 
     async onDeleted() {
         this.driver.tryRemoveIcon(this.getData().id);
+        this.driver.tryRemoveIcon(this.getData().id+"_temp");
         
         if (this.timeoutInitDevice){
             this.homey.clearTimeout(this.timeoutInitDevice);

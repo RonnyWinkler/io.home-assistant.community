@@ -156,6 +156,18 @@ class App extends Homey.App {
 		.registerRunListener(async (args, state) => {
 			return (args.device.getCapabilityValue('climate_mode') == args.value);
 		})
+		this._flowConditionClimateModeFan = this.homey.flow.getConditionCard('climate_mode_fan')
+		.registerRunListener(async (args, state) => {
+			return (args.device.getCapabilityValue('climate_mode_fan') == args.value);
+		})
+		this._flowConditionClimateModePreset = this.homey.flow.getConditionCard('climate_mode_preset')
+		.registerRunListener(async (args, state) => {
+			return (args.device.getCapabilityValue('climate_mode_preset') == args.value);
+		})
+		this._flowConditionClimateModeSwing = this.homey.flow.getConditionCard('climate_mode_swing')
+		.registerRunListener(async (args, state) => {
+			return (args.device.getCapabilityValue('climate_mode_swing') == args.value);
+		})
   
 		// App events
 		this.homey.settings.on("set", async (key) =>  {

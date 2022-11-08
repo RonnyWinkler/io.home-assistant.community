@@ -1,0 +1,70 @@
+{
+    "title": {
+        "en": "Swing mode !{{is|isn't}}",
+        "de": "Schwing-Modus !{{ist|ist nicht}}",
+        "nl": "Schommelen modus !{{is|is niet}}"
+    },
+    "titleFormatted": {
+        "en": "Swing mode !{{is|isn't}} [[mode]]",
+        "de": "Schwing-Modus !{{ist|ist nicht}} [[mode]]",
+        "nl": "Schommelen modus !{{is|is niet}} [[mode]]"
+    },
+    "args": [
+        {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=climate"
+        },
+        {
+            "name": "mode",
+            "type": "dropdown",
+            "title": { 
+                "en": "Fan mode",
+                "de": "Ventilator-Modus",
+                "nl": "Fan modus"
+            },
+            "values": [
+              {
+                "id": "on",
+                "title": {
+                  "en": "On",
+                  "de": "An",
+                  "nl": "Op"
+                }
+              },
+              {
+                "id": "off",
+                "title": {
+                  "en": "Off",
+                  "de": "Aus",
+                  "nl": "Uit"
+                }
+              },
+              {
+                "id": "vertical",
+                "title": {
+                  "en": "Vertical",
+                  "de": "Vertikal",
+                  "nl": "verticaal"
+                }
+              },
+              {
+                "id": "horizontal",
+                "title": {
+                  "en": "Horizontal",
+                  "de": "Horizontal",
+                  "nl": "Horizontaal"
+                }
+              },
+              {
+                "id": "both",
+                "title": {
+                  "en": "Both",
+                  "de": "Beides",
+                  "nl": "Beide"
+                }
+              }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,28 @@
+<script>
+
+    Homey.setTitle(__('repair.title.ready'));
+    
+    // Homey.emit('install', null, (err, device) => {
+    //   if (err) {
+    //     this.instructions = '[ERROR] ' + err;
+    //     console.log(err);
+    //   } else {
+    //     Homey.done();
+    //   }
+    // });
+    Homey.emit('changeIcon', null, function (err, devices) {
+        if (err) {
+            // this.instructions = '[ERROR] ' + err;
+            console.error(err);
+            return;
+        }
+        console.log(devices);
+  
+        Homey.done();
+        return;
+    });
+</script>
+
+<div style="text-align: center;">
+    <span data-i18n="repair.title.iconChanged"></span>
+</div>

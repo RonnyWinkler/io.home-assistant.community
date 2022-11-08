@@ -24,6 +24,12 @@ class ClimateDevice extends Homey.Device {
         this.registerCapabilityListener('climate_mode_fan', async (value, opts) => {
             await this.onCapabilityClimateModeFan(value, opts);
         });
+        this.registerCapabilityListener('climate_mode_preset', async (value, opts) => {
+            await this.onCapabilityClimateModePreset(value, opts);
+        });
+        this.registerCapabilityListener('climate_mode_swing', async (value, opts) => {
+            await this.onCapabilityClimateModeSwing(value, opts);
+        });
         
         // maintenance actions
         this.registerCapabilityListener('button.reconnect', async () => {
@@ -70,21 +76,21 @@ class ClimateDevice extends Homey.Device {
     }
 
     async onCapabilityClimateMode( value, opts ) {
-        switch (value){
-            // check features:
-            // TARGET_HUMIDITY = 4
-            // FAN_MODE = 8
-            case "dry":
-                if ((this.getStoreValue("features") & 4) != 4) {
-                    throw new Error("Mode not supported.");
-                }
-                break;
-            case "fan_only":
-                if ((this.getStoreValue("features") & 8) != 8) {
-                    throw new Error("Mode not supported.");
-                }
-                break;
-        }
+        // switch (value){
+        //     // check features:
+        //     // TARGET_HUMIDITY = 4
+        //     // FAN_MODE = 8
+        //     case "dry":
+        //         if ((this.getStoreValue("features") & 4) != 4) {
+        //             throw new Error("Mode not supported.");
+        //         }
+        //         break;
+        //     case "fan_only":
+        //         if ((this.getStoreValue("features") & 8) != 8) {
+        //             throw new Error("Mode not supported.");
+        //         }
+        //         break;
+        // }
         let entityId = this.entityId;
         await this._client.callService("climate", "set_hvac_mode", {
             "entity_id": entityId,
@@ -97,6 +103,22 @@ class ClimateDevice extends Homey.Device {
         await this._client.callService("climate", "set_fan_mode", {
             "entity_id": entityId,
             "fan_mode": value
+        });
+    }
+
+    async onCapabilityClimateModePreset( value, opts ) {
+        let entityId = this.entityId;
+        await this._client.callService("climate", "set_preset_mode", {
+            "entity_id": entityId,
+            "preset_mode": value
+        });
+    }
+
+    async onCapabilityClimateModeSwing( value, opts ) {
+        let entityId = this.entityId;
+        await this._client.callService("climate", "set_swing_mode", {
+            "entity_id": entityId,
+            "swing_mode": value
         });
     }
 
@@ -131,6 +153,14 @@ class ClimateDevice extends Homey.Device {
             if (this.hasCapability("climate_mode_fan") && 
                 data.attributes.fan_mode != undefined){
                 await this.setCapabilityValue("climate_mode_fan", data.attributes.fan_mode);
+            }
+            if (this.hasCapability("climate_mode_preset") && 
+                data.attributes.preset_mode != undefined){
+                await this.setCapabilityValue("climate_mode_preset", data.attributes.preset_mode);
+            }
+            if (this.hasCapability("climate_mode_swing") && 
+                data.attributes.swing_mode != undefined){
+                await this.setCapabilityValue("climate_mode_swing", data.attributes.preset_swing);
             }
         }
     }

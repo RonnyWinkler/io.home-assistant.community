@@ -11,7 +11,9 @@
       "target_temperature",
       "measure_humidity",
       "climate_mode",
-      "climate_mode fan",
+      "climate_mode_fan",
+      "climate_mode_preset",
+      "climate_mode_swing",
     
       "button.reconnect"
     ],

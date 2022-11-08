@@ -1,8 +1,8 @@
 {
     "title": {
-        "en": "Thermostat mode changed",
-        "de": "Thermostat-Modus hat sich geändert",
-        "nl": "Thermostaatmodus gewijzigd"
+        "en": "Swing mode changed",
+        "de": "Schwing-Modus hat sich geändert",
+        "nl": "Schommelen modus gewijzigd"
     },
     "tokens": [{
             "name": "mode",
@@ -12,7 +12,7 @@
                 "de": "Modus",
                 "nl": "Modus"
             },
-            "example": "heat"
+            "example": "vertical"
         }
     ],
     "args": [{

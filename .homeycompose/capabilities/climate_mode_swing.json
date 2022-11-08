@@ -1,0 +1,53 @@
+{
+  "type": "enum",
+  "title": {
+    "en": "Swing mode",
+    "de": "Schwing-Modus",
+    "nl": "Schommelen modus"
+  },
+  "getable": true,
+  "setable": true,
+  "uiComponent": "picker",
+  "values": [
+    {
+      "id": "on",
+      "title": {
+        "en": "On",
+        "de": "An",
+        "nl": "Op"
+      }
+    },
+    {
+      "id": "off",
+      "title": {
+        "en": "Off",
+        "de": "Aus",
+        "nl": "Uit"
+      }
+    },
+    {
+      "id": "vertical",
+      "title": {
+        "en": "Vertical",
+        "de": "Vertikal",
+        "nl": "verticaal"
+      }
+    },
+    {
+      "id": "horizontal",
+      "title": {
+        "en": "Horizontal",
+        "de": "Horizontal",
+        "nl": "Horizontaal"
+      }
+    },
+    {
+      "id": "both",
+      "title": {
+        "en": "Both",
+        "de": "Beides",
+        "nl": "Beide"
+      }
+    }
+  ]
+}

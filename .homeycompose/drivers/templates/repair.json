@@ -1,9 +1,29 @@
 {
     "repair": [
         {
+          "id": "select",
+          "navigation": {
+            "prev": "done"        
+          }
+        },
+        {
+          "id": "icon",
+          "navigation": {
+            "next": "icon_change",
+            "prev": "select" 
+          }
+        },
+        {
+          "id": "icon_change",
+          "navigation": {
+            "prev": "icon"
+          }
+        },
+        {
             "id": "login_credentials",
             "template": "login_credentials",
             "navigation": {
+                "prev": "select",
                 "next": "done"
             },
             "options": {
@@ -23,8 +43,8 @@
             }
         },
         {
-            "id": "done",
-            "template": "done"
+          "id": "done",
+          "template": "done"
         }
     ]
 }

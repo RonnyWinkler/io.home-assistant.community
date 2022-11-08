@@ -152,6 +152,7 @@ class BaseDriver extends Homey.Driver {
 
     async onRepair(session, device) {
         this.log("onRepair()");
+        let installed = false;
 
         session.setHandler('showView', async (view) => {
             return await this.onShowViewRepair(session, view, device);
@@ -159,6 +160,66 @@ class BaseDriver extends Homey.Driver {
 
         session.setHandler("login", async (data) => {
             return await this.checkLogin(data); 
+        });
+
+        session.setHandler('isIconChangeable', async (view) => {
+            let icon = device.getStoreValue("icon");
+            if (icon != undefined && icon.startsWith("../../../userdata/")){
+                return true;
+            }
+            else{
+                return false;
+            }
+        });
+
+        session.setHandler('setRemoteIcon', async (item) => {
+            this.log('setRemoteIcon: ' + item.url);
+            // if(DEBUG) listFiles("./userdata");
+            const root = "../../";
+            let deviceFile = await this.downloadIcon(item.url, device.getData().id+"_temp");
+            const file = deviceFile;
+            return file;
+        });
+    
+        // session.setHandler('setIcon', async (svg) => {
+        //     this.log('setIcon: ' + svg);
+        //     this.selectedDevices[i].store.icon = svg;
+        //     this.selectedDevices[i].icon = svg
+        //     return svg;
+        // });
+
+        session.setHandler('saveIcon', async (data) => {
+            try {
+                this.log('saveIcon: ' + JSON.stringify(data));
+                // if(DEBUG) listFiles("./userdata");
+                const root = '../../';
+                let deviceIconCurrent = "";
+
+                this.uploadIcon(data, device.getData().id+"_temp");
+                deviceIconCurrent = "../userdata/"+ device.getData().id+"_temp" +".svg";
+        
+                const deviceIcon = deviceIconCurrent;
+                return deviceIcon;
+        
+            } catch (error) {
+                this.error('saveIcon ERROR ' + JSON.stringify(error));
+            }
+        });
+    
+        session.setHandler('changeIcon', async (data) => {
+            this.log('Change icon for ID '+device.getData().id);
+            this.changeIcon(device.getData().id);
+            installed = true;
+            return;
+        });
+
+        session.setHandler('disconnect', async () => {
+            if(installed) {
+                this.log("Pairing is finished");
+            } else {
+                this.log("User aborted");
+                this.tryRemoveIcon(device.getData().id+"_temp");
+            }
         });
 
     }
@@ -264,6 +325,17 @@ class BaseDriver extends Homey.Driver {
         }
     }
 
+    renameFile(id_old, id_new) {
+        try {
+            const path_old = `../userdata/${id_old}.svg`;
+            const path_new = `../userdata/${id_new}.svg`;
+            fs.renameSync(path_old, path_new);
+            this.log("Icon reamed: from "+path_old+" to"+path_new);
+        } catch(error) {
+            this.error("Error renaming device icon: "+path_old+" to"+path_new);
+        }
+    }
+
     async downloadIcon(url, id) {
         const path = `../userdata/${id}.svg`;
         await download(url, path);
@@ -275,6 +347,18 @@ class BaseDriver extends Homey.Driver {
         const path = "../userdata/"+ id +".svg";
         const base64 = img.replace("data:image/svg+xml;base64,", '');
         fs.writeFileSync(path, base64, 'base64');
+    }
+
+    changeIcon(id) {
+        try {
+            // remove original icon
+            this.tryRemoveIcon(id);
+            // rename temp icon to original name
+            this.renameFile( id+"_temp", id);
+        } catch(error) {
+            this.error("Error changeing device icon filename. Error: "+error.message);
+        }
+
     }
 
     async getDeviceList(client){

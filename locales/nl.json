@@ -5,5 +5,16 @@
             "device_added": "Apparaat is toegevoegd",
             "icon": "Icon"
         }
+    },
+    "repair": {
+        "title": {
+            "ready": "Afgerond",
+            "select": "Selectie van de reparatiefunctie",
+            "auth": "login wijzigen",
+            "icon": "Apparaatpictogram wijzigen",
+            "iconDeactivated": "Wijzigen niet mogelijk. Het apparaat gebruikt het standaardpictogram.",
+            "iconActivated": "Verandering mogelijk. Het apparaat gebruikt al een individueel pictogram.",
+            "iconChanged": "Icoon is gewijzigd."
+        }
     }
 }

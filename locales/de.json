@@ -5,5 +5,16 @@
             "device_added": "Gerät wurde hinzugefügt",
             "icon": "Icon"
         }
+    },
+    "repair": {
+        "title": {
+            "ready": "Fertig",
+            "select": "Auswahl der Repair-Funktion",
+            "auth": "Anmeldung ändern",
+            "icon": "Geräte-Icon ändern",
+            "iconDeactivated": "Änderung nicht möglich. Das Gerät verwendet das Standard-Icon.",
+            "iconActivated": "Änderung möglich. Das Gerät verwendet bereits ein individuelles Icon.",
+            "iconChanged": "Icon wurde geändert."
+        }
     }
 }

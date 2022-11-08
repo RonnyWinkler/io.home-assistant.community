@@ -5,5 +5,16 @@
             "device_added": "Device was added",
             "icon": "Icon"
         }
+    },
+    "repair": {
+        "title": {
+            "ready": "Ready",
+            "select": "Selection of the repair function",
+            "auth": "Change login",
+            "icon": "Change device icon",
+            "iconDeactivated": "Change not possible. The device uses the standard icon.",
+            "iconActivated": "Change possible. The device already uses an individual icon.",
+            "iconChanged": "Icon has been changed."
+        }
     }
 }
