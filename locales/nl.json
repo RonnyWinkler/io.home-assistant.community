@@ -14,7 +14,8 @@
             "icon": "Apparaatpictogram wijzigen",
             "iconDeactivated": "Wijzigen niet mogelijk. Het apparaat gebruikt het standaardpictogram.",
             "iconActivated": "Verandering mogelijk. Het apparaat gebruikt al een individueel pictogram.",
-            "iconChanged": "Icoon is gewijzigd."
+            "iconChanged": "Icoon is gewijzigd.",
+            "appRestart": "Na een pictogramwijziging moet de app opnieuw worden gestart om de wijziging door te voeren."
         }
     }
 }

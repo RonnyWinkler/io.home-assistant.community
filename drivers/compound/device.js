@@ -218,7 +218,7 @@ class CompoundDevice extends Homey.Device {
                         value = convert(data.state);
                     }
                     else{
-                        data.state = data.attributes[attribute];
+                        entityValue = data.attributes[attribute];
                         value = convert(data.attributes[attribute]);
                     }
                     if ( (value == null || value == undefined) && (entityValue != value) ){

@@ -14,7 +14,8 @@
             "icon": "Change device icon",
             "iconDeactivated": "Change not possible. The device uses the standard icon.",
             "iconActivated": "Change possible. The device already uses an individual icon.",
-            "iconChanged": "Icon has been changed."
+            "iconChanged": "Icon has been changed.",
+            "appRestart": "After an icon change, the app must be restarted for the change to take effect."
         }
     }
 }

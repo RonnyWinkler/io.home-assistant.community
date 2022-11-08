@@ -162,7 +162,7 @@ class BaseDriver extends Homey.Driver {
             return await this.checkLogin(data); 
         });
 
-        session.setHandler('isIconChangeable', async (view) => {
+        session.setHandler('isIconChangeable', async () => {
             let icon = device.getStoreValue("icon");
             if (icon != undefined && icon.startsWith("../../../userdata/")){
                 return true;
