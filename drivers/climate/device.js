@@ -133,18 +133,23 @@ class ClimateDevice extends Homey.Device {
     async onEntityUpdate(data) {
         try{
             if(data) {
-                if (data.state != undefined && data.state != "unavailable"){
+                if (data.state != undefined && 
+                    data.state != "unavailable"){
                     await this.setCapabilityValue("climate_mode", data.state);
                 }
-                if (data.attributes.current_temperature != undefined){
+                if (data.attributes.current_temperature != undefined && 
+                    data.attributes.current_temperature != "unavailable"){
                     await this.setCapabilityValue("measure_temperature", data.attributes.current_temperature);
                 }
-                if (this.hasCapability("target_temperature") && data.attributes.temperature != undefined){
+                if (this.hasCapability("target_temperature") && 
+                    data.attributes.temperature != undefined &&
+                    data.attributes.temperature != "unavailable"){
                     await this.setCapabilityValue("target_temperature", data.attributes.temperature);
                 }
                 if (this.hasCapability("measure_humidity") && 
                     data.attributes.current_humidity != undefined &&
-                    data.attributes.current_humidity != "off"){
+                    data.attributes.current_humidity != "off" &&
+                    data.attributes.current_humidity != "unavailable"){
                     await this.setCapabilityValue("measure_humidity", data.attributes.current_humidity);
                 }
                 if (this.hasCapability("climate_action") && 
