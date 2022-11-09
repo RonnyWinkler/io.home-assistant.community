@@ -653,7 +653,7 @@
                 "title": {
                   "en": "activity driven",
                   "de": "aktivitätsgesteuert",
-                  "nl": "activiteit gedreven"
+                  "nl": "activiteit gestuurd"
                 }
               }
             ]
@@ -965,6 +965,126 @@
           }
         ],
         "id": "climateMode"
+      },
+      {
+        "highlight": true,
+        "title": {
+          "en": "Select fan mode",
+          "de": "Wähle Ventilator-Modus",
+          "nl": "Selecteer ventilatormodus"
+        },
+        "titleFormatted": {
+          "en": "Change to fan mode [[mode]].",
+          "de": "Wechsel zum Ventilator-Modus [[mode]].",
+          "nl": "Wijzig naar fan modus [[mode]]"
+        },
+        "hint": {
+          "en": "The list it provided by the device or the HomeAssistand integration.",
+          "de": "Die Liste wird vom Gerät oder der HomeAssistand-Integration bereitgestellt.",
+          "nl": "De lijst die wordt geleverd door de devie of de HomeAssistand-integratie."
+        },
+        "args": [
+          {
+            "type": "autocomplete",
+            "name": "mode",
+            "title": {
+              "en": "Fan mode",
+              "de": "Ventilator-Modus",
+              "nl": "Fan modus"
+            },
+            "placeholder": {
+              "en": "Select the fan mode",
+              "de": "Wähle den Ventilator-Modus",
+              "nl": "Selecteer de fan mode"
+            }
+          },
+          {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=climate"
+          }
+        ],
+        "id": "climateSelectModeFan"
+      },
+      {
+        "highlight": true,
+        "title": {
+          "en": "Select preset mode",
+          "de": "Wähle voreinstellten Modus",
+          "nl": "Selecteer vooraf ingestelde modus"
+        },
+        "titleFormatted": {
+          "en": "Change to preset mode [[mode]].",
+          "de": "Wechsel zum voreinstellten Modus [[mode]].",
+          "nl": "Overschakelen naar vooraf ingestelde modus [[mode]]"
+        },
+        "hint": {
+          "en": "The list it provided by the device or the HomeAssistand integration.",
+          "de": "Die Liste wird vom Gerät oder der HomeAssistand-Integration bereitgestellt.",
+          "nl": "De lijst die wordt geleverd door de devie of de HomeAssistand-integratie."
+        },
+        "args": [
+          {
+            "type": "autocomplete",
+            "name": "mode",
+            "title": {
+              "en": "Preset mode",
+              "de": "Ventilator-Modus",
+              "nl": "Vooraf ingestelde modus"
+            },
+            "placeholder": {
+              "en": "Select the preset mode",
+              "de": "Wähle den voreingestellten Modus",
+              "nl": "Selecteer de vooraf ingestelde modus"
+            }
+          },
+          {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=climate"
+          }
+        ],
+        "id": "climateSelectModePreset"
+      },
+      {
+        "highlight": true,
+        "title": {
+          "en": "Select swing mode",
+          "de": "Wähle Schwing-Modus",
+          "nl": "Selecteer Luchtstroom"
+        },
+        "titleFormatted": {
+          "en": "Change to swing mode [[mode]].",
+          "de": "Wechsel zum Schwing-Modus [[mode]].",
+          "nl": "Wijzig naar Luchtstroom [[mode]]"
+        },
+        "hint": {
+          "en": "The list it provided by the device or the HomeAssistand integration.",
+          "de": "Die Liste wird vom Gerät oder der HomeAssistand-Integration bereitgestellt.",
+          "nl": "De lijst die wordt geleverd door de devie of de HomeAssistand-integratie."
+        },
+        "args": [
+          {
+            "type": "autocomplete",
+            "name": "mode",
+            "title": {
+              "en": "Swing mode",
+              "de": "Schwing-Modus",
+              "nl": "Luchtstroom"
+            },
+            "placeholder": {
+              "en": "Select the swing mode",
+              "de": "Wähle den Schwing-Modus",
+              "nl": "Selecteer de Luchtstroom"
+            }
+          },
+          {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=climate"
+          }
+        ],
+        "id": "climateSelectModeSwing"
       },
       {
         "highlight": true,
@@ -1289,9 +1409,9 @@
       ],
       "id": "climate",
       "name": {
-        "en": "Thermostat",
-        "de": "Thermostat",
-        "nl": "Thermostaat"
+        "en": "Climate",
+        "de": "Klimagerät",
+        "nl": "Klimaat"
       },
       "class": "thermostat",
       "capabilities": [
@@ -1305,8 +1425,8 @@
         "button.reconnect"
       ],
       "images": {
-        "large": "/drivers/switch/assets/images/large.png",
-        "small": "/drivers/switch/assets/images/small.png"
+        "large": "/drivers/climate/assets/images/large.png",
+        "small": "/drivers/climate/assets/images/small.png"
       }
     },
     {
@@ -2616,7 +2736,7 @@
           "title": {
             "en": "activity driven",
             "de": "aktivitätsgesteuert",
-            "nl": "activiteit gedreven"
+            "nl": "activiteit gestuurd"
           }
         }
       ]
@@ -2653,7 +2773,7 @@
           "title": {
             "en": "Vertical",
             "de": "Vertikal",
-            "nl": "verticaal"
+            "nl": "Verticaal"
           }
         },
         {

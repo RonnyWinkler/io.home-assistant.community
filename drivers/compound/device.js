@@ -201,7 +201,7 @@ class CompoundDevice extends Homey.Device {
             Object.keys(this.compoundCapabilities).forEach(async (key) => {
                 // Is the entity_id of the compound entity equal (entity itself or entity_id of attribute) 
                 let entityId = this.getCompoundEntityId(this.compoundCapabilities[key]);
-                if(entityId == data.entity_id) {
+                if(data != undefined && entityId == data.entity_id) {
     
                     // console.log("---------------------------------------------------------------");
                     // console.log("update compound device:", this.entityId);

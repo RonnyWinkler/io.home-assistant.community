@@ -1,0 +1,39 @@
+{
+    "highlight": true,
+    "title": {
+        "en": "Select fan mode",
+        "de": "Wähle Ventilator-Modus",
+        "nl": "Selecteer ventilatormodus"
+    },
+    "titleFormatted": {
+        "en": "Change to fan mode [[mode]].",
+        "de": "Wechsel zum Ventilator-Modus [[mode]].",
+        "nl": "Wijzig naar fan modus [[mode]]"
+    },
+    "hint": {
+        "en": "The list it provided by the device or the HomeAssistand integration.",
+        "de": "Die Liste wird vom Gerät oder der HomeAssistand-Integration bereitgestellt.",
+        "nl": "De lijst die wordt geleverd door de devie of de HomeAssistand-integratie."
+    },
+    "args": [
+        {
+            "type": "autocomplete",
+            "name": "mode",
+            "title": { 
+                "en": "Fan mode",
+                "de": "Ventilator-Modus",
+                "nl": "Fan modus"
+            },
+            "placeholder": { 
+                "en": "Select the fan mode",
+                "de": "Wähle den Ventilator-Modus",
+                "nl": "Selecteer de fan mode"
+            }
+        },
+        {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=climate"
+        }
+    ]
+}

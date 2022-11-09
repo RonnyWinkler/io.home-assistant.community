@@ -1,0 +1,39 @@
+{
+    "highlight": true,
+    "title": {
+        "en": "Select preset mode",
+        "de": "Wähle voreinstellten Modus",
+        "nl": "Selecteer vooraf ingestelde modus"
+    },
+    "titleFormatted": {
+        "en": "Change to preset mode [[mode]].",
+        "de": "Wechsel zum voreinstellten Modus [[mode]].",
+        "nl": "Overschakelen naar vooraf ingestelde modus [[mode]]"
+    },
+    "hint": {
+        "en": "The list it provided by the device or the HomeAssistand integration.",
+        "de": "Die Liste wird vom Gerät oder der HomeAssistand-Integration bereitgestellt.",
+        "nl": "De lijst die wordt geleverd door de devie of de HomeAssistand-integratie."
+    },
+    "args": [
+        {
+            "type": "autocomplete",
+            "name": "mode",
+            "title": { 
+                "en": "Preset mode",
+                "de": "Voreingestellter Modus",
+                "nl": "Vooraf ingestelde modus"
+            },
+            "placeholder": { 
+                "en": "Select the preset mode",
+                "de": "Wähle den voreingestellten Modus",
+                "nl": "Selecteer de vooraf ingestelde modus"
+            }
+        },
+        {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=climate"
+        }
+    ]
+}

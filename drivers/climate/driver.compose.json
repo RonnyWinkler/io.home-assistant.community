@@ -2,7 +2,7 @@
     "id": "climate",
     "name": {
       "en": "Climate",
-      "de": "Klima",
+      "de": "Klimagerät",
       "nl": "Klimaat"
     },
     "class": "thermostat",

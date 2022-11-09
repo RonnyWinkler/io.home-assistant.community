@@ -127,6 +127,63 @@ class App extends Homey.App {
 			}
 		});
 
+		this._flowActionClimateSelectModeFan = this.homey.flow.getActionCard('climateSelectModeFan');
+		this._flowActionClimateSelectModeFan.registerRunListener(async (args, state) => {
+			try{
+				await args.device.setModeFan(args.source.id);
+				return true;
+			}
+			catch(error){
+				this.error("Error executing flowAction 'climateSelectModeFan': "+  error.message);
+				throw new Error(error.message);
+			}
+		});
+		this._flowActionClimateSelectModeFan.registerArgumentAutocompleteListener('mode', async (query, args) => {
+			const modeFanList = args.device.getModesFanList();
+			return modeFanList.filter((result) => { 
+				return result.name.toLowerCase().includes(query.toLowerCase());
+			});
+			
+		});
+
+		this._flowActionClimateSelectModePreset = this.homey.flow.getActionCard('climateSelectModePreset');
+		this._flowActionClimateSelectModePreset.registerRunListener(async (args, state) => {
+			try{
+				await args.device.setModePreset(args.source.id);
+				return true;
+			}
+			catch(error){
+				this.error("Error executing flowAction 'climateSelectModePreset': "+  error.message);
+				throw new Error(error.message);
+			}
+		});
+		this._flowActionClimateSelectModePreset.registerArgumentAutocompleteListener('mode', async (query, args) => {
+			const modePresetList = args.device.getModesPresetList();
+			return modePresetList.filter((result) => { 
+				return result.name.toLowerCase().includes(query.toLowerCase());
+			});
+			
+		});
+
+		this._flowActionClimateSelectModeSwing = this.homey.flow.getActionCard('climateSelectModeSwing');
+		this._flowActionClimateSelectModeSwing.registerRunListener(async (args, state) => {
+			try{
+				await args.device.setModeSwing(args.source.id);
+				return true;
+			}
+			catch(error){
+				this.error("Error executing flowAction 'climateSelectModeSwing': "+  error.message);
+				throw new Error(error.message);
+			}
+		});
+		this._flowActionClimateSelectModeSwing.registerArgumentAutocompleteListener('mode', async (query, args) => {
+			const modeSwingList = args.device.getModesSwingList();
+			return modeSwingList.filter((result) => { 
+				return result.name.toLowerCase().includes(query.toLowerCase());
+			});
+			
+		});
+
 		// Flow trigger for all capabilities
 		this._flowTriggerCapabilityChanged = this.homey.flow.getDeviceTriggerCard('capability_changed');
 		this._flowTriggerCapabilityChanged.registerRunListener(async (args, state) => {
