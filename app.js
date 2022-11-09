@@ -204,7 +204,7 @@ class App extends Homey.App {
 			await this._client.connect(address, token, true);
 		}
 		catch(error){
-			this.error("Connect error: "+ error.message);
+			this.error("Connect error: "+ error);
 		}
 	}
 

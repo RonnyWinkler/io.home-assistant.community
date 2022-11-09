@@ -131,37 +131,45 @@ class ClimateDevice extends Homey.Device {
     }
 
     async onEntityUpdate(data) {
-        if(data) {
-            if (data.state != undefined){
-                await this.setCapabilityValue("climate_mode", data.state);
+        try{
+            if(data) {
+                if (data.state != undefined && data.state != "unavailable"){
+                    await this.setCapabilityValue("climate_mode", data.state);
+                }
+                if (data.attributes.current_temperature != undefined){
+                    await this.setCapabilityValue("measure_temperature", data.attributes.current_temperature);
+                }
+                if (this.hasCapability("target_temperature") && data.attributes.temperature != undefined){
+                    await this.setCapabilityValue("target_temperature", data.attributes.temperature);
+                }
+                if (this.hasCapability("measure_humidity") && 
+                    data.attributes.current_humidity != undefined &&
+                    data.attributes.current_humidity != "off"){
+                    await this.setCapabilityValue("measure_humidity", data.attributes.current_humidity);
+                }
+                if (this.hasCapability("climate_action") && 
+                    data.attributes.hvac_action != undefined){
+                    await this.setCapabilityValue("climate_action", data.attributes.hvac_action);
+                }
+                if (this.hasCapability("climate_mode_fan") && 
+                    data.attributes.fan_mode != undefined &&
+                    data.attributes.fan_mode != "unavailable"){
+                    await this.setCapabilityValue("climate_mode_fan", data.attributes.fan_mode);
+                }
+                if (this.hasCapability("climate_mode_preset") && 
+                    data.attributes.preset_mode != undefined &&
+                    data.attributes.preset_mode != "unavailable"){
+                    await this.setCapabilityValue("climate_mode_preset", data.attributes.preset_mode);
+                }
+                if (this.hasCapability("climate_mode_swing") && 
+                    data.attributes.swing_mode != undefined &&
+                    data.attributes.swing_mode != "unavailable"){
+                    await this.setCapabilityValue("climate_mode_swing", data.attributes.preset_swing);
+                }
             }
-            if (data.attributes.current_temperature != undefined){
-                await this.setCapabilityValue("measure_temperature", data.attributes.current_temperature);
-            }
-            if (this.hasCapability("target_temperature") && data.attributes.temperature != undefined){
-                await this.setCapabilityValue("target_temperature", data.attributes.temperature);
-            }
-            if (this.hasCapability("measure_humidity") && 
-                data.attributes.current_humidity != undefined &&
-                data.attributes.current_humidity != "off"){
-                await this.setCapabilityValue("measure_humidity", data.attributes.current_humidity);
-            }
-            if (this.hasCapability("climate_action") && 
-                data.attributes.hvac_action != undefined){
-                await this.setCapabilityValue("climate_action", data.attributes.hvac_action);
-            }
-            if (this.hasCapability("climate_mode_fan") && 
-                data.attributes.fan_mode != undefined){
-                await this.setCapabilityValue("climate_mode_fan", data.attributes.fan_mode);
-            }
-            if (this.hasCapability("climate_mode_preset") && 
-                data.attributes.preset_mode != undefined){
-                await this.setCapabilityValue("climate_mode_preset", data.attributes.preset_mode);
-            }
-            if (this.hasCapability("climate_mode_swing") && 
-                data.attributes.swing_mode != undefined){
-                await this.setCapabilityValue("climate_mode_swing", data.attributes.preset_swing);
-            }
+        }
+        catch(error){
+            this.error("Error changing capability: "+error.message);
         }
     }
 

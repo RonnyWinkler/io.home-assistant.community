@@ -1076,9 +1076,6 @@
         {
           "id": "login_credentials",
           "template": "login_credentials",
-          "navigation": {
-            "next": "list_devices"
-          },
           "options": {
             "logo": "logo.png",
             "usernameLabel": {
@@ -1140,8 +1137,7 @@
           "id": "login_credentials",
           "template": "login_credentials",
           "navigation": {
-            "prev": "select",
-            "next": "done"
+            "prev": "select"
           },
           "options": {
             "logo": "logo.png",
@@ -1207,9 +1203,6 @@
         {
           "id": "login_credentials",
           "template": "login_credentials",
-          "navigation": {
-            "next": "list_devices"
-          },
           "options": {
             "logo": "logo.png",
             "usernameLabel": {
@@ -1271,8 +1264,7 @@
           "id": "login_credentials",
           "template": "login_credentials",
           "navigation": {
-            "prev": "select",
-            "next": "done"
+            "prev": "select"
           },
           "options": {
             "logo": "logo.png",
@@ -1344,9 +1336,6 @@
         {
           "id": "login_credentials",
           "template": "login_credentials",
-          "navigation": {
-            "next": "list_devices"
-          },
           "options": {
             "logo": "logo.png",
             "usernameLabel": {
@@ -1408,8 +1397,7 @@
           "id": "login_credentials",
           "template": "login_credentials",
           "navigation": {
-            "prev": "select",
-            "next": "done"
+            "prev": "select"
           },
           "options": {
             "logo": "logo.png",
@@ -1505,9 +1493,6 @@
         {
           "id": "login_credentials",
           "template": "login_credentials",
-          "navigation": {
-            "next": "list_devices"
-          },
           "options": {
             "logo": "logo.png",
             "usernameLabel": {
@@ -1569,8 +1554,7 @@
           "id": "login_credentials",
           "template": "login_credentials",
           "navigation": {
-            "prev": "select",
-            "next": "done"
+            "prev": "select"
           },
           "options": {
             "logo": "logo.png",
@@ -1675,9 +1659,6 @@
         {
           "id": "login_credentials",
           "template": "login_credentials",
-          "navigation": {
-            "next": "list_devices"
-          },
           "options": {
             "logo": "logo.png",
             "usernameLabel": {
@@ -1739,8 +1720,7 @@
           "id": "login_credentials",
           "template": "login_credentials",
           "navigation": {
-            "prev": "select",
-            "next": "done"
+            "prev": "select"
           },
           "options": {
             "logo": "logo.png",
@@ -1820,9 +1800,6 @@
         {
           "id": "login_credentials",
           "template": "login_credentials",
-          "navigation": {
-            "next": "list_devices"
-          },
           "options": {
             "logo": "logo.png",
             "usernameLabel": {
@@ -1884,8 +1861,7 @@
           "id": "login_credentials",
           "template": "login_credentials",
           "navigation": {
-            "prev": "select",
-            "next": "done"
+            "prev": "select"
           },
           "options": {
             "logo": "logo.png",
@@ -1951,9 +1927,6 @@
         {
           "id": "login_credentials",
           "template": "login_credentials",
-          "navigation": {
-            "next": "list_devices"
-          },
           "options": {
             "logo": "logo.png",
             "usernameLabel": {
@@ -2015,8 +1988,7 @@
           "id": "login_credentials",
           "template": "login_credentials",
           "navigation": {
-            "prev": "select",
-            "next": "done"
+            "prev": "select"
           },
           "options": {
             "logo": "logo.png",
@@ -2082,9 +2054,6 @@
         {
           "id": "login_credentials",
           "template": "login_credentials",
-          "navigation": {
-            "next": "list_devices"
-          },
           "options": {
             "logo": "logo.png",
             "usernameLabel": {
@@ -2146,8 +2115,7 @@
           "id": "login_credentials",
           "template": "login_credentials",
           "navigation": {
-            "prev": "select",
-            "next": "done"
+            "prev": "select"
           },
           "options": {
             "logo": "logo.png",
@@ -2242,9 +2210,6 @@
         {
           "id": "login_credentials",
           "template": "login_credentials",
-          "navigation": {
-            "next": "list_devices"
-          },
           "options": {
             "logo": "logo.png",
             "usernameLabel": {
@@ -2306,8 +2271,7 @@
           "id": "login_credentials",
           "template": "login_credentials",
           "navigation": {
-            "prev": "select",
-            "next": "done"
+            "prev": "select"
           },
           "options": {
             "logo": "logo.png",
