@@ -2,12 +2,12 @@
     "title": {
         "en": "Swing mode !{{is|isn't}}",
         "de": "Schwing-Modus !{{ist|ist nicht}}",
-        "nl": "Schommelen modus !{{is|is niet}}"
+        "nl": "Luchtstroom !{{is|is niet}}"
     },
     "titleFormatted": {
         "en": "Swing mode !{{is|isn't}} [[mode]]",
         "de": "Schwing-Modus !{{ist|ist nicht}} [[mode]]",
-        "nl": "Schommelen modus !{{is|is niet}} [[mode]]"
+        "nl": "Luchtstroom !{{is|is niet}} [[mode]]"
     },
     "args": [
         {
@@ -19,9 +19,9 @@
             "name": "mode",
             "type": "dropdown",
             "title": { 
-                "en": "Fan mode",
-                "de": "Ventilator-Modus",
-                "nl": "Fan modus"
+                "en": "Swing mode",
+                "de": "Schwing-Modus",
+                "nl": "Luchtstroom"
             },
             "values": [
               {

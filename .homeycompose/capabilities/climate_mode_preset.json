@@ -68,9 +68,9 @@
     {
       "id": "activity",
       "title": {
-        "en": "activity",
-        "de": "Aktivität",
-        "nl": "Werkzaamheid"
+        "en": "activity driven",
+        "de": "aktivitätsgesteuert",
+        "nl": "activiteit gedreven"
       }
     }
   ]

@@ -550,7 +550,7 @@
                 "title": {
                   "en": "Focused",
                   "de": "Fokusiert",
-                  "nl": "gefocust"
+                  "nl": "Gefocust"
                 }
               },
               {
@@ -587,9 +587,9 @@
             "name": "mode",
             "type": "dropdown",
             "title": {
-              "en": "Fan mode",
-              "de": "Ventilator-Modus",
-              "nl": "Fan modus"
+              "en": "Preset mode",
+              "de": "Voreinstellter Modus",
+              "nl": "Vooraf ingestelde modus"
             },
             "values": [
               {
@@ -651,9 +651,9 @@
               {
                 "id": "activity",
                 "title": {
-                  "en": "activity",
-                  "de": "Aktivität",
-                  "nl": "Werkzaamheid"
+                  "en": "activity driven",
+                  "de": "aktivitätsgesteuert",
+                  "nl": "activiteit gedreven"
                 }
               }
             ]
@@ -665,12 +665,12 @@
         "title": {
           "en": "Swing mode !{{is|isn't}}",
           "de": "Schwing-Modus !{{ist|ist nicht}}",
-          "nl": "Schommelen modus !{{is|is niet}}"
+          "nl": "Luchtstroom !{{is|is niet}}"
         },
         "titleFormatted": {
           "en": "Swing mode !{{is|isn't}} [[mode]]",
           "de": "Schwing-Modus !{{ist|ist nicht}} [[mode]]",
-          "nl": "Schommelen modus !{{is|is niet}} [[mode]]"
+          "nl": "Luchtstroom !{{is|is niet}} [[mode]]"
         },
         "args": [
           {
@@ -682,9 +682,9 @@
             "name": "mode",
             "type": "dropdown",
             "title": {
-              "en": "Fan mode",
-              "de": "Ventilator-Modus",
-              "nl": "Fan modus"
+              "en": "Swing mode",
+              "de": "Schwing-Modus",
+              "nl": "Luchtstroom"
             },
             "values": [
               {
@@ -2531,7 +2531,7 @@
           "title": {
             "en": "Focused",
             "de": "Fokusiert",
-            "nl": "gefocust"
+            "nl": "Gefocust"
           }
         },
         {
@@ -2614,9 +2614,9 @@
         {
           "id": "activity",
           "title": {
-            "en": "activity",
-            "de": "Aktivität",
-            "nl": "Werkzaamheid"
+            "en": "activity driven",
+            "de": "aktivitätsgesteuert",
+            "nl": "activiteit gedreven"
           }
         }
       ]
@@ -2626,7 +2626,7 @@
       "title": {
         "en": "Swing mode",
         "de": "Schwing-Modus",
-        "nl": "Schommelen modus"
+        "nl": "Luchtstroom"
       },
       "getable": true,
       "setable": true,

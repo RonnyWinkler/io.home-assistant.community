@@ -19,9 +19,9 @@
             "name": "mode",
             "type": "dropdown",
             "title": { 
-                "en": "Fan mode",
-                "de": "Ventilator-Modus",
-                "nl": "Fan modus"
+                "en": "Preset mode",
+                "de": "Voreinstellter Modus",
+                "nl": "Vooraf ingestelde modus"
             },
             "values": [
               {
@@ -83,11 +83,11 @@
               {
                 "id": "activity",
                 "title": {
-                  "en": "activity",
-                  "de": "Aktivität",
-                  "nl": "Werkzaamheid"
+                  "en": "activity driven",
+                  "de": "aktivitätsgesteuert",
+                  "nl": "activiteit gedreven"
                 }
-              }
+              }          
             ]
         }
     ]
