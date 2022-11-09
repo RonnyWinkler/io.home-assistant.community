@@ -1,9 +1,9 @@
 {
     "id": "climate",
     "name": {
-      "en": "Thermostat",
-      "de": "Thermostat",
-      "nl": "Thermostaat"
+      "en": "Climate",
+      "de": "Klima",
+      "nl": "Klimaat"
     },
     "class": "thermostat",
     "capabilities": [
@@ -18,8 +18,8 @@
       "button.reconnect"
     ],
     "images": {
-      "large": "/drivers/switch/assets/images/large.png",
-      "small": "/drivers/switch/assets/images/small.png"
+      "large": "/drivers/climate/assets/images/large.png",
+      "small": "/drivers/climate/assets/images/small.png"
   },
   "$extends": [ "capabilitiesOptions", "pair", "repair" ]
 }
