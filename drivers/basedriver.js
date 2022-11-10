@@ -222,6 +222,11 @@ class BaseDriver extends Homey.Driver {
             }
         });
 
+        session.setHandler('getEntity', async () => {
+            let id = device.getData().id;
+            let data = this.homey.app.getClient().getEntity(id);
+            return data;
+        });
     }
 
     async checkLogin(data){

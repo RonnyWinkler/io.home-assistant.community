@@ -13,18 +13,27 @@
 <script type="application/javascript">
 
     Homey.setTitle(Homey.__("repair.title.select"));
-    
+    // Homey.setNavigationClose();
+
     function onSelectAuth(){
         Homey.showView("login_credentials");
     }
     function onSelectIcon(){
         Homey.showView("icon");
     }
+    function onSelectEntity(){
+        Homey.showView("device_details");
+    }
 
 </script>
 
 <div">
     <fieldset>
+        <div>
+            <p>
+                <button id="btnEntity" class=button onClick="onSelectEntity()" visibility = 'hidden'><span data-i18n="repair.title.deviceDetails"></span></button>
+            </p>
+        </div>
         <div>
             <p>
                 <button id="btnAuth" class=button onClick="onSelectAuth()" visibility = 'hidden'><span data-i18n="repair.title.auth"></span></button>
@@ -39,6 +48,7 @@
                 <br>
                 <span id="spanAppRestart"></span>
             </p>
+        </div>
     </fieldset>
 </div>
 

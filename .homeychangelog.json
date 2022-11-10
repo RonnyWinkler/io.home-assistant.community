@@ -42,5 +42,13 @@
   "0.2.0": {
     "en": "Added icon upload for device pairing including mdi icon selection (https://materialdesignicons.com).",
     "de": "Icon-Upload für die Gerätekopplung hinzugefügt, einschließlich mdi-Iconauswahl (https://materialdesignicons.com)."
+  },
+  "0.2.1": {
+    "en": "Added climate device. Added icon exchange in repair dialog.",
+    "de": "Klimagerät hinzugefügt. Icon-Änderung in Repair-Dialog hinzug."
+  },
+  "0.2.2": {
+    "en": "Fixed capability error for climated evice",
+    "de": "Capability-Fehler für Klimagerät korrigiert."
   }
 }

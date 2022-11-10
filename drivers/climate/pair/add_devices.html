@@ -1,6 +1,7 @@
 <script>
 
   Homey.setTitle(__('pair.title.ready'));
+  Homey.setNavigationClose();
   
   // Homey.emit('install', null, (err, device) => {
   //   if (err) {
@@ -25,9 +26,8 @@
           console.error(err);
         }
       });
-      Homey.done();
-      return;
     }
+    Homey.done();
   });
 </script>
 

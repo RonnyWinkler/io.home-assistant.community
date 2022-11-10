@@ -20,10 +20,10 @@ class ClimateDevice extends Homey.Device {
         this._client.registerDevice(this.entityId, this);
 
         this.registerCapabilityListener('target_temperature', async (value) => {
-            await this.onCapabilityTargetTemperature(value, opts);
+            await this.onCapabilityTargetTemperature(value);
         });
         this.registerCapabilityListener('climate_mode', async (value) => {
-            await this.onCapabilityClimateMode(value, opts);
+            await this.onCapabilityClimateMode(value);
         });
         this.registerCapabilityListener('climate_mode_fan', async (value) => {
             await this.onCapabilityClimateModeFan(value, opts);

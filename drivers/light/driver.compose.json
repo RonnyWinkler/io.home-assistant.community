@@ -54,6 +54,6 @@
       "large": "/drivers/light/assets/images/large.png",
       "small": "/drivers/light/assets/images/small.png"
   },
-  "$extends": [ "pair", "repair" ]
+  "$extends": [ "pair", "repair"]
 
 }

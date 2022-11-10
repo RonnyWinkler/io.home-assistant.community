@@ -1,0 +1,38 @@
+
+<!-- <link rel="stylesheet" type="text/css" href="../../../assets/css/style.css" /> -->
+<style>
+    .button {
+        text-align: center;
+        width: 100%;
+        position: relative;
+        /* margin: 10px 0px;
+        left:-20px; */
+        cursor: pointer;
+    }
+</style>
+<script type="application/javascript">
+
+    Homey.setTitle(Homey.__("repair.title.deviceDetails"));
+    
+</script>
+
+<div">
+    <fieldset>
+        <div class="field row">
+            <textarea id="entityDetails"></textarea>
+        </div>
+    </fieldset>
+
+</div>
+
+<script type="application/javascript">
+    var entityDetailsElement = document.getElementById('entityDetails');
+    // Make the detected devices text area fill the page
+    entityDetailsElement.setAttribute('cols', entityDetailsElement.parentElement.clientWidth / 7);
+    entityDetailsElement.style.height = (window.innerHeight - entityDetailsElement.offsetTop - 100) + 'px';
+    Homey.emit('getEntity').then(function (entity) {
+        let string = JSON.stringify(entity, null, "  ");
+        entityDetailsElement.value = string;        
+    });
+
+</script>
