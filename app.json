@@ -1241,6 +1241,12 @@
           }
         },
         {
+          "id": "device_details",
+          "navigation": {
+            "prev": "select"
+          }
+        },
+        {
           "id": "icon",
           "navigation": {
             "next": "icon_change",
@@ -1365,6 +1371,12 @@
           "id": "select",
           "navigation": {
             "prev": "done"
+          }
+        },
+        {
+          "id": "device_details",
+          "navigation": {
+            "prev": "select"
           }
         },
         {
@@ -1498,6 +1510,12 @@
           "id": "select",
           "navigation": {
             "prev": "done"
+          }
+        },
+        {
+          "id": "device_details",
+          "navigation": {
+            "prev": "select"
           }
         },
         {
@@ -1650,6 +1668,59 @@
           "id": "add_devices"
         }
       ],
+      "repair": [
+        {
+          "id": "select",
+          "navigation": {
+            "prev": "done"
+          }
+        },
+        {
+          "id": "device_details",
+          "navigation": {
+            "prev": "select"
+          }
+        },
+        {
+          "id": "icon",
+          "navigation": {
+            "next": "icon_change",
+            "prev": "select"
+          }
+        },
+        {
+          "id": "icon_change",
+          "navigation": {
+            "prev": "icon"
+          }
+        },
+        {
+          "id": "login_credentials",
+          "template": "login_credentials",
+          "navigation": {
+            "prev": "select"
+          },
+          "options": {
+            "logo": "logo.png",
+            "usernameLabel": {
+              "en": "Server"
+            },
+            "usernamePlaceholder": {
+              "en": "http://192.168.xxx.xxx:8123"
+            },
+            "passwordLabel": {
+              "en": "Token"
+            },
+            "passwordPlaceholder": {
+              "en": "Long-lived access token"
+            }
+          }
+        },
+        {
+          "id": "done",
+          "template": "done"
+        }
+      ],
       "id": "light",
       "name": {
         "en": "Light",
@@ -1703,60 +1774,7 @@
       "images": {
         "large": "/drivers/light/assets/images/large.png",
         "small": "/drivers/light/assets/images/small.png"
-      },
-      "repair": [
-        {
-          "id": "select",
-          "navigation": {
-            "prev": "done"
-          }
-        },
-        {
-          "id": "device_details",
-          "navigation": {
-            "prev": "select"
-          }
-        },
-        {
-          "id": "icon",
-          "navigation": {
-            "next": "icon_change",
-            "prev": "select"
-          }
-        },
-        {
-          "id": "icon_change",
-          "navigation": {
-            "prev": "icon"
-          }
-        },
-        {
-          "id": "login_credentials",
-          "template": "login_credentials",
-          "navigation": {
-            "prev": "select"
-          },
-          "options": {
-            "logo": "logo.png",
-            "usernameLabel": {
-              "en": "Server"
-            },
-            "usernamePlaceholder": {
-              "en": "http://192.168.xxx.xxx:8123"
-            },
-            "passwordLabel": {
-              "en": "Token"
-            },
-            "passwordPlaceholder": {
-              "en": "Long-lived access token"
-            }
-          }
-        },
-        {
-          "id": "done",
-          "template": "done"
-        }
-      ]
+      }
     },
     {
       "capabilitiesOptions": {
@@ -1827,6 +1845,12 @@
           "id": "select",
           "navigation": {
             "prev": "done"
+          }
+        },
+        {
+          "id": "device_details",
+          "navigation": {
+            "prev": "select"
           }
         },
         {
@@ -1971,6 +1995,12 @@
           }
         },
         {
+          "id": "device_details",
+          "navigation": {
+            "prev": "select"
+          }
+        },
+        {
           "id": "icon",
           "navigation": {
             "next": "icon_change",
@@ -2098,6 +2128,12 @@
           }
         },
         {
+          "id": "device_details",
+          "navigation": {
+            "prev": "select"
+          }
+        },
+        {
           "id": "icon",
           "navigation": {
             "next": "icon_change",
@@ -2222,6 +2258,12 @@
           "id": "select",
           "navigation": {
             "prev": "done"
+          }
+        },
+        {
+          "id": "device_details",
+          "navigation": {
+            "prev": "select"
           }
         },
         {
@@ -2378,6 +2420,12 @@
           "id": "select",
           "navigation": {
             "prev": "done"
+          }
+        },
+        {
+          "id": "device_details",
+          "navigation": {
+            "prev": "select"
           }
         },
         {

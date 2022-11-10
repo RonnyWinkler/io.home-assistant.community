@@ -2,7 +2,7 @@
 
   Homey.setTitle(__('pair.title.ready'));
   Homey.setNavigationClose();
-  
+
   // Homey.emit('install', null, (err, device) => {
   //   if (err) {
   //     this.instructions = '[ERROR] ' + err;
@@ -11,7 +11,7 @@
   //     Homey.done();
   //   }
   // });
-  Homey.emit('install', null, function (err, devices) {
+  Homey.emit('install', null, async (err, devices) => {
     if (err) {
       // this.instructions = '[ERROR] ' + err;
       console.error(err);
@@ -20,7 +20,7 @@
     console.log(devices);
 
     for(let i=0; i<devices.length; i++){
-      Homey.createDevice(devices[i], (err, res) => {
+      await Homey.createDevice(devices[i], (err, res) => {
         if (err) {
           // this.instructions = '[ERROR] ' + err;
           console.error(err);
