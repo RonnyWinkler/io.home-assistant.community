@@ -1,63 +1,24 @@
 'use strict';
 
-const Homey = require('homey');
+const BaseDevice = require('../basedevice');
 
 const CAPABILITIES_SET_DEBOUNCE = 100;
 
-const defaultValueConverter = {
-    from: (state) => parseFloat(state),
-    to: (value) => value
-}
-
-const defaultStringConverter = {
-    from: (state) => {
-        if (state != undefined){
-            return state.toString();
-        }
-        else return "";
-    },
-    to: (value) => value
-}
-
-const defaultBooleanConverter = {
-    from: (state) => (state == "on"),
-    to: (value) => (value ? "on" : "off")
-}
-
-class CompoundDevice extends Homey.Device {
+class CompoundDevice extends BaseDevice {
 
     async onInit() {
-        this._client = this.homey.app.getClient();
+        await super.onInit();
 
-        await this.updateCapabilities();
-
-        this.entityId = this.getData().id;
-        this.capabilities = this.getCapabilities();
         this.compoundCapabilities = this.getData().capabilities;
         this.compoundCapabilitiesConverters = this.getData().capabilitiesConverters;
-
-        this.log('Device init. ID: '+this.entityId+" Name: "+this.getName()+" Class: "+this.getClass());
-
-        this._client.registerDevice(this.entityId, this);
 
         // Capability listener for all existing capabilities
         this.registerMultipleCapabilityListener(this.getCapabilities(), async (value, opts) => {
             await this._onCapabilitiesSet(value, opts)
         }, CAPABILITIES_SET_DEBOUNCE);
-
-        // maintenance actions
-        // this.registerCapabilityListener('button.reconnect', async () => {
-        //     await this.clientReconnect()
-        // });
-
-        // Init device with a short timeout to wait for initial entities
-        this.timeoutInitDevice = this.homey.setTimeout(async () => this.onInitDevice().catch(e => console.log(e)), 5 * 1000 );
     }
 
-    async onUninit(){
-
-    }
-    
+    // Redefinitionen ============================================================================================
     async updateCapabilities(){
         // Add new capabilities (if not already added)
         try{
@@ -71,39 +32,20 @@ class CompoundDevice extends Homey.Device {
         }
     }
 
-    getCapabilityType(capability){
-        let type = typeof(this.getCapabilityValue(capability));
-        if (type == 'string' || type == 'number' || type == 'boolean'){
-            return type;
-        }
-        else{
-            if (capability.startsWith("measure_generic")){
-                return "string";
-            }
-            else if( capability.startsWith("measure_") ||
-                capability.startsWith("meter_") ||
-                capability == "dim" ) {
-                return "number";
-            } 
-            else {
-                return "boolean";
-            }
-        }
-    }
+    async onInitDevice(){
+        super.onInitDevice();
 
-    getAutocompleteCapabilityList(){
-        let capabilities = this.getCapabilities();
-        let result = [];
-        for (let i=0; i<capabilities.length; i++){
-            if (capabilities[i] != "button.reconnect"){
-                let name = capabilities[i] + " ("+this.compoundCapabilities[capabilities[i]]+")";
-                result.push({
-                    id: capabilities[i],
-                    name: name
-                })
+        let updatedEntities = [];
+        Object.keys(this.compoundCapabilities).forEach(key => {
+            let entityId = this._getCompoundEntityId(this.compoundCapabilities[key]);
+            let entity = this._client.getEntity(entityId);
+            if (entity){
+                if (updatedEntities.indexOf(entityId) == -1){
+                    updatedEntities.push(entityId);
+                    this.onEntityUpdate(entity);
+                }
             }
-        }
-        return result;
+        });
     }
 
     inputConverter(compoundCapability) {
@@ -123,14 +65,7 @@ class CompoundDevice extends Homey.Device {
             }
         }
 
-        switch (this.getCapabilityType(capability)){
-            case "string":
-                return defaultStringConverter.from;
-            case "number":
-                return defaultValueConverter.from;
-            case "boolean":
-                return defaultBooleanConverter.from;
-        }
+        return super.inputConverter(capability);
     }
 
     outputConverter(compoundCapability) {
@@ -149,70 +84,22 @@ class CompoundDevice extends Homey.Device {
             }
         }
 
-        switch (this.getCapabilityType(capability)){
-            case "string":
-                return defaultStringConverter.to;
-            case "number":
-                return defaultValueConverter.to;
-            case "boolean":
-                return defaultBooleanConverter.to;
-        }
+        return super.outputConverter(capability);
     }
 
-    onAdded() {
-        this.log('device added');
-    }
-
-    onDeleted() {
-        this.log('device deleted');
-        this._client.unregisterDevice(this.entityId);
-    }
-
-    async onInitDevice(){
-        // Init device on satrtup with latest data to have initial values before HA sends updates
-        this.homey.clearTimeout(this.timeoutInitDevice);
-        this.timeoutInitDevice = null;
-
-        this.log('Device init data. ID: '+this.entityId+" Name: "+this.getName()+" Class: "+this.getClass());
-        let updatedEntities = [];
-        Object.keys(this.compoundCapabilities).forEach(key => {
-            let entityId = this.getCompoundEntityId(this.compoundCapabilities[key]);
-            let entity = this._client.getEntity(entityId);
-            if (entity){
-                if (updatedEntities.indexOf(entityId) == -1){
-                    updatedEntities.push(entityId);
-                    this.onEntityUpdate(entity);
-                }
-            }
-        });
-    }
-
-    getCompoundEntityId(compoundEntity){
-        return compoundEntity.split(".")[0]+"."+compoundEntity.split(".")[1];
-    }
-    getCompoundEntityAttribut(compoundEntity){
-        return compoundEntity.split(".")[2];
-    }
-
+    // Entity update ============================================================================================
     async onEntityUpdate(data){
         try {
-            // let entityId = data.entity_id;
-            
             Object.keys(this.compoundCapabilities).forEach(async (key) => {
                 // Is the entity_id of the compound entity equal (entity itself or entity_id of attribute) 
-                let entityId = this.getCompoundEntityId(this.compoundCapabilities[key]);
+                let entityId = this._getCompoundEntityId(this.compoundCapabilities[key]);
                 if(data != undefined && entityId == data.entity_id) {
-    
-                    // console.log("---------------------------------------------------------------");
-                    // console.log("update compound device:", this.entityId);
-                    // console.log("update compound capability:", key);
-                    // console.log("update compound by entity:", entityId);
     
                     let convert = this.inputConverter(key);
 
                     let value = null;
                     let entityValue = null;
-                    let attribute = this.getCompoundEntityAttribut(this.compoundCapabilities[key]);
+                    let attribute = this._getCompoundEntityAttribut(this.compoundCapabilities[key]);
                     if (attribute == undefined){
                         entityValue = data.state;
                         value = convert(data.state);
@@ -271,6 +158,13 @@ class CompoundDevice extends Homey.Device {
         catch(error) {
             this.error("CapabilitiesUpdate error: "+ error.message);
         }
+    }
+
+    _getCompoundEntityId(compoundEntity){
+        return compoundEntity.split(".")[0]+"."+compoundEntity.split(".")[1];
+    }
+    _getCompoundEntityAttribut(compoundEntity){
+        return compoundEntity.split(".")[2];
     }
 
     // Version without attributes
@@ -335,6 +229,7 @@ class CompoundDevice extends Homey.Device {
     //     }
     // }
 
+    // Capabilities ===========================================================================================
     async _onCapabilitiesSet(valueObj, optsObj) {
         try{
             let keys = Object.keys(valueObj);
@@ -344,16 +239,16 @@ class CompoundDevice extends Homey.Device {
                     await this.clientReconnect();          
                 }
                 if (key.startsWith("onoff")){
-                    this.onCapabilityOnoff(key, valueObj[keys[i]]);
+                    this._onCapabilityOnoff(key, valueObj[keys[i]]);
                 }
                 if (key.startsWith("button") && key != "button.reconnect"){
-                    this.onCapabilityButton(key);
+                    this._onCapabilityButton(key);
                 }
                 if (key.startsWith("locked")){
-                    this.onCapabilityLocked(key, valueObj[keys[i]]);
+                    this._onCapabilityLocked(key, valueObj[keys[i]]);
                 }
                 if (key.startsWith("dim")){
-                    this.onCapabilityDim(key, valueObj[keys[i]]);
+                    this._onCapabilityDim(key, valueObj[keys[i]]);
                 }
     
             }
@@ -364,21 +259,21 @@ class CompoundDevice extends Homey.Device {
 
     }
 
-    async onCapabilityButton( capability, value, opts ) {
+    async _onCapabilityButton( capability, value, opts ) {
         await this._client.turnOnOff(this.compoundCapabilities[capability], true);
     }
 
 
-    async onCapabilityOnoff( capability, value, opts ) {
+    async _onCapabilityOnoff( capability, value, opts ) {
         await this._client.turnOnOff(this.compoundCapabilities[capability], value);
     }
 
-    async onCapabilityLocked( capability, value, opts ) {
+    async _onCapabilityLocked( capability, value, opts ) {
         this.log("onCapabilityLocked", value);
         await this._client.turnOnOff(this.compoundCapabilities[capability], value);
     }
 
-    async onCapabilityDim( capability, value, opts ) {
+    async _onCapabilityDim( capability, value, opts ) {
         let entityId = this.compoundCapabilities[capability];
         let outputValue = this.outputConverter("dim")(value);
         await this._client.callService("input_number", "set_value", {
@@ -387,23 +282,19 @@ class CompoundDevice extends Homey.Device {
         });
     }
 
-    async clientReconnect(){
-        await this.homey.app.clientReconnect();
-    }
-
-    async onDeleted() {
-        this.driver.tryRemoveIcon(this.getData().id);
-
-        // dynamic capability icons are not possible using capabilitiesOptions
-        // Object.keys(this.getData().capabilitiesMdiIcons).forEach(async (key) => {
-        //     let id = this.getData().id + "." + key;
-        //     this.driver.tryRemoveIcon(id);
-        // });
-
-        if (this.timeoutInitDevice){
-            this.homey.clearTimeout(this.timeoutInitDevice);
-            this.timeoutInitDevice = null;    
+    getAutocompleteCapabilityList(){
+        let capabilities = this.getCapabilities();
+        let result = [];
+        for (let i=0; i<capabilities.length; i++){
+            if (capabilities[i] != "button.reconnect"){
+                let name = capabilities[i] + " ("+this.compoundCapabilities[capabilities[i]]+")";
+                result.push({
+                    id: capabilities[i],
+                    name: name
+                })
+            }
         }
+        return result;
     }
 }
 

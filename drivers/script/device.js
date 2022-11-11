@@ -1,27 +1,14 @@
 'use strict';
 
-const Homey = require('homey');
+const BaseDevice = require('../basedevice');
 
-class ScriptDevice extends Homey.Device {
+class ScriptDevice extends BaseDevice {
 
     async onInit() {
-        await this.updateCapabilities();
-
-        this._client = this.homey.app.getClient();
-
-        this.entityId = this.getData().id;
-
-        this.log('Device init. ID: '+this.entityId+" Name: "+this.getName()+" Class: "+this.getClass());
-
-        this._client.registerDevice(this.entityId, this);
-
-        let entity = this._client.getEntity(this.entityId);
-        if(entity) { 
-            this.onEntityUpdate(entity);
-        }
+        await super.onInit();
 
         this.registerCapabilityListener('button', async (value, opts) => {
-            await this.onCapabilityButton(value, opts);
+            await this._onCapabilityButton(value, opts);
         })
         // maintenance actions
         this.registerCapabilityListener('button.reconnect', async () => {
@@ -42,34 +29,14 @@ class ScriptDevice extends Homey.Device {
         }
     }
 
-    onAdded() {
-        this.log('device added');
-    }
-
-    onDeleted() {
-        this.log('device deleted');
-        this._client.unregisterDevice(this.entityId);
-    }
-
-    async onCapabilityButton( value, opts ) {
-        await this._client.turnOnOff(this.entityId, true);
-    }
-
+    // Entity update ============================================================================================
     async onEntityUpdate(data) {
         // nothing to update
     }
 
-    async clientReconnect(){
-        await this.homey.app.clientReconnect();
-    }
-
-    async onDeleted() {
-        this.driver.tryRemoveIcon(this.getData().id);
-        
-        if (this.timeoutInitDevice){
-            this.homey.clearTimeout(this.timeoutInitDevice);
-            this.timeoutInitDevice = null;    
-        }
+    // Capabilities ===========================================================================================
+    async _onCapabilityButton( value, opts ) {
+        await this._client.turnOnOff(this.entityId, true);
     }
 
 }

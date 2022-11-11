@@ -1,32 +1,22 @@
 'use strict';
 
-const Homey = require('homey');
+const BaseDevice = require('../basedevice');
 
-class ButtonDevice extends Homey.Device {
+class ButtonDevice extends BaseDevice {
 
     async onInit() {
-        await this.updateCapabilities();
+        await super.onInit();
 
-        this._client = this.homey.app.getClient();
-        this.entityId = this.getData().id;
         this.lastState = null;
 
-        this.log('Device init. ID: '+this.entityId+" Name: "+this.getName()+" Class: "+this.getClass());
-
-        this._client.registerDevice(this.entityId, this);
-
         this.registerCapabilityListener('button', async (value, opts) => {
-            await this.onCapabilityOnoff(value, opts);
+            await this._onCapabilityOnoff(value, opts);
         });
         
         // maintenance actions
         this.registerCapabilityListener('button.reconnect', async () => {
             await this.clientReconnect()
         });
-
-        // Init device with a short timeout to wait for initial entities
-        this.timeoutInitDevice = this.homey.setTimeout(async () => this.onInitDevice().catch(e => console.log(e)), 5 * 1000 );
-
     }
 
     async updateCapabilities(){
@@ -42,35 +32,7 @@ class ButtonDevice extends Homey.Device {
         }
     }
 
-    onAdded() {
-        this.log('device added');
-    }
-
-    onDeleted() {
-        this.log('device deleted');
-        this._client.unregisterDevice(this.entityId);
-    }
-
-    async onInitDevice(){
-        // Init device on satrtup with latest data to have initial values before HA sends updates
-        this.homey.clearTimeout(this.timeoutInitDevice);
-        this.timeoutInitDevice = null;
-
-        this.log('Device init data. ID: '+this.entityId+" Name: "+this.getName()+" Class: "+this.getClass());
-        let entity = this._client.getEntity(this.entityId);
-        if (entity){
-            this.onEntityUpdate(entity);
-        }
-    }
-
-    async onCapabilityOnoff( value, opts ) {
-       // this._client.turnOnOff(this.entityId, value);
-       let entityId = this.entityId;
-        await this._client.callService("input_button", "press", {
-            "entity_id": entityId
-        });
-   }
-
+    // Entity update ============================================================================================
     async onEntityUpdate(data) {
         try{
             // First update, just remember the current state (last press)
@@ -89,19 +51,14 @@ class ButtonDevice extends Homey.Device {
         }
     }
 
-    async clientReconnect(){
-        await this.homey.app.clientReconnect();
-    }
-
-    async onDeleted() {
-        this.driver.tryRemoveIcon(this.getData().id);
-        
-        if (this.timeoutInitDevice){
-            this.homey.clearTimeout(this.timeoutInitDevice);
-            this.timeoutInitDevice = null;    
-        }
-    }
-
+    // Capabilities ===========================================================================================?
+    async _onCapabilityOnoff( value, opts ) {
+       // this._client.turnOnOff(this.entityId, value);
+       let entityId = this.entityId;
+        await this._client.callService("input_button", "press", {
+            "entity_id": entityId
+        });
+   }
 }
 
 module.exports = ButtonDevice;

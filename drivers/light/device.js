@@ -1,36 +1,20 @@
 'use strict';
 
-const Homey = require('homey');
+const BaseDevice = require('../basedevice');
 
 const CAPABILITIES_SET_DEBOUNCE = 100;
 
-class LightDevice extends Homey.Device {
+class LightDevice extends BaseDevice {
 
     async onInit() {
-        await this.updateCapabilities();
-
-        this._client = this.homey.app.getClient();
-
-        this.entityId = this.getData().id;
+        await super.onInit();
 
         this._minMireds = 0;
         this._maxMireds = 0;
 
-        this.log('Device init. ID: '+this.entityId+" Name: "+this.getName()+" Class: "+this.getClass());
-
-        this._client.registerDevice(this.entityId, this);
-
         this.registerMultipleCapabilityListener(this.getCapabilities(), async (value, opts) => {
             await this._onCapabilitiesSet(value, opts)
         }, CAPABILITIES_SET_DEBOUNCE);
-        
-        // maintenance actions
-        this.registerCapabilityListener('button.reconnect', async () => {
-            await this.clientReconnect()
-        });
-
-        // Init device with a short timeout to wait for initial entities
-        this.timeoutInitDevice = this.homey.setTimeout(async () => this.onInitDevice().catch(e => console.log(e)), 5 * 1000 );
     }
 
     async updateCapabilities(){
@@ -46,128 +30,7 @@ class LightDevice extends Homey.Device {
         }
     }
 
-    onAdded() {
-        this.log('device added');
-    }
-
-    onDeleted() {
-        this.log('device deleted');
-        this._client.unregisterDevice(this.entityId);
-    }
-
-    async onInitDevice(){
-        // Init device on satrtup with latest data to have initial values before HA sends updates
-        this.homey.clearTimeout(this.timeoutInitDevice);
-        this.timeoutInitDevice = null;
-
-        this.log('Device init data. ID: '+this.entityId+" Name: "+this.getName()+" Class: "+this.getClass());
-        let entity = this._client.getEntity(this.entityId);
-        if (entity){
-            this.onEntityUpdate(entity);
-        }
-    }
-
-    async onCapabilityOnoff( value, opts ) {
-        await this._client.turnOnOff(this.entityId, value);
-    }
-
-    getCapabilityUpdate(valueObj, capability) {
-        let value = valueObj[capability];
-        if(typeof value === 'undefined') value = this.getCapabilityValue(capability)
-        return value;
-    }
-
-    hasCapabilityUpdate(valueObj, capability) {
-        let value = valueObj[capability];
-        return(typeof value !== 'undefined');
-    }
-
-    async _onCapabilitiesSet(valueObj, optsObj) {
-        try{
-            if( typeof valueObj.dim === 'number' ) {
-                valueObj.onoff = valueObj.dim > 0;	
-            }
-
-            let lightOn = this.getCapabilityUpdate(valueObj, "onoff");
-
-            let data = {
-                entity_id: this.entityId
-            };
-
-            if(lightOn) {
-
-                if(this.hasCapability("dim")) {
-                    let bri = this.getCapabilityUpdate(valueObj, "dim");
-                    if(bri != this.getCapabilityValue("dim")) {
-                        data["brightness"] = bri * 255.0;
-
-                        await this.setCapabilityValue("dim", bri);
-                            // .catch(error => {
-                            //     this.error("Device "+this.getName()+": Error set dim capability, value: "+bri+" Error: "+error.message);
-                            // });
-                    }
-                }
-
-                let lightModeUpdate = null;
-
-                if(this.hasCapabilityUpdate(valueObj, "light_hue") || 
-                this.hasCapabilityUpdate(valueObj, "light_saturation")) {
-
-                    lightModeUpdate = "color";
-
-                    let hue = this.getCapabilityUpdate(valueObj, "light_hue");
-                    let sat = this.getCapabilityUpdate(valueObj, "light_saturation");
-
-                    if(hue != this.getCapabilityValue("light_hue") ||
-                    sat != this.getCapabilityValue("light_saturation")) {
-
-                        data["hs_color"] = [
-                            hue * 360.0,
-                            sat * 100.0
-                        ]
-
-                        await this.setCapabilityValue("light_hue", hue);
-                            // .catch(error => {
-                            //     this.error("Device "+this.getName()+": Error set hue capability, value: "+hue+" Error: "+error.message);
-                            // });
-                        await this.setCapabilityValue("light_saturation", sat);
-                            // .catch(error => {
-                            //     this.error("Device "+this.getName()+": Error set saturation capability, value: "+sat+" Error: "+error.message);
-                            // });
-                }
-        
-                } 
-                else if(this.hasCapabilityUpdate(valueObj, "light_temperature")) {
-                    lightModeUpdate = "temperature";
-
-                    let tmp = this.getCapabilityUpdate(valueObj, "light_temperature");
-
-                    if(tmp != this.getCapabilityValue("light_temperature")) {
-                        data["color_temp"] = ((this._maxMireds - this._minMireds) * tmp) + this._minMireds;
-
-                        await this.setCapabilityValue("light_temperature", tmp);
-                            // .catch(error => {
-                            //     this.error("Device "+this.getName()+": Error set temoerature capability, value: "+tmp+" Error: "+error.message);
-                            // });
-                    }
-                }
-
-                if(lightModeUpdate && this.hasCapability("light_mode")) {
-                    this.setCapabilityValue("light_mode", lightModeUpdate);
-                        // .catch(error => {
-                        //     this.error("Device "+this.getName()+": Error set light mode capability, value: "+lightModeUpdate+" Error: "+error.message);
-                        // });
-                }
-            }
-
-            await this._client.updateLight(lightOn, data);
-        }
-        catch(error) {
-            this.error("CapabilitiesUpdate error: "+ error.message);
-        }
-    
-    }
-
+    // Entity update ============================================================================================
     async onEntityUpdate(data) {
         if(data==null){
             return;
@@ -238,18 +101,112 @@ class LightDevice extends Homey.Device {
         }
     }
 
-    async clientReconnect(){
-        await this.homey.app.clientReconnect();
+    // Capabilities ============================================================================================
+    // async _onCapabilityOnoff( value, opts ) {
+    //     await this._client.turnOnOff(this.entityId, value);
+    // }
+
+    _getCapabilityUpdate(valueObj, capability) {
+        let value = valueObj[capability];
+        if(typeof value === 'undefined') value = this.getCapabilityValue(capability)
+        return value;
     }
 
-    async onDeleted() {
-        this.driver.tryRemoveIcon(this.getData().id);
-        this.driver.tryRemoveIcon(this.getData().id+"_temp");
+    _hasCapabilityUpdate(valueObj, capability) {
+        let value = valueObj[capability];
+        return(typeof value !== 'undefined');
+    }
+
+    async _onCapabilitiesSet(valueObj, optsObj) {
+        try{
+
+            if (valueObj["button.reconnect"]){
+                await this.clientReconnect();   
+                return;       
+            }
+
+            if( typeof valueObj.dim === 'number' ) {
+                valueObj.onoff = valueObj.dim > 0;	
+            }
+
+            let lightOn = this._getCapabilityUpdate(valueObj, "onoff");
+
+            let data = {
+                entity_id: this.entityId
+            };
+
+            if(lightOn) {
+
+                if(this.hasCapability("dim")) {
+                    let bri = this._getCapabilityUpdate(valueObj, "dim");
+                    if(bri != this.getCapabilityValue("dim")) {
+                        data["brightness"] = bri * 255.0;
+
+                        await this.setCapabilityValue("dim", bri);
+                            // .catch(error => {
+                            //     this.error("Device "+this.getName()+": Error set dim capability, value: "+bri+" Error: "+error.message);
+                            // });
+                    }
+                }
+
+                let lightModeUpdate = null;
+
+                if(this._hasCapabilityUpdate(valueObj, "light_hue") || 
+                this._hasCapabilityUpdate(valueObj, "light_saturation")) {
+
+                    lightModeUpdate = "color";
+
+                    let hue = this._getCapabilityUpdate(valueObj, "light_hue");
+                    let sat = this._getCapabilityUpdate(valueObj, "light_saturation");
+
+                    if(hue != this.getCapabilityValue("light_hue") ||
+                    sat != this.getCapabilityValue("light_saturation")) {
+
+                        data["hs_color"] = [
+                            hue * 360.0,
+                            sat * 100.0
+                        ]
+
+                        await this.setCapabilityValue("light_hue", hue);
+                            // .catch(error => {
+                            //     this.error("Device "+this.getName()+": Error set hue capability, value: "+hue+" Error: "+error.message);
+                            // });
+                        await this.setCapabilityValue("light_saturation", sat);
+                            // .catch(error => {
+                            //     this.error("Device "+this.getName()+": Error set saturation capability, value: "+sat+" Error: "+error.message);
+                            // });
+                }
         
-        if (this.timeoutInitDevice){
-            this.homey.clearTimeout(this.timeoutInitDevice);
-            this.timeoutInitDevice = null;    
+                } 
+                else if(this._hasCapabilityUpdate(valueObj, "light_temperature")) {
+                    lightModeUpdate = "temperature";
+
+                    let tmp = this._getCapabilityUpdate(valueObj, "light_temperature");
+
+                    if(tmp != this.getCapabilityValue("light_temperature")) {
+                        data["color_temp"] = ((this._maxMireds - this._minMireds) * tmp) + this._minMireds;
+
+                        await this.setCapabilityValue("light_temperature", tmp);
+                            // .catch(error => {
+                            //     this.error("Device "+this.getName()+": Error set temoerature capability, value: "+tmp+" Error: "+error.message);
+                            // });
+                    }
+                }
+
+                if(lightModeUpdate && this.hasCapability("light_mode")) {
+                    this.setCapabilityValue("light_mode", lightModeUpdate);
+                        // .catch(error => {
+                        //     this.error("Device "+this.getName()+": Error set light mode capability, value: "+lightModeUpdate+" Error: "+error.message);
+                        // });
+                }
+            }
+
+            await this._client.updateLight(lightOn, data);
         }
+        catch(error) {
+            this.error("CapabilitiesUpdate error: "+ error.message);
+        }
+    
     }
 
 }

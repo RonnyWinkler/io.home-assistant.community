@@ -1,48 +1,37 @@
 'use strict';
 
-const Homey = require('homey');
+const BaseDevice = require('../basedevice');
 
-class ClimateDevice extends Homey.Device {
+class ClimateDevice extends BaseDevice {
 
     async onInit() {
-        await this.updateCapabilities();
+        await super.onInit();
 
-        this._client = this.homey.app.getClient();
-
-        this.entityId = this.getData().id;
         // mode lists
         this.modesFan = [];
         this.modesPreset = [];
         this.modesSwing = [];
 
-        this.log('Device init. ID: '+this.entityId+" Name: "+this.getName()+" Class: "+this.getClass());
-
-        this._client.registerDevice(this.entityId, this);
-
         this.registerCapabilityListener('target_temperature', async (value) => {
-            await this.onCapabilityTargetTemperature(value);
+            await this._onCapabilityTargetTemperature(value);
         });
         this.registerCapabilityListener('climate_mode', async (value) => {
-            await this.onCapabilityClimateMode(value);
+            await this._onCapabilityClimateMode(value);
         });
         this.registerCapabilityListener('climate_mode_fan', async (value) => {
-            await this.onCapabilityClimateModeFan(value, opts);
+            await this._onCapabilityClimateModeFan(value, opts);
         });
         this.registerCapabilityListener('climate_mode_preset', async (value) => {
-            await this.onCapabilityClimateModePreset(value, opts);
+            await this._onCapabilityClimateModePreset(value, opts);
         });
         this.registerCapabilityListener('climate_mode_swing', async (value) => {
-            await this.onCapabilityClimateModeSwing(value, opts);
+            await this._onCapabilityClimateModeSwing(value, opts);
         });
         
         // maintenance actions
         this.registerCapabilityListener('button.reconnect', async () => {
             await this.clientReconnect()
         });
-
-        // Init device with a short timeout to wait for initial entities
-        this.timeoutInitDevice = this.homey.setTimeout(async () => this.onInitDevice().catch(e => console.log(e)), 5 * 1000 );
-
     }
 
     async updateCapabilities(){
@@ -58,67 +47,7 @@ class ClimateDevice extends Homey.Device {
         }
     }
 
-    onAdded() {
-        this.log('device added');
-    }
-
-    onDeleted() {
-        this.log('device deleted');
-        this._client.unregisterDevice(this.entityId);
-    }
-
-    async onInitDevice(){
-        // Init device on satrtup with latest data to have initial values before HA sends updates
-        this.homey.clearTimeout(this.timeoutInitDevice);
-        this.timeoutInitDevice = null;
-
-        this.log('Device init data. ID: '+this.entityId+" Name: "+this.getName()+" Class: "+this.getClass());
-        let entity = this._client.getEntity(this.entityId);
-        if (entity){
-            this.onEntityUpdate(entity);
-        }
-    }
-
-    async onCapabilityClimateMode( value ) {
-        let entityId = this.entityId;
-        await this._client.callService("climate", "set_hvac_mode", {
-            "entity_id": entityId,
-            "hvac_mode": value
-        });
-    }
-
-    async onCapabilityClimateModeFan( value ) {
-        let entityId = this.entityId;
-        await this._client.callService("climate", "set_fan_mode", {
-            "entity_id": entityId,
-            "fan_mode": value
-        });
-    }
-
-    async onCapabilityClimateModePreset( value ) {
-        let entityId = this.entityId;
-        await this._client.callService("climate", "set_preset_mode", {
-            "entity_id": entityId,
-            "preset_mode": value
-        });
-    }
-
-    async onCapabilityClimateModeSwing( value ) {
-        let entityId = this.entityId;
-        await this._client.callService("climate", "set_swing_mode", {
-            "entity_id": entityId,
-            "swing_mode": value
-        });
-    }
-
-    async onCapabilityTargetTemperature( value ) {
-        let entityId = this.entityId;
-        await this._client.callService("climate", "set_temperature", {
-            "entity_id": entityId,
-            "temperature": value
-        });
-    }
-
+    // Entity update ============================================================================================
     async onEntityUpdate(data) {
         try{
             if(data) {
@@ -178,6 +107,48 @@ class ClimateDevice extends Homey.Device {
         }
     }
 
+     // Capabilities ===========================================================================================?
+     async _onCapabilityClimateMode( value ) {
+        let entityId = this.entityId;
+        await this._client.callService("climate", "set_hvac_mode", {
+            "entity_id": entityId,
+            "hvac_mode": value
+        });
+    }
+
+    async _onCapabilityClimateModeFan( value ) {
+        let entityId = this.entityId;
+        await this._client.callService("climate", "set_fan_mode", {
+            "entity_id": entityId,
+            "fan_mode": value
+        });
+    }
+
+    async _onCapabilityClimateModePreset( value ) {
+        let entityId = this.entityId;
+        await this._client.callService("climate", "set_preset_mode", {
+            "entity_id": entityId,
+            "preset_mode": value
+        });
+    }
+
+    async _onCapabilityClimateModeSwing( value ) {
+        let entityId = this.entityId;
+        await this._client.callService("climate", "set_swing_mode", {
+            "entity_id": entityId,
+            "swing_mode": value
+        });
+    }
+
+    async _onCapabilityTargetTemperature( value ) {
+        let entityId = this.entityId;
+        await this._client.callService("climate", "set_temperature", {
+            "entity_id": entityId,
+            "temperature": value
+        });
+    }
+
+    // Autocomplete lists & flow actions ===================================================================================?
     getModesFanList(){
         try{
             let result = [];
@@ -238,18 +209,6 @@ class ClimateDevice extends Homey.Device {
         await onCapabilityClimateModeSwing( mode );
     }
 
-    async clientReconnect(){
-        await this.homey.app.clientReconnect();
-    }
-    
-    async onDeleted() {
-        this.driver.tryRemoveIcon(this.getData().id);
-        
-        if (this.timeoutInitDevice){
-            this.homey.clearTimeout(this.timeoutInitDevice);
-            this.timeoutInitDevice = null;    
-        }
-    }
 }
 
 module.exports = ClimateDevice;

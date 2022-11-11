@@ -8,6 +8,7 @@ if (process.env.DEBUG === '1')
 const Homey = require('homey');
 const { join } = require('path');
 const Client = require('./lib/Client.js');
+const RECONNECT_TIMEOUT = 30;
 
 class App extends Homey.App {
 	
@@ -233,12 +234,20 @@ class App extends Homey.App {
 				await this._reconnectClient();
 			}
 		});
+
+		// Init device with a short timeout to wait for initial entities
+		this.timeoutCheckConnection = this.homey.setTimeout(async () => this.onCheckConnection().catch(e => console.log(e)), RECONNECT_TIMEOUT * 60 * 1000 );
+
 	}
 
 	async onUninit(){
 		this.log("App onUninit() - close connection");
 		await this._client.close();
 		this._client = null;
+		if (this.timeoutCheckConnection){
+            this.homey.clearTimeout(this.timeoutCheckConnection);
+            this.timeoutCheckConnection = null;     
+		}
 		this.log("App onUninit() - finished");
 	}
 
@@ -345,6 +354,26 @@ class App extends Homey.App {
 	async clientReconnect(){
 		await this._reconnectClient();
 	}
+
+	async onCheckConnection(){
+ 		this.timeoutCheckConnection = this.homey.setTimeout(async () => this.onCheckConnection().catch(e => console.log(e)), RECONNECT_TIMEOUT * 60 * 1000 );
+		try{
+			let result = await this._client.ping();
+			if (!result){
+				this.error("Error checking connection: No correst response content");
+				await this._reconnectClient();
+			}
+			else{
+				this.log("Connection check: OK.");
+			}
+        }
+        catch(error){
+            this.error("Error checking connection: ", error);
+            this.log("Start reconnect...");
+			await this._reconnectClient();
+        }
+	}
+
 }
 
 module.exports = App;
