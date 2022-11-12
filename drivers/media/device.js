@@ -209,10 +209,10 @@ class MediaDevice extends BaseDevice {
 
             let entityPicture = null;
             if (data.attributes.entity_picture_local != undefined){
-                entityPicture = data.attributes.entity_picture_local != undefined
+                entityPicture = data.attributes.entity_picture_local;
             }
             else if (data.attributes.entity_picture != undefined){
-                entityPicture = data.attributes.entity_picture != undefined
+                entityPicture = data.attributes.entity_picture;
             }
             if (entityPicture != null && entityPicture != undefined){
                 if (this.mediaCover != entityPicture){
