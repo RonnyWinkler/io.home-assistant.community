@@ -207,11 +207,18 @@ class MediaDevice extends BaseDevice {
                 await this.setStoreValue("canSelectSoundMode", true);
             }
 
+            let entityPicture = null;
             if (data.attributes.entity_picture_local != undefined){
-                if (this.mediaCover != data.attributes.entity_picture_local){
-                    this.mediaCover = data.attributes.entity_picture_local;
+                entityPicture = data.attributes.entity_picture_local != undefined
+            }
+            else if (data.attributes.entity_picture != undefined){
+                entityPicture = data.attributes.entity_picture != undefined
+            }
+            if (entityPicture != undefined){
+                if (this.mediaCover != entityPicture){
+                    this.mediaCover = entityPicture;
 
-                    let url =  this.homey.settings.get("address") + data.attributes.entity_picture_local;
+                    let url =  this.homey.settings.get("address") + entityPicture;
                     this.mediaImage.setUrl(url);
                     this.mediaImage.update();
                 }
