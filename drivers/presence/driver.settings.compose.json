@@ -1,0 +1,12 @@
+[
+    {
+        "id": "invert_alarm",
+        "type": "checkbox",
+        "value": false,
+        "label": {
+            "en": "Invert alarm",
+            "de": "Alarm umkehren", 
+            "nl": "Omkeren alarm"
+        }
+    }
+]

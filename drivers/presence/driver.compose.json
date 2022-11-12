@@ -1,0 +1,20 @@
+{
+  "id": "presence",
+  "name": {
+    "en": "Presence",
+    "de": "Präsenz",
+    "nl": "Aanwezigheid"
+  },
+  "class": "sensor",
+  "capabilities": [
+    "alarm_presence",
+    "presence_state",
+    
+    "button.reconnect"
+  ],
+  "images": {
+    "large": "/drivers/presence/assets/images/large.png",
+    "small": "/drivers/presence/assets/images/small.png"
+  },
+  "$extends": [ "capabilitiesOptions", "pair", "repair" ]
+}

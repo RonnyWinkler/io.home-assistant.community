@@ -1,0 +1,13 @@
+{
+    "title": {
+        "en": "Presence alarm !{{is|isn't}} on",
+        "de": "Präsenz-Alarm !{{ist|ist nicht}} an",
+        "nl": "Aanwezigheidsalarm  !{{is|is niet}} aan"
+    },
+    "args": [{
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=presence"
+        }
+    ]
+}

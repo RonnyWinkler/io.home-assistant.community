@@ -5,7 +5,7 @@
       "de": "Taste",
       "nl": "Knop"
     },
-    "class": "socket",
+    "class": "button",
     "capabilities": [
       "button",
     

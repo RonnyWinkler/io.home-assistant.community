@@ -1,0 +1,23 @@
+{
+    "title": {
+        "en": "Presence state changed",
+        "de": "Präsenz-Status hat sich geändert",
+        "nl": "Aanwezigheidsstatus gewijzigd"
+    },
+    "tokens": [{
+            "name": "presence_state",
+            "type": "string",
+            "title": {
+                "en": "State",
+                "de": "Status",
+                "nl": "Status"
+            },
+            "example": "home"
+        }
+    ],
+    "args": [{
+        "name": "device",
+        "type": "device",
+        "filter": "driver_id=presence"
+    }]
+}

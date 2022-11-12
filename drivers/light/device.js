@@ -30,8 +30,21 @@ class LightDevice extends BaseDevice {
         }
     }
 
+    getPowerEntityId(){
+        try{
+            let entityId = "sensor." + this.entityId.split('.')[1] + "_power"; 
+            return entityId;
+        }
+        catch(error){
+            this.error("Error getting power entity ID for device "+this.entityId);
+            return null;
+        }
+    }
+
     // Entity update ============================================================================================
     async onEntityUpdate(data) {
+        await super.onEntityUpdate(data);
+
         if(data==null){
             return;
         }

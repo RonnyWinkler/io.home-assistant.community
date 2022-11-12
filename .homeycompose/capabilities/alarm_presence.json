@@ -1,0 +1,23 @@
+{
+  "type": "boolean",
+  "title": {
+    "en": "Presence alarm",
+    "de": "Präsenz-Alarm",
+    "nl": "Aanwezigheidsalarm"
+  },
+  "insights": true,
+  "insightsTitleTrue": {
+    "en": "Presence alarm turned on",
+    "de": "Präsenz-Alarm ist angegangen",
+    "nl": "Aanwezigheidsalarm ging af"
+  },
+  "insightsTitleFalse": {
+    "en": "Presence alarm turned off",
+    "de": "Präsenz-Alarm ist ausgegangen",
+    "nl": "Aanwezigheidsalarm ging uit"
+  },
+  "getable": true,
+  "setable": false,
+  "uiComponent": "sensor",
+  "icon": "/assets/capability_icons/alarm_presence.svg"
+}

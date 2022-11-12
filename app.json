@@ -57,6 +57,38 @@
   "flow": {
     "triggers": [
       {
+        "highlight": true,
+        "title": {
+          "en": "Presence alarm has been deactivated",
+          "de": "Präsenz-Alarm wurde deaktiviert",
+          "nl": "Aanwezigheidsalarm is gedeactiveerd"
+        },
+        "args": [
+          {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=presence"
+          }
+        ],
+        "id": "alarm_presence_false"
+      },
+      {
+        "highlight": true,
+        "title": {
+          "en": "Presence alarm has been activated",
+          "de": "Präsenz-Alarm wurde aktiviert",
+          "nl": "Aanwezigheidsalarm is geactiveerd"
+        },
+        "args": [
+          {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=presence"
+          }
+        ],
+        "id": "alarm_presence_true"
+      },
+      {
         "title": {
           "en": "Memory warning",
           "de": "Speicherwarnung",
@@ -365,9 +397,51 @@
           }
         ],
         "id": "measure_numeric_changed"
+      },
+      {
+        "title": {
+          "en": "Presence state changed",
+          "de": "Präsenz-Status hat sich geändert",
+          "nl": "Aanwezigheidsstatus gewijzigd"
+        },
+        "tokens": [
+          {
+            "name": "presence_state",
+            "type": "string",
+            "title": {
+              "en": "State",
+              "de": "Status",
+              "nl": "Status"
+            },
+            "example": "home"
+          }
+        ],
+        "args": [
+          {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=presence"
+          }
+        ],
+        "id": "presence_state_changed"
       }
     ],
     "conditions": [
+      {
+        "title": {
+          "en": "Presence alarm !{{is|isn't}} on",
+          "de": "Präsenz-Alarm !{{ist|ist nicht}} an",
+          "nl": "Aanwezigheidsalarm  !{{is|is niet}} aan"
+        },
+        "args": [
+          {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=presence"
+          }
+        ],
+        "id": "alarm_presence"
+      },
       {
         "title": {
           "en": "Thermostat mode !{{is|isn't}}",
@@ -779,6 +853,30 @@
           }
         ],
         "id": "measure_numeric"
+      },
+      {
+        "title": {
+          "en": "Presence state !{{is|isn't}}",
+          "de": "Präsenz-Status !{{ist|ist nicht}}",
+          "nl": "Aanwezigheidsstatus !{{is|is niet}}"
+        },
+        "titleFormatted": {
+          "en": "Presence state !{{is|isn't}} [[state]]",
+          "de": "Präsenz-Status !{{ist|ist nicht}} [[state]]",
+          "nl": "Aanwezigheidsstatus  !{{is|is niet}} [[state]]"
+        },
+        "args": [
+          {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=presence"
+          },
+          {
+            "name": "state",
+            "type": "text"
+          }
+        ],
+        "id": "presence_state"
       }
     ],
     "actions": [
@@ -1292,7 +1390,7 @@
         "de": "Taste",
         "nl": "Knop"
       },
-      "class": "socket",
+      "class": "button",
       "capabilities": [
         "button",
         "button.reconnect"
@@ -2040,6 +2138,152 @@
           "template": "done"
         }
       ],
+      "id": "presence",
+      "name": {
+        "en": "Presence",
+        "de": "Präsenz",
+        "nl": "Aanwezigheid"
+      },
+      "class": "sensor",
+      "capabilities": [
+        "alarm_presence",
+        "presence_state",
+        "button.reconnect"
+      ],
+      "images": {
+        "large": "/drivers/presence/assets/images/large.png",
+        "small": "/drivers/presence/assets/images/small.png"
+      },
+      "settings": [
+        {
+          "id": "invert_alarm",
+          "type": "checkbox",
+          "value": false,
+          "label": {
+            "en": "Invert alarm",
+            "de": "Alarm umkehren",
+            "nl": "Omkeren alarm"
+          }
+        }
+      ]
+    },
+    {
+      "capabilitiesOptions": {
+        "button.reconnect": {
+          "maintenanceAction": true,
+          "title": {
+            "en": "Reconnect",
+            "de": "Neu verbinden",
+            "nl": "Opnieuw verbinden"
+          },
+          "desc": {
+            "en": "Reconnect and reload entities.",
+            "de": "Neu verbinden und Entitäten neu laden.",
+            "nl": "Maak opnieuw verbinding en laad entiteiten opnieuw."
+          }
+        }
+      },
+      "pair": [
+        {
+          "id": "loading",
+          "template": "loading",
+          "navigation": {
+            "next": "list_devices"
+          }
+        },
+        {
+          "id": "login_credentials",
+          "template": "login_credentials",
+          "options": {
+            "logo": "logo.png",
+            "usernameLabel": {
+              "en": "Server"
+            },
+            "usernamePlaceholder": {
+              "en": "http://192.168.xxx.xxx:8123"
+            },
+            "passwordLabel": {
+              "en": "Token"
+            },
+            "passwordPlaceholder": {
+              "en": "Long-lived access token"
+            }
+          }
+        },
+        {
+          "id": "list_devices",
+          "template": "list_devices",
+          "navigation": {
+            "next": "icon"
+          },
+          "options": {
+            "singular": true
+          }
+        },
+        {
+          "id": "icon",
+          "navigation": {
+            "next": "add_devices",
+            "prev": "list_devices"
+          }
+        },
+        {
+          "id": "add_devices"
+        }
+      ],
+      "repair": [
+        {
+          "id": "select",
+          "navigation": {
+            "prev": "done"
+          }
+        },
+        {
+          "id": "device_details",
+          "navigation": {
+            "prev": "select"
+          }
+        },
+        {
+          "id": "icon",
+          "navigation": {
+            "next": "icon_change",
+            "prev": "select"
+          }
+        },
+        {
+          "id": "icon_change",
+          "navigation": {
+            "prev": "icon"
+          }
+        },
+        {
+          "id": "login_credentials",
+          "template": "login_credentials",
+          "navigation": {
+            "prev": "select"
+          },
+          "options": {
+            "logo": "logo.png",
+            "usernameLabel": {
+              "en": "Server"
+            },
+            "usernamePlaceholder": {
+              "en": "http://192.168.xxx.xxx:8123"
+            },
+            "passwordLabel": {
+              "en": "Token"
+            },
+            "passwordPlaceholder": {
+              "en": "Long-lived access token"
+            }
+          }
+        },
+        {
+          "id": "done",
+          "template": "done"
+        }
+      ],
       "id": "scene",
       "name": {
         "en": "Scene",
@@ -2474,7 +2718,7 @@
         "de": "Schalter",
         "nl": "Schakelaar"
       },
-      "class": "socket",
+      "class": "button",
       "capabilities": [
         "onoff",
         "button.reconnect"
@@ -2486,6 +2730,29 @@
     }
   ],
   "capabilities": {
+    "alarm_presence": {
+      "type": "boolean",
+      "title": {
+        "en": "Presence alarm",
+        "de": "Präsenz-Alarm",
+        "nl": "Aanwezigheidsalarm"
+      },
+      "insights": true,
+      "insightsTitleTrue": {
+        "en": "Presence alarm turned on",
+        "de": "Präsenz-Alarm ist angegangen",
+        "nl": "Aanwezigheidsalarm ging af"
+      },
+      "insightsTitleFalse": {
+        "en": "Presence alarm turned off",
+        "de": "Präsenz-Alarm ist ausgegangen",
+        "nl": "Aanwezigheidsalarm ging uit"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "/assets/capability_icons/alarm_presence.svg"
+    },
     "climate_action": {
       "type": "enum",
       "title": {
@@ -2871,6 +3138,18 @@
       "setable": false,
       "insights": true,
       "icon": "/assets/capability_icons/measure_numeric.svg"
+    },
+    "presence_state": {
+      "type": "string",
+      "title": {
+        "en": "Presence state",
+        "de": "Präsenz-Status",
+        "nl": "Aanwezigheidsstatus"
+      },
+      "getable": true,
+      "setable": false,
+      "insights": true,
+      "icon": "/assets/capability_icons/presence_state.svg"
     }
   }
 }

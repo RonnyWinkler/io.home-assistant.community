@@ -1,0 +1,23 @@
+{
+    "title": {
+        "en": "Presence state !{{is|isn't}}",
+        "de": "Präsenz-Status !{{ist|ist nicht}}",
+        "nl": "Aanwezigheidsstatus !{{is|is niet}}"
+    },
+    "titleFormatted": {
+        "en": "Presence state !{{is|isn't}} [[state]]",
+        "de": "Präsenz-Status !{{ist|ist nicht}} [[state]]",
+        "nl": "Aanwezigheidsstatus  !{{is|is niet}} [[state]]"
+    },
+    "args": [
+        {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=presence"
+        },
+        {
+            "name": "state",
+            "type": "text"
+        }
+    ]
+}

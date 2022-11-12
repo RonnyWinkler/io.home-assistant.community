@@ -226,6 +226,14 @@ class App extends Homey.App {
 		.registerRunListener(async (args, state) => {
 			return (args.device.getCapabilityValue('climate_mode_swing') == args.value);
 		})
+		this._flowConditionClimateModeSwing = this.homey.flow.getConditionCard('alarm_presence')
+		.registerRunListener(async (args, state) => {
+			return (args.device.getCapabilityValue('alarm_presence'));
+		})
+		this._flowConditionClimateModeSwing = this.homey.flow.getConditionCard('presence_state')
+		.registerRunListener(async (args, state) => {
+			return (args.device.getCapabilityValue('presence_state') == args.value);
+		})
   
 		// App events
 		this.homey.settings.on("set", async (key) =>  {

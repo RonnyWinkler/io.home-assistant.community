@@ -29,9 +29,14 @@ class BaseDevice extends Homey.Device {
         await this.updateCapabilities();
 
         this._client = this.homey.app.getClient();
+        
+        // Register device EntityID for updates
         this.entityId = this.getData().id;
         this.log('Device init. ID: '+this.entityId+" Name: "+this.getName()+" Class: "+this.getClass());
         this._client.registerDevice(this.entityId, this);
+       
+        // EntityID of dynamically assigned measure_ power entity
+        this.powerEntityId = null;
 
         // Init device with a short timeout to wait for initial entities
         this.timeoutInitDevice = this.homey.setTimeout( async () => 
@@ -56,6 +61,9 @@ class BaseDevice extends Homey.Device {
         this.log('device deleted');
         // Unregister device at client to prevent updates on entity change
         this._client.unregisterDevice(this.entityId);
+        if (this.powerEntityId != null){
+           this._client.unregisterDevice(this.powerEntityId);
+        }
         // Remove device icon from /userdata/ (if existing)
         this.driver.tryRemoveIcon(this.getData().id);
         this.driver.tryRemoveIcon(this.getData().id+"_temp");
@@ -83,12 +91,70 @@ class BaseDevice extends Homey.Device {
             // Call 
             this.onEntityUpdate(entity);
         }
+
+        await this.connectPowerEntity();
     }
 
     async onEntityUpdate(data) {
         // Abstract method: 
-        // Update device based in entity data. Implement in device class
-        throw new Error("Abstract method not implemented");
+        // Update device based in entity data. #
+        // Implement in device class and call super.onEntityUpdate() to process common updates
+        // throw new Error("Abstract method not implemented");
+        try {
+            if (data == null || 
+                data.state == undefined ||
+                data.state == "unavailable"){
+                return;
+            }
+            if (this.hasCapability("measure_power") && 
+                this.powerEntityId != null &&
+                data.entity_id == this.powerEntityId){
+                let convert = this.inputConverter("measure_power");
+                let value = convert(data.state);
+                this.setCapabilityValue("measure_power", value)
+            }
+        }
+        catch(error) {
+            this.error("CapabilitiesUpdate error: "+ error.message);
+        }
+    }
+
+    // Connected entities functions ===============================================
+    getPowerEntityId(){
+        // Abstract method. 
+        // Redefine in device class and return the connectes power entity
+        return null;
+    }
+
+    async connectPowerEntity(){
+        // Get power entity and connect as additional update source
+        let entityId = this.getPowerEntityId();
+        if (entityId == null){
+            if (this.hasCapability('measure_power'))
+            {
+                await this.removeCapability('measure_power');
+            }
+            return;
+        }
+        // check if entity is present
+        let entity = this._client.getEntity(entityId);
+        if (entity == null || entity == undefined){
+            if (this.hasCapability('measure_power'))
+            {
+                await this.removeCapability('measure_power');
+            }
+            return;
+        }
+        // Remember ID for capability updates and unregister on device deletion 
+        this.powerEntityId = entityId;
+        // Check if capability already exists, add if needed
+        if (!this.hasCapability('measure_power'))
+        {
+            await this.addCapability('measure_power');
+        }
+        // Register for entity updates and read first state
+        this._client.registerDevice(entityId, this);
+        this.onEntityUpdate(entity);
     }
 
     // Helper functions ===========================================================

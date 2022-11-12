@@ -1,0 +1,15 @@
+{
+    "highlight": true,
+    "title": {
+        "en": "Presence alarm has been activated",
+        "de": "Präsenz-Alarm wurde aktiviert",
+        "nl": "Aanwezigheidsalarm is geactiveerd"
+    },
+    "args": [
+        {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=presence"
+        }
+      ]
+}

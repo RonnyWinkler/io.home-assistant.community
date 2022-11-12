@@ -1,0 +1,12 @@
+{
+    "type": "string",
+    "title": {
+        "en": "Presence state",
+        "de": "Präsenz-Status",
+        "nl": "Aanwezigheidsstatus"
+    },
+    "getable": true,
+    "setable": false,
+    "insights": true,
+    "icon": "/assets/capability_icons/presence_state.svg"
+}
