@@ -8,6 +8,8 @@ class MediaDevice extends BaseDevice {
         await super.onInit();
 
         this.mediaCover = null;
+        this.mediaImage = await this.homey.images.createImage();
+        this.setAlbumArtImage(this.mediaImage);
 
         if(this.hasCapability("onoff")) {
             this.registerCapabilityListener('onoff', async (value, opts) => {
@@ -159,10 +161,16 @@ class MediaDevice extends BaseDevice {
                 }
             }
             if (this.hasCapability("speaker_duration") && data.attributes.media_duration != null){
-                await this.setCapabilityValue("speaker_duration", data.attributes.media_duration);
+                let minutes = Math.floor(data.attributes.media_duration / 60);
+                let seconds = Math.floor(data.attributes.media_duration - minutes * 60);
+                let time = minutes + seconds/100;
+                await this.setCapabilityValue("speaker_duration", time);
             }
             if (this.hasCapability("speaker_position") && data.attributes.media_position != null){
-                await this.setCapabilityValue("speaker_position", data.attributes.media_position);
+                let minutes = Math.floor(data.attributes.media_position / 60);
+                let seconds = Math.floor(data.attributes.media_position - minutes * 60);
+                let time = minutes + seconds/100;
+                await this.setCapabilityValue("speaker_position", time);
             }
 
             if (this.hasCapability("onoff") && data.state != null){
@@ -199,23 +207,20 @@ class MediaDevice extends BaseDevice {
                 await this.setStoreValue("canSelectSoundMode", true);
             }
 
-            // if (data.attributes.entity_picture_local != undefined){
-            //     if (this.mediaCover != data.attributes.entity_picture_local){
-            //         this.mediaCover = data.attributes.entity_picture_local;
-            //         let image = await this._client.sendMessage(
-            //             {
-            //                 "id": 19,
-            //                 "type": "media_player_thumbnail",
-            //                 "key": this.entityId
-            //             }
-            //             // {
-            //             //     "id": 19,
-            //             //     "type": "get_services"
-            //             // }
-            //         );
-            //         this.log("Media cover: "+image);
-            //     }
-            // }
+            if (data.attributes.entity_picture_local != undefined){
+                if (this.mediaCover != data.attributes.entity_picture_local){
+                    this.mediaCover = data.attributes.entity_picture_local;
+
+                    let url =  this.homey.settings.get("address") + data.attributes.entity_picture_local;
+                    this.mediaImage.setUrl(url);
+                    this.mediaImage.update();
+                }
+            }
+            else{
+                this.mediaImage.setUrl(null);
+                this.mediaImage.update();
+                this.mediaCover = null;
+            }
         }
         catch(error) {
             this.error("CapabilitiesUpdate error: "+ error.message);
