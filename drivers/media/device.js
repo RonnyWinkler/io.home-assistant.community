@@ -214,7 +214,7 @@ class MediaDevice extends BaseDevice {
             else if (data.attributes.entity_picture != undefined){
                 entityPicture = data.attributes.entity_picture != undefined
             }
-            if (entityPicture != undefined){
+            if (entityPicture != null && entityPicture != undefined){
                 if (this.mediaCover != entityPicture){
                     this.mediaCover = entityPicture;
 
