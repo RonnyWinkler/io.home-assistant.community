@@ -1,0 +1,12 @@
+{
+    "type": "boolean",
+    "title": {
+        "en": "Unjoin group",
+        "de": "Gruppe verlassen",
+        "nl": "Deelnemen aan groep"
+    },
+    "getable": false,
+    "setable": true,
+    "uiComponent": "button",
+    "icon": "/assets/capability_icons/media_unjoin.svg"
+}

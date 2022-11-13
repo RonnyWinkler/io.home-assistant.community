@@ -2004,6 +2004,7 @@
         "volume_up",
         "volume_down",
         "volume_mute",
+        "media_unjoin",
         "speaker_playing",
         "speaker_next",
         "speaker_prev",
@@ -3138,6 +3139,18 @@
       "setable": false,
       "insights": true,
       "icon": "/assets/capability_icons/measure_numeric.svg"
+    },
+    "media_unjoin": {
+      "type": "boolean",
+      "title": {
+        "en": "Unjoin group",
+        "de": "Gruppe verlassen",
+        "nl": "Deelnemen aan groep"
+      },
+      "getable": false,
+      "setable": true,
+      "uiComponent": "button",
+      "icon": "/assets/capability_icons/media_unjoin.svg"
     },
     "presence_state": {
       "type": "string",

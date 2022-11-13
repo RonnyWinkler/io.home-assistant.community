@@ -9,7 +9,7 @@ class MediaDevice extends BaseDevice {
 
         this.mediaCover = null;
         this.mediaImage = await this.homey.images.createImage();
-        this.setAlbumArtImage(this.mediaImage);
+        await this.setAlbumArtImage(this.mediaImage);
 
         if(this.hasCapability("onoff")) {
             this.registerCapabilityListener('onoff', async (value, opts) => {
@@ -61,7 +61,12 @@ class MediaDevice extends BaseDevice {
                 await this._onCapabilitySpeakerRepeat(value, opts)
             });
         }
-
+        if(this.hasCapability("media_unjoin")) {
+            this.registerCapabilityListener('media_unjoin', async (value, opts) => {
+                await this._onCapabilityMediaUnjoin(value, opts)
+            });
+        }
+        
         // maintenance actions
         this.registerCapabilityListener('button.reconnect', async () => {
             await this.clientReconnect()
@@ -75,7 +80,11 @@ class MediaDevice extends BaseDevice {
         try{
             if (!this.hasCapability('button.reconnect'))
             {
-            await this.addCapability('button.reconnect');
+                await this.addCapability('button.reconnect');
+            }
+            if (!this.hasCapability('media_unjoin'))
+            {
+                await this.addCapability('media_unjoin');
             }
         }
         catch(error){
@@ -151,6 +160,9 @@ class MediaDevice extends BaseDevice {
                 else if (data.attributes.app_name != null){
                     await this.setCapabilityValue("speaker_album", data.attributes.app_name);
                 }
+                else{
+                    await this.setCapabilityValue("speaker_album", "");
+                }
             }
             if (this.hasCapability("speaker_track")){
                 if ( data.attributes.media_title != null){
@@ -160,17 +172,27 @@ class MediaDevice extends BaseDevice {
                     await this.setCapabilityValue("speaker_track", "");
                 }
             }
-            if (this.hasCapability("speaker_duration") && data.attributes.media_duration != null){
-                let minutes = Math.floor(data.attributes.media_duration / 60);
-                let seconds = Math.floor(data.attributes.media_duration - minutes * 60);
-                let time = minutes + seconds/100;
-                await this.setCapabilityValue("speaker_duration", time);
+            if (this.hasCapability("speaker_duration")){
+                if (data.attributes.media_duration != null){
+                    let minutes = Math.floor(data.attributes.media_duration / 60);
+                    let seconds = Math.floor(data.attributes.media_duration - minutes * 60);
+                    let time = minutes + seconds/100;
+                    await this.setCapabilityValue("speaker_duration", time);
+                }
+                else{
+                    await this.setCapabilityValue("speaker_duration", 0);
+                }
             }
-            if (this.hasCapability("speaker_position") && data.attributes.media_position != null){
-                let minutes = Math.floor(data.attributes.media_position / 60);
-                let seconds = Math.floor(data.attributes.media_position - minutes * 60);
-                let time = minutes + seconds/100;
-                await this.setCapabilityValue("speaker_position", time);
+            if (this.hasCapability("speaker_position")){
+                if (data.attributes.media_position != null){
+                    let minutes = Math.floor(data.attributes.media_position / 60);
+                    let seconds = Math.floor(data.attributes.media_position - minutes * 60);
+                    let time = minutes + seconds/100;
+                    await this.setCapabilityValue("speaker_position", time);
+                }
+                else{
+                    await this.setCapabilityValue("speaker_position", 0);
+                }
             }
 
             if (this.hasCapability("onoff") && data.state != null){
@@ -208,25 +230,31 @@ class MediaDevice extends BaseDevice {
             }
 
             let entityPicture = null;
-            if (data.attributes.entity_picture_local != undefined){
+            if (    data.attributes.entity_picture_local != undefined &&
+                    data.attributes.entity_picture_local != null){
                 entityPicture = data.attributes.entity_picture_local;
             }
-            else if (data.attributes.entity_picture != undefined){
+            else if (   data.attributes.entity_picture != undefined &&
+                        data.attributes.entity_picture != null){
                 entityPicture = data.attributes.entity_picture;
             }
             if (entityPicture != null && entityPicture != undefined){
                 if (this.mediaCover != entityPicture){
                     this.mediaCover = entityPicture;
-
-                    let url =  this.homey.settings.get("address") + entityPicture;
+                    let url = entityPicture;
+                    if ( ! (entityPicture.startsWith("http")) ){
+                        url =  this.homey.settings.get("address") + entityPicture;
+                    }
                     this.mediaImage.setUrl(url);
-                    this.mediaImage.update();
+                    await this.mediaImage.update();
                 }
             }
             else{
-                this.mediaImage.setUrl(null);
-                this.mediaImage.update();
-                this.mediaCover = null;
+                if (this.mediaCover != null){
+                    this.mediaImage.setUrl(null);
+                    await this.mediaImage.update();
+                    this.mediaCover = null;
+                }
             }
         }
         catch(error) {
@@ -342,10 +370,18 @@ class MediaDevice extends BaseDevice {
         
         await this._client.callService("media_player", "repeat_set", {
             "entity_id": entityId,
-            "is_volume_muted": outputValue
+            "repeat": outputValue
         });
     }
 
+    async _onCapabilityMediaUnjoin(){
+        let entityId = this.entityId;
+        await this._client.callService("media_player", "unjoin", {
+            "entity_id": entityId
+        });
+
+    }
+    
     // Autocompletion lists & Flow actions ===========================================================================================
     getSourceList(){
         if (this.getStoreValue("canSelectSource") == true){

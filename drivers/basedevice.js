@@ -131,15 +131,17 @@ class BaseDevice extends Homey.Device {
         // Get power entity and connect as additional update source
         let entityId = this.getPowerEntityId();
         if (entityId == null){
-            if (this.hasCapability('measure_power'))
-            {
-                await this.removeCapability('measure_power');
-            }
+            // Device does not define a power entityId => no adding needed
+            // if (this.hasCapability('measure_power'))
+            // {
+            //     await this.removeCapability('measure_power');
+            // }
             return;
         }
         // check if entity is present
         let entity = this._client.getEntity(entityId);
         if (entity == null || entity == undefined){
+            // Device defines a power entityID, but it's not present => remoce capability
             if (this.hasCapability('measure_power'))
             {
                 await this.removeCapability('measure_power');
@@ -201,58 +203,58 @@ class BaseDevice extends Homey.Device {
         }
     }
 
-    async httpGet(url, options){
-        return new Promise( ( resolve, reject ) =>
-            {
-                try
-                {
-                  let request = https
-                    .get(url, options, (response) => { 
-                      if (response.statusCode !== 200){
-                        response.resume();
+    // async httpGet(url, options){
+    //     return new Promise( ( resolve, reject ) =>
+    //         {
+    //             try
+    //             {
+    //               let request = https
+    //                 .get(url, options, (response) => { 
+    //                   if (response.statusCode !== 200){
+    //                     response.resume();
 
-                        let message = "";
-                        if ( response.statusCode === 204 )
-                        { message = "No Data Found"; }
-                        else if ( response.statusCode === 400 )
-                        { message = "Bad request"; }
-                        else if ( response.statusCode === 401 )
-                        { message = "Unauthorized"; }
-                        else if ( response.statusCode === 403 )
-                        { message = "Forbidden"; }
-                        else if ( response.statusCode === 404 )
-                        { message = "Not Found"; }
-                        reject( new Error( "HTTP Error: " + response.statusCode + " " + message ) );
-                        return;
-                      }
-                      else{
-                        let rawData = '';
-                        response.setEncoding('utf8');
-                        response.on( 'data', (chunk) => { rawData += chunk; })
-                        response.on( 'end', () => {
-                          resolve( rawData );
-                        })
-                      }
-                    })
-                    .on('error', (err) => {
-                      //console.log(err);
-                      reject( new Error( "HTTP Error: " + err.message ) );
-                      return;
-                    });
-                  request.setTimeout( 5000, function()
-                    {
-                      request.destroy();
-                      reject( new Error( "HTTP Catch: Timeout" ) );
-                      return;
-                    });
-                  }
-                catch ( err )
-                {
-                    reject( new Error( "HTTP Catch: " + err.message ) );
-                    return;
-                }
-            });
-      }
+    //                     let message = "";
+    //                     if ( response.statusCode === 204 )
+    //                     { message = "No Data Found"; }
+    //                     else if ( response.statusCode === 400 )
+    //                     { message = "Bad request"; }
+    //                     else if ( response.statusCode === 401 )
+    //                     { message = "Unauthorized"; }
+    //                     else if ( response.statusCode === 403 )
+    //                     { message = "Forbidden"; }
+    //                     else if ( response.statusCode === 404 )
+    //                     { message = "Not Found"; }
+    //                     reject( new Error( "HTTP Error: " + response.statusCode + " " + message ) );
+    //                     return;
+    //                   }
+    //                   else{
+    //                     let rawData = '';
+    //                     response.setEncoding('utf8');
+    //                     response.on( 'data', (chunk) => { rawData += chunk; })
+    //                     response.on( 'end', () => {
+    //                       resolve( rawData );
+    //                     })
+    //                   }
+    //                 })
+    //                 .on('error', (err) => {
+    //                   //console.log(err);
+    //                   reject( new Error( "HTTP Error: " + err.message ) );
+    //                   return;
+    //                 });
+    //               request.setTimeout( 5000, function()
+    //                 {
+    //                   request.destroy();
+    //                   reject( new Error( "HTTP Catch: Timeout" ) );
+    //                   return;
+    //                 });
+    //               }
+    //             catch ( err )
+    //             {
+    //                 reject( new Error( "HTTP Catch: " + err.message ) );
+    //                 return;
+    //             }
+    //         });
+    //   }
 }
 
 module.exports = BaseDevice;

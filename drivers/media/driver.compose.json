@@ -12,6 +12,7 @@
     "volume_up",
     "volume_down",
     "volume_mute",
+    "media_unjoin",
     "speaker_playing",
     "speaker_next",
     "speaker_prev",
