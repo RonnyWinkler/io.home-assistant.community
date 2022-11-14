@@ -54,9 +54,6 @@ class BaseDevice extends Homey.Device {
         this.log('device deleted');
         // Unregister device at client to prevent updates on entity change
         this.clientUnregisterDevice();
-        if (this.powerEntityId != null){
-           this._client.unregisterDevice(this.powerEntityId);
-        }
         // Remove device icon from /userdata/ (if existing)
         this.driver.tryRemoveIcon(this.getData().id);
         this.driver.tryRemoveIcon(this.getData().id+"_temp");
@@ -82,7 +79,11 @@ class BaseDevice extends Homey.Device {
         // Basic method for unregister entityId+client for updated
         // Overload if special unregister is needed 
         this._client.unregisterDevice(this.entityId);
-    }
+        // Unregister power entity (if used)
+        if (this.powerEntityId != null){
+            this._client.unregisterPowerEntity(this.powerEntityId);
+         }
+     }
 
     async updateCapabilities(){
         // Abstract method: 
@@ -165,7 +166,7 @@ class BaseDevice extends Homey.Device {
             await this.addCapability('measure_power');
         }
         // Register for entity updates and read first state
-        this._client.registerDevice(entityId, this);
+        this._client.registerPowerEntity(entityId, this);
         this.onEntityUpdate(entity);
     }
 

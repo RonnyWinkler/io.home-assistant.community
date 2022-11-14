@@ -32,7 +32,7 @@ class LightDevice extends BaseDevice {
 
     getPowerEntityId(){
         try{
-            let entityId = "sensor." + this.entityId.split('.')[1] + "_energy"; 
+            let entityId = "sensor." + this.entityId.split('.')[1] + "_power"; 
             return entityId;
         }
         catch(error){
