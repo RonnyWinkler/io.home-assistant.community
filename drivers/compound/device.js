@@ -19,6 +19,26 @@ class CompoundDevice extends BaseDevice {
     }
 
     // Redefinitionen ============================================================================================
+    clientRegisterDevice(){
+        let entityIds = [];
+        let capabilities = this.getData().capabilities;
+        let keys = Object.keys(capabilities);
+        for (let i=0; i<keys.length; i++){
+            let compoundEntity = capabilities[keys[i]];
+            let entity = this._getCompoundEntityId(compoundEntity);
+            if (entityIds.indexOf(entity) == -1){
+                entityIds.push(entity);
+            }
+        }
+        if (entityIds.length > 0){
+            this._client.registerCompound(this.entityId, this, entityIds);
+        }
+    }
+
+    clientUnregisterDevice(){
+        this._client.unregisterCompound(this.entityId);
+    }
+
     async updateCapabilities(){
         // Add new capabilities (if not already added)
         try{

@@ -34,7 +34,7 @@ class BaseDevice extends Homey.Device {
         // Register device EntityID for updates
         this.entityId = this.getData().id;
         this.log('Device init. ID: '+this.entityId+" Name: "+this.getName()+" Class: "+this.getClass());
-        this._client.registerDevice(this.entityId, this);
+        this.clientRegisterDevice();
        
         // EntityID of dynamically assigned measure_ power entity
         this.powerEntityId = null;
@@ -51,17 +51,9 @@ class BaseDevice extends Homey.Device {
     }
 
     async onDeleted() {
-    }
-
-    // Central device functions ===========================================================
-    async clientReconnect(){
-        await this.homey.app.clientReconnect();
-    }
-    
-    async onDeleted() {
         this.log('device deleted');
         // Unregister device at client to prevent updates on entity change
-        this._client.unregisterDevice(this.entityId);
+        this.clientUnregisterDevice();
         if (this.powerEntityId != null){
            this._client.unregisterDevice(this.powerEntityId);
         }
@@ -73,6 +65,23 @@ class BaseDevice extends Homey.Device {
             this.homey.clearTimeout(this.timeoutInitDevice);
             this.timeoutInitDevice = null;    
         }
+    }
+
+    // Central device functions ===========================================================
+    async clientReconnect(){
+        await this.homey.app.clientReconnect();
+    }
+
+    clientRegisterDevice(){
+        // Basic method for register entityId+client for updated
+        // Overload if special register is needed 
+        this._client.registerDevice(this.entityId, this);
+    }
+
+    clientUnregisterDevice(){
+        // Basic method for unregister entityId+client for updated
+        // Overload if special unregister is needed 
+        this._client.unregisterDevice(this.entityId);
     }
 
     async updateCapabilities(){
