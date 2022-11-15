@@ -5,7 +5,7 @@
         "nl": "Schommelen modus gewijzigd"
     },
     "tokens": [{
-            "name": "mode",
+            "name": "climate_mode_swing",
             "type": "string",
             "title": {
                 "en": "Mode",

@@ -50,8 +50,8 @@ class LightDevice extends BaseDevice {
         }
         try {
 
-            this.log("Light update from HA: ");
-            this.log(JSON.stringify(data, null, "  "));
+            // this.log("Light update from HA: ");
+            // this.log(JSON.stringify(data, null, "  "));
 
             this._minMireds = data.attributes["min_mireds"] || 0;
             this._maxMireds = data.attributes["max_mireds"] || 0;

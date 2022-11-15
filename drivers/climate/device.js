@@ -110,10 +110,12 @@ class ClimateDevice extends BaseDevice {
      // Capabilities ===========================================================================================?
      async _onCapabilityClimateMode( value ) {
         let entityId = this.entityId;
+        // await this.setCapabilityValue("climate_mode", value);
         await this._client.callService("climate", "set_hvac_mode", {
             "entity_id": entityId,
             "hvac_mode": value
         });
+        return true;
     }
 
     async _onCapabilityClimateModeFan( value ) {

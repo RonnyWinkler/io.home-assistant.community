@@ -5,7 +5,7 @@
         "nl": "Vooraf ingestelde modus gewijzigd"
     },
     "tokens": [{
-            "name": "mode",
+            "name": "climate_mode_preset",
             "type": "string",
             "title": {
                 "en": "Mode",

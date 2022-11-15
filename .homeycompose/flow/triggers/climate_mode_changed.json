@@ -5,7 +5,7 @@
         "nl": "Thermostaatmodus gewijzigd"
     },
     "tokens": [{
-            "name": "mode",
+            "name": "climate_mode",
             "type": "string",
             "title": {
                 "en": "Mode",

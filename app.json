@@ -234,7 +234,7 @@
         },
         "tokens": [
           {
-            "name": "mode",
+            "name": "climate_mode",
             "type": "string",
             "title": {
               "en": "Mode",
@@ -261,7 +261,7 @@
         },
         "tokens": [
           {
-            "name": "mode",
+            "name": "climate_mode_fan",
             "type": "string",
             "title": {
               "en": "Mode",
@@ -288,7 +288,7 @@
         },
         "tokens": [
           {
-            "name": "mode",
+            "name": "climate_mode_preset",
             "type": "string",
             "title": {
               "en": "Mode",
@@ -315,7 +315,7 @@
         },
         "tokens": [
           {
-            "name": "mode",
+            "name": "climate_mode_swing",
             "type": "string",
             "title": {
               "en": "Mode",

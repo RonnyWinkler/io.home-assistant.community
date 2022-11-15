@@ -204,35 +204,43 @@ class App extends Homey.App {
 		// Flow contitions
 		this._flowConditionMeasureNumeric = this.homey.flow.getConditionCard('measure_numeric')
 		.registerRunListener(async (args, state) => {
-			return (args.device.getCapabilityValue('measure_numeric') > args.value);
+			// return (state.value == args.value);
+			return (args.device.getCapabilityValue(state.capability.id) > args.value);
 		})
-		this._flowConditionMeasureNumeric = this.homey.flow.getConditionCard('measure_generic')
+		this._flowConditionMeasureGeneric = this.homey.flow.getConditionCard('measure_generic')
 		.registerRunListener(async (args, state) => {
-		  	return (args.device.getCapabilityValue('measure_generic') == args.value);
+			// return (state.value == args.value);
+		  	return (args.device.getCapabilityValue(state.capability.id) == args.value);
 		})
 		this._flowConditionClimateMode = this.homey.flow.getConditionCard('climate_mode')
 		.registerRunListener(async (args, state) => {
-			return (args.device.getCapabilityValue('climate_mode') == args.value);
+			return (state.value == args.mode);
+			// return (args.device.getCapabilityValue('climate_mode') == args.mode);
 		})
 		this._flowConditionClimateModeFan = this.homey.flow.getConditionCard('climate_mode_fan')
 		.registerRunListener(async (args, state) => {
-			return (args.device.getCapabilityValue('climate_mode_fan') == args.value);
+			return (state.value == args.mode);
+			// return (args.device.getCapabilityValue('climate_mode_fan') == args.mode);
 		})
 		this._flowConditionClimateModePreset = this.homey.flow.getConditionCard('climate_mode_preset')
 		.registerRunListener(async (args, state) => {
-			return (args.device.getCapabilityValue('climate_mode_preset') == args.value);
+			return (state.value == args.mode);
+			// return (args.device.getCapabilityValue('climate_mode_preset') == args.mode);
 		})
 		this._flowConditionClimateModeSwing = this.homey.flow.getConditionCard('climate_mode_swing')
 		.registerRunListener(async (args, state) => {
-			return (args.device.getCapabilityValue('climate_mode_swing') == args.value);
+			return (state.value == args.mode);
+			// return (args.device.getCapabilityValue('climate_mode_swing') == args.mode);
 		})
-		this._flowConditionClimateModeSwing = this.homey.flow.getConditionCard('alarm_presence')
+		this._flowConditionAlarmPresence = this.homey.flow.getConditionCard('alarm_presence')
 		.registerRunListener(async (args, state) => {
-			return (args.device.getCapabilityValue('alarm_presence'));
+			return (state.value == true);
+			// return (args.device.getCapabilityValue('alarm_presence'));
 		})
-		this._flowConditionClimateModeSwing = this.homey.flow.getConditionCard('presence_state')
+		this._flowConditionPresenceState = this.homey.flow.getConditionCard('presence_state')
 		.registerRunListener(async (args, state) => {
-			return (args.device.getCapabilityValue('presence_state') == args.value);
+			return (state.value == args.state);
+			// return (args.device.getCapabilityValue('presence_state') == args.value);
 		})
   
 		// App events
