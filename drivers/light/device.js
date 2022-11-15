@@ -45,7 +45,7 @@ class LightDevice extends BaseDevice {
     async onEntityUpdate(data) {
         await super.onEntityUpdate(data);
 
-        if(data==null){
+        if(data==null || data.entity_id != this.entityId){
             return;
         }
         try {
