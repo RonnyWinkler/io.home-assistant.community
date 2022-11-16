@@ -116,10 +116,11 @@ class App extends Homey.App {
 				return result.name.toLowerCase().includes(query.toLowerCase());
 			});
 		});
+
 		this._flowActionClimateMode = this.homey.flow.getActionCard('climateMode');
 		this._flowActionClimateMode.registerRunListener(async (args, state) => {
 			try{
-				await args.device.onCapabilityClimateMode(args.mode);
+				await args.device.setMode(args.mode);
 				return true;
 			}
 			catch(error){
@@ -214,32 +215,62 @@ class App extends Homey.App {
 		})
 		this._flowConditionClimateMode = this.homey.flow.getConditionCard('climate_mode')
 		.registerRunListener(async (args, state) => {
-			return (state.value == args.mode);
+			if (state.manual == true){
+				return (args.device.getCapabilityValue('climate_mode') == args.mode);
+			}
+			else{
+				return (state.value == args.mode);
+			}
 			// return (args.device.getCapabilityValue('climate_mode') == args.mode);
 		})
 		this._flowConditionClimateModeFan = this.homey.flow.getConditionCard('climate_mode_fan')
 		.registerRunListener(async (args, state) => {
-			return (state.value == args.mode);
+			if (state.manual == true){
+				return (args.device.getCapabilityValue('climate_mode_fan') == args.mode);
+			}
+			else{
+				return (state.value == args.mode);
+			}
 			// return (args.device.getCapabilityValue('climate_mode_fan') == args.mode);
 		})
 		this._flowConditionClimateModePreset = this.homey.flow.getConditionCard('climate_mode_preset')
 		.registerRunListener(async (args, state) => {
-			return (state.value == args.mode);
+			if (state.manual == true){
+				return (args.device.getCapabilityValue('climate_mode_preset') == args.mode);
+			}
+			else{
+				return (state.value == args.mode);
+			}
 			// return (args.device.getCapabilityValue('climate_mode_preset') == args.mode);
 		})
 		this._flowConditionClimateModeSwing = this.homey.flow.getConditionCard('climate_mode_swing')
 		.registerRunListener(async (args, state) => {
-			return (state.value == args.mode);
+			if (state.manual == true){
+				return (args.device.getCapabilityValue('climate_mode_swing') == args.mode);
+			}
+			else{
+				return (state.value == args.mode);
+			}
 			// return (args.device.getCapabilityValue('climate_mode_swing') == args.mode);
 		})
 		this._flowConditionAlarmPresence = this.homey.flow.getConditionCard('alarm_presence')
 		.registerRunListener(async (args, state) => {
-			return (state.value == true);
+			if (state.manual == true){
+				return (args.device.getCapabilityValue('alarm_presence'));
+			}
+			else{
+				return (state.value == true);
+			}
 			// return (args.device.getCapabilityValue('alarm_presence'));
 		})
 		this._flowConditionPresenceState = this.homey.flow.getConditionCard('presence_state')
 		.registerRunListener(async (args, state) => {
-			return (state.value == args.state);
+			if (state.manual == true){
+				return (args.device.getCapabilityValue('presence_state') == args.value);
+			}
+			else{
+				return (state.value == args.state);
+			}
 			// return (args.device.getCapabilityValue('presence_state') == args.value);
 		})
   

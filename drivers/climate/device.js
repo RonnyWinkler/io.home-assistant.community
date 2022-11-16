@@ -151,6 +151,10 @@ class ClimateDevice extends BaseDevice {
     }
 
     // Autocomplete lists & flow actions ===================================================================================?
+    async setMode(mode){
+        await this._onCapabilityClimateMode( mode );
+    }
+
     getModesFanList(){
         try{
             let result = [];
@@ -168,7 +172,7 @@ class ClimateDevice extends BaseDevice {
     }
 
     async setModeFan(mode){
-        await onCapabilityClimateModeFan( mode );
+        await this._onCapabilityClimateModeFan( mode );
     }
 
     getModesPresetList(){
@@ -188,7 +192,7 @@ class ClimateDevice extends BaseDevice {
     }
 
     async setModePreset(mode){
-        await onCapabilityClimateModePreset( mode );
+        await this._onCapabilityClimateModePreset( mode );
     }
 
     getModesSwingList(){
@@ -208,7 +212,7 @@ class ClimateDevice extends BaseDevice {
     }
 
     async setModeSwing(mode){
-        await onCapabilityClimateModeSwing( mode );
+        await this._onCapabilityClimateModeSwing( mode );
     }
 
 }

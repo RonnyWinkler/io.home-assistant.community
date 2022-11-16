@@ -50,5 +50,17 @@
   "0.2.2": {
     "en": "Fixed capability error for climated evice",
     "de": "Capability-Fehler für Klimagerät korrigiert."
+  },
+  "0.3.0": {
+    "en": "Added Presence device, power sensor for lights, icon change and entity details in repair view, and many internal changes.",
+    "de": "Präsenz-Gerät ergänzt, Power-Sensor für Licht, Icon-Änderung und Entitätsdetails in Repair-Dialog, und viele interne Änderungen."
+  },
+  "0.3.1": {
+    "en": "Fixed Climate flow actions.",
+    "de": "Klimagerät Flow-Aktionen korrigiert."
+  },
+  "0.3.2": {
+    "en": "Added manual testmode to AND flow cards.",
+    "de": "Manueller Testmodue ergänzt für AND Flowkarten."
   }
 }
