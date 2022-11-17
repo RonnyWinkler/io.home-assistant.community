@@ -1,7 +1,7 @@
 {
   "_comment": "This file is generated. Please edit .homeycompose/app.json instead.",
   "id": "io.home-assistant.community",
-  "version": "0.3.2",
+  "version": "0.4.0",
   "compatibility": ">=5.0.0",
   "sdk": 3,
   "brandColor": "#038FC7",
@@ -1187,6 +1187,90 @@
       {
         "highlight": true,
         "title": {
+          "en": "Deactivate the oscillation",
+          "de": "Deaktiviere die Oszillation",
+          "nl": "Deactiveer de oscillatie"
+        },
+        "titleFormatted": {
+          "en": "Deactivate the oscillation",
+          "de": "Deaktiviere die Oszillation",
+          "nl": "Deactiveer de oscillatie"
+        },
+        "args": [
+          {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=fan"
+          }
+        ],
+        "id": "fanOscillateOff"
+      },
+      {
+        "highlight": true,
+        "title": {
+          "en": "Activate the oscillation",
+          "de": "Aktiviere die Oszillation",
+          "nl": "Activeer de oscillatie"
+        },
+        "titleFormatted": {
+          "en": "Activate the oscillation",
+          "de": "Aktiviere die Oszillation",
+          "nl": "Activeer de oscillatie"
+        },
+        "args": [
+          {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=fan"
+          }
+        ],
+        "id": "fanOscillateOn"
+      },
+      {
+        "highlight": true,
+        "title": {
+          "en": "Use the forward direction",
+          "de": "Verwende die Vorwärtsrichtung",
+          "nl": "Gebruik de voorwaartse richting"
+        },
+        "titleFormatted": {
+          "en": "Use the forward direction",
+          "de": "Verwende die Vorwärtsrichtung",
+          "nl": "Gebruik de voorwaartse richting"
+        },
+        "args": [
+          {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=fan"
+          }
+        ],
+        "id": "fanReverseOff"
+      },
+      {
+        "highlight": true,
+        "title": {
+          "en": "Use the reverse direction",
+          "de": "Verwende die umgekehrte Richtung",
+          "nl": "Gebruik de omgekeerde richting"
+        },
+        "titleFormatted": {
+          "en": "Use the reverse direction",
+          "de": "Verwende die umgekehrte Richtung",
+          "nl": "Gebruik de omgekeerde richting"
+        },
+        "args": [
+          {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=fan"
+          }
+        ],
+        "id": "fanReverseOn"
+      },
+      {
+        "highlight": true,
+        "title": {
           "en": "Select sound mode.",
           "de": "Wähle Klangmodus.",
           "nl": "Selecteer geluidsmodus"
@@ -1715,6 +1799,149 @@
       "images": {
         "large": "/drivers/compound/assets/images/large.png",
         "small": "/drivers/compound/assets/images/small.png"
+      }
+    },
+    {
+      "pair": [
+        {
+          "id": "loading",
+          "template": "loading",
+          "navigation": {
+            "next": "list_devices"
+          }
+        },
+        {
+          "id": "login_credentials",
+          "template": "login_credentials",
+          "options": {
+            "logo": "logo.png",
+            "usernameLabel": {
+              "en": "Server"
+            },
+            "usernamePlaceholder": {
+              "en": "http://192.168.xxx.xxx:8123"
+            },
+            "passwordLabel": {
+              "en": "Token"
+            },
+            "passwordPlaceholder": {
+              "en": "Long-lived access token"
+            }
+          }
+        },
+        {
+          "id": "list_devices",
+          "template": "list_devices",
+          "navigation": {
+            "next": "icon"
+          },
+          "options": {
+            "singular": true
+          }
+        },
+        {
+          "id": "icon",
+          "navigation": {
+            "next": "add_devices",
+            "prev": "list_devices"
+          }
+        },
+        {
+          "id": "add_devices"
+        }
+      ],
+      "repair": [
+        {
+          "id": "select",
+          "navigation": {
+            "prev": "done"
+          }
+        },
+        {
+          "id": "device_details",
+          "navigation": {
+            "prev": "select"
+          }
+        },
+        {
+          "id": "icon",
+          "navigation": {
+            "next": "icon_change",
+            "prev": "select"
+          }
+        },
+        {
+          "id": "icon_change",
+          "navigation": {
+            "prev": "icon"
+          }
+        },
+        {
+          "id": "login_credentials",
+          "template": "login_credentials",
+          "navigation": {
+            "prev": "select"
+          },
+          "options": {
+            "logo": "logo.png",
+            "usernameLabel": {
+              "en": "Server"
+            },
+            "usernamePlaceholder": {
+              "en": "http://192.168.xxx.xxx:8123"
+            },
+            "passwordLabel": {
+              "en": "Token"
+            },
+            "passwordPlaceholder": {
+              "en": "Long-lived access token"
+            }
+          }
+        },
+        {
+          "id": "done",
+          "template": "done"
+        }
+      ],
+      "id": "fan",
+      "name": {
+        "en": "Fav",
+        "de": "Ventilator",
+        "nl": "Fan"
+      },
+      "class": "fan",
+      "capabilities": [
+        "onoff",
+        "dim",
+        "fan_oscillate",
+        "fan_reverse",
+        "button.reconnect"
+      ],
+      "images": {
+        "large": "/drivers/fan/assets/images/large.png",
+        "small": "/drivers/fan/assets/images/small.png"
+      },
+      "capabilitiesOptions": {
+        "button.reconnect": {
+          "maintenanceAction": true,
+          "title": {
+            "en": "Reconnect",
+            "de": "Neu verbinden",
+            "nl": "Opnieuw verbinden"
+          },
+          "desc": {
+            "en": "Reconnect and reload entities.",
+            "de": "Neu verbinden und Entitäten neu laden.",
+            "nl": "Maak opnieuw verbinding en laad entiteiten opnieuw."
+          }
+        },
+        "dim": {
+          "title": {
+            "en": "Speed",
+            "de": "Geschwindigkeit",
+            "nl": "Snelheid"
+          }
+        }
       }
     },
     {
@@ -3115,6 +3342,34 @@
           }
         }
       ]
+    },
+    "fan_oscillate": {
+      "type": "boolean",
+      "title": {
+        "en": "Oscillate",
+        "de": "Oszillieren",
+        "nl": "Oscilleren"
+      },
+      "uiQuickAction": true,
+      "uiComponent": "button",
+      "insights": false,
+      "getable": true,
+      "setable": true,
+      "icon": "/assets/capability_icons/fan_oscillate.svg"
+    },
+    "fan_reverse": {
+      "type": "boolean",
+      "title": {
+        "en": "Reverse direction",
+        "de": "Umgekehrte Richtung",
+        "nl": "Tegengestelde richting"
+      },
+      "uiQuickAction": true,
+      "uiComponent": "button",
+      "insights": false,
+      "getable": true,
+      "setable": true,
+      "icon": "/assets/capability_icons/fan_reverse.svg"
     },
     "measure_generic": {
       "type": "string",

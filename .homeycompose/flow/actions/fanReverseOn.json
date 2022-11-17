@@ -1,0 +1,20 @@
+{
+    "highlight": true,
+    "title": {
+        "en": "Use the reverse direction",
+        "de": "Verwende die umgekehrte Richtung",
+        "nl": "Gebruik de omgekeerde richting"
+    },
+    "titleFormatted": {
+        "en": "Use the reverse direction",
+        "de": "Verwende die umgekehrte Richtung",
+        "nl": "Gebruik de omgekeerde richting"
+    },
+    "args": [
+        {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=fan"
+        }
+    ]
+}

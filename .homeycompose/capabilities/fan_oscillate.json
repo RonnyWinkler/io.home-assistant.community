@@ -1,0 +1,14 @@
+{
+    "type": "boolean",
+    "title": {
+        "en": "Oscillate",
+        "de": "Oszillieren",
+        "nl": "Oscilleren"
+    },
+    "uiQuickAction": true,
+    "uiComponent": "button",
+    "insights": false,
+    "getable": true,
+    "setable": true,
+    "icon": "/assets/capability_icons/fan_oscillate.svg"
+  }

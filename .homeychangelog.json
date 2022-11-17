@@ -62,5 +62,9 @@
   "0.3.2": {
     "en": "Added manual testmode to AND flow cards.",
     "de": "Manueller Testmodue ergänzt für AND Flowkarten."
+  },
+  "0.4.0": {
+    "en": "Added fan device, added conection state check on disconnect",
+    "de": "Ventilator ergänzt, Verbindungsprüfung ergänzt für Verbindungsabbau."
   }
 }

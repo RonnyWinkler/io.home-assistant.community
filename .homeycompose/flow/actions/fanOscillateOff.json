@@ -1,0 +1,20 @@
+{
+    "highlight": true,
+    "title": {
+        "en": "Deactivate the oscillation",
+        "de": "Deaktiviere die Oszillation",
+        "nl": "Deactiveer de oscillatie"
+    },
+    "titleFormatted": {
+        "en": "Deactivate the oscillation",
+        "de": "Deaktiviere die Oszillation",
+        "nl": "Deactiveer de oscillatie"
+    },
+    "args": [
+        {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=fan"
+        }
+    ]
+}

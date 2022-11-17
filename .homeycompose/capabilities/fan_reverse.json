@@ -1,0 +1,14 @@
+{
+    "type": "boolean",
+    "title": {
+        "en": "Reverse direction",
+        "de": "Umgekehrte Richtung",
+        "nl": "Tegengestelde richting"
+    },
+    "uiQuickAction": true,
+    "uiComponent": "button",
+    "insights": false,
+    "getable": true,
+    "setable": true,
+    "icon": "/assets/capability_icons/fan_reverse.svg"
+  }

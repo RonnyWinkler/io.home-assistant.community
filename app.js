@@ -52,6 +52,7 @@ class App extends Homey.App {
 			}
 		});
 
+		// Media
 		this._flowActionMediaSelectSource = this.homey.flow.getActionCard('mediaSelectSource');
 		this._flowActionMediaSelectSource.registerRunListener(async (args, state) => {
 			try{
@@ -117,6 +118,7 @@ class App extends Homey.App {
 			});
 		});
 
+		// Climate
 		this._flowActionClimateMode = this.homey.flow.getActionCard('climateMode');
 		this._flowActionClimateMode.registerRunListener(async (args, state) => {
 			try{
@@ -184,6 +186,52 @@ class App extends Homey.App {
 				return result.name.toLowerCase().includes(query.toLowerCase());
 			});
 			
+		});
+
+		// Fan
+		this._flowActionFanOscillateOn = this.homey.flow.getActionCard('fanOscillateOn')
+		this._flowActionFanOscillateOn.registerRunListener(async (args, state) => {
+			try{
+				await args.device.setOscillateOn();
+				return true;
+			}
+			catch(error){
+				this.error("Error executing flowAction 'fanOscillateOn': "+  error.message);
+				throw new Error(error.message);
+			}
+		});
+		this._flowActionFanOscillateOff = this.homey.flow.getActionCard('fanOscillateOff')
+		this._flowActionFanOscillateOff.registerRunListener(async (args, state) => {
+			try{
+				await args.device.setOscillateOff();
+				return true;
+			}
+			catch(error){
+				this.error("Error executing flowAction 'fanOscillateOff': "+  error.message);
+				throw new Error(error.message);
+			}
+		});
+		this._flowActionFanReverseOn = this.homey.flow.getActionCard('fanReverseOn')
+		this._flowActionFanReverseOn.registerRunListener(async (args, state) => {
+			try{
+				await args.device.setReverseOn();
+				return true;
+			}
+			catch(error){
+				this.error("Error executing flowAction 'fanReverseOn': "+  error.message);
+				throw new Error(error.message);
+			}
+		});
+		this._flowActionFanReverseOff = this.homey.flow.getActionCard('fanReverseOff')
+		this._flowActionFanReverseOff.registerRunListener(async (args, state) => {
+			try{
+				await args.device.setReverseOff();
+				return true;
+			}
+			catch(error){
+				this.error("Error executing flowAction 'fanReverseOff': "+  error.message);
+				throw new Error(error.message);
+			}
 		});
 
 		// Flow trigger for all capabilities

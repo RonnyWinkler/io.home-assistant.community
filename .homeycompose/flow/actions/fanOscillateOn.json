@@ -1,0 +1,20 @@
+{
+    "highlight": true,
+    "title": {
+        "en": "Activate the oscillation",
+        "de": "Aktiviere die Oszillation",
+        "nl": "Activeer de oscillatie"
+    },
+    "titleFormatted": {
+        "en": "Activate the oscillation",
+        "de": "Aktiviere die Oszillation",
+        "nl": "Activeer de oscillatie"
+    },
+    "args": [
+        {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=fan"
+        }
+    ]
+}
