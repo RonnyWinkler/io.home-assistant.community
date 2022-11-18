@@ -1,0 +1,54 @@
+{
+    "title": {
+        "en": "Script was started",
+        "de": "Skript wurde gestartet",
+        "nl": "Script is gestart"
+    },
+    "titleFormatted":{
+        "en": "The script named [[name]] has been started.",
+        "de": "Das Skript mit Name [[name]] wurde gestartet.",
+        "nl": "Het script met de naam [[name]] is gestart."
+    },
+    "hint": {
+        "en": "Triggers when a script was started. The execution can be filtered by a script name.",
+        "de": "Wird ausgelöst, wenn das Script gestartet wurde. Die Ausführung kann mit einem Skript-Name gefiltert werden.",
+        "nl": "Wordt geactiveerd wanneer een script is gestart. De trigger kan worden gefilterd op een scriptnaam."
+    },
+    "tokens": [
+        {
+            "name": "name",
+            "type": "string",
+            "title": {
+                "en": "Script name",
+                "de": "Skript-Name",
+                "nl": "Scriptnaam" 
+            }
+        },
+        {
+            "name": "entity",
+            "type": "string",
+            "title": {
+                "en": "Entity",
+                "de": "Entität",
+                "nl": "Entiteit" 
+            }
+        }
+    ],
+    "args": [
+        {
+            "name": "name",
+            "type": "text",
+            "required": false,
+            "title": { 
+                "en": "Script name",
+                "de": "Skript-Name",
+                "nl": "Scriptnaam" 
+            },
+            "placeholder": { 
+                "en": "Script",
+                "de": "Skript",
+                "nl": "Script" 
+            }
+        }
+    ]
+}

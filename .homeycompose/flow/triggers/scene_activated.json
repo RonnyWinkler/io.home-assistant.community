@@ -1,0 +1,17 @@
+{
+    "title": {
+        "en": "Scene was activated",
+        "de": "Szene wurde aktiviert",
+        "nl": "Scène is geactiveerd"
+    },
+    "hint": {
+        "en": "Triggers when the scene was activated.",
+        "de": "Wird ausgelöst, wenn die Szene aktiviert wurde.",
+        "nl": "Wordt geactiveerd wanneer de scène is geactiveerd."
+    },
+    "args": [{
+        "name": "device",
+        "type": "device",
+        "filter": "driver_id=scene"
+    }]
+}

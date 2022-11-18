@@ -1,0 +1,17 @@
+{
+    "title": {
+        "en": "Script was started",
+        "de": "Skript wurde gestartet",
+        "nl": "Script is gestart"
+    },
+    "hint": {
+        "en": "Triggers when a script was started.",
+        "de": "Wird ausgelöst, wenn das Script gestartet wurde.",
+        "nl": "Wordt verzonden wanneer het script is gestart."
+    },
+    "args": [{
+        "name": "device",
+        "type": "device",
+        "filter": "driver_id=script"
+    }]
+}

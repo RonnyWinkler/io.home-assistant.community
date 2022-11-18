@@ -1,7 +1,7 @@
 {
   "_comment": "This file is generated. Please edit .homeycompose/app.json instead.",
   "id": "io.home-assistant.community",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "compatibility": ">=5.0.0",
   "sdk": 3,
   "brandColor": "#038FC7",
@@ -127,6 +127,61 @@
           }
         ],
         "id": "app_memwarn"
+      },
+      {
+        "title": {
+          "en": "Automation was triggered",
+          "de": "Automatisierung wurde ausgelöst",
+          "nl": "De automatisering kwam op gang"
+        },
+        "titleFormatted": {
+          "en": "The automation named [[name]] has been triggered.",
+          "de": "Die Automatisierung mit dem Namen [[name]] wurde ausgelöst.",
+          "nl": "De automatisering met de naam [[name]] is geactiveerd."
+        },
+        "hint": {
+          "en": "Triggers when a automation was triggered. The execution can be filtered by a automation name.",
+          "de": "Wird ausgelöst, wenn eine Automatisierung ausgelöst wurde. Die Ausführung kann nach einem Automatisierungsnamen gefiltert werden.",
+          "nl": "Wordt geactiveerd wanneer een automatisering is geactiveerd. De uitvoering kan worden gefilterd op een automatiseringsnaam."
+        },
+        "tokens": [
+          {
+            "name": "name",
+            "type": "string",
+            "title": {
+              "en": "Automation name",
+              "de": "Automatisierungs-Name",
+              "nl": "Automatiseringsnaam"
+            }
+          },
+          {
+            "name": "entity",
+            "type": "string",
+            "title": {
+              "en": "Entity",
+              "de": "Entität",
+              "nl": "Entiteit"
+            }
+          }
+        ],
+        "args": [
+          {
+            "name": "name",
+            "type": "text",
+            "required": false,
+            "title": {
+              "en": "Automation name",
+              "de": "Automatisierungs-Name",
+              "nl": "Automatiseringsnaam"
+            },
+            "placeholder": {
+              "en": "Automation",
+              "de": "Automatisierung",
+              "nl": "Aautomatisering"
+            }
+          }
+        ],
+        "id": "automation_triggered_filter"
       },
       {
         "title": {
@@ -424,6 +479,101 @@
           }
         ],
         "id": "presence_state_changed"
+      },
+      {
+        "title": {
+          "en": "Scene was activated",
+          "de": "Szene wurde aktiviert",
+          "nl": "Scène is geactiveerd"
+        },
+        "hint": {
+          "en": "Triggers when the scene was activated.",
+          "de": "Wird ausgelöst, wenn die Szene aktiviert wurde.",
+          "nl": "Wordt geactiveerd wanneer de scène is geactiveerd."
+        },
+        "args": [
+          {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=scene"
+          }
+        ],
+        "id": "scene_activated"
+      },
+      {
+        "title": {
+          "en": "Script was started",
+          "de": "Skript wurde gestartet",
+          "nl": "Script is gestart"
+        },
+        "hint": {
+          "en": "Triggers when a script was started.",
+          "de": "Wird ausgelöst, wenn das Script gestartet wurde.",
+          "nl": "Wordt verzonden wanneer het script is gestart."
+        },
+        "args": [
+          {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=script"
+          }
+        ],
+        "id": "script_started"
+      },
+      {
+        "title": {
+          "en": "Script was started",
+          "de": "Skript wurde gestartet",
+          "nl": "Script is gestart"
+        },
+        "titleFormatted": {
+          "en": "The script named [[name]] has been started.",
+          "de": "Das Skript mit Name [[name]] wurde gestartet.",
+          "nl": "Het script met de naam [[name]] is gestart."
+        },
+        "hint": {
+          "en": "Triggers when a script was started. The execution can be filtered by a script name.",
+          "de": "Wird ausgelöst, wenn das Script gestartet wurde. Die Ausführung kann mit einem Skript-Name gefiltert werden.",
+          "nl": "Wordt geactiveerd wanneer een script is gestart. De trigger kan worden gefilterd op een scriptnaam."
+        },
+        "tokens": [
+          {
+            "name": "name",
+            "type": "string",
+            "title": {
+              "en": "Script name",
+              "de": "Skript-Name",
+              "nl": "Scriptnaam"
+            }
+          },
+          {
+            "name": "entity",
+            "type": "string",
+            "title": {
+              "en": "Entity",
+              "de": "Entität",
+              "nl": "Entiteit"
+            }
+          }
+        ],
+        "args": [
+          {
+            "name": "name",
+            "type": "text",
+            "required": false,
+            "title": {
+              "en": "Script name",
+              "de": "Skript-Name",
+              "nl": "Scriptnaam"
+            },
+            "placeholder": {
+              "en": "Script",
+              "de": "Skript",
+              "nl": "Script"
+            }
+          }
+        ],
+        "id": "script_started_filter"
       }
     ],
     "conditions": [
@@ -2946,7 +3096,7 @@
         "de": "Schalter",
         "nl": "Schakelaar"
       },
-      "class": "button",
+      "class": "socket",
       "capabilities": [
         "onoff",
         "button.reconnect"

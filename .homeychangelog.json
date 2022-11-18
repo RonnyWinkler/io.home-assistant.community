@@ -66,5 +66,9 @@
   "0.4.0": {
     "en": "Added fan device, added conection state check on disconnect",
     "de": "Ventilator ergänzt, Verbindungsprüfung ergänzt für Verbindungsabbau."
+  },
+  "0.4.1": {
+    "en": "Fix for unregister on device deletion, change switch to device type 'socket'",
+    "de": "Korrektur für Deregistrierung nach Löschen eines Gerätes, Änderung des Schalter-Typs in 'Steckdose'."
   }
 }

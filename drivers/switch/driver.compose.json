@@ -5,7 +5,7 @@
       "de": "Schalter",
       "nl": "Schakelaar"
     },
-    "class": "button",
+    "class": "socket",
     "capabilities": [
       "onoff",
     

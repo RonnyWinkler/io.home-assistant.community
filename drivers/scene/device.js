@@ -6,6 +6,8 @@ class SceneDevice extends BaseDevice {
 
     async onInit() {
         await super.onInit();
+        
+        this.lastState = null;
 
         this.registerCapabilityListener('button', async (value, opts) => {
             await this._onCapabilityButton(value, opts);
@@ -31,7 +33,21 @@ class SceneDevice extends BaseDevice {
 
     // Entity update ============================================================================================
     async onEntityUpdate(data) {
-        // nothing to update
+        try{
+            // First update, just remember the current state (last press)
+            if (this.lastState == null){
+                this.lastState = data.state;
+                return;
+            }
+            // New update, raise flow trigger
+            if (this.lastState != data.state){
+                this.lastState = data.state;
+                this.homey.app._flowTriggerSceneActivated.trigger(this);
+            }
+        }
+        catch(error) {
+            this.error("CapabilitiesUpdate error: "+ error.message);
+        }
     }
 
     // Capabilities ===========================================================================================

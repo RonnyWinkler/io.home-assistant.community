@@ -1,0 +1,54 @@
+{
+    "title": {
+        "en": "Automation was triggered",
+        "de": "Automatisierung wurde ausgelöst",
+        "nl": "De automatisering kwam op gang"
+    },
+    "titleFormatted":{
+        "en": "The automation named [[name]] has been triggered.",
+        "de": "Die Automatisierung mit dem Namen [[name]] wurde ausgelöst.",
+        "nl": "De automatisering met de naam [[name]] is geactiveerd."
+    },
+    "hint": {
+        "en": "Triggers when a automation was triggered. The execution can be filtered by a automation name.",
+        "de": "Wird ausgelöst, wenn eine Automatisierung ausgelöst wurde. Die Ausführung kann nach einem Automatisierungsnamen gefiltert werden.",
+        "nl": "Wordt geactiveerd wanneer een automatisering is geactiveerd. De uitvoering kan worden gefilterd op een automatiseringsnaam."
+    },
+    "tokens": [
+        {
+            "name": "name",
+            "type": "string",
+            "title": {
+                "en": "Automation name",
+                "de": "Automatisierungs-Name",
+                "nl": "Automatiseringsnaam" 
+            }
+        },
+        {
+            "name": "entity",
+            "type": "string",
+            "title": {
+                "en": "Entity",
+                "de": "Entität",
+                "nl": "Entiteit" 
+            }
+        }
+    ],
+    "args": [
+        {
+            "name": "name",
+            "type": "text",
+            "required": false,
+            "title": { 
+                "en": "Automation name",
+                "de": "Automatisierungs-Name",
+                "nl": "Automatiseringsnaam" 
+            },
+            "placeholder": { 
+                "en": "Automation",
+                "de": "Automatisierung",
+                "nl": "Aautomatisering" 
+            }
+        }
+    ]
+}

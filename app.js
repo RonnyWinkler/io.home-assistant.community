@@ -234,7 +234,7 @@ class App extends Homey.App {
 			}
 		});
 
-		// Flow trigger for all capabilities
+		// Flow trigger for all capabilities (compound device)
 		this._flowTriggerCapabilityChanged = this.homey.flow.getDeviceTriggerCard('capability_changed');
 		this._flowTriggerCapabilityChanged.registerRunListener(async (args, state) => {
 			return ( !args.capability || !args.capability.id || args.capability.id === state.capability.id);
@@ -246,9 +246,22 @@ class App extends Homey.App {
 			});
 		});
 		
-		// Flow Trigger: Buttopn pressed
-		this._flowTriggerButtonPressed = this.homey.flow.getDeviceTriggerCard('button_pressed');
+		// Flow Trigger: App
 		this._flowTriggerAppMemwarn = this.homey.flow.getTriggerCard('app_memwarn');
+
+		this._flowTriggerScriptStartedFilter = this.homey.flow.getTriggerCard("script_started_filter");
+        this._flowTriggerScriptStartedFilter.registerRunListener(async (args, state) => {
+            return ( !args.name || args.name === state.name);
+        });
+		this._flowTriggerAutomationTriggeredFilter = this.homey.flow.getTriggerCard("automation_triggered_filter");
+        this._flowTriggerAutomationTriggeredFilter.registerRunListener(async (args, state) => {
+            return ( !args.name || args.name === state.name);
+        });
+
+		// Flow Trigger: Devices
+		this._flowTriggerButtonPressed = this.homey.flow.getDeviceTriggerCard('button_pressed');
+		this._flowTriggerSceneActivated = this.homey.flow.getDeviceTriggerCard('scene_activated');
+		this._flowTriggerScriptStarted = this.homey.flow.getDeviceTriggerCard('script_started');
 
 		// Flow contitions
 		this._flowConditionMeasureNumeric = this.homey.flow.getConditionCard('measure_numeric')
