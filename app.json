@@ -303,7 +303,7 @@
           {
             "name": "device",
             "type": "device",
-            "filter": "driver_id=climate"
+            "filter": "driver_id=climate|climate_fan"
           }
         ],
         "id": "climate_mode_changed"
@@ -330,7 +330,7 @@
           {
             "name": "device",
             "type": "device",
-            "filter": "driver_id=climate"
+            "filter": "driver_id=climate|climate_fan"
           }
         ],
         "id": "climate_mode_fan_changed"
@@ -357,7 +357,7 @@
           {
             "name": "device",
             "type": "device",
-            "filter": "driver_id=climate"
+            "filter": "driver_id=climate|climate_fan"
           }
         ],
         "id": "climate_mode_preset_changed"
@@ -384,7 +384,7 @@
           {
             "name": "device",
             "type": "device",
-            "filter": "driver_id=climate"
+            "filter": "driver_id=climate|climate_fan"
           }
         ],
         "id": "climate_mode_swing_changed"
@@ -607,7 +607,7 @@
           {
             "name": "device",
             "type": "device",
-            "filter": "driver_id=climate"
+            "filter": "driver_id=climate|climate_fan"
           },
           {
             "name": "mode",
@@ -694,7 +694,7 @@
           {
             "name": "device",
             "type": "device",
-            "filter": "driver_id=climate"
+            "filter": "driver_id=climate|climate_fan"
           },
           {
             "name": "mode",
@@ -805,7 +805,7 @@
           {
             "name": "device",
             "type": "device",
-            "filter": "driver_id=climate"
+            "filter": "driver_id=climate|climate_fan"
           },
           {
             "name": "mode",
@@ -900,7 +900,7 @@
           {
             "name": "device",
             "type": "device",
-            "filter": "driver_id=climate"
+            "filter": "driver_id=climate|climate_fan"
           },
           {
             "name": "mode",
@@ -1140,6 +1140,11 @@
         },
         "args": [
           {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=climate|climate_fan"
+          },
+          {
             "type": "dropdown",
             "name": "mode",
             "title": {
@@ -1205,11 +1210,6 @@
                 }
               }
             ]
-          },
-          {
-            "name": "device",
-            "type": "device",
-            "filter": "driver_id=climate"
           }
         ],
         "id": "climateMode"
@@ -1249,7 +1249,7 @@
           {
             "name": "device",
             "type": "device",
-            "filter": "driver_id=climate"
+            "filter": "driver_id=climate|climate_fan"
           }
         ],
         "id": "climateSelectModeFan"
@@ -1289,7 +1289,7 @@
           {
             "name": "device",
             "type": "device",
-            "filter": "driver_id=climate"
+            "filter": "driver_id=climate|climate_fan"
           }
         ],
         "id": "climateSelectModePreset"
@@ -1329,7 +1329,7 @@
           {
             "name": "device",
             "type": "device",
-            "filter": "driver_id=climate"
+            "filter": "driver_id=climate|climate_fan"
           }
         ],
         "id": "climateSelectModeSwing"
@@ -1350,7 +1350,7 @@
           {
             "name": "device",
             "type": "device",
-            "filter": "driver_id=fan"
+            "filter": "driver_id=fan|climate_fan"
           }
         ],
         "id": "fanOscillateOff"
@@ -1371,7 +1371,7 @@
           {
             "name": "device",
             "type": "device",
-            "filter": "driver_id=fan"
+            "filter": "driver_id=fan|climate_fan"
           }
         ],
         "id": "fanOscillateOn"
@@ -1392,7 +1392,7 @@
           {
             "name": "device",
             "type": "device",
-            "filter": "driver_id=fan"
+            "filter": "driver_id=fan|climate_fan"
           }
         ],
         "id": "fanReverseOff"
@@ -1413,7 +1413,7 @@
           {
             "name": "device",
             "type": "device",
-            "filter": "driver_id=fan"
+            "filter": "driver_id=fan|climate_fan"
           }
         ],
         "id": "fanReverseOn"
@@ -1771,6 +1771,156 @@
       "images": {
         "large": "/drivers/climate/assets/images/large.png",
         "small": "/drivers/climate/assets/images/small.png"
+      }
+    },
+    {
+      "pair": [
+        {
+          "id": "loading",
+          "template": "loading",
+          "navigation": {
+            "next": "list_devices"
+          }
+        },
+        {
+          "id": "login_credentials",
+          "template": "login_credentials",
+          "options": {
+            "logo": "logo.png",
+            "usernameLabel": {
+              "en": "Server"
+            },
+            "usernamePlaceholder": {
+              "en": "http://192.168.xxx.xxx:8123"
+            },
+            "passwordLabel": {
+              "en": "Token"
+            },
+            "passwordPlaceholder": {
+              "en": "Long-lived access token"
+            }
+          }
+        },
+        {
+          "id": "list_devices",
+          "template": "list_devices",
+          "navigation": {
+            "next": "icon"
+          },
+          "options": {
+            "singular": true
+          }
+        },
+        {
+          "id": "icon",
+          "navigation": {
+            "next": "add_devices",
+            "prev": "list_devices"
+          }
+        },
+        {
+          "id": "add_devices"
+        }
+      ],
+      "repair": [
+        {
+          "id": "select",
+          "navigation": {
+            "prev": "done"
+          }
+        },
+        {
+          "id": "device_details",
+          "navigation": {
+            "prev": "select"
+          }
+        },
+        {
+          "id": "icon",
+          "navigation": {
+            "next": "icon_change",
+            "prev": "select"
+          }
+        },
+        {
+          "id": "icon_change",
+          "navigation": {
+            "prev": "icon"
+          }
+        },
+        {
+          "id": "login_credentials",
+          "template": "login_credentials",
+          "navigation": {
+            "prev": "select"
+          },
+          "options": {
+            "logo": "logo.png",
+            "usernameLabel": {
+              "en": "Server"
+            },
+            "usernamePlaceholder": {
+              "en": "http://192.168.xxx.xxx:8123"
+            },
+            "passwordLabel": {
+              "en": "Token"
+            },
+            "passwordPlaceholder": {
+              "en": "Long-lived access token"
+            }
+          }
+        },
+        {
+          "id": "done",
+          "template": "done"
+        }
+      ],
+      "id": "climate_fan",
+      "name": {
+        "en": "Climate & fan",
+        "de": "Klimagerät & Ventilator",
+        "nl": "Klimaat & fan"
+      },
+      "class": "thermostat",
+      "capabilities": [
+        "measure_temperature",
+        "target_temperature",
+        "measure_humidity",
+        "climate_mode",
+        "climate_mode_fan",
+        "climate_mode_preset",
+        "climate_mode_swing",
+        "onoff",
+        "dim",
+        "fan_oscillate",
+        "fan_reverse",
+        "button.reconnect"
+      ],
+      "images": {
+        "large": "/drivers/climate_fan/assets/images/large.png",
+        "small": "/drivers/climate_fan/assets/images/small.png"
+      },
+      "capabilitiesOptions": {
+        "button.reconnect": {
+          "maintenanceAction": true,
+          "title": {
+            "en": "Reconnect",
+            "de": "Neu verbinden",
+            "nl": "Opnieuw verbinden"
+          },
+          "desc": {
+            "en": "Reconnect and reload entities.",
+            "de": "Neu verbinden und Entitäten neu laden.",
+            "nl": "Maak opnieuw verbinding en laad entiteiten opnieuw."
+          }
+        },
+        "dim": {
+          "title": {
+            "en": "Speed",
+            "de": "Geschwindigkeit",
+            "nl": "Snelheid"
+          }
+        }
       }
     },
     {

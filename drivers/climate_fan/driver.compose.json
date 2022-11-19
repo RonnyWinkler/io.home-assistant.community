@@ -1,0 +1,51 @@
+{
+    "id": "climate_fan",
+    "name": {
+      "en": "Climate & fan",
+      "de": "Klimagerät & Ventilator",
+      "nl": "Klimaat & fan"
+    },
+    "class": "thermostat",
+    "capabilities": [
+      "measure_temperature",
+      "target_temperature",
+      "measure_humidity",
+      "climate_mode",
+      "climate_mode_fan",
+      "climate_mode_preset",
+      "climate_mode_swing",
+      "onoff",
+      "dim",
+      "fan_oscillate",
+      "fan_reverse",
+    
+      "button.reconnect"
+    ],
+    "images": {
+      "large": "/drivers/climate_fan/assets/images/large.png",
+      "small": "/drivers/climate_fan/assets/images/small.png"
+  },
+  "capabilitiesOptions": {
+    "button.reconnect": {
+      "maintenanceAction": true,
+      "title": {
+          "en": "Reconnect",
+          "de": "Neu verbinden",
+          "nl": "Opnieuw verbinden"
+      },
+      "desc": {
+          "en": "Reconnect and reload entities.",
+          "de": "Neu verbinden und Entitäten neu laden.",
+          "nl": "Maak opnieuw verbinding en laad entiteiten opnieuw."
+      }
+    },
+    "dim": {
+      "title": {
+          "en": "Speed",
+          "de": "Geschwindigkeit",
+          "nl": "Snelheid"
+      }
+    }
+  },
+    "$extends": [  "pair", "repair" ]
+}

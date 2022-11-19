@@ -152,66 +152,6 @@ class FanDevice extends BaseDevice {
         await this._onCapabilityOnoffReverse( false );
     }
 
-    // getModesFanList(){
-    //     try{
-    //         let result = [];
-    //         for (let i=0; i<this.modesFan.length; i++){
-    //             result.push({
-    //                 id: this.modesFan[i],
-    //                 name: this.modesFan[i]
-    //             });
-    //         }
-    //         return result;
-    //     }
-    //     catch(error){
-    //         this.error("Error reading fan list: "+error.message);
-    //     }   
-    // }
-
-    // async setModeFan(mode){
-    //     await this._onCapabilityClimateModeFan( mode );
-    // }
-
-    // getModesPresetList(){
-    //     try{
-    //         let result = [];
-    //         for (let i=0; i<this.modesPreset.length; i++){
-    //             result.push({
-    //                 id: this.modesPreset[i],
-    //                 name: this.modesPreset[i]
-    //             });
-    //         }
-    //         return result;
-    //     }
-    //     catch(error){
-    //         this.error("Error reading preset list: "+error.message);
-    //     }   
-    // }
-
-    // async setModePreset(mode){
-    //     await this._onCapabilityClimateModePreset( mode );
-    // }
-
-    // getModesSwingList(){
-    //     try{
-    //         let result = [];
-    //         for (let i=0; i<this.modesSwing.length; i++){
-    //             result.push({
-    //                 id: this.modesSwing[i],
-    //                 name: this.modesSwing[i]
-    //             });
-    //         }
-    //         return result;
-    //     }
-    //     catch(error){
-    //         this.error("Error reading swing list: "+error.message);
-    //     }   
-    // }
-
-    // async setModeSwing(mode){
-    //     await this._onCapabilityClimateModeSwing( mode );
-    // }
-
 }
 
 module.exports = FanDevice;
