@@ -70,5 +70,9 @@
   "0.4.1": {
     "en": "Fix for unregister on device deletion, change switch to device type 'socket'",
     "de": "Korrektur für Deregistrierung nach Löschen eines Gerätes, Änderung des Schalter-Typs in 'Steckdose'."
+  },
+  "0.4.2": {
+    "en": "Added device trigger for scene & script. Added app trigger for script and automation.",
+    "de": "Geräte-Trigger für Szene und Skript ergänzt. App-Trigger für Skript und Automation ergänzt."
   }
 }
