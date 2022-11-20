@@ -467,6 +467,7 @@ class App extends Homey.App {
 				}
 				else if (args.service.id.includes(".send_photo")){
 					data["url"] = url;
+					data["caption"] = args.message;
 				}
 			}
 		}
