@@ -460,12 +460,13 @@ class App extends Homey.App {
 				url = args.droptoken.localUrl;
 			}
 			if (url != undefined){
-				data["data"] = {
-					image: url
-					// photo: {
-					// 	url: url,
-					// 	caption: "Image"
-					// }
+				if (args.service.startsWith("notify.")){
+					data["data"] = {
+						image: url
+					}
+				}
+				else if (args.service.includes(".send_photo")){
+					data["url"] = url;
 				}
 			}
 		}
