@@ -461,10 +461,11 @@ class App extends Homey.App {
 			}
 			if (url != undefined){
 				data["data"] = {
-					photo: {
-						url: url,
-						caption: "Image"
-					}
+					image: url
+					// photo: {
+					// 	url: url,
+					// 	caption: "Image"
+					// }
 				}
 			}
 		}
