@@ -51,6 +51,55 @@ class App extends Homey.App {
 				throw new Error(error.message);
 			}
 		});
+		this._flowActionSendNotification = this.homey.flow.getActionCard('sendNotification')
+		this._flowActionSendNotification.registerRunListener(async (args, state) => {
+			try{
+				await this._onFlowActionSendNotification(args);
+				return true;
+			}
+			catch(error){
+				this.error("Error executing flowAction 'sendNotification': "+  error.message);
+				throw new Error(error.message);
+			}
+		});
+
+		this._flowActionSendNotificationToService = this.homey.flow.getActionCard('sendNotificationToService');
+		this._flowActionSendNotificationToService.registerRunListener(async (args, state) => {
+			try{
+				await this._onFlowActionSendNotificationToService(args);
+				return true;
+			}
+			catch(error){
+				this.error("Error executing flowAction 'sendNotificationToService': "+  error.message);
+				throw new Error(error.message);
+			}
+		});
+		this._flowActionSendNotificationToService.registerArgumentAutocompleteListener('service', async (query, args) => {
+			this.serviceList = await this._getAutocompleteServiceList();
+			return this.serviceList.filter((result) => { 
+				return ( ( result.id.startsWith("notify.") || result.id.includes(".send_message") || result.id.includes(".send_photo") ) && 
+						 result.name.toLowerCase().includes(query.toLowerCase()) );
+			});
+		});
+		this._flowActionSendNotificationImageToService = this.homey.flow.getActionCard('sendNotificationImageToService');
+		this._flowActionSendNotificationImageToService.registerRunListener(async (args, state) => {
+			try{
+				await this._onFlowActionSendNotificationToService(args);
+				return true;
+			}
+			catch(error){
+				this.error("Error executing flowAction 'sendNotificationImageToService': "+  error.message);
+				throw new Error(error.message);
+			}
+		});
+		this._flowActionSendNotificationImageToService.registerArgumentAutocompleteListener('service', async (query, args) => {
+			this.serviceList = await this._getAutocompleteServiceList();
+			return this.serviceList.filter((result) => { 
+				return ( ( result.id.startsWith("notify.") || result.id.includes(".send_message") || result.id.includes(".send_photo") ) && 
+						 result.name.toLowerCase().includes(query.toLowerCase()) );
+			});
+		});
+
 
 		// Media
 		this._flowActionMediaSelectSource = this.homey.flow.getActionCard('mediaSelectSource');
@@ -385,6 +434,41 @@ class App extends Homey.App {
 	async _onFlowActionCallService(args) {
 		this.log("Call service. Domain: "+args.domain+" Service: "+args.service+" Data: "+args.data);
 		await this._client.callService(args.domain, args.service, args.data);
+	}
+
+	async _onFlowActionSendNotification(args) {
+		this.log("Send notification.");
+		let data = {
+			title: args.title,
+			message: args.message
+		};
+		await this._client.callService("notify", "notify", data);
+	}
+
+	async _onFlowActionSendNotificationToService(args) {
+		this.log("Send notification to service "+args.service);
+		let data = {
+			title: args.title,
+			message: args.message
+		};
+		if (args.droptoken != undefined){
+			let url;
+			if (args.url != undefined && args.url == "cloud"){
+				url = args.droptoken.cloudUrl;
+			}
+			else{
+				url = args.droptoken.localUrl;
+			}
+			if (url != undefined){
+				data["data"] = {
+					photo: {
+						url: url,
+						caption: "Image"
+					}
+				}
+			}
+		}
+		await this._client.callService(args.service.id.split('.')[0], args.service.id.split('.')[1], data);
 	}
 
 	async _onFlowActionCallServiceEntity(args) {

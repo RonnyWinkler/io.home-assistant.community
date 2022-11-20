@@ -1,0 +1,34 @@
+{
+    "id": "sendNotification",
+    "title": { 
+        "en": "Send a notification",
+        "de": "Sende eine Nachricht",
+        "nl": "Stuur een melding"
+    },
+    "titleFormatted": { 
+        "en": "Send a notification [[message]] with title [[title]].",
+        "de": "Sende eine Nachricht [[message]] mit Titel [[title]].",
+        "nl": "Stuur een melding [[message]] met titel [[title]]."
+    },
+    "args": [
+        {
+            "name": "message",
+            "type": "text",
+            "title": { 
+                "en": "Message",
+                "de": "Nachricht",
+                "nl": "Melding"
+            }
+        },
+        {
+            "name": "title",
+            "type": "text",
+            "required": false,
+            "title": { 
+                "en": "Title",
+                "de": "Titel",
+                "nl": "Titel"
+            }
+        }
+    ]
+}

@@ -1,0 +1,77 @@
+{
+    "highlight": true,
+    "title": {
+        "en": "Send a notification to a service",
+        "de": "Sende eine Nachricht an einen Dienst",
+        "nl": "Stuur een bericht naar een apparaat"
+    },
+    "titleFormatted": {
+        "en": "Send a notification [[message]] with title [[title]] to service [[service]] with image attachment [[droptoken]] using the [[url]].",
+        "de": "Sende eine Nachricht [[message]] mit Titel [[title]] an Dienst [[service]] mit Bild-Anlage [[droptoken]] unter Verwendung der [[url]]",
+        "nl": "Stuur een melding [[message]] met titel [[title]] naar de dienst [[service]] met afbeeldingsbijlage [[droptoken]] met behulp van de [[url]]" 
+    },
+    "droptoken": ["image"],
+    "args": [
+        {
+            "type": "autocomplete",
+            "name": "service",
+            "required": false,
+            "title": { 
+                "en": "Service",
+                "de": "Dienst",
+                "nl": "Dienst"
+            },
+            "placeholder": { 
+                "en": "Select the service",
+                "de": "Wähle den Dienst",
+                "nl": "selecteer de dienst"
+            }
+        },
+        {
+            "name": "message",
+            "type": "text",
+            "title": { 
+                "en": "Message",
+                "de": "Nachricht",
+                "nl": "Melding"
+            }
+        },
+        {
+            "name": "title",
+            "type": "text",
+            "required": false,
+            "title": { 
+                "en": "Title",
+                "de": "Titel",
+                "nl": "Titel"
+            }
+        },
+        {
+            "name": "url",
+            "type": "dropdown",
+            "title": { 
+                "en": "Homey-URL",
+                "de": "Homey-URL",
+                "nl": "Homey-URL"
+            },
+            "values": [
+                {
+                    "id": "local",
+                    "title": {
+                      "en": "Local Homey URL",
+                      "de": "Lokalen Homey-URL",
+                      "nl": "Lokale Homey URL"
+                    }
+                  },
+                  {
+                    "id": "cloud",
+                    "title": {
+                      "en": "Homey Cloud URL",
+                      "de": "Homey Cloud-URL",
+                      "nl": "Homey Cloud URL"
+                    }
+                  }        
+            ]
+        }
+    ]
+}

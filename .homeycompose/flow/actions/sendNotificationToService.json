@@ -1,0 +1,49 @@
+{
+    "highlight": true,
+    "title": {
+        "en": "Send a notification to a service",
+        "de": "Sende eine Nachricht an einen Dienst",
+        "nl": "Stuur een bericht naar een apparaat"
+    },
+    "titleFormatted": {
+        "en": "Send a notification [[message]] with title [[title]] to service [[service]].",
+        "de": "Sende eine Nachricht [[message]] mit Titel [[title]] an Dienst [[service]]",
+        "nl": "Stuur een melding [[message]] met titel [[title]] naar de dienst [[service]]"
+    },
+    "args": [
+        {
+            "type": "autocomplete",
+            "name": "service",
+            "required": false,
+            "title": { 
+                "en": "Service",
+                "de": "Dienst",
+                "nl": "Dienst"
+            },
+            "placeholder": { 
+                "en": "Select the service",
+                "de": "Wähle den Dienst",
+                "nl": "selecteer de dienst"
+            }
+        },
+        {
+            "name": "message",
+            "type": "text",
+            "title": { 
+                "en": "Message",
+                "de": "Nachricht",
+                "nl": "Melding"
+            }
+        },
+        {
+            "name": "title",
+            "type": "text",
+            "required": false,
+            "title": { 
+                "en": "Title",
+                "de": "Titel",
+                "nl": "Titel"
+            }
+        }
+    ]
+}
