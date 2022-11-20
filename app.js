@@ -452,20 +452,20 @@ class App extends Homey.App {
 			message: args.message
 		};
 		if (args.droptoken != undefined){
-			let url;
+			let url = null;
 			if (args.url != undefined && args.url == "cloud"){
 				url = args.droptoken.cloudUrl;
 			}
 			else{
 				url = args.droptoken.localUrl;
 			}
-			if (url != undefined){
-				if (args.service.startsWith("notify.")){
+			if (url != undefined && url != null){
+				if (args.service.id.startsWith("notify.")){
 					data["data"] = {
 						image: url
 					}
 				}
-				else if (args.service.includes(".send_photo")){
+				else if (args.service.id.includes(".send_photo")){
 					data["url"] = url;
 				}
 			}
