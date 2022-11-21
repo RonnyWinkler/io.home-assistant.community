@@ -1,0 +1,24 @@
+{
+    "id": "cover",
+    "name": {
+      "en": "Window covering",
+      "de": "Fensterabdeckung",
+      "nl": "Raambekleding"
+    },
+    "class": "windowcoverings",
+    "capabilities": [
+      "windowcoverings_closed",
+      "windowcoverings_state",
+      "windowcoverings_set",
+      "windowcoverings_tilt_up",
+      "windowcoverings_tilt_down",
+      "windowcoverings_tilt_set",
+    
+      "button.reconnect"
+    ],
+    "images": {
+      "large": "/drivers/cover/assets/images/large.png",
+      "small": "/drivers/cover/assets/images/small.png"
+  },
+  "$extends": [ "capabilitiesOptions", "pair", "repair" ]
+}
