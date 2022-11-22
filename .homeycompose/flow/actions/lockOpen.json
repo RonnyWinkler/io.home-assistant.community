@@ -1,0 +1,20 @@
+{
+    "highlight": true,
+    "title": {
+        "en": "Open",
+        "de": "Öffnen",
+        "nl": "Openen"
+    },
+    "titleFormatted": {
+        "en": "Open",
+        "de": "Öffnen",
+        "nl": "Openen"
+    },
+    "args": [
+        {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=lock"
+        }
+    ]
+}

@@ -1,0 +1,14 @@
+{
+    "type": "boolean",
+    "title": {
+        "en": "Open",
+        "de": "Öffnen",
+        "nl": "Openen"
+    },
+    "uiQuickAction": false,
+    "uiComponent": "button",
+    "insights": true,
+    "getable": true,
+    "setable": true,
+    "icon": "/assets/capability_icons/lock_open.svg"
+  }

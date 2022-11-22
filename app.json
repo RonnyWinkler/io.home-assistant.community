@@ -1421,6 +1421,27 @@
       {
         "highlight": true,
         "title": {
+          "en": "Open",
+          "de": "Öffnen",
+          "nl": "Openen"
+        },
+        "titleFormatted": {
+          "en": "Open",
+          "de": "Öffnen",
+          "nl": "Openen"
+        },
+        "args": [
+          {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=lock"
+          }
+        ],
+        "id": "lockOpen"
+      },
+      {
+        "highlight": true,
+        "title": {
           "en": "Select sound mode.",
           "de": "Wähle Klangmodus.",
           "nl": "Selecteer geluidsmodus"
@@ -2820,6 +2841,140 @@
           "template": "done"
         }
       ],
+      "id": "lock",
+      "name": {
+        "en": "Lock",
+        "de": "Schloss",
+        "nl": "Slot"
+      },
+      "class": "lock",
+      "capabilities": [
+        "locked",
+        "lock_open",
+        "button.reconnect"
+      ],
+      "images": {
+        "large": "/drivers/lock/assets/images/large.png",
+        "small": "/drivers/lock/assets/images/small.png"
+      }
+    },
+    {
+      "capabilitiesOptions": {
+        "button.reconnect": {
+          "maintenanceAction": true,
+          "title": {
+            "en": "Reconnect",
+            "de": "Neu verbinden",
+            "nl": "Opnieuw verbinden"
+          },
+          "desc": {
+            "en": "Reconnect and reload entities.",
+            "de": "Neu verbinden und Entitäten neu laden.",
+            "nl": "Maak opnieuw verbinding en laad entiteiten opnieuw."
+          }
+        }
+      },
+      "pair": [
+        {
+          "id": "loading",
+          "template": "loading",
+          "navigation": {
+            "next": "list_devices"
+          }
+        },
+        {
+          "id": "login_credentials",
+          "template": "login_credentials",
+          "options": {
+            "logo": "logo.png",
+            "usernameLabel": {
+              "en": "Server"
+            },
+            "usernamePlaceholder": {
+              "en": "http://192.168.xxx.xxx:8123"
+            },
+            "passwordLabel": {
+              "en": "Token"
+            },
+            "passwordPlaceholder": {
+              "en": "Long-lived access token"
+            }
+          }
+        },
+        {
+          "id": "list_devices",
+          "template": "list_devices",
+          "navigation": {
+            "next": "icon"
+          },
+          "options": {
+            "singular": true
+          }
+        },
+        {
+          "id": "icon",
+          "navigation": {
+            "next": "add_devices",
+            "prev": "list_devices"
+          }
+        },
+        {
+          "id": "add_devices"
+        }
+      ],
+      "repair": [
+        {
+          "id": "select",
+          "navigation": {
+            "prev": "done"
+          }
+        },
+        {
+          "id": "device_details",
+          "navigation": {
+            "prev": "select"
+          }
+        },
+        {
+          "id": "icon",
+          "navigation": {
+            "next": "icon_change",
+            "prev": "select"
+          }
+        },
+        {
+          "id": "icon_change",
+          "navigation": {
+            "prev": "icon"
+          }
+        },
+        {
+          "id": "login_credentials",
+          "template": "login_credentials",
+          "navigation": {
+            "prev": "select"
+          },
+          "options": {
+            "logo": "logo.png",
+            "usernameLabel": {
+              "en": "Server"
+            },
+            "usernamePlaceholder": {
+              "en": "http://192.168.xxx.xxx:8123"
+            },
+            "passwordLabel": {
+              "en": "Token"
+            },
+            "passwordPlaceholder": {
+              "en": "Long-lived access token"
+            }
+          }
+        },
+        {
+          "id": "done",
+          "template": "done"
+        }
+      ],
       "id": "media",
       "name": {
         "en": "Media player",
@@ -3972,6 +4127,20 @@
       "getable": true,
       "setable": true,
       "icon": "/assets/capability_icons/fan_reverse.svg"
+    },
+    "lock_open": {
+      "type": "boolean",
+      "title": {
+        "en": "Open",
+        "de": "Öffnen",
+        "nl": "Openen"
+      },
+      "uiQuickAction": false,
+      "uiComponent": "button",
+      "insights": true,
+      "getable": true,
+      "setable": true,
+      "icon": "/assets/capability_icons/lock_open.svg"
     },
     "measure_generic": {
       "type": "string",

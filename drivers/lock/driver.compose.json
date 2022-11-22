@@ -1,0 +1,20 @@
+{
+  "id": "lock",
+  "name": {
+    "en": "Lock",
+    "de": "Schloss",
+    "nl": "Slot"
+  },
+  "class": "lock",
+  "capabilities": [
+    "locked",
+    "lock_open",
+  
+    "button.reconnect"
+  ],
+  "images": {
+    "large": "/drivers/lock/assets/images/large.png",
+    "small": "/drivers/lock/assets/images/small.png"
+  },
+  "$extends": [ "capabilitiesOptions", "pair", "repair" ]
+}

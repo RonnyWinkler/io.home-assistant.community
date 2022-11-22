@@ -62,6 +62,17 @@ class App extends Homey.App {
 				throw new Error(error.message);
 			}
 		});
+		this._flowActionLockOpen = this.homey.flow.getActionCard('lockOpen')
+		this._flowActionLockOpen.registerRunListener(async (args, state) => {
+			try{
+				await args.device.lockOpen();
+				return true;
+			}
+			catch(error){
+				this.error("Error executing flowAction 'lockOpen': "+  error.message);
+				throw new Error(error.message);
+			}
+		});
 
 		this._flowActionSendNotificationToService = this.homey.flow.getActionCard('sendNotificationToService');
 		this._flowActionSendNotificationToService.registerRunListener(async (args, state) => {
