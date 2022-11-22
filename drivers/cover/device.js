@@ -63,6 +63,24 @@ class CoverDevice extends BaseDevice {
                         }
                     }
                 }
+                if (this.hasCapability("windowcoverings_state")){
+                    if (data.state != undefined){
+                        switch (data.state){
+                            case "open":
+                            case "closed":
+                                await this.setCapabilityValue("windowcoverings_state", 'idle' );
+                                break;
+                            case "opening":
+                                await this.setCapabilityValue("windowcoverings_state", 'up' );
+                                break;
+                            case "closing":
+                                await this.setCapabilityValue("windowcoverings_state", 'down' );
+                                break;
+                        }
+                    }
+                }
+
+                
                 if (this.hasCapability("windowcoverings_set")){
                     if (data.attributes.current_position != undefined){
                         let value = data.attributes.current_position/100;
