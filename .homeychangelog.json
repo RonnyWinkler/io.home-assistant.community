@@ -78,5 +78,9 @@
   "0.4.3": {
     "en": "Added three app flow actions for sending notifications and images via HA.",
     "de": "Drei Flow-aktionskarten zur App ergänzt, um Benachrichtigungen und Bilder über HA zu senden."
+  },
+  "0.5.0": {
+    "en": "Added cover and lock device.",
+    "de": "Fenterabdeckung und Schloss ergänzt."
   }
 }
