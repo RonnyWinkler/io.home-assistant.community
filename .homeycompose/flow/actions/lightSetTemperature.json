@@ -1,0 +1,42 @@
+{
+    "id": "lightSetTemperature",
+    "title": { 
+        "en": "Set light temperature",
+        "de": "Lichttemperatur einstellen",
+        "nl": "Lichte temperatuur instellen"
+    },
+    "titleFormatted": { 
+        "en": "Dim to [[dim]] with temperature [[light_temperature]].",
+        "de": "Dimme auf [[dim]] mit Temperatur [[light_temperature]].",
+        "nl": "Dim naar [[dim]] en temperatuur [[light_temperature]]."
+    },
+    "args": [
+        {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=light"
+        },
+        {
+            "name": "dim",
+            "type": "range",
+            "min": 0,
+            "max": 1,
+            "step": 0.01,
+            "value": 0.5,
+            "label": "%",
+            "labelMultiplier": 100,
+            "labelDecimals": 0
+        },
+        {
+        "name": "light_temperature",
+        "type": "range",
+        "min": 0,
+        "max": 1,
+        "step": 0.01,
+        "value": 0.5,
+        "label": "%",
+        "labelMultiplier": 100,
+        "labelDecimals": 0
+        }
+    ]
+}

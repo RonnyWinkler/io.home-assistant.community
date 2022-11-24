@@ -1,6 +1,7 @@
 'use strict';
 
 const BaseDevice = require('../basedevice');
+const colorsys = require('../../lib/colorsys.js');
 
 const CAPABILITIES_SET_DEBOUNCE = 100;
 
@@ -168,16 +169,16 @@ class LightDevice extends BaseDevice {
 
                 let lightModeUpdate = null;
 
-                if(this._hasCapabilityUpdate(valueObj, "light_hue") || 
-                this._hasCapabilityUpdate(valueObj, "light_saturation")) {
+                if( this._hasCapabilityUpdate(valueObj, "light_hue") || 
+                    this._hasCapabilityUpdate(valueObj, "light_saturation")) {
 
                     lightModeUpdate = "color";
 
                     let hue = this._getCapabilityUpdate(valueObj, "light_hue");
                     let sat = this._getCapabilityUpdate(valueObj, "light_saturation");
 
-                    if(hue != this.getCapabilityValue("light_hue") ||
-                    sat != this.getCapabilityValue("light_saturation")) {
+                    if( hue != this.getCapabilityValue("light_hue") ||
+                         sat != this.getCapabilityValue("light_saturation")) {
 
                         data["hs_color"] = [
                             hue * 360.0,
@@ -226,6 +227,26 @@ class LightDevice extends BaseDevice {
     
     }
 
+    // Flow actions ============================================================================================
+    async setHue(args){
+        this._onCapabilitiesSet(args, null);
+    }
+
+    async setColor(args){
+        let hsv = colorsys.hex2Hsv(args.light_color);
+        // this.log(hsv);
+        let value = {
+            "light_hue": hsv.h / 360,
+            "light_saturation": hsv.s / 100,
+            "dim": hsv.v / 100
+        };
+        // this.log(value);
+        this._onCapabilitiesSet(value, null);
+    }
+
+    async setTemperature(args){
+        this._onCapabilitiesSet(args, null);
+    }
 }
 
 module.exports = LightDevice;

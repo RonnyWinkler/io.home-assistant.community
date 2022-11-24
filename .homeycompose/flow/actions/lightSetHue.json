@@ -1,0 +1,53 @@
+{
+    "id": "lightSetHue",
+    "title": { 
+        "en": "Set light hue and saturation",
+        "de": "Lichtfarbton und Sättigung einstellen",
+        "nl": "Stel lichte tint en verzadiging in"
+    },
+    "titleFormatted": { 
+        "en": "Dim to [[dim]] with hue [[light_hue]] and saturation [[light_saturation]].",
+        "de": "Dimme auf [[dim]] mit Farbton [[light_hue]] und Sättigung [[light_saturation]].",
+        "nl": "Dim naar [[dim]] met hue [[light_hue]] en verzadiging [[light_saturation]]."
+    },
+    "args": [
+        {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=light"
+        },
+        {
+            "name": "dim",
+            "type": "range",
+            "min": 0,
+            "max": 1,
+            "step": 0.01,
+            "value": 0.5,
+            "label": "%",
+            "labelMultiplier": 100,
+            "labelDecimals": 0
+        },
+        {
+            "name": "light_hue",
+            "type": "range",
+            "min": 0,
+            "max": 1,
+            "step": 0.01,
+            "value": 0,
+            "label": "°",
+            "labelMultiplier": 360,
+            "labelDecimals": 0
+        },
+        {
+            "name": "light_saturation",
+            "type": "range",
+            "min": 0,
+            "max": 1,
+            "step": 0.01,
+            "value": 0.5,
+            "label": "%",
+            "labelMultiplier": 100,
+            "labelDecimals": 0
+          }
+    ]
+}

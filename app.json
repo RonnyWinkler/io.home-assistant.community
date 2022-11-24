@@ -1419,6 +1419,125 @@
         "id": "fanReverseOn"
       },
       {
+        "id": "lightSetColor",
+        "title": {
+          "en": "Set light color",
+          "de": "Lichtfarbe einstellen",
+          "nl": "Lichte kleur instellen"
+        },
+        "titleFormatted": {
+          "en": "Set color to [[light_color]].",
+          "de": "Setze Farbe auf [[light_color]].",
+          "nl": "Kleur instellen op [[light_color]]."
+        },
+        "args": [
+          {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=light"
+          },
+          {
+            "name": "light_color",
+            "type": "color"
+          }
+        ]
+      },
+      {
+        "id": "lightSetHue",
+        "title": {
+          "en": "Set light hue and saturation",
+          "de": "Lichtfarbton und Sättigung einstellen",
+          "nl": "Stel lichte tint en verzadiging in"
+        },
+        "titleFormatted": {
+          "en": "Dim to [[dim]] with hue [[light_hue]] and saturation [[light_saturation]].",
+          "de": "Dimme auf [[dim]] mit Farbton [[light_hue]] und Sättigung [[light_saturation]].",
+          "nl": "Dim naar [[dim]] met hue [[light_hue]] en verzadiging [[light_saturation]]."
+        },
+        "args": [
+          {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=light"
+          },
+          {
+            "name": "dim",
+            "type": "range",
+            "min": 0,
+            "max": 1,
+            "step": 0.01,
+            "value": 0.5,
+            "label": "%",
+            "labelMultiplier": 100,
+            "labelDecimals": 0
+          },
+          {
+            "name": "light_hue",
+            "type": "range",
+            "min": 0,
+            "max": 1,
+            "step": 0.01,
+            "value": 0,
+            "label": "°",
+            "labelMultiplier": 360,
+            "labelDecimals": 0
+          },
+          {
+            "name": "light_saturation",
+            "type": "range",
+            "min": 0,
+            "max": 1,
+            "step": 0.01,
+            "value": 0.5,
+            "label": "%",
+            "labelMultiplier": 100,
+            "labelDecimals": 0
+          }
+        ]
+      },
+      {
+        "id": "lightSetTemperature",
+        "title": {
+          "en": "Set light temperature",
+          "de": "Lichttemperatur einstellen",
+          "nl": "Lichte temperatuur instellen"
+        },
+        "titleFormatted": {
+          "en": "Dim to [[dim]] with temperature [[light_temperature]].",
+          "de": "Dimme auf [[dim]] mit Temperatur [[light_temperature]].",
+          "nl": "Dim naar [[dim]] en temperatuur [[light_temperature]]."
+        },
+        "args": [
+          {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=light"
+          },
+          {
+            "name": "dim",
+            "type": "range",
+            "min": 0,
+            "max": 1,
+            "step": 0.01,
+            "value": 0.5,
+            "label": "%",
+            "labelMultiplier": 100,
+            "labelDecimals": 0
+          },
+          {
+            "name": "light_temperature",
+            "type": "range",
+            "min": 0,
+            "max": 1,
+            "step": 0.01,
+            "value": 0.5,
+            "label": "%",
+            "labelMultiplier": 100,
+            "labelDecimals": 0
+          }
+        ]
+      },
+      {
         "highlight": true,
         "title": {
           "en": "Open",

@@ -74,6 +74,40 @@ class App extends Homey.App {
 			}
 		});
 
+		this._flowActionLightSetHue = this.homey.flow.getActionCard('lightSetHue')
+		this._flowActionLightSetHue.registerRunListener(async (args, state) => {
+			try{
+				await args.device.setHue(args);
+				return true;
+			}
+			catch(error){
+				this.error("Error executing flowAction 'lightSetHue': "+  error.message);
+				throw new Error(error.message);
+			}
+		});
+		this._flowActionLightSetColor = this.homey.flow.getActionCard('lightSetColor')
+		this._flowActionLightSetColor.registerRunListener(async (args, state) => {
+			try{
+				await args.device.setColor(args);
+				return true;
+			}
+			catch(error){
+				this.error("Error executing flowAction 'lightSetColor': "+  error.message);
+				throw new Error(error.message);
+			}
+		});
+		this._flowActionLightSetTemperature = this.homey.flow.getActionCard('lightSetTemperature')
+		this._flowActionLightSetTemperature.registerRunListener(async (args, state) => {
+			try{
+				await args.device.setTemperature(args);
+				return true;
+			}
+			catch(error){
+				this.error("Error executing flowAction 'lightSetTemperature': "+  error.message);
+				throw new Error(error.message);
+			}
+		});
+
 		this._flowActionSendNotificationToService = this.homey.flow.getActionCard('sendNotificationToService');
 		this._flowActionSendNotificationToService.registerRunListener(async (args, state) => {
 			try{
