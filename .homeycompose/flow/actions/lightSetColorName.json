@@ -1,0 +1,29 @@
+{
+    "id": "lightSetColorName",
+    "title": { 
+        "en": "Set light color via color name",
+        "de": "Lichtfarbe einstellen über Farbname",
+        "nl": "Lichtkleur instellen via kleurnaam"
+    },
+    "titleFormatted": { 
+        "en": "Set color name [[light_color_name]].",
+        "de": "Setze Farbename [[light_color_name]].",
+        "nl": "Kleurnaam [[light_color_name]] instellen."
+    },
+    "args": [
+        {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=light"
+        },
+        {
+            "name": "light_color_name",
+            "type": "autocomplete",
+            "title": { 
+                "en": "Light color",
+                "de": "Lichtfarbe",
+                "nl": "Lichtkleur"
+            }
+        }
+    ]
+}

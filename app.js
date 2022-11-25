@@ -8,6 +8,8 @@ if (process.env.DEBUG === '1')
 const Homey = require('homey');
 const { join } = require('path');
 const Client = require('./lib/Client.js');
+const colors = require('./lib/colors.json');
+
 const RECONNECT_TIMEOUT = 30;
 
 class App extends Homey.App {
@@ -106,6 +108,42 @@ class App extends Homey.App {
 				this.error("Error executing flowAction 'lightSetTemperature': "+  error.message);
 				throw new Error(error.message);
 			}
+		});
+
+		this._flowActionLightSetColorName = this.homey.flow.getActionCard('lightSetColorName')
+		this._flowActionLightSetColorName.registerRunListener(async (args, state) => {
+			try{
+				await args.device.setColorName(args);
+				return true;
+			}
+			catch(error){
+				this.error("Error executing flowAction 'lightSetColorName': "+  error.message);
+				throw new Error(error.message);
+			}
+		});
+		this._flowActionLightSetColorName.registerArgumentAutocompleteListener('light_color_name', async (query, args) => {
+			this.lightColorNamesList = await this._getAutocompleteLightColorNamesList();
+			return this.lightColorNamesList.filter((result) => { 
+				return ( result.name.toLowerCase().includes(query.toLowerCase()) );
+			});
+		});
+
+		this._flowActionLightSetColorNameDim = this.homey.flow.getActionCard('lightSetColorNameDim')
+		this._flowActionLightSetColorNameDim.registerRunListener(async (args, state) => {
+			try{
+				await args.device.setColorName(args);
+				return true;
+			}
+			catch(error){
+				this.error("Error executing flowAction 'lightSetColorNameDim': "+  error.message);
+				throw new Error(error.message);
+			}
+		});
+		this._flowActionLightSetColorNameDim.registerArgumentAutocompleteListener('light_color_name', async (query, args) => {
+			this.lightColorNamesList = await this._getAutocompleteLightColorNamesList();
+			return this.lightColorNamesList.filter((result) => { 
+				return ( result.name.toLowerCase().includes(query.toLowerCase()) );
+			});
 		});
 
 		this._flowActionSendNotificationToService = this.homey.flow.getActionCard('sendNotificationToService');
@@ -568,6 +606,20 @@ class App extends Homey.App {
 			result.push({
 				id: keys[i],
 				name: keys[i]
+			})
+		}
+		return result;
+	}
+
+	async _getAutocompleteLightColorNamesList(){
+		let keys = Object.keys(colors);
+		// this.sortKeys(keys);
+		let result = [];
+		for (let i=0; i<keys.length; i++){
+			result.push({
+				id: keys[i],
+				name: keys[i],
+				color: colors[keys[i]]
 			})
 		}
 		return result;

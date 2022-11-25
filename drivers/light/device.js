@@ -244,6 +244,22 @@ class LightDevice extends BaseDevice {
         this._onCapabilitiesSet(value, null);
     }
 
+    async setColorName(args){
+        let color = args.light_color_name.color;
+        let hsv = colorsys.hex2Hsv(color);
+        // this.log(hsv);
+        let value = {
+            "light_hue": hsv.h / 360,
+            "light_saturation": hsv.s / 100,
+            "dim": hsv.v / 100
+        };
+        if (args.dim != undefined){
+            value.dim = args.dim; 
+        }
+        // this.log(value);
+        this._onCapabilitiesSet(value, null);
+    }
+
     async setTemperature(args){
         this._onCapabilitiesSet(args, null);
     }
