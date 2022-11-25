@@ -82,5 +82,9 @@
   "0.5.0": {
     "en": "Added cover and lock device.",
     "de": "Fenterabdeckung und Schloss ergänzt."
+  },
+  "0.5.1": {
+    "en": "Added flow actions for light adjustment.",
+    "de": "FLow Aktionen zur Lichtanpassung ergängzt."
   }
 }
