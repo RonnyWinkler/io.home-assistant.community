@@ -1430,6 +1430,7 @@
           "de": "Setze Farbe auf [[light_color]].",
           "nl": "Kleur instellen op [[light_color]]."
         },
+        "duration": true,
         "args": [
           {
             "name": "device",
@@ -1454,6 +1455,7 @@
           "de": "Setze Farbename [[light_color_name]].",
           "nl": "Kleurnaam [[light_color_name]] instellen."
         },
+        "duration": true,
         "args": [
           {
             "name": "device",
@@ -1483,6 +1485,7 @@
           "de": "Dimme auf [[dim]] mit Farbe [[light_color_name]].",
           "nl": "Dim naar [[dim]] en Kleur [[light_color_name]]."
         },
+        "duration": true,
         "args": [
           {
             "name": "device",
@@ -1523,6 +1526,7 @@
           "de": "Dimme auf [[dim]] mit Farbton [[light_hue]] und Sättigung [[light_saturation]].",
           "nl": "Dim naar [[dim]] met hue [[light_hue]] en verzadiging [[light_saturation]]."
         },
+        "duration": true,
         "args": [
           {
             "name": "device",
@@ -1576,6 +1580,7 @@
           "de": "Dimme auf [[dim]] mit Temperatur [[light_temperature]].",
           "nl": "Dim naar [[dim]] en temperatuur [[light_temperature]]."
         },
+        "duration": true,
         "args": [
           {
             "name": "device",

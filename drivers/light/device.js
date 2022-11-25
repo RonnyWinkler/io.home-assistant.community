@@ -159,7 +159,12 @@ class LightDevice extends BaseDevice {
                     let bri = this._getCapabilityUpdate(valueObj, "dim");
                     if(bri != this.getCapabilityValue("dim")) {
                         data["brightness"] = bri * 255.0;
-
+                        if (optsObj && optsObj.dim && optsObj.dim.duration){
+                            data["transition"] = optsObj.dim.duration / 1000;
+                        }
+                        if (valueObj.duration){
+                            data["transition"] = valueObj.duration / 1000;
+                        }
                         await this.setCapabilityValue("dim", bri);
                             // .catch(error => {
                             //     this.error("Device "+this.getName()+": Error set dim capability, value: "+bri+" Error: "+error.message);
@@ -184,6 +189,15 @@ class LightDevice extends BaseDevice {
                             hue * 360.0,
                             sat * 100.0
                         ]
+                        if (optsObj && optsObj.light_saturation && optsObj.light_saturation.duration){
+                            data["transition"] = optsObj.light_saturation.duration / 1000;
+                        }
+                        if (optsObj && optsObj.light_hue && optsObj.light_hue.duration){
+                            data["transition"] = optsObj.light_hue.duration / 1000;
+                        }
+                        if (valueObj.duration){
+                            data["transition"] = valueObj.duration / 1000;
+                        }
 
                         await this.setCapabilityValue("light_hue", hue);
                             // .catch(error => {
@@ -203,6 +217,12 @@ class LightDevice extends BaseDevice {
 
                     if(tmp != this.getCapabilityValue("light_temperature")) {
                         data["color_temp"] = ((this._maxMireds - this._minMireds) * tmp) + this._minMireds;
+                        if (optsObj && optsObj.light_temperature && optsObj.light_temperature.duration){
+                            data["transition"] = optsObj.light_temperature.duration / 1000;
+                        }
+                        if (valueObj.duration){
+                            data["transition"] = valueObj.duration / 1000;
+                        }
 
                         await this.setCapabilityValue("light_temperature", tmp);
                             // .catch(error => {
@@ -240,6 +260,9 @@ class LightDevice extends BaseDevice {
             "light_saturation": hsv.s / 100,
             "dim": hsv.v / 100
         };
+        if (args.duration != undefined){
+            value["duration"] = args.duration; 
+        }
         // this.log(value);
         this._onCapabilitiesSet(value, null);
     }
@@ -251,10 +274,13 @@ class LightDevice extends BaseDevice {
         let value = {
             "light_hue": hsv.h / 360,
             "light_saturation": hsv.s / 100,
-            "dim": hsv.v / 100
+            "dim": hsv.v / 100 
         };
         if (args.dim != undefined){
             value.dim = args.dim; 
+        }
+        if (args.duration != undefined){
+            value["duration"] = args.duration; 
         }
         // this.log(value);
         this._onCapabilitiesSet(value, null);

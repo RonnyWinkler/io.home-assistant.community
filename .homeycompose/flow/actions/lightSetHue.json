@@ -10,6 +10,7 @@
         "de": "Dimme auf [[dim]] mit Farbton [[light_hue]] und Sättigung [[light_saturation]].",
         "nl": "Dim naar [[dim]] met hue [[light_hue]] en verzadiging [[light_saturation]]."
     },
+    "duration": true,
     "args": [
         {
             "name": "device",

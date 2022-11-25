@@ -10,6 +10,7 @@
         "de": "Dimme auf [[dim]] mit Farbe [[light_color_name]].",
         "nl": "Dim naar [[dim]] en Kleur [[light_color_name]]."
     },
+    "duration": true,
     "args": [
         {
             "name": "device",

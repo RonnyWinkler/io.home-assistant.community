@@ -10,6 +10,7 @@
         "de": "Setze Farbename [[light_color_name]].",
         "nl": "Kleurnaam [[light_color_name]] instellen."
     },
+    "duration": true,
     "args": [
         {
             "name": "device",

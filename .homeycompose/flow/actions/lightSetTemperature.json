@@ -10,6 +10,7 @@
         "de": "Dimme auf [[dim]] mit Temperatur [[light_temperature]].",
         "nl": "Dim naar [[dim]] en temperatuur [[light_temperature]]."
     },
+    "duration": true,
     "args": [
         {
             "name": "device",

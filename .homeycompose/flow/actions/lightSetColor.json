@@ -10,6 +10,7 @@
         "de": "Setze Farbe auf [[light_color]].",
         "nl": "Kleur instellen op [[light_color]]."
     },
+    "duration": true,
     "args": [
         {
             "name": "device",
