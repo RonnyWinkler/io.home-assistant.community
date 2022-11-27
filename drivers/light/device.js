@@ -137,6 +137,16 @@ class LightDevice extends BaseDevice {
 
     async _onCapabilitiesSet(valueObj, optsObj) {
         try{
+            // read duration value
+            let duration = null;
+            if (valueObj.duration){
+                duration = valueObj.duration / 1000;
+            }
+            Object.keys(optsObj).forEach(id => {
+                if (optsObj[id] && optsObj[id].duration){
+                    duration = optsObj[id].duration;
+                }
+            });
 
             if (valueObj["button.reconnect"]){
                 await this.clientReconnect();   
@@ -159,16 +169,8 @@ class LightDevice extends BaseDevice {
                     let bri = this._getCapabilityUpdate(valueObj, "dim");
                     if(bri != this.getCapabilityValue("dim")) {
                         data["brightness"] = bri * 255.0;
-                        if (optsObj && optsObj.dim && optsObj.dim.duration){
-                            data["transition"] = optsObj.dim.duration / 1000;
-                        }
-                        if (valueObj.duration){
-                            data["transition"] = valueObj.duration / 1000;
-                        }
+
                         await this.setCapabilityValue("dim", bri);
-                            // .catch(error => {
-                            //     this.error("Device "+this.getName()+": Error set dim capability, value: "+bri+" Error: "+error.message);
-                            // });
                     }
                 }
 
@@ -189,24 +191,9 @@ class LightDevice extends BaseDevice {
                             hue * 360.0,
                             sat * 100.0
                         ]
-                        if (optsObj && optsObj.light_saturation && optsObj.light_saturation.duration){
-                            data["transition"] = optsObj.light_saturation.duration / 1000;
-                        }
-                        if (optsObj && optsObj.light_hue && optsObj.light_hue.duration){
-                            data["transition"] = optsObj.light_hue.duration / 1000;
-                        }
-                        if (valueObj.duration){
-                            data["transition"] = valueObj.duration / 1000;
-                        }
 
                         await this.setCapabilityValue("light_hue", hue);
-                            // .catch(error => {
-                            //     this.error("Device "+this.getName()+": Error set hue capability, value: "+hue+" Error: "+error.message);
-                            // });
                         await this.setCapabilityValue("light_saturation", sat);
-                            // .catch(error => {
-                            //     this.error("Device "+this.getName()+": Error set saturation capability, value: "+sat+" Error: "+error.message);
-                            // });
                 }
         
                 } 
@@ -217,28 +204,18 @@ class LightDevice extends BaseDevice {
 
                     if(tmp != this.getCapabilityValue("light_temperature")) {
                         data["color_temp"] = ((this._maxMireds - this._minMireds) * tmp) + this._minMireds;
-                        if (optsObj && optsObj.light_temperature && optsObj.light_temperature.duration){
-                            data["transition"] = optsObj.light_temperature.duration / 1000;
-                        }
-                        if (valueObj.duration){
-                            data["transition"] = valueObj.duration / 1000;
-                        }
 
                         await this.setCapabilityValue("light_temperature", tmp);
-                            // .catch(error => {
-                            //     this.error("Device "+this.getName()+": Error set temoerature capability, value: "+tmp+" Error: "+error.message);
-                            // });
                     }
                 }
 
                 if(lightModeUpdate && this.hasCapability("light_mode")) {
-                    this.setCapabilityValue("light_mode", lightModeUpdate);
-                        // .catch(error => {
-                        //     this.error("Device "+this.getName()+": Error set light mode capability, value: "+lightModeUpdate+" Error: "+error.message);
-                        // });
+                    await this.setCapabilityValue("light_mode", lightModeUpdate);
                 }
             }
-
+            if (duration != null){
+                data["transition"] = duration / 1000;
+            }
             await this._client.updateLight(lightOn, data);
         }
         catch(error) {
