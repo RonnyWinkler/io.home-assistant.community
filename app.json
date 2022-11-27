@@ -2898,6 +2898,11 @@
             "duration": true
           }
         },
+        "onoff": {
+          "opts": {
+            "duration": true
+          }
+        },
         "button.reconnect": {
           "maintenanceAction": true,
           "title": {

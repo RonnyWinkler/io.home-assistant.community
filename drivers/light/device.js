@@ -153,9 +153,9 @@ class LightDevice extends BaseDevice {
                 return;       
             }
 
-            if( typeof valueObj.dim === 'number' ) {
-                valueObj.onoff = valueObj.dim > 0;	
-            }
+            // if( typeof valueObj.dim === 'number' ) {
+            //     valueObj.onoff = valueObj.dim > 0;	
+            // }
 
             let lightOn = this._getCapabilityUpdate(valueObj, "onoff");
 
@@ -167,11 +167,11 @@ class LightDevice extends BaseDevice {
 
                 if(this.hasCapability("dim")) {
                     let bri = this._getCapabilityUpdate(valueObj, "dim");
-                    if(bri != this.getCapabilityValue("dim")) {
+                    // if(bri != this.getCapabilityValue("dim")) {
                         data["brightness"] = bri * 255.0;
 
                         await this.setCapabilityValue("dim", bri);
-                    }
+                    // }
                 }
 
                 let lightModeUpdate = null;
@@ -215,11 +215,22 @@ class LightDevice extends BaseDevice {
             }
             if (duration != null){
                 data["transition"] = duration / 1000;
+                // If switch off with duration, this will result in a dim to 0. Update device, too
+                // if (!lightOn){
+                //     await this.setCapabilityValue("dim", 0);
+                // }
             }
             await this._client.updateLight(lightOn, data);
         }
         catch(error) {
-            this.error("CapabilitiesUpdate error: "+ error.message);
+            let errormsg;
+            if (error.message != undefined){
+                errormsg = error.message;
+            }
+            else{
+                errormsg = error;
+            }
+            this.error("CapabilitiesUpdate error: "+ errormsg);
         }
     
     }
