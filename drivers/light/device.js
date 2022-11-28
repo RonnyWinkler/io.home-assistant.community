@@ -8,6 +8,7 @@ const CAPABILITIES_SET_DEBOUNCE = 100;
 class LightDevice extends BaseDevice {
 
     async onInit() {
+        this._settings = this.getSettings();
         await super.onInit();
 
         this._minMireds = 0;
@@ -16,6 +17,7 @@ class LightDevice extends BaseDevice {
         this.registerMultipleCapabilityListener(this.getCapabilities(), async (value, opts) => {
             await this._onCapabilitiesSet(value, opts)
         }, CAPABILITIES_SET_DEBOUNCE);
+
     }
 
     async updateCapabilities(){
@@ -33,8 +35,14 @@ class LightDevice extends BaseDevice {
 
     getPowerEntityId(){
         try{
-            let entityId = "sensor." + this.entityId.split('.')[1] + "_power"; 
-            return entityId;
+            let powerSetting = this._settings.power_entity; 
+            if (powerSetting && powerSetting != "" ){
+                return powerSetting;
+            }
+            else{
+                let entityId = "sensor." + this.entityId.split('.')[1] + "_power"; 
+                return entityId;
+            }
         }
         catch(error){
             this.error("Error getting power entity ID for device "+this.entityId);
@@ -167,11 +175,10 @@ class LightDevice extends BaseDevice {
 
                 if(this.hasCapability("dim")) {
                     let bri = this._getCapabilityUpdate(valueObj, "dim");
-                    // if(bri != this.getCapabilityValue("dim")) {
-                        data["brightness"] = bri * 255.0;
-
+                    data["brightness"] = bri * 255.0;
+                    if(bri != this.getCapabilityValue("dim")) {
                         await this.setCapabilityValue("dim", bri);
-                    // }
+                    }
                 }
 
                 let lightModeUpdate = null;
@@ -277,6 +284,20 @@ class LightDevice extends BaseDevice {
     async setTemperature(args){
         this._onCapabilitiesSet(args, null);
     }
+
+    async onSettings(settings){
+        try {
+            this._settings = settings.newSettings;
+            await this.connectPowerEntity();
+        }
+        catch(error) {
+            this.error("onSettings error: "+ error.message);
+        }
+    }
+
+    // async _onSettingsChanged(){
+    //     await this.connectPowerEntity();
+    // }
 }
 
 module.exports = LightDevice;

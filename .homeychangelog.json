@@ -86,5 +86,9 @@
   "0.5.1": {
     "en": "Added flow actions for light adjustment.",
     "de": "FLow Aktionen zur Lichtanpassung ergängzt."
+  },
+  "0.5.2": {
+    "en": "Duration now possible for light flow cards, power entity setable in light device settings.",
+    "de": "Dauer jetzt verwendbar für Licht-Flowkarten, Angabe einer Energie-Entität in Geräteeinstellungen."
   }
 }

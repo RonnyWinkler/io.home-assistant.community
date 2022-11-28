@@ -82,7 +82,7 @@ class BaseDevice extends Homey.Device {
         // Unregister power entity (if used)
         if (this.powerEntityId != null){
             this._client.unregisterPowerEntity(this.powerEntityId);
-         }
+        }
      }
 
     async updateCapabilities(){
@@ -138,6 +138,11 @@ class BaseDevice extends Homey.Device {
     }
 
     async connectPowerEntity(){
+        // unregister if already set
+        if (this.powerEntityId != null){
+            this._client.unregisterPowerEntity(this.powerEntityId);
+        }
+
         // Get power entity and connect as additional update source
         let entityId = this.getPowerEntityId();
         if (entityId == null){

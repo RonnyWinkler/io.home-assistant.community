@@ -70,11 +70,12 @@ class CompoundDevice extends BaseDevice {
 
     inputConverter(compoundCapability) {
         let capability = compoundCapability;
-        if (capability.indexOf(".") > -1){
-            capability = capability.split(".")[0];
-        }
-
         let capabilityConverter = this.compoundCapabilitiesConverters[capability];
+        
+        if (capabilityConverter == undefined && capability.indexOf(".") > -1){
+            capability = capability.split(".")[0];
+            capabilityConverter = this.compoundCapabilitiesConverters[capability];
+        }
 
         if(capabilityConverter != null) {
             if(capabilityConverter.from && typeof capabilityConverter.from === "function") {
@@ -90,11 +91,13 @@ class CompoundDevice extends BaseDevice {
 
     outputConverter(compoundCapability) {
         let capability = compoundCapability;
-        if (capability.indexOf(".") > -1){
+        let capabilityConverter = this.compoundCapabilitiesConverters[capability];
+
+        if (capabilityConverter == undefined && capability.indexOf(".") > -1){
             capability = capability.split(".")[0];
+            capabilityConverter = this.compoundCapabilitiesConverters[capability];
         }
 
-        let capabilityConverter = this.compoundCapabilitiesConverters[capability];
         if(capabilityConverter != null) {
             if(capabilityConverter.to && typeof capabilityConverter.to === "function") {
                 return capabilityConverter.to;

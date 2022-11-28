@@ -22,7 +22,7 @@ class PresenceDevice extends BaseDevice {
             await this.setCapabilityValue("alarm_presence", alarm);
         }
         catch(error) {
-            this.error("CapabilitiesUpdate error: "+ error.message);
+            this.error("onSettings error: "+ error.message);
         }
     }
 
