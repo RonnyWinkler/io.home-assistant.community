@@ -147,23 +147,27 @@ class LightDevice extends BaseDevice {
         try{
             // read duration value
             let duration = null;
-            if (valueObj.duration){
+            if (valueObj && valueObj.duration){
                 duration = valueObj.duration / 1000;
             }
-            Object.keys(optsObj).forEach(id => {
-                if (optsObj[id] && optsObj[id].duration){
-                    duration = optsObj[id].duration;
-                }
-            });
-
+            if (optsObj){
+                Object.keys(optsObj).forEach(id => {
+                    if (optsObj[id] && optsObj[id].duration){
+                        duration = optsObj[id].duration / 1000;
+                    }
+                });
+            }
+            
             if (valueObj["button.reconnect"]){
                 await this.clientReconnect();   
                 return;       
             }
 
-            // if( typeof valueObj.dim === 'number' ) {
-            //     valueObj.onoff = valueObj.dim > 0;	
-            // }
+            if( typeof valueObj.dim === 'number' ) {
+                if (valueObj.dim > 0){
+                    valueObj["onoff"] = true;
+                }
+            }
 
             let lightOn = this._getCapabilityUpdate(valueObj, "onoff");
 
@@ -221,7 +225,7 @@ class LightDevice extends BaseDevice {
                 }
             }
             if (duration != null){
-                data["transition"] = duration / 1000;
+                data["transition"] = duration;
                 // If switch off with duration, this will result in a dim to 0. Update device, too
                 // if (!lightOn){
                 //     await this.setCapabilityValue("dim", 0);
