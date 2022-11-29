@@ -18,10 +18,10 @@ Homey.SimpleClass.prototype.log = function(...args) {
 	writeLog("log", this, ...args);
 	log.apply(this, args);
 }
-const err = Homey.SimpleClass.prototype.err;
-Homey.SimpleClass.prototype.err = function(...args) {
+const error = Homey.SimpleClass.prototype.error;
+Homey.SimpleClass.prototype.error = function(...args) {
 	writeLog("err", this, ...args);
-	err.apply(this, args);
+	error.apply(this, args);
 }
 
 function writeLog(type, instance, ...args){
