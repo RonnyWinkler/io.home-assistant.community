@@ -112,7 +112,7 @@ class BaseDriver extends Homey.Driver {
     
         session.setHandler('install', async (data) => {
             this.log('install devies');
-
+            this.log(JSON.stringify(this.selectedDevices, null, "  "));
             // dynamic icon defifinition for capabilities is not possible using capabilitiesOptions
             // Only icons defined in capability.json are used :(
             // for(let i=0; i<this.selectedDevices.length; i++){
@@ -227,6 +227,10 @@ class BaseDriver extends Homey.Driver {
             let data = this.homey.app.getClient().getEntity(id);
             return data;
         });
+
+        session.setHandler('getLog', async () => {
+            return this.homey.app.getLog();
+        });
     }
 
     async checkLogin(data){
@@ -314,8 +318,7 @@ class BaseDriver extends Homey.Driver {
     }
 
     async onListDeviceSelection(session, data){
-        this.log("handler: list_devices_selection: ");
-        this.log(data);
+        this.log("handler: list_devices_selection: "+ data[0].name);
         this.selectedDevices = data;
         return;
     }

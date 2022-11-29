@@ -16,7 +16,8 @@
             "iconActivated": "Verandering mogelijk. Het apparaat gebruikt al een individueel pictogram.",
             "iconChanged": "Icoon is gewijzigd.",
             "appRestart": "Na een pictogramwijziging moet de app opnieuw worden gestart om de wijziging door te voeren.",
-            "deviceDetails": "Apparaat details"
+            "deviceDetails": "Apparaat details",
+            "log": "Toepassingslogboek"
         }
     }
 }

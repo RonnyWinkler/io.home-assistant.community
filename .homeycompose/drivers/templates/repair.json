@@ -13,6 +13,12 @@
       }
     },
     {
+      "id": "log",
+      "navigation": {
+        "prev": "select"        
+      }
+    },
+    {
       "id": "icon",
       "navigation": {
         "next": "icon_change",

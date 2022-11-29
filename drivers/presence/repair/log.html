@@ -1,8 +1,8 @@
 
 <!-- <link rel="stylesheet" type="text/css" href="../../../assets/css/style.css" /> -->
 <style>
-    .preEntityDetails {
-        font-size: 12px;
+    .preLog {
+        font-size: 11px;
         color: inherit;
         border: initial;
         padding: initial;
@@ -12,22 +12,22 @@
 </style>
 <script type="application/javascript">
 
-    Homey.setTitle(Homey.__("repair.title.deviceDetails"));
+    Homey.setTitle(Homey.__("repair.title.log"));
     
 </script>
 
 <div>
     <fieldset>
-            <pre class="preEntityDetails" id="entityDetails"></pre>
+        <pre class="preLog" id="log"></pre>
     </fieldset>
 
 </div>
 
 <script type="application/javascript">
-    var entityDetails = document.getElementById('entityDetails');
-    Homey.emit('getEntity').then(function (entity) {
-        let string = JSON.stringify(entity, null, "  ");
-        entityDetails.textContent = string;
+    var logElement = document.getElementById('log');
+    Homey.emit('getLog').then(function (log) {
+        let string = log.join("\n");
+        logElement.textContent = string;
     });
 
 </script>

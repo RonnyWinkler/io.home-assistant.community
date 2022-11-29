@@ -9,8 +9,68 @@ const Homey = require('homey');
 const { join } = require('path');
 const Client = require('./lib/Client.js');
 const colors = require('./lib/colors.json');
-
 const RECONNECT_TIMEOUT = 30;
+
+
+const logList = [];
+const log = Homey.SimpleClass.prototype.log;
+Homey.SimpleClass.prototype.log = function(...args) {
+	writeLog("log", this, ...args);
+	log.apply(this, args);
+}
+const err = Homey.SimpleClass.prototype.err;
+Homey.SimpleClass.prototype.err = function(...args) {
+	writeLog("err", this, ...args);
+	err.apply(this, args);
+}
+
+function writeLog(type, instance, ...args){
+	if (instance && instance.homey){
+		let entry = "["+type+"] ";
+
+		const tz  = instance.homey.clock.getTimezone();
+		const nowTime = new Date();
+		const now = nowTime.toLocaleString('en-US', 
+			{ 
+				hour12: false, 
+				timeZone: tz,
+				hour: "2-digit",
+				minute: "2-digit",
+				day: "2-digit",
+				month: "2-digit",
+				year: "numeric"
+			});
+		let date = now.split(", ")[0];
+		date = date.split("/")[2] + "-" + date.split("/")[0] + "-" + date.split("/")[1]; 
+		let time = now.split(", ")[1];
+		entry += date + " " + time + ":";
+		let seconds = nowTime.getSeconds(); 
+		if (seconds.length == 1)
+		{
+			entry += '0';
+		}
+		entry += seconds;
+
+		if (instance instanceof Homey.App){
+			entry += " [APP] ";
+		}
+		if (instance instanceof Homey.Driver){
+			entry += " [Driver:" + instance.id+"] ";
+			if (args[0].startsWith("[Device:")){
+				return;
+			}
+		}
+		if (instance instanceof Homey.Device){
+			entry += " [Device:" + instance.getName()+"] ";
+		}
+
+		entry += args;
+		logList.unshift(entry);
+		if (logList.length > 50){
+			logList.pop();
+		}
+	}
+}
 
 class App extends Homey.App {
 	
@@ -18,7 +78,10 @@ class App extends Homey.App {
 		// Homey events
 		this.homey.on('unload', async () => await this.onUninit());
 		this.homey.on('memwarn', async (data) => await this.onMemwarn(data));
-
+		// this.homey.on('__log', (...args) => this.onLog(...args));
+		// this.homey.on('__error', (...args) => this.onError(...args));
+		// this.homey.on('__debug', (...args) => this.onDebug(...args));
+		
 		// Autocomplete Lists:
 		this.entityList = {};
 		this.serviceList = {};
@@ -478,6 +541,18 @@ class App extends Homey.App {
 		// Init device with a short timeout to wait for initial entities
 		this.timeoutCheckConnection = this.homey.setTimeout(async () => this.onCheckConnection().catch(e => console.log(e)), RECONNECT_TIMEOUT * 60 * 1000 );
 
+	}
+
+	// onLog(...args){
+	// }
+	// onError(...args){
+	
+	// }
+	// onDebug(...args){	
+	// }
+
+	getLog(){
+		return logList;
 	}
 
 	async onUninit(){

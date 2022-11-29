@@ -24,6 +24,9 @@
     function onSelectEntity(){
         Homey.showView("device_details");
     }
+    function onSelectLog(){
+        Homey.showView("log");
+    }
 
 </script>
 
@@ -32,6 +35,11 @@
         <div>
             <p>
                 <button id="btnEntity" class=button onClick="onSelectEntity()" visibility = 'hidden'><span data-i18n="repair.title.deviceDetails"></span></button>
+            </p>
+        </div>
+        <div>
+            <p>
+                <button id="btnLog" class=button onClick="onSelectLog()" visibility = 'hidden'><span data-i18n="repair.title.log"></span></button>
             </p>
         </div>
         <div>
@@ -85,21 +93,6 @@
                 span.removeChild( span.firstChild );
             }
         }
-
-
-        // alert(changeable);
-        // button = document.getElementById("btnIcon");
-        // button.disabled = !changeable;
-        // div1 = document.getElementById("divIconNotChangeable");
-        // div2 = document.getElementById("divIconChangeable");
-        // if (changeable == true){
-        //     div1.style.visibility = 'hidden';
-        //     div2.style.visibility = 'visible';
-        // }
-        // else{
-        //     div1.style.visibility = 'hidden';
-        //     div2.style.visibility = 'visible';
-        // }
     });
 
 </script>

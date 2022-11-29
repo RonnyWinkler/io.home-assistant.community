@@ -16,7 +16,8 @@
             "iconActivated": "Änderung möglich. Das Gerät verwendet bereits ein individuelles Icon.",
             "iconChanged": "Icon wurde geändert.",
             "appRestart": "Nach einer Icon-Änderung muss die App neu gestartet werden, damit die Änderung wirksam wird.",
-            "deviceDetails": "Gerätedetails"
+            "deviceDetails": "Gerätedetails",
+            "log": "Anwendungs-Log"
         }
     }
 }

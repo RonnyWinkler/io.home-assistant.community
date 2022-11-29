@@ -78,11 +78,17 @@ class CompoundDevice extends BaseDevice {
         }
 
         if(capabilityConverter != null) {
-            if(capabilityConverter.from && typeof capabilityConverter.from === "function") {
-                return capabilityConverter.from;
-            } else if(capabilityConverter.from && typeof capabilityConverter.from === "string") {
-                capabilityConverter.from = eval(capabilityConverter.from);
-                return capabilityConverter.from;
+            try{
+                if(capabilityConverter.from && typeof capabilityConverter.from === "function") {
+                    return capabilityConverter.from;
+                } else if(capabilityConverter.from && typeof capabilityConverter.from === "string") {
+                    capabilityConverter.from = eval(capabilityConverter.from);
+                    return capabilityConverter.from;
+                }
+            }
+            catch(error){
+                this.error("Read cabapilitiesConverter error: "+error.message);
+                this.error("Read cabapilitiesConverter: ", capabilityConverter.from);
             }
         }
 
@@ -99,11 +105,17 @@ class CompoundDevice extends BaseDevice {
         }
 
         if(capabilityConverter != null) {
-            if(capabilityConverter.to && typeof capabilityConverter.to === "function") {
-                return capabilityConverter.to;
-            } else if(capabilityConverter.to && typeof capabilityConverter.to === "string") {
-                capabilityConverter.to = eval(capabilityConverter.to);
-                return capabilityConverter.to;
+            try{
+                if(capabilityConverter.to && typeof c === "function") {
+                    return capabilityConverter.to;
+                } else if(capabilityConverter.to && typeof capabilityConverter.to === "string") {
+                    capabilityConverter.to = eval(capabilityConverter.to);
+                    return capabilityConverter.to;
+                }
+            }
+            catch(error){
+                this.error("Read cabapilitiesConverter error: capability: "+compoundCapability+" error: "+error.message);
+                this.error("Read cabapilitiesConverter: ", capabilityConverter.to);
             }
         }
 
@@ -112,9 +124,9 @@ class CompoundDevice extends BaseDevice {
 
     // Entity update ============================================================================================
     async onEntityUpdate(data){
-        try {
-            Object.keys(this.compoundCapabilities).forEach(async (key) => {
-                // Is the entity_id of the compound entity equal (entity itself or entity_id of attribute) 
+        Object.keys(this.compoundCapabilities).forEach(async (key) => {
+            try {
+                    // Is the entity_id of the compound entity equal (entity itself or entity_id of attribute) 
                 let entityId = this._getCompoundEntityId(this.compoundCapabilities[key]);
                 if(data != undefined && entityId == data.entity_id) {
     
@@ -175,12 +187,11 @@ class CompoundDevice extends BaseDevice {
                         this.error("Update compound device error: "+this.entityId+" key: "+key+" entity: "+entityId+" value:"+value+" error: "+error.message);
                     }
                  }
-            });
-                
-        }
-        catch(error) {
-            this.error("CapabilitiesUpdate error: "+ error.message);
-        }
+            }
+            catch(error) {
+                this.error("CapabilitiesUpdate: CompoundID: "+this.entityId+" key: "+key+" error: "+ error.message);
+            }
+        });
     }
 
     _getCompoundEntityId(compoundEntity){
