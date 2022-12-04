@@ -429,6 +429,27 @@ class App extends Homey.App {
 			}
 		});
 
+		// Vacuum
+		this._flowActionVacuumSelectFanSpeed = this.homey.flow.getActionCard('vacuumSelectFanSpeed');
+		this._flowActionVacuumSelectFanSpeed.registerRunListener(async (args, state) => {
+			try{
+				await args.device.setFanSpeed(args.source.id);
+				return true;
+			}
+			catch(error){
+				this.error("Error executing flowAction 'vacuumSelectFanSpeed': "+  error.message);
+				throw new Error(error.message);
+			}
+		});
+		this._flowActionVacuumSelectFanSpeed.registerArgumentAutocompleteListener('speed', async (query, args) => {
+			const modeSpeedList = args.device.getModesSpeedList();
+			return modeSpeedList.filter((result) => { 
+				return result.name.toLowerCase().includes(query.toLowerCase());
+			});
+			
+		});
+
+
 		// Flow trigger for all capabilities (compound device)
 		this._flowTriggerCapabilityChanged = this.homey.flow.getDeviceTriggerCard('capability_changed');
 		this._flowTriggerCapabilityChanged.registerRunListener(async (args, state) => {

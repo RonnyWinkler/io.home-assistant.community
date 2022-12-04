@@ -1,7 +1,7 @@
 {
   "_comment": "This file is generated. Please edit .homeycompose/app.json instead.",
   "id": "io.home-assistant.community",
-  "version": "0.5.6",
+  "version": "0.5.7",
   "compatibility": ">=5.0.0",
   "sdk": 3,
   "brandColor": "#038FC7",
@@ -1317,7 +1317,7 @@
           "nl": "Wijzig naar fan modus [[mode]]"
         },
         "hint": {
-          "en": "The list it provided by the device or the HomeAssistand integration.",
+          "en": "The list is provided by the device or the HomeAssistand integration.",
           "de": "Die Liste wird vom Gerät oder der HomeAssistand-Integration bereitgestellt.",
           "nl": "De lijst die wordt geleverd door de devie of de HomeAssistand-integratie."
         },
@@ -1357,7 +1357,7 @@
           "nl": "Overschakelen naar vooraf ingestelde modus [[mode]]"
         },
         "hint": {
-          "en": "The list it provided by the device or the HomeAssistand integration.",
+          "en": "The list is provided by the device or the HomeAssistand integration.",
           "de": "Die Liste wird vom Gerät oder der HomeAssistand-Integration bereitgestellt.",
           "nl": "De lijst die wordt geleverd door de devie of de HomeAssistand-integratie."
         },
@@ -1397,7 +1397,7 @@
           "nl": "Wijzig naar Luchtstroom [[mode]]"
         },
         "hint": {
-          "en": "The list it provided by the device or the HomeAssistand integration.",
+          "en": "The list is provided by the device or the HomeAssistand integration.",
           "de": "Die Liste wird vom Gerät oder der HomeAssistand-Integration bereitgestellt.",
           "nl": "De lijst die wordt geleverd door de devie of de HomeAssistand-integratie."
         },
@@ -1965,6 +1965,46 @@
           }
         ],
         "id": "sendNotificationToService"
+      },
+      {
+        "highlight": true,
+        "title": {
+          "en": "Select fan speed",
+          "de": "Wähle Ventilator-Geschwindigkeit",
+          "nl": "Selecteer ventilator snelheid"
+        },
+        "titleFormatted": {
+          "en": "Select the fan speed [[speed]].",
+          "de": "Wähle die Ventilator-Geschwindigkeit [[speed]].",
+          "nl": "Selecteer de ventilatorsnelheid [[speed]]"
+        },
+        "hint": {
+          "en": "The list is provided by the device or the HomeAssistand integration.",
+          "de": "Die Liste wird vom Gerät oder der HomeAssistand-Integration bereitgestellt.",
+          "nl": "De lijst die wordt geleverd door de devie of de HomeAssistand-integratie."
+        },
+        "args": [
+          {
+            "type": "autocomplete",
+            "name": "speed",
+            "title": {
+              "en": "Fan speed",
+              "de": "Ventilator-Geschwindigkeit",
+              "nl": "Ventilator snelheid"
+            },
+            "placeholder": {
+              "en": "Select the fan speed",
+              "de": "Wähle die Ventilator-Geschwindigkeit",
+              "nl": "Selecteer de ventilatorsnelheid"
+            }
+          },
+          {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=vacuum"
+          }
+        ],
+        "id": "vacuumSelectFanSpeed"
       }
     ]
   },

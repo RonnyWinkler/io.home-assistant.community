@@ -1,0 +1,39 @@
+{
+    "highlight": true,
+    "title": {
+        "en": "Select fan speed",
+        "de": "Wähle Ventilator-Geschwindigkeit",
+        "nl": "Selecteer ventilator snelheid"
+    },
+    "titleFormatted": {
+        "en": "Select the fan speed [[speed]].",
+        "de": "Wähle die Ventilator-Geschwindigkeit [[speed]].",
+        "nl": "Selecteer de ventilatorsnelheid [[speed]]"
+    },
+    "hint": {
+        "en": "The list is provided by the device or the HomeAssistand integration.",
+        "de": "Die Liste wird vom Gerät oder der HomeAssistand-Integration bereitgestellt.",
+        "nl": "De lijst die wordt geleverd door de devie of de HomeAssistand-integratie."
+    },
+    "args": [
+        {
+            "type": "autocomplete",
+            "name": "speed",
+            "title": { 
+                "en": "Fan speed",
+                "de": "Ventilator-Geschwindigkeit",
+                "nl": "Ventilator snelheid"
+            },
+            "placeholder": { 
+                "en": "Select the fan speed",
+                "de": "Wähle die Ventilator-Geschwindigkeit",
+                "nl": "Selecteer de ventilatorsnelheid"
+            }
+        },
+        {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=vacuum"
+        }
+    ]
+}

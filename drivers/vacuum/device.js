@@ -7,6 +7,9 @@ class VacuumDevice extends BaseDevice {
     async onInit() {
         await super.onInit();
 
+        // mode lists
+        this.modesSpeed = [];
+
         this.registerCapabilityListener('onoff', async (value) => {
             await this._onCapabilityOnoff(value);
         });
@@ -24,6 +27,9 @@ class VacuumDevice extends BaseDevice {
         });
         this.registerCapabilityListener('vacuum_locate', async () => {
             await this._onCapabilityService('locate');
+        });
+        this.registerCapabilityListener('vacuum_return', async () => {
+            await this._onCapabilityService('return_to_base');
         });
         this.registerCapabilityListener('vacuum_clean_spot', async () => {
             await this._onCapabilityService('clean_spot');
@@ -93,6 +99,7 @@ class VacuumDevice extends BaseDevice {
                         await this.setCapabilityValue("measure_battery", data.attributes.battery_level);
                     }
                 }
+                this.modesSpeed = data.attributes.speed_list;
             }
         }
         catch(error){
@@ -139,7 +146,7 @@ class VacuumDevice extends BaseDevice {
         } 
         await this._client.callService("vacuum", "set_fan_speed", {
             "entity_id": entityId,
-            "fan_speed": value * 100
+            "fan_speed": speed
         });
         return true;
     }
@@ -153,7 +160,30 @@ class VacuumDevice extends BaseDevice {
     }
 
     // flow actions ===================================================================================?
+    async setFanSpeed(speed){
+        let entityId = this.entityId;
+        await this._client.callService("vacuum", "set_fan_speed", {
+            "entity_id": entityId,
+            "fan_speed": speed
+        });
+        return true;
+    }
 
+    getModesSpeedList(){
+        try{
+            let result = [];
+            for (let i=0; i<this.modesSpeed.length; i++){
+                result.push({
+                    id: this.modesSpeed[i],
+                    name: this.modesSpeed[i]
+                });
+            }
+            return result;
+        }
+        catch(error){
+            this.error("Error reading speed list: "+error.message);
+        }   
+    }
 }
 
 module.exports = VacuumDevice;

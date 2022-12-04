@@ -11,7 +11,7 @@
         "nl": "Wijzig naar Luchtstroom [[mode]]"
     },
     "hint": {
-        "en": "The list it provided by the device or the HomeAssistand integration.",
+        "en": "The list is provided by the device or the HomeAssistand integration.",
         "de": "Die Liste wird vom Gerät oder der HomeAssistand-Integration bereitgestellt.",
         "nl": "De lijst die wordt geleverd door de devie of de HomeAssistand-integratie."
     },
