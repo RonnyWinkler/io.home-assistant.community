@@ -1,9 +1,9 @@
 {
     "id": "fan",
     "name": {
-      "en": "Fav",
+      "en": "Fan",
       "de": "Ventilator",
-      "nl": "Fan"
+      "nl": "Ventilator"
     },
     "class": "fan",
     "capabilities": [

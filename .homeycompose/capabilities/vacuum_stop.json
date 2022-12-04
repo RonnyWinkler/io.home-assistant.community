@@ -1,0 +1,13 @@
+{
+    "type": "boolean",
+    "title": {
+        "en": "Stop",
+        "de": "Stoppen",
+        "nl": "Stoppen"
+    },
+    "uiComponent": "button",
+    "insights": false,
+    "getable": true,
+    "setable": true,
+    "icon": "/assets/capability_icons/vacuum_stop.svg"
+  }

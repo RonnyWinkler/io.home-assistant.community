@@ -1,0 +1,62 @@
+{
+  "title": {
+    "en": "State !{{is|isn't}}",
+    "de": "Status !{{ist|ist nicht}}",
+    "nl": "Toestand !{{is|is niet}}"
+  },
+  "titleFormatted": {
+    "en": "State !{{is|isn't}} [[state]]",
+    "de": "Statue !{{ist|ist nicht}} [[state]]",
+    "nl": "Toestand !{{is|is niet}} [[state]]"
+  },
+  "args": [
+    {
+      "name": "device",
+      "type": "device",
+      "filter": "driver_id=vacuum"
+    },
+    {
+      "name": "state",
+      "type": "dropdown",
+      "title": { 
+        "en": "State",
+        "de": "Status",
+        "nl": "Toestand"
+      },
+      "values": [
+        {
+          "id": "cleaning",
+          "title": {
+            "en": "Cleaning",
+            "de": "Reinigen",
+            "nl": "Schoonmaak"
+          }
+        },
+        {
+          "id": "docked",
+          "title": {
+            "en": "Docked",
+            "de": "Angedockt",
+            "nl": "Aangemeerd"
+          }
+        },
+        {
+          "id": "returning",
+          "title": {
+            "en": "Returning",
+            "de": "Rückkehr",
+            "nl": "Terugkeren"
+          }
+        },
+        {
+          "id": "error",
+          "title": {
+            "en": "Error",
+            "de": "Fehler",
+            "nl": "Fout"
+          }
+        }
+      ]
+    }
+  ]
+}

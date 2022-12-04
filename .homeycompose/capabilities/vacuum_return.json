@@ -1,0 +1,13 @@
+{
+    "type": "boolean",
+    "title": {
+        "en": "Return to base",
+        "de": "Zur Basis zurückkehren",
+        "nl": "Ga terug naar de basis"
+    },
+    "uiComponent": "button",
+    "insights": false,
+    "getable": true,
+    "setable": true,
+    "icon": "/assets/capability_icons/vacuum_return.svg"
+  }

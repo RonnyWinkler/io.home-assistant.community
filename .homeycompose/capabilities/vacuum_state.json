@@ -1,0 +1,51 @@
+{
+  "type": "enum",
+  "title": {
+    "en": "State",
+    "de": "Status",
+    "nl": "Toestand"
+  },
+  "desc": {
+    "en": "State",
+    "de": "Status",
+    "nl": "Toestand"
+  },
+  "getable": true,
+  "setable": false,
+  "insights": true,
+  "uiComponent": "picker",
+  "values": [
+    {
+      "id": "cleaning",
+      "title": {
+        "en": "Cleaning",
+        "de": "Reinigen",
+        "nl": "Schoonmaak"
+      }
+    },
+    {
+      "id": "docked",
+      "title": {
+        "en": "Docked",
+        "de": "Angedockt",
+        "nl": "Aangemeerd"
+      }
+    },
+    {
+      "id": "returning",
+      "title": {
+        "en": "Returning",
+        "de": "Rückkehr",
+        "nl": "Terugkeren"
+      }
+    },
+    {
+      "id": "error",
+      "title": {
+        "en": "Error",
+        "de": "Fehler",
+        "nl": "Fout"
+      }
+    }
+  ]
+}

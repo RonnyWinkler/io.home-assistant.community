@@ -1,0 +1,13 @@
+{
+    "type": "boolean",
+    "title": {
+        "en": "Start",
+        "de": "Starten",
+        "nl": "Begin"
+    },
+    "uiComponent": "button",
+    "insights": false,
+    "getable": true,
+    "setable": true,
+    "icon": "/assets/capability_icons/vacuum_start.svg"
+  }

@@ -1,0 +1,13 @@
+{
+    "type": "boolean",
+    "title": {
+        "en": "Spot clean-up",
+        "de": "Punktreinigung",
+        "nl": "Plek opruimen"
+    },
+    "uiComponent": "button",
+    "insights": false,
+    "getable": true,
+    "setable": true,
+    "icon": "/assets/capability_icons/vacuum_clean_spot.svg"
+  }

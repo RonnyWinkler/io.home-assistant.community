@@ -1,0 +1,13 @@
+{
+    "type": "boolean",
+    "title": {
+        "en": "Pause",
+        "de": "Pauseieren",
+        "nl": "pauze"
+    },
+    "uiComponent": "button",
+    "insights": false,
+    "getable": true,
+    "setable": true,
+    "icon": "/assets/capability_icons/vacuum_pause.svg"
+  }

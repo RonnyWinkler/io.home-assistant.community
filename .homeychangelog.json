@@ -94,5 +94,17 @@
   "0.5.3": {
     "en": "Fix for light flow cards.",
     "de": "Korrektur für Licht-Flowkarten."
+  },
+  "0.5.4": {
+    "en": "Added app log to device repair view.",
+    "de": "App-Log in Repair-Dialog ergänzt."
+  },
+  "0.5.5": {
+    "en": "Added vacuum cleaner device.",
+    "de": "Staubsauger ergänzt."
+  },
+  "0.5.6": {
+    "en": "Fix for vacuum cleaner device.",
+    "de": "Korrektur für Staubsauger."
   }
 }

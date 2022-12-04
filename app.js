@@ -529,6 +529,16 @@ class App extends Homey.App {
 			}
 			// return (args.device.getCapabilityValue('presence_state') == args.value);
 		})
+		this._flowConditionVacuumState = this.homey.flow.getConditionCard('vacuum_state')
+		.registerRunListener(async (args, state) => {
+			if (state.manual == true){
+				return (args.device.getCapabilityValue('vacuum_state') == args.value);
+			}
+			else{
+				return (state.value == args.state);
+			}
+			// return (args.device.getCapabilityValue('presence_state') == args.value);
+		})
   
 		// App events
 		this.homey.settings.on("set", async (key) =>  {
