@@ -1,0 +1,19 @@
+{
+    "title": {
+        "en": "Pause",
+        "de": "Pausieren",
+        "nl": "pauze"
+    },
+    "titleFormatted": {
+        "en": "Pause",
+        "de": "Pausieren",
+        "nl": "pauze"
+    },
+    "args": [
+        {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=vacuum"
+        }
+    ]
+}

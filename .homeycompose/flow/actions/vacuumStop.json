@@ -1,0 +1,19 @@
+{
+    "title": {
+        "en": "Stop",
+        "de": "Stoppen",
+        "nl": "Stoppen"
+    },
+    "titleFormatted": {
+        "en": "Stop",
+        "de": "Stoppen",
+        "nl": "Stoppen"
+    },
+    "args": [
+        {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=vacuum"
+        }
+    ]
+}

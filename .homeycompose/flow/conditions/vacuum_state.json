@@ -5,9 +5,9 @@
     "nl": "Toestand !{{is|is niet}}"
   },
   "titleFormatted": {
-    "en": "State !{{is|isn't}} [[state]]",
-    "de": "Statue !{{ist|ist nicht}} [[state]]",
-    "nl": "Toestand !{{is|is niet}} [[state]]"
+    "en": "State !{{is|isn't}} [[vacuum_state]]",
+    "de": "Status !{{ist|ist nicht}} [[vacuum_state]]",
+    "nl": "Toestand !{{is|is niet}} [[vacuum_state]]"
   },
   "args": [
     {
@@ -16,7 +16,7 @@
       "filter": "driver_id=vacuum"
     },
     {
-      "name": "state",
+      "name": "vacuum_state",
       "type": "dropdown",
       "title": { 
         "en": "State",

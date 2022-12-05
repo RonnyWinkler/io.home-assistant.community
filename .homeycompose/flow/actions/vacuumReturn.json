@@ -1,0 +1,19 @@
+{
+    "title": {
+        "en": "Return to base",
+        "de": "Zur Basis zurückkehren",
+        "nl": "Ga terug naar de basis"
+    },
+    "titleFormatted": {
+        "en": "Return to base",
+        "de": "Zur Basis zurückkehren",
+        "nl": "Ga terug naar de basis"
+    },
+    "args": [
+        {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=vacuum"
+        }
+    ]
+}

@@ -7,7 +7,7 @@
     },
     "uiComponent": "button",
     "insights": false,
-    "getable": true,
+    "getable": false,
     "setable": true,
     "icon": "/assets/capability_icons/vacuum_start.svg"
   }

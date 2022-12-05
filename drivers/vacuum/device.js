@@ -18,21 +18,27 @@ class VacuumDevice extends BaseDevice {
         });
         this.registerCapabilityListener('vacuum_start', async () => {
             await this._onCapabilityService('start');
+            await this.setCapabilityValue("vacuum_start", false);
         });
         this.registerCapabilityListener('vacuum_stop', async () => {
             await this._onCapabilityService('stop');
+            await this.setCapabilityValue("vacuum_stop", false);
         });
         this.registerCapabilityListener('vacuum_pause', async () => {
             await this._onCapabilityService('pause');
+            await this.setCapabilityValue("vacuum_pause", false);
         });
         this.registerCapabilityListener('vacuum_locate', async () => {
             await this._onCapabilityService('locate');
+            await this.setCapabilityValue("vacuum_locate", false);
         });
         this.registerCapabilityListener('vacuum_return', async () => {
             await this._onCapabilityService('return_to_base');
+            await this.setCapabilityValue("vacuum_return", false);
         });
         this.registerCapabilityListener('vacuum_clean_spot', async () => {
             await this._onCapabilityService('clean_spot');
+            await this.setCapabilityValue("vacuum_clean_spot", false);
         });
         
         // maintenance actions
@@ -99,7 +105,12 @@ class VacuumDevice extends BaseDevice {
                         await this.setCapabilityValue("measure_battery", data.attributes.battery_level);
                     }
                 }
-                this.modesSpeed = data.attributes.speed_list;
+                if (data.attributes.fan_speed_list != undefined){
+                    this.modesSpeed = data.attributes.fan_speed_list;
+                }
+                else{
+                    this.modesSpeed = [];
+                }
             }
         }
         catch(error){
@@ -183,6 +194,25 @@ class VacuumDevice extends BaseDevice {
         catch(error){
             this.error("Error reading speed list: "+error.message);
         }   
+    }
+
+    async start(){
+        await this._onCapabilityService('start');
+    }
+    async stop(){
+        await this._onCapabilityService('stop');
+    }
+    async pause(){
+        await this._onCapabilityService('pause');
+    }
+    async cleanSpot(){
+        await this._onCapabilityService('clean_spot');
+    }
+    async return(){
+        await this._onCapabilityService('return_to_base');
+    }
+    async locate(){
+        await this._onCapabilityService('locate');
     }
 }
 

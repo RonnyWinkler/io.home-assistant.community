@@ -191,8 +191,10 @@ class ClimateFanDevice extends BaseDevice {
     // Capabilities ===========================================================================================?
     // Climate capabilities
      async _onCapabilityClimateMode( value ) {
-        let entityId = this.entityId;
-        // await this.setCapabilityValue("climate_mode", value);
+        let entityIds = this.getStoreValue("entities");
+        let entityId = entityIds.filter((result) => { 
+            return ( result.startsWith("climate."))
+        });
         await this._client.callService("climate", "set_hvac_mode", {
             "entity_id": entityId,
             "hvac_mode": value
@@ -201,7 +203,10 @@ class ClimateFanDevice extends BaseDevice {
     }
 
     async _onCapabilityClimateModeFan( value ) {
-        let entityId = this.entityId;
+        let entityIds = this.getStoreValue("entities");
+        let entityId = entityIds.filter((result) => { 
+            return ( result.startsWith("climate."))
+        });
         await this._client.callService("climate", "set_fan_mode", {
             "entity_id": entityId,
             "fan_mode": value
@@ -209,7 +214,10 @@ class ClimateFanDevice extends BaseDevice {
     }
 
     async _onCapabilityClimateModePreset( value ) {
-        let entityId = this.entityId;
+        let entityIds = this.getStoreValue("entities");
+        let entityId = entityIds.filter((result) => { 
+            return ( result.startsWith("climate."))
+        });
         await this._client.callService("climate", "set_preset_mode", {
             "entity_id": entityId,
             "preset_mode": value
@@ -217,7 +225,10 @@ class ClimateFanDevice extends BaseDevice {
     }
 
     async _onCapabilityClimateModeSwing( value ) {
-        let entityId = this.entityId;
+        let entityIds = this.getStoreValue("entities");
+        let entityId = entityIds.filter((result) => { 
+            return ( result.startsWith("climate."))
+        });
         await this._client.callService("climate", "set_swing_mode", {
             "entity_id": entityId,
             "swing_mode": value
@@ -225,7 +236,10 @@ class ClimateFanDevice extends BaseDevice {
     }
 
     async _onCapabilityTargetTemperature( value ) {
-        let entityId = this.entityId;
+        let entityIds = this.getStoreValue("entities");
+        let entityId = entityIds.filter((result) => { 
+            return ( result.startsWith("climate."))
+        });
         await this._client.callService("climate", "set_temperature", {
             "entity_id": entityId,
             "temperature": value
@@ -234,7 +248,10 @@ class ClimateFanDevice extends BaseDevice {
 
     // Fan capabilities:
     async _onCapabilityOnoff( value ) {
-        let entityId = this.entityId;
+        let entityIds = this.getStoreValue("entities");
+        let entityId = entityIds.filter((result) => { 
+            return ( result.startsWith("fan."))
+        });
         if (value){
             await this._client.callService("fan", "turn_on", {
                 "entity_id": entityId
@@ -249,7 +266,10 @@ class ClimateFanDevice extends BaseDevice {
     }
 
     async _onCapabilityOnoffOscillate( value ) {
-        let entityId = this.entityId;
+        let entityIds = this.getStoreValue("entities");
+        let entityId = entityIds.filter((result) => { 
+            return ( result.startsWith("fan."))
+        });
         await this._client.callService("fan", "oscillate", {
             "entity_id": entityId,
             "oscillating": value
@@ -258,7 +278,10 @@ class ClimateFanDevice extends BaseDevice {
     }
 
     async _onCapabilityOnoffReverse( value ) {
-        let entityId = this.entityId;
+        let entityIds = this.getStoreValue("entities");
+        let entityId = entityIds.filter((result) => { 
+            return ( result.startsWith("fan."))
+        });
         let direction = "forward";
         if (value){
             direction = "reverse";
@@ -271,7 +294,10 @@ class ClimateFanDevice extends BaseDevice {
     }
 
     async _onCapabilityDim( value ) {
-        let entityId = this.entityId;
+        let entityIds = this.getStoreValue("entities");
+        let entityId = entityIds.filter((result) => { 
+            return ( result.startsWith("fan."))
+        });
         let speed = value * 100;
         if (speed > 100){
             speed = 100;
@@ -342,6 +368,7 @@ class ClimateFanDevice extends BaseDevice {
                     name: this.modesSwing[i]
                 });
             }
+            result.push({id: "id1", name: "name1"});
             return result;
         }
         catch(error){

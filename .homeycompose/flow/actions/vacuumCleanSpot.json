@@ -1,0 +1,19 @@
+{
+    "title": {
+        "en": "Spot clean-up",
+        "de": "Punktreinigung",
+        "nl": "Plek opruimen"
+    },
+    "titleFormatted": {
+        "en": "Spot clean-up",
+        "de": "Punktreinigung",
+        "nl": "Plek opruimen"
+    },
+    "args": [
+        {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=vacuum"
+        }
+    ]
+}

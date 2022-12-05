@@ -329,7 +329,7 @@ class App extends Homey.App {
 		this._flowActionClimateSelectModeFan = this.homey.flow.getActionCard('climateSelectModeFan');
 		this._flowActionClimateSelectModeFan.registerRunListener(async (args, state) => {
 			try{
-				await args.device.setModeFan(args.source.id);
+				await args.device.setModeFan(args.mode.id);
 				return true;
 			}
 			catch(error){
@@ -348,7 +348,7 @@ class App extends Homey.App {
 		this._flowActionClimateSelectModePreset = this.homey.flow.getActionCard('climateSelectModePreset');
 		this._flowActionClimateSelectModePreset.registerRunListener(async (args, state) => {
 			try{
-				await args.device.setModePreset(args.source.id);
+				await args.device.setModePreset(args.mode.id);
 				return true;
 			}
 			catch(error){
@@ -367,7 +367,7 @@ class App extends Homey.App {
 		this._flowActionClimateSelectModeSwing = this.homey.flow.getActionCard('climateSelectModeSwing');
 		this._flowActionClimateSelectModeSwing.registerRunListener(async (args, state) => {
 			try{
-				await args.device.setModeSwing(args.source.id);
+				await args.device.setModeSwing(args.mode.id);
 				return true;
 			}
 			catch(error){
@@ -433,7 +433,7 @@ class App extends Homey.App {
 		this._flowActionVacuumSelectFanSpeed = this.homey.flow.getActionCard('vacuumSelectFanSpeed');
 		this._flowActionVacuumSelectFanSpeed.registerRunListener(async (args, state) => {
 			try{
-				await args.device.setFanSpeed(args.source.id);
+				await args.device.setFanSpeed(args.speed.id);
 				return true;
 			}
 			catch(error){
@@ -447,6 +447,73 @@ class App extends Homey.App {
 				return result.name.toLowerCase().includes(query.toLowerCase());
 			});
 			
+		});
+
+		this._flowActionVacuumStart = this.homey.flow.getActionCard('vacuumStart');
+		this._flowActionVacuumStart.registerRunListener(async (args, state) => {
+			try{
+				await args.device.start();
+				return true;
+			}
+			catch(error){
+				this.error("Error executing flowAction 'vacuumStart': "+  error.message);
+				throw new Error(error.message);
+			}
+		});
+		this._flowActionVacuumStop = this.homey.flow.getActionCard('vacuumStop');
+		this._flowActionVacuumStop.registerRunListener(async (args, state) => {
+			try{
+				await args.device.stop();
+				return true;
+			}
+			catch(error){
+				this.error("Error executing flowAction 'vacuumStop': "+  error.message);
+				throw new Error(error.message);
+			}
+		});
+		this._flowActionVacuumPause = this.homey.flow.getActionCard('vacuumPause');
+		this._flowActionVacuumPause.registerRunListener(async (args, state) => {
+			try{
+				await args.device.pause();
+				return true;
+			}
+			catch(error){
+				this.error("Error executing flowAction 'vacuumPause': "+  error.message);
+				throw new Error(error.message);
+			}
+		});
+		this._flowActionVacuumReturn = this.homey.flow.getActionCard('vacuumReturn');
+		this._flowActionVacuumReturn.registerRunListener(async (args, state) => {
+			try{
+				await args.device.return();
+				return true;
+			}
+			catch(error){
+				this.error("Error executing flowAction 'vacuumReturn': "+  error.message);
+				throw new Error(error.message);
+			}
+		});
+		this._flowActionVacuumLocate = this.homey.flow.getActionCard('vacuumLocate');
+		this._flowActionVacuumLocate.registerRunListener(async (args, state) => {
+			try{
+				await args.device.locate();
+				return true;
+			}
+			catch(error){
+				this.error("Error executing flowAction 'vacuumLocate': "+  error.message);
+				throw new Error(error.message);
+			}
+		});
+		this._flowActionVacuumCleanSpot = this.homey.flow.getActionCard('vacuumCleanSpot');
+		this._flowActionVacuumCleanSpot.registerRunListener(async (args, state) => {
+			try{
+				await args.device.cleanSpot();
+				return true;
+			}
+			catch(error){
+				this.error("Error executing flowAction 'vacuumCleanSpot': "+  error.message);
+				throw new Error(error.message);
+			}
 		});
 
 
@@ -543,7 +610,7 @@ class App extends Homey.App {
 		this._flowConditionPresenceState = this.homey.flow.getConditionCard('presence_state')
 		.registerRunListener(async (args, state) => {
 			if (state.manual == true){
-				return (args.device.getCapabilityValue('presence_state') == args.value);
+				return (args.device.getCapabilityValue('presence_state') == args.state);
 			}
 			else{
 				return (state.value == args.state);
@@ -553,10 +620,10 @@ class App extends Homey.App {
 		this._flowConditionVacuumState = this.homey.flow.getConditionCard('vacuum_state')
 		.registerRunListener(async (args, state) => {
 			if (state.manual == true){
-				return (args.device.getCapabilityValue('vacuum_state') == args.value);
+				return (args.device.getCapabilityValue('vacuum_state') == args.vacuum_state);
 			}
 			else{
-				return (state.value == args.state);
+				return (state.value == args.vacuum_state);
 			}
 			// return (args.device.getCapabilityValue('presence_state') == args.value);
 		})

@@ -1,0 +1,19 @@
+{
+    "title": {
+        "en": "Locate",
+        "de": "Lokalisieren",
+        "nl": "Bevind zich"
+    },
+    "titleFormatted": {
+        "en": "Locate",
+        "de": "Lokalisieren",
+        "nl": "Bevind zich"
+    },
+    "args": [
+        {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=vacuum"
+        }
+    ]
+}
