@@ -77,7 +77,12 @@ class VacuumDevice extends BaseDevice {
                 if (this.hasCapability('vacuum_state')){
                     if (data.state != undefined && 
                         data.state != "unavailable"){
-                        await this.setCapabilityValue("vacuum_state", data.state);
+                        try{
+                            await this.setCapabilityValue("vacuum_state", data.state);
+                        }
+                        catch(error){
+                            // ignore wrong states
+                        }
                     }
                 }
                 if (this.hasCapability('onoff')){
