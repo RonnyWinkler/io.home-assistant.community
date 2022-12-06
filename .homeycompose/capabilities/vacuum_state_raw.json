@@ -1,0 +1,17 @@
+{
+  "type": "string",
+  "title": {
+    "en": "State (original)",
+    "de": "Status (original)",
+    "nl": "Toestand (origineel)"
+  },
+  "desc": {
+    "en": "State (original)",
+    "de": "Status (original)",
+    "nl": "Toestand (origineel)"
+  },
+  "getable": true,
+  "setable": false,
+  "insights": true,
+  "uiComponent": "sensor"
+}

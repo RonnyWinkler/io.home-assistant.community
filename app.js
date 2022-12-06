@@ -10,6 +10,7 @@ const { join } = require('path');
 const Client = require('./lib/Client.js');
 const colors = require('./lib/colors.json');
 const RECONNECT_TIMEOUT = 30;
+const LOG_SIZE = 50;
 
 
 const logList = [];
@@ -64,9 +65,17 @@ function writeLog(type, instance, ...args){
 			entry += " [Device:" + instance.getName()+"] ";
 		}
 
-		entry += args;
+		for (let i=0; i<args.length;i++){
+			if (typeof(args[i]) == 'object'){
+				entry += JSON.stringify(args[i]);
+			}
+			else{
+				entry += args[i];
+			}
+		}
+
 		logList.unshift(entry);
-		if (logList.length > 50){
+		if (logList.length > LOG_SIZE){
 			logList.pop();
 		}
 	}
@@ -624,6 +633,16 @@ class App extends Homey.App {
 			}
 			else{
 				return (state.value == args.vacuum_state);
+			}
+			// return (args.device.getCapabilityValue('presence_state') == args.value);
+		})
+		this._flowConditionVacuumStateRaw = this.homey.flow.getConditionCard('vacuum_state_raw')
+		.registerRunListener(async (args, state) => {
+			if (state.manual == true){
+				return (args.device.getCapabilityValue('vacuum_state_raw') == args.vacuum_state_raw);
+			}
+			else{
+				return (state.value == args.vacuum_state_raw);
 			}
 			// return (args.device.getCapabilityValue('presence_state') == args.value);
 		})

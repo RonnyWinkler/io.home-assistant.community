@@ -13,7 +13,7 @@
   "getable": true,
   "setable": false,
   "insights": true,
-  "uiComponent": "picker",
+  "uiComponent": "sensor",
   "values": [
     {
       "id": "cleaning",

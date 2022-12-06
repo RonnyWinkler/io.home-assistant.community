@@ -601,6 +601,33 @@
           }
         ],
         "id": "vacuum_state_changed"
+      },
+      {
+        "title": {
+          "en": "State (original) changed",
+          "de": "Status (original) hat sich geändert",
+          "nl": "Toestand (origineel) gewijzigd"
+        },
+        "tokens": [
+          {
+            "name": "vacuum_state_raw",
+            "type": "string",
+            "title": {
+              "en": "State",
+              "de": "Status",
+              "nl": "Toestand"
+            },
+            "example": "cleaning"
+          }
+        ],
+        "args": [
+          {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=vacuum"
+          }
+        ],
+        "id": "vacuum_state_raw_changed"
       }
     ],
     "conditions": [
@@ -1117,6 +1144,35 @@
           }
         ],
         "id": "vacuum_state"
+      },
+      {
+        "title": {
+          "en": "State (original) !{{is|isn't}}",
+          "de": "Status (original) !{{ist|ist nicht}}",
+          "nl": "Toestand (origineel) !{{is|is niet}}"
+        },
+        "titleFormatted": {
+          "en": "State (original) !{{is|isn't}} [[vacuum_state_raw]]",
+          "de": "Status (original) !{{ist|ist nicht}} [[vacuum_state_raw]]",
+          "nl": "Toestand (origineel) !{{is|is niet}} [[vacuum_state_raw]]"
+        },
+        "args": [
+          {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=vacuum"
+          },
+          {
+            "name": "vacuum_state_raw",
+            "type": "text",
+            "title": {
+              "en": "State",
+              "de": "Status",
+              "nl": "Toestand"
+            }
+          }
+        ],
+        "id": "vacuum_state_raw"
       }
     ],
     "actions": [
@@ -4387,6 +4443,7 @@
         "vacuum_locate",
         "vacuum_clean_spot",
         "vacuum_state",
+        "vacuum_state_raw",
         "measure_battery",
         "button.reconnect"
       ],
@@ -4979,7 +5036,7 @@
       "getable": true,
       "setable": false,
       "insights": true,
-      "uiComponent": "picker",
+      "uiComponent": "sensor",
       "values": [
         {
           "id": "cleaning",
@@ -5014,6 +5071,23 @@
           }
         }
       ]
+    },
+    "vacuum_state_raw": {
+      "type": "string",
+      "title": {
+        "en": "State (original)",
+        "de": "Status (original)",
+        "nl": "Toestand (origineel)"
+      },
+      "desc": {
+        "en": "State (original)",
+        "de": "Status (original)",
+        "nl": "Toestand (origineel)"
+      },
+      "getable": true,
+      "setable": false,
+      "insights": true,
+      "uiComponent": "sensor"
     },
     "vacuum_stop": {
       "type": "boolean",

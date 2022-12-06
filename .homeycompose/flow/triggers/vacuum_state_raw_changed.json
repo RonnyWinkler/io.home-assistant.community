@@ -1,0 +1,24 @@
+{
+    "title": {
+        "en": "State (original) changed",
+        "de": "Status (original) hat sich geändert",
+        "nl": "Toestand (origineel) gewijzigd"
+    },
+    "tokens": [
+        {
+            "name": "vacuum_state_raw",
+            "type": "string",
+            "title": {
+                "en": "State",
+                "de": "Status",
+                "nl": "Toestand"
+            },
+            "example": "cleaning"
+        }
+    ],
+    "args": [{
+        "name": "device",
+        "type": "device",
+        "filter": "driver_id=vacuum"
+    }]
+}

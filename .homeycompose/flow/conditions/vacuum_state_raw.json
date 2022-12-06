@@ -1,0 +1,28 @@
+{
+  "title": {
+    "en": "State (original) !{{is|isn't}}",
+    "de": "Status (original) !{{ist|ist nicht}}",
+    "nl": "Toestand (origineel) !{{is|is niet}}"
+  },
+  "titleFormatted": {
+    "en": "State (original) !{{is|isn't}} [[vacuum_state_raw]]",
+    "de": "Status (original) !{{ist|ist nicht}} [[vacuum_state_raw]]",
+    "nl": "Toestand (origineel) !{{is|is niet}} [[vacuum_state_raw]]"
+  },
+  "args": [
+    {
+      "name": "device",
+      "type": "device",
+      "filter": "driver_id=vacuum"
+    },
+    {
+      "name": "vacuum_state_raw",
+      "type": "text",
+      "title": { 
+        "en": "State",
+        "de": "Status",
+        "nl": "Toestand"
+      }
+    }
+  ]
+}

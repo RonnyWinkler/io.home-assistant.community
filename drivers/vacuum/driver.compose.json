@@ -16,6 +16,7 @@
     "vacuum_locate",
     "vacuum_clean_spot",
     "vacuum_state",
+    "vacuum_state_raw",
 
     "measure_battery",
   

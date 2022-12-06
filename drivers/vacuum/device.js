@@ -58,6 +58,10 @@ class VacuumDevice extends BaseDevice {
             {
                 await this.addCapability('vacuum_state');
             }
+            if (!this.hasCapability('vacuum_state_raw'))
+            {
+                await this.addCapability('vacuum_state_raw');
+            }
         }
         catch(error){
             this.error("Error adding capability: "+error.message);
@@ -81,8 +85,14 @@ class VacuumDevice extends BaseDevice {
                             await this.setCapabilityValue("vacuum_state", data.state);
                         }
                         catch(error){
-                            // ignore wrong states
+                            this.log("Unknown state: "+data.state);
                         }
+                    }
+                }
+                if (this.hasCapability('vacuum_state_raw')){
+                    if (data.state != undefined && 
+                        data.state != "unavailable"){
+                        await this.setCapabilityValue("vacuum_state_raw", data.state);
                     }
                 }
                 if (this.hasCapability('onoff')){
