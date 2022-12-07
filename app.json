@@ -1,8 +1,8 @@
 {
   "_comment": "This file is generated. Please edit .homeycompose/app.json instead.",
   "id": "io.home-assistant.community",
-  "version": "0.5.16",
-  "compatibility": ">=5.0.0",
+  "version": "0.5.17",
+  "compatibility": ">=8.1.0",
   "sdk": 3,
   "brandColor": "#038FC7",
   "name": {
@@ -2235,7 +2235,7 @@
             "next": "icon"
           },
           "options": {
-            "singular": true
+            "singular": false
           }
         },
         {
@@ -2374,7 +2374,7 @@
             "next": "icon"
           },
           "options": {
-            "singular": true
+            "singular": false
           }
         },
         {
@@ -2504,7 +2504,7 @@
             "next": "icon"
           },
           "options": {
-            "singular": true
+            "singular": false
           }
         },
         {
@@ -2675,7 +2675,7 @@
             "next": "icon"
           },
           "options": {
-            "singular": true
+            "singular": false
           }
         },
         {
@@ -2859,7 +2859,7 @@
             "next": "icon"
           },
           "options": {
-            "singular": true
+            "singular": false
           }
         },
         {
@@ -2988,7 +2988,7 @@
             "next": "icon"
           },
           "options": {
-            "singular": true
+            "singular": false
           }
         },
         {
@@ -3137,7 +3137,7 @@
             "next": "icon"
           },
           "options": {
-            "singular": true
+            "singular": false
           }
         },
         {
@@ -3337,7 +3337,7 @@
             "next": "icon"
           },
           "options": {
-            "singular": true
+            "singular": false
           }
         },
         {
@@ -3477,7 +3477,7 @@
             "next": "icon"
           },
           "options": {
-            "singular": true
+            "singular": false
           }
         },
         {
@@ -3631,7 +3631,7 @@
             "next": "icon"
           },
           "options": {
-            "singular": true
+            "singular": false
           }
         },
         {
@@ -3783,7 +3783,7 @@
             "next": "icon"
           },
           "options": {
-            "singular": true
+            "singular": false
           }
         },
         {
@@ -3922,7 +3922,7 @@
             "next": "icon"
           },
           "options": {
-            "singular": true
+            "singular": false
           }
         },
         {
@@ -4061,7 +4061,7 @@
             "next": "icon"
           },
           "options": {
-            "singular": true
+            "singular": false
           }
         },
         {
@@ -4229,7 +4229,7 @@
             "next": "icon"
           },
           "options": {
-            "singular": true
+            "singular": false
           }
         },
         {
@@ -4353,7 +4353,7 @@
             "next": "icon"
           },
           "options": {
-            "singular": true
+            "singular": false
           }
         },
         {

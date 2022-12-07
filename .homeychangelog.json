@@ -146,5 +146,9 @@
   "0.5.16": {
     "en": "Fix for vacuum cleaner device.",
     "de": "Korrektur für Staubsauger."
+  },
+  "0.5.17": {
+    "en": "Changed state from pickes to sensor. Added raw state & error description.",
+    "de": "Satus geändert von Picker zu Sensor. Original-Status und Fehlertext ergänzt."
   }
 }

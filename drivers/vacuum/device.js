@@ -82,6 +82,26 @@ class VacuumDevice extends BaseDevice {
     async onEntityUpdate(data) {
         try{
             if(data) {
+                if (this.hasCapability('onoff')){
+                    if (data.state != undefined && 
+                        data.state == "cleaning" || data.state == "on" ){
+                        await this.setCapabilityValue("onoff", true);
+                    }
+                    else{
+                        await this.setCapabilityValue("onoff", false);
+                    }
+                }
+                if (this.hasCapability('vacuum_error')){
+                    if (data.attributes.error != undefined && 
+                        data.attributes.error != null){
+                        try{
+                            await this.setCapabilityValue("vacuum_error", data.attributes.error);
+                        }
+                        catch(error){
+                            this.log("Error changing capability 'vacuum_error': "+data.attributes.error);
+                        }
+                    }
+                }
                 if (this.hasCapability('vacuum_state')){
                     if (data.state != undefined && 
                         data.state != "unavailable"){
@@ -108,26 +128,6 @@ class VacuumDevice extends BaseDevice {
                         catch(error){
                             this.log("Error changing capability 'vacuum_state_raw': "+data.state);
                         }
-                    }
-                }
-                if (this.hasCapability('vacuum_error')){
-                    if (data.attributes.error != undefined && 
-                        data.attributes.error != null){
-                        try{
-                            await this.setCapabilityValue("vacuum_error", data.attributes.error);
-                        }
-                        catch(error){
-                            this.log("Error changing capability 'vacuum_error': "+data.attributes.error);
-                        }
-                    }
-                }
-                if (this.hasCapability('onoff')){
-                    if (data.state != undefined && 
-                        data.state == "cleaning" || data.state == "on" ){
-                        await this.setCapabilityValue("onoff", true);
-                    }
-                    else{
-                        await this.setCapabilityValue("onoff", false);
                     }
                 }
                 if (this.hasCapability('dim')){
