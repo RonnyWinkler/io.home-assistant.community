@@ -1,0 +1,18 @@
+{
+  "type": "string",
+  "title": {
+    "en": "Error",
+    "de": "Fehler",
+    "nl": "Fout"
+  },
+  "desc": {
+    "en": "Error",
+    "de": "Fehler",
+    "nl": "Fout"
+  },
+  "getable": true,
+  "setable": false,
+  "insights": false,
+  "uiComponent": "sensor",
+  "icon": "/assets/capability_icons/vacuum_error.svg"
+}

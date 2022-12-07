@@ -62,6 +62,10 @@ class VacuumDevice extends BaseDevice {
             {
                 await this.addCapability('vacuum_state_raw');
             }
+            if (!this.hasCapability('vacuum_error'))
+            {
+                await this.addCapability('vacuum_error');
+            }
         }
         catch(error){
             this.error("Error adding capability: "+error.message);
@@ -92,12 +96,34 @@ class VacuumDevice extends BaseDevice {
                 if (this.hasCapability('vacuum_state_raw')){
                     if (data.state != undefined && 
                         data.state != "unavailable"){
-                        await this.setCapabilityValue("vacuum_state_raw", data.state);
+                        try{
+                            await this.setCapabilityValue("vacuum_state_raw", data.state);
+                            // Check spacial status attribute in case of simple on/off state
+                            if (data.state == "on" || data.state == "off"){
+                                if (data.attributes.status != undefined){
+                                    await this.setCapabilityValue("vacuum_state_raw", data.attributes.status);
+                                }
+                            }
+                        }
+                        catch(error){
+                            this.log("Error changing capability 'vacuum_state_raw': "+data.state);
+                        }
+                    }
+                }
+                if (this.hasCapability('vacuum_error')){
+                    if (data.attributes.error != undefined && 
+                        data.attributes.error != null){
+                        try{
+                            await this.setCapabilityValue("vacuum_error", data.attributes.error);
+                        }
+                        catch(error){
+                            this.log("Error changing capability 'vacuum_error': "+data.attributes.error);
+                        }
                     }
                 }
                 if (this.hasCapability('onoff')){
                     if (data.state != undefined && 
-                        data.state == "cleaning"){
+                        data.state == "cleaning" || data.state == "on" ){
                         await this.setCapabilityValue("onoff", true);
                     }
                     else{

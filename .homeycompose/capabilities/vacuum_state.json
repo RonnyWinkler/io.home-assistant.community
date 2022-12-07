@@ -14,6 +14,7 @@
   "setable": false,
   "insights": true,
   "uiComponent": "sensor",
+  "icon": "/assets/capability_icons/vacuum_state.svg",
   "values": [
     {
       "id": "cleaning",
@@ -37,6 +38,22 @@
         "en": "Returning",
         "de": "Rückkehr",
         "nl": "Terugkeren"
+      }
+    },
+    {
+      "id": "paused",
+      "title": {
+        "en": "Paused",
+        "de": "Angehalten",
+        "nl": "Onderbroken"
+      }
+    },
+    {
+      "id": "idle",
+      "title": {
+        "en": "Idle",
+        "de": "Inaktiv",
+        "nl": "Inactief"
       }
     },
     {

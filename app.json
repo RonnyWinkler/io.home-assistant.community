@@ -4969,6 +4969,24 @@
       "setable": true,
       "icon": "/assets/capability_icons/vacuum_clean_spot.svg"
     },
+    "vacuum_error": {
+      "type": "string",
+      "title": {
+        "en": "Error",
+        "de": "Fehler",
+        "nl": "Fout"
+      },
+      "desc": {
+        "en": "Error",
+        "de": "Fehler",
+        "nl": "Fout"
+      },
+      "getable": true,
+      "setable": false,
+      "insights": false,
+      "uiComponent": "sensor",
+      "icon": "/assets/capability_icons/vacuum_error.svg"
+    },
     "vacuum_locate": {
       "type": "boolean",
       "title": {
@@ -5037,6 +5055,7 @@
       "setable": false,
       "insights": true,
       "uiComponent": "sensor",
+      "icon": "/assets/capability_icons/vacuum_state.svg",
       "values": [
         {
           "id": "cleaning",
@@ -5060,6 +5079,22 @@
             "en": "Returning",
             "de": "Rückkehr",
             "nl": "Terugkeren"
+          }
+        },
+        {
+          "id": "paused",
+          "title": {
+            "en": "Paused",
+            "de": "Angehalten",
+            "nl": "Onderbroken"
+          }
+        },
+        {
+          "id": "idle",
+          "title": {
+            "en": "Idle",
+            "de": "Inaktiv",
+            "nl": "Inactief"
           }
         },
         {
@@ -5087,7 +5122,8 @@
       "getable": true,
       "setable": false,
       "insights": true,
-      "uiComponent": "sensor"
+      "uiComponent": "sensor",
+      "icon": "/assets/capability_icons/vacuum_state_raw.svg"
     },
     "vacuum_stop": {
       "type": "boolean",
