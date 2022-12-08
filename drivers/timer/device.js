@@ -53,8 +53,14 @@ class TimerDevice extends BaseDevice {
             if (data.attributes.duration != undefined ){
                 await this.setCapabilityValue('timer_duration', data.attributes.duration);
             }
+            else{
+                await this.setCapabilityValue('timer_duration', '0:00:00');
+            }
             if (data.attributes.remaining != undefined ){
                 await this.setCapabilityValue('timer_remaining', data.attributes.remaining);
+            }
+            else{
+                await this.setCapabilityValue('timer_remaining', '0:00:00');
             }
         }
         catch(error) {

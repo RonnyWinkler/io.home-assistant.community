@@ -3,7 +3,7 @@
   "version": "0.5.17",
   "compatibility": ">=8.1.0",
   "sdk": 3,
-  "brandColor": "#038FC7",
+  "brandColor": "#0DA6EA",
   "name": {
     "en": "Home Assistant"
   },
