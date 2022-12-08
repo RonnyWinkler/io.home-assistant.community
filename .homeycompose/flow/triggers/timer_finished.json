@@ -1,0 +1,12 @@
+{
+    "title": {
+        "en": "Timer finished",
+        "de": "Timer wurde beendet",
+        "nl": "Timer is afgelopen"
+    },
+    "args": [{
+        "name": "device",
+        "type": "device",
+        "filter": "driver_id=timer"
+    }]
+}

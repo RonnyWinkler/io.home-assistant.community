@@ -577,6 +577,81 @@
       },
       {
         "title": {
+          "en": "Timer stopped",
+          "de": "Timer wurde gestoppt",
+          "nl": "Timer is gestopt"
+        },
+        "args": [
+          {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=timer"
+          }
+        ],
+        "id": "timer_cancelled"
+      },
+      {
+        "title": {
+          "en": "Timer finished",
+          "de": "Timer wurde beendet",
+          "nl": "Timer is afgelopen"
+        },
+        "args": [
+          {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=timer"
+          }
+        ],
+        "id": "timer_finished"
+      },
+      {
+        "title": {
+          "en": "Timer paused",
+          "de": "Timer wurde pausiert",
+          "nl": "Timer is gepauzeerd"
+        },
+        "args": [
+          {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=timer"
+          }
+        ],
+        "id": "timer_paused"
+      },
+      {
+        "title": {
+          "en": "Timer restarted",
+          "de": "Timer wurde fortgesetzt",
+          "nl": "Timer is doorgegaan"
+        },
+        "args": [
+          {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=timer"
+          }
+        ],
+        "id": "timer_restarted"
+      },
+      {
+        "title": {
+          "en": "Timer started",
+          "de": "Timer wurde gestartet",
+          "nl": "Timer is gestart"
+        },
+        "args": [
+          {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=timer"
+          }
+        ],
+        "id": "timer_started"
+      },
+      {
+        "title": {
           "en": "State changed",
           "de": "Status hat sich geändert",
           "nl": "Toestand gewijzigd"
@@ -1081,6 +1156,21 @@
           }
         ],
         "id": "presence_state"
+      },
+      {
+        "title": {
+          "en": "Timer !{{is|isn't}} running",
+          "de": "Timer !{{läuft|läuft nicht}}",
+          "nl": "Timer  !{{loopt|loopt niet}}"
+        },
+        "args": [
+          {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=timer"
+          }
+        ],
+        "id": "timer_active"
       },
       {
         "title": {
@@ -2024,6 +2114,131 @@
       },
       {
         "title": {
+          "en": "Finish",
+          "de": "Beenden",
+          "nl": "Uitmaken"
+        },
+        "titleFormatted": {
+          "en": "Finish",
+          "de": "Beenden",
+          "nl": "Uitmaken"
+        },
+        "args": [
+          {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=timer"
+          }
+        ],
+        "id": "timerFinish"
+      },
+      {
+        "title": {
+          "en": "Pause",
+          "de": "Pausieren",
+          "nl": "Pauzeren"
+        },
+        "titleFormatted": {
+          "en": "Pause",
+          "de": "Pausieren",
+          "nl": "Pauzeren"
+        },
+        "args": [
+          {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=timer"
+          }
+        ],
+        "id": "timerPause"
+      },
+      {
+        "title": {
+          "en": "Start",
+          "de": "Starten",
+          "nl": "Begin"
+        },
+        "titleFormatted": {
+          "en": "Start",
+          "de": "Starten",
+          "nl": "Begin"
+        },
+        "args": [
+          {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=timer"
+          }
+        ],
+        "id": "timerStart"
+      },
+      {
+        "title": {
+          "en": "Start",
+          "de": "Starten",
+          "nl": "Begin"
+        },
+        "titleFormatted": {
+          "en": "Start with duration [[time]] or [[seconds]]",
+          "de": "Starten mit Dauer [[time]] oder [[seconds]]",
+          "nl": "Begin met duur [[time]] of [[seconds]]"
+        },
+        "args": [
+          {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=timer"
+          },
+          {
+            "type": "text",
+            "name": "time",
+            "required": false,
+            "title": {
+              "en": "Duration (hh:mm:ss)",
+              "de": "Dauer (hh:mm:ss)",
+              "nl": "Duur (hh:mm:ss)"
+            },
+            "placeholder": {
+              "en": "hh:mm:ss",
+              "de": "hh:mm:ss",
+              "nl": "hh:mm:ss"
+            }
+          },
+          {
+            "type": "number",
+            "name": "seconds",
+            "required": false,
+            "title": {
+              "en": "Duration (seconds)",
+              "de": "Dauer (Sekunden)",
+              "nl": "Duur (seconden)"
+            }
+          }
+        ],
+        "id": "timerStartDuration"
+      },
+      {
+        "title": {
+          "en": "Stop",
+          "de": "Stoppen",
+          "nl": "Stoppen"
+        },
+        "titleFormatted": {
+          "en": "Stop",
+          "de": "Stoppen",
+          "nl": "Stoppen"
+        },
+        "args": [
+          {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=timer"
+          }
+        ],
+        "id": "timerStop"
+      },
+      {
+        "title": {
           "en": "Spot clean-up",
           "de": "Punktreinigung",
           "nl": "Plek opruimen"
@@ -2235,7 +2450,7 @@
             "next": "icon"
           },
           "options": {
-            "singular": false
+            "singular": true
           }
         },
         {
@@ -2374,7 +2589,7 @@
             "next": "icon"
           },
           "options": {
-            "singular": false
+            "singular": true
           }
         },
         {
@@ -2504,7 +2719,7 @@
             "next": "icon"
           },
           "options": {
-            "singular": false
+            "singular": true
           }
         },
         {
@@ -2675,7 +2890,7 @@
             "next": "icon"
           },
           "options": {
-            "singular": false
+            "singular": true
           }
         },
         {
@@ -2859,7 +3074,7 @@
             "next": "icon"
           },
           "options": {
-            "singular": false
+            "singular": true
           }
         },
         {
@@ -2988,7 +3203,7 @@
             "next": "icon"
           },
           "options": {
-            "singular": false
+            "singular": true
           }
         },
         {
@@ -3137,7 +3352,7 @@
             "next": "icon"
           },
           "options": {
-            "singular": false
+            "singular": true
           }
         },
         {
@@ -3337,7 +3552,7 @@
             "next": "icon"
           },
           "options": {
-            "singular": false
+            "singular": true
           }
         },
         {
@@ -3477,7 +3692,7 @@
             "next": "icon"
           },
           "options": {
-            "singular": false
+            "singular": true
           }
         },
         {
@@ -3631,7 +3846,7 @@
             "next": "icon"
           },
           "options": {
-            "singular": false
+            "singular": true
           }
         },
         {
@@ -3783,7 +3998,7 @@
             "next": "icon"
           },
           "options": {
-            "singular": false
+            "singular": true
           }
         },
         {
@@ -3922,7 +4137,7 @@
             "next": "icon"
           },
           "options": {
-            "singular": false
+            "singular": true
           }
         },
         {
@@ -4061,7 +4276,7 @@
             "next": "icon"
           },
           "options": {
-            "singular": false
+            "singular": true
           }
         },
         {
@@ -4229,7 +4444,7 @@
             "next": "icon"
           },
           "options": {
-            "singular": false
+            "singular": true
           }
         },
         {
@@ -4319,6 +4534,21 @@
       }
     },
     {
+      "capabilitiesOptions": {
+        "button.reconnect": {
+          "maintenanceAction": true,
+          "title": {
+            "en": "Reconnect",
+            "de": "Neu verbinden",
+            "nl": "Opnieuw verbinden"
+          },
+          "desc": {
+            "en": "Reconnect and reload entities.",
+            "de": "Neu verbinden und Entitäten neu laden.",
+            "nl": "Maak opnieuw verbinding en laad entiteiten opnieuw."
+          }
+        }
+      },
       "pair": [
         {
           "id": "loading",
@@ -4353,7 +4583,175 @@
             "next": "icon"
           },
           "options": {
-            "singular": false
+            "singular": true
+          }
+        },
+        {
+          "id": "icon",
+          "navigation": {
+            "next": "add_devices",
+            "prev": "list_devices"
+          }
+        },
+        {
+          "id": "add_devices"
+        }
+      ],
+      "repair": [
+        {
+          "id": "select",
+          "navigation": {
+            "prev": "done"
+          }
+        },
+        {
+          "id": "device_details",
+          "navigation": {
+            "prev": "select"
+          }
+        },
+        {
+          "id": "log",
+          "navigation": {
+            "prev": "select"
+          }
+        },
+        {
+          "id": "icon",
+          "navigation": {
+            "next": "icon_change",
+            "prev": "select"
+          }
+        },
+        {
+          "id": "icon_change",
+          "navigation": {
+            "prev": "icon"
+          }
+        },
+        {
+          "id": "login_credentials",
+          "template": "login_credentials",
+          "navigation": {
+            "prev": "select"
+          },
+          "options": {
+            "logo": "logo.png",
+            "usernameLabel": {
+              "en": "Server"
+            },
+            "usernamePlaceholder": {
+              "en": "http://192.168.xxx.xxx:8123"
+            },
+            "passwordLabel": {
+              "en": "Token"
+            },
+            "passwordPlaceholder": {
+              "en": "Long-lived access token"
+            }
+          }
+        },
+        {
+          "id": "done",
+          "template": "done"
+        }
+      ],
+      "id": "timer",
+      "name": {
+        "en": "Timer",
+        "de": "Timer",
+        "nl": "Timer"
+      },
+      "class": "sensor",
+      "capabilities": [
+        "timer_duration",
+        "timer_remaining",
+        "timer_state",
+        "timer_start",
+        "timer_pause",
+        "timer_stop",
+        "timer_finish",
+        "button.reconnect"
+      ],
+      "images": {
+        "large": "/drivers/timer/assets/images/large.png",
+        "small": "/drivers/timer/assets/images/small.png"
+      },
+      "settings": [
+        {
+          "id": "duration_time",
+          "type": "text",
+          "value": "",
+          "label": {
+            "en": "Duration (hh:mm:ss)",
+            "de": "Dauer (hh:mm:ss)",
+            "nl": "Duur (hh:mm:ss)"
+          },
+          "hint": {
+            "en": "Choose a duration as time (hh:mm:ss) or as seconds. This duration is used as the duration the next time the timer is started via the device button or Flow and is saved in the Home Assistant timer.",
+            "de": "Wähle eine Dauer als Zeit (hh:mm:ss) oder als Sekunden. Diese Dauer wird beim nächsten Start des Timers über den Gerätebutton oder Flow als Dauer verwendet und im Home Assistant Timer gespeichert.",
+            "nl": "Kies een duur als tijd (uu:mm:ss) of als seconden. Deze duur wordt de volgende keer dat de timer via de apparaatknop of Flow wordt gestart als duur gebruikt en wordt in de Home Assistant timer opgeslagen."
+          }
+        },
+        {
+          "id": "duration_sec",
+          "type": "number",
+          "value": 0,
+          "min": 0,
+          "units": {
+            "en": "seconds",
+            "de": "Sekunden",
+            "nl": "Seconden"
+          },
+          "label": {
+            "en": "Duration",
+            "de": "Dauer",
+            "nl": "Duur"
+          },
+          "hint": {
+            "en": "Choose a duration as time (hh:mm:ss) or as seconds. This duration is used as the duration the next time the timer is started via the device button or Flow and is saved in the Home Assistant timer.",
+            "de": "Wähle eine Dauer als Zeit (hh:mm:ss) oder als Sekunden. Diese Dauer wird beim nächsten Start des Timers über den Gerätebutton oder Flow als Dauer verwendet und im Home Assistant Timer gespeichert.",
+            "nl": "Kies een duur als tijd (uu:mm:ss) of als seconden. Deze duur wordt de volgende keer dat de timer via de apparaatknop of Flow wordt gestart als duur gebruikt en wordt in de Home Assistant timer opgeslagen."
+          }
+        }
+      ]
+    },
+    {
+      "pair": [
+        {
+          "id": "loading",
+          "template": "loading",
+          "navigation": {
+            "next": "list_devices"
+          }
+        },
+        {
+          "id": "login_credentials",
+          "template": "login_credentials",
+          "options": {
+            "logo": "logo.png",
+            "usernameLabel": {
+              "en": "Server"
+            },
+            "usernamePlaceholder": {
+              "en": "http://192.168.xxx.xxx:8123"
+            },
+            "passwordLabel": {
+              "en": "Token"
+            },
+            "passwordPlaceholder": {
+              "en": "Long-lived access token"
+            }
+          }
+        },
+        {
+          "id": "list_devices",
+          "template": "list_devices",
+          "navigation": {
+            "next": "icon"
+          },
+          "options": {
+            "singular": true
           }
         },
         {
@@ -4955,6 +5353,123 @@
       "setable": false,
       "insights": true,
       "icon": "/assets/capability_icons/presence_state.svg"
+    },
+    "timer_duration": {
+      "type": "string",
+      "title": {
+        "en": "Duration",
+        "de": "Dauer",
+        "nl": "Duur"
+      },
+      "getable": true,
+      "setable": false,
+      "insights": false,
+      "uiComponent": "sensor",
+      "icon": "/assets/capability_icons/timer_duration.svg"
+    },
+    "timer_finish": {
+      "type": "boolean",
+      "title": {
+        "en": "Finish",
+        "de": "Beenden",
+        "nl": "Uitmaken"
+      },
+      "uiComponent": "button",
+      "insights": false,
+      "getable": false,
+      "setable": true,
+      "icon": "/assets/capability_icons/timer_finish.svg"
+    },
+    "timer_pause": {
+      "type": "boolean",
+      "title": {
+        "en": "Pause",
+        "de": "Pausieren",
+        "nl": "Pauzeren"
+      },
+      "uiComponent": "button",
+      "insights": false,
+      "getable": false,
+      "setable": true,
+      "icon": "/assets/capability_icons/timer_pause.svg"
+    },
+    "timer_remaining": {
+      "type": "string",
+      "title": {
+        "en": "Remaining",
+        "de": "Verbleibend",
+        "nl": "Overig"
+      },
+      "getable": true,
+      "setable": false,
+      "insights": false,
+      "uiComponent": "sensor",
+      "icon": "/assets/capability_icons/timer_remaining.svg"
+    },
+    "timer_start": {
+      "type": "boolean",
+      "title": {
+        "en": "Start",
+        "de": "Starten",
+        "nl": "Begin"
+      },
+      "uiComponent": "button",
+      "insights": false,
+      "getable": false,
+      "setable": true,
+      "icon": "/assets/capability_icons/timer_start.svg"
+    },
+    "timer_state": {
+      "type": "enum",
+      "title": {
+        "en": "State",
+        "de": "Status",
+        "nl": "Toestand"
+      },
+      "getable": true,
+      "setable": false,
+      "insights": false,
+      "uiComponent": "sensor",
+      "icon": "/assets/capability_icons/timer_state.svg",
+      "values": [
+        {
+          "id": "idle",
+          "title": {
+            "en": "Idle",
+            "de": "Inaktiv",
+            "nl": "Inactief"
+          }
+        },
+        {
+          "id": "active",
+          "title": {
+            "en": "Active",
+            "de": "Aktiv",
+            "nl": "Actief"
+          }
+        },
+        {
+          "id": "paused",
+          "title": {
+            "en": "Paused",
+            "de": "Pausiert",
+            "nl": "Onderbroken"
+          }
+        }
+      ]
+    },
+    "timer_stop": {
+      "type": "boolean",
+      "title": {
+        "en": "Stop",
+        "de": "Stoppen",
+        "nl": "Stoppen"
+      },
+      "uiComponent": "button",
+      "insights": false,
+      "getable": false,
+      "setable": true,
+      "icon": "/assets/capability_icons/timer_stop.svg"
     },
     "vacuum_clean_spot": {
       "type": "boolean",

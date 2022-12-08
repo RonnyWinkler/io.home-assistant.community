@@ -1,0 +1,13 @@
+{
+  "type": "string",
+  "title": {
+    "en": "Duration",
+    "de": "Dauer",
+    "nl": "Duur"
+  },
+  "getable": true,
+  "setable": false,
+  "insights": false,
+  "uiComponent": "sensor",
+  "icon": "/assets/capability_icons/timer_duration.svg"
+}

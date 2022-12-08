@@ -1,0 +1,19 @@
+{
+    "title": {
+        "en": "Finish",
+        "de": "Beenden",
+        "nl": "Uitmaken"
+    },
+    "titleFormatted": {
+        "en": "Finish",
+        "de": "Beenden",
+        "nl": "Uitmaken"
+    },
+    "args": [
+        {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=timer"
+        }
+    ]
+}

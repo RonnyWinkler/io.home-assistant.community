@@ -1,0 +1,151 @@
+<link rel="stylesheet" type="text/css" href="../../../assets/css/styles.css" />
+<!-- <link rel="stylesheet" type="text/css" href="./styles.css" /> -->
+<link rel="stylesheet" type="text/css" href="../../../assets/css/icons.css" />
+<script src='../../../assets/js/vue.min.js'></script>
+<script src='../../../assets/js/lodash.min.js'></script>
+<script src='../../../assets/js/utils.js'></script>
+
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@mdi/font@5.9.55/css/materialdesignicons.min.css" />
+
+<script>
+    Homey.setTitle(__('pair.title.icon'));
+</script>
+
+<!-- ICON PICKER -->
+
+<script type="text/x-template" id="icon-picker">
+    <div class="icon-picker-container">
+        <div class="setting">
+            <div class="settings-itemgroup">
+                <span class="mdi mdi-magnify search-icon"></span>
+                <input id="searchbox" class="search-box" type="text" v-model="query" :placeholder="searchPlaceholder()" />
+            </div>
+        </div>
+        <div class="flex-row icons-container" v-if="items">
+            <div :class="{ selected:item==selected }" class="flex-cell icon-container" v-for="item in filteredItems">
+                <div class="iconbox" @click="select(item)">
+                    <span :class="iconClass(item)"></span>
+                </div>
+                <div class="caption">{{item.name}}</div>
+            </div>
+        </div>
+    </div>
+</script>
+
+<script>
+    // Icon picker component
+    Vue.component('icon-picker', {
+        template: '#icon-picker',
+        props: ['items'],
+        data() {
+            return { query: '', selected: undefined };
+        },
+        created() {
+            this.query='';
+        },
+        computed: {
+            filteredItems() {
+                if(!(this.query || "").trim()) return this.items;
+                var query = this.query.trim().toLowerCase().split(' ');
+                const match = (item, term) =>  item.name.includes(term) || (item.tags || []).some(t => t.includes(term));
+                return this.items ? this.items.filter(item => query.some(term => match(item, term))) : [];
+            }
+        },
+        methods: {
+            searchPlaceholder() {
+                if(!this.items) return '';
+                if(this.items.length == 0) return 'loading...';
+                return `search ${this.items.length} icons...`;
+            },
+            iconClass(item){
+                let clazz = { "mdi": true };
+                clazz['mdi-'+item.name] = true;
+                return clazz;
+            },
+            getUrl(item){
+                if(!item.url) {
+                    item.url = `https://raw.githubusercontent.com/Templarian/MaterialDesign-SVG/master/svg/${item.name}.svg`;
+                }
+                return item.url;
+            },
+            select(item) {
+                console.log('selected', item);
+                this.selected = item;
+                this.getUrl(item);
+                this.$emit('selection', item);
+            }
+        }
+    })
+</script>
+
+<!-- ICON SELECT -->
+
+<script>
+    var iconSelect = new Vue({
+        el: '#icon-select',
+        data: {
+            meta: [],
+            selected: undefined,
+            icon: '../assets/images/icon.png'
+        },
+        mounted() {
+            $.getJSON("../../../assets/mdi/meta.json", meta => setTimeout(() => this.meta = meta, 100));
+        },
+        methods: {
+            iconClass(item){
+                let clazz = { "mdi": true };
+                clazz['mdi-'+item.name] = true;
+                return clazz;
+            },
+            async onIconSelect(item) {
+                console.log('setRemoteIcon', item);
+
+                try {
+                    this.selected = item;
+                    const path = await Homey.emit('setRemoteIcon', item);
+                } catch(e) {
+                    this.icon = '../assets/images/icon.png';
+                    console.error(e);
+                    Homey.alert('Failed to select MDI icon', 'error');
+                }
+            },
+            loadIcon(event) {
+                const img = event.target.files[0];
+                const reader = new FileReader();
+                reader.readAsDataURL(img);
+                reader.onload = async () => {
+                    const imgBase64 = reader.result;
+                    if (!imgBase64 || !imgBase64.length) {
+                        return Homey.alert('Invalid image', 'error');
+                    }
+                    if (imgBase64.length > 1048000) {
+                        return Homey.alert('Image size is too large', 'error');
+                    }
+                    
+                    this.selected = undefined;
+                    this.icon = imgBase64;
+                    try {
+                        const path = await Homey.emit('saveIcon', imgBase64);
+                    } catch(e) {
+                        console.error(e);
+                        Homey.alert('Failed to upload icon', 'error');
+                    }
+                };
+            }
+        }
+    });
+</script>
+
+<div id="icon-select" v-if="meta">
+    <div id="icon-header">
+        <span id="selected-icon">
+            <img id="selected-icon-img" :src="icon" v-if="!selected"/>
+            <span id="selected-icon-mdi" :class="iconClass(selected)" v-if="selected"></span>
+        </span>
+        <label class="custom-file-upload">
+            <input id="custom-icon" type="file" accept="image/svg+xml" name="image" @change="loadIcon" />
+            <img id="upload-icon" src="../../../assets/icons/cloud-upload-outline.svg"></img>Upload custom SVG
+        </label>
+    </div>
+    <icon-picker id="icon-picker" :items="meta" v-on:selection="onIconSelect"></icon-picker>
+</div>

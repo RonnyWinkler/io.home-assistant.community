@@ -1,0 +1,26 @@
+{
+  "id": "timer",
+  "name": {
+    "en": "Timer",
+    "de": "Timer",
+    "nl": "Timer"
+  },
+  "class": "sensor",
+  "capabilities": [
+    "timer_duration",
+    "timer_remaining",
+    "timer_state",
+
+    "timer_start",
+    "timer_pause",
+    "timer_stop",
+    "timer_finish",
+
+    "button.reconnect"
+  ],
+  "images": {
+    "large": "/drivers/timer/assets/images/large.png",
+    "small": "/drivers/timer/assets/images/small.png"
+  },
+  "$extends": [ "capabilitiesOptions", "pair", "repair" ]
+}

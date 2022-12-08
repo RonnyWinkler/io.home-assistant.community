@@ -1,0 +1,13 @@
+{
+  "type": "string",
+  "title": {
+    "en": "Remaining",
+    "de": "Verbleibend",
+    "nl": "Overig"
+  },
+  "getable": true,
+  "setable": false,
+  "insights": false,
+  "uiComponent": "sensor",
+  "icon": "/assets/capability_icons/timer_remaining.svg"
+}

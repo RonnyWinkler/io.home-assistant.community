@@ -525,6 +525,63 @@ class App extends Homey.App {
 			}
 		});
 
+		// Timer
+		this._flowActionTimerStart = this.homey.flow.getActionCard('timerStart');
+		this._flowActionTimerStart.registerRunListener(async (args, state) => {
+			try{
+				await args.device.timerStart();
+				return true;
+			}
+			catch(error){
+				this.error("Error executing flowAction 'timerStart': "+  error.message);
+				throw new Error(error.message);
+			}
+		});
+		this._flowActionTimerStartDuration = this.homey.flow.getActionCard('timerStartDuration');
+		this._flowActionTimerStartDuration.registerRunListener(async (args, state) => {
+			try{
+				await args.device.timerStartDuration(args);
+				return true;
+			}
+			catch(error){
+				this.error("Error executing flowAction 'timerStart': "+  error.message);
+				throw new Error(error.message);
+			}
+		});
+		this._flowActionTimerStop = this.homey.flow.getActionCard('timerStop');
+		this._flowActionTimerStop.registerRunListener(async (args, state) => {
+			try{
+				await args.device.timerStop();
+				return true;
+			}
+			catch(error){
+				this.error("Error executing flowAction 'timerStop': "+  error.message);
+				throw new Error(error.message);
+			}
+		});
+		this._flowActionTimerPause = this.homey.flow.getActionCard('timerPause');
+		this._flowActionTimerPause.registerRunListener(async (args, state) => {
+			try{
+				await args.device.timerPause();
+				return true;
+			}
+			catch(error){
+				this.error("Error executing flowAction 'timerPause': "+  error.message);
+				throw new Error(error.message);
+			}
+		});
+		this._flowActionTimerFinish = this.homey.flow.getActionCard('timerFinish');
+		this._flowActionTimerFinish.registerRunListener(async (args, state) => {
+			try{
+				await args.device.timerFinish();
+				return true;
+			}
+			catch(error){
+				this.error("Error executing flowAction 'timerFinish': "+  error.message);
+				throw new Error(error.message);
+			}
+		});
+
 
 		// Flow trigger for all capabilities (compound device)
 		this._flowTriggerCapabilityChanged = this.homey.flow.getDeviceTriggerCard('capability_changed');
@@ -554,6 +611,11 @@ class App extends Homey.App {
 		this._flowTriggerButtonPressed = this.homey.flow.getDeviceTriggerCard('button_pressed');
 		this._flowTriggerSceneActivated = this.homey.flow.getDeviceTriggerCard('scene_activated');
 		this._flowTriggerScriptStarted = this.homey.flow.getDeviceTriggerCard('script_started');
+		this._flowTriggerTimerStarted = this.homey.flow.getDeviceTriggerCard('timer_started');
+		this._flowTriggerTimerPaused = this.homey.flow.getDeviceTriggerCard('timer_paused');
+		this._flowTriggerTimerCancelled = this.homey.flow.getDeviceTriggerCard('timer_cancelled');
+		this._flowTriggerTimerRestarted = this.homey.flow.getDeviceTriggerCard('timer_restarted');
+		this._flowTriggerTimerFinished = this.homey.flow.getDeviceTriggerCard('timer_finished');
 
 		// Flow contitions
 		this._flowConditionMeasureNumeric = this.homey.flow.getConditionCard('measure_numeric')
@@ -646,7 +708,17 @@ class App extends Homey.App {
 			}
 			// return (args.device.getCapabilityValue('presence_state') == args.value);
 		})
-  
+		this._flowConditionTimerActive = this.homey.flow.getConditionCard('timer_active')
+		.registerRunListener(async (args, state) => {
+			if (state.manual == true){
+				return (args.device.getCapabilityValue('timer_state') == 'active');
+			}
+			else{
+				return (args.device.getCapabilityValue('timer_state') == 'active');
+			}
+			// return (args.device.getCapabilityValue('alarm_presence'));
+		})
+
 		// App events
 		this.homey.settings.on("set", async (key) =>  {
 			if (key = "login" && this.homey.settings.get("login") == true){

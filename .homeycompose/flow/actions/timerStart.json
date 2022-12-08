@@ -1,0 +1,19 @@
+{
+    "title": {
+        "en": "Start",
+        "de": "Starten",
+        "nl": "Begin"
+    },
+    "titleFormatted": {
+        "en": "Start",
+        "de": "Starten",
+        "nl": "Begin"
+    },
+    "args": [
+        {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=timer"
+        }
+    ]
+}

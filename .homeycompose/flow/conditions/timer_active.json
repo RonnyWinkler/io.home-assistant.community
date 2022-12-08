@@ -1,0 +1,13 @@
+{
+    "title": {
+        "en": "Timer !{{is|isn't}} running",
+        "de": "Timer !{{läuft|läuft nicht}}",
+        "nl": "Timer  !{{loopt|loopt niet}}"
+    },
+    "args": [{
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=timer"
+        }
+    ]
+}

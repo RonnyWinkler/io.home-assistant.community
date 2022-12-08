@@ -1,0 +1,38 @@
+[
+    {
+        "id": "duration_time",
+        "type": "text",
+        "value": "",
+        "label": {
+            "en": "Duration (hh:mm:ss)",
+            "de": "Dauer (hh:mm:ss)",
+            "nl": "Duur (hh:mm:ss)"
+    },
+        "hint": {
+            "en": "Choose a duration as time (hh:mm:ss) or as seconds. This duration is used as the duration the next time the timer is started via the device button or Flow and is saved in the Home Assistant timer.",
+            "de": "Wähle eine Dauer als Zeit (hh:mm:ss) oder als Sekunden. Diese Dauer wird beim nächsten Start des Timers über den Gerätebutton oder Flow als Dauer verwendet und im Home Assistant Timer gespeichert.", 
+            "nl": "Kies een duur als tijd (uu:mm:ss) of als seconden. Deze duur wordt de volgende keer dat de timer via de apparaatknop of Flow wordt gestart als duur gebruikt en wordt in de Home Assistant timer opgeslagen."
+        }
+    },
+    {
+        "id": "duration_sec",
+        "type": "number",
+        "value": 0,
+        "min": 0,
+        "units": { 
+            "en": "seconds" ,
+            "de": "Sekunden",
+            "nl": "Seconden" 
+        },
+        "label": {
+            "en": "Duration",
+            "de": "Dauer",
+            "nl": "Duur"
+    },
+        "hint": {
+            "en": "Choose a duration as time (hh:mm:ss) or as seconds. This duration is used as the duration the next time the timer is started via the device button or Flow and is saved in the Home Assistant timer.",
+            "de": "Wähle eine Dauer als Zeit (hh:mm:ss) oder als Sekunden. Diese Dauer wird beim nächsten Start des Timers über den Gerätebutton oder Flow als Dauer verwendet und im Home Assistant Timer gespeichert.", 
+            "nl": "Kies een duur als tijd (uu:mm:ss) of als seconden. Deze duur wordt de volgende keer dat de timer via de apparaatknop of Flow wordt gestart als duur gebruikt en wordt in de Home Assistant timer opgeslagen."
+        }
+    }
+]

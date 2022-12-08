@@ -1,0 +1,13 @@
+{
+    "type": "boolean",
+    "title": {
+        "en": "Stop",
+        "de": "Stoppen",
+        "nl": "Stoppen"
+    },
+    "uiComponent": "button",
+    "insights": false,
+    "getable": false,
+    "setable": true,
+    "icon": "/assets/capability_icons/timer_stop.svg"
+  }

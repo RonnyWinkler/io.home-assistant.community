@@ -1,0 +1,39 @@
+{
+  "type": "enum",
+  "title": {
+    "en": "State",
+    "de": "Status",
+    "nl": "Toestand"
+  },
+  "getable": true,
+  "setable": false,
+  "insights": false,
+  "uiComponent": "sensor",
+  "icon": "/assets/capability_icons/timer_state.svg",
+  "values": [
+    {
+      "id": "idle",
+      "title": {
+        "en": "Idle",
+        "de": "Inaktiv",
+        "nl": "Inactief"
+      }
+    },
+    {
+      "id": "active",
+      "title": {
+        "en": "Active",
+        "de": "Aktiv",
+        "nl": "Actief"
+      }
+    },
+    {
+      "id": "paused",
+      "title": {
+        "en": "Paused",
+        "de": "Pausiert",
+        "nl": "Onderbroken"
+      }
+    }
+  ]
+}

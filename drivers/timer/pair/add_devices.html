@@ -1,0 +1,36 @@
+<script>
+
+  Homey.setTitle(__('pair.title.ready'));
+  Homey.setNavigationClose();
+
+  // Homey.emit('install', null, (err, device) => {
+  //   if (err) {
+  //     this.instructions = '[ERROR] ' + err;
+  //     console.log(err);
+  //   } else {
+  //     Homey.done();
+  //   }
+  // });
+  Homey.emit('install', null, async (err, devices) => {
+    if (err) {
+      // this.instructions = '[ERROR] ' + err;
+      console.error(err);
+      return;
+    }
+    console.log(devices);
+
+    for(let i=0; i<devices.length; i++){
+      await Homey.createDevice(devices[i], (err, res) => {
+        if (err) {
+          // this.instructions = '[ERROR] ' + err;
+          console.error(err);
+        }
+      });
+    }
+    Homey.done();
+  });
+</script>
+
+<div style="text-align: center;">
+  <span data-i18n="pair.title.device_added"></span>
+</div>

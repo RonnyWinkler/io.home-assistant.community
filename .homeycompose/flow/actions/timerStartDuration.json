@@ -1,0 +1,44 @@
+{
+    "title": {
+        "en": "Start",
+        "de": "Starten",
+        "nl": "Begin"
+    },
+    "titleFormatted": {
+        "en": "Start with duration [[time]] or [[seconds]]",
+        "de": "Starten mit Dauer [[time]] oder [[seconds]]",
+        "nl": "Begin met duur [[time]] of [[seconds]]"
+    },
+    "args": [
+        {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=timer"
+        },
+        {
+            "type": "text",
+            "name": "time",
+            "required": false,
+            "title": { 
+                "en": "Duration (hh:mm:ss)",
+                "de": "Dauer (hh:mm:ss)",
+                "nl": "Duur (hh:mm:ss)"
+            },
+            "placeholder": { 
+                "en": "hh:mm:ss",
+                "de": "hh:mm:ss",
+                "nl": "hh:mm:ss"
+            }
+        },
+        {
+            "type": "number",
+            "name": "seconds",
+            "required": false,
+            "title": { 
+                "en": "Duration (seconds)",
+                "de": "Dauer (Sekunden)",
+                "nl": "Duur (seconden)"
+            }
+        }
+    ]
+}
