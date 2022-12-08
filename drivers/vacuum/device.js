@@ -101,6 +101,9 @@ class VacuumDevice extends BaseDevice {
                             this.log("Error changing capability 'vacuum_error': "+data.attributes.error);
                         }
                     }
+                    else{
+                        await this.setCapabilityValue("vacuum_error", '');
+                    }
                 }
                 if (this.hasCapability('vacuum_state')){
                     if (data.state != undefined && 
@@ -128,6 +131,9 @@ class VacuumDevice extends BaseDevice {
                         catch(error){
                             this.log("Error changing capability 'vacuum_state_raw': "+data.state);
                         }
+                    }
+                    else{
+                        await this.setCapabilityValue("vacuum_state_raw", '');
                     }
                 }
                 if (this.hasCapability('dim')){
