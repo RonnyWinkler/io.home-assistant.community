@@ -225,6 +225,9 @@ class BaseDriver extends Homey.Driver {
         session.setHandler('getEntity', async () => {
             let id = device.getData().id;
             let data = this.homey.app.getClient().getEntity(id);
+            if (data == null){
+                data = "Device unvvailable. No entity data delivered by Home Assistant";
+            }
             return data;
         });
 

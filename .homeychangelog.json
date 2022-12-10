@@ -148,7 +148,15 @@
     "de": "Korrektur für Staubsauger."
   },
   "0.5.17": {
-    "en": "Changed state from pickes to sensor. Added raw state & error description.",
-    "de": "Satus geändert von Picker zu Sensor. Original-Status und Fehlertext ergänzt."
+    "en": "Changed vacuum state from pickes to sensor. Added raw state & error description.",
+    "de": "Staubsauger-Status geändert von Picker zu Sensor. Original-Status und Fehlertext ergänzt."
+  },
+  "0.6.0": {
+    "en": "Added timer and schedule device (HA helper entities).",
+    "de": "Timer und Zeitplan hinzugefügt (HA Helfer-Entitäten)."
+  },
+  "0.6.1": {
+    "en": "Fix for timer ttles.",
+    "de": "Korrektur für Timer-Titel."
   }
 }

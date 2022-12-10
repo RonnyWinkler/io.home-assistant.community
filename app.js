@@ -930,6 +930,16 @@ class App extends Homey.App {
         }
 	}
 
+	async checkDeviceAvailability(){
+		let drivers = this.homey.drivers.getDrivers();
+		Object.keys(drivers).forEach(async (key) => {
+			let devices = drivers[key].getDevices();
+			for (let i=0; i<devices.length; i++){
+				devices[i].checkDeviceAvailability();
+			}
+		});
+	}
+
 }
 
 module.exports = App;

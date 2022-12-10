@@ -19,5 +19,8 @@
             "deviceDetails": "Device details",
             "log": "Application log"
         }
+    },
+    "device_unavailable_reason": {
+        "entity_not_found": "Home Assistant entity is not available"
     }
 }

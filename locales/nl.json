@@ -19,5 +19,8 @@
             "deviceDetails": "Apparaat details",
             "log": "Toepassingslogboek"
         }
+    },
+    "device_unavailable_reason": {
+        "entity_not_found": "Home Assistant-entiteit is niet beschikbaar"
     }
 }

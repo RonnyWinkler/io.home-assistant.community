@@ -102,6 +102,7 @@ class BaseDevice extends Homey.Device {
             // Call 
             this.onEntityUpdate(entity);
         }
+        await this.checkDeviceAvailability();
 
         await this.connectPowerEntity();
     }
@@ -127,6 +128,16 @@ class BaseDevice extends Homey.Device {
         }
         catch(error) {
             this.error("CapabilitiesUpdate error: "+ error.message);
+        }
+    }
+
+    async checkDeviceAvailability(){
+        let entity = this._client.getEntity(this.entityId);
+        if (entity == null){
+            await this.setUnavailable(this.homey.__("device_unavailable_reason.entity_not_found"));
+        }
+        else{
+            this.setAvailable();
         }
     }
 

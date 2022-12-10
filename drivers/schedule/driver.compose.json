@@ -32,28 +32,28 @@
     },
     "alarm_generic": {
       "title": {
-          "en": "Aktive",
+          "en": "Active",
           "de": "Aktiv",
           "nl": "Actief"
       },
       "insightsTitleTrue": {
-        "en": "Schedule aktive",
+        "en": "Schedule active",
         "de": "Zeitplan aktiv",
         "nl": "Tijdschema actief"
       },
       "insightsTitleFalse": {
-        "en": "Schedule not aktive",
+        "en": "Schedule not active",
         "de": "Zeitplan inaktiv",
         "nl": "Tijdschema niet actief"
       },
       "titleTrue": {
-        "en": "Schedule aktive",
+        "en": "Schedule active",
         "de": "Zeitplan aktiv",
         "nl": "Tijdschema actief"
       },
       "titleFalse": {
-        "en": "Schedule not aktive",
-        "de": "Zeitplan inaktiv",
+        "en": "Schedule not active",
+        "de": "Zeitplan nicht aktiv",
         "nl": "Tijdschema niet actief"
       }
     }
