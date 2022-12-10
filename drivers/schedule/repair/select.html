@@ -1,0 +1,98 @@
+
+<!-- <link rel="stylesheet" type="text/css" href="../../../assets/css/style.css" /> -->
+<style>
+    .button {
+        text-align: center;
+        width: 100%;
+        position: relative;
+        /* margin: 10px 0px;
+        left:-20px; */
+        cursor: pointer;
+    }
+</style>
+<script type="application/javascript">
+
+    Homey.setTitle(Homey.__("repair.title.select"));
+    // Homey.setNavigationClose();
+
+    function onSelectAuth(){
+        Homey.showView("login_credentials");
+    }
+    function onSelectIcon(){
+        Homey.showView("icon");
+    }
+    function onSelectEntity(){
+        Homey.showView("device_details");
+    }
+    function onSelectLog(){
+        Homey.showView("log");
+    }
+
+</script>
+
+<div>
+    <fieldset>
+        <div>
+            <p>
+                <button id="btnEntity" class=button onClick="onSelectEntity()" visibility = 'hidden'><span data-i18n="repair.title.deviceDetails"></span></button>
+            </p>
+        </div>
+        <div>
+            <p>
+                <button id="btnLog" class=button onClick="onSelectLog()" visibility = 'hidden'><span data-i18n="repair.title.log"></span></button>
+            </p>
+        </div>
+        <div>
+            <p>
+                <button id="btnAuth" class=button onClick="onSelectAuth()" visibility = 'hidden'><span data-i18n="repair.title.auth"></span></button>
+            </p>
+        </div>
+        <div>
+            <p>
+                <button id="btnIcon" class=button onClick="onSelectIcon()" visibility = 'hidden'><span data-i18n="repair.title.icon"></span></button>
+            </p>
+            <p>
+                <span id="spanIconState"></span>
+                <br>
+                <span id="spanAppRestart"></span>
+            </p>
+        </div>
+    </fieldset>
+</div>
+
+<script type="application/javascript">
+
+    Homey.emit('isIconChangeable').then(function (result) {
+        button = document.getElementById("btnIcon");
+        button.disabled = !result;
+        if (result){
+            let span = document.getElementById('spanIconState');
+            while( span.firstChild ) {
+                span.removeChild( span.firstChild );
+            }
+            span.appendChild( document.createTextNode(__('repair.title.iconActivated')) );
+            span.style.color = "green";
+
+            span = document.getElementById('spanAppRestart');
+            while( span.firstChild ) {
+                span.removeChild( span.firstChild );
+            }
+            span.appendChild( document.createTextNode(__('repair.title.appRestart')) );
+            span.style.color = "orange";
+        }
+        else{
+            let span = document.getElementById('spanIconState');
+            while( span.firstChild ) {
+                span.removeChild( span.firstChild );
+            }
+            span.appendChild( document.createTextNode(__('repair.title.iconDeactivated')) );
+            span.style.color = "red";
+
+            span = document.getElementById('spanAppRestart');
+            while( span.firstChild ) {
+                span.removeChild( span.firstChild );
+            }
+        }
+    });
+
+</script>

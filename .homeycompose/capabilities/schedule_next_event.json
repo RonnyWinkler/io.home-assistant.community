@@ -1,0 +1,13 @@
+{
+  "type": "string",
+  "title": {
+    "en": "Next event",
+    "de": "Nächstes Ereignis",
+    "nl": "Volgende gebeurtenis"
+  },
+  "getable": true,
+  "setable": false,
+  "insights": false,
+  "uiComponent": "sensor",
+  "icon": "/assets/capability_icons/schedule_next_event.svg"
+}

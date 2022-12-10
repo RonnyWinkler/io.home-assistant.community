@@ -1,0 +1,63 @@
+{
+    "id": "schedule",
+    "name": {
+      "en": "Schedule",
+      "de": "Zeitplan",
+      "nl": "Tijdschema"
+    },
+    "class": "sensor",
+    "capabilities": [
+      "alarm_generic",
+      "schedule_next_event",
+    
+      "button.reconnect"
+    ],
+    "images": {
+      "large": "/drivers/switch/assets/images/large.png",
+      "small": "/drivers/switch/assets/images/small.png"
+  },
+  "capabilitiesOptions": {
+    "button.reconnect": {
+      "maintenanceAction": true,
+      "title": {
+          "en": "Reconnect",
+          "de": "Neu verbinden",
+          "nl": "Opnieuw verbinden"
+      },
+      "desc": {
+          "en": "Reconnect and reload entities.",
+          "de": "Neu verbinden und Entitäten neu laden.",
+          "nl": "Maak opnieuw verbinding en laad entiteiten opnieuw."
+      }
+    },
+    "alarm_generic": {
+      "title": {
+          "en": "Aktive",
+          "de": "Aktiv",
+          "nl": "Actief"
+      },
+      "insightsTitleTrue": {
+        "en": "Schedule aktive",
+        "de": "Zeitplan aktiv",
+        "nl": "Tijdschema actief"
+      },
+      "insightsTitleFalse": {
+        "en": "Schedule not aktive",
+        "de": "Zeitplan inaktiv",
+        "nl": "Tijdschema niet actief"
+      },
+      "titleTrue": {
+        "en": "Schedule aktive",
+        "de": "Zeitplan aktiv",
+        "nl": "Tijdschema actief"
+      },
+      "titleFalse": {
+        "en": "Schedule not aktive",
+        "de": "Zeitplan inaktiv",
+        "nl": "Tijdschema niet actief"
+      }
+    }
+  },
+    "$extends": [  "pair", "repair" ]
+
+}
