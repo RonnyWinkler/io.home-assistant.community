@@ -630,93 +630,93 @@ class App extends Homey.App {
 		})
 		this._flowConditionClimateMode = this.homey.flow.getConditionCard('climate_mode')
 		.registerRunListener(async (args, state) => {
-			if (state.manual == true){
-				return (args.device.getCapabilityValue('climate_mode') == args.mode);
-			}
-			else{
-				return (state.value == args.mode);
-			}
-			// return (args.device.getCapabilityValue('climate_mode') == args.mode);
+			// if (state.manual == true){
+			// 	return (args.device.getCapabilityValue('climate_mode') == args.mode);
+			// }
+			// else{
+			//	return (args.device.getCapabilityValue('climate_mode') == args.mode);
+			// }
+			return (args.device.getCapabilityValue('climate_mode') == args.mode);
 		})
 		this._flowConditionClimateModeFan = this.homey.flow.getConditionCard('climate_mode_fan')
 		.registerRunListener(async (args, state) => {
-			if (state.manual == true){
-				return (args.device.getCapabilityValue('climate_mode_fan') == args.mode);
-			}
-			else{
-				return (state.value == args.mode);
-			}
-			// return (args.device.getCapabilityValue('climate_mode_fan') == args.mode);
+			// if (state.manual == true){
+			// 	return (args.device.getCapabilityValue('climate_mode_fan') == args.mode);
+			// }
+			// else{
+			// 	return (state.value == args.mode);
+			// }
+			return (args.device.getCapabilityValue('climate_mode_fan') == args.mode);
 		})
 		this._flowConditionClimateModePreset = this.homey.flow.getConditionCard('climate_mode_preset')
 		.registerRunListener(async (args, state) => {
-			if (state.manual == true){
-				return (args.device.getCapabilityValue('climate_mode_preset') == args.mode);
-			}
-			else{
-				return (state.value == args.mode);
-			}
-			// return (args.device.getCapabilityValue('climate_mode_preset') == args.mode);
+			// if (state.manual == true){
+			// 	return (args.device.getCapabilityValue('climate_mode_preset') == args.mode);
+			// }
+			// else{
+			// 	return (state.value == args.mode);
+			// }
+			return (args.device.getCapabilityValue('climate_mode_preset') == args.mode);
 		})
 		this._flowConditionClimateModeSwing = this.homey.flow.getConditionCard('climate_mode_swing')
 		.registerRunListener(async (args, state) => {
-			if (state.manual == true){
-				return (args.device.getCapabilityValue('climate_mode_swing') == args.mode);
-			}
-			else{
-				return (state.value == args.mode);
-			}
-			// return (args.device.getCapabilityValue('climate_mode_swing') == args.mode);
+			// if (state.manual == true){
+			// 	return (args.device.getCapabilityValue('climate_mode_swing') == args.mode);
+			// }
+			// else{
+			// 	return (state.value == args.mode);
+			// }
+			return (args.device.getCapabilityValue('climate_mode_swing') == args.mode);
 		})
 		this._flowConditionAlarmPresence = this.homey.flow.getConditionCard('alarm_presence')
 		.registerRunListener(async (args, state) => {
-			if (state.manual == true){
-				return (args.device.getCapabilityValue('alarm_presence'));
-			}
-			else{
-				return (state.value == true);
-			}
-			// return (args.device.getCapabilityValue('alarm_presence'));
+			// if (state.manual == true){
+			// 	return (args.device.getCapabilityValue('alarm_presence'));
+			// }
+			// else{
+			// 	return (state.value == true);
+			// }
+			return (args.device.getCapabilityValue('alarm_presence'));
 		})
 		this._flowConditionPresenceState = this.homey.flow.getConditionCard('presence_state')
 		.registerRunListener(async (args, state) => {
-			if (state.manual == true){
-				return (args.device.getCapabilityValue('presence_state') == args.state);
-			}
-			else{
-				return (state.value == args.state);
-			}
-			// return (args.device.getCapabilityValue('presence_state') == args.value);
+			// if (state.manual == true){
+			// 	return (args.device.getCapabilityValue('presence_state') == args.state);
+			// }
+			// else{
+			// 	return (state.value == args.state);
+			// }
+			return (args.device.getCapabilityValue('presence_state') == args.value);
 		})
 		this._flowConditionVacuumState = this.homey.flow.getConditionCard('vacuum_state')
 		.registerRunListener(async (args, state) => {
-			if (state.manual == true){
-				return (args.device.getCapabilityValue('vacuum_state') == args.vacuum_state);
-			}
-			else{
-				return (state.value == args.vacuum_state);
-			}
-			// return (args.device.getCapabilityValue('presence_state') == args.value);
+			// if (state.manual == true){
+			// 	return (args.device.getCapabilityValue('vacuum_state') == args.vacuum_state);
+			// }
+			// else{
+			// 	return (state.value == args.vacuum_state);
+			// }
+			return (args.device.getCapabilityValue('vacuum_state') == args.vacuum_state);
 		})
 		this._flowConditionVacuumStateRaw = this.homey.flow.getConditionCard('vacuum_state_raw')
 		.registerRunListener(async (args, state) => {
-			if (state.manual == true){
-				return (args.device.getCapabilityValue('vacuum_state_raw') == args.vacuum_state_raw);
-			}
-			else{
-				return (state.value == args.vacuum_state_raw);
-			}
-			// return (args.device.getCapabilityValue('presence_state') == args.value);
+			// if (state.manual == true){
+			// 	return (args.device.getCapabilityValue('vacuum_state_raw') == args.vacuum_state_raw);
+			// }
+			// else{
+			// 	return (state.value == args.vacuum_state_raw);
+			// }
+			return (args.device.getCapabilityValue('vacuum_state_raw') == args.vacuum_state_raw);
 		})
 		this._flowConditionTimerActive = this.homey.flow.getConditionCard('timer_active')
 		.registerRunListener(async (args, state) => {
-			if (state.manual == true){
-				return (args.device.getCapabilityValue('timer_state') == 'active');
-			}
-			else{
-				return (args.device.getCapabilityValue('timer_state') == 'active');
-			}
-			// return (args.device.getCapabilityValue('alarm_presence'));
+			// if (state.manual == true){
+			// 	return (args.device.getCapabilityValue('timer_state') == 'active');
+			// }
+			// else{
+			// 	return (args.device.getCapabilityValue('timer_state') == 'active');
+			// }
+			return (args.device.getCapabilityValue('timer_state') == 'active');
 		})
 
 		// App events

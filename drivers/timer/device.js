@@ -96,15 +96,15 @@ class TimerDevice extends BaseDevice {
 
         if (service == 'start'){
             let data = { "entity_id": entityId };
-            let durationTime = this.getSetting("duration_time");
             let durationSec = this.getSetting("duration_sec");
-            if (durationTime != undefined && durationTime != ""){
-                data["duration"] = durationTime;
-                this.setSettings({duration_time: ""});
-            }
-            if (durationSec != undefined && durationSec != 0){
-                data["duration"] = durationSec;
+            let durationMin = this.getSetting("duration_min");
+            let durationHour = this.getSetting("duration_hour");
+            let duration = durationSec + durationMin * 60 + durationHour * 60 * 60;  
+            if (duration != undefined && duration != 0){
+                data["duration"] = duration;
                 this.setSettings({duration_sec: 0});
+                this.setSettings({duration_min: 0});
+                this.setSettings({duration_hour: 0});
             }
             await this._client.callService("timer", "start", data);
             return true;
@@ -121,11 +121,19 @@ class TimerDevice extends BaseDevice {
     async timerStartDuration(args){
         let entityId = this.entityId;
         let data = { "entity_id": entityId };
-        if (args.time != undefined ){
-            data["duration"] = args.time;
+
+        let duration = 0;
+        if (args.seconds != undefined){
+            duration += args.seconds;
         }
-        if (args.seconds != undefined ){
-            data["duration"] = args.seconds;
+        if (args.minutes != undefined){
+            duration += (args.minutes * 60);
+        }
+        if (args.hours != undefined){
+            duration += (args.hours * 60 * 60);
+        }
+        if (duration > 0 ){
+            data["duration"] = duration;
         }
         await this._client.callService("timer", "start", data);
         return true;

@@ -5,9 +5,9 @@
         "nl": "Begin"
     },
     "titleFormatted": {
-        "en": "Start with duration [[time]] or [[seconds]]",
-        "de": "Starten mit Dauer [[time]] oder [[seconds]]",
-        "nl": "Begin met duur [[time]] of [[seconds]]"
+        "en": "Start with duration [[hours]] hours, [[minutes]] minutes, [[seconds]] seconds",
+        "de": "Starten mit Dauer [[hours]] Stunden, [[minutes]] Minuten, [[seconds]] Sekunden",
+        "nl": "Begin met duur [[hours]] uur, [[minutes]] minuten, [[seconds]] seconden"
     },
     "args": [
         {
@@ -16,18 +16,23 @@
             "filter": "driver_id=timer"
         },
         {
-            "type": "text",
-            "name": "time",
+            "type": "number",
+            "name": "hours",
             "required": false,
             "title": { 
-                "en": "Duration (hh:mm:ss)",
-                "de": "Dauer (hh:mm:ss)",
-                "nl": "Duur (hh:mm:ss)"
-            },
-            "placeholder": { 
-                "en": "hh:mm:ss",
-                "de": "hh:mm:ss",
-                "nl": "hh:mm:ss"
+                "en": "Hours",
+                "de": "Stunden",
+                "nl": "Uur"
+            }
+        },
+        {
+            "type": "number",
+            "name": "minutes",
+            "required": false,
+            "title": { 
+                "en": "Minutes",
+                "de": "Minuten",
+                "nl": "Minuten"
             }
         },
         {
@@ -35,9 +40,9 @@
             "name": "seconds",
             "required": false,
             "title": { 
-                "en": "Duration (seconds)",
-                "de": "Dauer (Sekunden)",
-                "nl": "Duur (seconden)"
+                "en": "Seconds",
+                "de": "Sekunden",
+                "nl": "Seconden"
             }
         }
     ]

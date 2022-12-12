@@ -158,5 +158,9 @@
   "0.6.1": {
     "en": "Fix for timer ttles.",
     "de": "Korrektur für Timer-Titel."
+  },
+  "0.6.2": {
+    "en": "Fix for flow conditions. Changed timer duration change.",
+    "de": "Korrektur für Flow-Konditionen. Änderung der Timer-Dauer geändert."
   }
 }
