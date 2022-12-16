@@ -1,0 +1,348 @@
+<div class="hy-view visible" data-id="list_devices" data-template-id="list_devices">
+    <style>@import "/manager/drivers/assets/css/deprecated-list-devices.css";
+
+    /* List Devices View */
+    .__private__homey-list-devices {
+      display: flex;
+      height: 100%;
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    /* Message */
+    .__private__homey-list-devices-message {
+      margin-top: auto;
+      margin-bottom: auto;
+      text-align: center;
+    }
+  
+    .__private__homey-list-devices-message:empty {
+      display: none;
+    }
+  
+    /* Body */
+    .__private__homey-list-devices-body {
+      width: 100%;
+    }
+  
+    /* Select all devices */
+    .__private__homey-select-all-devices {
+      display: flex;
+      justify-content: center;
+      background: var(--homey-color-component);
+      margin-top: var(--homey-su-2);
+    }
+  
+    .__private__homey-select-all-devices.is-hidden {
+      display: none;
+    }
+  
+    .__private__homey-select-all-devices-button {
+      display: block;
+      padding: 9px 16px;
+      background: var(--homey-color-component);
+      box-shadow: var(--homey-box-shadow);
+      min-height: 36px;
+      font-size: 14px;
+      font-weight: var(--homey-font-weight-medium);
+      line-height: 18px;
+      color: var(--homey-color-blue);
+      border: none;
+      border-radius: 18px;
+      transition: 200ms ease-in-out;
+      transition-property: transform;
+      -webkit-user-select: none !important;
+      user-select: none !important;
+      box-sizing: border-box;
+      cursor: pointer;
+    }
+  
+    /* Devices */
+    .__private__homey-list-devices-grid {
+      display: grid;
+      width: 100%;
+      grid-template-columns: 1fr 1fr 1fr;
+      grid-gap: 16px;
+      margin: var(--homey-su-4) 0 var(--homey-su-4);
+    }
+  
+    .__private__homey-list-devices-grid:empty {
+      display: none;
+    }
+  
+    .__private__homey-select-all-devices-button:active {
+      transform: scale(0.95);
+    }
+  
+    /* Device tile */
+    .__private__homey-device-tile {
+      display: block;
+      -webkit-user-select: none !important;
+      user-select: none !important;
+      -webkit-tap-highlight-color: transparent;
+      -webkit-user-drag: none;
+    }
+  
+    .__private__homey-device-tile__input {
+      display: none;
+    }
+  
+    .__private__homey-device-tile__tile {
+      --device-tile-padding: 7.4%;
+  
+      position: relative;
+      display: block;
+      cursor: pointer;
+      padding-bottom: calc(100% - 4px);
+      border-radius: var(--homey-border-radius);
+      background: var(--homey-color-component);
+      box-shadow: var(--homey-box-shadow);
+      border: 2px solid transparent;
+      transition: 200ms ease-in-out;
+      transition-property: transform, border-color, background-color;
+      will-change: transform, border-color, background-color; /* prevent transition flickering on sibling device tiles on safari for iPad and iPhone */
+    }
+  
+    .__private__homey-device-tile__tile:active {
+      transform: scale(0.95);
+    }
+  
+    .__private__homey-device-tile__input:checked + .__private__homey-device-tile__tile {
+      border-color: var(--homey-color-blue);
+      background: var(--homey-color-blue-o-05);
+      box-shadow: var(--homey-box-shadow-selected);
+    }
+  
+    .__private__homey-device-tile__name-scale-wrapper {
+      position: absolute;
+      top: var(--device-tile-padding);
+      right: var(--device-tile-padding);
+      bottom: var(--device-tile-padding);
+      left: var(--device-tile-padding);
+      width: calc(100% - var(--device-tile-padding) * 2);
+      height: calc(100% - var(--device-tile-padding) * 2);
+    }
+  
+    .__private__homey-device-tile__name-position-wrapper {
+      display: flex;
+      justify-items: flex-end;
+      width: 92px;
+      height: 92px;
+    }
+  
+    .__private__homey-device-tile__name {
+      margin-top: auto;
+      line-height: 1.13;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      font-size: 15px;
+      -webkit-user-select: none !important;
+      user-select: none !important;
+      word-break: break-word;
+      hyphens: auto;
+    }
+  
+    .__private__homey-device-tile__icon {
+      position: absolute;
+      display: block;
+      top: var(--device-tile-padding);
+      left: var(--device-tile-padding);
+      flex-shrink: 0;
+      width: 33%;
+      padding-bottom: 33%;
+      background-color: var(--homey-color-mono-80);
+      mask-size: contain;
+    }
+  
+    .__private__homey-device-tile__checked {
+      opacity: 0;
+      position: absolute;
+      right: var(--device-tile-padding);
+      top: var(--device-tile-padding);
+      display: block;
+      width: 18.5%;
+      height: 18.5%;
+      background: var(--homey-color-blue);
+      -webkit-mask-size: 100%;
+      mask-size: 100%;
+      -webkit-mask-repeat: no-repeat;
+      mask-repeat: no-repeat;
+      -webkit-mask-position: center;
+      mask-position: center;
+      transition: opacity var(--homey-duration-fast) var(--homey-curve-fast-in);
+    }
+  
+    .__private__homey-device-tile__input[type="checkbox"] + .__private__homey-device-tile__tile .__private__homey-device-tile__checked {
+      -webkit-mask-image: url('/manager/drivers/assets/icons/checkmark-square-fill.svg');
+      mask-image: url('/manager/drivers/assets/icons/checkmark-square-fill.svg');
+    }
+  
+    .__private__homey-device-tile__input[type="radio"] + .__private__homey-device-tile__tile .__private__homey-device-tile__checked {
+      -webkit-mask-image: url('/manager/drivers/assets/icons/checkmark-circle-fill.svg');
+      mask-image: url('/manager/drivers/assets/icons/checkmark-circle-fill.svg');
+    }
+  
+    .__private__homey-device-tile__input:checked + .__private__homey-device-tile__tile .__private__homey-device-tile__checked {
+      opacity: 1;
+    }</style>
+
+    <div class="__private__homey-list-devices" id="16709463134490.7849481381070716">
+      <div id="homey-list-devices-message" class="__private__homey-list-devices-message"></div>
+      <div class="__private__homey-list-devices-body">
+        <div data-hy-select-all-devices="" class="__private__homey-select-all-devices is-hidden">
+            <button data-hy-select-all-devices-button="" class="__private__homey-select-all-devices-button hy-nostyle">
+                <span data-hy-select-all-devices-text="">Deselect all</span> (<span data-hy-select-all-devices-count="">1</span>)
+            </button>
+        </div>
+        <div id="homey-list-devices-select-devices" class="__private__homey-list-devices-grid">
+              <!-- <label data-template-device-label="" class="__private__homey-device-tile hy-nostyle">
+                  <input data-template-device-input="" type="radio" name="device" class="hy-input-checkbox __private__homey-device-tile__input"> 
+                  <span class="__private__homey-device-tile__tile">
+                    <span data-template-device-icon="" class="__private__homey-device-tile__icon icon" style="mask-image: url(&quot;/icon/11abbe3afd66be11d3ff283d2f6a713c/icon.svg&quot;);"></span>
+                    <span class="__private__homey-device-tile__checked"></span>
+                    <svg class="__private__homey-device-tile__name-scale-wrapper" width="100%" height="100%" viewBox="0 0 92 92" preserveAspectRatio="xMinYMin meet">
+                        <foreignObject width="100%" height="100%" x="0" y="0" xmlns="http://www.w3.org/1999/xhtml"><div class="__private__homey-device-tile__name-position-wrapper" xmlns="http://www.w3.org/1999/xhtml"><span data-template-device-name="" class="__private__homey-device-tile__name" title="TEST-BUTTON">TEST-BUTTON</span></div></foreignObject>
+                    </svg>
+                </span>
+            </label> -->
+        </div>
+      </div>
+
+      <template id="template-select-device">
+        <label data-template-device-label="" class="__private__homey-device-tile hy-nostyle">
+            <input data-template-device-input="" type="checkbox" name="device" class="hy-input-checkbox __private__homey-device-tile__input"> 
+            <span class="__private__homey-device-tile__tile">
+                <span data-template-device-icon="" class="__private__homey-device-tile__icon icon"></span>
+                <span class="__private__homey-device-tile__checked"></span>
+                <svg class="__private__homey-device-tile__name-scale-wrapper" width="100%" height="100%" viewBox="0 0 92 92" preserveAspectRatio="xMinYMin meet">
+                    <foreignObject width="100%" height="100%" x="0" y="0" xmlns="http://www.w3.org/1999/xhtml"><div class="__private__homey-device-tile__name-position-wrapper" xmlns="http://www.w3.org/1999/xhtml"><span data-template-device-name="" class="__private__homey-device-tile__name"></span></div></foreignObject>
+                </svg>
+            </span>
+          </label>
+      </template>
+    </div>
+            
+    <script type="text/javascript">
+      !function(){
+        const l=document.getElementById("16709463134490.7849481381070716"),
+        i=l.querySelector("#homey-list-devices-message"),
+        a=l.querySelector("#homey-list-devices-select-devices"),
+        d=l.querySelector("#template-select-device"),
+        t=l.querySelector("[data-hy-select-all-devices]");
+        var e=l.querySelector("[data-hy-select-all-devices-button]");
+        const n=l.querySelector("[data-hy-select-all-devices-text]"),
+        o=l.querySelector("[data-hy-select-all-devices-count]"),
+        c=Homey.getCurrentView(),
+        u={};
+        let s,
+        y=!1;
+        const m=[];
+        function r(){
+          return l.querySelectorAll("[data-template-device-input]:checked").length===m.length
+        }
+        function v(e){
+          [].concat(e).filter(f).forEach(function(e){
+            var t=m.push(e)-1;
+            {
+              var i=t;
+              const n=d.content.cloneNode(!0),
+              o=n.querySelector("[data-template-device-label]"),
+              c=n.querySelector("[data-template-device-input]"),
+              s=n.querySelector("[data-template-device-name]"),
+              r=n.querySelector("[data-template-device-icon]");
+              function l(e){
+                if(y&&e)
+                  for(const t in u)
+                    u[t]=!1;
+                  u[i]=e,g()
+              }
+              c.type=y?"radio":"checkbox",c.addEventListener("change",function(){l(!!c.checked)}),
+              o.addEventListener("click",function(){_()}),
+              s.setAttribute("title",e.name),
+              s.textContent=e.name,
+              e.iconUrl&&(r.style.webkitMaskImage="url("+e.iconUrl+")",r.style.maskImage="url("+e.iconUrl+")", delete e.iconUrl),
+              e.iconObj&&(r.style.webkitMaskImage="url("+e.iconObj.url+")",
+              r.style.maskImage="url("+e.iconObj.url+")",
+              delete e.iconObj),
+              !y||y&&1===m.length?(c.checked="checked",l(!0)):l(!1),
+              a.appendChild(n),
+              window.found_devices[JSON.stringify(e.data)]=e
+            }
+          }),
+          e=m.length<=1||y,
+          t.classList.toggle("is-hidden",e),
+          _(),
+          e=m.length,
+          o.textContent=e
+        }
+        
+        function _(){
+          let e=Homey.__("$tmpl.list_devices.select_all");
+          r()&&(e=Homey.__("$tmpl.list_devices.deselect_all")),
+          n.textContent=e
+        }
+        
+        function f(t){
+          return !m.find(function(e){
+            return JSON.stringify(e.data)===JSON.stringify(t.data)
+          })
+        }
+        
+        function g(){
+          var e,
+          t=m.filter(function(e,t){
+            return u[t]
+          });
+          JSON.stringify(t)!==JSON.stringify(s)&&(
+            s=t,
+            Homey.emit(c+"_selection",t),
+            (e=Homey.getNextViewByTemplate("add_devices"))&&Homey.setViewStoreValue(e,"devices",t,function(e){if(e)return console.error(e)}),
+            window.selected_devices=t.map(function(e){
+              return JSON.stringify(e.data)
+            })
+          )
+        }
+    
+        window.found_devices={},
+        window.selected_devices=[],
+        Homey.setTitle(Homey.__("$tmpl.list_devices.title")),
+        Homey.setSubtitle(Homey.__("$tmpl.list_devices.subtitle")),
+        Homey.showLoadingOverlay(Homey.__("$tmpl.list_devices.loading")),
+        Homey.getOptions(
+          function(e,t){
+            if(e)
+              return Homey.error(e);
+            t.singular&&(y=!0,Homey.setSubtitle(Homey.__("$tmpl.list_devices.subtitle-singular"))),
+            t.title&&Homey.setTitle(Homey.__(t.title)),
+            t.subtitle&&Homey.setSubtitle(Homey.__(t.subtitle))}),
+            Homey.on("list_devices",function(e){Homey.hideLoadingOverlay(),v(e)}),
+            Homey.emit("list_devices",null,function(e,t){
+              return Homey.hideLoadingOverlay(),
+              e?(i.textContent=e.message||e.toString(),Homey.setNavigationClose()):
+                t.length?v(t):(Homey.setTitle(Homey.__("$tmpl.list_devices.nonew")),
+                  Homey.setSubtitle(null),
+                  i.textContent=Homey.__("$tmpl.list_devices.nonew"),
+                  Homey.setNavigationClose()
+                )
+              }
+            ),
+            e.addEventListener("click",()=>{
+              {
+                const e=l.querySelectorAll("[data-template-device-input]"),
+                t=!1===r();
+                e.forEach(e=>{e.checked=t}),
+                _();
+                for(const i in u)
+                  u[i]=t;
+                g()
+              }
+            })
+      }()
+    </script>
+</div>

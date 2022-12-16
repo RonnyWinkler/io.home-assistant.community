@@ -4,6 +4,10 @@
             "ready": "Afgerond",
             "device_added": "Apparaat is toegevoegd",
             "icon": "Icon"
+        },
+        "list_devices":{
+            "search": "Zoeken naar",
+            "continue": "Volgende"
         }
     },
     "repair": {

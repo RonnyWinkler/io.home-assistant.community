@@ -34,22 +34,22 @@
     <fieldset>
         <div>
             <p>
-                <button id="btnEntity" class=button onClick="onSelectEntity()" visibility = 'hidden'><span data-i18n="repair.title.deviceDetails"></span></button>
+                <button id="btnEntity" class="homey-button-primary-full" onClick="onSelectEntity()" visibility = 'hidden'><span data-i18n="repair.title.deviceDetails"></span></button>
             </p>
         </div>
         <div>
             <p>
-                <button id="btnLog" class=button onClick="onSelectLog()" visibility = 'hidden'><span data-i18n="repair.title.log"></span></button>
+                <button id="btnLog" class="homey-button-primary-full" onClick="onSelectLog()" visibility = 'hidden'><span data-i18n="repair.title.log"></span></button>
             </p>
         </div>
         <div>
             <p>
-                <button id="btnAuth" class=button onClick="onSelectAuth()" visibility = 'hidden'><span data-i18n="repair.title.auth"></span></button>
+                <button id="btnAuth" class="homey-button-primary-full" onClick="onSelectAuth()" visibility = 'hidden'><span data-i18n="repair.title.auth"></span></button>
             </p>
         </div>
         <div>
             <p>
-                <button id="btnIcon" class=button onClick="onSelectIcon()" visibility = 'hidden'><span data-i18n="repair.title.icon"></span></button>
+                <button id="btnIcon" class="homey-button-primary-full" onClick="onSelectIcon()" visibility = 'hidden'><span data-i18n="repair.title.icon"></span></button>
             </p>
             <p>
                 <span id="spanIconState"></span>
@@ -65,6 +65,12 @@
     Homey.emit('isIconChangeable').then(function (result) {
         button = document.getElementById("btnIcon");
         button.disabled = !result;
+        if (!result){
+            button.className = "homey-button-primary-full is-disabled";
+        }
+        else{
+            button.className = "homey-button-primary-full";
+        }
         if (result){
             let span = document.getElementById('spanIconState');
             while( span.firstChild ) {

@@ -4,6 +4,10 @@
             "ready": "Ready",
             "device_added": "Device was added",
             "icon": "Icon"
+        },
+        "list_devices":{
+            "search": "Search",
+            "continue": "Continue"
         }
     },
     "repair": {

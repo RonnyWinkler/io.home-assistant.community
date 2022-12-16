@@ -324,8 +324,11 @@ class BaseDriver extends Homey.Driver {
         if (data.length > 1){
             this.log("handler: list_devices_selection: " + data.length + " devices selected");
         }
-        else{
+        else if (data.length == 1){
             this.log("handler: list_devices_selection: " + data[0].name);
+        }
+        else{
+            this.log("handler: list_devices_selection: No device selected");
         }
         this.selectedDevices = data;
         return;
