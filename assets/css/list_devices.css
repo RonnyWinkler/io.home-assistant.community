@@ -1,0 +1,249 @@
+
+/* #hy-views > .hy-view.visible {
+  opacity: 1;
+  visibility: visible;
+}
+#hy-views > .hy-view {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  overflow: auto;
+  opacity: 0;
+  visibility: hidden;
+  transition: all .3s;
+  box-sizing: border-box;
+  padding: 0 var(--homey-su-2) var(--homey-su-2) var(--homey-su-2) !important;
+} */
+
+/* List Devices View */
+.__private__homeassistant-list-devices {
+  display: flex;
+  min-height: 100%;
+  /* height: 100%; */
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Message */
+.__private__homeassistant-list-devices-message {
+  margin-top: auto;
+  margin-bottom: auto;
+  text-align: center;
+}
+
+.__private__homeassistant-list-devices-message:empty {
+  display: none;
+}
+
+/* Body */
+.__private__homeassistant-list-devices-body {
+  width: 100%;
+}
+
+/* Select all devices */
+.__private__homeassistant-select-all-devices {
+  display: flex;
+  justify-content: center;
+  background: var(--homey-color-component);
+  margin-top: var(--homey-su-2);
+}
+
+.__private__homeassistant-select-all-devices.is-hidden {
+  display: none;
+}
+
+.__private__homeassistant-select-all-devices-button {
+  display: block;
+  padding: 9px 16px;
+  background: var(--homey-color-component);
+  box-shadow: var(--homey-box-shadow);
+  min-height: 36px;
+  font-size: 14px;
+  font-weight: var(--homey-font-weight-medium);
+  line-height: 18px;
+  color: var(--homey-color-blue);
+  border: none;
+  border-radius: 18px;
+  transition: 200ms ease-in-out;
+  transition-property: transform;
+  -webkit-user-select: none !important;
+  user-select: none !important;
+  box-sizing: border-box;
+  cursor: pointer;
+}
+
+/* Devices */
+.__private__homeassistant-list-devices-grid {
+  display: grid;
+  width: 100%;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 16px;
+  margin: var(--homey-su-4) 0 var(--homey-su-4);
+}
+
+.__private__homeassistant-list-devices-grid:empty {
+  display: none;
+}
+
+.__private__homeassistant-select-all-devices-button:active {
+  transform: scale(0.95);
+}
+
+/* Device tile */
+.__private__homeassistant-device-tile {
+  display: block;
+  -webkit-user-select: none !important;
+  user-select: none !important;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-user-drag: none;
+}
+
+.__private__homeassistant-device-tile__input {
+  display: none;
+}
+
+.__private__homeassistant-device-tile__tile {
+  --device-tile-padding: 7.4%;
+
+  position: relative;
+  display: block;
+  cursor: pointer;
+  padding-bottom: calc(100% - 4px);
+  border-radius: var(--homey-border-radius);
+  background: var(--homey-color-component);
+  box-shadow: var(--homey-box-shadow);
+  border: 2px solid transparent;
+  transition: 200ms ease-in-out;
+  transition-property: transform, border-color, background-color;
+  will-change: transform, border-color, background-color; /* prevent transition flickering on sibling device tiles on safari for iPad and iPhone */
+}
+
+.__private__homeassistant-device-tile__tile:active {
+  transform: scale(0.95);
+}
+
+.__private__homeassistant-device-tile__input:checked + .__private__homeassistant-device-tile__tile {
+  border-color: var(--homey-color-blue);
+  background: var(--homey-color-blue-o-05);
+  box-shadow: var(--homey-box-shadow-selected);
+}
+
+.__private__homeassistant-device-tile__name-scale-wrapper {
+  position: absolute;
+  top: var(--device-tile-padding);
+  right: var(--device-tile-padding);
+  bottom: var(--device-tile-padding);
+  left: var(--device-tile-padding);
+  width: calc(100% - var(--device-tile-padding) * 2);
+  height: calc(100% - var(--device-tile-padding) * 2);
+}
+
+.__private__homeassistant-device-tile__name-position-wrapper {
+  display: flex;
+  justify-items: flex-end;
+  width: 92px;
+  height: 92px;
+}
+
+.__private__homeassistant-device-tile__name {
+  margin-top: auto;
+  line-height: 1.13;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  font-size: 15px;
+  -webkit-user-select: none !important;
+  user-select: none !important;
+  word-break: break-word;
+  hyphens: auto;
+}
+
+.__private__homeassistant-device-tile__icon {
+  position: absolute;
+  display: block;
+  top: var(--device-tile-padding);
+  left: var(--device-tile-padding);
+  flex-shrink: 0;
+  width: 33%;
+  padding-bottom: 33%;
+  background-color: var(--homey-color-mono-80);
+  mask-size: contain;
+}
+
+.__private__homeassistant-device-tile__checked {
+  opacity: 0;
+  position: absolute;
+  right: var(--device-tile-padding);
+  top: var(--device-tile-padding);
+  display: block;
+  width: 18.5%;
+  height: 18.5%;
+  background: var(--homey-color-blue);
+  -webkit-mask-size: 100%;
+  mask-size: 100%;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+  transition: opacity var(--homey-duration-fast) var(--homey-curve-fast-in);
+}
+
+.__private__homeassistant-device-tile__input[type="checkbox"] + .__private__homeassistant-device-tile__tile .__private__homeassistant-device-tile__checked {
+  -webkit-mask-image: url('/manager/drivers/assets/icons/checkmark-square-fill.svg');
+  mask-image: url('/manager/drivers/assets/icons/checkmark-square-fill.svg');
+}
+
+.__private__homeassistant-device-tile__input[type="radio"] + .__private__homeassistant-device-tile__tile .__private__homeassistant-device-tile__checked {
+  -webkit-mask-image: url('/manager/drivers/assets/icons/checkmark-circle-fill.svg');
+  mask-image: url('/manager/drivers/assets/icons/checkmark-circle-fill.svg');
+}
+
+.__private__homeassistant-device-tile__input:checked + .__private__homeassistant-device-tile__tile .__private__homeassistant-device-tile__checked {
+  opacity: 1;
+}
+
+/* Search field */
+.__private__homeassistant-search {
+  display: block;
+  padding: 9px 16px;
+  background: var(--homey-color-component);
+  box-shadow: var(--homey-box-shadow);
+  min-height: 36px;
+  font-size: 14px;
+  font-weight: var(--homey-font-weight-medium);
+  line-height: 18px;
+  color: var(--homey-color-blue);
+  border: none;
+  border-radius: 18px;
+  transition: 200ms ease-in-out;
+  transition-property: transform;
+  -webkit-user-select: none !important;
+  user-select: none !important;
+  box-sizing: border-box;
+  margin-left:10px;
+}
+
+#hy-nav-div-continue {
+  position: sticky;
+  bottom: 0px;
+  /* bottom: calc(var(--homey-su-2) * -1);
+  padding: 0 0 var(--homey-su-2) 0; */
+  background: var(--homey-color-white);
+  border-radius: var(--homey-border-radius);
+  box-shadow: 0 5px 5px 15px var(--homey-color-white);
+}
+
+/* #hy-nav-continue {
+  position: sticky;
+  bottom: 0px;
+} */
+/* #hy-nav-continue.is-disabled {
+  filter: grayscale(1) opacity(0.8);
+} */

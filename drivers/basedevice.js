@@ -65,6 +65,13 @@ class BaseDevice extends Homey.Device {
     }
 
     // Central device functions ===========================================================
+    getClient(){
+        if (this._client == undefined){
+            this._client = this.homey.app.getClient();
+        }
+        return this._client;
+    }
+
     async clientReconnect(){
         await this.homey.app.clientReconnect();
     }
@@ -132,12 +139,15 @@ class BaseDevice extends Homey.Device {
     }
 
     async checkDeviceAvailability(){
-        let entity = this._client.getEntity(this.entityId);
-        if (entity == null){
-            await this.setUnavailable(this.homey.__("device_unavailable_reason.entity_not_found"));
-        }
-        else{
-            this.setAvailable();
+        let client = this.getClient();
+        if (client != undefined){
+            let entity = this._client.getEntity(this.entityId);
+            if (entity == null){
+                await this.setUnavailable(this.homey.__("device_unavailable_reason.entity_not_found"));
+            }
+            else{
+                this.setAvailable();
+            }
         }
     }
 

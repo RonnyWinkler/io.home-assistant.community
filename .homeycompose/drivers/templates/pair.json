@@ -28,11 +28,7 @@
         },
         {
             "id": "list_devices",
-            "template": "list_devices",
-            "navigation": {
-                "next": "icon"
-            },
-            "options": { "singular": true }
+            "options": { "singular": false }
         },
         {
             "id": "icon",

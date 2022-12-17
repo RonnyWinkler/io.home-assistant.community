@@ -1,7 +1,7 @@
 {
   "id": "io.home-assistant.community",
   "version": "0.6.2",
-  "compatibility": ">=7.0.0",
+  "compatibility": ">=8.1.0",
   "sdk": 3,
   "brandColor": "#0DA6EA",
   "name": {
