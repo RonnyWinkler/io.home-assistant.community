@@ -162,5 +162,9 @@
   "0.6.2": {
     "en": "Fix for flow conditions. Changed timer duration change.",
     "de": "Korrektur für Flow-Konditionen. Änderung der Timer-Dauer geändert."
+  },
+  "0.7.0": {
+    "en": "Added new pairing dialog with multiselection and device search/filter .",
+    "de": "Neuer Pairing-Dialog mit Mehrfachselection und Gerätesuche/-filter."
   }
 }
