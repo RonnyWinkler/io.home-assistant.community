@@ -170,5 +170,9 @@
   "0.7.1": {
     "en": "Fix for pair dialog.",
     "de": "Korrektur für Pairing-Dialog."
+  },
+  "1.0.0": {
+    "en": "Publish stable version 1.0.0",
+    "de": "Veröffentlichung der stabilen Version 1.0.0"
   }
 }
