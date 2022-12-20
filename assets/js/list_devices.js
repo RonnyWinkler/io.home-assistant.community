@@ -8,6 +8,7 @@
   var search = l.querySelector("[data-hy-search]");
   var nextButton = document.getElementById('hy-nav-continue');
   nextButton.addEventListener("click",nextView);
+  var nextButtonDiv = document.getElementById('hy-nav-div-continue');
   // document.getElementById('hy-nav-continue').textContent=Homey.__("pair.list_devices.continue");
   var visibleDevicesCount;
   var e=l.querySelector("[data-hy-select-all-devices-button]");
@@ -133,10 +134,12 @@
   Homey.emit("list_devices",null,function(e,t){
     return Homey.hideLoadingOverlay(),
     e?(i.textContent=e.message||e.toString(),Homey.setNavigationClose()):
-      t.length?v(t):(Homey.setTitle(Homey.__("$tmpl.list_devices.nonew")),
+      t.length?v(t):(
+        Homey.setTitle(Homey.__("$tmpl.list_devices.nonew")),
         Homey.setSubtitle(null),
         i.textContent=Homey.__("$tmpl.list_devices.nonew"),
-        Homey.setNavigationClose()
+        Homey.setNavigationClose(),
+        nextButtonDiv.style.visibility = 'hidden'
       )
     }
   ),

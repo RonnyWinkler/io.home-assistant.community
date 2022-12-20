@@ -164,7 +164,11 @@
     "de": "Korrektur für Flow-Konditionen. Änderung der Timer-Dauer geändert."
   },
   "0.7.0": {
-    "en": "Added new pairing dialog with multiselection and device search/filter .",
-    "de": "Neuer Pairing-Dialog mit Mehrfachselection und Gerätesuche/-filter."
+    "en": "Added new pairing dialog with multiselection and device search/filter. Minimunm Homey version: 8.1.0",
+    "de": "Neuer Pairing-Dialog mit Mehrfachselection und Gerätesuche/-filter. Minimum Homey-Version: 8.1.0"
+  },
+  "0.7.1": {
+    "en": "Fix for pair dialog.",
+    "de": "Korrektur für Pairing-Dialog."
   }
 }
