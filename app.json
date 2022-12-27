@@ -1848,6 +1848,43 @@
         ]
       },
       {
+        "id": "lightSetTemperatureRelative",
+        "title": {
+          "en": "Set relative light temperature",
+          "de": "Relative Lichttemperatur einstellen",
+          "nl": "Relatieve Lichttemperatuur einstellen"
+        },
+        "titleFormatted": {
+          "en": "Set temperature with relative change of [[light_temperature_rel]].",
+          "de": "Setze Temperatur mit relativer Änderung von [[light_temperature_rel]].",
+          "nl": "Stel temperatuur in met relatieve verandering van [[light_temperature_rel]]."
+        },
+        "hint": {
+          "en": "Set light temperature with respect to the device's current temperature level.",
+          "de": "Stelle die Lichttemperatur in Bezug auf das aktuelle Temperaturniveau ein.",
+          "nl": "Stel de lichttemperatuur in ten opzichte van het huidige temperatuurniveau."
+        },
+        "duration": true,
+        "args": [
+          {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=light"
+          },
+          {
+            "name": "light_temperature_rel",
+            "type": "range",
+            "min": -1,
+            "max": 1,
+            "step": 0.01,
+            "value": 0,
+            "label": "%",
+            "labelMultiplier": 100,
+            "labelDecimals": 0
+          }
+        ]
+      },
+      {
         "highlight": true,
         "title": {
           "en": "Open",

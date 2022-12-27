@@ -148,6 +148,7 @@ class App extends Homey.App {
 			}
 		});
 
+		// Light
 		this._flowActionLightSetHue = this.homey.flow.getActionCard('lightSetHue')
 		this._flowActionLightSetHue.registerRunListener(async (args, state) => {
 			try{
@@ -178,6 +179,17 @@ class App extends Homey.App {
 			}
 			catch(error){
 				this.error("Error executing flowAction 'lightSetTemperature': "+  error.message);
+				throw new Error(error.message);
+			}
+		});
+		this._flowActionLightSetTemperatureRelative = this.homey.flow.getActionCard('lightSetTemperatureRelative')
+		this._flowActionLightSetTemperatureRelative.registerRunListener(async (args, state) => {
+			try{
+				await args.device.setTemperatureRelative(args);
+				return true;
+			}
+			catch(error){
+				this.error("Error executing flowAction 'lightSetTemperatureRelative': "+  error.message);
 				throw new Error(error.message);
 			}
 		});

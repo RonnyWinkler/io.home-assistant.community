@@ -289,6 +289,21 @@ class LightDevice extends BaseDevice {
         this._onCapabilitiesSet(args, null);
     }
 
+    async setTemperatureRelative(args){
+        if (args.light_temperature_rel){
+            let lightTemperature = this.getCapabilityValue('light_temperature');
+            lightTemperature += args.light_temperature_rel;
+            if (lightTemperature > 1){
+                lightTemperature = 1;
+            } 
+            if (lightTemperature < 0){
+                lightTemperature = 0;
+            } 
+            args["light_temperature"] = lightTemperature;
+            this._onCapabilitiesSet(args, null);
+        }
+    }
+
     async onSettings(settings){
         try {
             this._settings = settings.newSettings;
