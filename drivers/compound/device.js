@@ -1,6 +1,7 @@
 'use strict';
 
 const BaseDevice = require('../basedevice');
+const lodashget = require('lodash.get');
 
 const CAPABILITIES_SET_DEBOUNCE = 100;
 
@@ -140,11 +141,14 @@ class CompoundDevice extends BaseDevice {
                         value = convert(data.state);
                     }
                     else{
-                        entityValue = data.attributes[attribute];
-                        value = convert(data.attributes[attribute]);
+                        // Using Lodash.get method to read JSON path
+                        entityValue = lodashget(data.attributes, attribute, null);
+                        value = convert(lodashget(data.attributes, attribute, null));
+                        // entityValue = data.attributes[attribute];
+                        // value = convert(data.attributes[attribute]);
                     }
-                    if ( (value == null || value == undefined) && (entityValue != value) ){
-                        if (attribute == undefined){
+                    if ( (value == null || value == undefined || value == NaN) && (entityValue != value) ){
+                        if (attribute == undefined || value == NaN){
                             this.log("Update compound device from entity. Value convert error: "+this.entityId+" key: "+key+" entity: "+entityId+" HA state: "+data.state+" converted:"+value);
                         }
                         else{
@@ -198,7 +202,8 @@ class CompoundDevice extends BaseDevice {
         return compoundEntity.split(".")[0]+"."+compoundEntity.split(".")[1];
     }
     _getCompoundEntityAttribut(compoundEntity){
-        return compoundEntity.split(".")[2];
+        // return compoundEntity.split(".")[2];
+        return compoundEntity.replace(/([^\.]*\.){2}/, '');
     }
 
     // Version without attributes

@@ -10,6 +10,7 @@ const { join } = require('path');
 const Client = require('./lib/Client.js');
 const colors = require('./lib/colors.json');
 const RECONNECT_TIMEOUT = 30;
+const AVAILABILITY_CHECK_TIMEOUT = 30;
 const LOG_SIZE = 50;
 
 
@@ -91,6 +92,9 @@ class App extends Homey.App {
 		// this.homey.on('__error', (...args) => this.onError(...args));
 		// this.homey.on('__debug', (...args) => this.onDebug(...args));
 		
+		// global attributes
+		this.timeoutCheckDeviceAvailability = null;
+
 		// Autocomplete Lists:
 		this.entityList = {};
 		this.serviceList = {};
@@ -934,6 +938,7 @@ class App extends Homey.App {
 			else{
 				this.log("Connection check: OK.");
 			}
+			// await this.checkDeviceAvailability();
         }
         catch(error){
             this.error("Error checking connection: ", error);
@@ -943,6 +948,7 @@ class App extends Homey.App {
 	}
 
 	async checkDeviceAvailability(){
+		this.log("Check device availability...");
 		let drivers = this.homey.drivers.getDrivers();
 		Object.keys(drivers).forEach(async (key) => {
 			let devices = drivers[key].getDevices();
@@ -952,6 +958,16 @@ class App extends Homey.App {
 		});
 	}
 
+	async checkDeviceAvailabilityTimer(){
+		if (this.timeoutCheckDeviceAvailability == null){
+			this.timeoutCheckDeviceAvailability = this.homey.setTimeout(
+				async () => {
+					this.timeoutCheckDeviceAvailability = null;
+					await this.checkDeviceAvailability().catch(e => console.log(e))
+				},
+				AVAILABILITY_CHECK_TIMEOUT * 1000 );
+		}
+	}
 }
 
 module.exports = App;

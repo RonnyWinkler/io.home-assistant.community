@@ -174,5 +174,9 @@
   "1.0.0": {
     "en": "Publish stable version 1.0.0",
     "de": "Veröffentlichung der stabilen Version 1.0.0"
+  },
+  "1.0.1": {
+    "en": "Added light flow action to set relative temperature. Added possibilitay to use deep JSON paths in Compound definition.",
+    "de": "Licht-Flowaktion zum Setzen der relativen Temperatur ergänzt. Möglichkeit zur Angabe tiefer JSON-Pfade in Compound-Definition ergänzt."
   }
 }
