@@ -622,6 +622,12 @@ class App extends Homey.App {
         this._flowTriggerAutomationTriggeredFilter.registerRunListener(async (args, state) => {
             return ( !args.name || args.name === state.name);
         });
+		this._flowTriggerEventTriggeredFilter = this.homey.flow.getTriggerCard("event_triggered_filter");
+        this._flowTriggerEventTriggeredFilter.registerRunListener(async (args, state) => {
+            return ( ( !args.event || args.event === state.event ) 
+						&&
+					 ( !args.entity || args.entity === state.entity ));
+        });
 
 		// Flow Trigger: Devices
 		this._flowTriggerButtonPressed = this.homey.flow.getDeviceTriggerCard('button_pressed');

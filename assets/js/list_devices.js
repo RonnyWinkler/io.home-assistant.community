@@ -72,12 +72,15 @@
         //!y||y&&1===m.length?(c.checked="checked",l(!0)):l(!1),
         a.appendChild(n),
         window.found_devices[JSON.stringify(e.data)]=e;
-        if (m.length == 1){
-          c.checked="checked";
-          l(!0);
-        }
+
+        // Select first device as default
+        // if (m.length == 1){
+        //   c.checked="checked";
+        //   l(!0);
+        // }
       }
     }),
+    g(),
     e=m.length<=1||y,
     t.classList.toggle("is-hidden",e),
     _(),

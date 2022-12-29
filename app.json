@@ -1,7 +1,7 @@
 {
   "_comment": "This file is generated. Please edit .homeycompose/app.json instead.",
   "id": "io.home-assistant.community",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "compatibility": ">=8.1.0",
   "sdk": 3,
   "brandColor": "#0DA6EA",
@@ -388,6 +388,85 @@
           }
         ],
         "id": "climate_mode_swing_changed"
+      },
+      {
+        "title": {
+          "en": "Event was triggered",
+          "de": "Ereignis wurde ausgelöst",
+          "nl": "Evenement is geactiveerd"
+        },
+        "titleFormatted": {
+          "en": "The event named [[event]] has been triggered for entity [[entity]].",
+          "de": "Das Ereignis mit Name [[event]] wurde für die Entität [[entity]] ausgelöst.",
+          "nl": "De gebeurtenis met de naam [[event]] is geactiveerd voor entiteit [[entity]]."
+        },
+        "hint": {
+          "en": "Triggers when a event was triggered. The execution can be filtered by a event  and entity name.",
+          "de": "Wird ausgelöst, wenn ein Ereignis ausgelöst wurde. Die Ausführung kann nach einem Ereignis und einem Entitätsnamen gefiltert werden.",
+          "nl": "Wordt verzonden wanneer een gebeurtenis is geactiveerd. Uitvoering kan worden gefilterd op een gebeurtenis en een entiteitsnaam."
+        },
+        "tokens": [
+          {
+            "name": "event",
+            "type": "string",
+            "title": {
+              "en": "Event name",
+              "de": "Ereignis-Name",
+              "nl": "Evenement naam"
+            }
+          },
+          {
+            "name": "entity",
+            "type": "string",
+            "title": {
+              "en": "Entity",
+              "de": "Entität",
+              "nl": "Entiteit"
+            }
+          },
+          {
+            "name": "data",
+            "type": "string",
+            "title": {
+              "en": "Event data",
+              "de": "Ereignis-Daten",
+              "nl": "Gebeurtenis gegevens"
+            }
+          }
+        ],
+        "args": [
+          {
+            "name": "event",
+            "type": "text",
+            "required": false,
+            "title": {
+              "en": "Event",
+              "de": "Ereignis",
+              "nl": "Evenement"
+            },
+            "placeholder": {
+              "en": "Event",
+              "de": "Ereignis",
+              "nl": "Evenement"
+            }
+          },
+          {
+            "name": "entity",
+            "type": "text",
+            "required": false,
+            "title": {
+              "en": "Entity",
+              "de": "Entität",
+              "nl": "Entiteit"
+            },
+            "placeholder": {
+              "en": "Entity",
+              "de": "Eintität",
+              "nl": "Entiteit"
+            }
+          }
+        ],
+        "id": "event_triggered_filter"
       },
       {
         "title": {

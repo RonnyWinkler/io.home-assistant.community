@@ -202,8 +202,12 @@ class CompoundDevice extends BaseDevice {
         return compoundEntity.split(".")[0]+"."+compoundEntity.split(".")[1];
     }
     _getCompoundEntityAttribut(compoundEntity){
-        // return compoundEntity.split(".")[2];
-        return compoundEntity.replace(/([^\.]*\.){2}/, '');
+        if (compoundEntity.split(".")[2] == undefined){
+            return undefined;
+        }
+        else{
+            return compoundEntity.replace(/([^\.]*\.){2}/, '');
+        }
     }
 
     // Version without attributes
