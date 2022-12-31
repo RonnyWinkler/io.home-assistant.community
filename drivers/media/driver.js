@@ -4,8 +4,8 @@ const BaseDriver = require('../basedriver');
 
 class MediaDriver extends BaseDriver {
 
-    async getDeviceList(client){
-        return client.getMediaPlayers();
+    async getDeviceList(client, id=null){
+        return client.getMediaPlayers(id);
     }
 
 }

@@ -4,8 +4,8 @@ const BaseDriver = require('../basedriver');
 
 class LightDriver extends BaseDriver {
 
-    async getDeviceList(client){
-        return client.getLights();
+    async getDeviceList(client, id=null){
+        return client.getLights(id);
     }
 }
 

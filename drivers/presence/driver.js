@@ -4,8 +4,8 @@ const BaseDriver = require('../basedriver');
 
 class PresenceDriver extends BaseDriver {
 
-    async getDeviceList(client){
-        return client.getPresence();
+    async getDeviceList(client, id=null){
+        return client.getPresence(id);
     }
 }
 

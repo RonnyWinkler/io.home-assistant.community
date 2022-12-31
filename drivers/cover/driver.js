@@ -4,8 +4,8 @@ const BaseDriver = require('../basedriver');
 
 class CoverDriver extends BaseDriver {
 
-    async getDeviceList(client){
-        return client.getCovers();
+    async getDeviceList(client, id=null){
+        return client.getCovers(id);
     }
 }
 

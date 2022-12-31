@@ -4,8 +4,8 @@ const BaseDriver = require('../basedriver');
 
 class VacuumDriver extends BaseDriver {
 
-    async getDeviceList(client){
-        return client.getVacuums();
+    async getDeviceList(client, id=null){
+        return client.getVacuums(id);
     }
 }
 

@@ -4,8 +4,8 @@ const BaseDriver = require('../basedriver');
 
 class ClimateFanDriver extends BaseDriver {
 
-    async getDeviceList(client){
-        return client.getClimateFans();
+    async getDeviceList(client, id=null){
+        return client.getClimateFans(id);
     }
 }
 

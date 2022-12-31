@@ -4,8 +4,8 @@ const BaseDriver = require('../basedriver');
 
 class TimerDriver extends BaseDriver {
 
-    async getDeviceList(client){
-        return client.getTimers();
+    async getDeviceList(client, id=null){
+        return client.getTimers(id);
     }
 }
 

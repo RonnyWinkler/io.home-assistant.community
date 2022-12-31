@@ -21,7 +21,10 @@
             "iconChanged": "Icon wurde geändert.",
             "appRestart": "Nach einer Icon-Änderung muss die App neu gestartet werden, damit die Änderung wirksam wird.",
             "deviceDetails": "Gerätedetails",
-            "log": "Anwendungs-Log"
+            "log": "Anwendungs-Log",
+            "updateCapabilitiesTitle": "Geräte-Aktualisierung (experimentell)",
+            "updateCapabilitiesText": "Die aktuellen Gerätefunktionen (Capabilities) werden je nach HomeAssistant-Entität entfernt und neu hinzugefügt.",
+            "updateCapabilitiesReady": "Gerätefunktionen (Capabilities) wurden aktualisiert."
         }
     },
     "device_unavailable_reason": {

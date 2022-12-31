@@ -2614,6 +2614,19 @@
           }
         },
         {
+          "id": "capability_update_dlg",
+          "navigation": {
+            "next": "capability_update",
+            "prev": "select"
+          }
+        },
+        {
+          "id": "capability_update",
+          "navigation": {
+            "prev": "capability_update_dlg"
+          }
+        },
+        {
           "id": "login_credentials",
           "template": "login_credentials",
           "navigation": {
@@ -2749,6 +2762,19 @@
           }
         },
         {
+          "id": "capability_update_dlg",
+          "navigation": {
+            "next": "capability_update",
+            "prev": "select"
+          }
+        },
+        {
+          "id": "capability_update",
+          "navigation": {
+            "prev": "capability_update_dlg"
+          }
+        },
+        {
           "id": "login_credentials",
           "template": "login_credentials",
           "navigation": {
@@ -2872,6 +2898,19 @@
           "id": "icon_change",
           "navigation": {
             "prev": "icon"
+          }
+        },
+        {
+          "id": "capability_update_dlg",
+          "navigation": {
+            "next": "capability_update",
+            "prev": "select"
+          }
+        },
+        {
+          "id": "capability_update",
+          "navigation": {
+            "prev": "capability_update_dlg"
           }
         },
         {
@@ -3039,6 +3078,19 @@
           "id": "icon_change",
           "navigation": {
             "prev": "icon"
+          }
+        },
+        {
+          "id": "capability_update_dlg",
+          "navigation": {
+            "next": "capability_update",
+            "prev": "select"
+          }
+        },
+        {
+          "id": "capability_update",
+          "navigation": {
+            "prev": "capability_update_dlg"
           }
         },
         {
@@ -3222,6 +3274,19 @@
           }
         },
         {
+          "id": "capability_update_dlg",
+          "navigation": {
+            "next": "capability_update",
+            "prev": "select"
+          }
+        },
+        {
+          "id": "capability_update",
+          "navigation": {
+            "prev": "capability_update_dlg"
+          }
+        },
+        {
           "id": "login_credentials",
           "template": "login_credentials",
           "navigation": {
@@ -3344,6 +3409,19 @@
           "id": "icon_change",
           "navigation": {
             "prev": "icon"
+          }
+        },
+        {
+          "id": "capability_update_dlg",
+          "navigation": {
+            "next": "capability_update",
+            "prev": "select"
+          }
+        },
+        {
+          "id": "capability_update",
+          "navigation": {
+            "prev": "capability_update_dlg"
           }
         },
         {
@@ -3489,6 +3567,19 @@
           "id": "icon_change",
           "navigation": {
             "prev": "icon"
+          }
+        },
+        {
+          "id": "capability_update_dlg",
+          "navigation": {
+            "next": "capability_update",
+            "prev": "select"
+          }
+        },
+        {
+          "id": "capability_update",
+          "navigation": {
+            "prev": "capability_update_dlg"
           }
         },
         {
@@ -3688,6 +3779,19 @@
           }
         },
         {
+          "id": "capability_update_dlg",
+          "navigation": {
+            "next": "capability_update",
+            "prev": "select"
+          }
+        },
+        {
+          "id": "capability_update",
+          "navigation": {
+            "prev": "capability_update_dlg"
+          }
+        },
+        {
           "id": "login_credentials",
           "template": "login_credentials",
           "navigation": {
@@ -3821,6 +3925,19 @@
           "id": "icon_change",
           "navigation": {
             "prev": "icon"
+          }
+        },
+        {
+          "id": "capability_update_dlg",
+          "navigation": {
+            "next": "capability_update",
+            "prev": "select"
+          }
+        },
+        {
+          "id": "capability_update",
+          "navigation": {
+            "prev": "capability_update_dlg"
           }
         },
         {
@@ -3974,6 +4091,19 @@
           }
         },
         {
+          "id": "capability_update_dlg",
+          "navigation": {
+            "next": "capability_update",
+            "prev": "select"
+          }
+        },
+        {
+          "id": "capability_update",
+          "navigation": {
+            "prev": "capability_update_dlg"
+          }
+        },
+        {
           "id": "login_credentials",
           "template": "login_credentials",
           "navigation": {
@@ -4122,6 +4252,19 @@
           }
         },
         {
+          "id": "capability_update_dlg",
+          "navigation": {
+            "next": "capability_update",
+            "prev": "select"
+          }
+        },
+        {
+          "id": "capability_update",
+          "navigation": {
+            "prev": "capability_update_dlg"
+          }
+        },
+        {
           "id": "login_credentials",
           "template": "login_credentials",
           "navigation": {
@@ -4239,6 +4382,19 @@
           "id": "icon_change",
           "navigation": {
             "prev": "icon"
+          }
+        },
+        {
+          "id": "capability_update_dlg",
+          "navigation": {
+            "next": "capability_update",
+            "prev": "select"
+          }
+        },
+        {
+          "id": "capability_update",
+          "navigation": {
+            "prev": "capability_update_dlg"
           }
         },
         {
@@ -4420,6 +4576,19 @@
           }
         },
         {
+          "id": "capability_update_dlg",
+          "navigation": {
+            "next": "capability_update",
+            "prev": "select"
+          }
+        },
+        {
+          "id": "capability_update",
+          "navigation": {
+            "prev": "capability_update_dlg"
+          }
+        },
+        {
           "id": "login_credentials",
           "template": "login_credentials",
           "navigation": {
@@ -4552,6 +4721,19 @@
           "id": "icon_change",
           "navigation": {
             "prev": "icon"
+          }
+        },
+        {
+          "id": "capability_update_dlg",
+          "navigation": {
+            "next": "capability_update",
+            "prev": "select"
+          }
+        },
+        {
+          "id": "capability_update",
+          "navigation": {
+            "prev": "capability_update_dlg"
           }
         },
         {
@@ -4719,6 +4901,19 @@
           }
         },
         {
+          "id": "capability_update_dlg",
+          "navigation": {
+            "next": "capability_update",
+            "prev": "select"
+          }
+        },
+        {
+          "id": "capability_update",
+          "navigation": {
+            "prev": "capability_update_dlg"
+          }
+        },
+        {
           "id": "login_credentials",
           "template": "login_credentials",
           "navigation": {
@@ -4851,6 +5046,19 @@
           "id": "icon_change",
           "navigation": {
             "prev": "icon"
+          }
+        },
+        {
+          "id": "capability_update_dlg",
+          "navigation": {
+            "next": "capability_update",
+            "prev": "select"
+          }
+        },
+        {
+          "id": "capability_update",
+          "navigation": {
+            "prev": "capability_update_dlg"
           }
         },
         {
@@ -5037,6 +5245,19 @@
           "id": "icon_change",
           "navigation": {
             "prev": "icon"
+          }
+        },
+        {
+          "id": "capability_update_dlg",
+          "navigation": {
+            "next": "capability_update",
+            "prev": "select"
+          }
+        },
+        {
+          "id": "capability_update",
+          "navigation": {
+            "prev": "capability_update_dlg"
           }
         },
         {

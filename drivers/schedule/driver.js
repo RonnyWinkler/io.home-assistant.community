@@ -4,8 +4,8 @@ const BaseDriver = require('../basedriver');
 
 class ScheduleDriver extends BaseDriver {
 
-    async getDeviceList(client){
-        return client.getSchedules();
+    async getDeviceList(client, id=null){
+        return client.getSchedules(id);
     }
 }
 

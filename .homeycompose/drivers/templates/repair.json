@@ -32,30 +32,43 @@
       }
     },
     {
-        "id": "login_credentials",
-        "template": "login_credentials",
-        "navigation": {
-            "prev": "select"
+      "id": "capability_update_dlg",
+      "navigation": {
+        "next": "capability_update",
+        "prev": "select" 
+      }
+    },
+    {
+      "id": "capability_update",
+      "navigation": {
+        "prev": "capability_update_dlg"
+      }
+    },
+    {
+      "id": "login_credentials",
+      "template": "login_credentials",
+      "navigation": {
+          "prev": "select"
+      },
+      "options": {
+        "logo": "logo.png",
+        "usernameLabel": { 
+            "en": "Server" 
         },
-        "options": {
-            "logo": "logo.png",
-            "usernameLabel": { 
-                "en": "Server" 
-            },
-            "usernamePlaceholder": { 
-                "en": "http://192.168.xxx.xxx:8123" 
-            },
-            "passwordLabel": { 
-                "en": "Token" 
-            },
-            "passwordPlaceholder": { 
-                "en": "Long-lived access token" 
-            }
+        "usernamePlaceholder": { 
+            "en": "http://192.168.xxx.xxx:8123" 
+        },
+        "passwordLabel": { 
+            "en": "Token" 
+        },
+        "passwordPlaceholder": { 
+            "en": "Long-lived access token" 
         }
+      }
     },
     {
       "id": "done",
       "template": "done"
     }
-  ]
+  ]  
 }

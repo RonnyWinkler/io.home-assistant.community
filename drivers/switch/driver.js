@@ -4,8 +4,8 @@ const BaseDriver = require('../basedriver');
 
 class SwitchDriver extends BaseDriver {
 
-    async getDeviceList(client){
-        return client.getSwitches();
+    async getDeviceList(client, id=null){
+        return client.getSwitches(id);
     }
 }
 

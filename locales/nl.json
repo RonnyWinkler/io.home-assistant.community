@@ -21,7 +21,10 @@
             "iconChanged": "Icoon is gewijzigd.",
             "appRestart": "Na een pictogramwijziging moet de app opnieuw worden gestart om de wijziging door te voeren.",
             "deviceDetails": "Apparaat details",
-            "log": "Toepassingslogboek"
+            "log": "Toepassingslogboek",
+            "updateCapabilitiesTitle": "Apparaatupdate (experimenteel)",
+            "updateCapabilitiesText": "De huidige apparaatmogelijkheden (capabilities) worden verwijderd en opnieuw toegevoegd, afhankelijk van de HomeAssistant-entiteit.",
+            "updateCapabilitiesReady": "Apparaatmogelijkheden (capabilities) zijn bijgewerkt."
         }
     },
     "device_unavailable_reason": {

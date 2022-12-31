@@ -8,10 +8,10 @@ const CAPABILITIES_SET_DEBOUNCE = 100;
 class CompoundDevice extends BaseDevice {
 
     async onInit() {
-        await super.onInit();
+        this.compoundCapabilities = this._getCompoundCapabilities();
+        this.compoundCapabilitiesConverters = this._getCompoundCapabilitiesConverters();
 
-        this.compoundCapabilities = this.getData().capabilities;
-        this.compoundCapabilitiesConverters = this.getData().capabilitiesConverters;
+        await super.onInit();
 
         // Capability listener for all existing capabilities
         this.registerMultipleCapabilityListener(this.getCapabilities(), async (value, opts) => {
@@ -19,10 +19,34 @@ class CompoundDevice extends BaseDevice {
         }, CAPABILITIES_SET_DEBOUNCE);
     }
 
+    _getCompoundCapabilities(){
+        let capabilities = this.getStoreValue('capabilities');
+        if (!capabilities){
+            capabilities = this.getData().capabilities;
+            if (!capabilities){
+                capabilities = {};
+            }
+            this.setStoreValue('capabilities', capabilities);
+        } 
+        return capabilities;
+    }
+
+    _getCompoundCapabilitiesConverters(){
+        let capabilitiesConverters = this.getStoreValue('capabilitiesConverters');
+        if (!capabilitiesConverters){
+            capabilitiesConverters = this.getData().capabilitiesConverters;
+            if (!capabilitiesConverters){
+                capabilitiesConverters = {};
+            }
+            this.setStoreValue('capabilitiesConverters', capabilitiesConverters);
+        } 
+        return capabilitiesConverters;
+    }
+
     // Redefinitionen ============================================================================================
     clientRegisterDevice(){
         let entityIds = [];
-        let capabilities = this.getData().capabilities;
+        let capabilities = this._getCompoundCapabilities();
         let keys = Object.keys(capabilities);
         for (let i=0; i<keys.length; i++){
             let compoundEntity = capabilities[keys[i]];

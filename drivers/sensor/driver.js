@@ -4,8 +4,8 @@ const BaseDriver = require('../basedriver');
 
 class SensorDriver extends BaseDriver {
 
-    async getDeviceList(client){
-        return client.getSensors();
+    async getDeviceList(client, id=null){
+        return client.getSensors(id);
     }
 }
 

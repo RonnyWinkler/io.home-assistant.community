@@ -4,8 +4,8 @@ const BaseDriver = require('../basedriver');
 
 class ScriptDriver extends BaseDriver {
 
-    async getDeviceList(client){
-        return client.getScripts();
+    async getDeviceList(client, id=null){
+        return client.getScripts(id);
     }
 }
 

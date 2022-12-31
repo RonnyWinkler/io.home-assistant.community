@@ -172,6 +172,17 @@ class BaseDriver extends Homey.Driver {
             }
         });
 
+        session.setHandler('isCapabilityChangeable', async () => {
+            let client = this.homey.app.getClient();
+            let deviceDef = await this.getDeviceList(client, device.getData().id);
+            if (deviceDef && deviceDef[0] && deviceDef[0].capabilities != undefined){
+                return true;
+            }
+            else{
+                return false;
+            }
+        });
+
         session.setHandler('setRemoteIcon', async (item) => {
             this.log('setRemoteIcon: ' + item.url);
             // if(DEBUG) listFiles("./userdata");
@@ -225,6 +236,12 @@ class BaseDriver extends Homey.Driver {
         session.setHandler('getEntity', async () => {
             let id = device.getData().id;
             let data = this.homey.app.getClient().getEntity(id);
+            if (id.split(".")[0] == "climate_fan"){
+                data = {
+                    "climate": this.homey.app.getClient().getEntity("climate." + id.split(".")[1]),
+                    "fan": this.homey.app.getClient().getEntity("fan." + id.split(".")[1]),
+                }
+            }
             if (data == null){
                 data = this.homey.__("device_unavailable_reason.entity_not_found");
             }
@@ -233,6 +250,13 @@ class BaseDriver extends Homey.Driver {
 
         session.setHandler('getLog', async () => {
             return this.homey.app.getLog();
+        });
+
+        session.setHandler('updateCapabilities', async () => {
+            this.log("Updating device cabapilities...");
+            await this.updateCapabilities(device); 
+            this.log("Updating device cabapilities finished.");
+            return true;
         });
     }
 
@@ -380,7 +404,52 @@ class BaseDriver extends Homey.Driver {
 
     }
 
-    async getDeviceList(client){
+    async updateCapabilities(device){
+        let client = this.homey.app.getClient();
+        let deviceDef = await this.getDeviceList(client, device.getData().id);
+        deviceDef = deviceDef[0];
+        if (!deviceDef.capabilities){
+            return;
+        }
+        
+        this.log("New device definition: ", deviceDef);
+
+        // Remove old entries
+        let capabilities = device.getCapabilities();
+        for (let i=0; i<capabilities.length; i++){
+            await device.removeCapability(capabilities[i]);
+        }
+        let store = device.getStore();
+        if (store){
+            let storeKeys = Object.keys(store);
+            for (let i=0; i<storeKeys.length; i++){
+                if (storeKeys[i] != 'icon'){
+                    await device.unsetStoreValue(storeKeys[i]);
+                }
+            };
+        }
+        // Add new entries
+        capabilities = deviceDef.capabilities;
+        for (let i=0; i<capabilities.length; i++){
+            await device.addCapability(capabilities[i]);
+        }
+        if (deviceDef.capabilitiesOptions){
+            let coKeys = Object.keys(deviceDef.capabilitiesOptions);
+            for (let i=0; i<coKeys.length; i++){
+                await device.setCapabilityOptions(coKeys[i], deviceDef.capabilitiesOptions[coKeys[i]] );
+            }
+        }
+        if (deviceDef.store){
+            storeKeys = Object.keys(deviceDef.store);
+            for (let i=0; i<storeKeys.length; i++){
+                await device.setStoreValue(storeKeys[i], deviceDef.store[storeKeys[i]]);
+            };
+        }
+
+        await device.onInit();
+    }
+
+    async getDeviceList(client, id=null){
         // redefine in sub classes and return the driver dependent devices 
     }
 

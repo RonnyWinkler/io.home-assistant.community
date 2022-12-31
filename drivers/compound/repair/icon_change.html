@@ -6,11 +6,13 @@
         if (err) {
             // this.instructions = '[ERROR] ' + err;
             console.error(err);
+            Homey.alert( err, 'error' );
             return;
         }
         console.log(devices);
   
-        Homey.done();
+        // Homey.done();
+        Homey.setNavigationClose();
         return;
     });
 </script>

@@ -4,8 +4,8 @@ const BaseDriver = require('../basedriver');
 
 class ButtonDriver extends BaseDriver {
 
-    async getDeviceList(client){
-        return client.getButtons();
+    async getDeviceList(client, id=null){
+        return client.getButtons(id);
     }
 }
 

@@ -626,7 +626,8 @@ class App extends Homey.App {
         this._flowTriggerEventTriggeredFilter.registerRunListener(async (args, state) => {
             return ( ( !args.event || args.event === state.event ) 
 						&&
-					 ( !args.entity || args.entity === state.entity ));
+					 ( !args.entity || args.entity === state.entity )
+					);
         });
 
 		// Flow Trigger: Devices

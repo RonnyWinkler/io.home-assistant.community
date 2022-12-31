@@ -4,8 +4,8 @@ const BaseDriver = require('../basedriver');
 
 class LockDriver extends BaseDriver {
 
-    async getDeviceList(client){
-        return client.getLocks();
+    async getDeviceList(client, id=null){
+        return client.getLocks(id);
     }
 }
 
