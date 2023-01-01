@@ -624,10 +624,23 @@ class App extends Homey.App {
         });
 		this._flowTriggerEventTriggeredFilter = this.homey.flow.getTriggerCard("event_triggered_filter");
         this._flowTriggerEventTriggeredFilter.registerRunListener(async (args, state) => {
-            return ( ( !args.event || args.event === state.event ) 
-						&&
-					 ( !args.entity || args.entity === state.entity )
-					);
+			// Check for event name and entity id
+			if (
+				( !args.event || args.event === state.event ) 
+				&&
+				( !args.entity || args.entity === state.entity )	
+				&&
+				(!args.datafield01 || state.data[args.datafield01] == args.datavalue01)
+				&&
+				(!args.datafield02 || state.data[args.datafield02] == args.datavalue02)
+				&&
+				(!args.datafield03 || state.data[args.datafield03] == args.datavalue03)
+			){
+				return true;
+			}
+			else{
+				return false;
+			}
         });
 
 		// Flow Trigger: Devices

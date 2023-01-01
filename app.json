@@ -396,9 +396,9 @@
           "nl": "Evenement is geactiveerd"
         },
         "titleFormatted": {
-          "en": "The event named [[event]] has been triggered for entity [[entity]].",
-          "de": "Das Ereignis mit Name [[event]] wurde für die Entität [[entity]] ausgelöst.",
-          "nl": "De gebeurtenis met de naam [[event]] is geactiveerd voor entiteit [[entity]]."
+          "en": "The event named [[event]] has been triggered for entity [[entity]]. Filter by data fields: [[datafield01]] = [[datavalue01]] & [[datafield02]] = [[datavalue02]] & [[datafield03]] = [[datavalue03]]",
+          "de": "Das Ereignis mit Name [[event]] wurde für die Entität [[entity]] ausgelöst.  Filtern nach Datenfelder: [[datafield01]] = [[datavalue01]] & [[datafield02]] = [[datavalue02]] & [[datafield03]] = [[datavalue03]]",
+          "nl": "De gebeurtenis met de naam [[event]] is geactiveerd voor entiteit [[entity]].  Filter op gegevensvelden: [[datafield01]] = [[datavalue01]] & [[datafield02]] = [[datavalue02]] & [[datafield03]] = [[datavalue03]]"
         },
         "hint": {
           "en": "Triggers when a event was triggered. The execution can be filtered by a event  and entity name.",
@@ -463,6 +463,96 @@
               "en": "Entity",
               "de": "Eintität",
               "nl": "Entiteit"
+            }
+          },
+          {
+            "name": "datafield01",
+            "type": "text",
+            "required": false,
+            "title": {
+              "en": "Field 1",
+              "de": "Feld 1",
+              "nl": "Veld 1"
+            },
+            "placeholder": {
+              "en": "Field 1",
+              "de": "Feld 1",
+              "nl": "Veld 1"
+            }
+          },
+          {
+            "name": "datafield02",
+            "type": "text",
+            "required": false,
+            "title": {
+              "en": "Field 2",
+              "de": "Feld 2",
+              "nl": "Veld 2"
+            },
+            "placeholder": {
+              "en": "Field 2",
+              "de": "Feld 2",
+              "nl": "Veld 2"
+            }
+          },
+          {
+            "name": "datafield03",
+            "type": "text",
+            "required": false,
+            "title": {
+              "en": "Field 3",
+              "de": "Feld 3",
+              "nl": "Veld 3"
+            },
+            "placeholder": {
+              "en": "Field 3",
+              "de": "Feld 3",
+              "nl": "Veld 3"
+            }
+          },
+          {
+            "name": "datavalue01",
+            "type": "text",
+            "required": false,
+            "title": {
+              "en": "Value 1",
+              "de": "Wert 1",
+              "nl": "Waarde 1"
+            },
+            "placeholder": {
+              "en": "Value 1",
+              "de": "Wert 1",
+              "nl": "Waarde 1"
+            }
+          },
+          {
+            "name": "datavalue02",
+            "type": "text",
+            "required": false,
+            "title": {
+              "en": "Value 2",
+              "de": "Wert 2",
+              "nl": "Waarde 2"
+            },
+            "placeholder": {
+              "en": "Value 2",
+              "de": "Wert 2",
+              "nl": "Waarde 2"
+            }
+          },
+          {
+            "name": "datavalue03",
+            "type": "text",
+            "required": false,
+            "title": {
+              "en": "Value 3",
+              "de": "Wert 3",
+              "nl": "Waarde 3"
+            },
+            "placeholder": {
+              "en": "Value 3",
+              "de": "Wert 3",
+              "nl": "Waarde 3"
             }
           }
         ],

@@ -141,7 +141,7 @@ class BaseDriver extends Homey.Driver {
             if(installed) {
                 this.log("Pairing is finished");
             } else {
-                this.log("User aborted");
+                this.log("User closed pair view.");
                 for(let i=0; i<this.selectedDevices.length; i++){
                     this.tryRemoveIcon(this.selectedDevices[i].data.id);
                 }
@@ -228,7 +228,7 @@ class BaseDriver extends Homey.Driver {
             if(installed) {
                 this.log("Pairing is finished");
             } else {
-                this.log("User aborted");
+                this.log("User closed repair view.");
                 this.tryRemoveIcon(device.getData().id+"_temp");
             }
         });
@@ -414,6 +414,8 @@ class BaseDriver extends Homey.Driver {
         
         this.log("New device definition: ", deviceDef);
 
+        // unregister event listener
+        device.clientUnregisterDevice();
         // Remove old entries
         let capabilities = device.getCapabilities();
         for (let i=0; i<capabilities.length; i++){
@@ -440,12 +442,12 @@ class BaseDriver extends Homey.Driver {
             }
         }
         if (deviceDef.store){
-            storeKeys = Object.keys(deviceDef.store);
+            let storeKeys = Object.keys(deviceDef.store);
             for (let i=0; i<storeKeys.length; i++){
                 await device.setStoreValue(storeKeys[i], deviceDef.store[storeKeys[i]]);
             };
         }
-
+        // Init and register event listeners
         await device.onInit();
     }
 
