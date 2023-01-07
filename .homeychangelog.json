@@ -182,5 +182,9 @@
   "1.0.2": {
     "en": "Fix for Compound update (entity state). Added app flow trigger for events. Changed pairing dialog to start without selected devices.",
     "de": "Korrektur für Compound-Update (Entity state). App-Flow-Trigger für HA-Ereignisse hinzugefügt. Pairingdialog geändert, um ohne ausgewählte Geräte zu starten."
+  },
+  "1.0.3": {
+    "en": "Added filter fields to events flow trigger. Added capabilities update functionality to repair dialog to update devices after entity has changed in HA. ",
+    "de": "Filterfelder zum Event-Trigger hinzugefügt. Funktionen zum Aktualisieren von Geräte-Capabilities zum Repair-Dialog hinzugefügt, um das Gerät zu aktualisieren, nachdem sich die Entität in HA geändert hat."
   }
 }
