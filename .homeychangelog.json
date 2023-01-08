@@ -186,5 +186,9 @@
   "1.0.3": {
     "en": "Added filter fields to events flow trigger. Added capabilities update functionality to repair dialog to update devices after entity has changed in HA. ",
     "de": "Filterfelder zum Event-Trigger hinzugefügt. Funktionen zum Aktualisieren von Geräte-Capabilities zum Repair-Dialog hinzugefügt, um das Gerät zu aktualisieren, nachdem sich die Entität in HA geändert hat."
+  },
+  "1.0.4": {
+    "en": "Fix for wrong type of entity_id in HA event trigger card.",
+    "de": "Korrektur für falschen Datentyp von entity_id in HA-Event Trigger-Karte."
   }
 }
