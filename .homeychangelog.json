@@ -190,5 +190,9 @@
   "1.0.4": {
     "en": "Fix for wrong type of entity_id in HA event trigger card.",
     "de": "Korrektur für falschen Datentyp von entity_id in HA-Event Trigger-Karte."
+  },
+  "1.0.5": {
+    "en": "Optimization for HA reconnect.",
+    "de": "Optimierung für HA-Reconnect."
   }
 }

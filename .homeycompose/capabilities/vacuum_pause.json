@@ -2,7 +2,7 @@
     "type": "boolean",
     "title": {
         "en": "Pause",
-        "de": "Pauseieren",
+        "de": "Pausieren",
         "nl": "pauze"
     },
     "uiComponent": "button",
