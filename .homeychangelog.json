@@ -206,5 +206,9 @@
   "1.0.8": {
     "en": "Optimization for HA reconnect.",
     "de": "Optimierung für HA-Reconnect."
+  },
+  "1.0.9": {
+    "en": "Updated Node modules. Optimization for HA reconnect.",
+    "de": "Node-Module aktualisiert. Optimierung für HA-Reconnect."
   }
 }
