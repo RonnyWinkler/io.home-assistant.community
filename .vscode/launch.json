@@ -1,18 +1,55 @@
 {
-    // Use IntelliSense to learn about possible attributes.
-    // Hover to view descriptions of existing attributes.
-    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
-    
-    {
-        "type": "node",
-        "request": "attach",
-        "restart": true,
-        "name": "Attach HA to Homey",
-        "address": "192.168.1.13",
-        "port": 9225,
-        "localRoot": "${workspaceFolder}",
-        "remoteRoot": "/"
-    } ]
+        {
+            "name": "Launch HA app on Homey Pro23",
+            "type": "node",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "runtimeExecutable": "homey",
+            "args": ["app", "run", "--remote"],
+            "outputCapture": "std",
+            "serverReadyAction": {
+                "pattern": "Debugger listening on",
+                "action": "startDebugging",
+                "name": "Attach HA to Homey Pro 23"
+            }
+        },
+        {
+            "type": "node",
+            "request": "attach",
+            "restart": true,
+            "name": "Attach HA to Homey Pro 23",
+            "address": "192.168.1.14",
+            "port": 9225,
+            "localRoot": "${workspaceFolder}",
+            "remoteRoot": "/"
+        },
+
+
+        {
+            "name": "Launch HA app on Homey Dev",
+            "type": "node",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "runtimeExecutable": "homey",
+            "args": ["app", "run"],
+            "outputCapture": "std",
+            "serverReadyAction": {
+                "pattern": "Debugger listening on",
+                "action": "startDebugging",
+                "name": "Attach HA to Homey Dev"
+            }
+        },
+        {
+            "type": "node",
+            "request": "attach",
+            "restart": true,
+            "name": "Attach HA to Homey Dev",
+            "address": "192.168.1.13",
+            "port": 9225,
+            "localRoot": "${workspaceFolder}",
+            "remoteRoot": "/"
+        } 
+    ]
 }

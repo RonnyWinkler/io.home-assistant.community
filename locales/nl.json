@@ -7,7 +7,14 @@
         },
         "list_devices":{
             "search": "Zoeken naar",
-            "continue": "Volgende"
+            "continue": "Volgende",
+            "select_all": "Selecteer alles",
+            "deselect_all": "Deselecteer alles",
+            "title": "Nieuwe apparaten gevonden",
+            "subtitle": "Selecteer de apparaten die je wilt toevoegen.",
+            "subtitle_singular": "Selecteer het apparaat dat je wilt toevoegen.",
+            "loading": "Bezig met laden...",
+            "nonew": "Er zijn geen nieuwe apparaten gevonden."
         }
     },
     "repair": {

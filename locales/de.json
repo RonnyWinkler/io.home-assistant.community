@@ -7,7 +7,14 @@
         },
         "list_devices":{
             "search": "Suchen",
-            "continue": "Fortfahren"
+            "continue": "Fortfahren",
+            "select_all": "Alle auswählen",
+            "deselect_all": "Alle abwählen",
+            "title": "Es wurden neue Geräte gefunden",
+            "subtitle": "Wähle die Geräte, die du gerne hinzufügen möchtest.",
+            "subtitle_singular": "Wähle das Gerät, die du gerne hinzufügen möchtest.",
+            "loading": "Laden...",
+            "nonew": "Es wurden keine neuen Geräte gefunden."        
         }
     },
     "repair": {

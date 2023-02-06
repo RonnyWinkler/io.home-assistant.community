@@ -90,8 +90,8 @@
   }
   
   function _(){
-    let e=Homey.__("$tmpl.list_devices.select_all");
-    r()&&(e=Homey.__("$tmpl.list_devices.deselect_all")),
+    let e=Homey.__("pair.list_devices.select_all");
+    r()&&(e=Homey.__("pair.list_devices.deselect_all")),
     n.textContent=e
   }
   
@@ -121,14 +121,14 @@
   search.placeholder = Homey.__("pair.list_devices.search");
   window.found_devices={},
   window.selected_devices=[],
-  Homey.setTitle(Homey.__("$tmpl.list_devices.title")),
-  Homey.setSubtitle(Homey.__("$tmpl.list_devices.subtitle")),
-  Homey.showLoadingOverlay(Homey.__("$tmpl.list_devices.loading")),
+  Homey.setTitle(Homey.__("pair.list_devices.title")),
+  Homey.setSubtitle(Homey.__("pair.list_devices.subtitle")),
+  Homey.showLoadingOverlay(Homey.__("pair.list_devices.loading")),
   Homey.getOptions(
     function(e,t){
       if(e)
         return Homey.error(e);
-      t.singular&&(y=!0,Homey.setSubtitle(Homey.__("$tmpl.list_devices.subtitle-singular"))),
+      t.singular&&(y=!0,Homey.setSubtitle(Homey.__("pair.list_devices.subtitle_singular"))),
       t.title&&Homey.setTitle(Homey.__(t.title)),
       t.subtitle&&Homey.setSubtitle(Homey.__(t.subtitle))
     }
@@ -138,9 +138,9 @@
     return Homey.hideLoadingOverlay(),
     e?(i.textContent=e.message||e.toString(),Homey.setNavigationClose()):
       t.length?v(t):(
-        Homey.setTitle(Homey.__("$tmpl.list_devices.nonew")),
+        Homey.setTitle(Homey.__("pair.list_devices.nonew")),
         Homey.setSubtitle(null),
-        i.textContent=Homey.__("$tmpl.list_devices.nonew"),
+        i.textContent=Homey.__("pair.list_devices.nonew"),
         Homey.setNavigationClose(),
         nextButtonDiv.style.visibility = 'hidden'
       )

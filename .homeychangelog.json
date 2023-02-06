@@ -194,5 +194,17 @@
   "1.0.5": {
     "en": "Optimization for HA reconnect.",
     "de": "Optimierung für HA-Reconnect."
+  },
+  "1.0.6": {
+    "en": "Optimization for HA reconnect.",
+    "de": "Optimierung für HA-Reconnect."
+  },
+  "1.0.7": {
+    "en": "Optimization for HA reconnect. Preparing pair view for Homey2023.",
+    "de": "Optimierung für HA-Reconnect. Preparing pair view for Homey2023."
+  },
+  "1.0.8": {
+    "en": "Optimization for HA reconnect.",
+    "de": "Optimierung für HA-Reconnect."
   }
 }

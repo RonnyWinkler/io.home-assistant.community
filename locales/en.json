@@ -7,7 +7,14 @@
         },
         "list_devices":{
             "search": "Search",
-            "continue": "Continue"
+            "continue": "Continue",
+            "select_all": "Select all",
+            "deselect_all": "Deselect all",
+            "title": "New devices found",
+            "subtitle": "Select the devices you'd like to add.",
+            "subtitle_singular": "Select the device you'd like to add.",
+            "loading": "Loading...",
+            "nonew": "No new devices have been found."
         }
     },
     "repair": {
