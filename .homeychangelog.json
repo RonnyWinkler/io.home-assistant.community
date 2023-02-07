@@ -210,5 +210,9 @@
   "1.0.9": {
     "en": "Updated Node modules. Optimization for HA reconnect.",
     "de": "Node-Module aktualisiert. Optimierung für HA-Reconnect."
+  },
+  "1.0.10": {
+    "en": "Added HA domain 'button'.",
+    "de": "HA Domäne 'button' hinzugefügt."
   }
 }
