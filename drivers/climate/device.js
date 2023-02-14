@@ -39,8 +39,12 @@ class ClimateDevice extends BaseDevice {
         try{
             if (!this.hasCapability('button.reconnect'))
             {
-            await this.addCapability('button.reconnect');
+                await this.addCapability('button.reconnect');
             }
+            if (!this.hasCapability('climate_on')){
+                await this.addCapability('climate_on');
+            }
+
         }
         catch(error){
             this.error("Error adding capability: "+error.message);
@@ -54,6 +58,14 @@ class ClimateDevice extends BaseDevice {
                 if (data.state != undefined && 
                     data.state != "unavailable"){
                     await this.setCapabilityValue("climate_mode", data.state);
+                }
+                if (data.state != undefined ){ 
+                    if (data.state == "unavailable" || data.state == 'off'){
+                        await this.setCapabilityValue("climate_on", false);
+                    }
+                    else{
+                        await this.setCapabilityValue("climate_on", true);
+                    }
                 }
                 if (data.attributes.current_temperature != undefined && 
                     data.attributes.current_temperature != "unavailable"){

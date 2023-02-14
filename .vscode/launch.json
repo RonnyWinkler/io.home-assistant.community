@@ -19,11 +19,21 @@
             "type": "node",
             "request": "attach",
             "restart": true,
-            "name": "Attach HA to Homey Pro 23",
+            "name": "Attach HA to Homey Pro 23 Wifi",
+            "address": "192.168.1.15",
+            "port": 9225,
+            "localRoot": "${workspaceFolder}",
+            "remoteRoot": "/app/"
+        },
+        {
+            "type": "node",
+            "request": "attach",
+            "restart": true,
+            "name": "Attach HA to Homey Pro 23 LAN",
             "address": "192.168.1.14",
             "port": 9225,
             "localRoot": "${workspaceFolder}",
-            "remoteRoot": "/"
+            "remoteRoot": "/app/"
         },
 
 
@@ -50,6 +60,16 @@
             "port": 9225,
             "localRoot": "${workspaceFolder}",
             "remoteRoot": "/"
-        } 
+        },
+        {
+            "type": "node",
+            "request": "attach",
+            "restart": true,
+            "name": "Attach HA to Homey23 Docker",
+            "address": "192.168.1.15",
+            "port": 9229,
+            "localRoot": "${workspaceFolder}",
+            "remoteRoot": "/app/"
+        }
     ]
 }

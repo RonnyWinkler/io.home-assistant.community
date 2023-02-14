@@ -5,6 +5,7 @@ const BaseDevice = require('../basedevice');
 class SwitchDevice extends BaseDevice {
 
     async onInit() {
+        this._settings = this.getSettings();
         await super.onInit();
 
         // Capability listener for device capabilities
@@ -31,8 +32,27 @@ class SwitchDevice extends BaseDevice {
         }
     }
 
+    getPowerEntityId(){
+        try{
+            let powerSetting = this._settings.power_entity; 
+            if (powerSetting && powerSetting != "" ){
+                return powerSetting;
+            }
+            else{
+                let entityId = "sensor." + this.entityId.split('.')[1] + "_power"; 
+                return entityId;
+            }
+        }
+        catch(error){
+            this.error("Error getting power entity ID for device "+this.entityId);
+            return null;
+        }
+    }
+
     // Entity update ============================================================================================
     async onEntityUpdate(data) {
+        await super.onEntityUpdate(data);
+
         if(data) {
             await this.setCapabilityValue("onoff", data.state == "on");
         }
@@ -43,6 +63,17 @@ class SwitchDevice extends BaseDevice {
         await this._client.turnOnOff(this.entityId, value);
     }
 
+    
+    // Settings ================================================================================================
+    async onSettings(settings){
+        try {
+            this._settings = settings.newSettings;
+            await this.connectPowerEntity();
+        }
+        catch(error) {
+            this.error("onSettings error: "+ error.message);
+        }
+    }
 }
 
 module.exports = SwitchDevice;

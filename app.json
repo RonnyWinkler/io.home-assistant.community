@@ -1,7 +1,7 @@
 {
   "_comment": "This file is generated. Please edit .homeycompose/app.json instead.",
   "id": "io.home-assistant.community",
-  "version": "1.0.10",
+  "version": "1.1.0",
   "compatibility": ">=8.1.0",
   "sdk": 3,
   "brandColor": "#0DA6EA",
@@ -2906,6 +2906,7 @@
         "climate_mode_fan",
         "climate_mode_preset",
         "climate_mode_swing",
+        "climate_on",
         "button.reconnect"
       ],
       "images": {
@@ -3417,6 +3418,7 @@
         "windowcoverings_tilt_up",
         "windowcoverings_tilt_down",
         "windowcoverings_tilt_set",
+        "windowcoverings_opened",
         "button.reconnect"
       ],
       "images": {
@@ -5044,7 +5046,24 @@
       "images": {
         "large": "/drivers/switch/assets/images/large.png",
         "small": "/drivers/switch/assets/images/small.png"
-      }
+      },
+      "settings": [
+        {
+          "id": "power_entity",
+          "type": "text",
+          "value": "",
+          "label": {
+            "en": "Power entity",
+            "de": "Energie-Eitität",
+            "nl": "Energie entiteit"
+          },
+          "hint": {
+            "en": "Select an sensor entity providing the power value for this light if there is no default power sensor named sensor.MYLIGHT_power.",
+            "de": "Wählen Sie eine Sensorentität aus, die den Leistungswert für dieses Licht bereitstellt, wenn es keinen Standardleistungssensor mit dem Namen sensor.MYLIGHT_power gibt.",
+            "nl": "Selecteer een sensorentiteit die de vermogenswaarde voor dit licht levert als er geen standaard vermogenssensor met de naam sensor.MYLIGHT_power is."
+          }
+        }
+      ]
     },
     {
       "capabilitiesOptions": {
@@ -5460,7 +5479,7 @@
       "title": {
         "en": "Activity",
         "de": "Aktivität",
-        "nl": "Werkzaamheid"
+        "nl": "Activiteit"
       },
       "getable": true,
       "setable": false,
@@ -5816,6 +5835,39 @@
           }
         }
       ]
+    },
+    "climate_on": {
+      "type": "boolean",
+      "uiQuickAction": true,
+      "getable": true,
+      "setable": false,
+      "uiComponent": null,
+      "insights": true,
+      "title": {
+        "en": "Thermostat on",
+        "de": "Thermostat an",
+        "nl": "Thermostaat op"
+      },
+      "titleTrue": {
+        "en": "On",
+        "de": "An",
+        "nl": "Op"
+      },
+      "titleFalse": {
+        "en": "Off",
+        "de": "Aus",
+        "nl": "Uit"
+      },
+      "insightsTitleTrue": {
+        "en": "On",
+        "de": "An",
+        "nl": "Op"
+      },
+      "insightsTitleFalse": {
+        "en": "Off",
+        "de": "Aus",
+        "nl": "Uit"
+      }
     },
     "fan_oscillate": {
       "type": "boolean",
@@ -6218,6 +6270,39 @@
       "getable": false,
       "setable": true,
       "icon": "/assets/capability_icons/vacuum_stop.svg"
+    },
+    "windowcoverings_opened": {
+      "type": "boolean",
+      "uiQuickAction": true,
+      "getable": true,
+      "setable": false,
+      "uiComponent": null,
+      "insights": true,
+      "title": {
+        "en": "Cover opened",
+        "de": "Fensterabdeckung geöffnet",
+        "nl": "Raamafdekking geopend"
+      },
+      "titleTrue": {
+        "en": "Opened",
+        "de": "Geöffnet",
+        "nl": "Geopend"
+      },
+      "titleFalse": {
+        "en": "Closed",
+        "de": "Geschlossen",
+        "nl": "Gesloten"
+      },
+      "insightsTitleTrue": {
+        "en": "Opened",
+        "de": "Geöffnet",
+        "nl": "Geopend"
+      },
+      "insightsTitleFalse": {
+        "en": "Closed",
+        "de": "Geschlossen",
+        "nl": "Gesloten"
+      }
     }
   }
 }

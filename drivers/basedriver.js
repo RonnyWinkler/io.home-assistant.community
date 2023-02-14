@@ -7,6 +7,9 @@ const http = require('http');
 const https = require('https');
 const fs = require('fs');
 
+const USERDATA_PATH = "/userdata/";
+const USERDATA_PATH_PREFIX = "../../..";
+
 function download(url, path, encoding){
     var file = fs.createWriteStream(path);
     return new Promise((resolve, reject) => {
@@ -60,18 +63,18 @@ class BaseDriver extends Homey.Driver {
 
         session.setHandler('setRemoteIcon', async (item) => {
             this.log('setRemoteIcon: ' + item.url);
-            // if(DEBUG) listFiles("./userdata");
-            const root = "../../";
+            // if(DEBUG) listFiles("/userdata");
             let deviceFile = "";
             for(let i=0; i<this.selectedDevices.length; i++){
-                deviceFile  = await this.downloadIcon(item.url, this.selectedDevices[i].data.id);
-                let path = root + deviceFile;
+                deviceFile = await this.downloadIcon(item.url, this.selectedDevices[i].data.id);
+                let path = USERDATA_PATH_PREFIX + deviceFile;
                 if (!this.selectedDevices[i].store){
                     this.selectedDevices[i]["store"]={};
                 }
                 this.selectedDevices[i].store["icon"] = path;
                 this.selectedDevices[i]["icon"] = path;
             }
+            // if(DEBUG) listFiles("/userdata");
             const file = deviceFile;
             return file;
         });
@@ -89,18 +92,17 @@ class BaseDriver extends Homey.Driver {
             try {
                 this.log('saveIcon: ' + JSON.stringify(data));
                 // if(DEBUG) listFiles("./userdata");
-                const root = '../../';
                 let deviceIconCurrent = "";
                 for(let i=0; i<this.selectedDevices.length; i++){
 
                     this.uploadIcon(data, this.selectedDevices[i].data.id);
-                    deviceIconCurrent = "../userdata/"+ this.selectedDevices[i].data.id +".svg";
-            
+                    deviceIconCurrent = USERDATA_PATH+ this.selectedDevices[i].data.id +".svg";
+                    let path = USERDATA_PATH_PREFIX + deviceIconCurrent; 
                     if (!this.selectedDevices[i].store){
                         this.selectedDevices[i]["store"]={};
                     }
-                    this.selectedDevices[i].store["icon"] = root + deviceIconCurrent;
-                    this.selectedDevices[i]["icon"] = root + deviceIconCurrent;
+                    this.selectedDevices[i].store["icon"] = path;
+                    this.selectedDevices[i]["icon"] = path;
                 }            
                 const deviceIcon = deviceIconCurrent;
                 return deviceIcon;
@@ -164,12 +166,12 @@ class BaseDriver extends Homey.Driver {
 
         session.setHandler('isIconChangeable', async () => {
             let icon = device.getStoreValue("icon");
-            if (icon != undefined && icon.startsWith("../../../userdata/")){
-                return true;
+            if (icon != undefined){
+                if (icon.startsWith(USERDATA_PATH_PREFIX+USERDATA_PATH) || icon.startsWith(USERDATA_PATH)){
+                    return true;
+                }
             }
-            else{
-                return false;
-            }
+            return false;
         });
 
         session.setHandler('isCapabilityChangeable', async () => {
@@ -186,7 +188,6 @@ class BaseDriver extends Homey.Driver {
         session.setHandler('setRemoteIcon', async (item) => {
             this.log('setRemoteIcon: ' + item.url);
             // if(DEBUG) listFiles("./userdata");
-            const root = "../../";
             let deviceFile = await this.downloadIcon(item.url, device.getData().id+"_temp");
             const file = deviceFile;
             return file;
@@ -203,11 +204,10 @@ class BaseDriver extends Homey.Driver {
             try {
                 this.log('saveIcon: ' + JSON.stringify(data));
                 // if(DEBUG) listFiles("./userdata");
-                const root = '../../';
                 let deviceIconCurrent = "";
 
                 this.uploadIcon(data, device.getData().id+"_temp");
-                deviceIconCurrent = "../userdata/"+ device.getData().id+"_temp" +".svg";
+                deviceIconCurrent = USERDATA_PATH+ device.getData().id+"_temp" +".svg";
         
                 const deviceIcon = deviceIconCurrent;
                 return deviceIcon;
@@ -360,7 +360,7 @@ class BaseDriver extends Homey.Driver {
 
     tryRemoveIcon(id) {
         try {
-            const path = `../userdata/${id}.svg`;
+            const path = USERDATA_PATH + id +".svg";
             fs.unlinkSync(path);
             this.log("Icon removed: "+path);
         } catch(error) {
@@ -370,8 +370,8 @@ class BaseDriver extends Homey.Driver {
 
     renameFile(id_old, id_new) {
         try {
-            const path_old = `../userdata/${id_old}.svg`;
-            const path_new = `../userdata/${id_new}.svg`;
+            const path_old = USERDATA_PATH + id_old + ".svg";
+            const path_new = USERDATA_PATH + id_new + ".svg";
             fs.renameSync(path_old, path_new);
             this.log("Icon reamed: from "+path_old+" to"+path_new);
         } catch(error) {
@@ -380,14 +380,14 @@ class BaseDriver extends Homey.Driver {
     }
 
     async downloadIcon(url, id) {
-        const path = `../userdata/${id}.svg`;
+        const path = USERDATA_PATH + id + ".svg";
         await download(url, path);
         //await download(url, path, 'base64');
         return path;
     }
 
     uploadIcon(img, id) {
-        const path = "../userdata/"+ id +".svg";
+        const path = USERDATA_PATH+ id +".svg";
         const base64 = img.replace("data:image/svg+xml;base64,", '');
         fs.writeFileSync(path, base64, 'base64');
     }

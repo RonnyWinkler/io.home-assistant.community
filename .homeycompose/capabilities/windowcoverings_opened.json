@@ -1,0 +1,33 @@
+{
+  "type": "boolean",
+  "uiQuickAction": true,
+  "getable": true,
+  "setable": false,
+  "uiComponent": null,
+  "insights": true,
+  "title": {
+    "en": "Cover opened",
+    "de": "Fensterabdeckung geöffnet",
+    "nl": "Raamafdekking geopend"
+  },
+  "titleTrue": {
+    "en": "Opened",
+    "de": "Geöffnet",
+    "nl": "Geopend"
+  },
+  "titleFalse": {
+    "en": "Closed",
+    "de": "Geschlossen",
+    "nl": "Gesloten"
+  },
+  "insightsTitleTrue": {
+    "en": "Opened",
+    "de": "Geöffnet",
+    "nl": "Geopend"
+  },
+  "insightsTitleFalse": {
+    "en": "Closed",
+    "de": "Geschlossen",
+    "nl": "Gesloten"
+  }
+}

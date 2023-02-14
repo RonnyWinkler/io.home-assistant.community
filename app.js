@@ -1,7 +1,7 @@
-if (process.env.DEBUG === '1')
-{
-    require('inspector').open(9225, '0.0.0.0', true);
-}
+// if (process.env.DEBUG === '1')
+// {
+//     require('inspector').open(9225, '0.0.0.0', true);
+// }
 
 'use strict';
 
@@ -85,6 +85,18 @@ function writeLog(type, instance, ...args){
 class App extends Homey.App {
 	
 	async onInit() {
+
+		if (process.env.DEBUG === '1'){
+			if (this.homey.platform == "local"){
+				try{ 
+					require('inspector').waitForDebugger();
+				}
+				catch(error){
+					require('inspector').open(9225, '0.0.0.0', true);
+				}
+			}
+		}
+
 		// Homey events
 		this.homey.on('unload', async () => await this.onUninit());
 		this.homey.on('memwarn', async (data) => await this.onMemwarn(data));
@@ -793,7 +805,10 @@ class App extends Homey.App {
 
 	async onMemwarn(data){
 		this.error("A memory warning has occured.");
-		this._flowTriggerAppMemwarn.trigger(data);
+		if (data == undefined){
+			data = 0;
+		}
+		this._flowTriggerAppMemwarn.trigger(data).catch(error => this.log("onMemwarn() flow trigger error: ", error.message));
 	}
 
 	getClient() {

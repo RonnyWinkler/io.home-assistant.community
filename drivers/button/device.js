@@ -53,9 +53,10 @@ class ButtonDevice extends BaseDevice {
 
     // Capabilities ===========================================================================================?
     async _onCapabilityOnoff( value, opts ) {
-       // this._client.turnOnOff(this.entityId, value);
-       let entityId = this.entityId;
-        await this._client.callService("input_button", "press", {
+        // this._client.turnOnOff(this.entityId, value);
+        let entityId = this.entityId;
+        // Use entity domain as service type to support input_button and button dependent on device entity 
+        await this._client.callService(entityId.split(".")[0], "press", {
             "entity_id": entityId
         });
    }

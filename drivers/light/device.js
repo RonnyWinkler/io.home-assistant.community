@@ -304,6 +304,7 @@ class LightDevice extends BaseDevice {
         }
     }
 
+    // Settings ================================================================================================
     async onSettings(settings){
         try {
             this._settings = settings.newSettings;

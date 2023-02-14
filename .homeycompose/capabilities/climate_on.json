@@ -1,0 +1,33 @@
+{
+  "type": "boolean",
+  "uiQuickAction": true,
+  "getable": true,
+  "setable": false,
+  "uiComponent": null,
+  "insights": true,
+  "title": {
+    "en": "Thermostat on",
+    "de": "Thermostat an",
+    "nl": "Thermostaat op"
+  },
+  "titleTrue": {
+    "en": "On",
+    "de": "An",
+    "nl": "Op"
+  },
+  "titleFalse": {
+    "en": "Off",
+    "de": "Aus",
+    "nl": "Uit"
+  },
+  "insightsTitleTrue": {
+    "en": "On",
+    "de": "An",
+    "nl": "Op"
+  },
+  "insightsTitleFalse": {
+    "en": "Off",
+    "de": "Aus",
+    "nl": "Uit"
+  }
+}

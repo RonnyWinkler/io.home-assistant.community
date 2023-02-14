@@ -37,8 +37,13 @@ class CoverDevice extends BaseDevice {
         try{
             if (!this.hasCapability('button.reconnect'))
             {
-            await this.addCapability('button.reconnect');
+                await this.addCapability('button.reconnect');
             }
+
+            if (!this.hasCapability('windowcoverings_opened') && 
+                ( this.hasCapability('windowcoverings_closed') || this.hasCapability('windowcoverings_state') || this.hasCapability('windowcoverings_set') ) ){
+                    await this.addCapability('windowcoverings_opened');
+                }
         }
         catch(error){
             this.error("Error adding capability: "+error.message);
@@ -49,6 +54,14 @@ class CoverDevice extends BaseDevice {
     async onEntityUpdate(data) {
         try{
             if(data) {
+                if (this.hasCapability("windowcoverings_opened")){
+                    if (data.state == "closed"){
+                        await this.setCapabilityValue("windowcoverings_opened", false);
+                    }
+                    else{
+                        await this.setCapabilityValue("windowcoverings_opened", true);
+                    }
+                }
                 if (this.hasCapability("windowcoverings_closed")){
                     if (data.state == "open"){
                         await this.setCapabilityValue("windowcoverings_closed", false);

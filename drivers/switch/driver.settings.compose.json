@@ -1,0 +1,17 @@
+[
+    {
+        "id": "power_entity",
+        "type": "text",
+        "value": "",
+        "label": {
+            "en": "Power entity",
+            "de": "Energie-Eitität", 
+            "nl": "Energie entiteit"
+        },
+        "hint": {
+            "en": "Select an sensor entity providing the power value for this light if there is no default power sensor named sensor.MYLIGHT_power.",
+            "de": "Wählen Sie eine Sensorentität aus, die den Leistungswert für dieses Licht bereitstellt, wenn es keinen Standardleistungssensor mit dem Namen sensor.MYLIGHT_power gibt.", 
+            "nl": "Selecteer een sensorentiteit die de vermogenswaarde voor dit licht levert als er geen standaard vermogenssensor met de naam sensor.MYLIGHT_power is."
+        }
+    }
+]
