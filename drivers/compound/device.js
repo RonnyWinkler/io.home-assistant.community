@@ -73,7 +73,19 @@ class CompoundDevice extends BaseDevice {
             }
         }
         catch(error){
-            this.error("Error adding capability: "+error.message);
+            this.error("updateCapabilities(): Error adding capability: "+error.message);
+        }
+
+        // check device class
+        try{
+            let deviceClass = this.getSetting('device_class');
+            if (deviceClass != undefined && deviceClass != "" && deviceClass != this.getClass()){
+                await this.setClass(deviceClass);
+                this.log("updateCapabilities(): Device class changed to: "+deviceClass);
+            }
+        }
+        catch(error){
+            this.error("updateCapabilities(): Error checking/changing device class: "+error.message);
         }
     }
 
@@ -363,6 +375,24 @@ class CompoundDevice extends BaseDevice {
         }
         return result;
     }
+
+    // Settings ================================================================================================
+    async onSettings(settings){
+        try {
+            if (settings.changedKeys.indexOf('device_class') > -1){
+                let deviceClass = settings.newSettings['device_class'];
+                if (deviceClass != undefined && deviceClass != "" && deviceClass != this.getClass()){
+                    await this.setClass(deviceClass);
+                    this.log("onSettings(): Device class changed to: "+deviceClass);
+                } 
+            }
+        }
+        catch(error) {
+            this.error("onSettings error: "+ error.message);
+            throw new Error("Error setting device class");
+        }
+    }
+    
 }
 
 module.exports = CompoundDevice;

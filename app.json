@@ -1,7 +1,7 @@
 {
   "_comment": "This file is generated. Please edit .homeycompose/app.json instead.",
   "id": "io.home-assistant.community",
-  "version": "1.1.0",
+  "version": "1.1.2",
   "compatibility": ">=8.1.0",
   "sdk": 3,
   "brandColor": "#0DA6EA",
@@ -366,16 +366,16 @@
         "title": {
           "en": "Swing mode changed",
           "de": "Schwing-Modus hat sich geändert",
-          "nl": "Schommelen modus gewijzigd"
+          "nl": "Luchtstroom gewijzigd"
         },
         "tokens": [
           {
             "name": "climate_mode_swing",
             "type": "string",
             "title": {
-              "en": "Mode",
-              "de": "Modus",
-              "nl": "Modus"
+              "en": "Swing mode",
+              "de": "Schwing-Modus",
+              "nl": "Luchtstroom"
             },
             "example": "vertical"
           }
@@ -1214,7 +1214,7 @@
                 "title": {
                   "en": "On",
                   "de": "An",
-                  "nl": "Op"
+                  "nl": "Aangezet"
                 }
               },
               {
@@ -1222,7 +1222,7 @@
                 "title": {
                   "en": "Off",
                   "de": "Aus",
-                  "nl": "Uit"
+                  "nl": "Uitgezet"
                 }
               },
               {
@@ -1230,7 +1230,7 @@
                 "title": {
                   "en": "Vertical",
                   "de": "Vertikal",
-                  "nl": "verticaal"
+                  "nl": "Verticaal"
                 }
               },
               {
@@ -1541,7 +1541,7 @@
         "titleFormatted": {
           "en": "Select thermostat mode [[mode]].",
           "de": "Wähle Thermostat-Modus [[mode]].",
-          "nl": "Selecteer thermostaatmodus [[mode]]"
+          "nl": "Stel thermostaatmodus [[mode]] in op."
         },
         "args": [
           {
@@ -1624,17 +1624,17 @@
         "title": {
           "en": "Select fan mode",
           "de": "Wähle Ventilator-Modus",
-          "nl": "Selecteer ventilatormodus"
+          "nl": "Stel fan modus in"
         },
         "titleFormatted": {
           "en": "Change to fan mode [[mode]].",
           "de": "Wechsel zum Ventilator-Modus [[mode]].",
-          "nl": "Wijzig naar fan modus [[mode]]"
+          "nl": "Stel fan modus [[mode]] in."
         },
         "hint": {
           "en": "The list is provided by the device or the HomeAssistand integration.",
           "de": "Die Liste wird vom Gerät oder der HomeAssistand-Integration bereitgestellt.",
-          "nl": "De lijst die wordt geleverd door de devie of de HomeAssistand-integratie."
+          "nl": "De lijst wordt door de unit of door de HA-integratie geladen."
         },
         "args": [
           {
@@ -1674,7 +1674,7 @@
         "hint": {
           "en": "The list is provided by the device or the HomeAssistand integration.",
           "de": "Die Liste wird vom Gerät oder der HomeAssistand-Integration bereitgestellt.",
-          "nl": "De lijst die wordt geleverd door de devie of de HomeAssistand-integratie."
+          "nl": "De lijst wordt door de unit of door de HA-integratie geladen."
         },
         "args": [
           {
@@ -1704,17 +1704,17 @@
         "title": {
           "en": "Select swing mode",
           "de": "Wähle Schwing-Modus",
-          "nl": "Selecteer Luchtstroom"
+          "nl": "Wijzig luchtstroom"
         },
         "titleFormatted": {
           "en": "Change to swing mode [[mode]].",
           "de": "Wechsel zum Schwing-Modus [[mode]].",
-          "nl": "Wijzig naar Luchtstroom [[mode]]"
+          "nl": "Wijzig luchtstroom [[mode]]"
         },
         "hint": {
           "en": "The list is provided by the device or the HomeAssistand integration.",
           "de": "Die Liste wird vom Gerät oder der HomeAssistand-Integration bereitgestellt.",
-          "nl": "De lijst die wordt geleverd door de devie of de HomeAssistand-integratie."
+          "nl": "De lijst wordt door de unit of door de HA-integratie geladen."
         },
         "args": [
           {
@@ -3270,7 +3270,218 @@
       "images": {
         "large": "/drivers/compound/assets/images/large.png",
         "small": "/drivers/compound/assets/images/small.png"
-      }
+      },
+      "settings": [
+        {
+          "id": "device_class",
+          "type": "dropdown",
+          "value": "sensor",
+          "label": {
+            "en": "Device class",
+            "de": "Geräte-Typ",
+            "nl": "Apparaat klasse"
+          },
+          "hint": {
+            "en": "Choose an optional matching device type based on the Home Assistant entities used.",
+            "de": "Wähle einen optionalen passenden Gerätetyp basierend auf den verwendeten Home Assistant Entitäten.",
+            "nl": "Kies een optioneel bijpassend apparaattype op basis van de gebruikte Home Assistant-entiteiten."
+          },
+          "values": [
+            {
+              "id": "sensor",
+              "label": {
+                "en": "Sensor",
+                "de": "Sensor",
+                "nl": "Sensor"
+              }
+            },
+            {
+              "id": "socket",
+              "label": {
+                "en": "Wall Plug",
+                "nl": "Schakeldoos",
+                "de": "Steckdose"
+              }
+            },
+            {
+              "id": "light",
+              "label": {
+                "en": "Light",
+                "nl": "Lamp",
+                "de": "Lampe"
+              }
+            },
+            {
+              "id": "amplifier",
+              "label": {
+                "en": "Amplifier",
+                "nl": "Versterker",
+                "de": "Verstärker"
+              }
+            },
+            {
+              "id": "blinds",
+              "label": {
+                "en": "Blinds",
+                "nl": "Jaloezieën & Lamellen",
+                "de": "Rolladen"
+              }
+            },
+            {
+              "id": "button",
+              "label": {
+                "en": "Button",
+                "nl": "Knop",
+                "de": "Taste"
+              }
+            },
+            {
+              "id": "camera",
+              "label": {
+                "en": "Camera",
+                "nl": "Camera",
+                "de": "Kamera"
+              }
+            },
+            {
+              "id": "coffeemachine",
+              "label": {
+                "en": "Coffee machine",
+                "nl": "Koffiemachine",
+                "de": "Kaffemaschine"
+              }
+            },
+            {
+              "id": "curtain",
+              "label": {
+                "en": "Curtains",
+                "nl": "Gordijnen",
+                "de": "Vorhänge"
+              }
+            },
+            {
+              "id": "doorbell",
+              "label": {
+                "en": "Doorbell",
+                "nl": "Deurbel",
+                "de": "Türklingel"
+              }
+            },
+            {
+              "id": "fan",
+              "label": {
+                "en": "Fan",
+                "nl": "Ventilator",
+                "de": "Ventilator"
+              }
+            },
+            {
+              "id": "garagedoor",
+              "label": {
+                "en": "Garage door",
+                "nl": "Garagedeur",
+                "de": "Garagentor"
+              }
+            },
+            {
+              "id": "heater",
+              "label": {
+                "en": "Heater",
+                "nl": "Heater",
+                "de": "Heizung"
+              }
+            },
+            {
+              "id": "homealarm",
+              "label": {
+                "en": "Home Security",
+                "nl": "Huisbeveiliging",
+                "de": "Heim-Sicherheit"
+              }
+            },
+            {
+              "id": "kettle",
+              "label": {
+                "en": "Kettle",
+                "nl": "Waterkoker",
+                "de": "Wasserkocher"
+              }
+            },
+            {
+              "id": "lock",
+              "label": {
+                "en": "Other",
+                "nl": "Overig",
+                "de": "Andere"
+              }
+            },
+            {
+              "id": "remote",
+              "label": {
+                "en": "Remote",
+                "nl": "Afstandsbediening",
+                "de": "Fernbedienung"
+              }
+            },
+            {
+              "id": "speaker",
+              "label": {
+                "en": "Speaker",
+                "nl": "Speaker",
+                "de": "Lautsprecher"
+              }
+            },
+            {
+              "id": "solarpanel",
+              "label": {
+                "en": "Solar Panel",
+                "nl": "Zonnepaneel",
+                "de": "Solarpanel"
+              }
+            },
+            {
+              "id": "sunshade",
+              "label": {
+                "en": "Sunshade",
+                "nl": "Zonnescherm",
+                "de": "Sonnenschirm"
+              }
+            },
+            {
+              "id": "thermostat",
+              "label": {
+                "en": "Thermostat",
+                "nl": "Thermostaat",
+                "de": "Thermostat"
+              }
+            },
+            {
+              "id": "tv",
+              "label": {
+                "en": "TV",
+                "nl": "TV",
+                "de": "TV"
+              }
+            },
+            {
+              "id": "vacuumcleaner",
+              "label": {
+                "en": "Vacuum Cleaner",
+                "nl": "Stofzuiger",
+                "de": "Staubsauger"
+              }
+            },
+            {
+              "id": "windowcoverings",
+              "label": {
+                "en": "Window Coverings",
+                "nl": "Raambekleding",
+                "de": "Fenster-Abdeckungen"
+              }
+            }
+          ]
+        }
+      ]
     },
     {
       "capabilitiesOptions": {
@@ -5038,7 +5249,7 @@
         "de": "Schalter",
         "nl": "Schakelaar"
       },
-      "class": "socket",
+      "class": "button",
       "capabilities": [
         "onoff",
         "button.reconnect"
@@ -5568,7 +5779,7 @@
           "title": {
             "en": "Heating",
             "de": "Heizen",
-            "nl": "Warmte"
+            "nl": "Verwarmen"
           }
         },
         {
@@ -5584,7 +5795,7 @@
           "title": {
             "en": "Heating/Cooling",
             "de": "Heizen/Kühlen",
-            "nl": "Warmte/Koel"
+            "nl": "Verwarmen/Koelen"
           }
         },
         {
@@ -5598,17 +5809,17 @@
         {
           "id": "dry",
           "title": {
-            "en": "Dry/Humidity",
-            "de": "Trocken/Feuchtigkeit",
-            "nl": "Droog/vochtigheid"
+            "en": "Dry",
+            "de": "Entfeuchten",
+            "nl": "Ontvochtigen"
           }
         },
         {
           "id": "fan_only",
           "title": {
             "en": "Fan only",
-            "de": "Nur Lüfter",
-            "nl": "Alleen fans"
+            "de": "Lüfter",
+            "nl": "Ventileren"
           }
         }
       ]
@@ -5849,24 +6060,24 @@
         "nl": "Thermostaat op"
       },
       "titleTrue": {
-        "en": "On",
-        "de": "An",
-        "nl": "Op"
+        "en": "Switched on",
+        "de": "Angeschaltet",
+        "nl": "Aangezet"
       },
       "titleFalse": {
-        "en": "Off",
-        "de": "Aus",
-        "nl": "Uit"
+        "en": "Switched off",
+        "de": "Ausgeschaltet",
+        "nl": "Uitgezet"
       },
       "insightsTitleTrue": {
-        "en": "On",
-        "de": "An",
-        "nl": "Op"
+        "en": "Switched on",
+        "de": "Angeschaltet",
+        "nl": "Aangezet"
       },
       "insightsTitleFalse": {
-        "en": "Off",
-        "de": "Aus",
-        "nl": "Uit"
+        "en": "Switched off",
+        "de": "Ausgeschaltet",
+        "nl": "Uitgezet"
       }
     },
     "fan_oscillate": {

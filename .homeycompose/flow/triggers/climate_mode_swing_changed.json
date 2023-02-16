@@ -2,15 +2,15 @@
     "title": {
         "en": "Swing mode changed",
         "de": "Schwing-Modus hat sich geändert",
-        "nl": "Schommelen modus gewijzigd"
+        "nl": "Luchtstroom gewijzigd"
     },
     "tokens": [{
             "name": "climate_mode_swing",
             "type": "string",
             "title": {
-                "en": "Mode",
-                "de": "Modus",
-                "nl": "Modus"
+                "en": "Swing mode",
+                "de": "Schwing-Modus",
+                "nl": "Luchtstroom"
             },
             "example": "vertical"
         }

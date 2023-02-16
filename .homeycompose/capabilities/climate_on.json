@@ -11,23 +11,23 @@
     "nl": "Thermostaat op"
   },
   "titleTrue": {
-    "en": "On",
-    "de": "An",
-    "nl": "Op"
+    "en": "Switched on",
+    "de": "Angeschaltet",
+    "nl": "Aangezet"
   },
   "titleFalse": {
-    "en": "Off",
-    "de": "Aus",
-    "nl": "Uit"
+    "en": "Switched off",
+    "de": "Ausgeschaltet",
+    "nl": "Uitgezet"
   },
   "insightsTitleTrue": {
-    "en": "On",
-    "de": "An",
-    "nl": "Op"
+    "en": "Switched on",
+    "de": "Angeschaltet",
+    "nl": "Aangezet"
   },
   "insightsTitleFalse": {
-    "en": "Off",
-    "de": "Aus",
-    "nl": "Uit"
+    "en": "Switched off",
+    "de": "Ausgeschaltet",
+    "nl": "Uitgezet"
   }
 }

@@ -3,17 +3,17 @@
     "title": {
         "en": "Select swing mode",
         "de": "Wähle Schwing-Modus",
-        "nl": "Selecteer Luchtstroom"
+        "nl": "Wijzig luchtstroom"
     },
     "titleFormatted": {
         "en": "Change to swing mode [[mode]].",
         "de": "Wechsel zum Schwing-Modus [[mode]].",
-        "nl": "Wijzig naar Luchtstroom [[mode]]"
+        "nl": "Wijzig luchtstroom [[mode]]"
     },
     "hint": {
         "en": "The list is provided by the device or the HomeAssistand integration.",
         "de": "Die Liste wird vom Gerät oder der HomeAssistand-Integration bereitgestellt.",
-        "nl": "De lijst die wordt geleverd door de devie of de HomeAssistand-integratie."
+        "nl": "De lijst wordt door de unit of door de HA-integratie geladen."
     },
     "args": [
         {

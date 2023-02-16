@@ -806,7 +806,10 @@ class App extends Homey.App {
 	async onMemwarn(data){
 		this.error("A memory warning has occured.");
 		if (data == undefined){
-			data = 0;
+			data = {
+				count: 0,
+				limit: 0
+			};
 		}
 		this._flowTriggerAppMemwarn.trigger(data).catch(error => this.log("onMemwarn() flow trigger error: ", error.message));
 	}

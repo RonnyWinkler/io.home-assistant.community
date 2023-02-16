@@ -218,5 +218,13 @@
   "1.1.0": {
     "en": "Fix for custom icons on HomeyPro23. State/mode dependent active/inactive tile for cover and climate. Power entity for switch.",
     "de": "Korrektur für indiv.Icons auf HomeyPro23. Status-/modusabh. aktive/inaktive Kachel für Fensterabdeckung und Thermostat. Energie-Entität für Schalter ergänzt."
+  },
+  "1.1.1": {
+    "en": "Added device class selection for compound device. Translation updated for climate device.",
+    "de": "Geräteklassenselektion für Compound-Gerät ergänzt. Übersetzung aktualisiert für Climate-Gerät."
+  },
+  "1.1.2": {
+    "en": "Added device class selection for compound device. Translation updated for climate device.",
+    "de": "Geräteklassenselektion für Compound-Gerät ergänzt. Übersetzung aktualisiert für Climate-Gerät."
   }
 }

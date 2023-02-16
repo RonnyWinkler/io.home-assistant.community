@@ -29,7 +29,7 @@
                 "title": {
                   "en": "On",
                   "de": "An",
-                  "nl": "Op"
+                  "nl": "Aangezet"
                 }
               },
               {
@@ -37,7 +37,7 @@
                 "title": {
                   "en": "Off",
                   "de": "Aus",
-                  "nl": "Uit"
+                  "nl": "Uitgezet"
                 }
               },
               {
@@ -45,7 +45,7 @@
                 "title": {
                   "en": "Vertical",
                   "de": "Vertikal",
-                  "nl": "verticaal"
+                  "nl": "Verticaal"
                 }
               },
               {

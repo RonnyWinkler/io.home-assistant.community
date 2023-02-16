@@ -8,7 +8,7 @@
     "titleFormatted": {
         "en": "Select thermostat mode [[mode]].",
         "de": "Wähle Thermostat-Modus [[mode]].",
-        "nl": "Selecteer thermostaatmodus [[mode]]"
+        "nl": "Stel thermostaatmodus [[mode]] in op."
     },
     "args": [
         {

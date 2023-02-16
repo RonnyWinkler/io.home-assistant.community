@@ -29,7 +29,7 @@
       "title": {
         "en": "Heating",
         "de": "Heizen",
-        "nl": "Warmte"
+        "nl": "Verwarmen"
       }
     },
     {
@@ -45,7 +45,7 @@
       "title": {
         "en": "Heating/Cooling",
         "de": "Heizen/Kühlen",
-        "nl": "Warmte/Koel"
+        "nl": "Verwarmen/Koelen"
       }
     },
     {
@@ -59,17 +59,17 @@
     {
       "id": "dry",
       "title": {
-        "en": "Dry/Humidity",
-        "de": "Trocken/Feuchtigkeit",
-        "nl": "Droog/vochtigheid"
+        "en": "Dry",
+        "de": "Entfeuchten",
+        "nl": "Ontvochtigen"
       }
     },
     {
       "id": "fan_only",
       "title": {
         "en": "Fan only",
-        "de": "Nur Lüfter",
-        "nl": "Alleen fans"
+        "de": "Lüfter",
+        "nl": "Ventileren"
       }
     }
   ]

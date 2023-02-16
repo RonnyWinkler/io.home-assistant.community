@@ -108,7 +108,7 @@ class BaseDriver extends Homey.Driver {
                 return deviceIcon;
         
             } catch (error) {
-                this.error('saveIcon ERROR ' + JSON.stringify(error));
+                this.log('saveIcon ERROR ' + JSON.stringify(error));
             }
         });
     
@@ -213,7 +213,7 @@ class BaseDriver extends Homey.Driver {
                 return deviceIcon;
         
             } catch (error) {
-                this.error('saveIcon ERROR ' + JSON.stringify(error));
+                this.log('saveIcon ERROR ' + JSON.stringify(error));
             }
         });
     
@@ -278,7 +278,7 @@ class BaseDriver extends Homey.Driver {
             }
         }
         catch (error){
-            this.error("Connection error in pairing login view: "+error.message);
+            this.log("Connection error in pairing login view: "+error.message);
             return false;
         }
     }
@@ -340,7 +340,7 @@ class BaseDriver extends Homey.Driver {
         else{
             devices = await this.getDeviceList(client);
         }
-
+        this.log("onPairListDevices: size of devices JSON: "+JSON.stringify(devices).length);
         return devices;
     }
 
@@ -364,7 +364,7 @@ class BaseDriver extends Homey.Driver {
             fs.unlinkSync(path);
             this.log("Icon removed: "+path);
         } catch(error) {
-            this.error("Error removing device icon. Perhaps only driver icon was used. Error: "+error.message);
+            this.log("Error removing device icon. Perhaps only driver icon was used. Error: "+error.message);
         }
     }
 
@@ -375,7 +375,7 @@ class BaseDriver extends Homey.Driver {
             fs.renameSync(path_old, path_new);
             this.log("Icon reamed: from "+path_old+" to"+path_new);
         } catch(error) {
-            this.error("Error renaming device icon: "+path_old+" to"+path_new);
+            this.log("Error renaming device icon: "+path_old+" to"+path_new);
         }
     }
 
@@ -399,7 +399,7 @@ class BaseDriver extends Homey.Driver {
             // rename temp icon to original name
             this.renameFile( id+"_temp", id);
         } catch(error) {
-            this.error("Error changeing device icon filename. Error: "+error.message);
+            this.log("Error changeing device icon filename. Error: "+error.message);
         }
 
     }
