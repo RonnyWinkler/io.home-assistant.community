@@ -17,54 +17,17 @@
         },
         {
             "name": "mode",
-            "type": "dropdown",
+            "type": "autocomplete",
             "title": { 
                 "en": "Swing mode",
                 "de": "Schwing-Modus",
                 "nl": "Luchtstroom"
-            },
-            "values": [
-              {
-                "id": "on",
-                "title": {
-                  "en": "On",
-                  "de": "An",
-                  "nl": "Aangezet"
-                }
-              },
-              {
-                "id": "off",
-                "title": {
-                  "en": "Off",
-                  "de": "Aus",
-                  "nl": "Uitgezet"
-                }
-              },
-              {
-                "id": "vertical",
-                "title": {
-                  "en": "Vertical",
-                  "de": "Vertikal",
-                  "nl": "Verticaal"
-                }
-              },
-              {
-                "id": "horizontal",
-                "title": {
-                  "en": "Horizontal",
-                  "de": "Horizontal",
-                  "nl": "Horizontaal"
-                }
-              },
-              {
-                "id": "both",
-                "title": {
-                  "en": "Both",
-                  "de": "Beides",
-                  "nl": "Beide"
-                }
-              }
-            ]
+        },
+        "placeholder": { 
+            "en": "Select the fan mode",
+            "de": "Wähle den Ventilator-Modus",
+            "nl": "Selecteer de fan mode"
+        }
         }
     ]
 }

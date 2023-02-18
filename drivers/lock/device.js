@@ -36,6 +36,7 @@ class LockDevice extends BaseDevice {
 
     // Entity update ============================================================================================
     async onEntityUpdate(data) {
+        await super.onEntityUpdate(data);
         if(data) {
             await this.setCapabilityValue("locked", data.state == "locked");
         }

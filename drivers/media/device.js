@@ -94,6 +94,7 @@ class MediaDevice extends BaseDevice {
 
     // Entity update ============================================================================================
     async onEntityUpdate(data) {
+        await super.onEntityUpdate(data);
         if(data == null || data.entity_id == null) {
             return;
         }

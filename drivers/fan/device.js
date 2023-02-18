@@ -45,6 +45,7 @@ class FanDevice extends BaseDevice {
 
     // Entity update ============================================================================================
     async onEntityUpdate(data) {
+        await super.onEntityUpdate(data);
         try{
             if(data) {
                 if (data.state != undefined && 

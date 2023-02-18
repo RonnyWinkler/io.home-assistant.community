@@ -80,6 +80,7 @@ class VacuumDevice extends BaseDevice {
     // STATE_ERROR = "error"
 
     async onEntityUpdate(data) {
+        await super.onEntityUpdate(data);
         try{
             if(data) {
                 if (this.hasCapability('onoff')){

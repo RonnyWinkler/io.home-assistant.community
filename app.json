@@ -1,7 +1,7 @@
 {
   "_comment": "This file is generated. Please edit .homeycompose/app.json instead.",
   "id": "io.home-assistant.community",
-  "version": "1.1.2",
+  "version": "1.1.3",
   "compatibility": ">=8.1.0",
   "sdk": 3,
   "brandColor": "#0DA6EA",
@@ -979,14 +979,14 @@
       },
       {
         "title": {
-          "en": "Fan mode !{{is|isn't}}",
-          "de": "Ventilator-Modus !{{ist|ist nicht}}",
-          "nl": "Fan modus !{{is|is niet}}"
+          "en": "Specific fan mode !{{is|isn't}}",
+          "de": "Spezifischer Ventilator-Modus !{{ist|ist nicht}}",
+          "nl": "Specifiek fan modus !{{is|is niet}}"
         },
         "titleFormatted": {
-          "en": "Fan mode !{{is|isn't}} [[mode]]",
-          "de": "Ventilator-Modus !{{ist|ist nicht}} [[mode]]",
-          "nl": "Fan modus !{{is|is niet}} [[mode]]"
+          "en": "Specific fan mode !{{is|isn't}} [[mode]]",
+          "de": "Spezifischer Ventilator-Modus !{{ist|ist nicht}} [[mode]]",
+          "nl": "Specifiek fan modus !{{is|is niet}} [[mode]]"
         },
         "args": [
           {
@@ -996,94 +996,17 @@
           },
           {
             "name": "mode",
-            "type": "dropdown",
+            "type": "autocomplete",
             "title": {
               "en": "Fan mode",
               "de": "Ventilator-Modus",
               "nl": "Fan modus"
             },
-            "values": [
-              {
-                "id": "off",
-                "title": {
-                  "en": "Off",
-                  "de": "Aus",
-                  "nl": "Uit"
-                }
-              },
-              {
-                "id": "on",
-                "title": {
-                  "en": "On",
-                  "de": "An",
-                  "nl": "Aan"
-                }
-              },
-              {
-                "id": "auto",
-                "title": {
-                  "en": "Automatic",
-                  "de": "Automatisch",
-                  "nl": "Automatisch"
-                }
-              },
-              {
-                "id": "low",
-                "title": {
-                  "en": "Low",
-                  "de": "Niedrig",
-                  "nl": "Laag"
-                }
-              },
-              {
-                "id": "medium",
-                "title": {
-                  "en": "Medium",
-                  "de": "Mittel",
-                  "nl": "Medium"
-                }
-              },
-              {
-                "id": "high",
-                "title": {
-                  "en": "High",
-                  "de": "Hoch",
-                  "nl": "Hoog"
-                }
-              },
-              {
-                "id": "top",
-                "title": {
-                  "en": "Top",
-                  "de": "Oben",
-                  "nl": "Bovenkant"
-                }
-              },
-              {
-                "id": "middle",
-                "title": {
-                  "en": "Middle",
-                  "de": "Mitte",
-                  "nl": "Midden"
-                }
-              },
-              {
-                "id": "focus",
-                "title": {
-                  "en": "Focused",
-                  "de": "Fokusiert",
-                  "nl": "Gefocust"
-                }
-              },
-              {
-                "id": "diffuse",
-                "title": {
-                  "en": "Diffuse",
-                  "de": "Diffus",
-                  "nl": "Diffuus"
-                }
-              }
-            ]
+            "placeholder": {
+              "en": "Select the fan mode",
+              "de": "Wähle den Ventilator-Modus",
+              "nl": "Selecteer de fan mode"
+            }
           }
         ],
         "id": "climate_mode_fan"
@@ -1107,78 +1030,17 @@
           },
           {
             "name": "mode",
-            "type": "dropdown",
+            "type": "autocomplete",
             "title": {
               "en": "Preset mode",
               "de": "Voreinstellter Modus",
               "nl": "Vooraf ingestelde modus"
             },
-            "values": [
-              {
-                "id": "none",
-                "title": {
-                  "en": "none",
-                  "de": "keiner",
-                  "nl": "geen"
-                }
-              },
-              {
-                "id": "eco",
-                "title": {
-                  "en": "eco",
-                  "de": "eco",
-                  "nl": "eco"
-                }
-              },
-              {
-                "id": "boost",
-                "title": {
-                  "en": "boost",
-                  "de": "boost",
-                  "nl": "boost"
-                }
-              },
-              {
-                "id": "comfort",
-                "title": {
-                  "en": "comfort",
-                  "de": "comfort",
-                  "nl": "comfort"
-                }
-              },
-              {
-                "id": "home",
-                "title": {
-                  "en": "home",
-                  "de": "zuhause",
-                  "nl": "huis"
-                }
-              },
-              {
-                "id": "away",
-                "title": {
-                  "en": "away",
-                  "de": "unterwegs",
-                  "nl": "weg"
-                }
-              },
-              {
-                "id": "sleep",
-                "title": {
-                  "en": "sleep",
-                  "de": "schlafend",
-                  "nl": "slaap"
-                }
-              },
-              {
-                "id": "activity",
-                "title": {
-                  "en": "activity driven",
-                  "de": "aktivitätsgesteuert",
-                  "nl": "activiteit gestuurd"
-                }
-              }
-            ]
+            "placeholder": {
+              "en": "Select the fan mode",
+              "de": "Wähle den Ventilator-Modus",
+              "nl": "Selecteer de fan mode"
+            }
           }
         ],
         "id": "climate_mode_preset"
@@ -1202,54 +1064,17 @@
           },
           {
             "name": "mode",
-            "type": "dropdown",
+            "type": "autocomplete",
             "title": {
               "en": "Swing mode",
               "de": "Schwing-Modus",
               "nl": "Luchtstroom"
             },
-            "values": [
-              {
-                "id": "on",
-                "title": {
-                  "en": "On",
-                  "de": "An",
-                  "nl": "Aangezet"
-                }
-              },
-              {
-                "id": "off",
-                "title": {
-                  "en": "Off",
-                  "de": "Aus",
-                  "nl": "Uitgezet"
-                }
-              },
-              {
-                "id": "vertical",
-                "title": {
-                  "en": "Vertical",
-                  "de": "Vertikal",
-                  "nl": "Verticaal"
-                }
-              },
-              {
-                "id": "horizontal",
-                "title": {
-                  "en": "Horizontal",
-                  "de": "Horizontal",
-                  "nl": "Horizontaal"
-                }
-              },
-              {
-                "id": "both",
-                "title": {
-                  "en": "Both",
-                  "de": "Beides",
-                  "nl": "Beide"
-                }
-              }
-            ]
+            "placeholder": {
+              "en": "Select the fan mode",
+              "de": "Wähle den Ventilator-Modus",
+              "nl": "Selecteer de fan mode"
+            }
           }
         ],
         "id": "climate_mode_swing"
@@ -5787,7 +5612,7 @@
           "title": {
             "en": "Cooling",
             "de": "Kühlen",
-            "nl": "Koel"
+            "nl": "Koelen"
           }
         },
         {

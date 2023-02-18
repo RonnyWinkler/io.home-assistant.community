@@ -1,13 +1,13 @@
 {
     "title": {
-        "en": "Fan mode !{{is|isn't}}",
-        "de": "Ventilator-Modus !{{ist|ist nicht}}",
-        "nl": "Fan modus !{{is|is niet}}"
+        "en": "Specific fan mode !{{is|isn't}}",
+        "de": "Spezifischer Ventilator-Modus !{{ist|ist nicht}}",
+        "nl": "Specifiek fan modus !{{is|is niet}}"
     },
     "titleFormatted": {
-        "en": "Fan mode !{{is|isn't}} [[mode]]",
-        "de": "Ventilator-Modus !{{ist|ist nicht}} [[mode]]",
-        "nl": "Fan modus !{{is|is niet}} [[mode]]"
+        "en": "Specific fan mode !{{is|isn't}} [[mode]]",
+        "de": "Spezifischer Ventilator-Modus !{{ist|ist nicht}} [[mode]]",
+        "nl": "Specifiek fan modus !{{is|is niet}} [[mode]]"
     },
     "args": [
         {
@@ -17,94 +17,17 @@
         },
         {
             "name": "mode",
-            "type": "dropdown",
+            "type": "autocomplete",
             "title": { 
                 "en": "Fan mode",
                 "de": "Ventilator-Modus",
                 "nl": "Fan modus"
             },
-            "values": [
-                {
-                  "id": "off",
-                  "title": {
-                    "en": "Off",
-                    "de": "Aus",
-                    "nl": "Uit"
-                  }
-                },
-                {
-                  "id": "on",
-                  "title": {
-                    "en": "On",
-                    "de": "An",
-                    "nl": "Aan"
-                  }
-                },
-                {
-                  "id": "auto",
-                  "title": {
-                    "en": "Automatic",
-                    "de": "Automatisch",
-                    "nl": "Automatisch"
-                  }
-                },
-                {
-                  "id": "low",
-                  "title": {
-                    "en": "Low",
-                    "de": "Niedrig",
-                    "nl": "Laag"
-                  }
-                },
-                {
-                  "id": "medium",
-                  "title": {
-                    "en": "Medium",
-                    "de": "Mittel",
-                    "nl": "Medium"
-                  }
-                },
-                {
-                  "id": "high",
-                  "title": {
-                    "en": "High",
-                    "de": "Hoch",
-                    "nl": "Hoog"
-                  }
-                },
-                {
-                  "id": "top",
-                  "title": {
-                    "en": "Top",
-                    "de": "Oben",
-                    "nl": "Bovenkant"
-                  }
-                },
-                {
-                  "id": "middle",
-                  "title": {
-                    "en": "Middle",
-                    "de": "Mitte",
-                    "nl": "Midden"
-                  }
-                },
-                {
-                  "id": "focus",
-                  "title": {
-                    "en": "Focused",
-                    "de": "Fokusiert",
-                    "nl": "Gefocust"
-                  }
-                },
-                {
-                  "id": "diffuse",
-                  "title": {
-                    "en": "Diffuse",
-                    "de": "Diffus",
-                    "nl": "Diffuus"
-                  }
-                }
-              ]
+            "placeholder": { 
+                "en": "Select the fan mode",
+                "de": "Wähle den Ventilator-Modus",
+                "nl": "Selecteer de fan mode"
+            }
         }
     ]
 }

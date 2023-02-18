@@ -102,6 +102,7 @@ class ClimateFanDevice extends BaseDevice {
 
     // Entity update ============================================================================================
     async onEntityUpdate(data) {
+        await super.onEntityUpdate(data);
         try{
             if(data) {
                 if (data.entity_id.startsWith("climate.")){

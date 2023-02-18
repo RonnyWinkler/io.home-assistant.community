@@ -121,9 +121,14 @@ class BaseDevice extends Homey.Device {
         // throw new Error("Abstract method not implemented");
         try {
             if (data == null || 
-                data.state == undefined ||
-                data.state == "unavailable"){
+                data.state == undefined ){
                 return;
+            }
+            if (data.state == "unavailable"){
+                await this.setUnavailable(this.homey.__("device_unavailable_reason.entity_unavailable"));
+            }
+            else{
+                this.setAvailable();
             }
             if (this.hasCapability("measure_power") && 
                 this.powerEntityId != null &&

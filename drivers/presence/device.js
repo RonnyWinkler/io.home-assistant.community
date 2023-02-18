@@ -41,6 +41,7 @@ class PresenceDevice extends BaseDevice {
 
     // Entity update ============================================================================================
     async onEntityUpdate(data) {
+        await super.onEntityUpdate(data);
         try {
             if (data.state != undefined){
                 // String capabilities

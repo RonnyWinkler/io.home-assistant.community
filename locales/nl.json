@@ -35,6 +35,7 @@
         }
     },
     "device_unavailable_reason": {
-        "entity_not_found": "Home Assistant-entiteit is niet beschikbaar"
+        "entity_not_found": "Home Assistant-entiteit bestaat niet",
+        "entity_unavailable": "Home Assistant-entiteit heeft de status 'niet beschikbaar'"
     }
 }

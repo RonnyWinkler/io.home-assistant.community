@@ -226,5 +226,9 @@
   "1.1.2": {
     "en": "Added device class selection for compound device. Translation updated for climate device.",
     "de": "Geräteklassenselektion für Compound-Gerät ergänzt. Übersetzung aktualisiert für Climate-Gerät."
+  },
+  "1.1.3": {
+    "en": "Flow conditions (AND cards) for climate 'preset', 'swing' 'fan' modes are using autocomplete values now. Unavailable HA antities are set as unavailable in Homey, too.",
+    "de": "Flow-Konditionen (UND-Karten) für Klimagerät-Modus 'preset', 'swing' 'fan' verwenden nun Autocomplete-Werte. Nicht verfügbare HA Entitäten werden Homey auch als nicht verfügbar markiert."
   }
 }

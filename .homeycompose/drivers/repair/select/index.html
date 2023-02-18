@@ -1,0 +1,122 @@
+
+<style>
+    .button {
+        text-align: center;
+        width: 100%;
+        position: relative;
+        /* margin: 10px 0px;
+        left:-20px; */
+        cursor: pointer;
+    }
+</style>
+<script type="application/javascript">
+
+    Homey.setTitle(Homey.__("repair.title.select"));
+    // Homey.setNavigationClose();
+
+    function onSelectAuth(){
+        Homey.showView("login_credentials");
+    }
+    function onSelectIcon(){
+        Homey.showView("icon");
+    }
+    function onSelectEntity(){
+        Homey.showView("device_details");
+    }
+    function onSelectCapabilityUpdate(){
+        Homey.showView("capability_update_dlg");
+    }
+    function onSelectLog(){
+        Homey.showView("log");
+    }
+
+</script>
+
+<div>
+    <fieldset>
+        <div>
+            <p>
+                <button id="btnEntity" class="homey-button-primary-full" onClick="onSelectEntity()" visibility = 'hidden'><span data-i18n="repair.title.deviceDetails"></span></button>
+            </p>
+        </div>
+        <div>
+            <p>
+                <button id="btnLog" class="homey-button-primary-full" onClick="onSelectLog()" visibility = 'hidden'><span data-i18n="repair.title.log"></span></button>
+            </p>
+        </div>
+        <div>
+            <p>
+                <button id="btnAuth" class="homey-button-primary-full" onClick="onSelectAuth()" visibility = 'hidden'><span data-i18n="repair.title.auth"></span></button>
+            </p>
+        </div>
+        <div>
+            <p>
+                <button id="btnCapabilityUpdate" class="homey-button-primary-full" onClick="onSelectCapabilityUpdate()" visibility = 'hidden'><span data-i18n="repair.title.updateCapabilitiesTitle"></span></button>
+            </p>
+        </div>
+        <div>
+            <p>
+                <button id="btnIcon" class="homey-button-primary-full" onClick="onSelectIcon()" visibility = 'hidden'><span data-i18n="repair.title.icon"></span></button>
+            </p>
+            <p>
+                <span id="spanIconState"></span>
+                <br>
+                <span id="spanAppRestart"></span>
+            </p>
+        </div>
+    </fieldset>
+</div>
+
+<script type="application/javascript">
+
+    Homey.emit('isCapabilityChangeable').then(function (result) {
+        button = document.getElementById("btnCapabilityUpdate");
+        button.disabled = !result;
+        if (!result){
+            button.className = "homey-button-primary-full is-disabled";
+        }
+        else{
+            button.className = "homey-button-primary-full";
+        }
+    });
+
+    Homey.emit('isIconChangeable').then(function (result) {
+        button = document.getElementById("btnIcon");
+        button.disabled = !result;
+        if (!result){
+            button.className = "homey-button-primary-full is-disabled";
+        }
+        else{
+            button.className = "homey-button-primary-full";
+        }
+        if (result){
+            let span = document.getElementById('spanIconState');
+            while( span.firstChild ) {
+                span.removeChild( span.firstChild );
+            }
+            span.appendChild( document.createTextNode(__('repair.title.iconActivated')) );
+            span.style.color = "green";
+
+            span = document.getElementById('spanAppRestart');
+            while( span.firstChild ) {
+                span.removeChild( span.firstChild );
+            }
+            span.appendChild( document.createTextNode(__('repair.title.appRestart')) );
+            span.style.color = "orange";
+        }
+        else{
+            let span = document.getElementById('spanIconState');
+            while( span.firstChild ) {
+                span.removeChild( span.firstChild );
+            }
+            span.appendChild( document.createTextNode(__('repair.title.iconDeactivated')) );
+            span.style.color = "red";
+
+            span = document.getElementById('spanAppRestart');
+            while( span.firstChild ) {
+                span.removeChild( span.firstChild );
+            }
+        }
+    });
+
+</script>

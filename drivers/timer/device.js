@@ -40,6 +40,7 @@ class TimerDevice extends BaseDevice {
 
     // Entity update ============================================================================================
     async onEntityUpdate(data) {
+        await super.onEntityUpdate(data);
         try {
             if (data.state != undefined &&
                 data.state != "unavailable"){

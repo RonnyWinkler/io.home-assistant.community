@@ -161,6 +161,7 @@ class CompoundDevice extends BaseDevice {
 
     // Entity update ============================================================================================
     async onEntityUpdate(data){
+        await super.onEntityUpdate(data);
         Object.keys(this.compoundCapabilities).forEach(async (key) => {
             try {
                     // Is the entity_id of the compound entity equal (entity itself or entity_id of attribute) 

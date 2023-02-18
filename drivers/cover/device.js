@@ -52,6 +52,7 @@ class CoverDevice extends BaseDevice {
 
     // Entity update ============================================================================================
     async onEntityUpdate(data) {
+        await super.onEntityUpdate(data);
         try{
             if(data) {
                 if (this.hasCapability("windowcoverings_opened")){

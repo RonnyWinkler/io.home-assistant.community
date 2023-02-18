@@ -33,6 +33,7 @@ class ScriptDevice extends BaseDevice {
 
     // Entity update ============================================================================================
     async onEntityUpdate(data) {
+        await super.onEntityUpdate(data);
         try{
             // First update, just remember the current state (last press)
             if (this.lastState == null){

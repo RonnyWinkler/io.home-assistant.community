@@ -129,6 +129,25 @@ class App extends Homey.App {
 			this.error("Connect error: "+ error);
 		}
 
+		// Register Flow listener
+		await this._registerFlowActions();
+		await this._registerFlowTriggers();
+		await this._registerFlowConditions();
+
+		// App events
+		this.homey.settings.on("set", async (key) =>  {
+			if (key = "login" && this.homey.settings.get("login") == true){
+				await this.homey.settings.set("login", false);
+				await this._reconnectClient();
+			}
+		});
+
+		// Init device with a short timeout to wait for initial entities
+		this.timeoutCheckConnection = this.homey.setTimeout(async () => this.onCheckConnection().catch(e => console.log(e)), RECONNECT_TIMEOUT * 60 * 1000 );
+
+	}
+
+	async _registerFlowActions(){
 		// Flow actions
 		this._flowActionCallService = this.homey.flow.getActionCard('callService')
 		this._flowActionCallService.registerRunListener(async (args, state) => {
@@ -609,20 +628,9 @@ class App extends Homey.App {
 				throw new Error(error.message);
 			}
 		});
+	}
 
-
-		// Flow trigger for all capabilities (compound device)
-		this._flowTriggerCapabilityChanged = this.homey.flow.getDeviceTriggerCard('capability_changed');
-		this._flowTriggerCapabilityChanged.registerRunListener(async (args, state) => {
-			return ( !args.capability || !args.capability.id || args.capability.id === state.capability.id);
-		});
-		this._flowTriggerCapabilityChanged.registerArgumentAutocompleteListener('capability', async (query, args) => {
-			const capabilityList = args.device.getAutocompleteCapabilityList();
-			return capabilityList.filter((result) => { 
-				return result.name.toLowerCase().includes(query.toLowerCase());
-			});
-		});
-		
+	async _registerFlowTriggers(){
 		// Flow Trigger: App
 		this._flowTriggerAppMemwarn = this.homey.flow.getTriggerCard('app_memwarn');
 
@@ -656,6 +664,18 @@ class App extends Homey.App {
         });
 
 		// Flow Trigger: Devices
+		// Flow trigger for all capabilities (compound device)
+		this._flowTriggerCapabilityChanged = this.homey.flow.getDeviceTriggerCard('capability_changed');
+		this._flowTriggerCapabilityChanged.registerRunListener(async (args, state) => {
+			return ( !args.capability || !args.capability.id || args.capability.id === state.capability.id);
+		});
+		this._flowTriggerCapabilityChanged.registerArgumentAutocompleteListener('capability', async (query, args) => {
+			const capabilityList = args.device.getAutocompleteCapabilityList();
+			return capabilityList.filter((result) => { 
+				return result.name.toLowerCase().includes(query.toLowerCase());
+			});
+		});
+
 		this._flowTriggerButtonPressed = this.homey.flow.getDeviceTriggerCard('button_pressed');
 		this._flowTriggerSceneActivated = this.homey.flow.getDeviceTriggerCard('scene_activated');
 		this._flowTriggerScriptStarted = this.homey.flow.getDeviceTriggerCard('script_started');
@@ -664,16 +684,16 @@ class App extends Homey.App {
 		this._flowTriggerTimerCancelled = this.homey.flow.getDeviceTriggerCard('timer_cancelled');
 		this._flowTriggerTimerRestarted = this.homey.flow.getDeviceTriggerCard('timer_restarted');
 		this._flowTriggerTimerFinished = this.homey.flow.getDeviceTriggerCard('timer_finished');
+	}
 
+	async _registerFlowConditions(){
 		// Flow contitions
 		this._flowConditionMeasureNumeric = this.homey.flow.getConditionCard('measure_numeric')
 		.registerRunListener(async (args, state) => {
-			// return (state.value == args.value);
 			return (args.device.getCapabilityValue(state.capability.id) > args.value);
 		})
 		this._flowConditionMeasureGeneric = this.homey.flow.getConditionCard('measure_generic')
 		.registerRunListener(async (args, state) => {
-			// return (state.value == args.value);
 		  	return (args.device.getCapabilityValue(state.capability.id) == args.value);
 		})
 		this._flowConditionClimateMode = this.homey.flow.getConditionCard('climate_mode')
@@ -688,97 +708,59 @@ class App extends Homey.App {
 		})
 		this._flowConditionClimateModeFan = this.homey.flow.getConditionCard('climate_mode_fan')
 		.registerRunListener(async (args, state) => {
-			// if (state.manual == true){
-			// 	return (args.device.getCapabilityValue('climate_mode_fan') == args.mode);
-			// }
-			// else{
-			// 	return (state.value == args.mode);
-			// }
 			return (args.device.getCapabilityValue('climate_mode_fan') == args.mode);
 		})
+		this._flowConditionClimateModeFan.registerArgumentAutocompleteListener('mode', async (query, args) => {
+			const modeFanListCondition = args.device.getModesFanList();
+			return modeFanListCondition.filter((result) => { 
+				return result.name.toLowerCase().includes(query.toLowerCase());
+			});
+		});
+
 		this._flowConditionClimateModePreset = this.homey.flow.getConditionCard('climate_mode_preset')
 		.registerRunListener(async (args, state) => {
-			// if (state.manual == true){
-			// 	return (args.device.getCapabilityValue('climate_mode_preset') == args.mode);
-			// }
-			// else{
-			// 	return (state.value == args.mode);
-			// }
 			return (args.device.getCapabilityValue('climate_mode_preset') == args.mode);
 		})
+		this._flowConditionClimateModePreset.registerArgumentAutocompleteListener('mode', async (query, args) => {
+			const modePresetListCondition = args.device.getModePresetList();
+			return modePresetListCondition.filter((result) => { 
+				return result.name.toLowerCase().includes(query.toLowerCase());
+			});
+		});
+
 		this._flowConditionClimateModeSwing = this.homey.flow.getConditionCard('climate_mode_swing')
 		.registerRunListener(async (args, state) => {
-			// if (state.manual == true){
-			// 	return (args.device.getCapabilityValue('climate_mode_swing') == args.mode);
-			// }
-			// else{
-			// 	return (state.value == args.mode);
-			// }
 			return (args.device.getCapabilityValue('climate_mode_swing') == args.mode);
 		})
+		this._flowConditionClimateModeSwing.registerArgumentAutocompleteListener('mode', async (query, args) => {
+			const modeSwingListCondition = args.device.getModesSwingList();
+			return modeSwingListCondition.filter((result) => { 
+				return result.name.toLowerCase().includes(query.toLowerCase());
+			});
+		});
+
 		this._flowConditionAlarmPresence = this.homey.flow.getConditionCard('alarm_presence')
 		.registerRunListener(async (args, state) => {
-			// if (state.manual == true){
-			// 	return (args.device.getCapabilityValue('alarm_presence'));
-			// }
-			// else{
-			// 	return (state.value == true);
-			// }
 			return (args.device.getCapabilityValue('alarm_presence'));
 		})
 		this._flowConditionPresenceState = this.homey.flow.getConditionCard('presence_state')
 		.registerRunListener(async (args, state) => {
-			// if (state.manual == true){
-			// 	return (args.device.getCapabilityValue('presence_state') == args.state);
-			// }
-			// else{
-			// 	return (state.value == args.state);
-			// }
 			return (args.device.getCapabilityValue('presence_state') == args.value);
 		})
 		this._flowConditionVacuumState = this.homey.flow.getConditionCard('vacuum_state')
 		.registerRunListener(async (args, state) => {
-			// if (state.manual == true){
-			// 	return (args.device.getCapabilityValue('vacuum_state') == args.vacuum_state);
-			// }
-			// else{
-			// 	return (state.value == args.vacuum_state);
-			// }
 			return (args.device.getCapabilityValue('vacuum_state') == args.vacuum_state);
 		})
 		this._flowConditionVacuumStateRaw = this.homey.flow.getConditionCard('vacuum_state_raw')
 		.registerRunListener(async (args, state) => {
-			// if (state.manual == true){
-			// 	return (args.device.getCapabilityValue('vacuum_state_raw') == args.vacuum_state_raw);
-			// }
-			// else{
-			// 	return (state.value == args.vacuum_state_raw);
-			// }
 			return (args.device.getCapabilityValue('vacuum_state_raw') == args.vacuum_state_raw);
 		})
 		this._flowConditionTimerActive = this.homey.flow.getConditionCard('timer_active')
 		.registerRunListener(async (args, state) => {
-			// if (state.manual == true){
-			// 	return (args.device.getCapabilityValue('timer_state') == 'active');
-			// }
-			// else{
-			// 	return (args.device.getCapabilityValue('timer_state') == 'active');
-			// }
 			return (args.device.getCapabilityValue('timer_state') == 'active');
 		})
-
-		// App events
-		this.homey.settings.on("set", async (key) =>  {
-			if (key = "login" && this.homey.settings.get("login") == true){
-				await this.homey.settings.set("login", false);
-				await this._reconnectClient();
-			}
-		});
-
-		// Init device with a short timeout to wait for initial entities
-		this.timeoutCheckConnection = this.homey.setTimeout(async () => this.onCheckConnection().catch(e => console.log(e)), RECONNECT_TIMEOUT * 60 * 1000 );
-
 	}
+
 
 	// onLog(...args){
 	// }
@@ -804,7 +786,7 @@ class App extends Homey.App {
 	}
 
 	async onMemwarn(data){
-		this.error("A memory warning has occured.");
+		this.log("A memory warning has occured.");
 		if (data == undefined){
 			data = {
 				count: 0,
@@ -828,7 +810,7 @@ class App extends Homey.App {
 			await this._client.connect(address, token, true);
 		}
 		catch(error){
-			this.error("Connect error: "+ error);
+			this.log("Connect error: "+ error);
 		}
 	}
 
@@ -970,7 +952,7 @@ class App extends Homey.App {
 		try{
 			let result = await this._client.ping();
 			if (!result){
-				this.error("Error checking connection: No correst response content");
+				this.log("Error checking connection: No response content");
 				await this._reconnectClient();
 			}
 			else{
@@ -979,7 +961,7 @@ class App extends Homey.App {
 			// await this.checkDeviceAvailability();
         }
         catch(error){
-            this.error("Error checking connection: ", error);
+            this.log("Error checking connection: ", error);
             this.log("Start reconnect...");
 			await this._reconnectClient();
         }

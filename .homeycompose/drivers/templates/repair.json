@@ -2,24 +2,28 @@
   "repair": [
     {
       "id": "select",
+      "$template": "select",
       "navigation": {
         "prev": "done"        
       }
     },
     {
       "id": "device_details",
+      "$template": "device_details",
       "navigation": {
         "prev": "select"        
       }
     },
     {
       "id": "log",
+      "$template": "log",
       "navigation": {
         "prev": "select"        
       }
     },
     {
       "id": "icon",
+      "$template": "icon",
       "navigation": {
         "next": "icon_change",
         "prev": "select" 
@@ -27,12 +31,14 @@
     },
     {
       "id": "icon_change",
+      "$template": "icon_change",
       "navigation": {
         "prev": "icon"
       }
     },
     {
       "id": "capability_update_dlg",
+      "$template": "capability_update_dlg",
       "navigation": {
         "next": "capability_update",
         "prev": "select" 
@@ -40,6 +46,7 @@
     },
     {
       "id": "capability_update",
+      "$template": "capability_update",
       "navigation": {
         "prev": "capability_update_dlg"
       }

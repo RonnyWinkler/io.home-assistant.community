@@ -30,6 +30,7 @@ class SensorDevice extends BaseDevice {
 
     // Entity update ============================================================================================
     async onEntityUpdate(data) {
+        await super.onEntityUpdate(data);
         try {
             // let value = this.getCapabilityValue(this.capability);
             // switch (typeof(value)){

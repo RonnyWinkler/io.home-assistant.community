@@ -1,0 +1,22 @@
+<script>
+
+    Homey.setTitle(__('repair.title.ready'));
+
+    Homey.emit('changeIcon', null, function (err, devices) {
+        if (err) {
+            // this.instructions = '[ERROR] ' + err;
+            console.error(err);
+            Homey.alert( err, 'error' );
+            return;
+        }
+        console.log(devices);
+  
+        // Homey.done();
+        Homey.setNavigationClose();
+        return;
+    });
+</script>
+
+<div style="text-align: center;">
+    <span data-i18n="repair.title.iconChanged"></span>
+</div>
