@@ -1,0 +1,35 @@
+{
+    "highlight": true,
+    "title": {
+        "en": "Press button",
+        "de": "Drücke Button",
+        "nl": "druk op de knop"
+    },
+    "titleFormatted": {
+        "en": "Press the button [[capability]].",
+        "de": "Drücke den Button [[capability]].",
+        "nl": "Druk op de knop [[capability]]."
+    },
+    "args": [
+        {
+            "type": "autocomplete",
+            "name": "capability",
+            "required": false,
+            "title": { 
+                "en": "Capability",
+                "de": "Attribut",
+                "nl": "Capability"
+            },
+            "placeholder": { 
+                "en": "Select a device capability",
+                "de": "Wähle ein Geräte-Attibut",
+                "nl": "Selecteer een apparaat capability"
+            }
+        },
+        {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=compound"
+        }
+    ]
+}

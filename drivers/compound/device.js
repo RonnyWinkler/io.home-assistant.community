@@ -11,6 +11,9 @@ class CompoundDevice extends BaseDevice {
         this.compoundCapabilities = this._getCompoundCapabilities();
         this.compoundCapabilitiesConverters = this._getCompoundCapabilitiesConverters();
 
+        // temporary state buffer
+        this._buttonState = {};
+
         await super.onInit();
 
         // Capability listener for all existing capabilities
@@ -194,7 +197,17 @@ class CompoundDevice extends BaseDevice {
                     }
                     try {
                         let oldValue = this.getCapabilityValue(key);
-                        await this.setCapabilityValue(key, value);
+                        if (key.startsWith("button")){
+                            oldValue = this._buttonState[key];
+                            this._buttonState[key] = value;
+                            if (oldValue == undefined){
+                                oldValue = value;
+                            }
+                            await this.setCapabilityValue(key, true);
+                        }
+                        else{
+                            await this.setCapabilityValue(key, value);
+                        }
                         if (oldValue!=value){
                             // trigger flow
                             let state = {
@@ -340,9 +353,12 @@ class CompoundDevice extends BaseDevice {
     }
 
     async _onCapabilityButton( capability, value, opts ) {
-        await this._client.turnOnOff(this.compoundCapabilities[capability], true);
+        let entityId = this.compoundCapabilities[capability];
+        // Use entity domain as service type to support input_button and button dependent on device entity 
+        await this._client.callService(entityId.split(".")[0], "press", {
+            "entity_id": entityId
+        });
     }
-
 
     async _onCapabilityOnoff( capability, value, opts ) {
         await this._client.turnOnOff(this.compoundCapabilities[capability], value);
@@ -362,6 +378,7 @@ class CompoundDevice extends BaseDevice {
         });
     }
 
+    // Flow Trigger ===========================================================================================
     getAutocompleteCapabilityList(){
         let capabilities = this.getCapabilities();
         let result = [];
@@ -375,6 +392,49 @@ class CompoundDevice extends BaseDevice {
             }
         }
         return result;
+    }
+    
+    // Flow Actions ===========================================================================================
+    getAutocompleteOnoffList(){
+        let capabilities = this.getCapabilities();
+        let result = [];
+        for (let i=0; i<capabilities.length; i++){
+            if (capabilities[i] != "button.reconnect" && capabilities[i].startsWith("onoff")){
+                let name = capabilities[i] + " ("+this.compoundCapabilities[capabilities[i]]+")";
+                result.push({
+                    id: capabilities[i],
+                    name: name
+                })
+            }
+        }
+        return result;
+    }
+
+      getAutocompleteButtonList(){
+        let capabilities = this.getCapabilities();
+        let result = [];
+        for (let i=0; i<capabilities.length; i++){
+            if (capabilities[i] != "button.reconnect" && capabilities[i].startsWith("button")){
+                let name = capabilities[i] + " ("+this.compoundCapabilities[capabilities[i]]+")";
+                result.push({
+                    id: capabilities[i],
+                    name: name
+                })
+            }
+        }
+        return result;
+    }
+
+    async switchOn(capability){
+        await this._onCapabilityOnoff( capability, true, {} );
+    }
+
+    async switchOff(capability){
+        await this._onCapabilityOnoff( capability, false, {} );
+    }
+
+    async buttonPress(capability){
+        await this._onCapabilityButton( capability, false, {} );
     }
 
     // Settings ================================================================================================

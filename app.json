@@ -1,7 +1,7 @@
 {
   "_comment": "This file is generated. Please edit .homeycompose/app.json instead.",
   "id": "io.home-assistant.community",
-  "version": "1.1.3",
+  "version": "1.1.4",
   "compatibility": ">=8.1.0",
   "sdk": 3,
   "brandColor": "#0DA6EA",
@@ -1563,6 +1563,114 @@
           }
         ],
         "id": "climateSelectModeSwing"
+      },
+      {
+        "highlight": true,
+        "title": {
+          "en": "Press button",
+          "de": "Drücke Button",
+          "nl": "druk op de knop"
+        },
+        "titleFormatted": {
+          "en": "Press the button [[capability]].",
+          "de": "Drücke den Button [[capability]].",
+          "nl": "Druk op de knop [[capability]]."
+        },
+        "args": [
+          {
+            "type": "autocomplete",
+            "name": "capability",
+            "required": false,
+            "title": {
+              "en": "Capability",
+              "de": "Attribut",
+              "nl": "Capability"
+            },
+            "placeholder": {
+              "en": "Select a device capability",
+              "de": "Wähle ein Geräte-Attibut",
+              "nl": "Selecteer een apparaat capability"
+            }
+          },
+          {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=compound"
+          }
+        ],
+        "id": "compoundButtonPress"
+      },
+      {
+        "highlight": true,
+        "title": {
+          "en": "Switch off",
+          "de": "Ausschalten",
+          "nl": "Uitschakelen"
+        },
+        "titleFormatted": {
+          "en": "Switch off [[capability]].",
+          "de": "Schalter [[capability]] ausschalten.",
+          "nl": "Schakelaar [[capability]] uitschakelen."
+        },
+        "args": [
+          {
+            "type": "autocomplete",
+            "name": "capability",
+            "required": false,
+            "title": {
+              "en": "Capability",
+              "de": "Attribut",
+              "nl": "Capability"
+            },
+            "placeholder": {
+              "en": "Select a device capability",
+              "de": "Wähle ein Geräte-Attibut",
+              "nl": "Selecteer een apparaat capability"
+            }
+          },
+          {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=compound"
+          }
+        ],
+        "id": "compoundSwitchOff"
+      },
+      {
+        "highlight": true,
+        "title": {
+          "en": "Switch on",
+          "de": "Anschalten",
+          "nl": "Inschakelen"
+        },
+        "titleFormatted": {
+          "en": "Switch on [[capability]].",
+          "de": "Schalter [[capability]] anschalten.",
+          "nl": "Schakelaar [[capability]] inschakelen."
+        },
+        "args": [
+          {
+            "type": "autocomplete",
+            "name": "capability",
+            "required": false,
+            "title": {
+              "en": "Capability",
+              "de": "Attribut",
+              "nl": "Capability"
+            },
+            "placeholder": {
+              "en": "Select a device capability",
+              "de": "Wähle ein Geräte-Attibut",
+              "nl": "Selecteer een apparaat capability"
+            }
+          },
+          {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=compound"
+          }
+        ],
+        "id": "compoundSwitchOn"
       },
       {
         "highlight": true,

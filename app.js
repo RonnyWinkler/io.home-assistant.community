@@ -183,6 +183,64 @@ class App extends Homey.App {
 			}
 		});
 
+		// Compound
+		this._flowActionCompoundButtonPress = this.homey.flow.getActionCard('compoundButtonPress');
+		this._flowActionCompoundButtonPress.registerRunListener(async (args, state) => {
+			try{
+				await args.device.buttonPress(args.capability.id);
+				return true;
+			}
+			catch(error){
+				this.error("Error executing flowAction 'compoundButtonPress': "+  error.message);
+				throw new Error(error.message);
+			}
+		});
+		this._flowActionCompoundButtonPress.registerArgumentAutocompleteListener('capability', async (query, args) => {
+			const compoundButtonsList = args.device.getAutocompleteButtonList();
+			return compoundButtonsList.filter((result) => { 
+				return result.name.toLowerCase().includes(query.toLowerCase());
+			});
+			
+		});
+
+		this._flowActionCompoundSwitchOn = this.homey.flow.getActionCard('compoundSwitchOn');
+		this._flowActionCompoundSwitchOn.registerRunListener(async (args, state) => {
+			try{
+				await args.device.switchOn(args.capability.id);
+				return true;
+			}
+			catch(error){
+				this.error("Error executing flowAction 'compoundSwitchOn': "+  error.message);
+				throw new Error(error.message);
+			}
+		});
+		this._flowActionCompoundSwitchOn.registerArgumentAutocompleteListener('capability', async (query, args) => {
+			const compoundSwitchList = args.device.getAutocompleteOnoffList();
+			return compoundSwitchList.filter((result) => { 
+				return result.name.toLowerCase().includes(query.toLowerCase());
+			});
+			
+		});
+
+		this._flowActionCompoundSwitchOff = this.homey.flow.getActionCard('compoundSwitchOff');
+		this._flowActionCompoundSwitchOff.registerRunListener(async (args, state) => {
+			try{
+				await args.device.switchOff(args.capability.id);
+				return true;
+			}
+			catch(error){
+				this.error("Error executing flowAction 'compoundSwitchOff': "+  error.message);
+				throw new Error(error.message);
+			}
+		});
+		this._flowActionCompoundSwitchOff.registerArgumentAutocompleteListener('capability', async (query, args) => {
+			const compoundSwitchList = args.device.getAutocompleteOnoffList();
+			return compoundSwitchList.filter((result) => { 
+				return result.name.toLowerCase().includes(query.toLowerCase());
+			});
+			
+		});
+
 		// Light
 		this._flowActionLightSetHue = this.homey.flow.getActionCard('lightSetHue')
 		this._flowActionLightSetHue.registerRunListener(async (args, state) => {

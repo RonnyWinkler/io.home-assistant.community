@@ -1,0 +1,35 @@
+{
+    "highlight": true,
+    "title": {
+        "en": "Switch on",
+        "de": "Anschalten",
+        "nl": "Inschakelen"
+    },
+    "titleFormatted": {
+        "en": "Switch on [[capability]].",
+        "de": "Schalter [[capability]] anschalten.",
+        "nl": "Schakelaar [[capability]] inschakelen."
+    },
+    "args": [
+        {
+            "type": "autocomplete",
+            "name": "capability",
+            "required": false,
+            "title": { 
+                "en": "Capability",
+                "de": "Attribut",
+                "nl": "Capability"
+            },
+            "placeholder": { 
+                "en": "Select a device capability",
+                "de": "Wähle ein Geräte-Attibut",
+                "nl": "Selecteer een apparaat capability"
+            }
+        },
+        {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=compound"
+        }
+    ]
+}

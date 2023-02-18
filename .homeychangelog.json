@@ -230,5 +230,9 @@
   "1.1.3": {
     "en": "Flow conditions (AND cards) for climate 'preset', 'swing' 'fan' modes are using autocomplete values now. Unavailable HA antities are set as unavailable in Homey, too.",
     "de": "Flow-Konditionen (UND-Karten) für Klimagerät-Modus 'preset', 'swing' 'fan' verwenden nun Autocomplete-Werte. Nicht verfügbare HA Entitäten werden Homey auch als nicht verfügbar markiert."
+  },
+  "1.1.4": {
+    "en": "Fixed button press and button trigger in Compound device. Added flow actions for compound buttons and switches.",
+    "de": "Korrektur für Buttons (Drücken & Flow-Trigger) in Compound devices. Flow-Aktionen für Compound-Buttons/Schalter."
   }
 }

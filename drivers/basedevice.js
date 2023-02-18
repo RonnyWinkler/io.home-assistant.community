@@ -203,6 +203,9 @@ class BaseDevice extends Homey.Device {
 
     // Helper functions ===========================================================
     getCapabilityType(capability){
+        if (capability.startsWith("button")){
+            return "string";
+        }
         let type = typeof(this.getCapabilityValue(capability));
         if (type == 'string' || type == 'number' || type == 'boolean'){
             return type;

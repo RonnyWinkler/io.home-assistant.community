@@ -1,0 +1,35 @@
+{
+    "highlight": true,
+    "title": {
+        "en": "Switch off",
+        "de": "Ausschalten",
+        "nl": "Uitschakelen"
+    },
+    "titleFormatted": {
+        "en": "Switch off [[capability]].",
+        "de": "Schalter [[capability]] ausschalten.",
+        "nl": "Schakelaar [[capability]] uitschakelen."
+    },
+    "args": [
+        {
+            "type": "autocomplete",
+            "name": "capability",
+            "required": false,
+            "title": { 
+                "en": "Capability",
+                "de": "Attribut",
+                "nl": "Capability"
+            },
+            "placeholder": { 
+                "en": "Select a device capability",
+                "de": "Wähle ein Geräte-Attibut",
+                "nl": "Selecteer een apparaat capability"
+            }
+        },
+        {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=compound"
+        }
+    ]
+}
