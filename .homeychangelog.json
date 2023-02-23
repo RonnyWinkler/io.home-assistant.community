@@ -238,5 +238,9 @@
   "1.1.5": {
     "en": "Added flow trigger 'thermostat action changed' for climate device.",
     "de": "Flow Trigger 'Thermostat-Aktivität geändert' für Klimagerät ergänzt."
+  },
+  "1.1.6": {
+    "en": "Added flow condition 'thermostat action' for climate device.",
+    "de": "Flow Bedingung 'Thermostat-Aktivität' für Klimagerät ergänzt."
   }
 }

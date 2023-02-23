@@ -788,6 +788,13 @@ class App extends Homey.App {
 				return result.name.toLowerCase().includes(query.toLowerCase());
 			});
 		});
+		this._flowConditionClimateAction = this.homey.flow.getConditionCard('climate_action')
+		.registerRunListener(async (args, state) => {
+			if (!args.device.hasCapability('climate_action')){
+				throw new Error("This device doesn't support thermostat activity.");
+			}
+			return (args.device.getCapabilityValue('climate_action') == args.activity);
+		})
 
 		this._flowConditionClimateModeSwing = this.homey.flow.getConditionCard('climate_mode_swing')
 		.registerRunListener(async (args, state) => {
