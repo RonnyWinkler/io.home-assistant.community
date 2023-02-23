@@ -36,6 +36,6 @@
     },
     "device_unavailable_reason": {
         "entity_not_found": "Home Assistant Entität ist nicht vorhanden",
-        "entity_unavailable": "Home Assistant Entität hat Statue 'nicht verfügbar'"
+        "entity_unavailable": "Home Assistant Entität hat Status 'nicht verfügbar'"
     }
 }

@@ -1,0 +1,23 @@
+{
+    "title": {
+        "en": "Thermostat activity changed",
+        "de": "Thermostat-Aktivität hat sich geändert",
+        "nl": "Thermostaat activiteit gewijzigd"
+    },
+    "tokens": [{
+            "name": "climate_action",
+            "type": "string",
+            "title": {
+                "en": "Activity",
+                "de": "Aktivität",
+                "nl": "Activiteit"
+            },
+            "example": "heating"
+        }
+    ],
+    "args": [{
+        "name": "device",
+        "type": "device",
+        "filter": "driver_id=climate|climate_fan"
+    }]
+}

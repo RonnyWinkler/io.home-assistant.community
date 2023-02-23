@@ -145,6 +145,9 @@ class App extends Homey.App {
 		// Init device with a short timeout to wait for initial entities
 		this.timeoutCheckConnection = this.homey.setTimeout(async () => this.onCheckConnection().catch(e => console.log(e)), RECONNECT_TIMEOUT * 60 * 1000 );
 
+		// TEST
+		// let states = await this._client._connection.sendMessagePromise({type: "get_states"});
+		// console.log(states);
 	}
 
 	async _registerFlowActions(){
