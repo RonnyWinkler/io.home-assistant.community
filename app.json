@@ -276,7 +276,7 @@
           {
             "name": "device",
             "type": "device",
-            "filter": "driver_id=compound"
+            "filter": "driver_id=compound|climate|climate_fan|fan|light|media|sensor|switch|vacuum"
           }
         ],
         "id": "capability_changed"
@@ -2959,7 +2959,79 @@
       "images": {
         "large": "/drivers/climate/assets/images/large.png",
         "small": "/drivers/climate/assets/images/small.png"
-      }
+      },
+      "settings": [
+        {
+          "type": "group",
+          "label": {
+            "en": "Device entities",
+            "de": "Geräte-Entitäten",
+            "nl": "Apparaat entiteiten"
+          },
+          "children": [
+            {
+              "id": "add_device_sensor",
+              "type": "checkbox",
+              "value": false,
+              "label": {
+                "en": "Show device sensors",
+                "de": "Zeige Geräte-Sensoren",
+                "nl": "Apparaatsensoren weergeven"
+              },
+              "hint": {
+                "en": "Add sensor entities from HA device where this entity is assigned to.",
+                "de": "Füge Sensor-Entitäten des HA-Gerätes hinzu, dem diese Entität zugeordnet ist.",
+                "nl": "Voeg sensor entiteiten toe vanaf het HA-apparaat waaraan deze entiteit is toegewezen."
+              }
+            },
+            {
+              "id": "add_device_sensor_diagnostic",
+              "type": "checkbox",
+              "value": false,
+              "label": {
+                "en": "Show device diagnostic sensors",
+                "de": "Zeige Geräte-Diagnosesensoren",
+                "nl": "Diagnostische sensoren voor apparaat weergeven"
+              },
+              "hint": {
+                "en": "Add diagnostic sensor entities from HA device where this entity is assigned to.",
+                "de": "Füge Diagnosesensor-Entitäten des HA-Gerätes hinzu, dem diese Entität zugeordnet ist.",
+                "nl": "Voeg diagnostische sensor entiteiten toe vanaf het HA-apparaat waaraan deze entiteit is toegewezen."
+              }
+            },
+            {
+              "id": "add_device_switch",
+              "type": "checkbox",
+              "value": false,
+              "label": {
+                "en": "Show device switches",
+                "de": "Zeige Geräte-Schalter",
+                "nl": "Apparaatschakelaars weergeven"
+              },
+              "hint": {
+                "en": "Add switch entities from HA device where this entity is assigned to.",
+                "de": "Füge Schalter-Entitäten des HA-Gerätes hinzu, dem diese Entität zugeordnet ist.",
+                "nl": "Voeg schakelaar entiteiten toe vanaf het HA-apparaat waaraan deze entiteit is toegewezen."
+              }
+            },
+            {
+              "id": "add_device_button",
+              "type": "checkbox",
+              "value": false,
+              "label": {
+                "en": "Show device buttons",
+                "de": "Zeige Geräte-Buttons",
+                "nl": "Toon apparaatknoppen"
+              },
+              "hint": {
+                "en": "Add button entities from HA device where this entity is assigned to.",
+                "de": "Füge Button-Entitäten des HA-Gerätes hinzu, dem diese Entität zugeordnet ist.",
+                "nl": "Voeg knoppen entiteiten toe vanaf het HA-apparaat waaraan deze entiteit is toegewezen."
+              }
+            }
+          ]
+        }
+      ]
     },
     {
       "pair": [
@@ -3124,7 +3196,79 @@
             "nl": "Snelheid"
           }
         }
-      }
+      },
+      "settings": [
+        {
+          "type": "group",
+          "label": {
+            "en": "Device entities",
+            "de": "Geräte-Entitäten",
+            "nl": "Apparaat entiteiten"
+          },
+          "children": [
+            {
+              "id": "add_device_sensor",
+              "type": "checkbox",
+              "value": false,
+              "label": {
+                "en": "Show device sensors",
+                "de": "Zeige Geräte-Sensoren",
+                "nl": "Apparaatsensoren weergeven"
+              },
+              "hint": {
+                "en": "Add sensor entities from HA device where this entity is assigned to.",
+                "de": "Füge Sensor-Entitäten des HA-Gerätes hinzu, dem diese Entität zugeordnet ist.",
+                "nl": "Voeg sensor entiteiten toe vanaf het HA-apparaat waaraan deze entiteit is toegewezen."
+              }
+            },
+            {
+              "id": "add_device_sensor_diagnostic",
+              "type": "checkbox",
+              "value": false,
+              "label": {
+                "en": "Show device diagnostic sensors",
+                "de": "Zeige Geräte-Diagnosesensoren",
+                "nl": "Diagnostische sensoren voor apparaat weergeven"
+              },
+              "hint": {
+                "en": "Add diagnostic sensor entities from HA device where this entity is assigned to.",
+                "de": "Füge Diagnosesensor-Entitäten des HA-Gerätes hinzu, dem diese Entität zugeordnet ist.",
+                "nl": "Voeg diagnostische sensor entiteiten toe vanaf het HA-apparaat waaraan deze entiteit is toegewezen."
+              }
+            },
+            {
+              "id": "add_device_switch",
+              "type": "checkbox",
+              "value": false,
+              "label": {
+                "en": "Show device switches",
+                "de": "Zeige Geräte-Schalter",
+                "nl": "Apparaatschakelaars weergeven"
+              },
+              "hint": {
+                "en": "Add switch entities from HA device where this entity is assigned to.",
+                "de": "Füge Schalter-Entitäten des HA-Gerätes hinzu, dem diese Entität zugeordnet ist.",
+                "nl": "Voeg schakelaar entiteiten toe vanaf het HA-apparaat waaraan deze entiteit is toegewezen."
+              }
+            },
+            {
+              "id": "add_device_button",
+              "type": "checkbox",
+              "value": false,
+              "label": {
+                "en": "Show device buttons",
+                "de": "Zeige Geräte-Buttons",
+                "nl": "Toon apparaatknoppen"
+              },
+              "hint": {
+                "en": "Add button entities from HA device where this entity is assigned to.",
+                "de": "Füge Button-Entitäten des HA-Gerätes hinzu, dem diese Entität zugeordnet ist.",
+                "nl": "Voeg knoppen entiteiten toe vanaf het HA-apparaat waaraan deze entiteit is toegewezen."
+              }
+            }
+          ]
+        }
+      ]
     },
     {
       "capabilitiesOptions": {
@@ -3320,210 +3464,245 @@
       },
       "settings": [
         {
-          "id": "device_class",
-          "type": "dropdown",
-          "value": "sensor",
+          "type": "group",
           "label": {
-            "en": "Device class",
-            "de": "Geräte-Typ",
-            "nl": "Apparaat klasse"
+            "en": "Device",
+            "de": "Gerät",
+            "nl": "Apparaat"
           },
-          "hint": {
-            "en": "Choose an optional matching device type based on the Home Assistant entities used.",
-            "de": "Wähle einen optionalen passenden Gerätetyp basierend auf den verwendeten Home Assistant Entitäten.",
-            "nl": "Kies een optioneel bijpassend apparaattype op basis van de gebruikte Home Assistant-entiteiten."
+          "children": [
+            {
+              "id": "device_class",
+              "type": "dropdown",
+              "value": "sensor",
+              "label": {
+                "en": "Device class",
+                "de": "Geräte-Typ",
+                "nl": "Apparaat klasse"
+              },
+              "hint": {
+                "en": "Choose an optional matching device type based on the Home Assistant entities used.",
+                "de": "Wähle einen optionalen passenden Gerätetyp basierend auf den verwendeten Home Assistant Entitäten.",
+                "nl": "Kies een optioneel bijpassend apparaattype op basis van de gebruikte Home Assistant-entiteiten."
+              },
+              "values": [
+                {
+                  "id": "sensor",
+                  "label": {
+                    "en": "Sensor",
+                    "de": "Sensor",
+                    "nl": "Sensor"
+                  }
+                },
+                {
+                  "id": "socket",
+                  "label": {
+                    "en": "Wall Plug",
+                    "nl": "Schakeldoos",
+                    "de": "Steckdose"
+                  }
+                },
+                {
+                  "id": "light",
+                  "label": {
+                    "en": "Light",
+                    "nl": "Lamp",
+                    "de": "Lampe"
+                  }
+                },
+                {
+                  "id": "amplifier",
+                  "label": {
+                    "en": "Amplifier",
+                    "nl": "Versterker",
+                    "de": "Verstärker"
+                  }
+                },
+                {
+                  "id": "blinds",
+                  "label": {
+                    "en": "Blinds",
+                    "nl": "Jaloezieën & Lamellen",
+                    "de": "Rolladen"
+                  }
+                },
+                {
+                  "id": "button",
+                  "label": {
+                    "en": "Button",
+                    "nl": "Knop",
+                    "de": "Taste"
+                  }
+                },
+                {
+                  "id": "camera",
+                  "label": {
+                    "en": "Camera",
+                    "nl": "Camera",
+                    "de": "Kamera"
+                  }
+                },
+                {
+                  "id": "coffeemachine",
+                  "label": {
+                    "en": "Coffee machine",
+                    "nl": "Koffiemachine",
+                    "de": "Kaffemaschine"
+                  }
+                },
+                {
+                  "id": "curtain",
+                  "label": {
+                    "en": "Curtains",
+                    "nl": "Gordijnen",
+                    "de": "Vorhänge"
+                  }
+                },
+                {
+                  "id": "doorbell",
+                  "label": {
+                    "en": "Doorbell",
+                    "nl": "Deurbel",
+                    "de": "Türklingel"
+                  }
+                },
+                {
+                  "id": "fan",
+                  "label": {
+                    "en": "Fan",
+                    "nl": "Ventilator",
+                    "de": "Ventilator"
+                  }
+                },
+                {
+                  "id": "garagedoor",
+                  "label": {
+                    "en": "Garage door",
+                    "nl": "Garagedeur",
+                    "de": "Garagentor"
+                  }
+                },
+                {
+                  "id": "heater",
+                  "label": {
+                    "en": "Heater",
+                    "nl": "Heater",
+                    "de": "Heizung"
+                  }
+                },
+                {
+                  "id": "homealarm",
+                  "label": {
+                    "en": "Home Security",
+                    "nl": "Huisbeveiliging",
+                    "de": "Heim-Sicherheit"
+                  }
+                },
+                {
+                  "id": "kettle",
+                  "label": {
+                    "en": "Kettle",
+                    "nl": "Waterkoker",
+                    "de": "Wasserkocher"
+                  }
+                },
+                {
+                  "id": "lock",
+                  "label": {
+                    "en": "Other",
+                    "nl": "Overig",
+                    "de": "Andere"
+                  }
+                },
+                {
+                  "id": "remote",
+                  "label": {
+                    "en": "Remote",
+                    "nl": "Afstandsbediening",
+                    "de": "Fernbedienung"
+                  }
+                },
+                {
+                  "id": "speaker",
+                  "label": {
+                    "en": "Speaker",
+                    "nl": "Speaker",
+                    "de": "Lautsprecher"
+                  }
+                },
+                {
+                  "id": "solarpanel",
+                  "label": {
+                    "en": "Solar Panel",
+                    "nl": "Zonnepaneel",
+                    "de": "Solarpanel"
+                  }
+                },
+                {
+                  "id": "sunshade",
+                  "label": {
+                    "en": "Sunshade",
+                    "nl": "Zonnescherm",
+                    "de": "Sonnenschirm"
+                  }
+                },
+                {
+                  "id": "thermostat",
+                  "label": {
+                    "en": "Thermostat",
+                    "nl": "Thermostaat",
+                    "de": "Thermostat"
+                  }
+                },
+                {
+                  "id": "tv",
+                  "label": {
+                    "en": "TV",
+                    "nl": "TV",
+                    "de": "TV"
+                  }
+                },
+                {
+                  "id": "vacuumcleaner",
+                  "label": {
+                    "en": "Vacuum Cleaner",
+                    "nl": "Stofzuiger",
+                    "de": "Staubsauger"
+                  }
+                },
+                {
+                  "id": "windowcoverings",
+                  "label": {
+                    "en": "Window Coverings",
+                    "nl": "Raambekleding",
+                    "de": "Fenster-Abdeckungen"
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "group",
+          "label": {
+            "en": "Energy",
+            "de": "Energie",
+            "nl": "Energie"
           },
-          "values": [
+          "children": [
             {
-              "id": "sensor",
+              "id": "set_energy_cumulative",
+              "type": "checkbox",
+              "value": false,
               "label": {
-                "en": "Sensor",
-                "de": "Sensor",
-                "nl": "Sensor"
-              }
-            },
-            {
-              "id": "socket",
-              "label": {
-                "en": "Wall Plug",
-                "nl": "Schakeldoos",
-                "de": "Steckdose"
-              }
-            },
-            {
-              "id": "light",
-              "label": {
-                "en": "Light",
-                "nl": "Lamp",
-                "de": "Lampe"
-              }
-            },
-            {
-              "id": "amplifier",
-              "label": {
-                "en": "Amplifier",
-                "nl": "Versterker",
-                "de": "Verstärker"
-              }
-            },
-            {
-              "id": "blinds",
-              "label": {
-                "en": "Blinds",
-                "nl": "Jaloezieën & Lamellen",
-                "de": "Rolladen"
-              }
-            },
-            {
-              "id": "button",
-              "label": {
-                "en": "Button",
-                "nl": "Knop",
-                "de": "Taste"
-              }
-            },
-            {
-              "id": "camera",
-              "label": {
-                "en": "Camera",
-                "nl": "Camera",
-                "de": "Kamera"
-              }
-            },
-            {
-              "id": "coffeemachine",
-              "label": {
-                "en": "Coffee machine",
-                "nl": "Koffiemachine",
-                "de": "Kaffemaschine"
-              }
-            },
-            {
-              "id": "curtain",
-              "label": {
-                "en": "Curtains",
-                "nl": "Gordijnen",
-                "de": "Vorhänge"
-              }
-            },
-            {
-              "id": "doorbell",
-              "label": {
-                "en": "Doorbell",
-                "nl": "Deurbel",
-                "de": "Türklingel"
-              }
-            },
-            {
-              "id": "fan",
-              "label": {
-                "en": "Fan",
-                "nl": "Ventilator",
-                "de": "Ventilator"
-              }
-            },
-            {
-              "id": "garagedoor",
-              "label": {
-                "en": "Garage door",
-                "nl": "Garagedeur",
-                "de": "Garagentor"
-              }
-            },
-            {
-              "id": "heater",
-              "label": {
-                "en": "Heater",
-                "nl": "Heater",
-                "de": "Heizung"
-              }
-            },
-            {
-              "id": "homealarm",
-              "label": {
-                "en": "Home Security",
-                "nl": "Huisbeveiliging",
-                "de": "Heim-Sicherheit"
-              }
-            },
-            {
-              "id": "kettle",
-              "label": {
-                "en": "Kettle",
-                "nl": "Waterkoker",
-                "de": "Wasserkocher"
-              }
-            },
-            {
-              "id": "lock",
-              "label": {
-                "en": "Other",
-                "nl": "Overig",
-                "de": "Andere"
-              }
-            },
-            {
-              "id": "remote",
-              "label": {
-                "en": "Remote",
-                "nl": "Afstandsbediening",
-                "de": "Fernbedienung"
-              }
-            },
-            {
-              "id": "speaker",
-              "label": {
-                "en": "Speaker",
-                "nl": "Speaker",
-                "de": "Lautsprecher"
-              }
-            },
-            {
-              "id": "solarpanel",
-              "label": {
-                "en": "Solar Panel",
-                "nl": "Zonnepaneel",
-                "de": "Solarpanel"
-              }
-            },
-            {
-              "id": "sunshade",
-              "label": {
-                "en": "Sunshade",
-                "nl": "Zonnescherm",
-                "de": "Sonnenschirm"
-              }
-            },
-            {
-              "id": "thermostat",
-              "label": {
-                "en": "Thermostat",
-                "nl": "Thermostaat",
-                "de": "Thermostat"
-              }
-            },
-            {
-              "id": "tv",
-              "label": {
-                "en": "TV",
-                "nl": "TV",
-                "de": "TV"
-              }
-            },
-            {
-              "id": "vacuumcleaner",
-              "label": {
-                "en": "Vacuum Cleaner",
-                "nl": "Stofzuiger",
-                "de": "Staubsauger"
-              }
-            },
-            {
-              "id": "windowcoverings",
-              "label": {
-                "en": "Window Coverings",
-                "nl": "Raambekleding",
-                "de": "Fenster-Abdeckungen"
+                "en": "Cumulative energy measuring",
+                "de": "Kumulative Energiemessung",
+                "nl": "Cumulatieve energiemeting"
+              },
+              "hint": {
+                "en": "Enable this setting if the device is measuring the cumulative energy usage.",
+                "de": "Aktivieren Sie diese Einstellung, wenn das Gerät den kumulativen Energieverbrauch misst.",
+                "nl": "Schakel deze instelling in als het apparaat het cumulatieve energieverbruik meet."
               }
             }
           ]
@@ -3840,7 +4019,79 @@
             "nl": "Snelheid"
           }
         }
-      }
+      },
+      "settings": [
+        {
+          "type": "group",
+          "label": {
+            "en": "Device entities",
+            "de": "Geräte-Entitäten",
+            "nl": "Apparaat entiteiten"
+          },
+          "children": [
+            {
+              "id": "add_device_sensor",
+              "type": "checkbox",
+              "value": false,
+              "label": {
+                "en": "Show device sensors",
+                "de": "Zeige Geräte-Sensoren",
+                "nl": "Apparaatsensoren weergeven"
+              },
+              "hint": {
+                "en": "Add sensor entities from HA device where this entity is assigned to.",
+                "de": "Füge Sensor-Entitäten des HA-Gerätes hinzu, dem diese Entität zugeordnet ist.",
+                "nl": "Voeg sensor entiteiten toe vanaf het HA-apparaat waaraan deze entiteit is toegewezen."
+              }
+            },
+            {
+              "id": "add_device_sensor_diagnostic",
+              "type": "checkbox",
+              "value": false,
+              "label": {
+                "en": "Show device diagnostic sensors",
+                "de": "Zeige Geräte-Diagnosesensoren",
+                "nl": "Diagnostische sensoren voor apparaat weergeven"
+              },
+              "hint": {
+                "en": "Add diagnostic sensor entities from HA device where this entity is assigned to.",
+                "de": "Füge Diagnosesensor-Entitäten des HA-Gerätes hinzu, dem diese Entität zugeordnet ist.",
+                "nl": "Voeg diagnostische sensor entiteiten toe vanaf het HA-apparaat waaraan deze entiteit is toegewezen."
+              }
+            },
+            {
+              "id": "add_device_switch",
+              "type": "checkbox",
+              "value": false,
+              "label": {
+                "en": "Show device switches",
+                "de": "Zeige Geräte-Schalter",
+                "nl": "Apparaatschakelaars weergeven"
+              },
+              "hint": {
+                "en": "Add switch entities from HA device where this entity is assigned to.",
+                "de": "Füge Schalter-Entitäten des HA-Gerätes hinzu, dem diese Entität zugeordnet ist.",
+                "nl": "Voeg schakelaar entiteiten toe vanaf het HA-apparaat waaraan deze entiteit is toegewezen."
+              }
+            },
+            {
+              "id": "add_device_button",
+              "type": "checkbox",
+              "value": false,
+              "label": {
+                "en": "Show device buttons",
+                "de": "Zeige Geräte-Buttons",
+                "nl": "Toon apparaatknoppen"
+              },
+              "hint": {
+                "en": "Add button entities from HA device where this entity is assigned to.",
+                "de": "Füge Button-Entitäten des HA-Gerätes hinzu, dem diese Entität zugeordnet ist.",
+                "nl": "Voeg knoppen entiteiten toe vanaf het HA-apparaat waaraan deze entiteit is toegewezen."
+              }
+            }
+          ]
+        }
+      ]
     },
     {
       "pair": [
@@ -4020,19 +4271,114 @@
       },
       "settings": [
         {
-          "id": "power_entity",
-          "type": "text",
-          "value": "",
+          "type": "group",
           "label": {
-            "en": "Power entity",
-            "de": "Energie-Eitität",
-            "nl": "Energie entiteit"
+            "en": "Device entities",
+            "de": "Geräte-Entitäten",
+            "nl": "Apparaat entiteiten"
           },
-          "hint": {
-            "en": "Select an sensor entity providing the power value for this light if there is no default power sensor named sensor.MYLIGHT_power.",
-            "de": "Wählen Sie eine Sensorentität aus, die den Leistungswert für dieses Licht bereitstellt, wenn es keinen Standardleistungssensor mit dem Namen sensor.MYLIGHT_power gibt.",
-            "nl": "Selecteer een sensorentiteit die de vermogenswaarde voor dit licht levert als er geen standaard vermogenssensor met de naam sensor.MYLIGHT_power is."
-          }
+          "children": [
+            {
+              "id": "add_device_sensor",
+              "type": "checkbox",
+              "value": false,
+              "label": {
+                "en": "Show device sensors",
+                "de": "Zeige Geräte-Sensoren",
+                "nl": "Apparaatsensoren weergeven"
+              },
+              "hint": {
+                "en": "Add sensor entities from HA device where this entity is assigned to.",
+                "de": "Füge Sensor-Entitäten des HA-Gerätes hinzu, dem diese Entität zugeordnet ist.",
+                "nl": "Voeg sensor entiteiten toe vanaf het HA-apparaat waaraan deze entiteit is toegewezen."
+              }
+            },
+            {
+              "id": "add_device_sensor_diagnostic",
+              "type": "checkbox",
+              "value": false,
+              "label": {
+                "en": "Show device diagnostic sensors",
+                "de": "Zeige Geräte-Diagnosesensoren",
+                "nl": "Diagnostische sensoren voor apparaat weergeven"
+              },
+              "hint": {
+                "en": "Add diagnostic sensor entities from HA device where this entity is assigned to.",
+                "de": "Füge Diagnosesensor-Entitäten des HA-Gerätes hinzu, dem diese Entität zugeordnet ist.",
+                "nl": "Voeg diagnostische sensor entiteiten toe vanaf het HA-apparaat waaraan deze entiteit is toegewezen."
+              }
+            },
+            {
+              "id": "add_device_switch",
+              "type": "checkbox",
+              "value": false,
+              "label": {
+                "en": "Show device switches",
+                "de": "Zeige Geräte-Schalter",
+                "nl": "Apparaatschakelaars weergeven"
+              },
+              "hint": {
+                "en": "Add switch entities from HA device where this entity is assigned to.",
+                "de": "Füge Schalter-Entitäten des HA-Gerätes hinzu, dem diese Entität zugeordnet ist.",
+                "nl": "Voeg schakelaar entiteiten toe vanaf het HA-apparaat waaraan deze entiteit is toegewezen."
+              }
+            },
+            {
+              "id": "add_device_button",
+              "type": "checkbox",
+              "value": false,
+              "label": {
+                "en": "Show device buttons",
+                "de": "Zeige Geräte-Buttons",
+                "nl": "Toon apparaatknoppen"
+              },
+              "hint": {
+                "en": "Add button entities from HA device where this entity is assigned to.",
+                "de": "Füge Button-Entitäten des HA-Gerätes hinzu, dem diese Entität zugeordnet ist.",
+                "nl": "Voeg knoppen entiteiten toe vanaf het HA-apparaat waaraan deze entiteit is toegewezen."
+              }
+            }
+          ]
+        },
+        {
+          "type": "group",
+          "label": {
+            "en": "Energy",
+            "de": "Energie",
+            "nl": "Energie"
+          },
+          "children": [
+            {
+              "id": "add_power_entity",
+              "type": "checkbox",
+              "value": true,
+              "label": {
+                "en": "Add power entity",
+                "de": "Energie-Eitität hinzufügen",
+                "nl": "Energie entiteit toevoegen"
+              },
+              "hint": {
+                "en": "Add a sensor entity providing the power value for this device. It uses a sensor named sensor.MYLIGHT_power. If there is no default power sensor named sensor.MYLIGHT_power, you can set a custom sensor in next field.",
+                "de": "Fügen Sie eine Sensorentität hinzu, die den Leistungswert für dieses Gerät bereitstellt. Es verwendet einen Sensor namens sensor.MYLIGHT_power. Wenn es keinen Standard-Leistungssensor namens sensor.MYLIGHT_power gibt, können Sie im nächsten Feld einen benutzerdefinierten Sensor festlegen.",
+                "nl": "Voeg een sensorentiteit toe die de vermogenswaarde voor dit apparaat levert. Het gebruikt een sensor met de naam sensor.MYLIGHT_power. Als er geen standaard vermogenssensor met de naam sensor.MYLIGHT_power is, kunt u een aangepaste sensor instellen in het volgende veld."
+              }
+            },
+            {
+              "id": "power_entity",
+              "type": "text",
+              "value": "",
+              "label": {
+                "en": "Power entity",
+                "de": "Energie-Eitität",
+                "nl": "Energie entiteit"
+              },
+              "hint": {
+                "en": "Select a sensor entity providing the power value for this device if there is no default power sensor named sensor.MYLIGHT_power.",
+                "de": "Wählen Sie eine Sensorentität aus, die den Leistungswert für dieses Gerät bereitstellt, wenn es keinen Standardleistungssensor mit dem Namen sensor.MYLIGHT_power gibt.",
+                "nl": "Selecteer een sensorentiteit die de vermogenswaarde voor dit apparaat levert als er geen standaard vermogenssensor met de naam sensor.MYLIGHT_power is."
+              }
+            }
+          ]
         }
       ]
     },
@@ -4346,7 +4692,79 @@
       "images": {
         "large": "/drivers/media/assets/images/large.png",
         "small": "/drivers/media/assets/images/small.png"
-      }
+      },
+      "settings": [
+        {
+          "type": "group",
+          "label": {
+            "en": "Device entities",
+            "de": "Geräte-Entitäten",
+            "nl": "Apparaat entiteiten"
+          },
+          "children": [
+            {
+              "id": "add_device_sensor",
+              "type": "checkbox",
+              "value": false,
+              "label": {
+                "en": "Show device sensors",
+                "de": "Zeige Geräte-Sensoren",
+                "nl": "Apparaatsensoren weergeven"
+              },
+              "hint": {
+                "en": "Add sensor entities from HA device where this entity is assigned to.",
+                "de": "Füge Sensor-Entitäten des HA-Gerätes hinzu, dem diese Entität zugeordnet ist.",
+                "nl": "Voeg sensor entiteiten toe vanaf het HA-apparaat waaraan deze entiteit is toegewezen."
+              }
+            },
+            {
+              "id": "add_device_sensor_diagnostic",
+              "type": "checkbox",
+              "value": false,
+              "label": {
+                "en": "Show device diagnostic sensors",
+                "de": "Zeige Geräte-Diagnosesensoren",
+                "nl": "Diagnostische sensoren voor apparaat weergeven"
+              },
+              "hint": {
+                "en": "Add diagnostic sensor entities from HA device where this entity is assigned to.",
+                "de": "Füge Diagnosesensor-Entitäten des HA-Gerätes hinzu, dem diese Entität zugeordnet ist.",
+                "nl": "Voeg diagnostische sensor entiteiten toe vanaf het HA-apparaat waaraan deze entiteit is toegewezen."
+              }
+            },
+            {
+              "id": "add_device_switch",
+              "type": "checkbox",
+              "value": false,
+              "label": {
+                "en": "Show device switches",
+                "de": "Zeige Geräte-Schalter",
+                "nl": "Apparaatschakelaars weergeven"
+              },
+              "hint": {
+                "en": "Add switch entities from HA device where this entity is assigned to.",
+                "de": "Füge Schalter-Entitäten des HA-Gerätes hinzu, dem diese Entität zugeordnet ist.",
+                "nl": "Voeg schakelaar entiteiten toe vanaf het HA-apparaat waaraan deze entiteit is toegewezen."
+              }
+            },
+            {
+              "id": "add_device_button",
+              "type": "checkbox",
+              "value": false,
+              "label": {
+                "en": "Show device buttons",
+                "de": "Zeige Geräte-Buttons",
+                "nl": "Toon apparaatknoppen"
+              },
+              "hint": {
+                "en": "Add button entities from HA device where this entity is assigned to.",
+                "de": "Füge Button-Entitäten des HA-Gerätes hinzu, dem diese Entität zugeordnet ist.",
+                "nl": "Voeg knoppen entiteiten toe vanaf het HA-apparaat waaraan deze entiteit is toegewezen."
+              }
+            }
+          ]
+        }
+      ]
     },
     {
       "capabilitiesOptions": {
@@ -4787,8 +5205,8 @@
         "button.reconnect"
       ],
       "images": {
-        "large": "/drivers/switch/assets/images/large.png",
-        "small": "/drivers/switch/assets/images/small.png"
+        "large": "/drivers/schedule/assets/images/large.png",
+        "small": "/drivers/schedule/assets/images/small.png"
       },
       "capabilitiesOptions": {
         "button.reconnect": {
@@ -5156,7 +5574,104 @@
       "images": {
         "large": "/drivers/sensor/assets/images/large.png",
         "small": "/drivers/sensor/assets/images/small.png"
-      }
+      },
+      "settings": [
+        {
+          "type": "group",
+          "label": {
+            "en": "Device entities",
+            "de": "Geräte-Entitäten",
+            "nl": "Apparaat entiteiten"
+          },
+          "children": [
+            {
+              "id": "add_device_sensor",
+              "type": "checkbox",
+              "value": false,
+              "label": {
+                "en": "Show device sensors",
+                "de": "Zeige Geräte-Sensoren",
+                "nl": "Apparaatsensoren weergeven"
+              },
+              "hint": {
+                "en": "Add sensor entities from HA device where this entity is assigned to.",
+                "de": "Füge Sensor-Entitäten des HA-Gerätes hinzu, dem diese Entität zugeordnet ist.",
+                "nl": "Voeg sensor entiteiten toe vanaf het HA-apparaat waaraan deze entiteit is toegewezen."
+              }
+            },
+            {
+              "id": "add_device_sensor_diagnostic",
+              "type": "checkbox",
+              "value": false,
+              "label": {
+                "en": "Show device diagnostic sensors",
+                "de": "Zeige Geräte-Diagnosesensoren",
+                "nl": "Diagnostische sensoren voor apparaat weergeven"
+              },
+              "hint": {
+                "en": "Add diagnostic sensor entities from HA device where this entity is assigned to.",
+                "de": "Füge Diagnosesensor-Entitäten des HA-Gerätes hinzu, dem diese Entität zugeordnet ist.",
+                "nl": "Voeg diagnostische sensor entiteiten toe vanaf het HA-apparaat waaraan deze entiteit is toegewezen."
+              }
+            },
+            {
+              "id": "add_device_switch",
+              "type": "checkbox",
+              "value": false,
+              "label": {
+                "en": "Show device switches",
+                "de": "Zeige Geräte-Schalter",
+                "nl": "Apparaatschakelaars weergeven"
+              },
+              "hint": {
+                "en": "Add switch entities from HA device where this entity is assigned to.",
+                "de": "Füge Schalter-Entitäten des HA-Gerätes hinzu, dem diese Entität zugeordnet ist.",
+                "nl": "Voeg schakelaar entiteiten toe vanaf het HA-apparaat waaraan deze entiteit is toegewezen."
+              }
+            },
+            {
+              "id": "add_device_button",
+              "type": "checkbox",
+              "value": false,
+              "label": {
+                "en": "Show device buttons",
+                "de": "Zeige Geräte-Buttons",
+                "nl": "Toon apparaatknoppen"
+              },
+              "hint": {
+                "en": "Add button entities from HA device where this entity is assigned to.",
+                "de": "Füge Button-Entitäten des HA-Gerätes hinzu, dem diese Entität zugeordnet ist.",
+                "nl": "Voeg knoppen entiteiten toe vanaf het HA-apparaat waaraan deze entiteit is toegewezen."
+              }
+            }
+          ]
+        },
+        {
+          "type": "group",
+          "label": {
+            "en": "Energy",
+            "de": "Energie",
+            "nl": "Energie"
+          },
+          "children": [
+            {
+              "id": "set_energy_cumulative",
+              "type": "checkbox",
+              "value": false,
+              "label": {
+                "en": "Cumulative energy measuring",
+                "de": "Kumulative Energiemessung",
+                "nl": "Cumulatieve energiemeting"
+              },
+              "hint": {
+                "en": "Enable this setting if the device is measuring the cumulative energy usage.",
+                "de": "Aktivieren Sie diese Einstellung, wenn das Gerät den kumulativen Energieverbrauch misst.",
+                "nl": "Schakel deze instelling in als het apparaat het cumulatieve energieverbruik meet."
+              }
+            }
+          ]
+        }
+      ]
     },
     {
       "capabilitiesOptions": {
@@ -5307,19 +5822,114 @@
       },
       "settings": [
         {
-          "id": "power_entity",
-          "type": "text",
-          "value": "",
+          "type": "group",
           "label": {
-            "en": "Power entity",
-            "de": "Energie-Eitität",
-            "nl": "Energie entiteit"
+            "en": "Device entities",
+            "de": "Geräte-Entitäten",
+            "nl": "Apparaat entiteiten"
           },
-          "hint": {
-            "en": "Select an sensor entity providing the power value for this light if there is no default power sensor named sensor.MYLIGHT_power.",
-            "de": "Wählen Sie eine Sensorentität aus, die den Leistungswert für dieses Licht bereitstellt, wenn es keinen Standardleistungssensor mit dem Namen sensor.MYLIGHT_power gibt.",
-            "nl": "Selecteer een sensorentiteit die de vermogenswaarde voor dit licht levert als er geen standaard vermogenssensor met de naam sensor.MYLIGHT_power is."
-          }
+          "children": [
+            {
+              "id": "add_device_sensor",
+              "type": "checkbox",
+              "value": false,
+              "label": {
+                "en": "Show device sensors",
+                "de": "Zeige Geräte-Sensoren",
+                "nl": "Apparaatsensoren weergeven"
+              },
+              "hint": {
+                "en": "Add sensor entities from HA device where this entity is assigned to.",
+                "de": "Füge Sensor-Entitäten des HA-Gerätes hinzu, dem diese Entität zugeordnet ist.",
+                "nl": "Voeg sensor entiteiten toe vanaf het HA-apparaat waaraan deze entiteit is toegewezen."
+              }
+            },
+            {
+              "id": "add_device_sensor_diagnostic",
+              "type": "checkbox",
+              "value": false,
+              "label": {
+                "en": "Show device diagnostic sensors",
+                "de": "Zeige Geräte-Diagnosesensoren",
+                "nl": "Diagnostische sensoren voor apparaat weergeven"
+              },
+              "hint": {
+                "en": "Add diagnostic sensor entities from HA device where this entity is assigned to.",
+                "de": "Füge Diagnosesensor-Entitäten des HA-Gerätes hinzu, dem diese Entität zugeordnet ist.",
+                "nl": "Voeg diagnostische sensor entiteiten toe vanaf het HA-apparaat waaraan deze entiteit is toegewezen."
+              }
+            },
+            {
+              "id": "add_device_switch",
+              "type": "checkbox",
+              "value": false,
+              "label": {
+                "en": "Show device switches",
+                "de": "Zeige Geräte-Schalter",
+                "nl": "Apparaatschakelaars weergeven"
+              },
+              "hint": {
+                "en": "Add switch entities from HA device where this entity is assigned to.",
+                "de": "Füge Schalter-Entitäten des HA-Gerätes hinzu, dem diese Entität zugeordnet ist.",
+                "nl": "Voeg schakelaar entiteiten toe vanaf het HA-apparaat waaraan deze entiteit is toegewezen."
+              }
+            },
+            {
+              "id": "add_device_button",
+              "type": "checkbox",
+              "value": false,
+              "label": {
+                "en": "Show device buttons",
+                "de": "Zeige Geräte-Buttons",
+                "nl": "Toon apparaatknoppen"
+              },
+              "hint": {
+                "en": "Add button entities from HA device where this entity is assigned to.",
+                "de": "Füge Button-Entitäten des HA-Gerätes hinzu, dem diese Entität zugeordnet ist.",
+                "nl": "Voeg knoppen entiteiten toe vanaf het HA-apparaat waaraan deze entiteit is toegewezen."
+              }
+            }
+          ]
+        },
+        {
+          "type": "group",
+          "label": {
+            "en": "Energy",
+            "de": "Energie",
+            "nl": "Energie"
+          },
+          "children": [
+            {
+              "id": "add_power_entity",
+              "type": "checkbox",
+              "value": true,
+              "label": {
+                "en": "Add power entity",
+                "de": "Energie-Eitität hinzufügen",
+                "nl": "Energie entiteit toevoegen"
+              },
+              "hint": {
+                "en": "Add a sensor entity providing the power value for this device. It uses a sensor named sensor.MYLIGHT_power. If there is no default power sensor named sensor.MYLIGHT_power, you can set a custom sensor in next field.",
+                "de": "Fügen Sie eine Sensorentität hinzu, die den Leistungswert für dieses Gerät bereitstellt. Es verwendet einen Sensor namens sensor.MYLIGHT_power. Wenn es keinen Standard-Leistungssensor namens sensor.MYLIGHT_power gibt, können Sie im nächsten Feld einen benutzerdefinierten Sensor festlegen.",
+                "nl": "Voeg een sensorentiteit toe die de vermogenswaarde voor dit apparaat levert. Het gebruikt een sensor met de naam sensor.MYLIGHT_power. Als er geen standaard vermogenssensor met de naam sensor.MYLIGHT_power is, kunt u een aangepaste sensor instellen in het volgende veld."
+              }
+            },
+            {
+              "id": "power_entity",
+              "type": "text",
+              "value": "",
+              "label": {
+                "en": "Power entity",
+                "de": "Energie-Eitität",
+                "nl": "Energie entiteit"
+              },
+              "hint": {
+                "en": "Select a sensor entity providing the power value for this device if there is no default power sensor named sensor.MYLIGHT_power.",
+                "de": "Wählen Sie eine Sensorentität aus, die den Leistungswert für dieses Gerät bereitstellt, wenn es keinen Standardleistungssensor mit dem Namen sensor.MYLIGHT_power gibt.",
+                "nl": "Selecteer een sensorentiteit die de vermogenswaarde voor dit apparaat levert als er geen standaard vermogenssensor met de naam sensor.MYLIGHT_power is."
+              }
+            }
+          ]
         }
       ]
     },
@@ -5705,7 +6315,79 @@
             "nl": "Snelheid"
           }
         }
-      }
+      },
+      "settings": [
+        {
+          "type": "group",
+          "label": {
+            "en": "Device entities",
+            "de": "Geräte-Entitäten",
+            "nl": "Apparaat entiteiten"
+          },
+          "children": [
+            {
+              "id": "add_device_sensor",
+              "type": "checkbox",
+              "value": false,
+              "label": {
+                "en": "Show device sensors",
+                "de": "Zeige Geräte-Sensoren",
+                "nl": "Apparaatsensoren weergeven"
+              },
+              "hint": {
+                "en": "Add sensor entities from HA device where this entity is assigned to.",
+                "de": "Füge Sensor-Entitäten des HA-Gerätes hinzu, dem diese Entität zugeordnet ist.",
+                "nl": "Voeg sensor entiteiten toe vanaf het HA-apparaat waaraan deze entiteit is toegewezen."
+              }
+            },
+            {
+              "id": "add_device_sensor_diagnostic",
+              "type": "checkbox",
+              "value": false,
+              "label": {
+                "en": "Show device diagnostic sensors",
+                "de": "Zeige Geräte-Diagnosesensoren",
+                "nl": "Diagnostische sensoren voor apparaat weergeven"
+              },
+              "hint": {
+                "en": "Add diagnostic sensor entities from HA device where this entity is assigned to.",
+                "de": "Füge Diagnosesensor-Entitäten des HA-Gerätes hinzu, dem diese Entität zugeordnet ist.",
+                "nl": "Voeg diagnostische sensor entiteiten toe vanaf het HA-apparaat waaraan deze entiteit is toegewezen."
+              }
+            },
+            {
+              "id": "add_device_switch",
+              "type": "checkbox",
+              "value": false,
+              "label": {
+                "en": "Show device switches",
+                "de": "Zeige Geräte-Schalter",
+                "nl": "Apparaatschakelaars weergeven"
+              },
+              "hint": {
+                "en": "Add switch entities from HA device where this entity is assigned to.",
+                "de": "Füge Schalter-Entitäten des HA-Gerätes hinzu, dem diese Entität zugeordnet ist.",
+                "nl": "Voeg schakelaar entiteiten toe vanaf het HA-apparaat waaraan deze entiteit is toegewezen."
+              }
+            },
+            {
+              "id": "add_device_button",
+              "type": "checkbox",
+              "value": false,
+              "label": {
+                "en": "Show device buttons",
+                "de": "Zeige Geräte-Buttons",
+                "nl": "Toon apparaatknoppen"
+              },
+              "hint": {
+                "en": "Add button entities from HA device where this entity is assigned to.",
+                "de": "Füge Button-Entitäten des HA-Gerätes hinzu, dem diese Entität zugeordnet ist.",
+                "nl": "Voeg knoppen entiteiten toe vanaf het HA-apparaat waaraan deze entiteit is toegewezen."
+              }
+            }
+          ]
+        }
+      ]
     }
   ],
   "capabilities": {
@@ -6204,6 +6886,30 @@
       "setable": true,
       "uiComponent": "button",
       "icon": "/assets/capability_icons/media_unjoin.svg"
+    },
+    "onoff_button": {
+      "type": "boolean",
+      "title": {
+        "en": "Turned on",
+        "de": "Eingeschaltet",
+        "nl": "Aangezet"
+      },
+      "insightsTitleTrue": {
+        "en": "Turned on",
+        "de": "Eingeschaltet",
+        "nl": "Aangezet"
+      },
+      "insightsTitleFalse": {
+        "en": "Turned off",
+        "de": "Ausgeschaltet",
+        "nl": "Uitgezet"
+      },
+      "uiQuickAction": false,
+      "uiComponent": "button",
+      "insights": true,
+      "getable": true,
+      "setable": true,
+      "icon": "/assets/capability_icons/onoff_button.svg"
     },
     "presence_state": {
       "type": "string",

@@ -1,210 +1,248 @@
 [
     {
-        "id": "device_class",
-        "type": "dropdown",
-        "value": "sensor",
-        "label": {
-            "en": "Device class",
-            "de": "Geräte-Typ", 
-            "nl": "Apparaat klasse"
+        "type": "group",
+        "label": { 
+            "en": "Device",
+            "de": "Gerät",
+            "nl": "Apparaat"
         },
-        "hint": {
-            "en": "Choose an optional matching device type based on the Home Assistant entities used.",
-            "de": "Wähle einen optionalen passenden Gerätetyp basierend auf den verwendeten Home Assistant Entitäten.", 
-            "nl": "Kies een optioneel bijpassend apparaattype op basis van de gebruikte Home Assistant-entiteiten."
-        },
-        "values": [
+        "children": 
+        [
             {
-                "id": "sensor",
+                "id": "device_class",
+                "type": "dropdown",
+                "value": "sensor",
                 "label": {
-                    "en": "Sensor",
-                    "de": "Sensor",
-                    "nl": "Sensor"
-                }    
-            },
-            {
-                "id": "socket",
-                "label": {
-                    "en": "Wall Plug",
-                    "nl": "Schakeldoos",
-                    "de": "Steckdose"
-                }    
-            },
-            {
-                "id": "light",
-                "label": {
-                    "en": "Light",
-                    "nl": "Lamp",
-                    "de": "Lampe"
-                }    
-            },
-            {
-                "id": "amplifier",
-                "label": {
-                    "en": "Amplifier",
-                    "nl": "Versterker",
-                    "de": "Verstärker"                }    
-            },
-            {
-                "id": "blinds",
-                "label": {
-                    "en": "Blinds",
-                    "nl": "Jaloezieën & Lamellen",
-                    "de": "Rolladen"
-                }    
-            },
-            {
-                "id": "button",
-                "label": {
-                    "en": "Button",
-                    "nl": "Knop",
-                    "de": "Taste"
-                }    
-            },
-            {
-                "id": "camera",
-                "label": {
-                    "en": "Camera",
-                    "nl": "Camera",
-                    "de": "Kamera"
-                }    
-            },
-            {
-                "id": "coffeemachine",
-                "label": {
-                    "en": "Coffee machine",
-                    "nl": "Koffiemachine",
-                    "de": "Kaffemaschine"
-                }    
-            },
-            {
-                "id": "curtain",
-                "label": {
-                    "en": "Curtains",
-                    "nl": "Gordijnen",
-                    "de": "Vorhänge"
-                }    
-            },
-            {
-                "id": "doorbell",
-                "label": {
-                    "en": "Doorbell",
-                    "nl": "Deurbel",
-                    "de": "Türklingel"
-                }    
-            },
-            {
-                "id": "fan",
-                "label": {
-                    "en": "Fan",
-                    "nl": "Ventilator",
-                    "de": "Ventilator"
-                }    
-            },
-            {
-                "id": "garagedoor",
-                "label": {
-                    "en": "Garage door",
-                    "nl": "Garagedeur",
-                    "de": "Garagentor"
-                }    
-            },
-            {
-                "id": "heater",
-                "label": {
-                    "en": "Heater",
-                    "nl": "Heater",
-                    "de": "Heizung"
-                }    
-            },
-            {
-                "id": "homealarm",
-                "label": {
-                    "en": "Home Security",
-                    "nl": "Huisbeveiliging",
-                    "de": "Heim-Sicherheit"
-                }    
-            },
-            {
-                "id": "kettle",
-                "label": {
-                    "en": "Kettle",
-                    "nl": "Waterkoker",
-                    "de": "Wasserkocher"
-                }    
-            },
-            {
-                "id": "lock",
-                "label": {
-                    "en": "Other",
-                    "nl": "Overig",
-                    "de": "Andere"
-                }    
-            },
-            {
-                "id": "remote",
-                "label": {
-                    "en": "Remote",
-                    "nl": "Afstandsbediening",
-                    "de": "Fernbedienung"
-                }    
-            },
-            {
-                "id": "speaker",
-                "label": {
-                    "en": "Speaker",
-                    "nl": "Speaker",
-                    "de": "Lautsprecher"
-                }    
-            },
-            {
-                "id": "solarpanel",
-                "label": {
-                    "en": "Solar Panel",
-                    "nl": "Zonnepaneel",
-                    "de": "Solarpanel"
-                }    
-            },
-            {
-                "id": "sunshade",
-                "label": {
-                    "en": "Sunshade",
-                    "nl": "Zonnescherm",
-                    "de": "Sonnenschirm"
-                }    
-            },
-            {
-                "id": "thermostat",
-                "label": {
-                    "en": "Thermostat",
-                    "nl": "Thermostaat",
-                    "de": "Thermostat"
-                }    
-            },
-            {
-                "id": "tv",
-                "label": {
-                    "en": "TV",
-                    "nl": "TV",
-                    "de": "TV"
-                }    
-            },
-            {
-                "id": "vacuumcleaner",
-                "label": {
-                    "en": "Vacuum Cleaner",
-                    "nl": "Stofzuiger",
-                    "de": "Staubsauger"
-                }    
-            },
-            {
-                "id": "windowcoverings",
-                "label": {
-                    "en": "Window Coverings",
-                    "nl": "Raambekleding",
-                    "de": "Fenster-Abdeckungen"
-                }    
+                    "en": "Device class",
+                    "de": "Geräte-Typ", 
+                    "nl": "Apparaat klasse"
+                },
+                "hint": {
+                    "en": "Choose an optional matching device type based on the Home Assistant entities used.",
+                    "de": "Wähle einen optionalen passenden Gerätetyp basierend auf den verwendeten Home Assistant Entitäten.", 
+                    "nl": "Kies een optioneel bijpassend apparaattype op basis van de gebruikte Home Assistant-entiteiten."
+                },
+                "values": [
+                    {
+                        "id": "sensor",
+                        "label": {
+                            "en": "Sensor",
+                            "de": "Sensor",
+                            "nl": "Sensor"
+                        }    
+                    },
+                    {
+                        "id": "socket",
+                        "label": {
+                            "en": "Wall Plug",
+                            "nl": "Schakeldoos",
+                            "de": "Steckdose"
+                        }    
+                    },
+                    {
+                        "id": "light",
+                        "label": {
+                            "en": "Light",
+                            "nl": "Lamp",
+                            "de": "Lampe"
+                        }    
+                    },
+                    {
+                        "id": "amplifier",
+                        "label": {
+                            "en": "Amplifier",
+                            "nl": "Versterker",
+                            "de": "Verstärker"                
+                        }    
+                    },
+                    {
+                        "id": "blinds",
+                        "label": {
+                            "en": "Blinds",
+                            "nl": "Jaloezieën & Lamellen",
+                            "de": "Rolladen"
+                        }    
+                    },
+                    {
+                        "id": "button",
+                        "label": {
+                            "en": "Button",
+                            "nl": "Knop",
+                            "de": "Taste"
+                        }    
+                    },
+                    {
+                        "id": "camera",
+                        "label": {
+                            "en": "Camera",
+                            "nl": "Camera",
+                            "de": "Kamera"
+                        }    
+                    },
+                    {
+                        "id": "coffeemachine",
+                        "label": {
+                            "en": "Coffee machine",
+                            "nl": "Koffiemachine",
+                            "de": "Kaffemaschine"
+                        }    
+                    },
+                    {
+                        "id": "curtain",
+                        "label": {
+                            "en": "Curtains",
+                            "nl": "Gordijnen",
+                            "de": "Vorhänge"
+                        }    
+                    },
+                    {
+                        "id": "doorbell",
+                        "label": {
+                            "en": "Doorbell",
+                            "nl": "Deurbel",
+                            "de": "Türklingel"
+                        }    
+                    },
+                    {
+                        "id": "fan",
+                        "label": {
+                            "en": "Fan",
+                            "nl": "Ventilator",
+                            "de": "Ventilator"
+                        }    
+                    },
+                    {
+                        "id": "garagedoor",
+                        "label": {
+                            "en": "Garage door",
+                            "nl": "Garagedeur",
+                            "de": "Garagentor"
+                        }    
+                    },
+                    {
+                        "id": "heater",
+                        "label": {
+                            "en": "Heater",
+                            "nl": "Heater",
+                            "de": "Heizung"
+                        }    
+                    },
+                    {
+                        "id": "homealarm",
+                        "label": {
+                            "en": "Home Security",
+                            "nl": "Huisbeveiliging",
+                            "de": "Heim-Sicherheit"
+                        }    
+                    },
+                    {
+                        "id": "kettle",
+                        "label": {
+                            "en": "Kettle",
+                            "nl": "Waterkoker",
+                            "de": "Wasserkocher"
+                        }    
+                    },
+                    {
+                        "id": "lock",
+                        "label": {
+                            "en": "Other",
+                            "nl": "Overig",
+                            "de": "Andere"
+                        }    
+                    },
+                    {
+                        "id": "remote",
+                        "label": {
+                            "en": "Remote",
+                            "nl": "Afstandsbediening",
+                            "de": "Fernbedienung"
+                        }    
+                    },
+                    {
+                        "id": "speaker",
+                        "label": {
+                            "en": "Speaker",
+                            "nl": "Speaker",
+                            "de": "Lautsprecher"
+                        }    
+                    },
+                    {
+                        "id": "solarpanel",
+                        "label": {
+                            "en": "Solar Panel",
+                            "nl": "Zonnepaneel",
+                            "de": "Solarpanel"
+                        }    
+                    },
+                    {
+                        "id": "sunshade",
+                        "label": {
+                            "en": "Sunshade",
+                            "nl": "Zonnescherm",
+                            "de": "Sonnenschirm"
+                        }    
+                    },
+                    {
+                        "id": "thermostat",
+                        "label": {
+                            "en": "Thermostat",
+                            "nl": "Thermostaat",
+                            "de": "Thermostat"
+                        }    
+                    },
+                    {
+                        "id": "tv",
+                        "label": {
+                            "en": "TV",
+                            "nl": "TV",
+                            "de": "TV"
+                        }    
+                    },
+                    {
+                        "id": "vacuumcleaner",
+                        "label": {
+                            "en": "Vacuum Cleaner",
+                            "nl": "Stofzuiger",
+                            "de": "Staubsauger"
+                        }    
+                    },
+                    {
+                        "id": "windowcoverings",
+                        "label": {
+                            "en": "Window Coverings",
+                            "nl": "Raambekleding",
+                            "de": "Fenster-Abdeckungen"
+                        }    
+                    }
+                ]
             }
         ]
+    },
+    {
+        "type": "group",
+        "label": { 
+            "en": "Energy",
+            "de": "Energie",
+            "nl": "Energie"
+        },
+        "children": 
+        [
+            {
+                "id": "set_energy_cumulative",
+                "type": "checkbox",
+                "value": false,
+                "label": {
+                    "en": "Cumulative energy measuring",
+                    "de": "Kumulative Energiemessung", 
+                    "nl": "Cumulatieve energiemeting"
+                },
+                "hint": {
+                    "en": "Enable this setting if the device is measuring the cumulative energy usage.",
+                    "de": "Aktivieren Sie diese Einstellung, wenn das Gerät den kumulativen Energieverbrauch misst.", 
+                    "nl": "Schakel deze instelling in als het apparaat het cumulatieve energieverbruik meet."
+                }
+            }
+       ]
     }
 ]

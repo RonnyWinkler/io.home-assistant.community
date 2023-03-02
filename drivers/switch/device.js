@@ -35,7 +35,7 @@ class SwitchDevice extends BaseDevice {
     getPowerEntityId(){
         try{
             let powerSetting = this._settings.power_entity; 
-            if (powerSetting && powerSetting != "" ){
+            if (this._settings.add_power_entity && powerSetting && powerSetting != "" ){
                 return powerSetting;
             }
             else{

@@ -55,7 +55,7 @@ class ClimateDevice extends BaseDevice {
     async onEntityUpdate(data) {
         await super.onEntityUpdate(data);
         try{
-            if(data) {
+            if(data && data.entity_id && this.entityId == data.entity_id) {
                 if (data.state != undefined && 
                     data.state != "unavailable"){
                     await this.setCapabilityValue("climate_mode", data.state);

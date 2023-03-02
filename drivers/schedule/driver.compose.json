@@ -13,8 +13,8 @@
       "button.reconnect"
     ],
     "images": {
-      "large": "/drivers/switch/assets/images/large.png",
-      "small": "/drivers/switch/assets/images/small.png"
+      "large": "/drivers/schedule/assets/images/large.png",
+      "small": "/drivers/schedule/assets/images/small.png"
   },
   "capabilitiesOptions": {
     "button.reconnect": {

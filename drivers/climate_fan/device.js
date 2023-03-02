@@ -104,7 +104,11 @@ class ClimateFanDevice extends BaseDevice {
     async onEntityUpdate(data) {
         await super.onEntityUpdate(data);
         try{
-            if(data) {
+            if(data && (
+                data.entity_id == ("fan."+this.entityId.split(".")[1]) ||
+                data.entity_id == ("climate."+this.entityId.split(".")[1])
+                )
+            ){
                 if (data.entity_id.startsWith("climate.")){
                     // Climate capabilities:
                     if (data.state != undefined && 

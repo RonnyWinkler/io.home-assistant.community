@@ -7,7 +7,10 @@ class SensorDevice extends BaseDevice {
     async onInit() {
         await super.onInit();
 
-        this.capability = this.getCapabilities()[0];
+        // Read main capability as devcice capability
+        this.capability = this.getCapabilities().filter((entry) => {
+            if (entry.indexOf('.') == -1) return true;
+        })[0];
 
         // maintenance actions
         this.registerCapabilityListener('button.reconnect', async () => {
@@ -44,23 +47,26 @@ class SensorDevice extends BaseDevice {
             //         await this.setCapabilityValue(this.capability, data.state);
             //         break;
             // }
-            if (this.capability == "measure_generic"){
-                // String capabilities
-                await this.setCapabilityValue(this.capability, data.state);
-            }
-            else if (this.capability.startsWith("alarm")){
-                // boolean capability
-                await this.setCapabilityValue(this.capability, data.state == "on");
-            }
-            else{
-                // numeric capability
-                await this.setCapabilityValue(this.capability, parseFloat(data.state));
+            if (data && data.entity_id && this.entityId == data.entity_id){
+                if (this.capability == "measure_generic"){
+                    // String capabilities
+                    await this.setCapabilityValue(this.capability, data.state);
+                }
+                else if (this.capability.startsWith("alarm")){
+                    // boolean capability
+                    await this.setCapabilityValue(this.capability, data.state == "on");
+                }
+                else{
+                    // numeric capability
+                    await this.setCapabilityValue(this.capability, parseFloat(data.state));
+                }
             }
         }
         catch(error) {
             this.error("CapabilitiesUpdate error: "+ error.message);
         }
     }
+
 
 }
 

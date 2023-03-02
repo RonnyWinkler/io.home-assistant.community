@@ -68,6 +68,8 @@ class CompoundDevice extends BaseDevice {
     }
 
     async updateCapabilities(){
+        super.updateCapabilities();
+
         // Add new capabilities (if not already added)
         try{
             if (!this.hasCapability('button.reconnect'))
@@ -79,17 +81,7 @@ class CompoundDevice extends BaseDevice {
             this.error("updateCapabilities(): Error adding capability: "+error.message);
         }
 
-        // check device class
-        try{
-            let deviceClass = this.getSetting('device_class');
-            if (deviceClass != undefined && deviceClass != "" && deviceClass != this.getClass()){
-                await this.setClass(deviceClass);
-                this.log("updateCapabilities(): Device class changed to: "+deviceClass);
-            }
-        }
-        catch(error){
-            this.error("updateCapabilities(): Error checking/changing device class: "+error.message);
-        }
+
     }
 
     async onInitDevice(){
@@ -197,7 +189,7 @@ class CompoundDevice extends BaseDevice {
                     }
                     try {
                         let oldValue = this.getCapabilityValue(key);
-                        if (key.startsWith("button")){
+                         if (key.startsWith("button")){
                             oldValue = this._buttonState[key];
                             this._buttonState[key] = value;
                             if (oldValue == undefined){
@@ -378,7 +370,37 @@ class CompoundDevice extends BaseDevice {
         });
     }
 
-    // Flow Trigger ===========================================================================================
+    async switchOn(capability){
+        await this._onCapabilityOnoff( capability, true, {} );
+    }
+
+    async switchOff(capability){
+        await this._onCapabilityOnoff( capability, false, {} );
+    }
+
+    async buttonPress(capability){
+        await this._onCapabilityButton( capability, false, {} );
+    }
+
+    // Settings ================================================================================================
+    // async onSettings(settings){
+    //     try {
+    //         if (settings.changedKeys.indexOf('device_class') > -1){
+    //             let deviceClass = settings.newSettings['device_class'];
+    //             if (deviceClass != undefined && deviceClass != "" && deviceClass != this.getClass()){
+    //                 await this.setClass(deviceClass);
+    //                 this.log("onSettings(): Device class changed to: "+deviceClass);
+    //             } 
+    //         }
+    //     }
+    //     catch(error) {
+    //         this.error("onSettings error: "+ error.message);
+    //         throw new Error("Error setting device class");
+    //     }
+    // }
+    
+        // Generic Flow functions ===========================================================================================
+    // Flow Trigger 
     getAutocompleteCapabilityList(){
         let capabilities = this.getCapabilities();
         let result = [];
@@ -394,7 +416,7 @@ class CompoundDevice extends BaseDevice {
         return result;
     }
     
-    // Flow Actions ===========================================================================================
+    // Flow Actions 
     getAutocompleteOnoffList(){
         let capabilities = this.getCapabilities();
         let result = [];
@@ -410,7 +432,7 @@ class CompoundDevice extends BaseDevice {
         return result;
     }
 
-      getAutocompleteButtonList(){
+    getAutocompleteButtonList(){
         let capabilities = this.getCapabilities();
         let result = [];
         for (let i=0; i<capabilities.length; i++){
@@ -425,35 +447,6 @@ class CompoundDevice extends BaseDevice {
         return result;
     }
 
-    async switchOn(capability){
-        await this._onCapabilityOnoff( capability, true, {} );
-    }
-
-    async switchOff(capability){
-        await this._onCapabilityOnoff( capability, false, {} );
-    }
-
-    async buttonPress(capability){
-        await this._onCapabilityButton( capability, false, {} );
-    }
-
-    // Settings ================================================================================================
-    async onSettings(settings){
-        try {
-            if (settings.changedKeys.indexOf('device_class') > -1){
-                let deviceClass = settings.newSettings['device_class'];
-                if (deviceClass != undefined && deviceClass != "" && deviceClass != this.getClass()){
-                    await this.setClass(deviceClass);
-                    this.log("onSettings(): Device class changed to: "+deviceClass);
-                } 
-            }
-        }
-        catch(error) {
-            this.error("onSettings error: "+ error.message);
-            throw new Error("Error setting device class");
-        }
-    }
-    
 }
 
 module.exports = CompoundDevice;

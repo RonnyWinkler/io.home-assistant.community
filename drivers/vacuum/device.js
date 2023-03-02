@@ -82,7 +82,7 @@ class VacuumDevice extends BaseDevice {
     async onEntityUpdate(data) {
         await super.onEntityUpdate(data);
         try{
-            if(data) {
+            if(data && data.entity_id && this.entityId == data.entity_id) {
                 if (this.hasCapability('onoff')){
                     if (data.state != undefined && 
                         data.state == "cleaning" || data.state == "on" ){

@@ -2,6 +2,7 @@
 
 const Homey = require('homey');
 const https = require('https');
+const CAPABILITIES_SET_DEBOUNCE = 100;
 
 // Device init timeout (sec). Reads entity data with a delay to get ready on app start
 const DEVICE_INIT_TIMEOUT = 3;
@@ -29,6 +30,9 @@ class BaseDevice extends Homey.Device {
     async onInit() {
         await this.updateCapabilities();
 
+        // temporary state buffer
+        this._buttonState = {};
+
         this._client = this.homey.app.getClient();
         
         // Register device EntityID for updates
@@ -38,6 +42,25 @@ class BaseDevice extends Homey.Device {
        
         // EntityID of dynamically assigned measure_ power entity
         this.powerEntityId = null;
+
+        // Capability listener for all existing device entity capabilities
+        let capabilities = this.getCapabilities();
+        let deviceEntityCapabilities = [];
+        for (let i=0; i<capabilities.length; i++){
+            let capabilityOptions = {};
+            try{
+                capabilityOptions = this.getCapabilityOptions(capabilities[i]);
+            }
+            catch(error){continue;}
+            if (capabilityOptions.entity_id != undefined){
+                deviceEntityCapabilities.push(capabilities[i]);
+            }
+        }
+        if (deviceEntityCapabilities.length > 0){
+            this.registerMultipleCapabilityListener(deviceEntityCapabilities, async (value, opts) => {
+                await this.onDeviceEntitiesSet(value, opts)
+            }, CAPABILITIES_SET_DEBOUNCE);
+        }
 
         // Init device with a short timeout to wait for initial entities
         this.timeoutInitDevice = this.homey.setTimeout( async () => 
@@ -80,6 +103,25 @@ class BaseDevice extends Homey.Device {
         // Basic method for register entityId+client for updated
         // Overload if special register is needed 
         this._client.registerDevice(this.entityId, this);
+
+        // Register deviceEntities
+        let entityIds = [];
+        let capabilities = this.getCapabilities();
+        for (let i=0; i<capabilities.length; i++){
+            let capabilityOptions = {};
+            try{
+                capabilityOptions = this.getCapabilityOptions(capabilities[i]);
+            }
+            catch(error){continue;}
+            let entity = capabilityOptions.entity_id;
+            if (entity != undefined && entityIds.indexOf(entity) == -1){
+                entityIds.push(entity);
+            }
+        }
+        if (entityIds.length > 0){
+            this._client.registerCompound(this.entityId, this, entityIds);
+        }
+
     }
 
     clientUnregisterDevice(){
@@ -90,12 +132,27 @@ class BaseDevice extends Homey.Device {
         if (this.powerEntityId != null){
             this._client.unregisterPowerEntity(this.powerEntityId);
         }
+        // Unregister deviceEntities
+        this._client.unregisterCompound(this.entityId);
      }
 
     async updateCapabilities(){
-        // Abstract method: 
+        // Base method 
         // Update device capabilities, add new capabilities. Implement in device class
-        throw new Error("Abstract method not implemented");
+        // throw new Error("Abstract method not implemented");
+
+        // check device class
+        try{
+            let deviceClass = this.getSetting('device_class');
+            if (deviceClass != undefined && deviceClass != "" && deviceClass != this.getClass()){
+                await this.setClass(deviceClass);
+                this.log("updateCapabilities(): Device class changed to: "+deviceClass);
+            }
+        }
+        catch(error){
+            this.error("updateCapabilities(): Error checking/changing device class: "+error.message);
+        }
+
     }
 
     async onInitDevice(){
@@ -109,16 +166,36 @@ class BaseDevice extends Homey.Device {
             // Call 
             this.onEntityUpdate(entity);
         }
+
+        // Init deviceEntities
+        let updatedEntities = [];
+        let capabilities = this.getCapabilities();
+        for (let i=0; i<capabilities.length; i++){
+            let capabilitiesOptions = {};
+            try{
+                capabilitiesOptions = this.getCapabilityOptions(capabilities[i])
+            }
+            catch(error){continue;}
+            if (capabilitiesOptions.entity_id != undefined){
+                let entityId = capabilitiesOptions.entity_id;
+                let entity = this._client.getEntity(entityId);
+                if (entity){
+                    if (updatedEntities.indexOf(entityId) == -1){
+                        updatedEntities.push(entityId);
+                        this.onEntityUpdate(entity);
+                    }
+                }
+            }
+        }
+
         await this.checkDeviceAvailability();
 
         await this.connectPowerEntity();
     }
 
     async onEntityUpdate(data) {
-        // Abstract method: 
-        // Update device based in entity data. #
+        // General device update on Entity change 
         // Implement in device class and call super.onEntityUpdate() to process common updates
-        // throw new Error("Abstract method not implemented");
         try {
             if (data == null || 
                 data.state == undefined ){
@@ -137,6 +214,8 @@ class BaseDevice extends Homey.Device {
                 let value = convert(data.state);
                 this.setCapabilityValue("measure_power", value)
             }
+            // Update dynamically added device entities
+            await this.deviceEntitiesUpdate(data);
         }
         catch(error) {
             this.error("CapabilitiesUpdate error: "+ error.message);
@@ -156,7 +235,7 @@ class BaseDevice extends Homey.Device {
         }
     }
 
-    // Connected entities functions ===============================================
+    // Connected power entity functions ===============================================
     getPowerEntityId(){
         // Abstract method. 
         // Redefine in device class and return the connectes power entity
@@ -199,6 +278,258 @@ class BaseDevice extends Homey.Device {
         // Register for entity updates and read first state
         this._client.registerPowerEntity(entityId, this);
         this.onEntityUpdate(entity);
+    }
+
+    // Device Entities ============================================================================================
+    async addDeviceEntities(type=null){
+        this.log("addDeviceEntities()");
+        let entitiesList = [];
+        if ( this.entityId.startsWith("climate_fan") ){ 
+            entitiesList.push("fan."+this.entityId.split(".")[1])
+            entitiesList.push("climate."+this.entityId.split(".")[1])
+        }
+        else{
+            entitiesList.push(this.entityId);
+        }
+
+        for (let i=0; i<entitiesList.length; i++){
+            let entityRegistry = await this._client.getEntityRegistry(null, entitiesList[i]);
+            let entities = await this._client.getEntityRegistry(entityRegistry[0].device_id, null);
+            for (let i=0; i<entities.length; i++){
+                if (entities[i].entity_id == entitiesList[i] ||
+                    entities[i].disabled_by != null ||
+                    entities[i].hidden_by != null ||
+                    type != null && type == 'sensor_diagnostic' && entities[i].entity_category != 'diagnostic' ||
+                    type != null && type == 'sensor' && entities[i].entity_category == 'diagnostic' ){
+                    continue;
+                }
+                // get device pattern depending on domain
+                let capabilityTemplate = this._client.getCapabilityTemplate(entities[i].entity_id, type);
+                this.log("Entity found: "+entities[i].entity_id);
+                this.log("Capability template:", capabilityTemplate);
+                // add capability to device and deviceEntity registry
+                if (capabilityTemplate.capability == undefined){ continue; }
+
+                let capability = capabilityTemplate.capability + '.' + entities[i].entity_id;
+                if (!this.hasCapability(capability)){
+                    this.log("Adding capability: "+capability);
+                    try{
+                        await this.addCapability(capability);
+                        if (capabilityTemplate.capabilitiesOptions != undefined){
+                            await this.setCapabilityOptions(capability, capabilityTemplate.capabilitiesOptions);
+                        }
+                    }
+                    catch(error){
+                        this.log("Error adding capability "+capability+": "+error.message);
+                    }
+                    this.log("Capability added.");
+                }
+            }
+        }
+
+        await this.onInit();
+    }
+
+    async removeDeviceEntities(type=null){
+        this.log("removeDeviceEntities()")
+        let keys  = this.getCapabilities();
+        for (let i=0; i<keys.length; i++){
+            let capabilityOptions = {};
+            try{
+                capabilityOptions = this.getCapabilityOptions(keys[i]);
+            }
+            catch(error){continue;}
+            try{ 
+                if ( capabilityOptions.entity_id != undefined &&
+                     ( type== null || capabilityOptions.entity_type == type) ){
+                    this.log("Removing capability: "+keys[i]);
+                    if (this.hasCapability(keys[i])){
+                        // this.setCapabilityOptions(keys[i], null);
+                        await this.removeCapability(keys[i]);
+                    }
+                    this.log("Capability removed.");
+                }
+            }
+            catch(error){
+                this.log("removeDeviceEntities(): Error removing capability: "+keys[i]+": "+error.message);
+            }
+        };
+    }
+
+    async deviceEntitiesUpdate(data){
+        if (!data || !data.entity_id){
+            return;
+        }
+        let entityId = data.entity_id;
+        let keys = this.getCapabilities();
+        for (let i=0; i<keys.length; i++){
+            let capabilitiesOptions = {};
+            try{
+                capabilitiesOptions = this.getCapabilityOptions(keys[i]);
+            }
+            catch(error){continue;}
+            try{
+                if (capabilitiesOptions.entity_id == entityId){
+                    let oldValue = this.getCapabilityValue(keys[i]);
+
+                    let newValue = null; 
+                    let tokens = {
+                        capability: keys[i],
+                        value_string: '',
+                        value_number: 0,
+                        value_boolean: false
+                    };
+                    let state = {
+                        capability: {
+                            id: keys[i]
+                        }
+                    };
+                    if (keys[i].startsWith("measure_generic")){
+                        // String capabilities
+                        newValue = data.state;
+                        tokens.value_string = newValue;
+                        await this.setCapabilityValue(keys[i], data.state);
+                    }
+                    else if (keys[i].startsWith("alarm")){
+                        // boolean capability
+                        newValue = (data.state == "on");
+                        tokens.value_boolean = newValue;
+                        await this.setCapabilityValue(keys[i], (data.state == "on") );
+                    }
+                    else if (keys[i].startsWith("measure") || keys[i].startsWith("meter")){
+                        // numeric capability
+                        newValue = parseFloat(data.state);
+                        tokens.value_number = newValue;
+                        await this.setCapabilityValue(keys[i], parseFloat(data.state));
+                    }
+                    else if (keys[i].startsWith("switch") || keys[i].startsWith("input_boolean") || keys[i].startsWith("onoff_button") ){
+                        // boolean capability
+                        newValue = (data.state == "on");
+                        tokens.value_boolean = newValue;
+                        await this.setCapabilityValue(keys[i], (data.state == "on") );
+                    }
+                    else if (keys[i].startsWith("button") || keys[i].startsWith("input_button")){
+                        newValue = data.state;
+                        oldValue = this._buttonState[keys[i]];
+                        this._buttonState[keys[i]] = newValue;
+                        if (oldValue == undefined){
+                            oldValue = newValue;
+                        }
+                    }
+                    else{continue;}
+
+                    if (oldValue!=newValue){
+                        // trigger flow
+                        if (this.homey.app){
+                            await this.homey.app._flowTriggerCapabilityChanged.trigger(this, tokens, state);
+                        }
+                    }
+    
+                }
+            }
+            catch(error){this.log("deviceEntitiesUpdate(): Error "+error.message)}
+        }
+    }
+
+    async onDeviceEntitiesSet(valueObj, optsObj) {
+        try{
+            let keys = Object.keys(valueObj);
+            for (let i=0; i<keys.length; i++){
+                let key = keys[i];
+                let capabilitiesOptions = {};
+                try{
+                    capabilitiesOptions = this.getCapabilityOptions(keys[i]);
+                }
+                catch(error){continue;}
+                let entityId = capabilitiesOptions.entity_id; 
+                if (entityId != undefined){
+                    if (key.startsWith("onoff")){
+                        await this._client.turnOnOff(entityId, valueObj[keys[i]]);
+                    }
+                    if (key.startsWith("button") && key != "button.reconnect"){
+                        await this._client.callService(entityId.split(".")[0], "press", {"entity_id": entityId});
+                    }
+                }
+            }
+        }
+        catch(error) {
+            this.error("onDeviceEntitiesSet() error: "+ error.message);
+        }
+
+    }
+
+    // Energy settings ================================================================================================
+    async setEnergyCumulative(value = false){
+        await this.setEnergy(
+            { "cumulative": value }
+        );
+    }
+
+    // Settings ================================================================================================
+    async onSettings(settings){
+        try {
+            if (settings.changedKeys.indexOf('add_device_sensor') > -1){
+                if (settings.newSettings['add_device_sensor']){
+                    this.log("onSettings(): Add device sensors SET");
+                    await this.addDeviceEntities('sensor');
+                }
+                else{
+                    this.log("onSettings(): Add device sensors UNSET");
+                    await this.removeDeviceEntities('sensor');
+                } 
+            }
+            if (settings.changedKeys.indexOf('add_device_sensor_diagnostic') > -1){
+                if (settings.newSettings['add_device_sensor_diagnostic']){
+                    this.log("onSettings(): Add device diagnostic sensors SET");
+                    await this.addDeviceEntities('sensor_diagnostic');
+                }
+                else{
+                    this.log("onSettings(): Add device diagnostic sensors UNSET");
+                    await this.removeDeviceEntities('sensor_diagnostic');
+                } 
+            }
+            if (settings.changedKeys.indexOf('add_device_switch') > -1){
+                if (settings.newSettings['add_device_switch']){
+                    this.log("onSettings(): Add device switches SET");
+                    await this.addDeviceEntities('switch');
+                }
+                else{
+                    this.log("onSettings(): Add device switches UNSET");
+                    await this.removeDeviceEntities('switch');
+                } 
+            }
+            if (settings.changedKeys.indexOf('add_device_button') > -1){
+                if (settings.newSettings['add_device_button']){
+                    this.log("onSettings(): Add device buttons SET");
+                    await this.addDeviceEntities('button');
+                }
+                else{
+                    this.log("onSettings(): Add device buttons UNSET");
+                    await this.removeDeviceEntities('button');
+                } 
+            }
+            if (settings.changedKeys.indexOf('device_class') > -1){
+                let deviceClass = settings.newSettings['device_class'];
+                if (deviceClass != undefined && deviceClass != "" && deviceClass != this.getClass()){
+                    await this.setClass(deviceClass);
+                    this.log("onSettings(): Device class changed to: "+deviceClass);
+                } 
+            }
+            if (settings.changedKeys.indexOf('set_energy_cumulative') > -1){
+                if (settings.newSettings['set_energy_cumulative']){
+                    this.log("onSettings(): set_energy_cumulative SET");
+                    await this.setEnergyCumulative(true);
+                }
+                else{
+                    this.log("onSettings(): set_energy_cumulative UNSET");
+                    await this.setEnergyCumulative(false);
+                } 
+            }
+        }
+        catch(error) {
+            this.error("onSettings error: "+ error.message);
+            return error.message;
+        }
     }
 
     // Helper functions ===========================================================
@@ -247,6 +578,82 @@ class BaseDevice extends Homey.Device {
         }
     }
 
+    // Generic Flow functions ===========================================================================================
+    // Flow Trigger 
+    getAutocompleteCapabilityList(){
+        let capabilities = this.getCapabilities();
+        let result = [];
+        for (let i=0; i<capabilities.length; i++){
+            let capabilitiesOptions = {};
+            try{
+                capabilitiesOptions = this.getCapabilityOptions(capabilities[i]);
+            }
+            catch(error){continue;}
+            try{
+                if (capabilitiesOptions.entity_id != undefined){
+                    let name = capabilitiesOptions.entity_id + " ("+this._client.getEntity(capabilitiesOptions.entity_id).attributes.friendly_name + ")";
+                    result.push({
+                        id: capabilities[i],
+                        name: name
+                    })
+                }
+            }
+            catch(error){this.log("getAutocompleteCapabilityList(): "+error.message)}
+        }
+        return result;
+    }
+    
+    // Flow Actions 
+    getAutocompleteOnoffList(){
+        let capabilities = this.getCapabilities();
+        let result = [];
+        for (let i=0; i<capabilities.length; i++){
+            if (capabilitties[i].startsWith("onoff")){
+                let capabilitiesOptions = {};
+                try{
+                    capabilitiesOptions = this.getCapabilityOptions(capabilities[i]);
+                }
+                catch(error){continue;}
+                try{
+                    if (capabilitiesOptions.entity_id != undefined){
+                        let name = capabilitiesOptions.entity_id + " ("+this._client.getEntity(capabilitiesOptions.entity_id).attributes.friendly_name + ")";
+                        result.push({
+                            id: capabilities[i],
+                            name: name
+                        })
+                    }
+                }
+                catch(error){this.log("getAutocompleteCapabilityList(): "+error.message)}
+            }
+        }
+        return result;
+    }
+
+    getAutocompleteButtonList(){
+        let capabilities = this.getCapabilities();
+        let result = [];
+        for (let i=0; i<capabilities.length; i++){
+            if (capabilitties[i].startsWith("button")){
+                let capabilitiesOptions = {};
+                try{
+                    capabilitiesOptions = this.getCapabilityOptions(capabilities[i]);
+                }
+                catch(error){continue;}
+                try{
+                    if (capabilitiesOptions.entity_id != undefined){
+                        let name = capabilitiesOptions.entity_id + " ("+this._client.getEntity(capabilitiesOptions.entity_id).attributes.friendly_name + ")";
+                        result.push({
+                            id: capabilities[i],
+                            name: name
+                        })
+                    }
+                }
+                catch(error){this.log("getAutocompleteCapabilityList(): "+error.message)}
+            }
+        }
+        return result;
+    }
+    
     // async httpGet(url, options){
     //     return new Promise( ( resolve, reject ) =>
     //         {
