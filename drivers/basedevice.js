@@ -292,11 +292,11 @@ class BaseDevice extends Homey.Device {
             entitiesList.push(this.entityId);
         }
 
-        for (let i=0; i<entitiesList.length; i++){
-            let entityRegistry = await this._client.getEntityRegistry(null, entitiesList[i]);
+        for (let j=0; j<entitiesList.length; j++){
+            let entityRegistry = await this._client.getEntityRegistry(null, entitiesList[j]);
             let entities = await this._client.getEntityRegistry(entityRegistry[0].device_id, null);
             for (let i=0; i<entities.length; i++){
-                if (entities[i].entity_id == entitiesList[i] ||
+                if (entities[i].entity_id == entitiesList[j] ||
                     entities[i].disabled_by != null ||
                     entities[i].hidden_by != null ||
                     type != null && type == 'sensor_diagnostic' && entities[i].entity_category != 'diagnostic' ||
