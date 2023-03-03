@@ -294,6 +294,10 @@ class BaseDevice extends Homey.Device {
 
         for (let j=0; j<entitiesList.length; j++){
             let entityRegistry = await this._client.getEntityRegistry(null, entitiesList[j]);
+            if (!entityRegistry[0] || entityRegistry[0].device_id == undefined || entityRegistry[0].device_id == null){
+                // No device assigned
+                return;
+            }
             let entities = await this._client.getEntityRegistry(entityRegistry[0].device_id, null);
             for (let i=0; i<entities.length; i++){
                 if (entities[i].entity_id == entitiesList[j] ||
