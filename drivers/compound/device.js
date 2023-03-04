@@ -370,6 +370,20 @@ class CompoundDevice extends BaseDevice {
         });
     }
 
+    async switchAction(capability, action){
+        switch (action){
+            case "on":
+                await this._onCapabilityOnoff( capability, true, {} );
+                break;
+            case "off":
+                await this._onCapabilityOnoff( capability, false, {} );
+                break;
+            case "toggle":
+                await this._onCapabilityOnoff( capability, !this.getCapabilityValue(capability), {} );
+                break;
+        }
+    }
+
     async switchOn(capability){
         await this._onCapabilityOnoff( capability, true, {} );
     }

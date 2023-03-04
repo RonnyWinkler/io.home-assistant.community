@@ -16,14 +16,14 @@
             "name": "capability",
             "required": false,
             "title": { 
-                "en": "Capability",
-                "de": "Attribut",
-                "nl": "Capability"
+                "en": "Button",
+                "de": "Button",
+                "nl": "Knop"
             },
             "placeholder": { 
-                "en": "Select a device capability",
-                "de": "Wähle ein Geräte-Attibut",
-                "nl": "Selecteer een apparaat capability"
+                "en": "Select a button",
+                "de": "Wähle einen Button",
+                "nl": "Selecteer een knop"
             }
         },
         {

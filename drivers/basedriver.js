@@ -235,14 +235,18 @@ class BaseDriver extends Homey.Driver {
 
         session.setHandler('getEntity', async () => {
             let id = device.getData().id;
-            let data = this.homey.app.getClient().getEntity(id);
+            let data = {};
+            data[id] = this.homey.app.getClient().getEntity(id);
             if (id.split(".")[0] == "climate_fan"){
-                data = {
-                    "climate": this.homey.app.getClient().getEntity("climate." + id.split(".")[1]),
-                    "fan": this.homey.app.getClient().getEntity("fan." + id.split(".")[1]),
-                }
+                data["climate." + id.split(".")[1]] = this.homey.app.getClient().getEntity("climate." + id.split(".")[1]);
+                data["fan." + id.split(".")[1]] = this.homey.app.getClient().getEntity("fan." + id.split(".")[1]);
             }
-            if (data == null){
+            let deviceEntities = device.getDeviceEntitiesCapabilitites();
+            for (let i=0; i<deviceEntities.length; i++){
+                let capabilitiesOptions = device.getCapabilityOptions(deviceEntities[i]);
+                data[capabilitiesOptions.entity_id] = this.homey.app.getClient().getEntity(capabilitiesOptions.entity_id);
+            }
+            if (data == null || data == {}){
                 data = this.homey.__("device_unavailable_reason.entity_not_found");
             }
             return data;

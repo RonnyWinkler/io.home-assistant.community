@@ -176,9 +176,7 @@ class App extends Homey.App {
 		this._flowActionGenericButtonPress = this.homey.flow.getActionCard('genericButtonPress');
 		this._flowActionGenericButtonPress.registerRunListener(async (args, state) => {
 			try{
-				let valueObj = {};
-				valueObj[ args.capability.id ] = true;
-				await args.device.onDeviceEntitiesSet( valueObj, {} );
+				await args.device.flowActionButtonPress(args.capability.id);
 				return true;
 			}
 			catch(error){
@@ -194,48 +192,24 @@ class App extends Homey.App {
 			
 		});
 
-		this._flowActionGenericSwitchOn = this.homey.flow.getActionCard('genericSwitchOn');
-		this._flowActionGenericSwitchOn.registerRunListener(async (args, state) => {
+		this._flowActionGenericSwitchAction = this.homey.flow.getActionCard('genericSwitchAction');
+		this._flowActionGenericSwitchAction.registerRunListener(async (args, state) => {
 			try{
-				let valueObj = {};
-				valueObj[ args.capability.id ] = true;
-				await args.device.onDeviceEntitiesSet( valueObj, {} );
+				await args.device.flowActionSwitchAction(args.capability.id, args.action);
 				return true;
 			}
 			catch(error){
-				this.error("Error executing flowAction 'genericSwitchOn': "+  error.message);
+				this.error("Error executing flowAction 'genericSwitchAction': "+  error.message);
 				throw new Error(error.message);
 			}
 		});
-		this._flowActionGenericSwitchOn.registerArgumentAutocompleteListener('capability', async (query, args) => {
+		this._flowActionGenericSwitchAction.registerArgumentAutocompleteListener('capability', async (query, args) => {
 			const genericSwitchList = args.device.getAutocompleteOnoffList();
 			return genericSwitchList.filter((result) => { 
 				return result.name.toLowerCase().includes(query.toLowerCase());
 			});
 			
 		});
-
-		this._flowActionGenericSwitchOff = this.homey.flow.getActionCard('genericSwitchOff');
-		this._flowActionGenericSwitchOff.registerRunListener(async (args, state) => {
-			try{
-				let valueObj = {};
-				valueObj[ args.capability.id ] = false;
-				await args.device.onDeviceEntitiesSet( valueObj, {} );
-				return true;
-			}
-			catch(error){
-				this.error("Error executing flowAction 'genericSwitchOff': "+  error.message);
-				throw new Error(error.message);
-			}
-		});
-		this._flowActionGenericSwitchOff.registerArgumentAutocompleteListener('capability', async (query, args) => {
-			const genericSwitchList = args.device.getAutocompleteOnoffList();
-			return genericSwitchList.filter((result) => { 
-				return result.name.toLowerCase().includes(query.toLowerCase());
-			});
-			
-		});
-
 
 		// Lock
 		this._flowActionLockOpen = this.homey.flow.getActionCard('lockOpen')
@@ -265,6 +239,25 @@ class App extends Homey.App {
 		this._flowActionCompoundButtonPress.registerArgumentAutocompleteListener('capability', async (query, args) => {
 			const compoundButtonsList = args.device.getAutocompleteButtonList();
 			return compoundButtonsList.filter((result) => { 
+				return result.name.toLowerCase().includes(query.toLowerCase());
+			});
+			
+		});
+
+		this._flowActionCompoundSwitchAction = this.homey.flow.getActionCard('compoundSwitchAction');
+		this._flowActionCompoundSwitchAction.registerRunListener(async (args, state) => {
+			try{
+				await args.device.switchAction(args.capability.id, args.action);
+				return true;
+			}
+			catch(error){
+				this.error("Error executing flowAction 'compoundSwitchAction': "+  error.message);
+				throw new Error(error.message);
+			}
+		});
+		this._flowActionCompoundSwitchAction.registerArgumentAutocompleteListener('capability', async (query, args) => {
+			const compoundSwitchList = args.device.getAutocompleteOnoffList();
+			return compoundSwitchList.filter((result) => { 
 				return result.name.toLowerCase().includes(query.toLowerCase());
 			});
 			

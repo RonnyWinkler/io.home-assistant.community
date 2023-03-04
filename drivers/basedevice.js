@@ -680,6 +680,28 @@ class BaseDevice extends Homey.Device {
         return result;
     }
     
+    async flowActionSwitchAction(capability, action){
+        let valueObj = {};
+        switch (action){
+            case "on":
+                valueObj[ capability ] = true;
+                break;
+            case "off":
+                valueObj[ capability ] = false;
+                break;
+            case "toggle":
+                valueObj[ capability ] = !this.getCapabilityValue(capability);
+                break;
+        }
+        await this.onDeviceEntitiesSet( valueObj, {} );
+    }
+
+    async flowActionButtonPress(capability){
+        let valueObj = {};
+        valueObj[ capability ] = true;
+        await this.onDeviceEntitiesSet( valueObj, {} );
+    }
+
     // async httpGet(url, options){
     //     return new Promise( ( resolve, reject ) =>
     //         {

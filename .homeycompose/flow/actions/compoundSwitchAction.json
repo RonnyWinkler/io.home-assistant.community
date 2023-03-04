@@ -1,0 +1,71 @@
+{
+    "highlight": true,
+    "title": {
+        "en": "Turn on/off or toggle",
+        "de": "Schalte ein/aus oder schalte um",
+        "nl": "In-/uitschakelen of wisselen"
+},
+    "titleFormatted": {
+        "en": "[[action]] [[capability]].",
+        "de": "[[action]] [[capability]].",
+        "nl": "[[action]] [[capability]]."
+    },
+    "args": [
+        {
+            "type": "dropdown",
+            "name": "action",
+            "required": true,
+            "title": { 
+                "en": "Turn on/off or toggle",
+                "de": "Schalte ein/aus oder schalte um",
+                "nl": "In-/uitschakelen of wisselen"
+            },
+            "values": [
+                {
+                    "id": "on", 
+                    "label": { 
+                        "en": "Turn on",
+                        "de": "Schalte an",
+                        "nl": "Aanzetten"
+                    } 
+                },
+                {
+                    "id": "off", 
+                    "label": { 
+                        "en": "Turn off",
+                        "de": "Schalte aus",
+                        "nl": "Uitschakelen"
+                    } 
+                },
+                {
+                    "id": "toggle", 
+                    "label": { 
+                        "en": "Toggle",
+                        "de": "Schalte um",
+                        "nl": "Schakelaar"
+                    } 
+                }
+            ]
+        },
+        {
+            "type": "autocomplete",
+            "name": "capability",
+            "required": false,
+            "title": { 
+                "en": "Switch",
+                "de": "Schalter",
+                "nl": "Schakelaar"
+            },
+            "placeholder": { 
+                "en": "Select a switch",
+                "de": "Wähle einen Schalter",
+                "nl": "Selecteer een schakelaar"
+            }
+        },
+        {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=compound"
+        }
+    ]
+}
