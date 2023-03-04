@@ -148,7 +148,7 @@ class App extends Homey.App {
 	}
 
 	async _registerFlowActions(){
-		// Flow actions
+		// Flow actions - App
 		this._flowActionCallService = this.homey.flow.getActionCard('callService')
 		this._flowActionCallService.registerRunListener(async (args, state) => {
 			try{
@@ -171,6 +171,73 @@ class App extends Homey.App {
 				throw new Error(error.message);
 			}
 		});
+
+		// DeviceEntities
+		this._flowActionGenericButtonPress = this.homey.flow.getActionCard('genericButtonPress');
+		this._flowActionGenericButtonPress.registerRunListener(async (args, state) => {
+			try{
+				let valueObj = {};
+				valueObj[ args.capability.id ] = true;
+				await args.device.onDeviceEntitiesSet( valueObj, {} );
+				return true;
+			}
+			catch(error){
+				this.error("Error executing flowAction 'genericButtonPress': "+  error.message);
+				throw new Error(error.message);
+			}
+		});
+		this._flowActionGenericButtonPress.registerArgumentAutocompleteListener('capability', async (query, args) => {
+			const genericButtonsList = args.device.getAutocompleteButtonList();
+			return genericButtonsList.filter((result) => { 
+				return result.name.toLowerCase().includes(query.toLowerCase());
+			});
+			
+		});
+
+		this._flowActionGenericSwitchOn = this.homey.flow.getActionCard('genericSwitchOn');
+		this._flowActionGenericSwitchOn.registerRunListener(async (args, state) => {
+			try{
+				let valueObj = {};
+				valueObj[ args.capability.id ] = true;
+				await args.device.onDeviceEntitiesSet( valueObj, {} );
+				return true;
+			}
+			catch(error){
+				this.error("Error executing flowAction 'genericSwitchOn': "+  error.message);
+				throw new Error(error.message);
+			}
+		});
+		this._flowActionGenericSwitchOn.registerArgumentAutocompleteListener('capability', async (query, args) => {
+			const genericSwitchList = args.device.getAutocompleteOnoffList();
+			return genericSwitchList.filter((result) => { 
+				return result.name.toLowerCase().includes(query.toLowerCase());
+			});
+			
+		});
+
+		this._flowActionGenericSwitchOff = this.homey.flow.getActionCard('genericSwitchOff');
+		this._flowActionGenericSwitchOff.registerRunListener(async (args, state) => {
+			try{
+				let valueObj = {};
+				valueObj[ args.capability.id ] = false;
+				await args.device.onDeviceEntitiesSet( valueObj, {} );
+				return true;
+			}
+			catch(error){
+				this.error("Error executing flowAction 'genericSwitchOff': "+  error.message);
+				throw new Error(error.message);
+			}
+		});
+		this._flowActionGenericSwitchOff.registerArgumentAutocompleteListener('capability', async (query, args) => {
+			const genericSwitchList = args.device.getAutocompleteOnoffList();
+			return genericSwitchList.filter((result) => { 
+				return result.name.toLowerCase().includes(query.toLowerCase());
+			});
+			
+		});
+
+
+		// Lock
 		this._flowActionLockOpen = this.homey.flow.getActionCard('lockOpen')
 		this._flowActionLockOpen.registerRunListener(async (args, state) => {
 			try{

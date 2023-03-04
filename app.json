@@ -1871,6 +1871,114 @@
         "id": "fanReverseOn"
       },
       {
+        "highlight": true,
+        "title": {
+          "en": "Press button",
+          "de": "Drücke Button",
+          "nl": "druk op de knop"
+        },
+        "titleFormatted": {
+          "en": "Press the button [[capability]].",
+          "de": "Drücke den Button [[capability]].",
+          "nl": "Druk op de knop [[capability]]."
+        },
+        "args": [
+          {
+            "type": "autocomplete",
+            "name": "capability",
+            "required": false,
+            "title": {
+              "en": "Capability",
+              "de": "Attribut",
+              "nl": "Capability"
+            },
+            "placeholder": {
+              "en": "Select a device capability",
+              "de": "Wähle ein Geräte-Attibut",
+              "nl": "Selecteer een apparaat capability"
+            }
+          },
+          {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=climate|climate_fan|fan|light|media|sensor|switch|vacuum"
+          }
+        ],
+        "id": "genericButtonPress"
+      },
+      {
+        "highlight": true,
+        "title": {
+          "en": "Switch off",
+          "de": "Ausschalten",
+          "nl": "Uitschakelen"
+        },
+        "titleFormatted": {
+          "en": "Switch off [[capability]].",
+          "de": "Schalter [[capability]] ausschalten.",
+          "nl": "Schakelaar [[capability]] uitschakelen."
+        },
+        "args": [
+          {
+            "type": "autocomplete",
+            "name": "capability",
+            "required": false,
+            "title": {
+              "en": "Capability",
+              "de": "Attribut",
+              "nl": "Capability"
+            },
+            "placeholder": {
+              "en": "Select a device capability",
+              "de": "Wähle ein Geräte-Attibut",
+              "nl": "Selecteer een apparaat capability"
+            }
+          },
+          {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=climate|climate_fan|fan|light|media|sensor|switch|vacuum"
+          }
+        ],
+        "id": "genericSwitchOff"
+      },
+      {
+        "highlight": true,
+        "title": {
+          "en": "Switch on",
+          "de": "Anschalten",
+          "nl": "Inschakelen"
+        },
+        "titleFormatted": {
+          "en": "Switch on [[capability]].",
+          "de": "Schalter [[capability]] anschalten.",
+          "nl": "Schakelaar [[capability]] inschakelen."
+        },
+        "args": [
+          {
+            "type": "autocomplete",
+            "name": "capability",
+            "required": false,
+            "title": {
+              "en": "Capability",
+              "de": "Attribut",
+              "nl": "Capability"
+            },
+            "placeholder": {
+              "en": "Select a device capability",
+              "de": "Wähle ein Geräte-Attibut",
+              "nl": "Selecteer een apparaat capability"
+            }
+          },
+          {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=climate|climate_fan|fan|light|media|sensor|switch|vacuum"
+          }
+        ],
+        "id": "genericSwitchOn"
+      },
+      {
         "id": "lightSetColor",
         "title": {
           "en": "Set light color",

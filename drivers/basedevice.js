@@ -6,6 +6,7 @@ const CAPABILITIES_SET_DEBOUNCE = 100;
 
 // Device init timeout (sec). Reads entity data with a delay to get ready on app start
 const DEVICE_INIT_TIMEOUT = 3;
+const DEVICE_MAX_DEVICE_ENTITIES = 20;
 
 const defaultValueConverter = {
     from: (state) => parseFloat(state),
@@ -44,18 +45,7 @@ class BaseDevice extends Homey.Device {
         this.powerEntityId = null;
 
         // Capability listener for all existing device entity capabilities
-        let capabilities = this.getCapabilities();
-        let deviceEntityCapabilities = [];
-        for (let i=0; i<capabilities.length; i++){
-            let capabilityOptions = {};
-            try{
-                capabilityOptions = this.getCapabilityOptions(capabilities[i]);
-            }
-            catch(error){continue;}
-            if (capabilityOptions.entity_id != undefined){
-                deviceEntityCapabilities.push(capabilities[i]);
-            }
-        }
+        let deviceEntityCapabilities = this.getDeviceEntitiesCapabilitites();
         if (deviceEntityCapabilities.length > 0){
             this.registerMultipleCapabilityListener(deviceEntityCapabilities, async (value, opts) => {
                 await this.onDeviceEntitiesSet(value, opts)
@@ -280,7 +270,23 @@ class BaseDevice extends Homey.Device {
         this.onEntityUpdate(entity);
     }
 
-    // Device Entities ============================================================================================
+    // Device Entities ===========================================================================================
+    getDeviceEntitiesCapabilitites(){
+        let capabilities = [];
+        let keys = this.getCapabilities();
+        for (let i=0; i<keys.length; i++){
+            let capabilitiesOptions = {};
+            try{
+                capabilitiesOptions = this.getCapabilityOptions(keys[i]);
+            }
+            catch(error){continue;}
+            if (capabilitiesOptions && capabilitiesOptions.entity_id != undefined){
+                capabilities.push(keys[i]);
+            }
+        }
+        return capabilities;
+    }
+
     async addDeviceEntities(type=null){
         this.log("addDeviceEntities()");
         let entitiesList = [];
@@ -299,7 +305,7 @@ class BaseDevice extends Homey.Device {
                 return;
             }
             let entities = await this._client.getEntityRegistry(entityRegistry[0].device_id, null);
-            for (let i=0; i<entities.length; i++){
+            for (let i=0; ( i < entities.length && i < DEVICE_MAX_DEVICE_ENTITIES ); i++){
                 if (entities[i].entity_id == entitiesList[j] ||
                     entities[i].disabled_by != null ||
                     entities[i].hidden_by != null ||
@@ -410,6 +416,10 @@ class BaseDevice extends Homey.Device {
                         // boolean capability
                         newValue = (data.state == "on");
                         tokens.value_boolean = newValue;
+                        // ignore initial state change from initial state to first read state in onInit()
+                        if (oldValue == null){
+                            oldValue = newValue;
+                        }
                         await this.setCapabilityValue(keys[i], (data.state == "on") );
                     }
                     else if (keys[i].startsWith("button") || keys[i].startsWith("input_button")){
@@ -585,7 +595,7 @@ class BaseDevice extends Homey.Device {
     // Generic Flow functions ===========================================================================================
     // Flow Trigger 
     getAutocompleteCapabilityList(){
-        let capabilities = this.getCapabilities();
+        let capabilities = this.getDeviceEntitiesCapabilitites();
         let result = [];
         for (let i=0; i<capabilities.length; i++){
             let capabilitiesOptions = {};
@@ -594,13 +604,17 @@ class BaseDevice extends Homey.Device {
             }
             catch(error){continue;}
             try{
-                if (capabilitiesOptions.entity_id != undefined){
-                    let name = capabilitiesOptions.entity_id + " ("+this._client.getEntity(capabilitiesOptions.entity_id).attributes.friendly_name + ")";
-                    result.push({
-                        id: capabilities[i],
-                        name: name
-                    })
+                let name;
+                if (capabilitiesOptions.title){
+                    name = capabilitiesOptions.title;
                 }
+                else{
+                    name = capabilitiesOptions.entity_id;
+                }
+            result.push({
+                    id: capabilities[i],
+                    name: name
+                })
             }
             catch(error){this.log("getAutocompleteCapabilityList(): "+error.message)}
         }
@@ -609,23 +623,27 @@ class BaseDevice extends Homey.Device {
     
     // Flow Actions 
     getAutocompleteOnoffList(){
-        let capabilities = this.getCapabilities();
+        let capabilities = this.getDeviceEntitiesCapabilitites();
         let result = [];
         for (let i=0; i<capabilities.length; i++){
-            if (capabilitties[i].startsWith("onoff")){
-                let capabilitiesOptions = {};
+            let capabilitiesOptions = {};
+            try{
+                capabilitiesOptions = this.getCapabilityOptions(capabilities[i]);
+            }
+            catch(error){continue;}
+            if (capabilities[i].startsWith("onoff")){
                 try{
-                    capabilitiesOptions = this.getCapabilityOptions(capabilities[i]);
-                }
-                catch(error){continue;}
-                try{
-                    if (capabilitiesOptions.entity_id != undefined){
-                        let name = capabilitiesOptions.entity_id + " ("+this._client.getEntity(capabilitiesOptions.entity_id).attributes.friendly_name + ")";
-                        result.push({
-                            id: capabilities[i],
-                            name: name
-                        })
+                    let name;
+                    if (capabilitiesOptions.title){
+                        name = capabilitiesOptions.title;
                     }
+                    else{
+                        name = capabilitiesOptions.entity_id;
+                    }
+                    result.push({
+                        id: capabilities[i],
+                        name: name
+                    })
                 }
                 catch(error){this.log("getAutocompleteCapabilityList(): "+error.message)}
             }
@@ -634,23 +652,27 @@ class BaseDevice extends Homey.Device {
     }
 
     getAutocompleteButtonList(){
-        let capabilities = this.getCapabilities();
+        let capabilities = this.getDeviceEntitiesCapabilitites();
         let result = [];
         for (let i=0; i<capabilities.length; i++){
-            if (capabilitties[i].startsWith("button")){
-                let capabilitiesOptions = {};
+            let capabilitiesOptions = {};
+            try{
+                capabilitiesOptions = this.getCapabilityOptions(capabilities[i]);
+            }
+            catch(error){continue;}
+            if (capabilities[i].startsWith("button")){
                 try{
-                    capabilitiesOptions = this.getCapabilityOptions(capabilities[i]);
-                }
-                catch(error){continue;}
-                try{
-                    if (capabilitiesOptions.entity_id != undefined){
-                        let name = capabilitiesOptions.entity_id + " ("+this._client.getEntity(capabilitiesOptions.entity_id).attributes.friendly_name + ")";
-                        result.push({
-                            id: capabilities[i],
-                            name: name
-                        })
+                    let name;
+                    if (capabilitiesOptions.title){
+                        name = capabilitiesOptions.title;
                     }
+                    else{
+                        name = capabilitiesOptions.entity_id;
+                    }
+                    result.push({
+                        id: capabilities[i],
+                        name: name
+                    })
                 }
                 catch(error){this.log("getAutocompleteCapabilityList(): "+error.message)}
             }
