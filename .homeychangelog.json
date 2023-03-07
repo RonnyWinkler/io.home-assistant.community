@@ -258,5 +258,9 @@
   "1.2.3": {
     "en": "Testversion: Added water heater (boiler) device.",
     "de": "Testversion: Boiler-Gerät hinzugefügt."
+  },
+  "1.2.4": {
+    "en": "Added water heater (boiler) device.",
+    "de": "Boiler-Gerät hinzugefügt."
   }
 }
