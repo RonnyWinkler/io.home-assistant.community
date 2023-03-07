@@ -29,7 +29,7 @@
             "appRestart": "After an icon change, the app must be restarted for the change to take effect.",
             "deviceDetails": "Device details",
             "log": "Application log",
-            "updateCapabilitiesTitle": "Update capabilities (experimental)",
+            "updateCapabilitiesTitle": "Update/reset device capabilities",
             "updateCapabilitiesText": "The current device capabilities are removed and re-added dependent on the HomeAssistant entity.",
             "updateCapabilitiesReady": "Capabilities updated."
         }

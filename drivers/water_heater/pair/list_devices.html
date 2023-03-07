@@ -1,0 +1,35 @@
+<link rel="stylesheet" type="text/css" href="../../../assets/css/list_devices.css" />
+
+<div class="__private__homeassistant-list-devices" id="16709463134490.7849481381070716">
+  <div id="homey-list-devices-message" class="__private__homeassistant-list-devices-message"></div>
+  <div class="__private__homeassistant-list-devices-body">
+    <div data-hy-select-all-devices="" class="__private__homeassistant-select-all-devices is-hidden">
+      <button data-hy-select-all-devices-button="" class="__private__homeassistant-select-all-devices-button hy-nostyle">
+          <span data-hy-select-all-devices-text="">Deselect all</span> (<span data-hy-select-all-devices-count="">1</span>)
+      </button>
+      <input data-hy-search="" class="__private__homeassistant-search hy-nostyle"/>
+    </div>
+    <div id="homey-list-devices-select-devices" class="__private__homeassistant-list-devices-grid">
+      <!-- Place for device list -->
+    </div>
+  </div>
+
+  <template id="template-select-device">
+    <label data-template-device-label="" class="__private__homeassistant-device-tile hy-nostyle">
+        <input data-template-device-input="" type="checkbox" name="device" class="hy-input-checkbox __private__homeassistant-device-tile__input"> 
+        <span class="__private__homeassistant-device-tile__tile">
+            <span data-template-device-icon="" class="__private__homeassistant-device-tile__icon icon"></span>
+            <span class="__private__homeassistant-device-tile__checked"></span>
+            <svg class="__private__homeassistant-device-tile__name-scale-wrapper" width="100%" height="100%" viewBox="0 0 92 92" preserveAspectRatio="xMinYMin meet">
+                <foreignObject width="100%" height="100%" x="0" y="0" xmlns="http://www.w3.org/1999/xhtml"><div class="__private__homeassistant-device-tile__name-position-wrapper" xmlns="http://www.w3.org/1999/xhtml"><span data-template-device-name="" class="__private__homeassistant-device-tile__name"></span></div></foreignObject>
+            </svg>
+        </span>
+      </label>
+  </template>
+</div>
+    
+<div id="hy-nav-div-continue">
+  <button id="hy-nav-continue" class="homey-button-primary-full visible"><span id="hy-nav-continue-text" data-i18n="pair.list_devices.continue"></span></button>
+</div>
+
+<script src="../../../assets/js/list_devices.js"></script>

@@ -1,7 +1,7 @@
 {
   "_comment": "This file is generated. Please edit .homeycompose/app.json instead.",
   "id": "io.home-assistant.community",
-  "version": "1.2.0",
+  "version": "1.2.3",
   "compatibility": ">=8.1.0",
   "sdk": 3,
   "brandColor": "#0DA6EA",
@@ -276,7 +276,7 @@
           {
             "name": "device",
             "type": "device",
-            "filter": "driver_id=compound|climate|climate_fan|fan|light|media|sensor|switch|vacuum"
+            "filter": "driver_id=compound|climate|climate_fan|fan|water_heater|light|media|sensor|switch|vacuum"
           }
         ],
         "id": "capability_changed"
@@ -1975,7 +1975,7 @@
           {
             "name": "device",
             "type": "device",
-            "filter": "driver_id=climate|climate_fan|fan|light|media|sensor|switch|vacuum"
+            "filter": "driver_id=climate|climate_fan|fan|water_heater|light|media|sensor|switch|vacuum"
           }
         ],
         "id": "genericButtonPress"
@@ -2047,7 +2047,7 @@
           {
             "name": "device",
             "type": "device",
-            "filter": "driver_id=climate|climate_fan|fan|light|media|sensor|switch|vacuum"
+            "filter": "driver_id=climate|climate_fan|fan|water_heater|light|media|sensor|switch|vacuum"
           }
         ],
         "id": "genericSwitchAction"
@@ -2836,6 +2836,86 @@
           }
         ],
         "id": "vacuumStop"
+      },
+      {
+        "title": {
+          "en": "Turn off Away mode",
+          "de": "Abwesenheitsmodus ausschalten",
+          "nl": "Schakel de modus Afwezig uit"
+        },
+        "titleFormatted": {
+          "en": "Turn off Away mode",
+          "de": "Abwesenheitsmodus ausschalten",
+          "nl": "Schakel de modus Afwezig uit"
+        },
+        "args": [
+          {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=water_heater"
+          }
+        ],
+        "id": "waterHeaterAwayModeOff"
+      },
+      {
+        "title": {
+          "en": "Turn on Away mode",
+          "de": "Abwesenheitsmodus einschalten",
+          "nl": "Schakel de modus Afwezig in"
+        },
+        "titleFormatted": {
+          "en": "Turn on Away mode",
+          "de": "Abwesenheitsmodus einschalten",
+          "nl": "Schakel de modus Afwezig in"
+        },
+        "args": [
+          {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=water_heater"
+          }
+        ],
+        "id": "waterHeaterAwayModeOn"
+      },
+      {
+        "highlight": true,
+        "title": {
+          "en": "Select mode",
+          "de": "Wähle Modus",
+          "nl": "Wijzig modus"
+        },
+        "titleFormatted": {
+          "en": "Change to mode [[mode]].",
+          "de": "Wechsel zum Modus [[mode]].",
+          "nl": "Wijzig modus [[mode]]"
+        },
+        "hint": {
+          "en": "The list is provided by the device or the HomeAssistand integration.",
+          "de": "Die Liste wird vom Gerät oder der HomeAssistand-Integration bereitgestellt.",
+          "nl": "De lijst wordt door de unit of door de HA-integratie geladen."
+        },
+        "args": [
+          {
+            "type": "autocomplete",
+            "name": "mode",
+            "title": {
+              "en": "Mode",
+              "de": "Modus",
+              "nl": "Modus"
+            },
+            "placeholder": {
+              "en": "Mode",
+              "de": "Modus",
+              "nl": "Modus"
+            }
+          },
+          {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=water_heater"
+          }
+        ],
+        "id": "waterHeaterOperationMode"
       }
     ]
   },
@@ -6570,6 +6650,233 @@
           ]
         }
       ]
+    },
+    {
+      "pair": [
+        {
+          "id": "loading",
+          "template": "loading",
+          "navigation": {
+            "next": "list_devices"
+          }
+        },
+        {
+          "id": "login_credentials",
+          "template": "login_credentials",
+          "options": {
+            "logo": "logo.png",
+            "usernameLabel": {
+              "en": "Server"
+            },
+            "usernamePlaceholder": {
+              "en": "http://192.168.xxx.xxx:8123"
+            },
+            "passwordLabel": {
+              "en": "Token"
+            },
+            "passwordPlaceholder": {
+              "en": "Long-lived access token"
+            }
+          }
+        },
+        {
+          "id": "list_devices",
+          "options": {
+            "singular": false
+          }
+        },
+        {
+          "id": "icon",
+          "navigation": {
+            "next": "add_devices",
+            "prev": "list_devices"
+          }
+        },
+        {
+          "id": "add_devices"
+        }
+      ],
+      "repair": [
+        {
+          "id": "select",
+          "navigation": {
+            "prev": "done"
+          }
+        },
+        {
+          "id": "device_details",
+          "navigation": {
+            "prev": "select"
+          }
+        },
+        {
+          "id": "log",
+          "navigation": {
+            "prev": "select"
+          }
+        },
+        {
+          "id": "icon",
+          "navigation": {
+            "next": "icon_change",
+            "prev": "select"
+          }
+        },
+        {
+          "id": "icon_change",
+          "navigation": {
+            "prev": "icon"
+          }
+        },
+        {
+          "id": "capability_update_dlg",
+          "navigation": {
+            "next": "capability_update",
+            "prev": "select"
+          }
+        },
+        {
+          "id": "capability_update",
+          "navigation": {
+            "prev": "capability_update_dlg"
+          }
+        },
+        {
+          "id": "login_credentials",
+          "template": "login_credentials",
+          "navigation": {
+            "prev": "select"
+          },
+          "options": {
+            "logo": "logo.png",
+            "usernameLabel": {
+              "en": "Server"
+            },
+            "usernamePlaceholder": {
+              "en": "http://192.168.xxx.xxx:8123"
+            },
+            "passwordLabel": {
+              "en": "Token"
+            },
+            "passwordPlaceholder": {
+              "en": "Long-lived access token"
+            }
+          }
+        },
+        {
+          "id": "done",
+          "template": "done"
+        }
+      ],
+      "id": "water_heater",
+      "name": {
+        "en": "Boiler",
+        "de": "Boiler",
+        "nl": "Boiler"
+      },
+      "class": "thermostat",
+      "capabilities": [
+        "onoff",
+        "measure_temperature",
+        "target_temperature",
+        "water_heater_mode",
+        "water_heater_away_mode",
+        "button.reconnect"
+      ],
+      "capabilitiesOptions": {
+        "onoff": {
+          "uiQuickAction": false
+        },
+        "button.reconnect": {
+          "maintenanceAction": true,
+          "title": {
+            "en": "Reconnect",
+            "de": "Neu verbinden",
+            "nl": "Opnieuw verbinden"
+          },
+          "desc": {
+            "en": "Reconnect and reload entities.",
+            "de": "Neu verbinden und Entitäten neu laden.",
+            "nl": "Maak opnieuw verbinding en laad entiteiten opnieuw."
+          }
+        }
+      },
+      "images": {
+        "large": "/drivers/water_heater/assets/images/large.png",
+        "small": "/drivers/water_heater/assets/images/small.png"
+      },
+      "settings": [
+        {
+          "type": "group",
+          "label": {
+            "en": "Device entities",
+            "de": "Geräte-Entitäten",
+            "nl": "Apparaat entiteiten"
+          },
+          "children": [
+            {
+              "id": "add_device_sensor",
+              "type": "checkbox",
+              "value": false,
+              "label": {
+                "en": "Show device sensors",
+                "de": "Zeige Geräte-Sensoren",
+                "nl": "Apparaatsensoren weergeven"
+              },
+              "hint": {
+                "en": "Add sensor entities from HA device where this entity is assigned to.",
+                "de": "Füge Sensor-Entitäten des HA-Gerätes hinzu, dem diese Entität zugeordnet ist.",
+                "nl": "Voeg sensor entiteiten toe vanaf het HA-apparaat waaraan deze entiteit is toegewezen."
+              }
+            },
+            {
+              "id": "add_device_sensor_diagnostic",
+              "type": "checkbox",
+              "value": false,
+              "label": {
+                "en": "Show device diagnostic sensors",
+                "de": "Zeige Geräte-Diagnosesensoren",
+                "nl": "Diagnostische sensoren voor apparaat weergeven"
+              },
+              "hint": {
+                "en": "Add diagnostic sensor entities from HA device where this entity is assigned to.",
+                "de": "Füge Diagnosesensor-Entitäten des HA-Gerätes hinzu, dem diese Entität zugeordnet ist.",
+                "nl": "Voeg diagnostische sensor entiteiten toe vanaf het HA-apparaat waaraan deze entiteit is toegewezen."
+              }
+            },
+            {
+              "id": "add_device_switch",
+              "type": "checkbox",
+              "value": false,
+              "label": {
+                "en": "Show device switches",
+                "de": "Zeige Geräte-Schalter",
+                "nl": "Apparaatschakelaars weergeven"
+              },
+              "hint": {
+                "en": "Add switch entities from HA device where this entity is assigned to.",
+                "de": "Füge Schalter-Entitäten des HA-Gerätes hinzu, dem diese Entität zugeordnet ist.",
+                "nl": "Voeg schakelaar entiteiten toe vanaf het HA-apparaat waaraan deze entiteit is toegewezen."
+              }
+            },
+            {
+              "id": "add_device_button",
+              "type": "checkbox",
+              "value": false,
+              "label": {
+                "en": "Show device buttons",
+                "de": "Zeige Geräte-Buttons",
+                "nl": "Toon apparaatknoppen"
+              },
+              "hint": {
+                "en": "Add button entities from HA device where this entity is assigned to.",
+                "de": "Füge Button-Entitäten des HA-Gerätes hinzu, dem diese Entität zugeordnet ist.",
+                "nl": "Voeg knoppen entiteiten toe vanaf het HA-apparaat waaraan deze entiteit is toegewezen."
+              }
+            }
+          ]
+        }
+      ]
     }
   ],
   "capabilities": {
@@ -7416,6 +7723,106 @@
       "getable": false,
       "setable": true,
       "icon": "/assets/capability_icons/vacuum_stop.svg"
+    },
+    "water_heater_away_mode": {
+      "type": "boolean",
+      "title": {
+        "en": "Away mode",
+        "de": "Abwesenheitsmodus",
+        "nl": "Afwezig modus"
+      },
+      "insightsTitleTrue": {
+        "en": "Away mode turned on",
+        "de": "Abwesenheitsmodus eingeschaltet",
+        "nl": "Afwezig modus aangezet"
+      },
+      "insightsTitleFalse": {
+        "en": "Away mode turned off",
+        "de": "Abwesenheitsmodus ausgeschaltet",
+        "nl": "Afwezig modus uitgezet"
+      },
+      "uiQuickAction": false,
+      "uiComponent": "button",
+      "insights": true,
+      "getable": true,
+      "setable": true,
+      "icon": "/assets/capability_icons/water_heater_away_mode.svg"
+    },
+    "water_heater_mode": {
+      "type": "enum",
+      "title": {
+        "en": "Mode",
+        "de": "Modus",
+        "nl": "Modus"
+      },
+      "desc": {
+        "en": "Mode",
+        "de": "Modus",
+        "nl": "Modus"
+      },
+      "getable": true,
+      "setable": true,
+      "insights": true,
+      "icon": "/assets/capability_icons/water_heater_mode.svg",
+      "uiComponent": "picker",
+      "values": [
+        {
+          "id": "off",
+          "title": {
+            "en": "Off",
+            "de": "Aus",
+            "nl": "Uit"
+          }
+        },
+        {
+          "id": "eco",
+          "title": {
+            "en": "Eco",
+            "de": "Eco",
+            "nl": "Eco"
+          }
+        },
+        {
+          "id": "performance",
+          "title": {
+            "en": "Performance",
+            "de": "Leistung",
+            "nl": "Prestatie"
+          }
+        },
+        {
+          "id": "high_demand",
+          "title": {
+            "en": "High demand",
+            "de": "Hoge vraag",
+            "nl": "Hohe Nachfrage"
+          }
+        },
+        {
+          "id": "electric",
+          "title": {
+            "en": "Electric",
+            "de": "Elektrisch",
+            "nl": "Elektrisch"
+          }
+        },
+        {
+          "id": "heat_pump",
+          "title": {
+            "en": "Heat pump",
+            "de": "Wärmepumpe",
+            "nl": "Warmtepomp"
+          }
+        },
+        {
+          "id": "gas",
+          "title": {
+            "en": "Gas",
+            "de": "Gas",
+            "nl": "Gas"
+          }
+        }
+      ]
     },
     "windowcoverings_opened": {
       "type": "boolean",

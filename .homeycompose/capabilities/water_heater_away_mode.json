@@ -1,0 +1,25 @@
+{
+    "type": "boolean",
+    "title": {
+        "en": "Away mode",
+        "de": "Abwesenheitsmodus",
+        "nl": "Afwezig modus"
+    },
+    "insightsTitleTrue": {
+        "en": "Away mode turned on",
+        "de": "Abwesenheitsmodus eingeschaltet",
+        "nl": "Afwezig modus aangezet"
+    },
+    "insightsTitleFalse": {
+        "en": "Away mode turned off",
+        "de": "Abwesenheitsmodus ausgeschaltet",
+        "nl": "Afwezig modus uitgezet"
+    },
+    
+    "uiQuickAction": false,
+    "uiComponent": "button",
+    "insights": true,
+    "getable": true,
+    "setable": true,
+    "icon": "/assets/capability_icons/water_heater_away_mode.svg"
+  }

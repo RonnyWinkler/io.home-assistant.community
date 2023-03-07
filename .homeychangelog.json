@@ -246,5 +246,17 @@
   "1.2.0": {
     "en": "Added device settings to add HA device sensors/buttons. Added device setting to set energy usage cumulative for senssor/compound.",
     "de": "Geräteeinstellung ergänzt zum Hinzufügen von HA Geräte-Sensoren/Buttons. Geräteeinstellung ergänzt zum Setzen des Energieverbrauchs als kumulativ für Sensor/Compound."
+  },
+  "1.2.1": {
+    "en": "Reset device sensor settings on repair update/reset function.",
+    "de": "Löschen der Geräte-Sensor-Einstellungen bei Repair-Aktkualisieren/Zurücksetzen-Funktion."
+  },
+  "1.2.2": {
+    "en": "Testversion: Added water heater (boiler) device.",
+    "de": "Testversion: Boiler-Gerät hinzugefügt."
+  },
+  "1.2.3": {
+    "en": "Testversion: Added water heater (boiler) device.",
+    "de": "Testversion: Boiler-Gerät hinzugefügt."
   }
 }

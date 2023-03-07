@@ -29,7 +29,7 @@
             "appRestart": "Nach einer Icon-Änderung muss die App neu gestartet werden, damit die Änderung wirksam wird.",
             "deviceDetails": "Gerätedetails",
             "log": "Anwendungs-Log",
-            "updateCapabilitiesTitle": "Geräte-Aktualisierung (experimentell)",
+            "updateCapabilitiesTitle": "Geräte aktualisieren/zurücksetzen",
             "updateCapabilitiesText": "Die aktuellen Gerätefunktionen (Capabilities) werden je nach HomeAssistant-Entität entfernt und neu hinzugefügt.",
             "updateCapabilitiesReady": "Gerätefunktionen (Capabilities) wurden aktualisiert."
         }

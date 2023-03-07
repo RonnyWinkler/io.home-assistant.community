@@ -29,7 +29,7 @@
             "appRestart": "Na een pictogramwijziging moet de app opnieuw worden gestart om de wijziging door te voeren.",
             "deviceDetails": "Apparaat details",
             "log": "Toepassingslogboek",
-            "updateCapabilitiesTitle": "Apparaatupdate (experimenteel)",
+            "updateCapabilitiesTitle": "Apparaat bijwerken/resetten",
             "updateCapabilitiesText": "De huidige apparaatmogelijkheden (capabilities) worden verwijderd en opnieuw toegevoegd, afhankelijk van de HomeAssistant-entiteit.",
             "updateCapabilitiesReady": "Apparaatmogelijkheden (capabilities) zijn bijgewerkt."
         }

@@ -1,0 +1,76 @@
+{
+  "type": "enum",
+  "title": {
+    "en": "Mode",
+    "de": "Modus",
+    "nl": "Modus"
+  },
+  "desc": {
+    "en": "Mode",
+    "de": "Modus",
+    "nl": "Modus"
+  },
+  "getable": true,
+  "setable": true,
+  "insights": true,
+  "icon": "/assets/capability_icons/water_heater_mode.svg",
+  "uiComponent": "picker",
+  "values": [
+    {
+      "id": "off",
+      "title": {
+        "en": "Off",
+        "de": "Aus",
+        "nl": "Uit"
+      }
+    },
+    {
+      "id": "eco",
+      "title": {
+        "en": "Eco",
+        "de": "Eco",
+        "nl": "Eco"
+      }
+    },
+    {
+      "id": "performance",
+      "title": {
+        "en": "Performance",
+        "de": "Leistung",
+        "nl": "Prestatie"
+      }
+    },
+    {
+      "id": "high_demand",
+      "title": {
+        "en": "High demand",
+        "de": "Hoge vraag",
+        "nl": "Hohe Nachfrage"
+      }
+    },
+    {
+      "id": "electric",
+      "title": {
+        "en": "Electric",
+        "de": "Elektrisch",
+        "nl": "Elektrisch"
+      }
+    },
+    {
+      "id": "heat_pump",
+      "title": {
+        "en": "Heat pump",
+        "de": "Wärmepumpe",
+        "nl": "Warmtepomp"
+      }
+    },
+    {
+      "id": "gas",
+      "title": {
+        "en": "Gas",
+        "de": "Gas",
+        "nl": "Gas"
+      }
+    }
+  ]
+}

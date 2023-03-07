@@ -1,0 +1,41 @@
+{
+    "id": "water_heater",
+    "name": {
+      "en": "Boiler",
+      "de": "Boiler",
+      "nl": "Boiler"
+    },
+    "class": "thermostat",
+    "capabilities": [
+      "onoff",
+      "measure_temperature",
+      "target_temperature",
+      "water_heater_mode",
+      "water_heater_away_mode",
+    
+      "button.reconnect"
+    ],
+    "capabilitiesOptions": {
+      "onoff": {
+        "uiQuickAction": false
+      },
+      "button.reconnect": {
+        "maintenanceAction": true,
+        "title": {
+            "en": "Reconnect",
+            "de": "Neu verbinden",
+            "nl": "Opnieuw verbinden"
+        },
+        "desc": {
+            "en": "Reconnect and reload entities.",
+            "de": "Neu verbinden und Entitäten neu laden.",
+            "nl": "Maak opnieuw verbinding en laad entiteiten opnieuw."
+        }
+      }
+    },
+    "images": {
+      "large": "/drivers/water_heater/assets/images/large.png",
+      "small": "/drivers/water_heater/assets/images/small.png"
+  },
+  "$extends": [ "pair", "repair" ]
+}

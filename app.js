@@ -603,6 +603,47 @@ class App extends Homey.App {
 			}
 		});
 
+		// Water heater
+		this._flowActionWaterHeaterAwayModeOn = this.homey.flow.getActionCard('waterHeaterAwayModeOn')
+		this._flowActionWaterHeaterAwayModeOn.registerRunListener(async (args, state) => {
+			try{
+				await args.device.setAwayMode(true);
+				return true;
+			}
+			catch(error){
+				this.error("Error executing flowAction 'waterHeaterAwayModeOn': "+  error.message);
+				throw new Error(error.message);
+			}
+		});
+		this._flowActionWaterHeaterAwayModeOff = this.homey.flow.getActionCard('waterHeaterAwayModeOff')
+		this._flowActionWaterHeaterAwayModeOff.registerRunListener(async (args, state) => {
+			try{
+				await args.device.setAwayMode(false);
+				return true;
+			}
+			catch(error){
+				this.error("Error executing flowAction 'waterHeaterAwayModeOff': "+  error.message);
+				throw new Error(error.message);
+			}
+		});
+		this._flowActionWaterHeaterOperationMode = this.homey.flow.getActionCard('waterHeaterOperationMode');
+		this._flowActionWaterHeaterOperationMode.registerRunListener(async (args, state) => {
+			try{
+				await args.device.setOperationMode(args.mode.id);
+				return true;
+			}
+			catch(error){
+				this.error("Error executing flowAction 'waterHeaterOperationMode': "+  error.message);
+				throw new Error(error.message);
+			}
+		});
+		this._flowActionWaterHeaterOperationMode.registerArgumentAutocompleteListener('mode', async (query, args) => {
+			const modeHeaterOperationList = args.device.getModesOperationList();
+			return modeHeaterOperationList.filter((result) => { 
+				return result.name.toLowerCase().includes(query.toLowerCase());
+			});
+		});
+
 		// Vacuum
 		this._flowActionVacuumSelectFanSpeed = this.homey.flow.getActionCard('vacuumSelectFanSpeed');
 		this._flowActionVacuumSelectFanSpeed.registerRunListener(async (args, state) => {

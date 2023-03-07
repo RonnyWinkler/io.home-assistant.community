@@ -1,0 +1,73 @@
+[
+    {
+        "type": "group",
+        "label": { 
+            "en": "Device entities",
+            "de": "Geräte-Entitäten",
+            "nl": "Apparaat entiteiten"
+        },
+        "children": 
+        [
+            {
+                "id": "add_device_sensor",
+                "type": "checkbox",
+                "value": false,
+                "label": {
+                    "en": "Show device sensors",
+                    "de": "Zeige Geräte-Sensoren", 
+                    "nl": "Apparaatsensoren weergeven"
+                },
+                "hint": {
+                    "en": "Add sensor entities from HA device where this entity is assigned to.",
+                    "de": "Füge Sensor-Entitäten des HA-Gerätes hinzu, dem diese Entität zugeordnet ist.", 
+                    "nl": "Voeg sensor entiteiten toe vanaf het HA-apparaat waaraan deze entiteit is toegewezen."
+                }
+            },
+            {
+                "id": "add_device_sensor_diagnostic",
+                "type": "checkbox",
+                "value": false,
+                "label": {
+                    "en": "Show device diagnostic sensors",
+                    "de": "Zeige Geräte-Diagnosesensoren", 
+                    "nl": "Diagnostische sensoren voor apparaat weergeven"
+                },
+                "hint": {
+                    "en": "Add diagnostic sensor entities from HA device where this entity is assigned to.",
+                    "de": "Füge Diagnosesensor-Entitäten des HA-Gerätes hinzu, dem diese Entität zugeordnet ist.", 
+                    "nl": "Voeg diagnostische sensor entiteiten toe vanaf het HA-apparaat waaraan deze entiteit is toegewezen."
+                }
+            },
+            {
+                "id": "add_device_switch",
+                "type": "checkbox",
+                "value": false,
+                "label": {
+                    "en": "Show device switches",
+                    "de": "Zeige Geräte-Schalter", 
+                    "nl": "Apparaatschakelaars weergeven"
+                },
+                "hint": {
+                    "en": "Add switch entities from HA device where this entity is assigned to.",
+                    "de": "Füge Schalter-Entitäten des HA-Gerätes hinzu, dem diese Entität zugeordnet ist.", 
+                    "nl": "Voeg schakelaar entiteiten toe vanaf het HA-apparaat waaraan deze entiteit is toegewezen."
+                }
+            },
+            {
+                "id": "add_device_button",
+                "type": "checkbox",
+                "value": false,
+                "label": {
+                    "en": "Show device buttons",
+                    "de": "Zeige Geräte-Buttons", 
+                    "nl": "Toon apparaatknoppen"
+                },
+                "hint": {
+                    "en": "Add button entities from HA device where this entity is assigned to.",
+                    "de": "Füge Button-Entitäten des HA-Gerätes hinzu, dem diese Entität zugeordnet ist.", 
+                    "nl": "Voeg knoppen entiteiten toe vanaf het HA-apparaat waaraan deze entiteit is toegewezen."
+                }
+            }
+        ]
+    }
+]

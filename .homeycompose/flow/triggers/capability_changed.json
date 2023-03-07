@@ -71,7 +71,7 @@
         {
             "name": "device",
             "type": "device",
-            "filter": "driver_id=compound|climate|climate_fan|fan|light|media|sensor|switch|vacuum"
+            "filter": "driver_id=compound|climate|climate_fan|fan|water_heater|light|media|sensor|switch|vacuum"
         }
     ]
 }

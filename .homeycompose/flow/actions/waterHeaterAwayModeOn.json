@@ -1,0 +1,19 @@
+{
+    "title": {
+        "en": "Turn on Away mode",
+        "de": "Abwesenheitsmodus einschalten",
+        "nl": "Schakel de modus Afwezig in"
+    },
+    "titleFormatted": {
+        "en": "Turn on Away mode",
+        "de": "Abwesenheitsmodus einschalten",
+        "nl": "Schakel de modus Afwezig in"
+    },
+    "args": [
+        {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=water_heater"
+        }
+    ]
+}

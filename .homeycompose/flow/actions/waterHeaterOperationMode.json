@@ -1,0 +1,39 @@
+{
+    "highlight": true,
+    "title": {
+        "en": "Select mode",
+        "de": "Wähle Modus",
+        "nl": "Wijzig modus"
+    },
+    "titleFormatted": {
+        "en": "Change to mode [[mode]].",
+        "de": "Wechsel zum Modus [[mode]].",
+        "nl": "Wijzig modus [[mode]]"
+    },
+    "hint": {
+        "en": "The list is provided by the device or the HomeAssistand integration.",
+        "de": "Die Liste wird vom Gerät oder der HomeAssistand-Integration bereitgestellt.",
+        "nl": "De lijst wordt door de unit of door de HA-integratie geladen."
+    },
+    "args": [
+        {
+            "type": "autocomplete",
+            "name": "mode",
+            "title": { 
+                "en": "Mode",
+                "de": "Modus",
+                "nl": "Modus"
+            },
+            "placeholder": { 
+                "en": "Mode",
+                "de": "Modus",
+                "nl": "Modus"
+            }
+        },
+        {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=water_heater"
+        }
+    ]
+}

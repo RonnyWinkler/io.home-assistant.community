@@ -434,6 +434,20 @@ class BaseDriver extends Homey.Driver {
                 }
             };
         }
+        // clear settings
+        if (device.getSetting('add_device_sensor') != null){
+            device.setSettings({'add_device_sensor': false});
+        }
+        if (device.getSetting('add_device_sensor_diagnostic') != null){
+            device.setSettings({'add_device_sensor_diagnostic': false});
+        }
+        if (device.getSetting('add_device_switch') != null){
+            device.setSettings({'add_device_switch': false});
+        }
+        if (device.getSetting('add_device_button') != null){
+            device.setSettings({'add_device_button': false});
+        }
+
         // Add new entries
         capabilities = deviceDef.capabilities;
         for (let i=0; i<capabilities.length; i++){
