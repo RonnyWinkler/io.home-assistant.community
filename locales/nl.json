@@ -37,5 +37,14 @@
     "device_unavailable_reason": {
         "entity_not_found": "Home Assistant-entiteit bestaat niet",
         "entity_unavailable": "Home Assistant-entiteit heeft de status 'niet beschikbaar'"
+    },
+    "settings": {
+        "connection": "Verbindingsinstellingen",
+        "server": "HomeAssistant server",
+        "token": "Access token",
+        "connection_state": "Verbindingsstatus",
+        "connection_failed": "Kon niet verbinden...",
+        "connection_success": "Succesvol verbonden",
+        "save_changes": "Opslaan"
     }
 }

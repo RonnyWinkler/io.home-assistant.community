@@ -262,5 +262,9 @@
   "1.2.4": {
     "en": "Added water heater (boiler) device.",
     "de": "Boiler-Gerät hinzugefügt."
+  },
+  "1.2.5": {
+    "en": "Updated app settings style.",
+    "de": "App-Einstellungs-Stil aktualisiert."
   }
 }

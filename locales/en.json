@@ -37,5 +37,14 @@
     "device_unavailable_reason": {
         "entity_not_found": "Home Assistant entity does not exist",
         "entity_unavailable": "Home Assistant entity has state 'unavailable'"
+    },
+    "settings": {
+        "connection": "Connection settings",
+        "server": "HomeAssistant server",
+        "token": "Access token",
+        "connection_state": "Connection state",
+        "connection_failed": "Failed to connect...",
+        "connection_success": "Successfully connected",
+        "save_changes": "Save"
     }
 }

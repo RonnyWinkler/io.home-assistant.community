@@ -1,7 +1,6 @@
 <!doctype html>
 <html>
     <head>
-
         <!-- The '/homey.js' script must be included in your settings view to work -->
         <script type="text/javascript" src="/homey.js" data-origin="settings"></script>
 
@@ -16,71 +15,75 @@
     </head>
     <body>
 
-        <fieldset>
-            <legend>Connection settings</legend>
-            <div class="field row">
-                <label for="address">Address</label>
-                <input id="address" type="text" value="" placeholder="http://your_ip:8123" />
+        <fieldset class="homey-form-fieldset">
+            <legend  class="homey-form-legend"><span data-i18n="settings.connection"></span></legend>
+            <div class="homey-form-group">
+                <label for="address" class="homey-form-label"><span data-i18n="settings.server"></span></label>
+                <input id="address"  class="homey-form-input" type="text" value="" placeholder="http://192.168.1.xxx:8123" />
             </div>
-            <div class="field row">
-                <label for="token">Access token</label>
-                <input id="token" type="text" value="" />
-            </div>
-        </fieldset>
-
-        <fieldset id="state">
-            <legend>Connection state</legend>
-            <div class="field row">
-                <div class="label_failure">Failed to connect...</div>
-                <div class="label_success">Successfully connected</div>
+            <div class="homey-form-group">
+                <label for="token" class="homey-form-label"><span data-i18n="settings.token"></span></label>
+                <input id="token"  class="homey-form-input" type="password" value="" />
             </div>
         </fieldset>
 
-        <button id="save" class="right">Save changes</button>
+        <div class="homey-form-group">
+            <button id="save" class="homey-button-primary-shadow-full"><span data-i18n="settings.save_changes"></span></button>
+        </div>
+
+        <fieldset id="state" class="homey-form-fieldset">
+            <legend class="homey-form-legend"><span data-i18n="settings.connection_state"></span></legend>
+            <div class="homey-form-group">
+                <div class="label_failure"><span data-i18n="settings.connection_failed"></span></div>
+                <div class="label_success"><span data-i18n="settings.connection_success"></span></div>
+            </div>
+        </fieldset>
 
         <script type="text/javascript">
+            function setState(connected) {
+                var stateElement = document.getElementById('state');
+                stateElement.className = connected ? "success homey-form-fieldset" : "failure homey-form-fieldset";
+                // document.getElementById('save').className = "homey-button-primary-shadow-full";
+                document.getElementById('save').classList.remove("is-loading");
+            }
 
-        function setState(connected) {
-            var stateElement = document.getElementById('state');
-            stateElement.className = connected ? "success" : "failure";
-        }
+            function onHomeyReady( Homey ){
+                var addressElement = document.getElementById('address');
+                var tokenElement = document.getElementById('token');
+                var saveElement = document.getElementById('save');
 
-        function onHomeyReady( Homey ){
-            var addressElement = document.getElementById('address');
-            var tokenElement = document.getElementById('token');
-            var saveElement = document.getElementById('save');
-
-            Homey.on("connection_update", function(state) {
-                setState(state.connected);
-            });
-
-            Homey.get('address', function( err, address ) {
-               if( err ) return Homey.alert( err );
-               addressElement.value = address;
-            });
-
-            Homey.get('token', function( err, token ) {
-               if( err ) return Homey.alert( err );
-               tokenElement.value = token;
-            });
-
-            saveElement.addEventListener('click', function(e) {
-
-                Homey.set('address', addressElement.value, function( err ){
-                    if( err ) return Homey.alert( err );
-                });
-                Homey.set('token', tokenElement.value, function( err ){
-                    if( err ) return Homey.alert( err );
-                });
-                Homey.set('login', true, function( err ){
-                    //if( err ) return Homey.alert( err );
+                Homey.on("connection_update", function(state) {
+                    setState(state.connected);
                 });
 
-            });
+                Homey.get('address', function( err, address ) {
+                if( err ) return Homey.alert( err );
+                addressElement.value = address;
+                });
 
-            Homey.ready();
-        }
+                Homey.get('token', function( err, token ) {
+                if( err ) return Homey.alert( err );
+                tokenElement.value = token;
+                });
+
+                saveElement.addEventListener('click', function(e) {
+                    // document.getElementById('save').className = "homey-button-primary-shadow-full is-loading";
+                    document.getElementById('save').classList.add("is-loading");
+
+                    Homey.set('address', addressElement.value, function( err ){
+                        if( err ) return Homey.alert( err );
+                    });
+                    Homey.set('token', tokenElement.value, function( err ){
+                        if( err ) return Homey.alert( err );
+                    });
+                    Homey.set('login', true, function( err ){
+                        //if( err ) return Homey.alert( err );
+                    });
+
+                });
+
+                Homey.ready();
+            }
         </script>
-
     </body>
 </html>
