@@ -69,5 +69,46 @@
                 }
             }
         ]
+    },
+    {
+        "type": "group",
+        "label": { 
+            "en": "Energy",
+            "de": "Energie",
+            "nl": "Energie"
+        },
+        "children": 
+        [
+            {
+                "id": "add_power_entity",
+                "type": "checkbox",
+                "value": true,
+                "label": {
+                    "en": "Add power entity",
+                    "de": "Energie-Eitität hinzufügen", 
+                    "nl": "Energie entiteit toevoegen"
+                },
+                "hint": {
+                    "en": "Add a sensor entity providing the power value for this device. It uses a sensor named sensor.MYLIGHT_power. If there is no default power sensor named sensor.MYLIGHT_power, you can set a custom sensor in next field.",
+                    "de": "Fügen Sie eine Sensorentität hinzu, die den Leistungswert für dieses Gerät bereitstellt. Es verwendet einen Sensor namens sensor.MYLIGHT_power. Wenn es keinen Standard-Leistungssensor namens sensor.MYLIGHT_power gibt, können Sie im nächsten Feld einen benutzerdefinierten Sensor festlegen.", 
+                    "nl": "Voeg een sensorentiteit toe die de vermogenswaarde voor dit apparaat levert. Het gebruikt een sensor met de naam sensor.MYLIGHT_power. Als er geen standaard vermogenssensor met de naam sensor.MYLIGHT_power is, kunt u een aangepaste sensor instellen in het volgende veld."
+                }
+            },
+            {
+                "id": "power_entity",
+                "type": "text",
+                "value": "",
+                "label": {
+                    "en": "Power entity",
+                    "de": "Energie-Eitität", 
+                    "nl": "Energie entiteit"
+                },
+                "hint": {
+                    "en": "Select a sensor entity providing the power value for this device if there is no default power sensor named sensor.MYLIGHT_power.",
+                    "de": "Wählen Sie eine Sensorentität aus, die den Leistungswert für dieses Gerät bereitstellt, wenn es keinen Standardleistungssensor mit dem Namen sensor.MYLIGHT_power gibt.", 
+                    "nl": "Selecteer een sensorentiteit die de vermogenswaarde voor dit apparaat levert als er geen standaard vermogenssensor met de naam sensor.MYLIGHT_power is."
+                }
+            }
+       ]
     }
 ]

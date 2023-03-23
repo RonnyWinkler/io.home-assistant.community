@@ -114,25 +114,27 @@ class App extends Homey.App {
 		this.log('Home-Assistant is running...');
 
 		// Init client and connect
-		let address = this.homey.settings.get("address");
-		let token = this.homey.settings.get("token");
-
 		this._client = new Client(this);
 		this._client.on("connection_update", (state) => {
 				this.homey.api.realtime('connection_update', state);
 			});
+		this.clientReconnect();
 
-		try{
-			await this._client.connect(address, token, false);
-		}
-		catch(error){
-			this.error("Connect error: "+ error);
-		}
+		// let address = this.homey.settings.get("address");
+		// let token = this.homey.settings.get("token");
+		// try{
+		// 	await this._client.connect(address, token, false);
+		// }
+		// catch(error){
+		// 	this.error("Connect error: "+ error);
+		// }
 
 		// Register Flow listener
+		this.flowTriggerArguments = {};
 		await this._registerFlowActions();
 		await this._registerFlowTriggers();
 		await this._registerFlowConditions();
+		await this._registerFlowArguments();
 
 		// App events
 		this.homey.settings.on("set", async (key) =>  {
@@ -147,6 +149,7 @@ class App extends Homey.App {
 		
 	}
 
+	// FLOW ACTIONS ======================================================================================
 	async _registerFlowActions(){
 		// Flow actions - App
 		this._flowActionCallService = this.homey.flow.getActionCard('callService')
@@ -789,6 +792,7 @@ class App extends Homey.App {
 		});
 	}
 
+	// FLOW TRIGGER ======================================================================================
 	async _registerFlowTriggers(){
 		// Flow Trigger: App
 		this._flowTriggerAppMemwarn = this.homey.flow.getTriggerCard('app_memwarn');
@@ -845,6 +849,7 @@ class App extends Homey.App {
 		this._flowTriggerTimerFinished = this.homey.flow.getDeviceTriggerCard('timer_finished');
 	}
 
+	// FLOW CONDITIONS ======================================================================================
 	async _registerFlowConditions(){
 		// Flow contitions
 		this._flowConditionMeasureNumeric = this.homey.flow.getConditionCard('measure_numeric')
@@ -927,6 +932,31 @@ class App extends Homey.App {
 		})
 	}
 
+	// FLOW ARGUMENTS ======================================================================================
+	async _registerFlowArguments(){
+		await this._registerFlowArgumentsEventTriggeredFilter(await this._flowTriggerEventTriggeredFilter.getArgumentValues());
+		this._flowTriggerEventTriggeredFilter.on("update", async () => {
+			this.log("Trigger argument updated for event_triggered_filter.");
+			let args = await this._flowTriggerEventTriggeredFilter.getArgumentValues();
+			// args is [{ "my_arg": "user_value" }]
+			await this._registerFlowArgumentsEventTriggeredFilter(args);
+		});
+	}
+
+	async _registerFlowArgumentsEventTriggeredFilter(args){
+		this.log("Trigger arguments read for event_triggered_filter");
+		// this.log(args);
+		this.flowTriggerArguments["event_triggered_filter"] = [];
+		for(let i=0; i<args.length; i++){
+			this.flowTriggerArguments["event_triggered_filter"].push(
+				{	
+					event: args[i].event,
+				 	entity: args[i].entity
+				}
+			);
+		}
+		this.log(this.flowTriggerArguments);
+	}
 
 	// onLog(...args){
 	// }
@@ -964,6 +994,10 @@ class App extends Homey.App {
 
 	getClient() {
 		return this._client;
+	}
+
+	getFlowTriggerArguments(){
+		return this.flowTriggerArguments;
 	}
 
 	async _reconnectClient() {

@@ -266,5 +266,17 @@
   "1.2.5": {
     "en": "Updated app settings style.",
     "de": "App-Einstellungs-Stil aktualisiert."
+  },
+  "1.2.6": {
+    "en": "Added power entity to climate & fan device settings.",
+    "de": "Power-Entität in Geräte-Einstellungen für Klimagerät & Ventilator ergänzt."
+  },
+  "1.2.7": {
+    "en": "Added filter for event flow trigger to prevent flow rate limit.",
+    "de": "Filter für Event-Flow-Trigger ergänzt zur Verhinderung von Flow-RateLimits."
+  },
+  "1.2.8": {
+    "en": "Added filter for event flow trigger to prevent flow rate limit.",
+    "de": "Filter für Event-Flow-Trigger ergänzt zur Verhinderung von Flow-RateLimits."
   }
 }

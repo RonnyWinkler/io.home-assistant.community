@@ -5,6 +5,7 @@ const BaseDevice = require('../basedevice');
 class ClimateFanDevice extends BaseDevice {
 
     async onInit() {
+        this._settings = this.getSettings();
         await super.onInit();
 
         // climate mode lists
@@ -61,6 +62,23 @@ class ClimateFanDevice extends BaseDevice {
         }
         catch(error){
             this.error("Error adding capability: "+error.message);
+        }
+    }
+
+    getPowerEntityId(){
+        try{
+            let powerSetting = this._settings.power_entity; 
+            if (this._settings.add_power_entity && powerSetting && powerSetting != "" ){
+                return powerSetting;
+            }
+            else{
+                let entityId = "climate." + this.entityId.split('.')[1] + "_power"; 
+                return entityId;
+            }
+        }
+        catch(error){
+            this.error("Error getting power entity ID for device "+this.entityId);
+            return null;
         }
     }
 
@@ -408,6 +426,17 @@ class ClimateFanDevice extends BaseDevice {
     }
     async setReverseOff(){
         await this._onCapabilityOnoffReverse( false );
+    }
+
+    // Settings ================================================================================================
+    async onSettings(settings){
+        try {
+            this._settings = settings.newSettings;
+            await this.connectPowerEntity();
+        }
+        catch(error) {
+            this.error("onSettings error: "+ error.message);
+        }
     }
 
 }
