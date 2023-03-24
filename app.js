@@ -946,14 +946,16 @@ class App extends Homey.App {
 	async _registerFlowArgumentsEventTriggeredFilter(args){
 		this.log("Trigger arguments read for event_triggered_filter");
 		// this.log(args);
-		this.flowTriggerArguments["event_triggered_filter"] = [];
+		this.flowTriggerArguments["event_triggered_filter"] = {};
+
 		for(let i=0; i<args.length; i++){
-			this.flowTriggerArguments["event_triggered_filter"].push(
-				{	
-					event: args[i].event,
-				 	entity: args[i].entity
-				}
-			);
+			this.flowTriggerArguments["event_triggered_filter"][args[i].event] = true;
+			// this.flowTriggerArguments["event_triggered_filter"].push(
+			// 	{	
+			// 		event: args[i].event,
+			// 	 	entity: args[i].entity
+			// 	}
+			// );
 		}
 		this.log(this.flowTriggerArguments);
 	}

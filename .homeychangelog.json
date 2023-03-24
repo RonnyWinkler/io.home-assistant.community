@@ -278,5 +278,9 @@
   "1.2.8": {
     "en": "Added filter for event flow trigger to prevent flow rate limit.",
     "de": "Filter für Event-Flow-Trigger ergänzt zur Verhinderung von Flow-RateLimits."
+  },
+  "1.2.9": {
+    "en": "Optimizations for event flow trigger filter.",
+    "de": "Optimierungen zum Filter für Event-Flow-Trigger."
   }
 }
