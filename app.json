@@ -1,7 +1,7 @@
 {
   "_comment": "This file is generated. Please edit .homeycompose/app.json instead.",
   "id": "io.home-assistant.community",
-  "version": "1.2.9",
+  "version": "1.2.10",
   "compatibility": ">=8.1.0",
   "sdk": 3,
   "brandColor": "#0DA6EA",
@@ -276,7 +276,7 @@
           {
             "name": "device",
             "type": "device",
-            "filter": "driver_id=compound|climate|climate_fan|fan|water_heater|light|media|sensor|switch|vacuum"
+            "filter": "driver_id=compound|climate|climate_fan|fan|water_heater|light|media|sensor|switch|vacuum|cover"
           }
         ],
         "id": "capability_changed"
@@ -1975,7 +1975,7 @@
           {
             "name": "device",
             "type": "device",
-            "filter": "driver_id=climate|climate_fan|fan|water_heater|light|media|sensor|switch|vacuum"
+            "filter": "driver_id=climate|climate_fan|fan|water_heater|light|media|sensor|switch|vacuum|cover"
           }
         ],
         "id": "genericButtonPress"
@@ -2047,7 +2047,7 @@
           {
             "name": "device",
             "type": "device",
-            "filter": "driver_id=climate|climate_fan|fan|water_heater|light|media|sensor|switch|vacuum"
+            "filter": "driver_id=climate|climate_fan|fan|water_heater|light|media|sensor|switch|vacuum|cover"
           }
         ],
         "id": "genericSwitchAction"
@@ -4203,7 +4203,79 @@
       "images": {
         "large": "/drivers/cover/assets/images/large.png",
         "small": "/drivers/cover/assets/images/small.png"
-      }
+      },
+      "settings": [
+        {
+          "type": "group",
+          "label": {
+            "en": "Device entities",
+            "de": "Geräte-Entitäten",
+            "nl": "Apparaat entiteiten"
+          },
+          "children": [
+            {
+              "id": "add_device_sensor",
+              "type": "checkbox",
+              "value": false,
+              "label": {
+                "en": "Show device sensors",
+                "de": "Zeige Geräte-Sensoren",
+                "nl": "Apparaatsensoren weergeven"
+              },
+              "hint": {
+                "en": "Add sensor entities from HA device where this entity is assigned to.",
+                "de": "Füge Sensor-Entitäten des HA-Gerätes hinzu, dem diese Entität zugeordnet ist.",
+                "nl": "Voeg sensor entiteiten toe vanaf het HA-apparaat waaraan deze entiteit is toegewezen."
+              }
+            },
+            {
+              "id": "add_device_sensor_diagnostic",
+              "type": "checkbox",
+              "value": false,
+              "label": {
+                "en": "Show device diagnostic sensors",
+                "de": "Zeige Geräte-Diagnosesensoren",
+                "nl": "Diagnostische sensoren voor apparaat weergeven"
+              },
+              "hint": {
+                "en": "Add diagnostic sensor entities from HA device where this entity is assigned to.",
+                "de": "Füge Diagnosesensor-Entitäten des HA-Gerätes hinzu, dem diese Entität zugeordnet ist.",
+                "nl": "Voeg diagnostische sensor entiteiten toe vanaf het HA-apparaat waaraan deze entiteit is toegewezen."
+              }
+            },
+            {
+              "id": "add_device_switch",
+              "type": "checkbox",
+              "value": false,
+              "label": {
+                "en": "Show device switches",
+                "de": "Zeige Geräte-Schalter",
+                "nl": "Apparaatschakelaars weergeven"
+              },
+              "hint": {
+                "en": "Add switch entities from HA device where this entity is assigned to.",
+                "de": "Füge Schalter-Entitäten des HA-Gerätes hinzu, dem diese Entität zugeordnet ist.",
+                "nl": "Voeg schakelaar entiteiten toe vanaf het HA-apparaat waaraan deze entiteit is toegewezen."
+              }
+            },
+            {
+              "id": "add_device_button",
+              "type": "checkbox",
+              "value": false,
+              "label": {
+                "en": "Show device buttons",
+                "de": "Zeige Geräte-Buttons",
+                "nl": "Toon apparaatknoppen"
+              },
+              "hint": {
+                "en": "Add button entities from HA device where this entity is assigned to.",
+                "de": "Füge Button-Entitäten des HA-Gerätes hinzu, dem diese Entität zugeordnet ist.",
+                "nl": "Voeg knoppen entiteiten toe vanaf het HA-apparaat waaraan deze entiteit is toegewezen."
+              }
+            }
+          ]
+        }
+      ]
     },
     {
       "pair": [

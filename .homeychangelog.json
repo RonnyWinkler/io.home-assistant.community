@@ -282,5 +282,9 @@
   "1.2.9": {
     "en": "Optimizations for event flow trigger filter.",
     "de": "Optimierungen zum Filter für Event-Flow-Trigger."
+  },
+  "1.2.10": {
+    "en": "Added device entity settings for cover device.",
+    "de": "Geräte-Entitäten-Einstellung für Cover-Gerät ergänzt."
   }
 }

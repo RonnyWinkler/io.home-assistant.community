@@ -15,6 +15,10 @@
             "subtitle_singular": "Select the device you'd like to add.",
             "loading": "Loading...",
             "nonew": "No new devices have been found."
+        },
+        "custom_device": {
+            "device_name": "Custom device",
+            "device_warning": "Start adding HomeAssistant entities in the repair dialog."
         }
     },
     "repair": {
@@ -31,7 +35,11 @@
             "log": "Application log",
             "updateCapabilitiesTitle": "Update/reset device capabilities",
             "updateCapabilitiesText": "The current device capabilities are removed and re-added dependent on the HomeAssistant entity.",
-            "updateCapabilitiesReady": "Capabilities updated."
+            "updateCapabilitiesReady": "Capabilities updated.",
+            "addEntity": "Add Entity",
+            "removeEntity": "Remove Entity",
+            "adjustCustomDevice": "Adjust custom device",
+            "maintenance": "Maintenance"
         }
     },
     "device_unavailable_reason": {

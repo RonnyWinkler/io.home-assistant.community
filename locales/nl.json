@@ -15,6 +15,10 @@
             "subtitle_singular": "Selecteer het apparaat dat je wilt toevoegen.",
             "loading": "Bezig met laden...",
             "nonew": "Er zijn geen nieuwe apparaten gevonden."
+        },
+        "custom_device": {
+            "device_name": "Aangepast apparaat",
+            "device_warning": "Begin met het toevoegen van HomeAssistant-entiteiten in het reparatiedialoogvenster."
         }
     },
     "repair": {

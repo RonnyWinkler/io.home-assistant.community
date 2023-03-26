@@ -1,0 +1,95 @@
+{
+  "repair": [
+    {
+      "id": "select_custom_device",
+      "$template": "select_custom_device",
+      "navigation": {
+        "prev": "done"        
+      }
+    },
+    {
+      "id": "add_entity",
+      "$template": "add_entity",
+      "navigation": {
+        "prev": "select_custom_device"
+      }
+    },
+    {
+      "id": "remove_entity",
+      "$template": "remove_entity",
+      "navigation": {
+        "prev": "select_custom_device"
+      }
+    },
+    {
+      "id": "device_details",
+      "$template": "device_details",
+      "navigation": {
+        "prev": "select_custom_device"        
+      }
+    },
+    {
+      "id": "log",
+      "$template": "log",
+      "navigation": {
+        "prev": "select_custom_device"        
+      }
+    },
+    {
+      "id": "icon",
+      "$template": "icon",
+      "navigation": {
+        "next": "icon_change",
+        "prev": "select_custom_device" 
+      }
+    },
+    {
+      "id": "icon_change",
+      "$template": "icon_change",
+      "navigation": {
+        "prev": "icon"
+      }
+    },
+    {
+      "id": "capability_update_dlg",
+      "$template": "capability_update_dlg",
+      "navigation": {
+        "next": "capability_update",
+        "prev": "select" 
+      }
+    },
+    {
+      "id": "capability_update",
+      "$template": "capability_update",
+      "navigation": {
+        "prev": "capability_update_dlg"
+      }
+    },
+    {
+      "id": "login_credentials",
+      "template": "login_credentials",
+      "navigation": {
+          "prev": "select"
+      },
+      "options": {
+        "logo": "logo.png",
+        "usernameLabel": { 
+            "en": "Server" 
+        },
+        "usernamePlaceholder": { 
+            "en": "http://192.168.xxx.xxx:8123" 
+        },
+        "passwordLabel": { 
+            "en": "Token" 
+        },
+        "passwordPlaceholder": { 
+            "en": "Long-lived access token" 
+        }
+      }
+    },
+    {
+      "id": "done",
+      "template": "done"
+    }
+  ]  
+}

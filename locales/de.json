@@ -15,6 +15,10 @@
             "subtitle_singular": "Wähle das Gerät, die du gerne hinzufügen möchtest.",
             "loading": "Laden...",
             "nonew": "Es wurden keine neuen Geräte gefunden."        
+        },
+        "custom_device": {
+            "device_name": "Benutzerdefiniertes Gerät",
+            "device_warning": "Beginne mit dem Hinzufügen von HomeAssistant Entitäten im Reparieren-Dialog."
         }
     },
     "repair": {

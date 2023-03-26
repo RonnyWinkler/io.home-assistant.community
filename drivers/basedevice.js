@@ -45,7 +45,7 @@ class BaseDevice extends Homey.Device {
         this.powerEntityId = null;
 
         // Capability listener for all existing device entity capabilities
-        let deviceEntityCapabilities = this.getDeviceEntitiesCapabilitites();
+        let deviceEntityCapabilities = this.getDeviceEntitiesCapabilities();
         if (deviceEntityCapabilities.length > 0){
             this.registerMultipleCapabilityListener(deviceEntityCapabilities, async (value, opts) => {
                 await this.onDeviceEntitiesSet(value, opts)
@@ -271,7 +271,7 @@ class BaseDevice extends Homey.Device {
     }
 
     // Device Entities ===========================================================================================
-    getDeviceEntitiesCapabilitites(){
+    getDeviceEntitiesCapabilities(){
         let capabilities = [];
         let keys = this.getCapabilities();
         for (let i=0; i<keys.length; i++){
@@ -595,7 +595,7 @@ class BaseDevice extends Homey.Device {
     // Generic Flow functions ===========================================================================================
     // Flow Trigger 
     getAutocompleteCapabilityList(){
-        let capabilities = this.getDeviceEntitiesCapabilitites();
+        let capabilities = this.getDeviceEntitiesCapabilities();
         let result = [];
         for (let i=0; i<capabilities.length; i++){
             let capabilitiesOptions = {};
@@ -623,7 +623,7 @@ class BaseDevice extends Homey.Device {
     
     // Flow Actions 
     getAutocompleteOnoffList(){
-        let capabilities = this.getDeviceEntitiesCapabilitites();
+        let capabilities = this.getDeviceEntitiesCapabilities();
         let result = [];
         for (let i=0; i<capabilities.length; i++){
             let capabilitiesOptions = {};
@@ -652,7 +652,7 @@ class BaseDevice extends Homey.Device {
     }
 
     getAutocompleteButtonList(){
-        let capabilities = this.getDeviceEntitiesCapabilitites();
+        let capabilities = this.getDeviceEntitiesCapabilities();
         let result = [];
         for (let i=0; i<capabilities.length; i++){
             let capabilitiesOptions = {};

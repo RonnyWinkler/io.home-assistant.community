@@ -236,7 +236,10 @@ class BaseDriver extends Homey.Driver {
         session.setHandler('getEntity', async () => {
             let id = device.getData().id;
             let data = {};
-            data[id] = this.homey.app.getClient().getEntity(id);
+            let entityId = this.homey.app.getClient().getEntity(id);
+            if (entityId){
+                data[id] = entityId;
+            }
             if (id.split(".")[0] == "climate_fan"){
                 data["climate." + id.split(".")[1]] = this.homey.app.getClient().getEntity("climate." + id.split(".")[1]);
                 data["fan." + id.split(".")[1]] = this.homey.app.getClient().getEntity("fan." + id.split(".")[1]);
