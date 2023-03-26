@@ -27,19 +27,39 @@
             "select": "Selection of the repair function",
             "auth": "Change login",
             "icon": "Change device icon",
-            "iconDeactivated": "Change not possible. The device uses the standard icon.",
-            "iconActivated": "Change possible. The device already uses an individual icon.",
-            "iconChanged": "Icon has been changed.",
-            "appRestart": "After an icon change, the app must be restarted for the change to take effect.",
-            "deviceDetails": "Device details",
+            "icon_deactivated": "Change not possible. The device uses the standard icon.",
+            "icon_activated": "Change possible. The device already uses an individual icon.",
+            "icon_changed": "Icon has been changed.",
+            "app_restart": "After an icon change, the app must be restarted for the change to take effect.",
+            "device_details": "Device details",
             "log": "Application log",
-            "updateCapabilitiesTitle": "Update/reset device capabilities",
-            "updateCapabilitiesText": "The current device capabilities are removed and re-added dependent on the HomeAssistant entity.",
-            "updateCapabilitiesReady": "Capabilities updated.",
-            "addEntity": "Add Entity",
-            "removeEntity": "Remove Entity",
-            "adjustCustomDevice": "Adjust custom device",
+            "update_capabilities_title": "Update/reset device capabilities",
+            "update_capabilities_text": "The current device capabilities are removed and re-added dependent on the HomeAssistant entity.",
+            "update_capabilities_ready": "Capabilities updated.",
+            "adjust_custom_device": "Adjust device",
+            "add_entity": "Add Entity",
+            "change_entity": "Change Entity",
+            "remove_entity": "Remove Entity",
             "maintenance": "Maintenance"
+        },
+        "custom_device": {
+            "entity": "Entity",
+            "entity_placeholder": "Select entity...",
+            "name": "Name",
+            "unit": "Unit",
+            "converter_ha2homey": "Converter function HA->Homey",
+            "converter_homey2HA": "Converter function Homey->HA",
+            "add_as_main_capability": "Add as main capability",
+            "result_count_01": "Displaying",
+            "result_count_02": "out of",
+            "result_count_03": "results",
+            "result_count_04": "No results found",
+            "entity_not_found": "Entity not found",
+            "entity_already_added": "Entity already added",
+            "capability_already_added": "Capability already added",
+            "entity_added": "Entity has been added",
+            "entity_changed": "Entity has been changed",
+            "entity_removed": "Entity has been removed"
         }
     },
     "device_unavailable_reason": {
@@ -54,5 +74,10 @@
         "connection_failed": "Failed to connect...",
         "connection_success": "Successfully connected",
         "save_changes": "Save"
+    },
+    "devices": {
+        "custom": {
+            "hint01": "Add entities..."
+        }
     }
 }

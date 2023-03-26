@@ -1,0 +1,50 @@
+<!-- <link rel="stylesheet" type="text/css" href="../../../assets/css/styles.css" /> -->
+<!-- <link rel="stylesheet" type="text/css" href="./styles.css" /> -->
+<link rel="stylesheet" type="text/css" href="../../../assets/css/icons.css" />
+<script src='../../../assets/js/vue.min.js'></script>
+<script src='../../../assets/js/lodash.min.js'></script>
+<script src='../../../assets/js/utils.js'></script>
+
+<!-- <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@mdi/font@5.9.55/css/materialdesignicons.min.css" /> -->
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@mdi/font/css/materialdesignicons.min.css" />
+
+<script>
+    Homey.setTitle(__('pair.title.icon'));
+</script>
+
+<!-- ICON PICKER -->
+
+<script type="text/x-template" id="icon-picker">
+    <div class="icon-picker-container">
+        <div class="setting">
+            <div class="settings-itemgroup">
+                <span class="mdi mdi-magnify search-icon"></span>
+                <input id="searchbox" class="search-box" type="text" v-model="query" :placeholder="searchPlaceholder()" />
+            </div>
+        </div>
+        <div class="flex-row icons-container" v-if="items">
+            <div :class="{ selected:item==selected }" class="flex-cell icon-container" v-for="item in filteredItems">
+                <div class="iconbox" @click="select(item)">
+                    <span :class="iconClass(item)"></span>
+                </div>
+                <div class="caption">{{item.name}}</div>
+            </div>
+        </div>
+    </div>
+</script>
+
+<script src="../../../assets/js/icon.js"></script>
+
+<div id="icon-select" v-if="meta">
+    <div id="icon-header">
+        <span id="selected-icon">
+            <img id="selected-icon-img" :src="icon" v-if="!selected"/>
+            <span id="selected-icon-mdi" :class="iconClass(selected)" v-if="selected"></span>
+        </span>
+        <label class="custom-file-upload">
+            <input id="custom-icon" type="file" accept="image/svg+xml" name="image" @change="loadIcon" />
+            <img id="upload-icon" src="../../../assets/icons/cloud-upload-outline.svg"></img>Upload custom SVG
+        </label>
+    </div>
+    <icon-picker id="icon-picker" :items="meta" v-on:selection="onIconSelect"></icon-picker>
+</div>

@@ -1,0 +1,21 @@
+{
+  "id": "custom",
+  "name": {
+    "en": "Custom device",
+    "de": "Benutzerdefiniertes Gerät",
+    "nl": "Aangepast apparaat"
+  },
+  "class": "sensor",
+  "capabilities": [
+    "custom_hint",
+    "button.reconnect"
+  ],
+  "energy": {
+    "batteries": ["OTHER"]
+  },
+  "images": {
+      "large": "/drivers/custom/assets/images/large.png",
+      "small": "/drivers/custom/assets/images/small.png"
+  },
+  "$extends": [ "capabilitiesOptions", "pair", "repair" ]
+}

@@ -164,6 +164,34 @@ class BaseDriver extends Homey.Driver {
             return await this.checkLogin(data); 
         });
 
+        session.setHandler('isDeviceChangeable', async () => {
+            if (device.driver.id == 'custom'){
+                return true;
+            }
+            return false;        
+        });
+
+        session.setHandler('addEntity', async (data) => {
+            if (device.driver.id == 'custom'){
+                return await this.addEntity(device, data);
+            }
+            return {added: false, message: "Device type not changeable."};        
+        });
+
+        session.setHandler('changeEntity', async (data) => {
+            if (device.driver.id == 'custom'){
+                return await this.changeEntity(device, data);
+            }
+            return {added: false, message: "Device type not changeable."};        
+        });
+
+        session.setHandler('removeEntity', async (data) => {
+            if (device.driver.id == 'custom'){
+                return await this.removeEntity(device, data);
+            }
+            return {added: false, message: "Device type not changeable."};        
+        });
+
         session.setHandler('isIconChangeable', async () => {
             let icon = device.getStoreValue("icon");
             if (icon != undefined){
@@ -244,10 +272,11 @@ class BaseDriver extends Homey.Driver {
                 data["climate." + id.split(".")[1]] = this.homey.app.getClient().getEntity("climate." + id.split(".")[1]);
                 data["fan." + id.split(".")[1]] = this.homey.app.getClient().getEntity("fan." + id.split(".")[1]);
             }
-            let deviceEntities = device.getDeviceEntitiesCapabilitites();
+            let deviceEntities = device.getDeviceEntitiesCapabilities();
             for (let i=0; i<deviceEntities.length; i++){
                 let capabilitiesOptions = device.getCapabilityOptions(deviceEntities[i]);
                 data[capabilitiesOptions.entity_id] = this.homey.app.getClient().getEntity(capabilitiesOptions.entity_id);
+                data[capabilitiesOptions.entity_id]["homey_capability"] = deviceEntities[i]
             }
             if (data == null || data == {}){
                 data = this.homey.__("device_unavailable_reason.entity_not_found");
@@ -264,6 +293,22 @@ class BaseDriver extends Homey.Driver {
             await this.updateCapabilities(device); 
             this.log("Updating device cabapilities finished.");
             return true;
+        });
+
+        // Read entities for autocomplete list of custom device repair view (to add capability)
+        session.setHandler('getCustomEntityList', async () => {
+            this.log("Get custom device entity list...");
+            let entities = await this.getCustomEntityList(); 
+            // this.log(entities);
+            return entities;
+        });
+        
+        // Read capabilities + assigned entity for autocomplete list of custom device repair view (to delete capability)
+        session.setHandler('getCustomCapabilityList', async () => {
+            this.log("Get custom device capability list...");
+            let entities = await this.getCustomCapabilityList(device); 
+            //this.log(entities);
+            return entities;
         });
     }
 
@@ -470,6 +515,236 @@ class BaseDriver extends Homey.Driver {
         }
         // Init and register event listeners
         await device.onInit();
+    }
+
+    async getCustomEntityList(){
+        let result = [];
+        let client = this.homey.app.getClient();
+        let entities = await client.getEntities();
+        let entityKeys = Object.keys(entities);
+        for (let i=0; i<entityKeys.length; i++){
+            let domain = entities[entityKeys[i]].entity_id.split('.')[0];
+            if (
+                domain == 'sensor' ||
+                domain == 'switch' ||
+                domain == 'input_boolean' ||
+                domain == 'button' ||
+                domain == 'input_button'
+            ){
+                result.push({
+                    entity_id: entities[entityKeys[i]].entity_id,
+                    name: entities[entityKeys[i]].attributes.friendly_name,
+                    unit: entities[entityKeys[i]].attributes.unit_of_measurement || '',
+                    title: entities[entityKeys[i]].attributes.friendly_name + 
+                            " (" +
+                            entities[entityKeys[i]].entity_id +
+                            ")" 
+                });
+            }
+        };
+        return result;
+    }
+
+    async getCustomCapabilityList(device){
+        let result = [];
+        let capabilities = device.getCapabilities();
+        for (let i=0; i<capabilities.length; i++){
+            let capability = capabilities[i];
+            let capabilityOptions = {};
+            try{
+                capabilityOptions = device.getCapabilityOptions(capability);
+            }
+            catch(error){continue;}
+            if ( capabilityOptions.entity_id != undefined ){
+                let entity = {};
+                entity["entity_id"] = capabilityOptions.entity_id;
+                entity["capability"] = capability;
+                if (capabilityOptions.title != undefined){
+                    entity["name"] = capabilityOptions.title;
+                }
+                else{
+                    entity["name"] = '';
+                }
+                if (capabilityOptions.units != undefined){
+                    entity["unit"] = capabilityOptions.units;
+                }
+                else{
+                    entity["unit"] = '';
+                }
+                if (capabilityOptions.converter_ha2homey != undefined){
+                    entity["converter_ha2homey"] = capabilityOptions.converter_ha2homey;
+                }
+                else{
+                    entity["converter_ha2homey"] = '';
+                }
+                if (capabilityOptions.converter_homey2ha != undefined){
+                    entity["converter_homey2ha"] = capabilityOptions.converter_homey2ha;
+                }
+                else{
+                    entity["converter_homey2ha"] = '';
+                }
+                result.push( entity );
+            }
+        };
+        return result;
+    }
+
+    async addEntity(device, data){
+        try{
+            this.log("addEntity()");
+            let client = this.homey.app.getClient();
+            if (!data.entity_id){
+                return {added: false, message: this.homey.__("repair.custom_device.entity_not_found")};
+            }
+
+            // get capability template to detect correct capability type
+            let capabilityTemplate = client.getCapabilityTemplate(data.entity_id, null);
+            if (!capabilityTemplate || !capabilityTemplate.capability){
+                return {added: false, message: this.homey.__("repair.custom_device.entity_not_found")};
+            }
+
+            this.log("Custom entity settings:", data);
+
+            // add capability as subcapability with entity_id as subcapability name
+            let capability = capabilityTemplate.capability + '.' +data.entity_id;
+            if (data.add_as_main_capability){
+                capability = capabilityTemplate.capability;
+                // Special case: if main capability, the add onoff_button (button page) as onoff to allow quick actions
+                if (capability == 'onoff_button'){
+                    capability = 'onoff';
+                }
+            }
+            if (!device.hasCapability(capability)){
+                this.log("Adding capability: "+capability);
+                try{
+                    await device.addCapability(capability);
+                    // add custom capabilitieOptions fron repair dialog
+                    let capabilitiesOptions = {};
+                    capabilitiesOptions["entity_id"] = data.entity_id;
+                    if (data.name){
+                        capabilitiesOptions['title'] = data.name;
+                    }
+                    if (data.unit){
+                        capabilitiesOptions['units'] = data.unit;
+                    }
+                    if (data.converter_ha2homey || data.converter_homey2ha){
+                        if (data.converter_ha2homey){
+                            capabilitiesOptions['converter_ha2homey'] = data.converter_ha2homey; 
+                        }
+                        if (data.converter_homey2ha){
+                            capabilitiesOptions['converter_homey2ha'] = data.converter_homey2ha;
+                        }
+                    }
+                    this.log("CapabilityOptions:", capabilitiesOptions);
+                    await device.setCapabilityOptions(capability, capabilitiesOptions);
+
+                    // remove initial hint if found
+                    if (device.hasCapability("custom_hint")){
+                        device.removeCapability("custom_hint");
+                    }
+                }
+                catch(error){
+                    this.log("Error adding capability "+capability+": "+error.message);
+                }
+                this.log("Capability added.");
+                
+                // Reload device (register capability listerner ...)
+                device.onInit();
+            }
+            else{
+                return {added: false, message: this.homey.__("repair.custom_device.capability_already_added")};
+            }
+
+            return {added: true, message: this.homey.__("repair.custom_device.entity_added")};
+
+        }
+        catch(error){
+            this.log("Error adding capability: ",error.message);
+            return {added: false, message: "Error adding capability: "+error.message};
+        }
+    }
+
+    async changeEntity(device, data){
+        try{
+            this.log("changeEntity()");
+            if ( !data.entity_id ){
+                return {removed: false, message: this.homey.__("repair.custom_device.entity_not_found")};
+            }
+            let capabilities = device.getCapabilities();
+            for (let i=0; i<capabilities.length; i++){
+                let capabilitiesOptions = {};
+                try{
+                    capabilitiesOptions = device.getCapabilityOptions(capabilities[i]);
+                }
+                catch(error){continue;}
+                if (capabilitiesOptions.entity_id && capabilitiesOptions.entity_id == data.entity_id){
+                    // add custom capabilitieOptions fron repair dialog
+                    let capabilitiesOptions = {};
+                    capabilitiesOptions["entity_id"] = data.entity_id;
+                    if (data.name){
+                        capabilitiesOptions['title'] = data.name;
+                    }
+                    if (data.unit){
+                        capabilitiesOptions['units'] = data.unit;
+                    }
+                    if (data.converter_ha2homey || data.converter_homey2ha){
+                        capabilitiesOptions['capabilityConverter'] = {};
+                        if (data.converter_ha2homey){
+                            capabilitiesOptions['converter_ha2homey'] = data.converter_ha2homey; 
+                        }
+                        if (data.converter_homey2ha){
+                            capabilitiesOptions['converter_homey2ha'] = data.converter_homey2ha;
+                        }
+                    }
+                    this.log("CapabilityOptions:", capabilitiesOptions);
+                    await device.setCapabilityOptions(capabilities[i], capabilitiesOptions);
+
+
+                    // unregister entities
+                    device.clientUnregisterDevice();
+                    // Reload device (register capability listerner ...)
+                    device.onInit();
+        
+                    return {removed: true, message: this.homey.__("repair.custom_device.entity_changed")};        
+                }
+            }
+            return {removed: false, message: this.homey.__("repair.custom_device.entity_not_found")};
+        }
+        catch(error){
+            this.log("Error changing capability: ",error.message);
+            return {added: false, message: "Error changing capability: "+error.message};
+        }
+    }
+
+    async removeEntity(device, data){
+        try{
+            this.log("removeEntity()");
+            if ( !data.entity_id ){
+                return {removed: false, message: this.homey.__("repair.custom_device.entity_not_found")};
+            }
+            let capabilities = device.getCapabilities();
+            for (let i=0; i<capabilities.length; i++){
+                let capabilitiesOptions = {};
+                try{
+                    capabilitiesOptions = device.getCapabilityOptions(capabilities[i]);
+                }
+                catch(error){continue;}
+                if (capabilitiesOptions.entity_id && capabilitiesOptions.entity_id == data.entity_id){
+                    device.removeCapability(capabilities[i]);
+                    // unregister entities
+                    device.clientUnregisterDevice();
+                    // Reload device (register capability listerner ...)
+                    device.onInit();
+        
+                    return {removed: true, message: this.homey.__("repair.custom_device.entity_removed")};        
+                }
+            }
+            return {removed: false, message: this.homey.__("repair.custom_device.entity_not_found")};
+        }
+        catch(error){
+            this.log("Error removing capability: ",error.message);
+            return {added: false, message: "Error removing capability: "+error.message};
+        }
     }
 
     async getDeviceList(client, id=null){

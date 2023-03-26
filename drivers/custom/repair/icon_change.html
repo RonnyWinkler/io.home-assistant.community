@@ -2,21 +2,21 @@
 
     Homey.setTitle(__('repair.title.ready'));
 
-    Homey.showLoadingOverlay();
-    Homey.emit('updateCapabilities', null, function (err, device) {
-        Homey.hideLoadingOverlay();
+    Homey.emit('changeIcon', null, function (err, devices) {
         if (err) {
+            // this.instructions = '[ERROR] ' + err;
             console.error(err);
             Homey.alert( err, 'error' );
             return;
         }
+        console.log(devices);
   
         // Homey.done();
-        Homey.setNavigationClose()
+        Homey.setNavigationClose();
         return;
     });
 </script>
 
 <div style="text-align: center;">
-    <span data-i18n="repair.title.updateCapabilitiesReady"></span>
+    <span data-i18n="repair.title.icon_changed"></span>
 </div>

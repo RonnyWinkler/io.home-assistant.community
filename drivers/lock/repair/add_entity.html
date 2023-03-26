@@ -1,0 +1,162 @@
+<link rel="stylesheet" type="text/css" href="../../../assets/css/autoComplete.css"/>
+<style>
+  #div_button {
+    position: sticky;
+    bottom: 0px;
+    /* bottom: calc(var(--homey-su-2) * -1);
+    padding: 0 0 var(--homey-su-2) 0; */
+    background: var(--homey-color-white);
+    border-radius: var(--homey-border-radius);
+    box-shadow: 0 5px 5px 15px var(--homey-color-white);
+  }
+  #spanResultlistEntity {
+    font-size: 12px;
+  }
+</style>
+
+<script type="application/javascript">
+
+  Homey.setTitle(Homey.__("repair.title.add_entity"));
+  // Homey.setNavigationClose();
+
+  // Add entity (add button pressed)
+  async function onAddEntity(){
+    document.getElementById('btnAddEntityProcess').classList.add("is-loading");
+    let data = {
+      entity_id: document.getElementById('entityAdd').value,
+      name: document.getElementById('nameAdd').value,
+      unit: document.getElementById('unitAdd').value,
+      converter_ha2homey: document.getElementById('converter_ha2homeyAdd').value,
+      converter_homey2ha: document.getElementById('converter_homey2haAdd').value,
+      add_as_main_capability: document.getElementById('addAsMainCapabilityAdd').checked
+    };
+    let result = await Homey.emit("addEntity", data);
+    if (!result.added){
+      Homey.alert( result.message, 'error' );
+    }
+    else{
+      Homey.alert( result.message, 'info' );
+      // Homey.showView("select");
+    }
+    document.getElementById('btnAddEntityProcess').classList.remove("is-loading");
+  }
+</script>
+
+<div>
+  <fieldset class="homey-form-fieldset">
+    <div class="homey-form-group">
+      <label for="entityAdd" class="homey-form-label"><span data-i18n="repair.custom_device.entity"></span></label>
+      <input id="entityAdd"  class="homey-form-input" type="text" value=""/>
+    </div>
+    <div class="homey-form-group">
+      <label for="nameAdd" class="homey-form-label"><span data-i18n="repair.custom_device.name"></span></label>
+      <input id="nameAdd"  class="homey-form-input" type="text" value=""/>
+    </div>
+    <div class="homey-form-group">
+      <label for="unitAdd" class="homey-form-label"><span data-i18n="repair.custom_device.unit"></span></label>
+      <input id="unitAdd"  class="homey-form-input" type="text" value=""/>
+    </div>
+    <div class="homey-form-group">
+      <fieldset class="homey-form-checkbox-set">
+        <!-- <legend class="homey-form-checkbox-set-title"><span data-i18n="repair.custom_device.add_as_main_capability"></span></legend> -->
+    
+        <label class="homey-form-checkbox">
+          <input class="homey-form-checkbox-input" type="checkbox" id="addAsMainCapabilityAdd"/>
+          <span class="homey-form-checkbox-checkmark"></span>
+          <span class="homey-form-checkbox-text"><span data-i18n="repair.custom_device.add_as_main_capability"></span></span>
+        </label>
+      </fieldset>
+    </div>
+    <div class="homey-form-group" id="divInputConverter">
+      <label for="converter_ha2homeyAdd" class="homey-form-label"><span data-i18n="repair.custom_device.converter_ha2homey"></span></label>
+      <textarea class="homey-form-textarea"id="converter_ha2homeyAdd" rows="5"
+                placeholder="(value) => { return parseFloat(value) * 0.01; }"></textarea>
+    </div>
+    <div class="homey-form-group" id="divOutputConverter" style="display:none">
+      <label for="converter_homey2haAdd" class="homey-form-label"><span data-i18n="repair.custom_device.converter_homey2ha"></span></label>
+      <textarea class="homey-form-textarea" id="converter_homey2haAdd" rows="5"
+                placeholder="(value) => { return value * 100; }"></textarea>
+    </div>
+    <div class="homey-form-group" id="div_button">
+      <button id="btnAddEntityProcess" class="homey-button-primary-shadow-full" onClick="onAddEntity()"><span data-i18n="repair.title.add_entity"></span></button>
+    </div>
+  </fieldset>
+</div>
+
+<script src="../../../assets/js/autoComplete.min.js"></script>
+
+
+<script>
+  (function () {
+      let autoCompleteJS = new autoComplete({
+          selector: "#entityAdd",
+          placeHolder: Homey.__("repair.custom_device.entity_placeholder"),
+          debounce: 300,
+          threshold: 1,
+          data: {
+              src : (query) => {
+                  return Homey.emit("getCustomEntityList", query).then(function (result) {
+                      return result;
+                  });
+              },
+              keys: ["name", "entity_id"],
+              cache: true
+          },
+          resultsList:{
+            element: (list, data) => {
+              const info = document.createElement("p");
+              if (data.results.length > 0) {
+                info.innerHTML = 
+                  Homey.__("repair.custom_device.result_count_01")+
+                  " <strong>"+
+                  data.results.length+
+                  "</strong> "+
+                  Homey.__("repair.custom_device.result_count_02")+
+                  " <strong>"+data.matches.length+"</strong> "+
+                  Homey.__("repair.custom_device.result_count_03");
+              } else {
+                info.innerHTML = 
+                  "<strong>"+
+                  Homey.__("repair.custom_device.result_count_04")+
+                  "</strong>";
+              }
+              list.prepend(info);
+            },
+            maxResults: 100,
+            noResults: true
+          },
+          resultItem: {
+            element: (item, data) => {
+              if (data.key == 'name'){
+                item.innerHTML =  "<span id='spanResultlistName'>"+data.match+"</span>"+
+                                  "<br>"+
+                                  "<span id='spanResultlistEntity'>"+data.value.entity_id+"</span>";
+              }
+              else{
+                item.innerHTML =  "<span id='spanResultlistName'>"+data.value.name+"</span>"+
+                                  "<br>"+
+                                  "<span id='spanResultlistEntity'>"+data.match+"</span>";
+              }
+            },
+            highlight: true
+          },
+          events: {
+              input: {
+                  selection: (event) => {
+                      let value = event.detail.selection.value.entity_id;
+                      autoCompleteJS.input.value = value;
+                      document.getElementById('nameAdd').value = event.detail.selection.value.name;
+                      document.getElementById('unitAdd').value = event.detail.selection.value.unit;
+                  },
+                  focus: () => {
+                    // if (autoCompleteJS.input.value.length) autoCompleteJS.start();
+                    autoCompleteJS.start();
+                  }
+              }
+          },
+          trigger: (query) => {
+              return true; // Search also for empty field
+          },
+      });
+  })();
+</script>

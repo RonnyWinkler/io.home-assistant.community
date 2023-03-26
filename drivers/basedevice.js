@@ -358,12 +358,17 @@ class BaseDevice extends Homey.Device {
                         await this.removeCapability(keys[i]);
                     }
                     this.log("Capability removed.");
+                    
+                    // unregister entities
+                    device.clientUnregisterDevice();
+                    // Reload device (register capability listerner ...)
+                    this.onInit();
                 }
             }
             catch(error){
                 this.log("removeDeviceEntities(): Error removing capability: "+keys[i]+": "+error.message);
             }
-        };
+        }
     }
 
     async deviceEntitiesUpdate(data){
@@ -394,36 +399,62 @@ class BaseDevice extends Homey.Device {
                             id: keys[i]
                         }
                     };
+                    let converter = this.getDeviceEntitiesInputConverter(keys[i]);
                     if (keys[i].startsWith("measure_generic")){
                         // String capabilities
-                        newValue = data.state;
+                        if (converter != undefined){
+                            newValue = converter(data.state);
+                        }
+                        else{
+                            newValue = data.state;
+                        }
                         tokens.value_string = newValue;
-                        await this.setCapabilityValue(keys[i], data.state);
+                        await this.setCapabilityValue(keys[i], newValue);
                     }
                     else if (keys[i].startsWith("alarm")){
                         // boolean capability
-                        newValue = (data.state == "on");
+                        if (converter != undefined){
+                            newValue = converter(data.state);
+                        }
+                        else{
+                            newValue = (data.state == "on");
+                        }
                         tokens.value_boolean = newValue;
-                        await this.setCapabilityValue(keys[i], (data.state == "on") );
+                        await this.setCapabilityValue(keys[i], newValue );
                     }
                     else if (keys[i].startsWith("measure") || keys[i].startsWith("meter")){
                         // numeric capability
-                        newValue = parseFloat(data.state);
+                        if (converter != undefined){
+                            newValue = converter(data.state);
+                        }
+                        else{
+                            newValue = parseFloat(data.state);
+                        }
                         tokens.value_number = newValue;
-                        await this.setCapabilityValue(keys[i], parseFloat(data.state));
+                        await this.setCapabilityValue(keys[i], newValue);
                     }
                     else if (keys[i].startsWith("switch") || keys[i].startsWith("input_boolean") || keys[i].startsWith("onoff_button") ){
                         // boolean capability
-                        newValue = (data.state == "on");
+                        if (converter != undefined){
+                            newValue = converter(data.state);
+                        }
+                        else{
+                            newValue = (data.state == "on");
+                        }
                         tokens.value_boolean = newValue;
                         // ignore initial state change from initial state to first read state in onInit()
                         if (oldValue == null){
                             oldValue = newValue;
                         }
-                        await this.setCapabilityValue(keys[i], (data.state == "on") );
+                        await this.setCapabilityValue(keys[i], newValue );
                     }
                     else if (keys[i].startsWith("button") || keys[i].startsWith("input_button")){
-                        newValue = data.state;
+                        if (converter != undefined){
+                            newValue = converter(data.state);
+                        }
+                        else{
+                            newValue = data.state;
+                        }
                         oldValue = this._buttonState[keys[i]];
                         this._buttonState[keys[i]] = newValue;
                         if (oldValue == undefined){
@@ -571,6 +602,31 @@ class BaseDevice extends Homey.Device {
     }
 
     inputConverter(capability) {
+        // // device entity converter
+        // let capabilitiesOptions = {};
+        // try{
+        //     capabilitiesOptions = this.getCapabilityOptions(capability);
+        //     if (    capabilitiesOptions && 
+        //             capabilitiesOptions.entity_id != undefined &&
+        //             capabilitiesOptions.converter_ha2homey ){
+        //         let capabilityConverter = capabilitiesOptions.converter_ha2homey;
+        //         try{
+        //             if( typeof capabilityConverter === "function") {
+        //                 return capabilityConverter;
+        //             } else if( typeof capabilityConverter === "string") {
+        //                 capabilityConverter = eval(capabilityConverter);
+        //                 return capabilityConverter;
+        //             }
+        //         }
+        //         catch(error){
+        //             this.error("Read cabapilitiesConverter error: "+error.message);
+        //             this.error("Read cabapilitiesConverter: ", capabilityConverter);
+        //         }
+        //     }
+        // }
+        // catch(error){}
+
+        // default converter
         switch (this.getCapabilityType(capability)){
             case "string":
                 return defaultStringConverter.from;
@@ -582,6 +638,30 @@ class BaseDevice extends Homey.Device {
     }
 
     outputConverter(capability) {
+        // let capabilitiesOptions = {};
+        // try{
+        //     capabilitiesOptions = this.getCapabilityOptions(capability);
+        //     if (    capabilitiesOptions && 
+        //             capabilitiesOptions.entity_id != undefined &&
+        //             capabilitiesOptions.converter_homey2ha ){
+        //         let capabilityConverter = capabilitiesOptions.converter_homey2ha;
+        //         try{
+        //             if( typeof capabilityConverter === "function") {
+        //                 return capabilityConverter;
+        //             } else if( typeof capabilityConverter === "string") {
+        //                 capabilityConverter = eval(capabilityConverter);
+        //                 return capabilityConverter;
+        //             }
+        //         }
+        //         catch(error){
+        //             this.error("Read cabapilitiesConverter error: "+error.message);
+        //             this.error("Read cabapilitiesConverter: ", capabilityConverter);
+        //         }
+        //     }
+        // }
+        // catch(error){}
+
+        // default converter
         switch (this.getCapabilityType(capability)){
             case "string":
                 return defaultStringConverter.to;
@@ -590,6 +670,62 @@ class BaseDevice extends Homey.Device {
             case "boolean":
                 return defaultBooleanConverter.to;
         }
+    }
+
+    getDeviceEntitiesInputConverter(capability) {
+        // device entity converter
+        let capabilitiesOptions = {};
+        try{
+            capabilitiesOptions = this.getCapabilityOptions(capability);
+            if (    capabilitiesOptions && 
+                    capabilitiesOptions.entity_id != undefined &&
+                    capabilitiesOptions.converter_ha2homey ){
+                let capabilityConverter = capabilitiesOptions.converter_ha2homey;
+                try{
+                    if( typeof capabilityConverter === "function") {
+                        return capabilityConverter;
+                    } else if( typeof capabilityConverter === "string" && capabilityConverter != '') {
+                        capabilityConverter = eval(capabilityConverter);
+                        return capabilityConverter;
+                    }
+                }
+                catch(error){
+                    this.error("Read cabapilitiesConverter error: "+error.message);
+                    this.error("Read cabapilitiesConverter: ", capabilityConverter);
+                    return undefined;
+                }
+            }
+            return undefined;
+        }
+        catch(error){return undefined;}
+    }
+
+    getDeviceEntitiesOutputConverter(capability) {
+        // device entity converter
+        let capabilitiesOptions = {};
+        try{
+            capabilitiesOptions = this.getCapabilityOptions(capability);
+            if (    capabilitiesOptions && 
+                    capabilitiesOptions.entity_id != undefined &&
+                    capabilitiesOptions.converter_homey2ha ){
+                let capabilityConverter = capabilitiesOptions.converter_homey2ha;
+                try{
+                    if( typeof capabilityConverter === "function") {
+                        return capabilityConverter;
+                    } else if( typeof capabilityConverter === "string" && capabilityConverter != '') {
+                        capabilityConverter = eval(capabilityConverter);
+                        return capabilityConverter;
+                    }
+                }
+                catch(error){
+                    this.error("Read cabapilitiesConverter error: "+error.message);
+                    this.error("Read cabapilitiesConverter: ", capabilityConverter);
+                    return undefined;
+                }
+            }
+            return undefined;
+        }
+        catch(error){return undefined;}
     }
 
     // Generic Flow functions ===========================================================================================

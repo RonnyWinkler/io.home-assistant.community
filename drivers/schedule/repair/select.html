@@ -29,14 +29,42 @@
     function onSelectLog(){
         Homey.showView("log");
     }
+    function onAddEntity(){
+        Homey.showView("add_entity");
+    }
+    function onChangeEntity(){
+        Homey.showView("change_entity");
+    }
+    function onRemoveEntity(){
+        Homey.showView("remove_entity");
+    }
 
 </script>
 
 <div>
-    <fieldset>
+    <fieldset id="fieldsetCustomDevice" class="homey-form-fieldset" style="display:none">
+        <legend class="homey-form-checkbox-set-title"><span data-i18n="repair.title.adjust_custom_device"></span></legend>
         <div>
             <p>
-                <button id="btnEntity" class="homey-button-primary-full" onClick="onSelectEntity()" visibility = 'hidden'><span data-i18n="repair.title.deviceDetails"></span></button>
+                <button id="btnAddEntity" class="homey-button-primary-full" onClick="onAddEntity()"><span data-i18n="repair.title.add_entity"></span></button>
+            </p>
+        </div>
+        <div>
+            <p>
+                <button id="btnChangeEntity" class="homey-button-primary-full" onClick="onChangeEntity()"><span data-i18n="repair.title.change_entity"></span></button>
+            </p>
+        </div>
+        <div>
+            <p>
+                <button id="btnRemoveEntity" class="homey-button-primary-full" onClick="onRemoveEntity()"><span data-i18n="repair.title.remove_entity"></span></button>
+            </p>
+        </div>
+    </fieldset>
+    <fieldset class="homey-form-fieldset">
+        <legend class="homey-form-checkbox-set-title"><span data-i18n="repair.title.maintenance"></span></legend>
+        <div>
+            <p>
+                <button id="btnEntity" class="homey-button-primary-full" onClick="onSelectEntity()" visibility = 'hidden'><span data-i18n="repair.title.device_details"></span></button>
             </p>
         </div>
         <div>
@@ -51,7 +79,7 @@
         </div>
         <div>
             <p>
-                <button id="btnCapabilityUpdate" class="homey-button-primary-full" onClick="onSelectCapabilityUpdate()" visibility = 'hidden'><span data-i18n="repair.title.updateCapabilitiesTitle"></span></button>
+                <button id="btnCapabilityUpdate" class="homey-button-primary-full" onClick="onSelectCapabilityUpdate()" visibility = 'hidden'><span data-i18n="repair.title.update_capabilities_title"></span></button>
             </p>
         </div>
         <div>
@@ -68,6 +96,35 @@
 </div>
 
 <script type="application/javascript">
+
+    Homey.emit('isDeviceChangeable').then(function (result) {
+        button = document.getElementById("btnAddEntity");
+        button.disabled = !result;
+        if (!result){
+            button.className = "homey-button-primary-full is-disabled";
+        }
+        else{
+            button.className = "homey-button-primary-full";
+        }
+
+        button = document.getElementById("btnRemoveEntity");
+        button.disabled = !result;
+        if (!result){
+            button.className = "homey-button-primary-full is-disabled";
+        }
+        else{
+            button.className = "homey-button-primary-full";
+        }
+
+        fieldset = document.getElementById("fieldsetCustomDevice");
+        if (!result){
+            fieldset.style.display = 'none';
+        }
+        else{
+            fieldset.style.display = 'unset';
+        }
+
+    });
 
     Homey.emit('isCapabilityChangeable').then(function (result) {
         button = document.getElementById("btnCapabilityUpdate");
@@ -94,14 +151,14 @@
             while( span.firstChild ) {
                 span.removeChild( span.firstChild );
             }
-            span.appendChild( document.createTextNode(__('repair.title.iconActivated')) );
+            span.appendChild( document.createTextNode(__('repair.title.icon_activated')) );
             span.style.color = "green";
 
             span = document.getElementById('spanAppRestart');
             while( span.firstChild ) {
                 span.removeChild( span.firstChild );
             }
-            span.appendChild( document.createTextNode(__('repair.title.appRestart')) );
+            span.appendChild( document.createTextNode(__('repair.title.app_restart')) );
             span.style.color = "orange";
         }
         else{
@@ -109,7 +166,7 @@
             while( span.firstChild ) {
                 span.removeChild( span.firstChild );
             }
-            span.appendChild( document.createTextNode(__('repair.title.iconDeactivated')) );
+            span.appendChild( document.createTextNode(__('repair.title.icon_deactivated')) );
             span.style.color = "red";
 
             span = document.getElementById('spanAppRestart');

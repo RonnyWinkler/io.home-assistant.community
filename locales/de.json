@@ -27,15 +27,39 @@
             "select": "Auswahl der Repair-Funktion",
             "auth": "Anmeldung ändern",
             "icon": "Geräte-Icon ändern",
-            "iconDeactivated": "Änderung nicht möglich. Das Gerät verwendet das Standard-Icon.",
-            "iconActivated": "Änderung möglich. Das Gerät verwendet bereits ein individuelles Icon.",
-            "iconChanged": "Icon wurde geändert.",
-            "appRestart": "Nach einer Icon-Änderung muss die App neu gestartet werden, damit die Änderung wirksam wird.",
-            "deviceDetails": "Gerätedetails",
+            "icon_deactivated": "Änderung nicht möglich. Das Gerät verwendet das Standard-Icon.",
+            "icon_activated": "Änderung möglich. Das Gerät verwendet bereits ein individuelles Icon.",
+            "icon_changed": "Icon wurde geändert.",
+            "app_restart": "Nach einer Icon-Änderung muss die App neu gestartet werden, damit die Änderung wirksam wird.",
+            "device_details": "Gerätedetails",
             "log": "Anwendungs-Log",
-            "updateCapabilitiesTitle": "Geräte aktualisieren/zurücksetzen",
-            "updateCapabilitiesText": "Die aktuellen Gerätefunktionen (Capabilities) werden je nach HomeAssistant-Entität entfernt und neu hinzugefügt.",
-            "updateCapabilitiesReady": "Gerätefunktionen (Capabilities) wurden aktualisiert."
+            "update_capabilities_title": "Geräte aktualisieren/zurücksetzen",
+            "update_capabilities_text": "Die aktuellen Gerätefunktionen (Capabilities) werden je nach HomeAssistant-Entität entfernt und neu hinzugefügt.",
+            "update_capabilities_ready": "Gerätefunktionen (Capabilities) wurden aktualisiert.",
+            "adjust_custom_device": "Gerät anpassen",
+            "add_entity": "Entität hinzufügen",
+            "change_entity": "Entität anpassen",
+            "remove_entity": "Entität entfernen",
+            "maintenance": "Wartungs"
+        },
+        "custom_device": {
+            "entity": "Entität",
+            "entity_placeholder": "Wähle eine Entität...",
+            "name": "Name",
+            "unit": "Einheit",
+            "converter_ha2homey": "Konvertierungsfunktion HA->Homey",
+            "converter_homey2HA": "Konvertierungsfunktion Homey->HA",
+            "add_as_main_capability": "Als Haupt-Capability hinzufügen",
+            "result_count_01": "Zeige",
+            "result_count_02": "von",
+            "result_count_03": "Ergebnissen",
+            "result_count_04": "Keine Ergebnisse gefunden",
+            "entity_not_found": "Entität nicht gefunden",
+            "entity_already_added": "Entität bereits vorhanden",
+            "capability_already_added": "Capability bereits vorhanden",
+            "entity_added": "Entität wurde hinzugefügt",
+            "entity_changed": "Entität wurde geändert",
+            "entity_removed": "Entität wurde entfernt"
         }
     },
     "device_unavailable_reason": {
@@ -50,5 +74,10 @@
         "connection_failed": "Verbiungungsfehler...",
         "connection_success": "Erfolgreich verbunden",
         "save_changes": "Speichern"
+    },
+    "devices": {
+        "custom": {
+            "hint01": "Entitäten hinzufügen..."
+        }
     }
 }

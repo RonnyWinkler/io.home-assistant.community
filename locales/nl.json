@@ -27,15 +27,38 @@
             "select": "Selectie van de reparatiefunctie",
             "auth": "login wijzigen",
             "icon": "Apparaatpictogram wijzigen",
-            "iconDeactivated": "Wijzigen niet mogelijk. Het apparaat gebruikt het standaardpictogram.",
-            "iconActivated": "Verandering mogelijk. Het apparaat gebruikt al een individueel pictogram.",
-            "iconChanged": "Icoon is gewijzigd.",
-            "appRestart": "Na een pictogramwijziging moet de app opnieuw worden gestart om de wijziging door te voeren.",
-            "deviceDetails": "Apparaat details",
+            "icon_deactivated": "Wijzigen niet mogelijk. Het apparaat gebruikt het standaardpictogram.",
+            "icon_activated": "Verandering mogelijk. Het apparaat gebruikt al een individueel pictogram.",
+            "icon_changed": "Icoon is gewijzigd.",
+            "app_restart": "Na een pictogramwijziging moet de app opnieuw worden gestart om de wijziging door te voeren.",
+            "device_details": "Apparaat details",
             "log": "Toepassingslogboek",
-            "updateCapabilitiesTitle": "Apparaat bijwerken/resetten",
-            "updateCapabilitiesText": "De huidige apparaatmogelijkheden (capabilities) worden verwijderd en opnieuw toegevoegd, afhankelijk van de HomeAssistant-entiteit.",
-            "updateCapabilitiesReady": "Apparaatmogelijkheden (capabilities) zijn bijgewerkt."
+            "update_capabilities_title": "Apparaat bijwerken/resetten",
+            "update_capabilities_text": "De huidige apparaatmogelijkheden (capabilities) worden verwijderd en opnieuw toegevoegd, afhankelijk van de HomeAssistant-entiteit.",
+            "update_capabilities_ready": "Apparaatmogelijkheden (capabilities) zijn bijgewerkt.",
+            "adjust_custom_device": "Apparaat aanpassen",
+            "add_entity": "Entiteit toevoegen",
+            "change_entity": "Entiteit aanpassen",
+            "remove_entity": "Entiteit verwijderen",
+            "maintenance": "Onderhoud"
+        },
+        "custom_device": {
+            "entity": "Entiteit",
+            "entity_placeholder": "Selecteer entiteit...",
+            "name": "Naam",
+            "unit": "Eenheid",
+            "converter_ha2homey": "Converter functie HA->Homey",
+            "converter_homey2HA": "Converter functie Homey->HA",
+            "result_count_01": "Show",
+            "result_count_02": "van",
+            "result_count_03": "resultaten",
+            "result_count_04": "Geen resultaten gevonden",
+            "entity_not_found": "Entiteit niet gevonden",
+            "entity_already_added": "Entiteit bestaat al",
+            "capability_already_added": "Capability bestaat al",
+            "entity_added": "Entiteit is toegevoegd",
+            "entity_changed": "Entiteit is veranderd",
+            "entity_removed": "Entiteit is verwijderd"
         }
     },
     "device_unavailable_reason": {
@@ -50,5 +73,10 @@
         "connection_failed": "Kon niet verbinden...",
         "connection_success": "Succesvol verbonden",
         "save_changes": "Opslaan"
+    },
+    "devices": {
+        "custom": {
+            "hint01": "Entiteiten toevoegen..."
+        }
     }
 }

@@ -8,6 +8,27 @@
       }
     },
     {
+      "id": "add_entity",
+      "$template": "add_entity",
+      "navigation": {
+        "prev": "select"
+      }
+    },
+    {
+      "id": "change_entity",
+      "$template": "change_entity",
+      "navigation": {
+        "prev": "select"
+      }
+    },
+    {
+      "id": "remove_entity",
+      "$template": "remove_entity",
+      "navigation": {
+        "prev": "select"
+      }
+    },
+    {
       "id": "device_details",
       "$template": "device_details",
       "navigation": {

@@ -1,7 +1,7 @@
 {
   "_comment": "This file is generated. Please edit .homeycompose/app.json instead.",
   "id": "io.home-assistant.community",
-  "version": "1.2.10",
+  "version": "1.2.11",
   "compatibility": ">=8.1.0",
   "sdk": 3,
   "brandColor": "#0DA6EA",
@@ -276,7 +276,7 @@
           {
             "name": "device",
             "type": "device",
-            "filter": "driver_id=compound|climate|climate_fan|fan|water_heater|light|media|sensor|switch|vacuum|cover"
+            "filter": "driver_id=custom|compound|climate|climate_fan|fan|water_heater|light|media|sensor|switch|vacuum|cover"
           }
         ],
         "id": "capability_changed"
@@ -1975,7 +1975,7 @@
           {
             "name": "device",
             "type": "device",
-            "filter": "driver_id=climate|climate_fan|fan|water_heater|light|media|sensor|switch|vacuum|cover"
+            "filter": "driver_id=custom|climate|climate_fan|fan|water_heater|light|media|sensor|switch|vacuum|cover"
           }
         ],
         "id": "genericButtonPress"
@@ -2047,7 +2047,7 @@
           {
             "name": "device",
             "type": "device",
-            "filter": "driver_id=climate|climate_fan|fan|water_heater|light|media|sensor|switch|vacuum|cover"
+            "filter": "driver_id=custom|climate|climate_fan|fan|water_heater|light|media|sensor|switch|vacuum|cover"
           }
         ],
         "id": "genericSwitchAction"
@@ -2988,6 +2988,24 @@
           }
         },
         {
+          "id": "add_entity",
+          "navigation": {
+            "prev": "select"
+          }
+        },
+        {
+          "id": "change_entity",
+          "navigation": {
+            "prev": "select"
+          }
+        },
+        {
+          "id": "remove_entity",
+          "navigation": {
+            "prev": "select"
+          }
+        },
+        {
           "id": "device_details",
           "navigation": {
             "prev": "select"
@@ -3133,6 +3151,24 @@
           "id": "select",
           "navigation": {
             "prev": "done"
+          }
+        },
+        {
+          "id": "add_entity",
+          "navigation": {
+            "prev": "select"
+          }
+        },
+        {
+          "id": "change_entity",
+          "navigation": {
+            "prev": "select"
+          }
+        },
+        {
+          "id": "remove_entity",
+          "navigation": {
+            "prev": "select"
           }
         },
         {
@@ -3385,6 +3421,24 @@
           "id": "select",
           "navigation": {
             "prev": "done"
+          }
+        },
+        {
+          "id": "add_entity",
+          "navigation": {
+            "prev": "select"
+          }
+        },
+        {
+          "id": "change_entity",
+          "navigation": {
+            "prev": "select"
+          }
+        },
+        {
+          "id": "remove_entity",
+          "navigation": {
+            "prev": "select"
           }
         },
         {
@@ -3677,6 +3731,24 @@
           "id": "select",
           "navigation": {
             "prev": "done"
+          }
+        },
+        {
+          "id": "add_entity",
+          "navigation": {
+            "prev": "select"
+          }
+        },
+        {
+          "id": "change_entity",
+          "navigation": {
+            "prev": "select"
+          }
+        },
+        {
+          "id": "remove_entity",
+          "navigation": {
+            "prev": "select"
           }
         },
         {
@@ -4119,6 +4191,24 @@
           }
         },
         {
+          "id": "add_entity",
+          "navigation": {
+            "prev": "select"
+          }
+        },
+        {
+          "id": "change_entity",
+          "navigation": {
+            "prev": "select"
+          }
+        },
+        {
+          "id": "remove_entity",
+          "navigation": {
+            "prev": "select"
+          }
+        },
+        {
           "id": "device_details",
           "navigation": {
             "prev": "select"
@@ -4278,6 +4368,21 @@
       ]
     },
     {
+      "capabilitiesOptions": {
+        "button.reconnect": {
+          "maintenanceAction": true,
+          "title": {
+            "en": "Reconnect",
+            "de": "Neu verbinden",
+            "nl": "Opnieuw verbinden"
+          },
+          "desc": {
+            "en": "Reconnect and reload entities.",
+            "de": "Neu verbinden und Entitäten neu laden.",
+            "nl": "Maak opnieuw verbinding en laad entiteiten opnieuw."
+          }
+        }
+      },
       "pair": [
         {
           "id": "loading",
@@ -4327,6 +4432,180 @@
           "id": "select",
           "navigation": {
             "prev": "done"
+          }
+        },
+        {
+          "id": "add_entity",
+          "navigation": {
+            "prev": "select"
+          }
+        },
+        {
+          "id": "change_entity",
+          "navigation": {
+            "prev": "select"
+          }
+        },
+        {
+          "id": "remove_entity",
+          "navigation": {
+            "prev": "select"
+          }
+        },
+        {
+          "id": "device_details",
+          "navigation": {
+            "prev": "select"
+          }
+        },
+        {
+          "id": "log",
+          "navigation": {
+            "prev": "select"
+          }
+        },
+        {
+          "id": "icon",
+          "navigation": {
+            "next": "icon_change",
+            "prev": "select"
+          }
+        },
+        {
+          "id": "icon_change",
+          "navigation": {
+            "prev": "icon"
+          }
+        },
+        {
+          "id": "capability_update_dlg",
+          "navigation": {
+            "next": "capability_update",
+            "prev": "select"
+          }
+        },
+        {
+          "id": "capability_update",
+          "navigation": {
+            "prev": "capability_update_dlg"
+          }
+        },
+        {
+          "id": "login_credentials",
+          "template": "login_credentials",
+          "navigation": {
+            "prev": "select"
+          },
+          "options": {
+            "logo": "logo.png",
+            "usernameLabel": {
+              "en": "Server"
+            },
+            "usernamePlaceholder": {
+              "en": "http://192.168.xxx.xxx:8123"
+            },
+            "passwordLabel": {
+              "en": "Token"
+            },
+            "passwordPlaceholder": {
+              "en": "Long-lived access token"
+            }
+          }
+        },
+        {
+          "id": "done",
+          "template": "done"
+        }
+      ],
+      "id": "custom",
+      "name": {
+        "en": "Custom device",
+        "de": "Benutzerdefiniertes Gerät",
+        "nl": "Aangepast apparaat"
+      },
+      "class": "sensor",
+      "capabilities": [
+        "custom_hint",
+        "button.reconnect"
+      ],
+      "energy": {
+        "batteries": [
+          "OTHER"
+        ]
+      },
+      "images": {
+        "large": "/drivers/custom/assets/images/large.png",
+        "small": "/drivers/custom/assets/images/small.png"
+      }
+    },
+    {
+      "pair": [
+        {
+          "id": "loading",
+          "template": "loading",
+          "navigation": {
+            "next": "list_devices"
+          }
+        },
+        {
+          "id": "login_credentials",
+          "template": "login_credentials",
+          "options": {
+            "logo": "logo.png",
+            "usernameLabel": {
+              "en": "Server"
+            },
+            "usernamePlaceholder": {
+              "en": "http://192.168.xxx.xxx:8123"
+            },
+            "passwordLabel": {
+              "en": "Token"
+            },
+            "passwordPlaceholder": {
+              "en": "Long-lived access token"
+            }
+          }
+        },
+        {
+          "id": "list_devices",
+          "options": {
+            "singular": false
+          }
+        },
+        {
+          "id": "icon",
+          "navigation": {
+            "next": "add_devices",
+            "prev": "list_devices"
+          }
+        },
+        {
+          "id": "add_devices"
+        }
+      ],
+      "repair": [
+        {
+          "id": "select",
+          "navigation": {
+            "prev": "done"
+          }
+        },
+        {
+          "id": "add_entity",
+          "navigation": {
+            "prev": "select"
+          }
+        },
+        {
+          "id": "change_entity",
+          "navigation": {
+            "prev": "select"
+          }
+        },
+        {
+          "id": "remove_entity",
+          "navigation": {
+            "prev": "select"
           }
         },
         {
@@ -4597,6 +4876,24 @@
           "id": "select",
           "navigation": {
             "prev": "done"
+          }
+        },
+        {
+          "id": "add_entity",
+          "navigation": {
+            "prev": "select"
+          }
+        },
+        {
+          "id": "change_entity",
+          "navigation": {
+            "prev": "select"
+          }
+        },
+        {
+          "id": "remove_entity",
+          "navigation": {
+            "prev": "select"
           }
         },
         {
@@ -4904,6 +5201,24 @@
           }
         },
         {
+          "id": "add_entity",
+          "navigation": {
+            "prev": "select"
+          }
+        },
+        {
+          "id": "change_entity",
+          "navigation": {
+            "prev": "select"
+          }
+        },
+        {
+          "id": "remove_entity",
+          "navigation": {
+            "prev": "select"
+          }
+        },
+        {
           "id": "device_details",
           "navigation": {
             "prev": "select"
@@ -5050,6 +5365,24 @@
           "id": "select",
           "navigation": {
             "prev": "done"
+          }
+        },
+        {
+          "id": "add_entity",
+          "navigation": {
+            "prev": "select"
+          }
+        },
+        {
+          "id": "change_entity",
+          "navigation": {
+            "prev": "select"
+          }
+        },
+        {
+          "id": "remove_entity",
+          "navigation": {
+            "prev": "select"
           }
         },
         {
@@ -5288,6 +5621,24 @@
           }
         },
         {
+          "id": "add_entity",
+          "navigation": {
+            "prev": "select"
+          }
+        },
+        {
+          "id": "change_entity",
+          "navigation": {
+            "prev": "select"
+          }
+        },
+        {
+          "id": "remove_entity",
+          "navigation": {
+            "prev": "select"
+          }
+        },
+        {
           "id": "device_details",
           "navigation": {
             "prev": "select"
@@ -5449,6 +5800,24 @@
           }
         },
         {
+          "id": "add_entity",
+          "navigation": {
+            "prev": "select"
+          }
+        },
+        {
+          "id": "change_entity",
+          "navigation": {
+            "prev": "select"
+          }
+        },
+        {
+          "id": "remove_entity",
+          "navigation": {
+            "prev": "select"
+          }
+        },
+        {
           "id": "device_details",
           "navigation": {
             "prev": "select"
@@ -5579,6 +5948,24 @@
           "id": "select",
           "navigation": {
             "prev": "done"
+          }
+        },
+        {
+          "id": "add_entity",
+          "navigation": {
+            "prev": "select"
+          }
+        },
+        {
+          "id": "change_entity",
+          "navigation": {
+            "prev": "select"
+          }
+        },
+        {
+          "id": "remove_entity",
+          "navigation": {
+            "prev": "select"
           }
         },
         {
@@ -5773,6 +6160,24 @@
           }
         },
         {
+          "id": "add_entity",
+          "navigation": {
+            "prev": "select"
+          }
+        },
+        {
+          "id": "change_entity",
+          "navigation": {
+            "prev": "select"
+          }
+        },
+        {
+          "id": "remove_entity",
+          "navigation": {
+            "prev": "select"
+          }
+        },
+        {
           "id": "device_details",
           "navigation": {
             "prev": "select"
@@ -5918,6 +6323,24 @@
           "id": "select",
           "navigation": {
             "prev": "done"
+          }
+        },
+        {
+          "id": "add_entity",
+          "navigation": {
+            "prev": "select"
+          }
+        },
+        {
+          "id": "change_entity",
+          "navigation": {
+            "prev": "select"
+          }
+        },
+        {
+          "id": "remove_entity",
+          "navigation": {
+            "prev": "select"
           }
         },
         {
@@ -6195,6 +6618,24 @@
           }
         },
         {
+          "id": "add_entity",
+          "navigation": {
+            "prev": "select"
+          }
+        },
+        {
+          "id": "change_entity",
+          "navigation": {
+            "prev": "select"
+          }
+        },
+        {
+          "id": "remove_entity",
+          "navigation": {
+            "prev": "select"
+          }
+        },
+        {
           "id": "device_details",
           "navigation": {
             "prev": "select"
@@ -6455,6 +6896,24 @@
           }
         },
         {
+          "id": "add_entity",
+          "navigation": {
+            "prev": "select"
+          }
+        },
+        {
+          "id": "change_entity",
+          "navigation": {
+            "prev": "select"
+          }
+        },
+        {
+          "id": "remove_entity",
+          "navigation": {
+            "prev": "select"
+          }
+        },
+        {
           "id": "device_details",
           "navigation": {
             "prev": "select"
@@ -6651,6 +7110,24 @@
           "id": "select",
           "navigation": {
             "prev": "done"
+          }
+        },
+        {
+          "id": "add_entity",
+          "navigation": {
+            "prev": "select"
+          }
+        },
+        {
+          "id": "change_entity",
+          "navigation": {
+            "prev": "select"
+          }
+        },
+        {
+          "id": "remove_entity",
+          "navigation": {
+            "prev": "select"
           }
         },
         {
@@ -6893,6 +7370,24 @@
           "id": "select",
           "navigation": {
             "prev": "done"
+          }
+        },
+        {
+          "id": "add_entity",
+          "navigation": {
+            "prev": "select"
+          }
+        },
+        {
+          "id": "change_entity",
+          "navigation": {
+            "prev": "select"
+          }
+        },
+        {
+          "id": "remove_entity",
+          "navigation": {
+            "prev": "select"
           }
         },
         {
@@ -7489,6 +7984,19 @@
         "de": "Ausgeschaltet",
         "nl": "Uitgezet"
       }
+    },
+    "custom_hint": {
+      "type": "string",
+      "title": {
+        "en": "in maintenance/repair dialog",
+        "de": "im Wartung/Reparieren-Dialog",
+        "nl": "in het dialoog underhoud/reparatie"
+      },
+      "getable": true,
+      "setable": false,
+      "insights": false,
+      "uiComponent": "sensor",
+      "icon": "/assets/capability_icons/custom_hint.svg"
     },
     "fan_oscillate": {
       "type": "boolean",

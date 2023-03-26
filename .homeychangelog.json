@@ -286,5 +286,9 @@
   "1.2.10": {
     "en": "Added device entity settings for cover device.",
     "de": "Geräte-Entitäten-Einstellung für Cover-Gerät ergänzt."
+  },
+  "1.2.11": {
+    "en": "Internal test version.",
+    "de": "Interne Testversion."
   }
 }

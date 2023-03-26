@@ -1,0 +1,13 @@
+{
+  "type": "string",
+  "title": {
+    "en": "in maintenance/repair dialog",
+    "de": "im Wartung/Reparieren-Dialog",
+    "nl": "in het dialoog underhoud/reparatie"
+  },
+  "getable": true,
+  "setable": false,
+  "insights": false,
+  "uiComponent": "sensor",
+  "icon": "/assets/capability_icons/custom_hint.svg"
+}
