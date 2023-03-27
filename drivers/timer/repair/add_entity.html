@@ -100,7 +100,17 @@
                   });
               },
               keys: ["name", "entity_id"],
-              cache: true
+              cache: true,
+              filter: (list) => {
+                // Filter duplicates
+                // incase of multiple data keys usage
+                const filteredResults = Array.from(
+                  new Set(list.map((value) => value.value.entity_id))
+                ).map((entity_id) => {
+                  return list.find((value) => value.value.entity_id === entity_id);
+                });
+                return filteredResults;
+              }
           },
           resultsList:{
             element: (list, data) => {

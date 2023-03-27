@@ -165,28 +165,25 @@ class BaseDriver extends Homey.Driver {
         });
 
         session.setHandler('isDeviceChangeable', async () => {
-            if (device.driver.id == 'custom'){
-                return true;
-            }
-            return false;        
+            return this.isDeviceChangeable(device);
         });
 
         session.setHandler('addEntity', async (data) => {
-            if (device.driver.id == 'custom'){
+            if (this.isDeviceChangeable(device)){
                 return await this.addEntity(device, data);
             }
             return {added: false, message: "Device type not changeable."};        
         });
 
         session.setHandler('changeEntity', async (data) => {
-            if (device.driver.id == 'custom'){
+            if (this.isDeviceChangeable(device)){
                 return await this.changeEntity(device, data);
             }
             return {added: false, message: "Device type not changeable."};        
         });
 
         session.setHandler('removeEntity', async (data) => {
-            if (device.driver.id == 'custom'){
+            if (this.isDeviceChangeable(device)){
                 return await this.removeEntity(device, data);
             }
             return {added: false, message: "Device type not changeable."};        
@@ -587,6 +584,13 @@ class BaseDriver extends Homey.Driver {
             }
         };
         return result;
+    }
+
+    isDeviceChangeable(device){
+        // if (device.driver.id == 'custom'){
+            return true;
+        // }
+        // return false;        
     }
 
     async addEntity(device, data){

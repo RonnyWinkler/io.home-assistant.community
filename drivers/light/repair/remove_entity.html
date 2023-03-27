@@ -67,8 +67,18 @@
                       return result;
                   });
               },
-              keys: ["name"],
-              cache: false
+              keys: ["name", "entity_id"],
+              cache: false,
+              filter: (list) => {
+                // Filter duplicates
+                // incase of multiple data keys usage
+                const filteredResults = Array.from(
+                  new Set(list.map((value) => value.value.entity_id))
+                ).map((entity_id) => {
+                  return list.find((value) => value.value.entity_id === entity_id);
+                });
+                return filteredResults;
+              }
           },
           resultsList:{
             element: (list, data) => {
@@ -95,9 +105,16 @@
           },
           resultItem: {
             element: (item, data) => {
-              item.innerHTML =  "<span id='spanResultlistName'>"+data.value.name+"</span>"+
-                                "<br>"+
-                                "<span id='spanResultlistEntity'>"+data.value.entity_id+"</span>";
+              if (data.key == 'name'){
+                item.innerHTML =  "<span id='spanResultlistName'>"+data.match+"</span>"+
+                                  "<br>"+
+                                  "<span id='spanResultlistEntity'>"+data.value.entity_id+"</span>";
+              }
+              else{
+                item.innerHTML =  "<span id='spanResultlistName'>"+data.value.name+"</span>"+
+                                  "<br>"+
+                                  "<span id='spanResultlistEntity'>"+data.match+"</span>";
+              }
             },
             highlight: true
           },

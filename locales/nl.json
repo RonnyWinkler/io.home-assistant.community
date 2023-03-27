@@ -49,6 +49,7 @@
             "unit": "Eenheid",
             "converter_ha2homey": "Converter functie HA->Homey",
             "converter_homey2HA": "Converter functie Homey->HA",
+            "add_as_main_capability": "Voeg toe als hoofdmogelijkheid",
             "result_count_01": "Show",
             "result_count_02": "van",
             "result_count_03": "resultaten",
