@@ -1,4 +1,11 @@
 <link rel="stylesheet" type="text/css" href="../../../assets/css/autoComplete.css"/>
+
+<link rel="stylesheet" type="text/css" href="../../../assets/css/toastmessage.css"/>
+<script src="../../../assets/js/toastmessage.js"></script>
+
+<link rel="stylesheet" type="text/css" href="../../../assets/css/infomessage.css"/>
+<script src="../../../assets/js/infomessage.js"></script>
+
 <style>
   #div_button {
     position: sticky;
@@ -30,14 +37,39 @@
       converter_homey2ha: document.getElementById('converter_homey2haChange').value
     };
     let result = await Homey.emit("changeEntity", data);
-    if (!result.added){
-      Homey.alert( result.message, 'error' );
+    let message = new Message();
+    if (!result.changed){
+      message.error(result.message,
+        {
+          duration: 4,
+          closable: true,
+        }
+      );
+      // Homey.alert( result.message, 'error' );
     }
     else{
-      Homey.alert( result.message, 'info' );
+      message.success(result.message,
+        {
+          duration: 4,
+          closable: true,
+        }
+      );
+      // Homey.alert( result.message, 'info' );
       // Homey.showView("select");
     }
     document.getElementById('btnChangeEntityProcess').classList.remove("is-loading");
+  }
+
+  function onInfoConverter(){
+    let message = new InfoMessage();
+    message.info( 
+        Homey.__("repair.custom_device.info_converter"),
+        {
+          duration: 0,
+          closable: true,
+          dangerUseHtml: true
+        }
+      );
   }
 </script>
 
@@ -56,7 +88,10 @@
       <input id="unitChange"  class="homey-form-input" type="text" value=""/>
     </div>
     <div class="homey-form-group" id="divInputConverter">
-      <label for="converter_ha2homeyChange" class="homey-form-label"><span data-i18n="repair.custom_device.converter_ha2homey"></span></label>
+      <label for="converter_ha2homeyChange" class="homey-form-label" style="display: inline;"><span data-i18n="repair.custom_device.converter_ha2homey"></span></label>
+      <div class="info_icon" onClick="onInfoConverter()"> 
+        <span class="fa fa-icon fa-info-circle"></span>
+      </div>
       <textarea class="homey-form-textarea"id="converter_ha2homeyChange" rows="5"
                 placeholder="(value) => { return parseFloat(value) * 0.01; }"></textarea>
     </div>

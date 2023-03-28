@@ -1,4 +1,11 @@
 <link rel="stylesheet" type="text/css" href="../../../assets/css/autoComplete.css"/>
+
+<link rel="stylesheet" type="text/css" href="../../../assets/css/toastmessage.css"/>
+<script src="../../../assets/js/toastmessage.js"></script>
+
+<link rel="stylesheet" type="text/css" href="../../../assets/css/infomessage.css"/>
+<script src="../../../assets/js/infomessage.js"></script>
+
 <style>
   #div_button {
     position: sticky;
@@ -12,9 +19,18 @@
   #spanResultlistEntity {
     font-size: 12px;
   }
+  .info_icon{
+    cursor: pointer; 
+    color: darkgray;
+    display: inline;
+  }
 </style>
 
 <script type="application/javascript">
+
+  function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
 
   Homey.setTitle(Homey.__("repair.title.add_entity"));
   // Homey.setNavigationClose();
@@ -31,14 +47,54 @@
       add_as_main_capability: document.getElementById('addAsMainCapabilityAdd').checked
     };
     let result = await Homey.emit("addEntity", data);
+    let message = new Message();
     if (!result.added){
-      Homey.alert( result.message, 'error' );
+      message.error(result.message,
+        {
+          duration: 4,
+          closable: true,
+        }
+      );
+
+
+      // Homey.alert( result.message, 'error' );
     }
     else{
-      Homey.alert( result.message, 'info' );
+      message.success(result.message,
+        {
+          duration: 4,
+          top: 0,
+          closable: true,
+        }
+      );
+
+      // Homey.alert( result.message, 'info' );
       // Homey.showView("select");
     }
     document.getElementById('btnAddEntityProcess').classList.remove("is-loading");
+  }
+
+  function onInfoMainCapability(){
+    let message = new InfoMessage();
+    message.info( 
+        Homey.__("repair.custom_device.info_main_capability"),
+        {
+          duration: 0,
+          closable: true,
+          dangerUseHtml: true
+        }
+      );
+  }
+  function onInfoConverter(){
+    let message = new InfoMessage();
+    message.info( 
+        Homey.__("repair.custom_device.info_converter"),
+        {
+          duration: 0,
+          closable: true,
+          dangerUseHtml: true
+        }
+      );
   }
 </script>
 
@@ -66,9 +122,15 @@
           <span class="homey-form-checkbox-text"><span data-i18n="repair.custom_device.add_as_main_capability"></span></span>
         </label>
       </fieldset>
-    </div>
+      <div class="info_icon" onClick="onInfoMainCapability()"> 
+        <span class="fa fa-icon fa-info-circle"></span>
+      </div>
+  </div>
     <div class="homey-form-group" id="divInputConverter">
-      <label for="converter_ha2homeyAdd" class="homey-form-label"><span data-i18n="repair.custom_device.converter_ha2homey"></span></label>
+      <label for="converter_ha2homeyAdd" class="homey-form-label" style="display: inline;"><span data-i18n="repair.custom_device.converter_ha2homey"></span></label>
+      <div class="info_icon" onClick="onInfoConverter()"> 
+        <span class="fa fa-icon fa-info-circle"></span>
+      </div>
       <textarea class="homey-form-textarea"id="converter_ha2homeyAdd" rows="5"
                 placeholder="(value) => { return parseFloat(value) * 0.01; }"></textarea>
     </div>

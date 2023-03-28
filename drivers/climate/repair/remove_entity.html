@@ -1,4 +1,8 @@
 <link rel="stylesheet" type="text/css" href="../../../assets/css/autoComplete.css"/>
+
+<link rel="stylesheet" type="text/css" href="../../../assets/css/toastmessage.css"/>
+<script src="../../../assets/js/toastmessage.js"></script>
+
 <style>
   #div_button {
     position: sticky;
@@ -24,11 +28,24 @@
       entity_id: document.getElementById('entityRemove').value,
     };
     let result = await Homey.emit("removeEntity", data);
+    let message = new Message();
     if (!result.removed){
-      Homey.alert( result.message, 'error' );
+      message.error(result.message,
+        {
+          duration: 4,
+          closable: true,
+        }
+      );
+      // Homey.alert( result.message, 'error' );
     }
     else{
-      Homey.alert( result.message, 'info' );
+      message.success(result.message,
+        {
+          duration: 4,
+          closable: true,
+        }
+      );
+      // Homey.alert( result.message, 'info' );
       document.getElementById('entity').value = '';
       // Homey.showView("select");
     }

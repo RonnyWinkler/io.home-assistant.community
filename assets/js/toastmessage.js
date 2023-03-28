@@ -1,3 +1,5 @@
+//https://www.jqueryscript.net/other/toast-notification-td-message.html
+
 class Message {
     constructor() {
         this._prefixCls = 'i-message-';
