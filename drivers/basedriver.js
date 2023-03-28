@@ -672,7 +672,7 @@ class BaseDriver extends Homey.Driver {
         try{
             this.log("changeEntity()");
             if ( !data.entity_id ){
-                return {removed: false, message: this.homey.__("repair.custom_device.entity_not_found")};
+                return {changed: false, message: this.homey.__("repair.custom_device.entity_not_found")};
             }
             let capabilities = device.getCapabilities();
             for (let i=0; i<capabilities.length; i++){
@@ -709,14 +709,14 @@ class BaseDriver extends Homey.Driver {
                     // Reload device (register capability listerner ...)
                     device.onInit();
         
-                    return {removed: true, message: this.homey.__("repair.custom_device.entity_changed")};        
+                    return {changed: true, message: this.homey.__("repair.custom_device.entity_changed")};        
                 }
             }
-            return {removed: false, message: this.homey.__("repair.custom_device.entity_not_found")};
+            return {changed: false, message: this.homey.__("repair.custom_device.entity_not_found")};
         }
         catch(error){
             this.log("Error changing capability: ",error.message);
-            return {added: false, message: "Error changing capability: "+error.message};
+            return {changed: false, message: "Error changing capability: "+error.message};
         }
     }
 
@@ -747,7 +747,7 @@ class BaseDriver extends Homey.Driver {
         }
         catch(error){
             this.log("Error removing capability: ",error.message);
-            return {added: false, message: "Error removing capability: "+error.message};
+            return {removed: false, message: "Error removing capability: "+error.message};
         }
     }
 

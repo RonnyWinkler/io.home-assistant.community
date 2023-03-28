@@ -59,7 +59,9 @@
             "capability_already_added": "Capability already added",
             "entity_added": "Entity has been added",
             "entity_changed": "Entity has been changed",
-            "entity_removed": "Entity has been removed"
+            "entity_removed": "Entity has been removed",
+            "info_main_capability": "Activate this option to add an entity as main capability.\n\n<strong>Switch:</strong> will be added as onoff capability including quick action for the device tile.\n\n<strong>Power</strong> entity: will be added as measure_power capability to enable measurement in Homey energy.",
+            "info_converter": "You can add a <strong>JavaScript function</strong> to convert the parameter <strong>value</strong> and return a converted/calculated value that should be set as capability value of the Homey device.\nUse the correct data type.\n\n<strong>Example for simple calculation</strong>\n\n(value) => { return value * 100; }\n\nThis uses the 100x of the HA value as capability value.\n\n<strong>Example for date conversion</strong> from ISO to local date:\n\n(value) => { return new Date(value).toLocaleString('de-DE', {hour12s: false, hour: '2-digit', minute: '2-digit', day: '2-digit', month: '2-digit', year: 'numeric' }); }\n\nReplace 'de-DE' with your timezone."
         }
     },
     "device_unavailable_reason": {
