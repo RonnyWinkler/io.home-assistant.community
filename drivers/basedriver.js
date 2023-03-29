@@ -7,6 +7,8 @@ const http = require('http');
 const https = require('https');
 const fs = require('fs');
 
+const customTemplateCapabilities = require('../assets/const/customTemplateCapabilities');
+
 const USERDATA_PATH = "/userdata/";
 const USERDATA_PATH_PREFIX = "../../..";
 
@@ -299,14 +301,30 @@ class BaseDriver extends Homey.Driver {
             // this.log(entities);
             return entities;
         });
-        
+
         // Read capabilities + assigned entity for autocomplete list of custom device repair view (to delete capability)
+        session.setHandler('getCustomTemplateCapabilityList', async () => {
+            this.log("Get custom device template capability list...");
+            let capabilities = await this.getCustomTemplateCapabilityList(device); 
+            //this.log(entities);
+            return capabilities;
+        });
+
+        session.setHandler('getCustomTemplateCapability', async (entity_id) => {
+            this.log("Get custom device template capability list...");
+            let capability = await this.getCustomTemplateCapability(device, entity_id); 
+            //this.log(entities);
+            return capability;
+        });
+
+        // Read template capabilities 
         session.setHandler('getCustomCapabilityList', async () => {
             this.log("Get custom device capability list...");
             let entities = await this.getCustomCapabilityList(device); 
             //this.log(entities);
             return entities;
         });
+
     }
 
     async checkLogin(data){
@@ -586,6 +604,21 @@ class BaseDriver extends Homey.Driver {
         return result;
     }
 
+    async getCustomTemplateCapabilityList(device){
+        return customTemplateCapabilities;
+    }
+
+    async getCustomTemplateCapability(device, entity_id){
+        let client = this.homey.app.getClient();
+        let capabilityTemplate = client.getCapabilityTemplate(entity_id, null);
+        if (capabilityTemplate && capabilityTemplate.capability){
+            return capabilityTemplate.capability + '.' + entity_id;
+        }
+        else{
+            return '';
+        }
+    }
+
     isDeviceChangeable(device){
         // if (device.driver.id == 'custom'){
             return true;
@@ -596,23 +629,28 @@ class BaseDriver extends Homey.Driver {
     async addEntity(device, data){
         try{
             this.log("addEntity()");
+            this.log("Custom entity settings:", data);
             let client = this.homey.app.getClient();
             if (!data.entity_id){
                 return {added: false, message: this.homey.__("repair.custom_device.entity_not_found")};
             }
 
-            // get capability template to detect correct capability type
-            let capabilityTemplate = client.getCapabilityTemplate(data.entity_id, null);
-            if (!capabilityTemplate || !capabilityTemplate.capability){
-                return {added: false, message: this.homey.__("repair.custom_device.entity_not_found")};
+            let capability;
+            if (data.capability){
+                capability = data.capability;
             }
+            else{
+                // get capability template to detect correct capability type
+                let capabilityTemplate = client.getCapabilityTemplate(data.entity_id, null);
+                if (!capabilityTemplate || !capabilityTemplate.capability){
+                    return {added: false, message: this.homey.__("repair.custom_device.entity_not_found")};
+                }
 
-            this.log("Custom entity settings:", data);
-
-            // add capability as subcapability with entity_id as subcapability name
-            let capability = capabilityTemplate.capability + '.' +data.entity_id;
+                // add capability as subcapability with entity_id as subcapability name
+                capability = capabilityTemplate.capability + '.' +data.entity_id;
+            }
             if (data.add_as_main_capability){
-                capability = capabilityTemplate.capability;
+                capability = capability.split('.')[0];
                 // Special case: if main capability, the add onoff_button (button page) as onoff to allow quick actions
                 if (capability == 'onoff_button'){
                     capability = 'onoff';

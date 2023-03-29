@@ -45,6 +45,8 @@
         "custom_device": {
             "entity": "Entiteit",
             "entity_placeholder": "Selecteer entiteit...",
+            "capability": "Capability",
+            "capability_placeholder": "measure_temperature",
             "name": "Naam",
             "unit": "Eenheid",
             "converter_ha2homey": "Converter functie HA->Homey",
