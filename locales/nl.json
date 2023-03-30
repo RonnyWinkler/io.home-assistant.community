@@ -61,7 +61,10 @@
             "capability_already_added": "Capability bestaat al",
             "entity_added": "Entiteit is toegevoegd",
             "entity_changed": "Entiteit is veranderd",
-            "entity_removed": "Entiteit is verwijderd"
+            "entity_removed": "Entiteit is verwijderd",
+            "info_main_capability": "Activeer deze optie om een entiteit als hoofdfunctionaliteit toe te voegen.\n\n<strong>Schakelaar:</strong> wordt toegevoegd als aan/uit-functionaliteit, inclusief snelle actie voor de apparaattegel.\n\n<strong>Vermogen</strong> entiteit: wordt toegevoegd als measure_power functionaliteit om metingen mogelijk te maken in Homey Energie.",
+            "info_converter": "U kunt een <strong>JavaScript functie</strong> toevoegen om de parameterwaarde <strong>value</strong> te converteren, en een geconverteerde/berekende waarde terug te geven, die als capaciteitswaarde van het Homey apparaat moet worden ingesteld. Gebruik wel het juiste gegevenstype alstublieft. \n\n<strong>Voorbeeld van eenvoudige berekening</strong>\n\n(value) => { return value * 100; }\n\nDit vermenigvuldigt de HA-waarde met een factor 100 als Homey capaciteitswaarde. \n\n<strong>Voorbeeld van datumconversie</strong> van ISO naar lokale datum:\n\n(value) => { return new Date(value).toLocaleString('de-DE', {hour12s: false, hour: '2-digit', minute: '2-digit', day: '2-digit', month: '2-digit', year: 'numeric' }); }\n\nVervang 'de-DE' door uw tijdzone, bijv nl-NL.",
+            "info_capability": "De apparaatfunctionaliteit (capability) wordt toegewezen na selectie van de entiteit.\n\nAls de mogelijkheid niet correct kan worden bepaald, kunt u een aangepaste doelfunctionaliteit instellen. U kunt ook de naam van de vooraf toegewezen mogelijkheid aanpassen.\n\nU kunt mogelijkheidsnamen gebruiken zoals <strong>measure_*, measure_*, alarm_*, onoff, onoff_button of button (* = alles wat u wilt, maar in kleine letters en zonder spaties)</strong>. Of selecteer een mogelijkheid uit de lijst met beschikbare.\n\nGebruik je een functionaliteit meer dan één keer in een apparaat, gebruik dan submogelijkheden zoals <strong>onoff.livingroom of measure_power.fridge</strong>."
         }
     },
     "device_unavailable_reason": {

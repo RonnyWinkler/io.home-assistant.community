@@ -854,11 +854,33 @@ class App extends Homey.App {
 		// Flow contitions
 		this._flowConditionMeasureNumeric = this.homey.flow.getConditionCard('measure_numeric')
 		.registerRunListener(async (args, state) => {
-			return (args.device.getCapabilityValue(state.capability.id) > args.value);
+			if (args.device.hasCapability('measure_numeric')){
+				return (args.device.getCapabilityValue('measure_numeric') > args.value);
+			}
+			else{
+				let capabilities = args.device.getCapabilities();
+				for (let i=0; i<capabilities.length; i++){
+					if (typeof args.device.getCapabilityValue(capabilities[i] == 'number')){
+						return (args.device.getCapabilityValue(capabilities[i]) > args.value);
+					}
+				}
+				throw new Error("Capability measure_numeric or other numeric capability not present in device.")
+			}
 		})
 		this._flowConditionMeasureGeneric = this.homey.flow.getConditionCard('measure_generic')
 		.registerRunListener(async (args, state) => {
-		  	return (args.device.getCapabilityValue(state.capability.id) == args.value);
+			if (args.device.hasCapability('measure_generic')){
+				return (args.device.getCapabilityValue('measure_generic') == args.value);
+			}
+			else{
+				let capabilities = args.device.getCapabilities();
+				for (let i=0; i<capabilities.length; i++){
+					if (typeof args.device.getCapabilityValue(capabilities[i] == 'string')){
+						return (args.device.getCapabilityValue(capabilities[i]) == args.value);
+					}
+				}
+				throw new Error("Capability measure_generic or other string capability not present in device.")
+			}
 		})
 		this._flowConditionClimateMode = this.homey.flow.getConditionCard('climate_mode')
 		.registerRunListener(async (args, state) => {

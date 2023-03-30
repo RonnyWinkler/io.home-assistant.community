@@ -9,6 +9,11 @@
         "de": "Wert (numerisch) !{{ist|ist nicht}} größer als [[value]]",
         "nl": "Waarde (numeriek) !{{is|is niet}} hoger dan [[value]]"
     },
+    "hint": {
+        "en": "The capability measure_numeric is checked. If this is not available, then the first numerical capability found is checked.",
+        "de": "Es wird die Capability measure_numeric geprüft. Ist diese nicht vorhanden, dann wird die erste gefundene numerische Capability geprüft.",
+        "nl": "De capability measure_numeric wordt gecontroleerd. Als deze niet beschikbaar is, wordt de eerst gevonden numerieke capability gecontroleerd."
+    },
     "args": [
         {
             "name": "device",
