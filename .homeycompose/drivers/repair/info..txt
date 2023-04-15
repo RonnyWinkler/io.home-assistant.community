@@ -1,2 +1,0 @@
-Repair folder is currently not copied to drivers folder.
-The repaid html files must be provides for every driver.

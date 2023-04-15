@@ -40,6 +40,7 @@
     document.getElementById('btnAddEntityProcess').classList.add("is-loading");
     let data = {
       entity_id: document.getElementById('entityAdd').value,
+      capability: document.getElementById('capabilityAdd').value,
       name: document.getElementById('nameAdd').value,
       unit: document.getElementById('unitAdd').value,
       converter_ha2homey: document.getElementById('converter_ha2homeyAdd').value,
@@ -96,6 +97,17 @@
         }
       );
   }
+  function onInfoCapability(){
+    let message = new InfoMessage();
+    message.info( 
+        Homey.__("repair.custom_device.info_capability"),
+        {
+          duration: 0,
+          closable: true,
+          dangerUseHtml: true
+        }
+      );
+  }
 </script>
 
 <div>
@@ -111,6 +123,13 @@
     <div class="homey-form-group">
       <label for="unitAdd" class="homey-form-label"><span data-i18n="repair.custom_device.unit"></span></label>
       <input id="unitAdd"  class="homey-form-input" type="text" value=""/>
+    </div>
+    <div class="homey-form-group">
+      <label for="capabilityAdd" class="homey-form-label" style="display: inline;"><span data-i18n="repair.custom_device.capability"></span></label>
+      <div class="info_icon" onClick="onInfoCapability()"> 
+        <span class="fa fa-icon fa-info-circle"></span>
+      </div>
+      <input id="capabilityAdd"  class="homey-form-input" type="text" value=""/>
     </div>
     <div class="homey-form-group">
       <fieldset class="homey-form-checkbox-set">
@@ -214,11 +233,12 @@
           },
           events: {
               input: {
-                  selection: (event) => {
+                  selection: async (event) => {
                       let value = event.detail.selection.value.entity_id;
                       autoCompleteJS.input.value = value;
                       document.getElementById('nameAdd').value = event.detail.selection.value.name;
                       document.getElementById('unitAdd').value = event.detail.selection.value.unit;
+                      document.getElementById('capabilityAdd').value = await Homey.emit("getCustomTemplateCapability", event.detail.selection.value.entity_id)
                   },
                   focus: () => {
                     // if (autoCompleteJS.input.value.length) autoCompleteJS.start();
@@ -230,5 +250,47 @@
               return true; // Search also for empty field
           },
       });
-  })();
+
+      let autoCompleteJSCapability = new autoComplete({
+          selector: "#capabilityAdd",
+          placeHolder: Homey.__("repair.custom_device.capability_placeholder"),
+          debounce: 300,
+          threshold: 1,
+          data: {
+              src : (query) => {
+                  return Homey.emit("getCustomTemplateCapabilityList", query).then(function (result) {
+                      return result;
+                  });
+              },
+              keys: ["id"],
+              cache: true
+          },
+          resultsList:{
+            maxResults: 100,
+            noResults: true
+          },
+          resultItem: {
+            element: (item, data) => {
+                item.innerHTML =  "<span id='spanResultlistName'>"+data.match+"</span>";
+            },
+            highlight: true
+          },
+          events: {
+              input: {
+                  selection: (event) => {
+                      let value = event.detail.selection.value.id;
+                      autoCompleteJSCapability.input.value = value;
+                  },
+                  focus: () => {
+                    // if (autoCompleteJS.input.value.length) autoCompleteJS.start();
+                    autoCompleteJSCapability.start();
+                  }
+              }
+          },
+          trigger: (query) => {
+              return true; // Search also for empty field
+          },
+      });
+
+})();
 </script>

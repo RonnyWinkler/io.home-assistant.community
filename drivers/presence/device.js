@@ -42,16 +42,19 @@ class PresenceDevice extends BaseDevice {
     // Entity update ============================================================================================
     async onEntityUpdate(data) {
         await super.onEntityUpdate(data);
+
         try {
-            if (data.state != undefined){
-                // String capabilities
-                await this.setCapabilityValue("presence_state", data.state);
+            if(data && data.entity_id && data.entity_id == this.entityId) {
+                if (data.state != undefined){
+                    // String capabilities
+                    await this.setCapabilityValue("presence_state", data.state);
+                }
+                let alarm = (data.state == "home");
+                if (this.getSetting("invert_alarm")){
+                    alarm = !alarm;
+                }
+                await this.setCapabilityValue("alarm_presence", alarm);
             }
-            let alarm = (data.state == "home");
-            if (this.getSetting("invert_alarm")){
-                alarm = !alarm;
-            }
-            await this.setCapabilityValue("alarm_presence", alarm);
         }
         catch(error) {
             this.error("CapabilitiesUpdate error: "+ error.message);

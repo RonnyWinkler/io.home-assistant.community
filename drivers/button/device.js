@@ -37,15 +37,17 @@ class ButtonDevice extends BaseDevice {
         await super.onEntityUpdate(data);
 
         try{
-            // First update, just remember the current state (last press)
-            if (this.lastState == null){
-                this.lastState = data.state;
-                return;
-            }
-            // New update, raise flow trigger
-            if (this.lastState != data.state){
-                this.lastState = data.state;
-                this.homey.app._flowTriggerButtonPressed.trigger(this);
+            if(data && data.entity_id && data.entity_id == this.entityId) {
+                // First update, just remember the current state (last press)
+                if (this.lastState == null){
+                    this.lastState = data.state;
+                    return;
+                }
+                // New update, raise flow trigger
+                if (this.lastState != data.state){
+                    this.lastState = data.state;
+                    this.homey.app._flowTriggerButtonPressed.trigger(this);
+                }
             }
         }
         catch(error) {

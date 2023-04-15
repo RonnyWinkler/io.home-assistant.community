@@ -294,5 +294,13 @@
   "1.3.0": {
     "en": "Added 'custom device'. Added possibility to add/change/remove entities in repair view. Fix for generic condition cardds (numeric/text value). Fix for Switch state update.",
     "de": "'Benutzerdefiniertes Gerät' hinzugefügt. Möglichkeit des Hinzufügens/Ändern/Löschen von Entitäten im Repair-Dialog. Korrektur für generische Bedingungen (numerische/Textwerte). Korrektur für Schalter Status-Aktualisierung."
+  },
+  "1.3.1": {
+    "en": "Updated non physical devices (scenes etc.) to use new add-entity functionylity.",
+    "de": "Nicht-physische Geräte aktualisiert zur Verwendung der Entity-Hinzufügen-Funktionalität."
+  },
+  "1.3.2": {
+    "en": "Fix for type recognition of partly numeric entity state.",
+    "de": "Korrektur für Typerkennung des Entität-Status bei teilweise numerischen Werten."
   }
 }

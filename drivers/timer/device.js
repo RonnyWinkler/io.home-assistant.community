@@ -42,26 +42,28 @@ class TimerDevice extends BaseDevice {
     async onEntityUpdate(data) {
         await super.onEntityUpdate(data);
         try {
-            if (data.state != undefined &&
-                data.state != "unavailable"){
-                try{
-                    await this.setCapabilityValue('timer_state', data.state);
+            if(data && data.entity_id && data.entity_id == this.entityId) {
+                if (data.state != undefined &&
+                    data.state != "unavailable"){
+                    try{
+                        await this.setCapabilityValue('timer_state', data.state);
+                    }
+                    catch(error){
+                        this.log("Unknown state: "+data.state);
+                    }
                 }
-                catch(error){
-                    this.log("Unknown state: "+data.state);
+                if (data.attributes.duration != undefined ){
+                    await this.setCapabilityValue('timer_duration', data.attributes.duration);
                 }
-            }
-            if (data.attributes.duration != undefined ){
-                await this.setCapabilityValue('timer_duration', data.attributes.duration);
-            }
-            else{
-                await this.setCapabilityValue('timer_duration', '0:00:00');
-            }
-            if (data.attributes.remaining != undefined ){
-                await this.setCapabilityValue('timer_remaining', data.attributes.remaining);
-            }
-            else{
-                await this.setCapabilityValue('timer_remaining', '0:00:00');
+                else{
+                    await this.setCapabilityValue('timer_duration', '0:00:00');
+                }
+                if (data.attributes.remaining != undefined ){
+                    await this.setCapabilityValue('timer_remaining', data.attributes.remaining);
+                }
+                else{
+                    await this.setCapabilityValue('timer_remaining', '0:00:00');
+                }
             }
         }
         catch(error) {

@@ -1,0 +1,22 @@
+<script>
+
+    Homey.setTitle(__('repair.title.ready'));
+
+    Homey.showLoadingOverlay();
+    Homey.emit('updateCapabilities', null, function (err, device) {
+        Homey.hideLoadingOverlay();
+        if (err) {
+            console.error(err);
+            Homey.alert( err, 'error' );
+            return;
+        }
+  
+        // Homey.done();
+        Homey.setNavigationClose()
+        return;
+    });
+</script>
+
+<div style="text-align: center;">
+    <span data-i18n="repair.title.update_capabilities_ready"></span>
+</div>

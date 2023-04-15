@@ -11,7 +11,7 @@
             "id": "login_credentials",
             "template": "login_credentials",
             "options": {
-                "logo": "logo.png",
+                "logo": "../../../assets/images/logo.png",
                 "usernameLabel": { 
                     "en": "Server" 
                 },

@@ -1,0 +1,32 @@
+<style>
+    .preEntityDetails {
+        font-size: 12px;
+        color: inherit;
+        border: initial;
+        padding: initial;
+        font-family: inherit;
+        line-height: 1.3;
+        user-select: text;
+    }
+</style>
+<script type="application/javascript">
+
+    Homey.setTitle(Homey.__("repair.title.device_details"));
+    
+</script>
+
+<div>
+    <fieldset>
+            <pre class="preEntityDetails" id="entityDetails"></pre>
+    </fieldset>
+
+</div>
+
+<script type="application/javascript">
+    var entityDetails = document.getElementById('entityDetails');
+    Homey.emit('getEntity').then(function (entity) {
+        let string = JSON.stringify(entity, null, "  ");
+        entityDetails.textContent = string;
+    });
+
+</script>

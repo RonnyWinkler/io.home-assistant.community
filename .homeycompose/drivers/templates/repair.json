@@ -79,7 +79,7 @@
           "prev": "select"
       },
       "options": {
-        "logo": "logo.png",
+        "logo": "../../../assets/images/logo.png",
         "usernameLabel": { 
             "en": "Server" 
         },

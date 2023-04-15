@@ -29,7 +29,7 @@ class ScheduleDevice extends BaseDevice {
     // Entity update ============================================================================================
     async onEntityUpdate(data) {
         await super.onEntityUpdate(data);
-        if(data) {
+        if(data && data.entity_id && data.entity_id == this.entityId) {
             await this.setCapabilityValue("alarm_generic", data.state == "on");
 
             if (data.attributes.next_event != undefined){

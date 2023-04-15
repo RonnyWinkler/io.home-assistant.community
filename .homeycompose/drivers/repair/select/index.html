@@ -1,0 +1,179 @@
+
+<style>
+    .button {
+        text-align: center;
+        width: 100%;
+        position: relative;
+        /* margin: 10px 0px;
+        left:-20px; */
+        cursor: pointer;
+    }
+</style>
+<script type="application/javascript">
+
+    Homey.setTitle(Homey.__("repair.title.select"));
+    // Homey.setNavigationClose();
+
+    function onSelectAuth(){
+        Homey.showView("login_credentials");
+    }
+    function onSelectIcon(){
+        Homey.showView("icon");
+    }
+    function onSelectEntity(){
+        Homey.showView("device_details");
+    }
+    function onSelectCapabilityUpdate(){
+        Homey.showView("capability_update_dlg");
+    }
+    function onSelectLog(){
+        Homey.showView("log");
+    }
+    function onAddEntity(){
+        Homey.showView("add_entity");
+    }
+    function onChangeEntity(){
+        Homey.showView("change_entity");
+    }
+    function onRemoveEntity(){
+        Homey.showView("remove_entity");
+    }
+
+</script>
+
+<div>
+    <fieldset id="fieldsetCustomDevice" class="homey-form-fieldset" style="display:none">
+        <legend class="homey-form-checkbox-set-title"><span data-i18n="repair.title.adjust_custom_device"></span></legend>
+        <div>
+            <p>
+                <button id="btnAddEntity" class="homey-button-primary-full" onClick="onAddEntity()"><span data-i18n="repair.title.add_entity"></span></button>
+            </p>
+        </div>
+        <div>
+            <p>
+                <button id="btnChangeEntity" class="homey-button-primary-full" onClick="onChangeEntity()"><span data-i18n="repair.title.change_entity"></span></button>
+            </p>
+        </div>
+        <div>
+            <p>
+                <button id="btnRemoveEntity" class="homey-button-primary-full" onClick="onRemoveEntity()"><span data-i18n="repair.title.remove_entity"></span></button>
+            </p>
+        </div>
+    </fieldset>
+    <fieldset class="homey-form-fieldset">
+        <legend class="homey-form-checkbox-set-title"><span data-i18n="repair.title.maintenance"></span></legend>
+        <div>
+            <p>
+                <button id="btnEntity" class="homey-button-primary-full" onClick="onSelectEntity()" visibility = 'hidden'><span data-i18n="repair.title.device_details"></span></button>
+            </p>
+        </div>
+        <div>
+            <p>
+                <button id="btnLog" class="homey-button-primary-full" onClick="onSelectLog()" visibility = 'hidden'><span data-i18n="repair.title.log"></span></button>
+            </p>
+        </div>
+        <div>
+            <p>
+                <button id="btnAuth" class="homey-button-primary-full" onClick="onSelectAuth()" visibility = 'hidden'><span data-i18n="repair.title.auth"></span></button>
+            </p>
+        </div>
+        <div>
+            <p>
+                <button id="btnCapabilityUpdate" class="homey-button-primary-full" onClick="onSelectCapabilityUpdate()" visibility = 'hidden'><span data-i18n="repair.title.update_capabilities_title"></span></button>
+            </p>
+        </div>
+        <div>
+            <p>
+                <button id="btnIcon" class="homey-button-primary-full" onClick="onSelectIcon()" visibility = 'hidden'><span data-i18n="repair.title.icon"></span></button>
+            </p>
+            <p>
+                <span id="spanIconState"></span>
+                <br>
+                <span id="spanAppRestart"></span>
+            </p>
+        </div>
+    </fieldset>
+</div>
+
+<script type="application/javascript">
+
+    Homey.emit('isDeviceChangeable').then(function (result) {
+        button = document.getElementById("btnAddEntity");
+        button.disabled = !result;
+        if (!result){
+            button.className = "homey-button-primary-full is-disabled";
+        }
+        else{
+            button.className = "homey-button-primary-full";
+        }
+
+        button = document.getElementById("btnRemoveEntity");
+        button.disabled = !result;
+        if (!result){
+            button.className = "homey-button-primary-full is-disabled";
+        }
+        else{
+            button.className = "homey-button-primary-full";
+        }
+
+        fieldset = document.getElementById("fieldsetCustomDevice");
+        if (!result){
+            fieldset.style.display = 'none';
+        }
+        else{
+            fieldset.style.display = 'unset';
+        }
+
+    });
+
+    Homey.emit('isCapabilityChangeable').then(function (result) {
+        button = document.getElementById("btnCapabilityUpdate");
+        button.disabled = !result;
+        if (!result){
+            button.className = "homey-button-primary-full is-disabled";
+        }
+        else{
+            button.className = "homey-button-primary-full";
+        }
+    });
+
+    Homey.emit('isIconChangeable').then(function (result) {
+        button = document.getElementById("btnIcon");
+        button.disabled = !result;
+        if (!result){
+            button.className = "homey-button-primary-full is-disabled";
+        }
+        else{
+            button.className = "homey-button-primary-full";
+        }
+        if (result){
+            let span = document.getElementById('spanIconState');
+            while( span.firstChild ) {
+                span.removeChild( span.firstChild );
+            }
+            span.appendChild( document.createTextNode(__('repair.title.icon_activated')) );
+            span.style.color = "green";
+
+            span = document.getElementById('spanAppRestart');
+            while( span.firstChild ) {
+                span.removeChild( span.firstChild );
+            }
+            span.appendChild( document.createTextNode(__('repair.title.app_restart')) );
+            span.style.color = "orange";
+        }
+        else{
+            let span = document.getElementById('spanIconState');
+            while( span.firstChild ) {
+                span.removeChild( span.firstChild );
+            }
+            span.appendChild( document.createTextNode(__('repair.title.icon_deactivated')) );
+            span.style.color = "red";
+
+            span = document.getElementById('spanAppRestart');
+            while( span.firstChild ) {
+                span.removeChild( span.firstChild );
+            }
+        }
+    });
+
+</script>

@@ -1,0 +1,202 @@
+<link rel="stylesheet" type="text/css" href="../../../assets/css/autoComplete.css"/>
+
+<link rel="stylesheet" type="text/css" href="../../../assets/css/toastmessage.css"/>
+<script src="../../../assets/js/toastmessage.js"></script>
+
+<link rel="stylesheet" type="text/css" href="../../../assets/css/infomessage.css"/>
+<script src="../../../assets/js/infomessage.js"></script>
+
+<style>
+  #div_button {
+    position: sticky;
+    bottom: 0px;
+    /* bottom: calc(var(--homey-su-2) * -1);
+    padding: 0 0 var(--homey-su-2) 0; */
+    background: var(--homey-color-white);
+    border-radius: var(--homey-border-radius);
+    box-shadow: 0 5px 5px 15px var(--homey-color-white);
+  }
+  #spanResultlistEntity {
+    font-size: 12px;
+  }
+  .info_icon{
+    cursor: pointer; 
+    color: darkgray;
+    display: inline;
+  }
+</style>
+
+<script type="application/javascript">
+
+  Homey.setTitle(Homey.__("repair.title.change_entity"));
+  // Homey.setNavigationClose();
+
+  // Add entity (add button pressed)
+  async function onChangeEntity(){
+    document.getElementById('btnChangeEntityProcess').classList.add("is-loading");
+    let data = {
+      entity_id: document.getElementById('entityChange').value,
+      name: document.getElementById('nameChange').value,
+      unit: document.getElementById('unitChange').value,
+      converter_ha2homey: document.getElementById('converter_ha2homeyChange').value,
+      converter_homey2ha: document.getElementById('converter_homey2haChange').value
+    };
+    let result = await Homey.emit("changeEntity", data);
+    let message = new Message();
+    if (!result.changed){
+      message.error(result.message,
+        {
+          duration: 4,
+          closable: true,
+        }
+      );
+      // Homey.alert( result.message, 'error' );
+    }
+    else{
+      message.success(result.message,
+        {
+          duration: 4,
+          closable: true,
+        }
+      );
+      // Homey.alert( result.message, 'info' );
+      // Homey.showView("select");
+    }
+    document.getElementById('btnChangeEntityProcess').classList.remove("is-loading");
+  }
+
+  function onInfoConverter(){
+    let message = new InfoMessage();
+    message.info( 
+        Homey.__("repair.custom_device.info_converter"),
+        {
+          duration: 0,
+          closable: true,
+          dangerUseHtml: true
+        }
+      );
+  }
+</script>
+
+<div>
+  <fieldset class="homey-form-fieldset">
+    <div class="homey-form-group">
+      <label for="entityChange" class="homey-form-label"><span data-i18n="repair.custom_device.entity"></span></label>
+      <input id="entityChange"  class="homey-form-input" type="text" value=""/>
+    </div>
+    <div class="homey-form-group">
+      <label for="nameChange" class="homey-form-label"><span data-i18n="repair.custom_device.name"></span></label>
+      <input id="nameChange"  class="homey-form-input" type="text" value=""/>
+    </div>
+    <div class="homey-form-group">
+      <label for="unitChange" class="homey-form-label"><span data-i18n="repair.custom_device.unit"></span></label>
+      <input id="unitChange"  class="homey-form-input" type="text" value=""/>
+    </div>
+    <div class="homey-form-group" id="divInputConverter">
+      <label for="converter_ha2homeyChange" class="homey-form-label" style="display: inline;"><span data-i18n="repair.custom_device.converter_ha2homey"></span></label>
+      <div class="info_icon" onClick="onInfoConverter()"> 
+        <span class="fa fa-icon fa-info-circle"></span>
+      </div>
+      <textarea class="homey-form-textarea"id="converter_ha2homeyChange" rows="5"
+                placeholder="(value) => { return parseFloat(value) * 0.01; }"></textarea>
+    </div>
+    <div class="homey-form-group" id="divOutputConverter" style="display:none">
+      <label for="converter_homey2haChange" class="homey-form-label"><span data-i18n="repair.custom_device.converter_homey2ha"></span></label>
+      <textarea class="homey-form-textarea" id="converter_homey2haChange" rows="5"
+                placeholder="(value) => { return value * 100; }"></textarea>
+    </div>
+    <div class="homey-form-group" id="div_button">
+      <button id="btnChangeEntityProcess" class="homey-button-primary-shadow-full" onClick="onChangeEntity()"><span data-i18n="repair.title.change_entity"></span></button>
+    </div>
+  </fieldset>
+</div>
+
+<script src="../../../assets/js/autoComplete.min.js"></script>
+
+
+<script>
+  (function () {
+      let autoCompleteJS = new autoComplete({
+          selector: "#entityChange",
+          placeHolder: Homey.__("repair.custom_device.entity_placeholder"),
+          debounce: 300,
+          threshold: 1,
+          data: {
+              src : (query) => {
+                  return Homey.emit("getCustomCapabilityList", query).then(function (result) {
+                      return result;
+                  });
+              },
+              keys: ["name", "entity_id"],
+              cache: false,
+              filter: (list) => {
+                // Filter duplicates
+                // incase of multiple data keys usage
+                const filteredResults = Array.from(
+                  new Set(list.map((value) => value.value.entity_id))
+                ).map((entity_id) => {
+                  return list.find((value) => value.value.entity_id === entity_id);
+                });
+                return filteredResults;
+              }
+          },
+          resultsList:{
+            element: (list, data) => {
+              const info = document.createElement("p");
+              if (data.results.length > 0) {
+                info.innerHTML = 
+                  Homey.__("repair.custom_device.result_count_01")+
+                  " <strong>"+
+                  data.results.length+
+                  "</strong> "+
+                  Homey.__("repair.custom_device.result_count_02")+
+                  " <strong>"+data.matches.length+"</strong> "+
+                  Homey.__("repair.custom_device.result_count_03");
+              } else {
+                info.innerHTML = 
+                  "<strong>"+
+                  Homey.__("repair.custom_device.result_count_04")+
+                  "</strong>";
+              }
+              list.prepend(info);
+            },
+            maxResults: 100,
+            noResults: true
+          },
+          resultItem: {
+            element: (item, data) => {
+              if (data.key == 'name'){
+                item.innerHTML =  "<span id='spanResultlistName'>"+data.match+"</span>"+
+                                  "<br>"+
+                                  "<span id='spanResultlistEntity'>"+data.value.entity_id+"</span>";
+              }
+              else{
+                item.innerHTML =  "<span id='spanResultlistName'>"+data.value.name+"</span>"+
+                                  "<br>"+
+                                  "<span id='spanResultlistEntity'>"+data.match+"</span>";
+              }
+            },
+            highlight: true
+          },
+          events: {
+              input: {
+                  selection: (event) => {
+                      let value = event.detail.selection.value.entity_id;
+                      autoCompleteJS.input.value = value;
+                      document.getElementById('nameChange').value = event.detail.selection.value.name;
+                      document.getElementById('unitChange').value = event.detail.selection.value.unit;
+                      document.getElementById('converter_ha2homeyChange').value = event.detail.selection.value.converter_ha2homey;
+                      document.getElementById('converter_homey2haChange').value = event.detail.selection.value.converter_homey2ha;
+                  },
+                  focus: () => {
+                    // if (autoCompleteJS.input.value.length) autoCompleteJS.start();
+                    autoCompleteJS.start();
+                  }
+              }
+          },
+          trigger: (query) => {
+              return true; // Search also for empty field
+          },
+      });
+  })();
+</script>

@@ -1,7 +1,7 @@
 {
   "_comment": "This file is generated. Please edit .homeycompose/app.json instead.",
   "id": "io.home-assistant.community",
-  "version": "1.3.0",
+  "version": "1.3.2",
   "compatibility": ">=8.1.0",
   "sdk": 3,
   "brandColor": "#0DA6EA",
@@ -276,7 +276,7 @@
           {
             "name": "device",
             "type": "device",
-            "filter": "driver_id=custom|compound|climate|climate_fan|fan|water_heater|light|media|sensor|switch|vacuum|cover"
+            "filter": "driver_id=custom|compound|climate|climate_fan|fan|water_heater|light|media|sensor|switch|vacuum|cover|button|lock|presence|scene|schedule|script|timer"
           }
         ],
         "id": "capability_changed"
@@ -2958,7 +2958,7 @@
           "id": "login_credentials",
           "template": "login_credentials",
           "options": {
-            "logo": "logo.png",
+            "logo": "../../../assets/images/logo.png",
             "usernameLabel": {
               "en": "Server"
             },
@@ -3060,7 +3060,7 @@
             "prev": "select"
           },
           "options": {
-            "logo": "logo.png",
+            "logo": "../../../assets/images/logo.png",
             "usernameLabel": {
               "en": "Server"
             },
@@ -3124,7 +3124,7 @@
           "id": "login_credentials",
           "template": "login_credentials",
           "options": {
-            "logo": "logo.png",
+            "logo": "../../../assets/images/logo.png",
             "usernameLabel": {
               "en": "Server"
             },
@@ -3226,7 +3226,7 @@
             "prev": "select"
           },
           "options": {
-            "logo": "logo.png",
+            "logo": "../../../assets/images/logo.png",
             "usernameLabel": {
               "en": "Server"
             },
@@ -3394,7 +3394,7 @@
           "id": "login_credentials",
           "template": "login_credentials",
           "options": {
-            "logo": "logo.png",
+            "logo": "../../../assets/images/logo.png",
             "usernameLabel": {
               "en": "Server"
             },
@@ -3496,7 +3496,7 @@
             "prev": "select"
           },
           "options": {
-            "logo": "logo.png",
+            "logo": "../../../assets/images/logo.png",
             "usernameLabel": {
               "en": "Server"
             },
@@ -3704,7 +3704,7 @@
           "id": "login_credentials",
           "template": "login_credentials",
           "options": {
-            "logo": "logo.png",
+            "logo": "../../../assets/images/logo.png",
             "usernameLabel": {
               "en": "Server"
             },
@@ -3806,7 +3806,7 @@
             "prev": "select"
           },
           "options": {
-            "logo": "logo.png",
+            "logo": "../../../assets/images/logo.png",
             "usernameLabel": {
               "en": "Server"
             },
@@ -4161,7 +4161,7 @@
           "id": "login_credentials",
           "template": "login_credentials",
           "options": {
-            "logo": "logo.png",
+            "logo": "../../../assets/images/logo.png",
             "usernameLabel": {
               "en": "Server"
             },
@@ -4263,7 +4263,7 @@
             "prev": "select"
           },
           "options": {
-            "logo": "logo.png",
+            "logo": "../../../assets/images/logo.png",
             "usernameLabel": {
               "en": "Server"
             },
@@ -4405,7 +4405,7 @@
           "id": "login_credentials",
           "template": "login_credentials",
           "options": {
-            "logo": "logo.png",
+            "logo": "../../../assets/images/logo.png",
             "usernameLabel": {
               "en": "Server"
             },
@@ -4507,7 +4507,7 @@
             "prev": "select"
           },
           "options": {
-            "logo": "logo.png",
+            "logo": "../../../assets/images/logo.png",
             "usernameLabel": {
               "en": "Server"
             },
@@ -4807,7 +4807,7 @@
           "id": "login_credentials",
           "template": "login_credentials",
           "options": {
-            "logo": "logo.png",
+            "logo": "../../../assets/images/logo.png",
             "usernameLabel": {
               "en": "Server"
             },
@@ -4909,7 +4909,7 @@
             "prev": "select"
           },
           "options": {
-            "logo": "logo.png",
+            "logo": "../../../assets/images/logo.png",
             "usernameLabel": {
               "en": "Server"
             },
@@ -5095,7 +5095,7 @@
           "id": "login_credentials",
           "template": "login_credentials",
           "options": {
-            "logo": "logo.png",
+            "logo": "../../../assets/images/logo.png",
             "usernameLabel": {
               "en": "Server"
             },
@@ -5197,7 +5197,7 @@
             "prev": "select"
           },
           "options": {
-            "logo": "logo.png",
+            "logo": "../../../assets/images/logo.png",
             "usernameLabel": {
               "en": "Server"
             },
@@ -5417,7 +5417,7 @@
           "id": "login_credentials",
           "template": "login_credentials",
           "options": {
-            "logo": "logo.png",
+            "logo": "../../../assets/images/logo.png",
             "usernameLabel": {
               "en": "Server"
             },
@@ -5519,7 +5519,7 @@
             "prev": "select"
           },
           "options": {
-            "logo": "logo.png",
+            "logo": "../../../assets/images/logo.png",
             "usernameLabel": {
               "en": "Server"
             },
@@ -5584,7 +5584,7 @@
           "id": "login_credentials",
           "template": "login_credentials",
           "options": {
-            "logo": "logo.png",
+            "logo": "../../../assets/images/logo.png",
             "usernameLabel": {
               "en": "Server"
             },
@@ -5686,7 +5686,7 @@
             "prev": "select"
           },
           "options": {
-            "logo": "logo.png",
+            "logo": "../../../assets/images/logo.png",
             "usernameLabel": {
               "en": "Server"
             },
@@ -5837,7 +5837,7 @@
           "id": "login_credentials",
           "template": "login_credentials",
           "options": {
-            "logo": "logo.png",
+            "logo": "../../../assets/images/logo.png",
             "usernameLabel": {
               "en": "Server"
             },
@@ -5939,7 +5939,7 @@
             "prev": "select"
           },
           "options": {
-            "logo": "logo.png",
+            "logo": "../../../assets/images/logo.png",
             "usernameLabel": {
               "en": "Server"
             },
@@ -6016,7 +6016,7 @@
           "id": "login_credentials",
           "template": "login_credentials",
           "options": {
-            "logo": "logo.png",
+            "logo": "../../../assets/images/logo.png",
             "usernameLabel": {
               "en": "Server"
             },
@@ -6118,7 +6118,7 @@
             "prev": "select"
           },
           "options": {
-            "logo": "logo.png",
+            "logo": "../../../assets/images/logo.png",
             "usernameLabel": {
               "en": "Server"
             },
@@ -6167,7 +6167,7 @@
           "id": "login_credentials",
           "template": "login_credentials",
           "options": {
-            "logo": "logo.png",
+            "logo": "../../../assets/images/logo.png",
             "usernameLabel": {
               "en": "Server"
             },
@@ -6269,7 +6269,7 @@
             "prev": "select"
           },
           "options": {
-            "logo": "logo.png",
+            "logo": "../../../assets/images/logo.png",
             "usernameLabel": {
               "en": "Server"
             },
@@ -6376,7 +6376,7 @@
           "id": "login_credentials",
           "template": "login_credentials",
           "options": {
-            "logo": "logo.png",
+            "logo": "../../../assets/images/logo.png",
             "usernameLabel": {
               "en": "Server"
             },
@@ -6478,7 +6478,7 @@
             "prev": "select"
           },
           "options": {
-            "logo": "logo.png",
+            "logo": "../../../assets/images/logo.png",
             "usernameLabel": {
               "en": "Server"
             },
@@ -6542,7 +6542,7 @@
           "id": "login_credentials",
           "template": "login_credentials",
           "options": {
-            "logo": "logo.png",
+            "logo": "../../../assets/images/logo.png",
             "usernameLabel": {
               "en": "Server"
             },
@@ -6644,7 +6644,7 @@
             "prev": "select"
           },
           "options": {
-            "logo": "logo.png",
+            "logo": "../../../assets/images/logo.png",
             "usernameLabel": {
               "en": "Server"
             },
@@ -6834,7 +6834,7 @@
           "id": "login_credentials",
           "template": "login_credentials",
           "options": {
-            "logo": "logo.png",
+            "logo": "../../../assets/images/logo.png",
             "usernameLabel": {
               "en": "Server"
             },
@@ -6936,7 +6936,7 @@
             "prev": "select"
           },
           "options": {
-            "logo": "logo.png",
+            "logo": "../../../assets/images/logo.png",
             "usernameLabel": {
               "en": "Server"
             },
@@ -7112,7 +7112,7 @@
           "id": "login_credentials",
           "template": "login_credentials",
           "options": {
-            "logo": "logo.png",
+            "logo": "../../../assets/images/logo.png",
             "usernameLabel": {
               "en": "Server"
             },
@@ -7214,7 +7214,7 @@
             "prev": "select"
           },
           "options": {
-            "logo": "logo.png",
+            "logo": "../../../assets/images/logo.png",
             "usernameLabel": {
               "en": "Server"
             },
@@ -7329,7 +7329,7 @@
           "id": "login_credentials",
           "template": "login_credentials",
           "options": {
-            "logo": "logo.png",
+            "logo": "../../../assets/images/logo.png",
             "usernameLabel": {
               "en": "Server"
             },
@@ -7431,7 +7431,7 @@
             "prev": "select"
           },
           "options": {
-            "logo": "logo.png",
+            "logo": "../../../assets/images/logo.png",
             "usernameLabel": {
               "en": "Server"
             },
@@ -7589,7 +7589,7 @@
           "id": "login_credentials",
           "template": "login_credentials",
           "options": {
-            "logo": "logo.png",
+            "logo": "../../../assets/images/logo.png",
             "usernameLabel": {
               "en": "Server"
             },
@@ -7691,7 +7691,7 @@
             "prev": "select"
           },
           "options": {
-            "logo": "logo.png",
+            "logo": "../../../assets/images/logo.png",
             "usernameLabel": {
               "en": "Server"
             },
