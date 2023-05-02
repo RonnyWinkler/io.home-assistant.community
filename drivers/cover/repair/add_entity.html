@@ -40,6 +40,7 @@
     document.getElementById('btnAddEntityProcess').classList.add("is-loading");
     let data = {
       entity_id: document.getElementById('entityAdd').value,
+      attribute: document.getElementById('entityAttributeAdd').value,
       capability: document.getElementById('capabilityAdd').value,
       name: document.getElementById('nameAdd').value,
       unit: document.getElementById('unitAdd').value,
@@ -108,16 +109,61 @@
         }
       );
   }
+  function onInfoEntity(){
+    let message = new InfoMessage();
+    message.info( 
+        Homey.__("repair.custom_device.info_entity"),
+        {
+          duration: 0,
+          closable: true,
+          dangerUseHtml: true
+        }
+      );
+  }
+
+  function onAddEntityAttributeClick(){
+    if (document.getElementById("addEntityAttributeAdd").checked){
+      document.getElementById("labelEntityAttributeAdd").style.display = 'unset';
+      document.getElementById("entityAttributeAdd").style.display = 'unset';
+    }
+    else{
+      document.getElementById("labelEntityAttributeAdd").style.display = 'none';
+      document.getElementById("entityAttributeAdd").style.display = 'none';
+      document.getElementById("entityAttributeAdd").value = '';
+    }
+  }
+
+  // update visible/invisible fields
+  onAddEntityAttributeClick();
 </script>
 
 <div>
   <fieldset class="homey-form-fieldset">
     <div class="homey-form-group">
       <label for="entityAdd" class="homey-form-label"><span data-i18n="repair.custom_device.entity"></span></label>
+      <!-- <div class="info_icon" onClick="onInfoEntity()"> 
+        <span class="fa fa-icon fa-info-circle"></span>
+      </div> -->
       <input id="entityAdd"  class="homey-form-input" type="text" value=""/>
+    <!-- </div>
+    <div class="homey-form-group"> -->
+      <fieldset class="homey-form-checkbox-set">
+        <label class="homey-form-checkbox">
+          <input class="homey-form-checkbox-input" type="checkbox" id="addEntityAttributeAdd" onclick="onAddEntityAttributeClick()"/>
+          <span class="homey-form-checkbox-checkmark"></span>
+          <span class="homey-form-checkbox-text"><span data-i18n="repair.custom_device.add_entity_attribute"></span></span>
+        </label>
+      </fieldset>
+      <div class="info_icon" onClick="onInfoEntity()"> 
+        <span class="fa fa-icon fa-info-circle"></span>
+      </div>
     </div>
     <div class="homey-form-group">
-      <label for="nameAdd" class="homey-form-label"><span data-i18n="repair.custom_device.name"></span></label>
+      <label id="labelEntityAttributeAdd" for="entityAttributeAdd" class="homey-form-label"><span data-i18n="repair.custom_device.entity_attribute"></span></label>
+      <input id="entityAttributeAdd"  class="homey-form-input" type="text" value=""/>
+    </div>
+    <div class="homey-form-group">
+      <label for="nameAdd" class="homey-form-label" style="display: inline;"><span data-i18n="repair.custom_device.name"></span></label>
       <input id="nameAdd"  class="homey-form-input" type="text" value=""/>
     </div>
     <div class="homey-form-group">
@@ -130,8 +176,8 @@
         <span class="fa fa-icon fa-info-circle"></span>
       </div>
       <input id="capabilityAdd"  class="homey-form-input" type="text" value=""/>
-    </div>
-    <div class="homey-form-group">
+    <!-- </div>
+    <div class="homey-form-group"> -->
       <fieldset class="homey-form-checkbox-set">
         <!-- <legend class="homey-form-checkbox-set-title"><span data-i18n="repair.custom_device.add_as_main_capability"></span></legend> -->
     
@@ -144,7 +190,7 @@
       <div class="info_icon" onClick="onInfoMainCapability()"> 
         <span class="fa fa-icon fa-info-circle"></span>
       </div>
-  </div>
+    </div>
     <div class="homey-form-group" id="divInputConverter">
       <label for="converter_ha2homeyAdd" class="homey-form-label" style="display: inline;"><span data-i18n="repair.custom_device.converter_ha2homey"></span></label>
       <div class="info_icon" onClick="onInfoConverter()"> 
@@ -284,6 +330,48 @@
                   focus: () => {
                     // if (autoCompleteJS.input.value.length) autoCompleteJS.start();
                     autoCompleteJSCapability.start();
+                  }
+              }
+          },
+          trigger: (query) => {
+              return true; // Search also for empty field
+          },
+      });
+
+      let autoCompleteJSAttribute = new autoComplete({
+          selector: "#entityAttributeAdd",
+          placeHolder: Homey.__("repair.custom_device.entity_attribute_placeholder"),
+          debounce: 300,
+          threshold: 1,
+          data: {
+              src : (query) => {
+                  return Homey.emit("getCustomEntityAttributeList", document.getElementById('entityAdd').value ).then(function (result) {
+                    return result;
+                  });
+              },
+              keys: ["id"],
+              cache: true
+          },
+          resultsList:{
+            maxResults: 100,
+            noResults: true
+          },
+          resultItem: {
+            element: (item, data) => {
+                item.innerHTML =  "<span id='spanResultlistName'>"+data.match+"</span>";
+            },
+            highlight: true
+          },
+          events: {
+              input: {
+                  selection: async (event) => {
+                      let value = event.detail.selection.value.id;
+                      autoCompleteJSAttribute.input.value = value;
+                      document.getElementById('capabilityAdd').value = await Homey.emit("getCustomTemplateCapability", document.getElementById('entityAdd').value +'.'+ event.detail.selection.value.id)
+                  },
+                  focus: () => {
+                    // if (autoCompleteJS.input.value.length) autoCompleteJS.start();
+                    autoCompleteJSAttribute.start();
                   }
               }
           },

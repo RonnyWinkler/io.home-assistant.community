@@ -45,6 +45,9 @@
         "custom_device": {
             "entity": "Entity",
             "entity_placeholder": "Select entity...",
+            "add_entity_attribute": "Select entity attribute",
+            "entity_attribute": "Attribute",
+            "entity_attribute_placeholder": "Select attribute...",
             "capability": "Capability",
             "capability_placeholder": "measure_temperature",
             "name": "Name",
@@ -57,6 +60,7 @@
             "result_count_03": "results",
             "result_count_04": "No results found",
             "entity_not_found": "Entity not found",
+            "capability_not_valid": "Capability not valid",
             "entity_already_added": "Entity already added",
             "capability_already_added": "Capability already added",
             "entity_added": "Entity has been added",
@@ -64,7 +68,8 @@
             "entity_removed": "Entity has been removed",
             "info_main_capability": "Activate this option to add an entity as main capability.\n\n<strong>Switch</strong> will be added as onoff capability including quick action for the device tile.\n\n<strong>Power entity</strong> will be added as measure_power capability to enable measurement in Homey energy.",
             "info_converter": "You can add a <strong>JavaScript function</strong> to convert the parameter <strong>value</strong> and return a converted/calculated value that should be set as capability value of the Homey device.\nUse the correct data type.\n\n<strong>Example for simple calculation</strong>\n\n(value) => { return value * 100; }\n\nThis uses the 100x of the HA value as capability value.\n\n<strong>Example for date conversion</strong> from ISO to local date:\n\n(value) => { return new Date(value).toLocaleString('de-DE', {hour12s: false, hour: '2-digit', minute: '2-digit', day: '2-digit', month: '2-digit', year: 'numeric' }); }\n\nReplace 'de-DE' with your locale.",
-            "info_capability": "The device capability is preassigned after entity selection.\n\nIf the capability can not be determined correctly, you can set a custom target capability. Alternatively you can adjust the preassigned capability name.\n\nYou can use capability names  like <strong>measure_*, meter_*, alarm_*, onoff, onoff_button or button</strong>. Or select one capability from the autocomplete list.\n\nWhen using a capability name more than once in a device, use subcapabilities instead like <strong>onoff.livingroom</strong>."
+            "info_capability": "The device capability is preassigned after entity selection.\n\nIf the capability can not be determined correctly, you can set a custom target capability. Alternatively you can adjust the preassigned capability name.\n\nYou can use capability names  like <strong>measure_*, meter_*, alarm_*, onoff, onoff_button or button</strong>. Or select one capability from the autocomplete list.\n\nWhen using a capability name more than once in a device, use subcapabilities instead like <strong>onoff.livingroom</strong>.",
+            "info_entity": "Select an entity from the list to add the entity state as device capability.\n\nIf you want to add an <strong>entity attribute</strong> instead, you can activate this checkbox and select the attribute of the selected entity.\n\nYou can insert an attribute manually, too.\n\nExamples for entity weather.home:\n\nSimple attribute:\ntemperature\n\nArray:\nforecast[0].temperature\n\nSelect a corresponding capability (possibly including a sub capability) if a numeric or alphanumeric capability is not the right one and the attribute is representing e.g. a temperature or a binary sensor/alarm."
         }
     },
     "device_unavailable_reason": {

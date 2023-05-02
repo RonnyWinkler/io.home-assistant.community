@@ -36,6 +36,7 @@
     document.getElementById('btnChangeEntityProcess').classList.add("is-loading");
     let data = {
       entity_id: document.getElementById('entityChange').value,
+      capability: document.getElementById('capabilityChange').value,
       name: document.getElementById('nameChange').value,
       unit: document.getElementById('unitChange').value,
       converter_ha2homey: document.getElementById('converter_ha2homeyChange').value,
@@ -85,6 +86,10 @@
       <input id="entityChange"  class="homey-form-input" type="text" value=""/>
     </div>
     <div class="homey-form-group">
+      <label for="capabilityChange" class="homey-form-label"><span data-i18n="repair.custom_device.capability"></span></label>
+      <input id="capabilityChange"  class="homey-form-input" type="text" value="" readonly="readonly" style="color: var(--homey-color-text-light);"/>
+    </div>
+    <div class="homey-form-group">
       <label for="nameChange" class="homey-form-label"><span data-i18n="repair.custom_device.name"></span></label>
       <input id="nameChange"  class="homey-form-input" type="text" value=""/>
     </div>
@@ -127,15 +132,15 @@
                       return result;
                   });
               },
-              keys: ["name", "entity_id"],
+              keys: ["name", "entity_id", "capability"],
               cache: false,
               filter: (list) => {
                 // Filter duplicates
                 // incase of multiple data keys usage
                 const filteredResults = Array.from(
-                  new Set(list.map((value) => value.value.entity_id))
-                ).map((entity_id) => {
-                  return list.find((value) => value.value.entity_id === entity_id);
+                  new Set(list.map((value) => value.value.capability))
+                ).map((capability) => {
+                  return list.find((value) => ( value.value.capability === capability ) );
                 });
                 return filteredResults;
               }
@@ -168,10 +173,21 @@
               if (data.key == 'name'){
                 item.innerHTML =  "<span id='spanResultlistName'>"+data.match+"</span>"+
                                   "<br>"+
-                                  "<span id='spanResultlistEntity'>"+data.value.entity_id+"</span>";
+                                  "<span id='spanResultlistEntity'>"+data.value.entity_id+"</span>"+
+                                  "<br>"+
+                                  "<span id='spanResultlistEntity'>"+data.value.capability+"</span>";
               }
-              else{
+              if (data.key == 'entity_id'){
                 item.innerHTML =  "<span id='spanResultlistName'>"+data.value.name+"</span>"+
+                                  "<br>"+
+                                  "<span id='spanResultlistEntity'>"+data.match+"</span>"+
+                                  "<br>"+
+                                  "<span id='spanResultlistEntity'>"+data.value.capability+"</span>";
+              }
+              if (data.key == 'capability'){
+                item.innerHTML =  "<span id='spanResultlistName'>"+data.value.name+"</span>"+
+                                  "<br>"+
+                                  "<span id='spanResultlistEntity'>"+data.entity_id+"</span>"+
                                   "<br>"+
                                   "<span id='spanResultlistEntity'>"+data.match+"</span>";
               }
@@ -183,6 +199,7 @@
                   selection: (event) => {
                       let value = event.detail.selection.value.entity_id;
                       autoCompleteJS.input.value = value;
+                      document.getElementById('capabilityChange').value = event.detail.selection.value.capability;
                       document.getElementById('nameChange').value = event.detail.selection.value.name;
                       document.getElementById('unitChange').value = event.detail.selection.value.unit;
                       document.getElementById('converter_ha2homeyChange').value = event.detail.selection.value.converter_ha2homey;

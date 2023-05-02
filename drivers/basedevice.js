@@ -2,6 +2,8 @@
 
 const Homey = require('homey');
 const https = require('https');
+const lodashget = require('lodash.get');
+
 const CAPABILITIES_SET_DEBOUNCE = 100;
 
 // Device init timeout (sec). Reads entity data with a delay to get ready on app start
@@ -103,7 +105,7 @@ class BaseDevice extends Homey.Device {
                 capabilityOptions = this.getCapabilityOptions(capabilities[i]);
             }
             catch(error){continue;}
-            let entity = capabilityOptions.entity_id;
+            let entity = this.getEntityId(capabilityOptions.entity_id);
             if (entity != undefined && entityIds.indexOf(entity) == -1){
                 entityIds.push(entity);
             }
@@ -125,6 +127,22 @@ class BaseDevice extends Homey.Device {
         // Unregister deviceEntities
         this._client.unregisterCompound(this.entityId);
      }
+
+    getEntityId(entityId){
+        if (entityId == undefined){
+            return undefined;
+        }
+        return entityId.split(".")[0]+"."+entityId.split(".")[1];
+    }
+
+    getEntityAttribute(entityId){
+        if (entityId.split(".")[2] == undefined){
+            return undefined;
+        }
+        else{
+            return entityId.replace(/([^\.]*\.){2}/, '');
+        }
+    }
 
     async updateCapabilities(){
         // Base method 
@@ -167,7 +185,7 @@ class BaseDevice extends Homey.Device {
             }
             catch(error){continue;}
             if (capabilitiesOptions.entity_id != undefined){
-                let entityId = capabilitiesOptions.entity_id;
+                let entityId = this.getEntityId(capabilitiesOptions.entity_id);
                 let entity = this._client.getEntity(entityId);
                 if (entity){
                     if (updatedEntities.indexOf(entityId) == -1){
@@ -384,10 +402,10 @@ class BaseDevice extends Homey.Device {
             }
             catch(error){continue;}
             try{
-                if (capabilitiesOptions.entity_id == entityId){
+                if (this.getEntityId(capabilitiesOptions.entity_id) == entityId){
                     let oldValue = this.getCapabilityValue(keys[i]);
 
-                    let newValue = null; 
+                    let newValue = null;
                     let tokens = {
                         capability: keys[i],
                         value_string: '',
@@ -399,14 +417,25 @@ class BaseDevice extends Homey.Device {
                             id: keys[i]
                         }
                     };
+                    // get converter function
                     let converter = this.getDeviceEntitiesInputConverter(keys[i]);
+                    // check if it's an entity or an entity attribute
+                    let entityValue = undefined;
+                    let attribute = this.getEntityAttribute(capabilitiesOptions.entity_id);
+                    if (attribute == undefined){
+                        entityValue = data.state;
+                    }
+                    else{
+                        entityValue = lodashget(data.attributes, attribute, null);
+                    }
+
                     if (keys[i].startsWith("measure_generic")){
                         // String capabilities
                         if (converter != undefined){
-                            newValue = converter(data.state);
+                            newValue = converter(entityValue);
                         }
                         else{
-                            newValue = data.state;
+                            newValue = entityValue;
                         }
                         tokens.value_string = newValue;
                         await this.setCapabilityValue(keys[i], newValue);
@@ -414,10 +443,10 @@ class BaseDevice extends Homey.Device {
                     else if (keys[i].startsWith("alarm")){
                         // boolean capability
                         if (converter != undefined){
-                            newValue = converter(data.state);
+                            newValue = converter(entityValue);
                         }
                         else{
-                            newValue = (data.state == "on");
+                            newValue = (entityValue == "on");
                         }
                         tokens.value_boolean = newValue;
                         await this.setCapabilityValue(keys[i], newValue );
@@ -425,10 +454,10 @@ class BaseDevice extends Homey.Device {
                     else if (keys[i].startsWith("measure") || keys[i].startsWith("meter")){
                         // numeric capability
                         if (converter != undefined){
-                            newValue = converter(data.state);
+                            newValue = converter(entityValue);
                         }
                         else{
-                            newValue = parseFloat(data.state);
+                            newValue = parseFloat(entityValue);
                         }
                         tokens.value_number = newValue;
                         await this.setCapabilityValue(keys[i], newValue);
@@ -436,10 +465,10 @@ class BaseDevice extends Homey.Device {
                     else if (keys[i].startsWith("switch") || keys[i].startsWith("input_boolean") || keys[i].startsWith("onoff_button") ){
                         // boolean capability
                         if (converter != undefined){
-                            newValue = converter(data.state);
+                            newValue = converter(entityValue);
                         }
                         else{
-                            newValue = (data.state == "on");
+                            newValue = (entityValue == "on");
                         }
                         tokens.value_boolean = newValue;
                         // ignore initial state change from initial state to first read state in onInit()
@@ -450,10 +479,10 @@ class BaseDevice extends Homey.Device {
                     }
                     else if (keys[i].startsWith("button") || keys[i].startsWith("input_button")){
                         if (converter != undefined){
-                            newValue = converter(data.state);
+                            newValue = converter(entityValue);
                         }
                         else{
-                            newValue = data.state;
+                            newValue = entityValue;
                         }
                         oldValue = this._buttonState[keys[i]];
                         this._buttonState[keys[i]] = newValue;

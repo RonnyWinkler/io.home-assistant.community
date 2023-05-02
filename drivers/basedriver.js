@@ -325,6 +325,14 @@ class BaseDriver extends Homey.Driver {
             return entities;
         });
 
+        // Read template attributes for selected entity 
+        session.setHandler('getCustomEntityAttributeList', async (entity_id) => {
+            this.log("Get custom entity attribute list for entity "+entity_id+"...");
+            let attributes = await this.getCustomEntityAttributeList(device, entity_id); 
+            this.log("Attribute: ",attributes);
+            return attributes;
+        });
+        
     }
 
     async checkLogin(data){
@@ -539,25 +547,93 @@ class BaseDriver extends Homey.Driver {
         let entityKeys = Object.keys(entities);
         for (let i=0; i<entityKeys.length; i++){
             let domain = entities[entityKeys[i]].entity_id.split('.')[0];
-            if (
-                domain == 'sensor' ||
-                domain == 'switch' ||
-                domain == 'input_boolean' ||
-                domain == 'button' ||
-                domain == 'input_button'
-            ){
+            // if (
+            //     domain == 'sensor' ||
+            //     domain == 'binary_sensor' ||
+            //     domain == 'switch' ||
+            //     domain == 'input_boolean' ||
+            //     domain == 'button' ||
+            //     domain == 'input_button'
+            // ){
                 result.push({
                     entity_id: entities[entityKeys[i]].entity_id,
-                    name: entities[entityKeys[i]].attributes.friendly_name,
+                    name: entities[entityKeys[i]].attributes.friendly_name || entities[entityKeys[i]].entity_id.split('.')[1],
                     unit: entities[entityKeys[i]].attributes.unit_of_measurement || '',
                     title: entities[entityKeys[i]].attributes.friendly_name + 
                             " (" +
                             entities[entityKeys[i]].entity_id +
                             ")" 
                 });
-            }
+            // }
         };
         return result;
+    }
+
+    async getCustomEntityAttributeList(device, entity_id){
+        let result = [];
+        let client = this.homey.app.getClient();
+        let entity = await client.getEntity(entity_id);
+
+        if (entity.attributes){
+            result = this.getAttributeFieldList(entity.attributes); 
+        }
+
+        return result;
+    }
+
+    getAttributeFieldList(object){
+        try{
+            let fieldlist = [];
+            if (typeof object == "object"){
+                let keys = Object.keys(object);
+                for (let i=0; i<keys.length; i++){
+                    if (typeof object[keys[i]] == 'object'){
+                        // get subobjects with resursive reading
+                        let subFieldlist = [];
+                        if ( Array.isArray(object[keys[i]]) ){
+                            for (let j=0; j<object[keys[i]].length; j++){
+                                // fieldlist.push(subFieldlist[j]);
+                                let subFieldlist = this.getAttributeFieldList(object[keys[i]][j]);
+                                for (let k=0; k<subFieldlist.length; k++){
+                                    let id = keys[i] + '[' + j + '].' + subFieldlist[k].id;
+                                    fieldlist.push({
+                                        id: id
+                                    });
+                                }
+                            }
+                        }
+                        else{
+                            subFieldlist = getAttributeFieldList(object[keys[i]]);
+                            for (k=0; k<subFieldlist.length; k++){
+                                let id = object[keys[i]] + '.' + subFieldlist[k].id;
+                                fieldlist.push({
+                                    id: id
+                                });
+                            }
+                        }
+                        for (let j=0; j<subFieldlist.length; j++){
+                            fieldlist.push(subFieldlist[j]);
+                        }
+                    }
+                    else{
+                        // add currennt field to fieldlist
+                        fieldlist.push({
+                            id: keys[i]
+                        });
+                    }
+                }
+            }
+            else{
+                fieldlist.push({
+                    id: object
+                });
+            }
+            return fieldlist;
+        }
+        catch(error){
+            this.log("getAttributeFieldList() with parameter: ", error );
+            return [];
+        }
     }
 
     async getCustomCapabilityList(device){
@@ -634,6 +710,13 @@ class BaseDriver extends Homey.Driver {
             if (!data.entity_id){
                 return {added: false, message: this.homey.__("repair.custom_device.entity_not_found")};
             }
+            if (!client.getEntity(data.entity_id)){
+                return {added: false, message: this.homey.__("repair.custom_device.entity_not_found")};
+            }
+
+            if (data.attribute != undefined && data.attribute != ''){
+                data.entity_id = data.entity_id + '.' + data.attribute;
+            }
 
             let capability;
             if (data.capability){
@@ -643,7 +726,7 @@ class BaseDriver extends Homey.Driver {
                 // get capability template to detect correct capability type
                 let capabilityTemplate = client.getCapabilityTemplate(data.entity_id, null);
                 if (!capabilityTemplate || !capabilityTemplate.capability){
-                    return {added: false, message: this.homey.__("repair.custom_device.entity_not_found")};
+                    return {added: false, message: this.homey.__("repair.custom_device.capability_not_valid")};
                 }
 
                 // add capability as subcapability with entity_id as subcapability name
@@ -719,7 +802,10 @@ class BaseDriver extends Homey.Driver {
                     capabilitiesOptions = device.getCapabilityOptions(capabilities[i]);
                 }
                 catch(error){continue;}
-                if (capabilitiesOptions.entity_id && capabilitiesOptions.entity_id == data.entity_id){
+                if (    capabilitiesOptions.entity_id && 
+                        capabilitiesOptions.entity_id == data.entity_id &&
+                        capabilities[i] == data.capability
+                    ){
                     // add custom capabilitieOptions fron repair dialog
                     let capabilitiesOptions = {};
                     capabilitiesOptions["entity_id"] = data.entity_id;
@@ -771,7 +857,10 @@ class BaseDriver extends Homey.Driver {
                     capabilitiesOptions = device.getCapabilityOptions(capabilities[i]);
                 }
                 catch(error){continue;}
-                if (capabilitiesOptions.entity_id && capabilitiesOptions.entity_id == data.entity_id){
+                if (    capabilitiesOptions.entity_id && 
+                        capabilitiesOptions.entity_id == data.entity_id &&
+                        capabilities[i] == data.capability
+                    ){
                     device.removeCapability(capabilities[i]);
                     // unregister entities
                     device.clientUnregisterDevice();
