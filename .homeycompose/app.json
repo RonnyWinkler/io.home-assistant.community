@@ -1,11 +1,11 @@
 {
   "id": "io.home-assistant.community",
-  "version": "1.3.4",
+  "version": "1.3.5",
   "compatibility": ">=8.1.0",
   "sdk": 3,
   "brandColor": "#0DA6EA",
   "name": {
-    "en": "Home Assistant"
+    "en": "Home Assistant Community"
   },
   "description": {
     "en": "Connect to Home Assistant",
@@ -19,7 +19,8 @@
     "en": [
       "home-assistant",
       "hass",
-      "home assistant"
+      "home assistant",
+      "ha"
     ]
   },
   "source": "https://github.com/RonnyWinkler/io.home-assistant.community",

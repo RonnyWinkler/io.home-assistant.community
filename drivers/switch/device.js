@@ -54,7 +54,15 @@ class SwitchDevice extends BaseDevice {
         await super.onEntityUpdate(data);
 
         if(data && data.entity_id && data.entity_id == this.entityId) {
-            await this.setCapabilityValue("onoff", data.state == "on");
+            switch (data.state){
+                case "on":
+                    await this.setCapabilityValue("onoff", true);
+                    break;
+                case "off":
+                    await this.setCapabilityValue("onoff", false);
+                    break;            
+            }
+            // await this.setCapabilityValue("onoff", data.state == "on");
         }
     }
 
