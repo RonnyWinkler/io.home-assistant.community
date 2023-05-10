@@ -24,7 +24,15 @@ const defaultStringConverter = {
     to: (value) => value
 }
 const defaultBooleanConverter = {
-    from: (state) => (state == "on"),
+    from: (state) => {
+        switch (state){
+            case "on":
+                return true;
+            case "off":
+                return false;
+        }
+        // state == "on"
+    },
     to: (value) => (value ? "on" : "off")
 }
 
@@ -446,7 +454,15 @@ class BaseDevice extends Homey.Device {
                             newValue = converter(entityValue);
                         }
                         else{
-                            newValue = (entityValue == "on");
+                            switch (entityValue){
+                                case "on":
+                                    newValue = true;
+                                    break;
+                                case "off":
+                                    newValue = false;
+                                    break;            
+                            }
+                            // newValue = (entityValue == "on");
                         }
                         tokens.value_boolean = newValue;
                         await this.setCapabilityValue(keys[i], newValue );
@@ -468,7 +484,15 @@ class BaseDevice extends Homey.Device {
                             newValue = converter(entityValue);
                         }
                         else{
-                            newValue = (entityValue == "on");
+                            switch (entityValue){
+                                case "on":
+                                    newValue = true;
+                                    break;
+                                case "off":
+                                    newValue = false;
+                                    break;            
+                            }
+                            // newValue = (entityValue == "on");
                         }
                         tokens.value_boolean = newValue;
                         // ignore initial state change from initial state to first read state in onInit()
