@@ -54,7 +54,12 @@ class SensorDevice extends BaseDevice {
                 }
                 else if (this.capability.startsWith("alarm")){
                     // boolean capability
-                    await this.setCapabilityValue(this.capability, data.state == "on");
+                    if (data.state == "on"){
+                        await this.setCapabilityValue(this.capability, true);
+                    }
+                    if (data.state == "off"){
+                        await this.setCapabilityValue(this.capability, false);
+                    }
                 }
                 else{
                     // numeric capability

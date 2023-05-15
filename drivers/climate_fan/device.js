@@ -186,7 +186,9 @@ class ClimateFanDevice extends BaseDevice {
                         data.state == "on"){
                         await this.setCapabilityValue("onoff", true);
                     }
-                    else{
+                    if (data.state != undefined && 
+                        data.state != "unavailable" &&
+                        data.state == "off"){
                         await this.setCapabilityValue("onoff", false);
                     }
                     if (data.attributes.percentage != undefined && 

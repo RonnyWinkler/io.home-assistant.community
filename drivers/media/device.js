@@ -209,6 +209,8 @@ class MediaDevice extends BaseDevice {
                     case "standby":
                         await this.setCapabilityValue("onoff", false);
                         break;
+                    case "unavailable":
+                        break;
                     default:
                         await  this.setCapabilityValue("onoff", false);
                 }

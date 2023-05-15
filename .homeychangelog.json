@@ -318,5 +318,9 @@
   "1.3.6": {
     "en": "Change compound/onoff and device entity/onoff state only for valid states (on/off).",
     "de": "Ändere Compound- und Geräte-Entität-Status nur für gültigen Statuswerte (on/off)."
+  },
+  "1.3.7": {
+    "en": "Change entity on/off state only for valid states (on/off).",
+    "de": "Ändere Entität-Status nur für gültigen Statuswerte (on/off)."
   }
 }

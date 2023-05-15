@@ -53,10 +53,10 @@ class WaterHeaterDevice extends BaseDevice {
                 //     await this.setCapabilityValue("water_heater_state", data.state);
                 // }
                 if (data.state != undefined ){ 
-                    if (data.state == "unavailable" || data.state == 'off'){
+                    if (data.state == 'off'){
                         await this.setCapabilityValue("onoff", false);
                     }
-                    else{
+                    if (data.state == 'on'){
                         await this.setCapabilityValue("onoff", true);
                     }
                 }

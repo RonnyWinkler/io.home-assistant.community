@@ -65,7 +65,13 @@ class LightDevice extends BaseDevice {
             this._minMireds = data.attributes["min_mireds"] || 0;
             this._maxMireds = data.attributes["max_mireds"] || 0;
 
-            let lightOn = data.state == "on";
+            let lightOn;
+            if (data.state == "on"){
+                lightOn = true;
+            };
+            if (data.state == "off"){
+                lightOn = false;
+            };
 
             await this.setCapabilityValue("onoff", lightOn);
 

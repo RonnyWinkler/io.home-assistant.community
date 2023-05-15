@@ -88,7 +88,8 @@ class VacuumDevice extends BaseDevice {
                         data.state == "cleaning" || data.state == "on" ){
                         await this.setCapabilityValue("onoff", true);
                     }
-                    else{
+                    if (data.state != undefined && 
+                       data.state == "off" ){
                         await this.setCapabilityValue("onoff", false);
                     }
                 }
