@@ -839,6 +839,28 @@ class App extends Homey.App {
 			});
 		});
 
+		this._flowTriggerGenericAlarmTrue = this.homey.flow.getDeviceTriggerCard('generic_alarm_true');
+		this._flowTriggerGenericAlarmTrue.registerRunListener(async (args, state) => {
+			return ( !args.capability || !args.capability.id || args.capability.id === state.capability.id);
+		});
+		this._flowTriggerGenericAlarmTrue.registerArgumentAutocompleteListener('capability', async (query, args) => {
+			const capabilityAlarmList = args.device.getAutocompleteCapabilityList().filter(e => e.id.startsWith('alarm'));
+			return capabilityAlarmList.filter((result) => { 
+				return result.name.toLowerCase().includes(query.toLowerCase());
+			});
+		});
+
+		this._flowTriggerGenericAlarmFalse = this.homey.flow.getDeviceTriggerCard('generic_alarm_false');
+		this._flowTriggerGenericAlarmFalse.registerRunListener(async (args, state) => {
+			return ( !args.capability || !args.capability.id || args.capability.id === state.capability.id);
+		});
+		this._flowTriggerGenericAlarmFalse.registerArgumentAutocompleteListener('capability', async (query, args) => {
+			const capabilityAlarmList = args.device.getAutocompleteCapabilityList().filter(e => e.id.startsWith('alarm'));
+			return capabilityAlarmList.filter((result) => { 
+				return result.name.toLowerCase().includes(query.toLowerCase());
+			});
+		});
+
 		this._flowTriggerButtonPressed = this.homey.flow.getDeviceTriggerCard('button_pressed');
 		this._flowTriggerSceneActivated = this.homey.flow.getDeviceTriggerCard('scene_activated');
 		this._flowTriggerScriptStarted = this.homey.flow.getDeviceTriggerCard('script_started');

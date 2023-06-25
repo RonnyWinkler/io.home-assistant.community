@@ -322,5 +322,9 @@
   "1.3.7": {
     "en": "Change entity on/off state only for valid states (on/off).",
     "de": "Ändere Entität-Status nur für gültigen Statuswerte (on/off)."
+  },
+  "1.3.8": {
+    "en": "Added trigger 'alarm goes on/off' for generic alarm capabilities (manually added entities).",
+    "de": "Trigger 'Alarm ist an-/ausgegangen' für generische Alarm-Capabilities (manuell hinzugefügte Entitäten)."
   }
 }

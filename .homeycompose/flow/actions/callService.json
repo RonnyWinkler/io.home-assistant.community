@@ -8,7 +8,7 @@
     "titleFormatted": { 
         "en": "Call service [[service]] of domain [[domain]] with data [[data]]",
         "de": "Dienst [[service]] der Domäne [[domain]] mit den Daten [[data]] aufrufen",
-        "nl": "Bel service [[service]] van domein [[domain]] met data [[data]]"
+        "nl": "Roep service [[service]] aan van domein [[domain]] met data [[data]]"
     },
     "hint": {
         "en": "Example for light.turn_on: service=turn_on, domain=light, data={'brightness':100, 'entity_id':'light.entityname'}",

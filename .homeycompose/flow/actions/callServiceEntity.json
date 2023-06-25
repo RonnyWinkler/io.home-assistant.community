@@ -8,7 +8,7 @@
     "titleFormatted": {
         "en": "Call service [[service]] for entity [[entity]] with data [[data]]",
         "de": "Dienst [[service]] für Entität [[entity]] mit den Daten [[data]] aufrufen",
-        "nl": "Bel service [[service]] voor entiteit [[entity]] met data [[data]]"
+        "nl": "Roep service [[service]] aan voor entiteit [[entity]] met data [[data]]"
     },
     "hint": {
         "en": "Call an entity service using a service/entity autocompletion list.",

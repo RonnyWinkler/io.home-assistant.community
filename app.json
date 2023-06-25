@@ -1,7 +1,7 @@
 {
   "_comment": "This file is generated. Please edit .homeycompose/app.json instead.",
   "id": "io.home-assistant.community",
-  "version": "1.3.7",
+  "version": "1.3.8",
   "compatibility": ">=8.1.0",
   "sdk": 3,
   "brandColor": "#0DA6EA",
@@ -585,6 +585,108 @@
           }
         ],
         "id": "event_triggered_filter"
+      },
+      {
+        "title": {
+          "en": "The alarm turned off",
+          "de": "Der Alarm ist ausgegangen",
+          "nl": "Het alarm is uitgeschakeld"
+        },
+        "titleFormatted": {
+          "en": "The alarm of capability [[capability]] turned off",
+          "de": "Der Alarm des Attributs [[capability]] ist ausgangen",
+          "nl": "Het alarm van capability [[capability]] is uitgeschakeld"
+        },
+        "hint": {
+          "en": "Triggers when the alarm of capability [[capability]] turned on. Select one of the capabilities defined in compound definition and use the result token of the corresponding type",
+          "de": "Wird ausgelöst, wenn der Alarm des Attributs [[capability]] ausgegangen ist. Wähle eines der in der Compound-Definition definierten Attribute aus und verwende den Ergebnistoken des entsprechenden Typs.",
+          "nl": "Activeert wanneer het alarm van vermogen [[vermogen]] is uitgeschakeld. Selecteer een van de mogelijkheden die zijn gedefinieerd in de compound definitie en gebruik het resultaattoken van het overeenkomstige type"
+        },
+        "tokens": [
+          {
+            "name": "capability",
+            "type": "string",
+            "title": {
+              "en": "Capability",
+              "de": "Attribut",
+              "nl": "Capability"
+            }
+          }
+        ],
+        "args": [
+          {
+            "type": "autocomplete",
+            "name": "capability",
+            "required": false,
+            "title": {
+              "en": "Capability",
+              "de": "Attribut",
+              "nl": "Capability"
+            },
+            "placeholder": {
+              "en": "Select a device capability",
+              "de": "Wähle ein Geräte-Attibut",
+              "nl": "Selecteer een apparaat capability"
+            }
+          },
+          {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=custom|compound|climate|climate_fan|fan|water_heater|light|media|sensor|switch|vacuum|cover|button|lock|presence|scene|schedule|script|timer"
+          }
+        ],
+        "id": "generic_alarm_false"
+      },
+      {
+        "title": {
+          "en": "The alarm turned on",
+          "de": "Der Alarm ist angegangen",
+          "nl": "Het alarm ging aan"
+        },
+        "titleFormatted": {
+          "en": "The alarm of capability [[capability]] turned on",
+          "de": "Der Alarm des Attributs [[capability]] ist angegangen",
+          "nl": "Het alarm van capability [[capability]] ging aan"
+        },
+        "hint": {
+          "en": "Triggers when the alarm of capability [[capability]] turned on. Select one of the capabilities defined in compound definition and use the result token of the corresponding type",
+          "de": "Wird ausgelöst, wenn der Alarm des Attributs [[capability]] angenagne ist. Wähle eines der in der Compound-Definition definierten Attribute aus und verwende den Ergebnistoken des entsprechenden Typs.",
+          "nl": "Activeert wanneer het alarm van vermogen [[vermogen]] is ingeschakeld. Selecteer een van de mogelijkheden die zijn gedefinieerd in de compound definitie en gebruik het resultaattoken van het overeenkomstige type"
+        },
+        "tokens": [
+          {
+            "name": "capability",
+            "type": "string",
+            "title": {
+              "en": "Capability",
+              "de": "Attribut",
+              "nl": "Capability"
+            }
+          }
+        ],
+        "args": [
+          {
+            "type": "autocomplete",
+            "name": "capability",
+            "required": false,
+            "title": {
+              "en": "Capability",
+              "de": "Attribut",
+              "nl": "Capability"
+            },
+            "placeholder": {
+              "en": "Select a device capability",
+              "de": "Wähle ein Geräte-Attibut",
+              "nl": "Selecteer een apparaat capability"
+            }
+          },
+          {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=custom|compound|climate|climate_fan|fan|water_heater|light|media|sensor|switch|vacuum|cover|button|lock|presence|scene|schedule|script|timer"
+          }
+        ],
+        "id": "generic_alarm_true"
       },
       {
         "title": {
@@ -1395,7 +1497,7 @@
         "titleFormatted": {
           "en": "Call service [[service]] of domain [[domain]] with data [[data]]",
           "de": "Dienst [[service]] der Domäne [[domain]] mit den Daten [[data]] aufrufen",
-          "nl": "Bel service [[service]] van domein [[domain]] met data [[data]]"
+          "nl": "Roep service [[service]] aan van domein [[domain]] met data [[data]]"
         },
         "hint": {
           "en": "Example for light.turn_on: service=turn_on, domain=light, data={'brightness':100, 'entity_id':'light.entityname'}",
@@ -1427,7 +1529,7 @@
         "titleFormatted": {
           "en": "Call service [[service]] for entity [[entity]] with data [[data]]",
           "de": "Dienst [[service]] für Entität [[entity]] mit den Daten [[data]] aufrufen",
-          "nl": "Bel service [[service]] voor entiteit [[entity]] met data [[data]]"
+          "nl": "Roep service [[service]] aan voor entiteit [[entity]] met data [[data]]"
         },
         "hint": {
           "en": "Call an entity service using a service/entity autocompletion list.",
