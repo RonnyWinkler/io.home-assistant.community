@@ -6,10 +6,11 @@
 'use strict';
 
 const Homey = require('homey');
+const http = require('http');
 const { join } = require('path');
 const Client = require('./lib/Client.js');
 const colors = require('./lib/colors.json');
-const RECONNECT_TIMEOUT = 30;
+const RECONNECT_TIMEOUT = 15;
 const AVAILABILITY_CHECK_TIMEOUT = 30;
 const LOG_SIZE = 50;
 
@@ -1204,7 +1205,6 @@ class App extends Homey.App {
 			else{
 				this.log("Connection check: OK.");
 			}
-			// await this.checkDeviceAvailability();
         }
         catch(error){
             this.log("Error checking connection: ", error);
@@ -1234,6 +1234,56 @@ class App extends Homey.App {
 				AVAILABILITY_CHECK_TIMEOUT * 1000 );
 		}
 	}
+
+	// Helper functions ===================================================================
+	async httpGetStream(url, options = {}){
+		return new Promise( ( resolve, reject ) =>
+		{
+			try
+			{
+			  let request = http
+				.get(url, options, (response) => { 
+				  if (response.statusCode !== 200){
+					response.resume();
+	
+					let message = "";
+					if ( response.statusCode === 204 )
+					{ message = "No Data Found"; }
+					else if ( response.statusCode === 400 )
+					{ message = "Bad request"; }
+					else if ( response.statusCode === 401 )
+					{ message = "Unauthorized"; }
+					else if ( response.statusCode === 403 )
+					{ message = "Forbidden"; }
+					else if ( response.statusCode === 404 )
+					{ message = "Not Found"; }
+					reject( new Error( "HTTP Error: " + response.statusCode + " " + message ) );
+					return;
+				  }
+				  else{
+					return resolve( response );
+				  }
+				})
+				.on('error', (err) => {
+				  //console.log(err);
+				  reject( new Error( "HTTP Error: " + err.message ) );
+				  return;
+				});
+			  request.setTimeout( 5000, function()
+				{
+				  request.destroy();
+				  reject( new Error( "HTTP Catch: Timeout" ) );
+				  return;
+				});
+			  }
+			catch ( err )
+			{
+				reject( new Error( "HTTP Catch: " + err.message ) );
+				return;
+			}
+		});
+	  }
+	
 }
 
 module.exports = App;

@@ -277,8 +277,9 @@ class BaseDriver extends Homey.Driver {
                 data[capabilitiesOptions.entity_id] = this.homey.app.getClient().getEntity(capabilitiesOptions.entity_id);
                 data[capabilitiesOptions.entity_id]["homey_capability"] = deviceEntities[i]
             }
-            if (data == null || data == {}){
-                data = this.homey.__("device_unavailable_reason.entity_not_found");
+            if (data == null || data == {} || Object.keys(data).length === 0){
+                data["entityId"] = id;
+                data["Error"] = this.homey.__("device_unavailable_reason.entity_not_found");
             }
             return data;
         });

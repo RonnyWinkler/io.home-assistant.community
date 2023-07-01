@@ -92,6 +92,29 @@ class MediaDevice extends BaseDevice {
         }
     }
 
+
+    // Device functions ============================================================================================
+    async _upateAlbumArtImage(stream){
+        if ( this.mediaCover == undefined || this.mediaCover == ""){
+            throw new Error("No artwork image available.");    
+        }
+        try{
+            let url = this.mediaCover;
+            if ( ! (this.mediaCover.startsWith("http")) ){
+                url =  this.homey.settings.get("address") + this.mediaCover;
+            }
+            let res = await this.homey.app.httpGetStream(url);
+            res.on("error", (error) => {this.log(error);});
+            stream.on("error", (error) => {this.log(error);});
+            return await res.pipe(stream);
+        }
+        catch(error){
+            this.log("Error updating album art image: ", error.message);
+            stream.end();
+            throw new Error("Artwork image error");
+        }
+    }
+
     // Entity update ============================================================================================
     async onEntityUpdate(data) {
         await super.onEntityUpdate(data);
@@ -248,7 +271,14 @@ class MediaDevice extends BaseDevice {
                     if ( ! (entityPicture.startsWith("http")) ){
                         url =  this.homey.settings.get("address") + entityPicture;
                     }
-                    this.mediaImage.setUrl(url);
+                    if (url.startsWith('https')){
+                        this.mediaImage.setUrl(url);
+                    }
+                    else{
+                        this.mediaImage.setStream(async (stream) => {
+                            return await this._upateAlbumArtImage(stream);
+                        });
+                    }
                     await this.mediaImage.update();
                 }
             }

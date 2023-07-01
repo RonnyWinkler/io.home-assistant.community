@@ -68,12 +68,12 @@ class LightDevice extends BaseDevice {
             let lightOn;
             if (data.state == "on"){
                 lightOn = true;
+                await this.setCapabilityValue("onoff", true);
             };
             if (data.state == "off"){
                 lightOn = false;
+                await this.setCapabilityValue("onoff", false);
             };
-
-            await this.setCapabilityValue("onoff", lightOn);
 
             if(lightOn) {
 
