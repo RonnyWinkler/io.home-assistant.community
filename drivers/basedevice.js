@@ -793,7 +793,8 @@ class BaseDevice extends Homey.Device {
 
     // Generic Flow functions ===========================================================================================
     // Flow Trigger 
-    getAutocompleteCapabilityList(){
+    getAutocompleteCapabilityList(addStandardCapabilities=false){
+        // get device entities capabilities
         let capabilities = this.getDeviceEntitiesCapabilities();
         let result = [];
         for (let i=0; i<capabilities.length; i++){
@@ -817,9 +818,53 @@ class BaseDevice extends Homey.Device {
             }
             catch(error){this.log("getAutocompleteCapabilityList(): "+error.message)}
         }
+
+        // include standard capabilities
+        if (addStandardCapabilities){
+            let stdCapabilitites = this.getCapabilities();
+            for (let i=0; i<stdCapabilitites.length; i++){
+                if (stdCapabilitites[i] == 'button.reconnect'){
+                    continue;
+                }
+                if (result.filter(e =>{ return e.id == stdCapabilitites[i]}).length == 0){
+                    result.push({
+                        id: stdCapabilitites[i],
+                        name: stdCapabilitites[i]
+                    });
+                }
+            }
+        }
+
         return result;
     }
-    
+
+    // getAutocompleteCapabilityListFull(){
+    //     let capabilities = this.getDeviceEntitiesCapabilities();
+    //     let result = [];
+    //     for (let i=0; i<capabilities.length; i++){
+    //         let capabilitiesOptions = {};
+    //         try{
+    //             capabilitiesOptions = this.getCapabilityOptions(capabilities[i]);
+    //         }
+    //         catch(error){continue;}
+    //         try{
+    //             let name;
+    //             if (capabilitiesOptions.title){
+    //                 name = capabilitiesOptions.title;
+    //             }
+    //             else{
+    //                 name = capabilitiesOptions.entity_id;
+    //             }
+    //         result.push({
+    //                 id: capabilities[i],
+    //                 name: name
+    //             })
+    //         }
+    //         catch(error){this.log("getAutocompleteCapabilityList(): "+error.message)}
+    //     }
+    //     return result;
+    // }
+
     // Flow Actions 
     getAutocompleteOnoffList(){
         let capabilities = this.getDeviceEntitiesCapabilities();

@@ -329,6 +329,10 @@
   },
   "1.3.9": {
     "en": "Added media image support for https URLs.",
-    "de": "Unterstützung für Medienbilder über https URLs ergänzt.."
+    "de": "Unterstützung für Medienbilder über https URLs ergänzt."
+  },
+  "1.3.10": {
+    "en": "Added generic flow conditions.",
+    "de": "Generische Flow-Bedingungen ergänzt."
   }
 }

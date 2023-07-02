@@ -875,6 +875,58 @@ class App extends Homey.App {
 	// FLOW CONDITIONS ======================================================================================
 	async _registerFlowConditions(){
 		// Flow contitions
+
+		// Generic conditions for custom device / generic added entities
+		this._flowConditionCapabilityText = this.homey.flow.getConditionCard('capability_text')
+		.registerRunListener(async (args, state) => {
+			if (args.device.hasCapability(args.capability.id)){
+				return (args.device.getCapabilityValue(args.capability.id) == args.value);
+			}
+			else{
+				throw new Error("Capability "+args.capability.id+" not present in device.");
+			}
+		})
+		this._flowConditionCapabilityText.registerArgumentAutocompleteListener('capability', async (query, args) => {
+			const conditionCapabilityTextList = args.device.getAutocompleteCapabilityList(true);
+			return conditionCapabilityTextList.filter((result) => { 
+				return result.name.toLowerCase().includes(query.toLowerCase());
+			});
+		});
+
+		this._flowConditionCapabilityNumber = this.homey.flow.getConditionCard('capability_number')
+		.registerRunListener(async (args, state) => {
+			if (args.device.hasCapability(args.capability.id)){
+				return (args.device.getCapabilityValue(args.capability.id) > args.value);
+			}
+			else{
+				throw new Error("Capability "+args.capability.id+" not present in device.");
+			}
+		})
+		this._flowConditionCapabilityNumber.registerArgumentAutocompleteListener('capability', async (query, args) => {
+			const conditionCapabilityNumberList = args.device.getAutocompleteCapabilityList(true);
+			return conditionCapabilityNumberList.filter((result) => { 
+				return result.name.toLowerCase().includes(query.toLowerCase());
+			});
+		});
+
+		this._flowConditionCapabilityBoolean = this.homey.flow.getConditionCard('capability_boolean')
+		.registerRunListener(async (args, state) => {
+			if (args.device.hasCapability(args.capability.id)){
+				return (args.device.getCapabilityValue(args.capability.id) == true);
+			}
+			else{
+				throw new Error("Capability "+args.capability.id+" not present in device.");
+			}
+		})
+		this._flowConditionCapabilityBoolean.registerArgumentAutocompleteListener('capability', async (query, args) => {
+			const conditionCapabilityBooleanList = args.device.getAutocompleteCapabilityList(true);
+			return conditionCapabilityBooleanList.filter((result) => { 
+				return ( ( result.id.startsWith("alarm") || result.id.startsWith("onoff") ) 
+						&& result.name.toLowerCase().includes(query.toLowerCase()));
+			});
+		});
+
+		// Capability conditions
 		this._flowConditionMeasureNumeric = this.homey.flow.getConditionCard('measure_numeric')
 		.registerRunListener(async (args, state) => {
 			if (args.device.hasCapability('measure_numeric')){

@@ -1,0 +1,38 @@
+{
+    "title": {
+        "en": "Value (text) of capability !{{is|isn't}}",
+        "de": "Wert (Text) eines Attributs !{{ist|ist nicht}}",
+        "nl": "Waarde (tekst) van een capability !{{is|is niet}}"
+    },
+    "titleFormatted": {
+        "en": "Value (text) of capability [[capability]] !{{is|isn't}} [[value]]",
+        "de": "Wert (Text) des Attributs [[capability]] !{{ist|ist nicht}} [[value]]",
+        "nl": "Waarde (tekst) van de capability [[capability]] !{{is|is niet}} [[value]]"
+    },
+    "args": [
+        {
+            "name": "value",
+            "type": "text"
+        },
+        {
+            "type": "autocomplete",
+            "name": "capability",
+            "required": false,
+            "title": { 
+                "en": "Capability",
+                "de": "Attribut",
+                "nl": "Capability"
+            },
+            "placeholder": { 
+                "en": "Select a device capability",
+                "de": "Wähle ein Geräte-Attibut",
+                "nl": "Selecteer een apparaat capability"
+            }
+        },
+        {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=custom|compound|climate|climate_fan|fan|water_heater|light|media|sensor|switch|vacuum|cover|button|lock|presence|scene|schedule|script|timer"
+        }
+    ]
+}
