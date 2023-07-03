@@ -215,6 +215,25 @@ class App extends Homey.App {
 			
 		});
 
+		this._flowActionGenericNumberSet = this.homey.flow.getActionCard('genericNumberSet');
+		this._flowActionGenericNumberSet.registerRunListener(async (args, state) => {
+			try{
+				await args.device.flowActionNumberSet(args.capability.id, args.value);
+				return true;
+			}
+			catch(error){
+				this.error("Error executing flowAction 'genericNumberSet': "+  error.message);
+				throw new Error(error.message);
+			}
+		});
+		this._flowActionGenericNumberSet.registerArgumentAutocompleteListener('capability', async (query, args) => {
+			const genericNumberList = args.device.getAutocompleteCapabilityList();
+			return genericNumberList.filter((result) => { 
+				return ( result.id.startsWith('dim.') && result.name.toLowerCase().includes(query.toLowerCase()));
+			});
+			
+		});
+
 		// Lock
 		this._flowActionLockOpen = this.homey.flow.getActionCard('lockOpen')
 		this._flowActionLockOpen.registerRunListener(async (args, state) => {

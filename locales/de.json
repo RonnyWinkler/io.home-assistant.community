@@ -48,10 +48,14 @@
             "add_entity_attribute": "Wähle Entitäts-Attribut",
             "entity_attribute": "Attribut",
             "entity_attribute_placeholder": "Wähle Attribut...",
+            "entity_number_input": "Füge änderbare numerische Capability ein",
             "capability": "Capability",
             "capability_placeholder": "measure_temperature",
             "name": "Name",
             "unit": "Einheit",
+            "number_range_min": "Minimun",
+            "number_range_max": "Maximaal",
+            "number_range_step": "Schrittweite",
             "converter_ha2homey": "Konvertierungsfunktion HA->Homey",
             "converter_homey2HA": "Konvertierungsfunktion Homey->HA",
             "add_as_main_capability": "Als Haupt-Capability hinzufügen",
@@ -69,7 +73,8 @@
             "info_main_capability": "Aktiviere diese ption, um eine Entität als Haupt-Capability einzufügen.\n\n<strong>Schalter </strong> werden als onoff Capability hinzugefügt incl. Quick-Action für die Gerätekachel.\n\n<strong>Energie-Entität</strong> wird als measure_power Capability hinzugefügt, um den Energieverbrauchsanzeige in Homey Energie-Übersicht zu ermöglichen.",
             "info_converter": "Es kann eine <strong>JavaScript-Function</strong> angegeben werden, um den Parameter <strong>value</strong> zu konvertieren und einen berechneten/konvertierten Wert zurückzugeben, der im Gerät als Capability-Wert übernommen werden soll.\n Verwenden einen passenden Datentyp.\n\n.<strong>Beispiel für eine einfache Berechnung:</strong>\n\n(value) => { return value * 100; }\n\nEs wird der 100-fache Wert als Capability-Wert übernommen.\n\n<strong>Beispiel für eine Datumskonvertierung</strong> vom ISO ins lokale Datums-Format:\n\n(value) => { return new Date(value).toLocaleString('de-DE', {hour12s: false, hour: '2-digit', minute: '2-digit', day: '2-digit', month: '2-digit', year: 'numeric' }); }\n\nErsetze 'de-DE' durch dein Gebietsschema.",
             "info_capability": "Die Geräte-Capability wird vorbelegt bei Auswahl einer Entität.\n\nWenn die Capability nicht korrekt bestimmmt werden kann, dann kann eine individuelle Capability angegeben werden. Alternativ kann die Vorbelegung angepasst werden.\n\nEs können Capability-Namen wie <strong>measure_*, meter_*, alarm_*, onoff, onoff_button or button</strong> verwendet werden. Oder es kann ein Wert der Auswahlliste gewählt werden.\n\nWenn eine Capability mehrfach im Gerät verwendet wird, dann muss ab der zweiten Variante eine Sub-Capability verwendet werden wie z.B. <strong>onoff.livingroom</strong>.",
-            "info_entity": "Die gewünschte Entität kann in der Liste gewählt werden, um den Entitäts-Status als Capability hinzuzufügen.\n\nSoll stattdessen ein <strong>Entitäts-Attribut</strong> hinzugefügt werden, dann kann diese Checkbox aktiviert und ein Attribut gewählt werden.\n\nDas Attribut kann auch manuell angegeben werden.\n\nBeispiele für Entitär weather.home:\n\nEinfaches Attribut:\ntemperature\n\nArray:\nforecast[0].temperature\n\nGib eine passende Capability an (ggf. incl. Sub-Capability), wenn eine numerische oder anphanumerische Capability nicht korrekt ist und das Attribut z.B. eine Temperatur oder eine Binärsensor/Alarm repräsentiert."
+            "info_entity": "Die gewünschte Entität kann in der Liste gewählt werden, um den Entitäts-Status als Capability hinzuzufügen.\n\nSoll stattdessen ein <strong>Entitäts-Attribut</strong> hinzugefügt werden, dann kann diese Checkbox aktiviert und ein Attribut gewählt werden.\n\nDas Attribut kann auch manuell angegeben werden.\n\nBeispiele für Entitär weather.home:\n\nEinfaches Attribut:\ntemperature\n\nArray:\nforecast[0].temperature\n\nGib eine passende Capability an (ggf. incl. Sub-Capability), wenn eine numerische oder anphanumerische Capability nicht korrekt ist und das Attribut z.B. eine Temperatur oder eine Binärsensor/Alarm repräsentiert.",
+            "info_number_input": "Eine numerische Eingabe-Entität (number oder input_number) wird normalerweise als Sensor importiert.\n\nSoll der Wert dieser Entität in Homey geändert werden, so kann die Entität als Schieberegler dargestellt werden.\nDie Eigenschaften der Entität (Min, Max, Schrittweite) wird übernommen.\n\nVerwende den Schieberegler, um den Wert zu ändern - auch in der HA-Entität."
         }
     },
     "device_unavailable_reason": {

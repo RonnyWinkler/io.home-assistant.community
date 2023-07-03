@@ -1,0 +1,50 @@
+{
+    "highlight": true,
+    "title": {
+        "en": "Set number value",
+        "de": "Setze den numerischen Wert",
+        "nl": "Stel de numerieke waarde in"
+    },
+    "titleFormatted": {
+        "en": "Set number value of capability [[capability]] to [[value]].",
+        "de": "Setze den numerischen Wert des Attributs [[capability]] auf [[value]].",
+        "nl": "Stel de numerieke waarde van het kenmerk [[capability]] in op [[value]]."
+    },
+    "args": [
+        {
+            "type": "autocomplete",
+            "name": "capability",
+            "required": true,
+            "title": { 
+                "en": "Capability",
+                "de": "Attribut",
+                "nl": "Capability"
+            },
+            "placeholder": { 
+                "en": "Select a capability",
+                "de": "Wähle eine Attribut",
+                "nl": "Selecteer een capability"
+            }
+        },
+        {
+            "type": "number",
+            "name": "value",
+            "required": true,
+            "title": { 
+                "en": "Value",
+                "de": "Wert",
+                "nl": "Waarde"
+            },
+            "placeholder": { 
+                "en": "Numeric value",
+                "de": "Numerischer Wert",
+                "nl": "Numerieke waarde"
+            }
+        },
+        {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=custom|climate|climate_fan|fan|water_heater|light|media|sensor|switch|vacuum|cover"
+        }
+    ]
+}

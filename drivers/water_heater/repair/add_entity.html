@@ -46,7 +46,13 @@
       unit: document.getElementById('unitAdd').value,
       converter_ha2homey: document.getElementById('converter_ha2homeyAdd').value,
       converter_homey2ha: document.getElementById('converter_homey2haAdd').value,
-      add_as_main_capability: document.getElementById('addAsMainCapabilityAdd').checked
+      add_as_main_capability: document.getElementById('addAsMainCapabilityAdd').checked,
+      add_as_number_input: document.getElementById('addEntityNumberInput').checked,
+      number_input: {
+        min: document.getElementById('entityNumberRangeMinAdd').value,      
+        max: document.getElementById('entityNumberRangeMaxAdd').value,
+        step: document.getElementById('entityNumberRangeStepAdd').value
+      }
     };
     let result = await Homey.emit("addEntity", data);
     let message = new Message();
@@ -120,6 +126,17 @@
         }
       );
   }
+  function onInfoNumberInput(){
+    let message = new InfoMessage();
+    message.info( 
+        Homey.__("repair.custom_device.info_number_input"),
+        {
+          duration: 0,
+          closable: true,
+          dangerUseHtml: true
+        }
+      );
+  }
 
   function onAddEntityAttributeClick(){
     if (document.getElementById("addEntityAttributeAdd").checked){
@@ -130,6 +147,30 @@
       document.getElementById("labelEntityAttributeAdd").style.display = 'none';
       document.getElementById("entityAttributeAdd").style.display = 'none';
       document.getElementById("entityAttributeAdd").value = '';
+    }
+  }
+
+  function onAddEntityNumberInputClick(){
+    // if (document.getElementById("addEntityAttributeAdd").checked){
+    //   document.getElementById("labelEntityAttributeAdd").style.display = 'unset';
+    //   document.getElementById("entityAttributeAdd").style.display = 'unset';
+    // }
+    // else{
+    //   document.getElementById("labelEntityAttributeAdd").style.display = 'none';
+    //   document.getElementById("entityAttributeAdd").style.display = 'none';
+    //   document.getElementById("entityAttributeAdd").value = '';
+    // }
+  }
+
+  function onEntityChanged(value){
+    // clear number range fields if no number domain is set
+    if (! (value.startsWith('number.') || value.startsWith('input_number.'))){
+      document.getElementById('addEntityNumberInput').checked = false;
+      document.getElementById('entityNumberRangeMinAdd').value = '';
+      document.getElementById('entityNumberRangeMaxAdd').value = '';
+      document.getElementById('entityNumberRangeStepAdd').value = '';
+      document.getElementById("divNumberInput").style.display = 'none';
+      document.getElementById("divNumberInputRange").style.display = 'none';
     }
   }
 
@@ -144,7 +185,7 @@
       <!-- <div class="info_icon" onClick="onInfoEntity()"> 
         <span class="fa fa-icon fa-info-circle"></span>
       </div> -->
-      <input id="entityAdd"  class="homey-form-input" type="text" value=""/>
+      <input id="entityAdd"  class="homey-form-input" type="text" value="" onchange="onEntityChanged(this.value)"/>
     <!-- </div>
     <div class="homey-form-group"> -->
       <fieldset class="homey-form-checkbox-set">
@@ -191,6 +232,40 @@
         <span class="fa fa-icon fa-info-circle"></span>
       </div>
     </div>
+
+    <!-- Number Input options -->
+    <div class="homey-form-group" id="divNumberInput" style="display:none">
+      <fieldset class="homey-form-checkbox-set">
+        <label class="homey-form-checkbox">
+          <input class="homey-form-checkbox-input" type="checkbox" id="addEntityNumberInput" onclick="onAddEntityNumberInputClick()"/>
+          <span class="homey-form-checkbox-checkmark"></span>
+          <span class="homey-form-checkbox-text"><span data-i18n="repair.custom_device.entity_number_input"></span></span>
+        </label>
+      </fieldset>
+      <div class="info_icon" onClick="onInfoNumberInput()"> 
+        <span class="fa fa-icon fa-info-circle"></span>
+      </div>
+    </div>
+    <div class="homey-form-group" id="divNumberInputRange" style="display:none">
+      <table>
+        <tr>
+          <td>
+            <label for="entityNumberRangeMinAdd" class="homey-form-label"><span data-i18n="repair.custom_device.number_range_min"></span></label>
+            <input id="entityNumberRangeMinAdd"  class="homey-form-input" type="text" value=""/>
+          </td>
+          <td>
+            <label for="entityNumberRangeMaxAdd" class="homey-form-label"><span data-i18n="repair.custom_device.number_range_max"></span></label>
+            <input id="entityNumberRangeMaxAdd"  class="homey-form-input" type="text" value=""/>
+          </td>
+          <td>
+            <label for="entityNumberRangeStepnAdd" class="homey-form-label"><span data-i18n="repair.custom_device.number_range_step"></span></label>
+            <input id="entityNumberRangeStepAdd"  class="homey-form-input" type="text" value=""/>
+          </td>
+        </tr>
+      </table>
+    </div>
+
+
     <div class="homey-form-group" id="divInputConverter">
       <label for="converter_ha2homeyAdd" class="homey-form-label" style="display: inline;"><span data-i18n="repair.custom_device.converter_ha2homey"></span></label>
       <div class="info_icon" onClick="onInfoConverter()"> 
@@ -285,6 +360,38 @@
                       document.getElementById('nameAdd').value = event.detail.selection.value.name;
                       document.getElementById('unitAdd').value = event.detail.selection.value.unit;
                       document.getElementById('capabilityAdd').value = await Homey.emit("getCustomTemplateCapability", event.detail.selection.value.entity_id)
+                      if (event.detail.selection.value.number_range != undefined){
+                        document.getElementById('addEntityNumberInput').checked = false;
+                        if (event.detail.selection.value.number_range.min != undefined){
+                          document.getElementById('entityNumberRangeMinAdd').value = event.detail.selection.value.number_range.min;
+                        }
+                        else{
+                          document.getElementById('entityNumberRangeMinAdd').value = '';
+                        }
+                        if (event.detail.selection.value.number_range.max != undefined){
+                          document.getElementById('entityNumberRangeMaxAdd').value = event.detail.selection.value.number_range.max;
+                        }
+                        else{
+                          document.getElementById('entityNumberRangeMaxAdd').value = '';
+                        }
+                        if (event.detail.selection.value.number_range.step != undefined){
+                          document.getElementById('entityNumberRangeStepAdd').value = event.detail.selection.value.number_range.step;
+                        }
+                        else{
+                          document.getElementById('entityNumberRangeStepAdd').value = '';
+                        }
+                        document.getElementById("divNumberInput").style.display = 'unset';
+                        document.getElementById("divNumberInputRange").style.display = 'unset';
+                        
+                      }
+                      else{
+                        document.getElementById('addEntityNumberInput').checked = false;
+                        document.getElementById('entityNumberRangeMinAdd').value = '';
+                        document.getElementById('entityNumberRangeMaxAdd').value = '';
+                        document.getElementById('entityNumberRangeStepAdd').value = '';
+                        document.getElementById("divNumberInput").style.display = 'none';
+                        document.getElementById("divNumberInputRange").style.display = 'none';
+                      }
                   },
                   focus: () => {
                     // if (autoCompleteJS.input.value.length) autoCompleteJS.start();

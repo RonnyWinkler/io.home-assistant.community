@@ -48,10 +48,14 @@
             "add_entity_attribute": "Select entity attribute",
             "entity_attribute": "Attribute",
             "entity_attribute_placeholder": "Select attribute...",
+            "entity_number_input": "Add changeable number capability",
             "capability": "Capability",
             "capability_placeholder": "measure_temperature",
             "name": "Name",
             "unit": "Unit",
+            "number_range_min": "Minimun",
+            "number_range_max": "Maximum",
+            "number_range_step": "Step",
             "converter_ha2homey": "Converter function HA->Homey",
             "converter_homey2HA": "Converter function Homey->HA",
             "add_as_main_capability": "Add as main capability",
@@ -69,7 +73,8 @@
             "info_main_capability": "Activate this option to add an entity as main capability.\n\n<strong>Switch</strong> will be added as onoff capability including quick action for the device tile.\n\n<strong>Power entity</strong> will be added as measure_power capability to enable measurement in Homey energy.",
             "info_converter": "You can add a <strong>JavaScript function</strong> to convert the parameter <strong>value</strong> and return a converted/calculated value that should be set as capability value of the Homey device.\nUse the correct data type.\n\n<strong>Example for simple calculation</strong>\n\n(value) => { return value * 100; }\n\nThis uses the 100x of the HA value as capability value.\n\n<strong>Example for date conversion</strong> from ISO to local date:\n\n(value) => { return new Date(value).toLocaleString('de-DE', {hour12s: false, hour: '2-digit', minute: '2-digit', day: '2-digit', month: '2-digit', year: 'numeric' }); }\n\nReplace 'de-DE' with your locale.",
             "info_capability": "The device capability is preassigned after entity selection.\n\nIf the capability can not be determined correctly, you can set a custom target capability. Alternatively you can adjust the preassigned capability name.\n\nYou can use capability names  like <strong>measure_*, meter_*, alarm_*, onoff, onoff_button or button</strong>. Or select one capability from the autocomplete list.\n\nWhen using a capability name more than once in a device, use subcapabilities instead like <strong>onoff.livingroom</strong>.",
-            "info_entity": "Select an entity from the list to add the entity state as device capability.\n\nIf you want to add an <strong>entity attribute</strong> instead, you can activate this checkbox and select the attribute of the selected entity.\n\nYou can insert an attribute manually, too.\n\nExamples for entity weather.home:\n\nSimple attribute:\ntemperature\n\nArray:\nforecast[0].temperature\n\nSelect a corresponding capability (possibly including a sub capability) if a numeric or alphanumeric capability is not the right one and the attribute is representing e.g. a temperature or a binary sensor/alarm."
+            "info_entity": "Select an entity from the list to add the entity state as device capability.\n\nIf you want to add an <strong>entity attribute</strong> instead, you can activate this checkbox and select the attribute of the selected entity.\n\nYou can insert an attribute manually, too.\n\nExamples for entity weather.home:\n\nSimple attribute:\ntemperature\n\nArray:\nforecast[0].temperature\n\nSelect a corresponding capability (possibly including a sub capability) if a numeric or alphanumeric capability is not the right one and the attribute is representing e.g. a temperature or a binary sensor/alarm.",
+            "info_number_input": "A numeric input entity (number or input_number) is usually imported as a sensor.\n\nIf the value of this entity is to be changed in Homey, the entity can be represented as a slider.\nThe properties of the entity (min, max, increment) are taken over.\n\nUse the slider to change the value - also in the HA entity."
         }
     },
     "device_unavailable_reason": {

@@ -548,24 +548,48 @@ class BaseDriver extends Homey.Driver {
         let entityKeys = Object.keys(entities);
         for (let i=0; i<entityKeys.length; i++){
             let domain = entities[entityKeys[i]].entity_id.split('.')[0];
-            // if (
-            //     domain == 'sensor' ||
-            //     domain == 'binary_sensor' ||
-            //     domain == 'switch' ||
-            //     domain == 'input_boolean' ||
-            //     domain == 'button' ||
-            //     domain == 'input_button'
-            // ){
-                result.push({
-                    entity_id: entities[entityKeys[i]].entity_id,
-                    name: entities[entityKeys[i]].attributes.friendly_name || entities[entityKeys[i]].entity_id.split('.')[1],
-                    unit: entities[entityKeys[i]].attributes.unit_of_measurement || '',
-                    title: entities[entityKeys[i]].attributes.friendly_name + 
-                            " (" +
-                            entities[entityKeys[i]].entity_id +
-                            ")" 
-                });
-            // }
+            let entity = {
+                entity_id: entities[entityKeys[i]].entity_id,
+                name: entities[entityKeys[i]].attributes.friendly_name || entities[entityKeys[i]].entity_id.split('.')[1],
+                unit: entities[entityKeys[i]].attributes.unit_of_measurement || '',
+                title: entities[entityKeys[i]].attributes.friendly_name + 
+                        " (" +
+                        entities[entityKeys[i]].entity_id +
+                        ")" 
+            };
+            if ( domain == "number" 
+                // && entities[entityKeys[i]].attributes.min_value != undefined
+                // && entities[entityKeys[i]].attributes.max_value != undefined
+                // && entities[entityKeys[i]].attributes.step != undefined 
+                ){
+                entity["number_range"] = {};
+                if (entities[entityKeys[i]].attributes.min_value != undefined){
+                    entity["number_range"]["min"] = entities[entityKeys[i]].attributes.min_value;
+                }
+                if (entities[entityKeys[i]].attributes.max_value != undefined){
+                    entity["number_range"]["max"] = entities[entityKeys[i]].attributes.max_value;
+                }
+                if (entities[entityKeys[i]].attributes.step != undefined){
+                    entity["number_range"]["step"] = entities[entityKeys[i]].attributes.step;
+                }
+            }
+            if ( domain == "input_number" 
+                //  && entities[entityKeys[i]].attributes.min != undefined
+                //  && entities[entityKeys[i]].attributes.max != undefined
+                //  && entities[entityKeys[i]].attributes.step != undefined
+                ){
+                entity["number_range"] = {};
+                if (entities[entityKeys[i]].attributes.min != undefined){
+                    entity["number_range"]["min"] = entities[entityKeys[i]].attributes.min;
+                }
+                if (entities[entityKeys[i]].attributes.max != undefined){
+                    entity["number_range"]["max"] = entities[entityKeys[i]].attributes.max;
+                }
+                if (entities[entityKeys[i]].attributes.step != undefined){
+                    entity["number_range"]["step"] = entities[entityKeys[i]].attributes.step;
+                }
+            }
+            result.push(entity);
         };
         return result;
     }
@@ -720,6 +744,7 @@ class BaseDriver extends Homey.Driver {
             }
 
             let capability;
+            let capabilitiesOptions = {};
             if (data.capability){
                 capability = data.capability;
             }
@@ -733,6 +758,29 @@ class BaseDriver extends Homey.Driver {
                 // add capability as subcapability with entity_id as subcapability name
                 capability = capabilityTemplate.capability + '.' +data.entity_id;
             }
+
+            // Insert DIM capability for changeable number entities
+            if (data.add_as_number_input == true){
+                if (data.entity_id.startsWith('number.') || data.entity_id.startsWith('input_number.')){
+                    let capabilityArray = capability.split(/\.(.*)/s);
+                    if (capabilityArray.length > 1){
+                        capability = 'dim.' + capabilityArray[1];
+                    }
+                    else{
+                        capability = 'dim';
+                    }
+                    if (!isNaN(Number(data.number_input.min))){
+                        capabilitiesOptions["min"] = Number(data.number_input.min);
+                    }
+                    if (!isNaN(Number(data.number_input.max))){
+                        capabilitiesOptions["max"] = Number(data.number_input.max);
+                    }
+                    if (!isNaN(Number(data.number_input.step))){
+                        capabilitiesOptions["step"] = Number(data.number_input.step);
+                    }
+                }
+            }
+
             if (data.add_as_main_capability){
                 capability = capability.split('.')[0];
                 // Special case: if main capability, the add onoff_button (button page) as onoff to allow quick actions
@@ -745,7 +793,7 @@ class BaseDriver extends Homey.Driver {
                 try{
                     await device.addCapability(capability);
                     // add custom capabilitieOptions fron repair dialog
-                    let capabilitiesOptions = {};
+                    
                     capabilitiesOptions["entity_id"] = data.entity_id;
                     if (data.name){
                         capabilitiesOptions['title'] = data.name;

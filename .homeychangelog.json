@@ -334,5 +334,9 @@
   "1.3.10": {
     "en": "Added generic flow conditions.",
     "de": "Generische Flow-Bedingungen ergänzt."
+  },
+  "1.3.11": {
+    "en": "Added changeable numeric capability.",
+    "de": "Änderbare numerische Capability ergänzt."
   }
 }

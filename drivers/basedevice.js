@@ -467,7 +467,7 @@ class BaseDevice extends Homey.Device {
                         tokens.value_boolean = newValue;
                         await this.setCapabilityValue(keys[i], newValue );
                     }
-                    else if (keys[i].startsWith("measure") || keys[i].startsWith("meter")){
+                    else if (keys[i].startsWith("measure") || keys[i].startsWith("meter") || keys[i].startsWith("dim")){
                         // numeric capability
                         if (converter != undefined){
                             newValue = converter(entityValue);
@@ -553,6 +553,9 @@ class BaseDevice extends Homey.Device {
                 if (entityId != undefined){
                     if (key.startsWith("onoff")){
                         await this._client.turnOnOff(entityId, valueObj[keys[i]]);
+                    }
+                    if (key.startsWith("dim")){
+                        await this._client.callService(entityId.split(".")[0], "set_value", {"entity_id": entityId, value: valueObj[keys[i]]});
                     }
                     if (key.startsWith("button") && key != "button.reconnect"){
                         await this._client.callService(entityId.split(".")[0], "press", {"entity_id": entityId});
@@ -838,33 +841,6 @@ class BaseDevice extends Homey.Device {
         return result;
     }
 
-    // getAutocompleteCapabilityListFull(){
-    //     let capabilities = this.getDeviceEntitiesCapabilities();
-    //     let result = [];
-    //     for (let i=0; i<capabilities.length; i++){
-    //         let capabilitiesOptions = {};
-    //         try{
-    //             capabilitiesOptions = this.getCapabilityOptions(capabilities[i]);
-    //         }
-    //         catch(error){continue;}
-    //         try{
-    //             let name;
-    //             if (capabilitiesOptions.title){
-    //                 name = capabilitiesOptions.title;
-    //             }
-    //             else{
-    //                 name = capabilitiesOptions.entity_id;
-    //             }
-    //         result.push({
-    //                 id: capabilities[i],
-    //                 name: name
-    //             })
-    //         }
-    //         catch(error){this.log("getAutocompleteCapabilityList(): "+error.message)}
-    //     }
-    //     return result;
-    // }
-
     // Flow Actions 
     getAutocompleteOnoffList(){
         let capabilities = this.getDeviceEntitiesCapabilities();
@@ -943,6 +919,12 @@ class BaseDevice extends Homey.Device {
     async flowActionButtonPress(capability){
         let valueObj = {};
         valueObj[ capability ] = true;
+        await this.onDeviceEntitiesSet( valueObj, {} );
+    }
+
+    async flowActionNumberSet(capability, value){
+        let valueObj = {};
+        valueObj[ capability ] = value;
         await this.onDeviceEntitiesSet( valueObj, {} );
     }
 
