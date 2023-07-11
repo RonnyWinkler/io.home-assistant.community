@@ -1,7 +1,7 @@
 {
   "_comment": "This file is generated. Please edit .homeycompose/app.json instead.",
   "id": "io.home-assistant.community",
-  "version": "1.3.11",
+  "version": "1.3.12",
   "compatibility": ">=8.1.0",
   "sdk": 3,
   "brandColor": "#0DA6EA",
@@ -277,7 +277,7 @@
           {
             "name": "device",
             "type": "device",
-            "filter": "driver_id=custom|compound|climate|climate_fan|fan|water_heater|light|media|sensor|switch|vacuum|cover|button|lock|presence|scene|schedule|script|timer"
+            "filter": "driver_id=custom|compound|climate|climate_fan|fan|water_heater|light|media|sensor|switch|vacuum|cover|button|lock|presence|scene|schedule|script|timer|camera"
           }
         ],
         "id": "capability_changed"
@@ -632,7 +632,7 @@
           {
             "name": "device",
             "type": "device",
-            "filter": "driver_id=custom|compound|climate|climate_fan|fan|water_heater|light|media|sensor|switch|vacuum|cover|button|lock|presence|scene|schedule|script|timer"
+            "filter": "driver_id=custom|compound|climate|climate_fan|fan|water_heater|light|media|sensor|switch|vacuum|cover|button|lock|presence|scene|schedule|script|timer|camera"
           }
         ],
         "id": "generic_alarm_false"
@@ -683,7 +683,7 @@
           {
             "name": "device",
             "type": "device",
-            "filter": "driver_id=custom|compound|climate|climate_fan|fan|water_heater|light|media|sensor|switch|vacuum|cover|button|lock|presence|scene|schedule|script|timer"
+            "filter": "driver_id=custom|compound|climate|climate_fan|fan|water_heater|light|media|sensor|switch|vacuum|cover|button|lock|presence|scene|schedule|script|timer|camera"
           }
         ],
         "id": "generic_alarm_true"
@@ -1050,7 +1050,7 @@
           {
             "name": "device",
             "type": "device",
-            "filter": "driver_id=custom|compound|climate|climate_fan|fan|water_heater|light|media|sensor|switch|vacuum|cover|button|lock|presence|scene|schedule|script|timer"
+            "filter": "driver_id=custom|compound|climate|climate_fan|fan|water_heater|light|media|sensor|switch|vacuum|cover|button|lock|presence|scene|schedule|script|timer|camera"
           }
         ],
         "id": "capability_boolean"
@@ -1089,7 +1089,7 @@
           {
             "name": "device",
             "type": "device",
-            "filter": "driver_id=custom|compound|climate|climate_fan|fan|water_heater|light|media|sensor|switch|vacuum|cover|button|lock|presence|scene|schedule|script|timer"
+            "filter": "driver_id=custom|compound|climate|climate_fan|fan|water_heater|light|media|sensor|switch|vacuum|cover|button|lock|presence|scene|schedule|script|timer|camera"
           }
         ],
         "id": "capability_number"
@@ -1128,7 +1128,7 @@
           {
             "name": "device",
             "type": "device",
-            "filter": "driver_id=custom|compound|climate|climate_fan|fan|water_heater|light|media|sensor|switch|vacuum|cover|button|lock|presence|scene|schedule|script|timer"
+            "filter": "driver_id=custom|compound|climate|climate_fan|fan|water_heater|light|media|sensor|switch|vacuum|cover|button|lock|presence|scene|schedule|script|timer|camera"
           }
         ],
         "id": "capability_text"
@@ -2201,7 +2201,7 @@
           {
             "name": "device",
             "type": "device",
-            "filter": "driver_id=custom|climate|climate_fan|fan|water_heater|light|media|sensor|switch|vacuum|cover"
+            "filter": "driver_id=custom|climate|climate_fan|fan|water_heater|light|media|sensor|switch|vacuum|covers|camera"
           }
         ],
         "id": "genericButtonPress"
@@ -2252,7 +2252,7 @@
           {
             "name": "device",
             "type": "device",
-            "filter": "driver_id=custom|climate|climate_fan|fan|water_heater|light|media|sensor|switch|vacuum|cover"
+            "filter": "driver_id=custom|climate|climate_fan|fan|water_heater|light|media|sensor|switch|vacuum|cover|camera"
           }
         ],
         "id": "genericNumberSet"
@@ -2324,7 +2324,7 @@
           {
             "name": "device",
             "type": "device",
-            "filter": "driver_id=custom|climate|climate_fan|fan|water_heater|light|media|sensor|switch|vacuum|cover"
+            "filter": "driver_id=custom|climate|climate_fan|fan|water_heater|light|media|sensor|switch|vacuum|cover|camera"
           }
         ],
         "id": "genericSwitchAction"
@@ -3362,6 +3362,243 @@
         "large": "/drivers/button/assets/images/large.png",
         "small": "/drivers/button/assets/images/small.png"
       }
+    },
+    {
+      "capabilitiesOptions": {
+        "button.reconnect": {
+          "maintenanceAction": true,
+          "title": {
+            "en": "Reconnect",
+            "de": "Neu verbinden",
+            "nl": "Opnieuw verbinden"
+          },
+          "desc": {
+            "en": "Reconnect and reload entities.",
+            "de": "Neu verbinden und Entitäten neu laden.",
+            "nl": "Maak opnieuw verbinding en laad entiteiten opnieuw."
+          }
+        }
+      },
+      "pair": [
+        {
+          "id": "loading",
+          "template": "loading",
+          "navigation": {
+            "next": "list_devices"
+          }
+        },
+        {
+          "id": "login_credentials",
+          "template": "login_credentials",
+          "options": {
+            "logo": "../../../assets/images/logo.png",
+            "usernameLabel": {
+              "en": "Server"
+            },
+            "usernamePlaceholder": {
+              "en": "http://192.168.xxx.xxx:8123"
+            },
+            "passwordLabel": {
+              "en": "Token"
+            },
+            "passwordPlaceholder": {
+              "en": "Long-lived access token"
+            }
+          }
+        },
+        {
+          "id": "list_devices",
+          "options": {
+            "singular": false
+          }
+        },
+        {
+          "id": "icon",
+          "navigation": {
+            "next": "add_devices",
+            "prev": "list_devices"
+          }
+        },
+        {
+          "id": "add_devices"
+        }
+      ],
+      "repair": [
+        {
+          "id": "select",
+          "navigation": {
+            "prev": "done"
+          }
+        },
+        {
+          "id": "add_entity",
+          "navigation": {
+            "prev": "select"
+          }
+        },
+        {
+          "id": "change_entity",
+          "navigation": {
+            "prev": "select"
+          }
+        },
+        {
+          "id": "remove_entity",
+          "navigation": {
+            "prev": "select"
+          }
+        },
+        {
+          "id": "device_details",
+          "navigation": {
+            "prev": "select"
+          }
+        },
+        {
+          "id": "log",
+          "navigation": {
+            "prev": "select"
+          }
+        },
+        {
+          "id": "icon",
+          "navigation": {
+            "next": "icon_change",
+            "prev": "select"
+          }
+        },
+        {
+          "id": "icon_change",
+          "navigation": {
+            "prev": "icon"
+          }
+        },
+        {
+          "id": "capability_update_dlg",
+          "navigation": {
+            "next": "capability_update",
+            "prev": "select"
+          }
+        },
+        {
+          "id": "capability_update",
+          "navigation": {
+            "prev": "capability_update_dlg"
+          }
+        },
+        {
+          "id": "login_credentials",
+          "template": "login_credentials",
+          "navigation": {
+            "prev": "select"
+          },
+          "options": {
+            "logo": "../../../assets/images/logo.png",
+            "usernameLabel": {
+              "en": "Server"
+            },
+            "usernamePlaceholder": {
+              "en": "http://192.168.xxx.xxx:8123"
+            },
+            "passwordLabel": {
+              "en": "Token"
+            },
+            "passwordPlaceholder": {
+              "en": "Long-lived access token"
+            }
+          }
+        },
+        {
+          "id": "done",
+          "template": "done"
+        }
+      ],
+      "id": "camera",
+      "name": {
+        "en": "Camera",
+        "de": "Kamera",
+        "nl": "Camera"
+      },
+      "class": "camera",
+      "capabilities": [
+        "button.reconnect"
+      ],
+      "images": {
+        "large": "/drivers/camera/assets/images/large.png",
+        "small": "/drivers/camera/assets/images/small.png"
+      },
+      "settings": [
+        {
+          "type": "group",
+          "label": {
+            "en": "Device entities",
+            "de": "Geräte-Entitäten",
+            "nl": "Apparaat entiteiten"
+          },
+          "children": [
+            {
+              "id": "add_device_sensor",
+              "type": "checkbox",
+              "value": false,
+              "label": {
+                "en": "Show device sensors",
+                "de": "Zeige Geräte-Sensoren",
+                "nl": "Apparaatsensoren weergeven"
+              },
+              "hint": {
+                "en": "Add sensor entities from HA device where this entity is assigned to.",
+                "de": "Füge Sensor-Entitäten des HA-Gerätes hinzu, dem diese Entität zugeordnet ist.",
+                "nl": "Voeg sensor entiteiten toe vanaf het HA-apparaat waaraan deze entiteit is toegewezen."
+              }
+            },
+            {
+              "id": "add_device_sensor_diagnostic",
+              "type": "checkbox",
+              "value": false,
+              "label": {
+                "en": "Show device diagnostic sensors",
+                "de": "Zeige Geräte-Diagnosesensoren",
+                "nl": "Diagnostische sensoren voor apparaat weergeven"
+              },
+              "hint": {
+                "en": "Add diagnostic sensor entities from HA device where this entity is assigned to.",
+                "de": "Füge Diagnosesensor-Entitäten des HA-Gerätes hinzu, dem diese Entität zugeordnet ist.",
+                "nl": "Voeg diagnostische sensor entiteiten toe vanaf het HA-apparaat waaraan deze entiteit is toegewezen."
+              }
+            },
+            {
+              "id": "add_device_switch",
+              "type": "checkbox",
+              "value": false,
+              "label": {
+                "en": "Show device switches",
+                "de": "Zeige Geräte-Schalter",
+                "nl": "Apparaatschakelaars weergeven"
+              },
+              "hint": {
+                "en": "Add switch entities from HA device where this entity is assigned to.",
+                "de": "Füge Schalter-Entitäten des HA-Gerätes hinzu, dem diese Entität zugeordnet ist.",
+                "nl": "Voeg schakelaar entiteiten toe vanaf het HA-apparaat waaraan deze entiteit is toegewezen."
+              }
+            },
+            {
+              "id": "add_device_button",
+              "type": "checkbox",
+              "value": false,
+              "label": {
+                "en": "Show device buttons",
+                "de": "Zeige Geräte-Buttons",
+                "nl": "Toon apparaatknoppen"
+              },
+              "hint": {
+                "en": "Add button entities from HA device where this entity is assigned to.",
+                "de": "Füge Button-Entitäten des HA-Gerätes hinzu, dem diese Entität zugeordnet ist.",
+                "nl": "Voeg knoppen entiteiten toe vanaf het HA-apparaat waaraan deze entiteit is toegewezen."
+              }
+            }
+          ]
+        }
+      ]
     },
     {
       "capabilitiesOptions": {

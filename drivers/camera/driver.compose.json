@@ -1,0 +1,18 @@
+{
+    "id": "camera",
+    "name": {
+      "en": "Camera",
+      "de": "Kamera",
+      "nl": "Camera"
+    },
+    "class": "camera",
+    "capabilities": [
+    
+      "button.reconnect"
+    ],
+    "images": {
+      "large": "/drivers/camera/assets/images/large.png",
+      "small": "/drivers/camera/assets/images/small.png"
+  },
+  "$extends": [ "capabilitiesOptions", "pair", "repair" ]
+}

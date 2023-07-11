@@ -299,6 +299,7 @@ class BaseDriver extends Homey.Driver {
         session.setHandler('getCustomEntityList', async () => {
             this.log("Get custom device entity list...");
             let entities = await this.getCustomEntityList(); 
+            this.log("Entities found: "+entities.length);
             // this.log(entities);
             return entities;
         });
