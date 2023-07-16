@@ -1032,7 +1032,7 @@ class App extends Homey.App {
 		})
 		this._flowConditionPresenceState = this.homey.flow.getConditionCard('presence_state')
 		.registerRunListener(async (args, state) => {
-			return (args.device.getCapabilityValue('presence_state') == args.value);
+			return (args.device.getCapabilityValue('presence_state') == args.state);
 		})
 		this._flowConditionVacuumState = this.homey.flow.getConditionCard('vacuum_state')
 		.registerRunListener(async (args, state) => {
