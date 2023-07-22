@@ -21,6 +21,11 @@ class CustomDevice extends BaseDevice {
             await this.setCapabilityValue('custom_hint', this.homey.__("devices.custom.hint01") );
         }
 
+        // maintenance actions
+        this.registerCapabilityListener('button.reconnect', async () => {
+            await this.clientReconnect()
+        });
+        
         // Capability listener for all existing capabilities
         // this.registerMultipleCapabilityListener(this.getCapabilities(), async (value, opts) => {
         //     await this._onCapabilitiesSet(value, opts)
@@ -165,6 +170,9 @@ class CustomDevice extends BaseDevice {
     }
 
     // Device  functions ============================================================================================
+    async clientReconnect(){
+        await this.homey.app.clientReconnect();
+    }
 
     // Entity update ============================================================================================
     // async onEntityUpdate(data){

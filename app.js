@@ -1090,12 +1090,12 @@ class App extends Homey.App {
 
 	async onUninit(){
 		this.log("App onUninit() - close connection");
-		await this._client.close();
-		this._client = null;
 		if (this.timeoutCheckConnection){
             this.homey.clearTimeout(this.timeoutCheckConnection);
             this.timeoutCheckConnection = null;     
 		}
+		await this._client.close();
+		this._client = null;
 		this.log("App onUninit() - finished");
 	}
 

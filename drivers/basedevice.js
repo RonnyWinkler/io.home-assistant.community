@@ -217,11 +217,14 @@ class BaseDevice extends Homey.Device {
                 data.state == undefined ){
                 return;
             }
-            if (data.state == "unavailable"){
-                await this.setUnavailable(this.homey.__("device_unavailable_reason.entity_unavailable"));
-            }
-            else{
-                this.setAvailable();
+            // Availability check for state only for devices based on a entity - and only if this main entity is unavailable
+            if (this.entityId == data.entity_id){
+                if (data.state == "unavailable"){
+                    await this.setUnavailable(this.homey.__("device_unavailable_reason.entity_unavailable"));
+                }
+                else{
+                    this.setAvailable();
+                }
             }
             if (this.hasCapability("measure_power") && 
                 this.powerEntityId != null &&
@@ -246,7 +249,8 @@ class BaseDevice extends Homey.Device {
                 await this.setUnavailable(this.homey.__("device_unavailable_reason.entity_not_found"));
             }
             else{
-                this.setAvailable();
+                // this.setAvailable();
+                this.onEntityUpdate(entity);
             }
         }
     }
@@ -558,7 +562,12 @@ class BaseDevice extends Homey.Device {
                         await this._client.callService(entityId.split(".")[0], "set_value", {"entity_id": entityId, value: valueObj[keys[i]]});
                     }
                     if (key.startsWith("button") && key != "button.reconnect"){
-                        await this._client.callService(entityId.split(".")[0], "press", {"entity_id": entityId});
+                        if (entityId.startsWith("scene") || entityId.startsWith("script")){
+                            await this._client.turnOnOff(entityId, valueObj[keys[i]]);
+                        }
+                        else{
+                            await this._client.callService(entityId.split(".")[0], "press", {"entity_id": entityId});
+                        }
                     }
                 }
             }

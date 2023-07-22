@@ -108,13 +108,18 @@ class ClimateFanDevice extends BaseDevice {
     }
 
     async checkDeviceAvailability(){
-        let entity_fan = this._client.getEntity("fan."+this.entityId.split(".")[1]);
-        let entity_climate = this._client.getEntity("climate."+this.entityId.split(".")[1]);
-        if (entity_fan == null || entity_climate == null){
-            await this.setUnavailable(this.homey.__("device_unavailable_reason.entity_not_found"));
-        }
-        else{
-            this.setAvailable();
+        let client = this.getClient();
+        if (client != undefined){
+            let entity_fan = this._client.getEntity("fan."+this.entityId.split(".")[1]);
+            let entity_climate = this._client.getEntity("climate."+this.entityId.split(".")[1]);
+            if (entity_fan == null || entity_climate == null){
+                await this.setUnavailable(this.homey.__("device_unavailable_reason.entity_not_found"));
+            }
+            else{
+                // this.setAvailable();
+                this.onEntityUpdate(entity_fan);
+                this.onEntityUpdate(entity_climate);
+            }
         }
     }
 
