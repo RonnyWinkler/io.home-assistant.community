@@ -354,5 +354,9 @@
   "1.4.0": {
     "en": "Add scene/script entities as button in repair view.",
     "de": "Füge Szenen-/Skript-Entitäten als Button im Repair-Dialog hinzu."
+  },
+  "1.4.1": {
+    "en": "Adjusted error handling for service calls.",
+    "de": "Fehlerbehandlung für Serviceaufrufe angepasst."
   }
 }
