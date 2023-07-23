@@ -154,7 +154,7 @@ class FanDevice extends BaseDevice {
         } 
         await this._client.callService("fan", "set_percentage", {
             "entity_id": entityId,
-            "percentage": speed * 100
+            "percentage": speed
         });
         return true;
     }
