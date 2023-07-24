@@ -324,16 +324,16 @@ class CompoundDevice extends BaseDevice {
                     await this.clientReconnect();          
                 }
                 if (key.startsWith("onoff")){
-                    this._onCapabilityOnoff(key, valueObj[keys[i]]);
+                    await this._onCapabilityOnoff(key, valueObj[keys[i]]);
                 }
                 if (key.startsWith("button") && key != "button.reconnect"){
-                    this._onCapabilityButton(key);
+                    await this._onCapabilityButton(key);
                 }
                 if (key.startsWith("locked")){
-                    this._onCapabilityLocked(key, valueObj[keys[i]]);
+                    await this._onCapabilityLocked(key, valueObj[keys[i]]);
                 }
                 if (key.startsWith("dim")){
-                    this._onCapabilityDim(key, valueObj[keys[i]]);
+                    await this._onCapabilityDim(key, valueObj[keys[i]]);
                 }
     
             }

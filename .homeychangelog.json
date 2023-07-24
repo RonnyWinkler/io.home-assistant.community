@@ -366,5 +366,9 @@
   "1.4.3": {
     "en": "Adjusted error handling for service calls.",
     "de": "Fehlerbehandlung für Serviceaufrufe angepasst."
+  },
+  "1.4.4": {
+    "en": "Adjusted error handling for service calls.",
+    "de": "Fehlerbehandlung für Serviceaufrufe angepasst."
   }
 }
