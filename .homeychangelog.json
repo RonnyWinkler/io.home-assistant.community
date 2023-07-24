@@ -362,5 +362,9 @@
   "1.4.2": {
     "en": "Fixed fan speed calculation.",
     "de": "Berechnung der Ventilator-Geschwindigkeit korigiert."
+  },
+  "1.4.3": {
+    "en": "Adjusted error handling for service calls.",
+    "de": "Fehlerbehandlung für Serviceaufrufe angepasst."
   }
 }
