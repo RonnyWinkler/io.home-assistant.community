@@ -370,5 +370,9 @@
   "1.4.4": {
     "en": "Adjusted error handling for service calls.",
     "de": "Fehlerbehandlung für Serviceaufrufe angepasst."
+  },
+  "1.4.5": {
+    "en": "Flow card 'call entity service' adjusted: data is optional now.",
+    "de": "Flow-Karte 'Starte Entität-Service' angepasst: Daten-Feld ist nun optional."
   }
 }

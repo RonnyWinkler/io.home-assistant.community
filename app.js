@@ -1183,7 +1183,11 @@ class App extends Homey.App {
 			this.log("Call entity service. Service: "+args.service.id+" | Entity: not selected | Data: "+args.data);
 		}
 		try{
-			let data = this.jsonEscape(args.data);
+			let data = args.data;
+			if (data == ''){
+				data = '{}';
+			}
+			data = this.jsonEscape(data);
 			if (args.entity){
 				let json = JSON.parse(data);
 				json["entity_id"] = args.entity.id;
