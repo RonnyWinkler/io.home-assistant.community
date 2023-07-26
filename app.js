@@ -1187,11 +1187,12 @@ class App extends Homey.App {
 			if (data == ''){
 				data = '{}';
 			}
-			data = this.jsonEscape(data);
+			// data = this.jsonEscape(data);
 			if (args.entity){
 				let json = JSON.parse(data);
 				json["entity_id"] = args.entity.id;
-				data = this.jsonUnescape(JSON.stringify(json));
+				// data = this.jsonUnescape(JSON.stringify(json));
+				data = JSON.stringify(json);
 			}
 			await this._client.callService(args.service.id.split('.')[0], args.service.id.split('.')[1], data);
 
@@ -1282,7 +1283,7 @@ class App extends Homey.App {
 			}
         }
         catch(error){
-            this.log("Error checking connection: ", error);
+            this.log("Error checking connection: ");
             this.log("Start reconnect...");
 			await this._reconnectClient();
         }
