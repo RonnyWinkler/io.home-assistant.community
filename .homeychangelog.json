@@ -382,5 +382,9 @@
   "1.4.7": {
     "en": "Added 'dynamic scene' flow cards to store and restore entity states.",
     "de": "'Dynamische Szene' Flowkarten ergänzt zum Speichern und Wiederherstellen von Entitäts-Eigenschaften'."
+  },
+  "1.4.8": {
+    "en": "Adjusted error handling.",
+    "de": "Fehlerbehandlung angepasst."
   }
 }

@@ -1141,7 +1141,7 @@ class App extends Homey.App {
 	}
 
 	async _reconnectClient() {
-		console.log("settings updated.... reconnecting");
+		this.log("Client reconnecting...");
 
 		let address = this.homey.settings.get("address");
 		let token = this.homey.settings.get("token");
@@ -1295,19 +1295,19 @@ class App extends Homey.App {
 	async onCheckConnection(){
  		this.timeoutCheckConnection = this.homey.setTimeout(async () => this.onCheckConnection().catch(e => console.log(e)), RECONNECT_TIMEOUT * 60 * 1000 );
 		try{
-			let result = await this._client.ping();
-			if (!result){
-				this.log("Error checking connection: No response content");
-				await this._reconnectClient();
-			}
-			else{
-				this.log("Connection check: OK.");
-			}
+			// check connection, on connection error a error is thrown
+			await this._client.ping();
+			this.log("Connection check: OK.");
         }
         catch(error){
             this.log("Error checking connection: ");
             this.log("Start reconnect...");
-			await this._reconnectClient();
+			try{
+				await this._reconnectClient();
+			}
+			catch(error){
+				this.log("Error on reconnect. Wait for next check...");
+			}
         }
 	}
 

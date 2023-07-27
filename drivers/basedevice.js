@@ -242,16 +242,21 @@ class BaseDevice extends Homey.Device {
     }
 
     async checkDeviceAvailability(){
-        let client = this.getClient();
-        if (client != undefined){
-            let entity = this._client.getEntity(this.entityId);
-            if (entity == null){
-                await this.setUnavailable(this.homey.__("device_unavailable_reason.entity_not_found"));
+        try{
+            let client = this.getClient();
+            if (client != undefined){
+                let entity = this._client.getEntity(this.entityId);
+                if (entity == null){
+                    await this.setUnavailable(this.homey.__("device_unavailable_reason.entity_not_found"));
+                }
+                else{
+                    // this.setAvailable();
+                    this.onEntityUpdate(entity);
+                }
             }
-            else{
-                // this.setAvailable();
-                this.onEntityUpdate(entity);
-            }
+        }
+        catch(error){
+            this.log("Error: checkDeviceAvailability()");
         }
     }
 
