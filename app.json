@@ -1,7 +1,7 @@
 {
   "_comment": "This file is generated. Please edit .homeycompose/app.json instead.",
   "id": "io.home-assistant.community",
-  "version": "1.4.6",
+  "version": "1.4.7",
   "compatibility": ">=8.1.0",
   "sdk": 3,
   "brandColor": "#0DA6EA",
@@ -2086,6 +2086,56 @@
           }
         ],
         "id": "compoundSwitchOn"
+      },
+      {
+        "title": {
+          "en": "Apply dynamic scene",
+          "de": "Dynamische Szene anwenden",
+          "nl": "Dynamische scène toepassen"
+        },
+        "titleFormatted": {
+          "en": "Apply dynamic scene",
+          "de": "Dynamische Szene anwenden",
+          "nl": "Dynamische scène toepassen"
+        },
+        "hint": {
+          "en": "Apply the previously created scene and restore the saved properties of the entities. For 'Custom and Compound devices', the properties of all added entities will be restored, for other devices, only the main entity will be restored.",
+          "de": "Wendet die zuvor erstellte Szene an und stellt die gespeicherten Eigenschaften der Entitäten wieder her. Für 'Benutzerdefiniertes- und Compound-Geräte' werden die Eigenschaften aller hinzugefügten Entitäten wiederhergestellt, für andere Geräte nur die Haupt-Entität.",
+          "nl": "Pas de eerder gemaakte scène toe en herstel de opgeslagen eigenschappen van de entiteiten. Voor 'Aangepaste en Compound apparaten' worden de eigenschappen van alle toegevoegde entiteiten hersteld, voor andere apparaten wordt alleen de hoofdentiteit hersteld."
+        },
+        "args": [
+          {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=custom|compound|climate|climate_fan|fan|water_heater|light|media|switch|vacuum|covers|lock"
+          }
+        ],
+        "id": "dynamicSceneApply"
+      },
+      {
+        "title": {
+          "en": "Create dynamic scene",
+          "de": "Dynamische Szene erstellen",
+          "nl": "Dynamische scène maken"
+        },
+        "titleFormatted": {
+          "en": "Create dynamic scene",
+          "de": "Dynamische Szene erstellen",
+          "nl": "Dynamische scène maken"
+        },
+        "hint": {
+          "en": "Create dynamic scene in HomeAssistant. The current properties of the entity will be captured into the scene. This state can be later restored by calling the scene. For 'Custom and Compound devices', the properties of all added entities will be captured. For other devices, only the main entity will be captured.",
+          "de": "Erstelle eine dynamische Szene in HomeAssistant. Die aktuellen Eigenschaften der Entität werden in die Szene übernommen. Dieser Zustand kann später durch Aufruf der Szene wiederhergestellt werden. Für 'Benutzerdefiniertes- und Compound-Geräte' werden die Eigenschaften aller hinzugefügten Entitäten übernommen, für andere Geräte nur die Haupt-Entität.",
+          "nl": "Creëer een dynamische scène in HomeAssistant. De huidige eigenschappen van het object worden vastgelegd in de scène. Deze staat kan later worden hersteld door de scène aan te roepen. Voor 'Aangepaste en Compound apparaten' worden de eigenschappen van alle toegevoegde entiteiten vastgelegd. Voor andere apparaten wordt alleen de hoofdentiteit vastgelegd."
+        },
+        "args": [
+          {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=custom|compound|climate|climate_fan|fan|water_heater|light|media|switch|vacuum|covers|lock"
+          }
+        ],
+        "id": "dynamicSceneCreate"
       },
       {
         "highlight": true,

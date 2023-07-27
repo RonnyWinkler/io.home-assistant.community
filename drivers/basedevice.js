@@ -937,6 +937,50 @@ class BaseDevice extends Homey.Device {
         await this.onDeviceEntitiesSet( valueObj, {} );
     }
 
+    async flowActionDynamicSceneCreate(){
+        let entities = [];
+        let sceneId = this.getData().id.replace(/-/g, "_").replace(/\./g, "_");
+        switch (this.driver.id ){
+            case 'custom':
+                // Custom device, use all added entities
+                let capabilities = this.getDeviceEntitiesCapabilities();
+                for (let i=0; i<capabilities.length; i++){
+                    let capabilitiesOptions = this.getCapabilityOptions(capabilities[i]);
+                    entities.push(capabilitiesOptions.entity_id);
+                }
+                break;
+            case 'compound':
+                // Compound device, use all assigned entities
+                let compoundCapabilities = this._getCompoundCapabilities();
+                let keys = Object.keys(compoundCapabilities);
+                for(let i=0; i<keys.length; i++){
+                    let entityId = this._getCompoundEntityId(compoundCapabilities[keys[i]]);
+                    entities.push(entityId);
+                }    
+                break;     
+            case others:
+                // Standard device, use main entity only
+                entities.push(this.entityId);
+        }
+
+        let data = {
+            snapshot_entities: [],
+            scene_id: sceneId
+        }
+        for (let i=0; i<entities.length; i++){
+            data.snapshot_entities.push(entities[i]);
+        }
+        await this._client.callService("scene", "create", data);
+    }
+
+    async flowActionDynamicSceneApply(){
+        let sceneId = "scene." + this.getData().id.replace(/-/g, "_").replace(/\./g, "_");
+        let target = {
+            entity_id: sceneId
+        }
+        await this._client.callService("scene", "turn_on", {}, target);
+    }
+
     // async httpGet(url, options){
     //     return new Promise( ( resolve, reject ) =>
     //         {

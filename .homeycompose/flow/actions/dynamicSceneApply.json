@@ -1,0 +1,24 @@
+{
+    "title": {
+        "en": "Apply dynamic scene",
+        "de": "Dynamische Szene anwenden",
+        "nl": "Dynamische scène toepassen"
+    },
+    "titleFormatted": {
+        "en": "Apply dynamic scene",
+        "de": "Dynamische Szene anwenden",
+        "nl": "Dynamische scène toepassen"
+    },
+    "hint": {
+        "en": "Apply the previously created scene and restore the saved properties of the entities. For 'Custom and Compound devices', the properties of all added entities will be restored, for other devices, only the main entity will be restored.",
+        "de": "Wendet die zuvor erstellte Szene an und stellt die gespeicherten Eigenschaften der Entitäten wieder her. Für 'Benutzerdefiniertes- und Compound-Geräte' werden die Eigenschaften aller hinzugefügten Entitäten wiederhergestellt, für andere Geräte nur die Haupt-Entität.",
+        "nl": "Pas de eerder gemaakte scène toe en herstel de opgeslagen eigenschappen van de entiteiten. Voor 'Aangepaste en Compound apparaten' worden de eigenschappen van alle toegevoegde entiteiten hersteld, voor andere apparaten wordt alleen de hoofdentiteit hersteld."
+    },
+    "args": [
+        {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=custom|compound|climate|climate_fan|fan|water_heater|light|media|switch|vacuum|covers|lock"
+        }
+    ]
+}

@@ -378,5 +378,9 @@
   "1.4.6": {
     "en": "Accept line breaks in data field of 'call service' flow card.",
     "de": "Erlaube Zeilenumbrüche ih 'Starte Dienst' Flow-Karte."
+  },
+  "1.4.7": {
+    "en": "Added 'dynamic scene' flow cards to store and restore entity states.",
+    "de": "'Dynamische Szene' Flowkarten ergänzt zum Speichern und Wiederherstellen von Entitäts-Eigenschaften'."
   }
 }

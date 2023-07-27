@@ -810,6 +810,28 @@ class App extends Homey.App {
 				throw new Error(error.message);
 			}
 		});
+		this._flowActionDynamicSceneCreate = this.homey.flow.getActionCard('dynamicSceneCreate');
+		this._flowActionDynamicSceneCreate.registerRunListener(async (args, state) => {
+			try{
+				await args.device.flowActionDynamicSceneCreate();
+				return true;
+			}
+			catch(error){
+				this.error("Error executing flowAction 'dynamicSceneCreate': "+  error.message);
+				throw new Error(error.message);
+			}
+		});
+		this._flowActionDynamicSceneApply = this.homey.flow.getActionCard('dynamicSceneApply');
+		this._flowActionDynamicSceneApply.registerRunListener(async (args, state) => {
+			try{
+				await args.device.flowActionDynamicSceneApply();
+				return true;
+			}
+			catch(error){
+				this.error("Error executing flowAction 'dynamicSceneApply': "+  error.message);
+				throw new Error(error.message);
+			}
+		});
 	}
 
 	// FLOW TRIGGER ======================================================================================
