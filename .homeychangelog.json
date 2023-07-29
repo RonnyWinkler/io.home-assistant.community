@@ -390,5 +390,9 @@
   "1.4.9": {
     "en": "Fixed autocomplete list of flow card 'alarm or switch is on'.",
     "de": "Autocomplete-Liste der FLow-Karte 'Alarm oder Schalter is an' korrigiert."
+  },
+  "1.4.10": {
+    "en": "Fixed flow card title'.",
+    "de": "Flow-Kartentitel korrigiert."
   }
 }

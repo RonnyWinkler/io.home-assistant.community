@@ -1,18 +1,18 @@
 {
     "title": {
-        "en": "The alarm turned off",
-        "de": "Der Alarm ist ausgegangen",
-        "nl": "Het alarm is uitgeschakeld"
+        "en": "The alarm or switch turned off",
+        "de": "Der Alarm oder Schalter ist ausgegangen",
+        "nl": "Het alarm of schakelaar is uitgeschakeld"
     },
     "titleFormatted": {
-        "en": "The alarm of capability [[capability]] turned off",
-        "de": "Der Alarm des Attributs [[capability]] ist ausgangen",
-        "nl": "Het alarm van capability [[capability]] is uitgeschakeld"
+        "en": "The alarm of capability or switch [[capability]] turned off",
+        "de": "Der Alarm des Attributs oder Schalter [[capability]] ist ausgangen",
+        "nl": "Het alarm van capability of schakelaar [[capability]] is uitgeschakeld"
     },
     "hint": {
-        "en": "Triggers when the alarm of capability [[capability]] turned on. Select one of the capabilities defined in compound definition and use the result token of the corresponding type",
-        "de": "Wird ausgelöst, wenn der Alarm des Attributs [[capability]] ausgegangen ist. Wähle eines der in der Compound-Definition definierten Attribute aus und verwende den Ergebnistoken des entsprechenden Typs.",
-        "nl": "Activeert wanneer het alarm van vermogen [[vermogen]] is uitgeschakeld. Selecteer een van de mogelijkheden die zijn gedefinieerd in de compound definitie en gebruik het resultaattoken van het overeenkomstige type"
+        "en": "Triggers when the alarm of capability or switch [[capability]] turned on. Select one of the capabilities defined in compound definition and use the result token of the corresponding type",
+        "de": "Wird ausgelöst, wenn der Alarm des Attributs oder der Schalter [[capability]] ausgegangen ist. Wähle eines der in der Compound-Definition definierten Attribute aus und verwende den Ergebnistoken des entsprechenden Typs.",
+        "nl": "Activeert wanneer het alarm van vermogen of schakelaar [[vermogen]] is uitgeschakeld. Selecteer een van de mogelijkheden die zijn gedefinieerd in de compound definitie en gebruik het resultaattoken van het overeenkomstige type"
     },
     "tokens": [
         {
