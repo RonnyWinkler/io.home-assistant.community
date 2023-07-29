@@ -886,8 +886,8 @@ class App extends Homey.App {
 			return ( !args.capability || !args.capability.id || args.capability.id === state.capability.id);
 		});
 		this._flowTriggerGenericAlarmTrue.registerArgumentAutocompleteListener('capability', async (query, args) => {
-			const capabilityAlarmList = args.device.getAutocompleteCapabilityList().filter((e) => {
-				return ( e.id.startsWith('alarm') || result.id.startsWith("onoff"));
+			const capabilityAlarmList = args.device.getAutocompleteCapabilityList().filter((result) => {
+				return ( result.id.startsWith('alarm') || result.id.startsWith("onoff"));
 			});
 			return capabilityAlarmList.filter((result) => { 
 				return result.name.toLowerCase().includes(query.toLowerCase());
@@ -899,8 +899,8 @@ class App extends Homey.App {
 			return ( !args.capability || !args.capability.id || args.capability.id === state.capability.id);
 		});
 		this._flowTriggerGenericAlarmFalse.registerArgumentAutocompleteListener('capability', async (query, args) => {
-			const capabilityAlarmList = args.device.getAutocompleteCapabilityList().filter((e) => {
-				return ( e.id.startsWith('alarm') || result.id.startsWith("onoff"));
+			const capabilityAlarmList = args.device.getAutocompleteCapabilityList().filter((result) => {
+				return ( result.id.startsWith('alarm') || result.id.startsWith("onoff"));
 			});
 			return capabilityAlarmList.filter((result) => { 
 				return result.name.toLowerCase().includes(query.toLowerCase());
