@@ -386,5 +386,9 @@
   "1.4.8": {
     "en": "Adjusted error handling.",
     "de": "Fehlerbehandlung angepasst."
+  },
+  "1.4.9": {
+    "en": "Fixed autocomplete list of flow card 'alarm or switch is on'.",
+    "de": "Autocomplete-Liste der FLow-Karte 'Alarm oder Schalter is an' korrigiert."
   }
 }
