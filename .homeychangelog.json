@@ -402,5 +402,9 @@
   "1.4.12": {
     "en": "Fixed setting volume for media player.",
     "de": "Korrektur der Lautstärkeänderung für Mediengerät."
+  },
+  "1.4.13": {
+    "en": "Fixed optional data field in 'call service' flow card.",
+    "de": "Korrektur des oprtionalen Datenfeldes in 'Starte Dienst' Flow-Karte."
   }
 }

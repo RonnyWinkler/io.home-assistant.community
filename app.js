@@ -1210,7 +1210,7 @@ class App extends Homey.App {
 		}
 		try{
 			let data = args.data;
-			if (data == ''){
+			if (data == undefined || data == ''){
 				data = '{}';
 			}
 			// data = this.jsonEscape(data);
