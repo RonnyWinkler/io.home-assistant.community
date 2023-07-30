@@ -672,7 +672,8 @@ class BaseDevice extends Homey.Device {
             }
             else if( capability.startsWith("measure_") ||
                 capability.startsWith("meter_") ||
-                capability == "dim" ) {
+                capability == "dim" ||
+                capability == "volume_set" ) {
                 return "number";
             } 
             else {

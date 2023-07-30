@@ -398,5 +398,9 @@
   "1.4.11": {
     "en": "Fixed autocomplete list of flow card 'alarm or switch turned on/off'.",
     "de": "Autocomplete-Liste der FLow-Karte 'Alarm oder Schalter ging an/aus' korrigiert."
+  },
+  "1.4.12": {
+    "en": "Fixed setting volume for media player.",
+    "de": "Korrektur der Lautstärkeänderung für Mediengerät."
   }
 }

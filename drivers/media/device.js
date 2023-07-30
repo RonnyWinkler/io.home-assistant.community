@@ -170,7 +170,7 @@ class MediaDevice extends BaseDevice {
                 }
             }
             if (this.hasCapability("speaker_artist")){
-                if ( data.attributes.media_artist != null){
+                if ( data.attributes.media_artist != null && data.attributes.media_artist != undefined && typeof data.attributes.media_artist === "string" ){
                     this.setCapabilityValue("speaker_artist", data.attributes.media_artist);
                 }
                 else{
