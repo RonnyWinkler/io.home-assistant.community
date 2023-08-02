@@ -406,5 +406,9 @@
   "1.4.13": {
     "en": "Fixed optional data field in 'call service' flow card.",
     "de": "Korrektur des oprtionalen Datenfeldes in 'Starte Dienst' Flow-Karte."
+  },
+  "1.4.14": {
+    "en": "Fix for camera device, check image before updating the device.",
+    "de": "Korrektur für Kamera-Gerät, prüfe Bild vor Aktualisierung."
   }
 }

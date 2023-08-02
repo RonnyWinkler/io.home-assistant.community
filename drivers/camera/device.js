@@ -84,12 +84,16 @@ class CameraDevice extends BaseDevice {
                         url =  this.homey.settings.get("address") + entityPicture;
                     }
                     if (url.startsWith('https')){
-                        this.mediaImage.setUrl(url);
+                        if (this.mediaImage){
+                            this.mediaImage.setUrl(url);
+                        }
                     }
                     else{
-                        this.mediaImage.setStream(async (stream) => {
-                            return await this._upateCameraImage(stream);
-                        });
+                        if (this.mediaImage){
+                            this.mediaImage.setStream(async (stream) => {
+                                return await this._upateCameraImage(stream);
+                            });
+                        }
                     }
                     await this.mediaImage.update();
                 }
