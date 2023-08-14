@@ -410,5 +410,9 @@
   "1.4.14": {
     "en": "Fix for camera device, check image before updating the device.",
     "de": "Korrektur für Kamera-Gerät, prüfe Bild vor Aktualisierung."
+  },
+  "1.4.15": {
+    "en": "Fix for crash on device availability check.",
+    "de": "Korrektur füe Abbruch in Geräteverfügbarkeits-Prüfung."
   }
 }

@@ -109,7 +109,7 @@ class ClimateFanDevice extends BaseDevice {
 
     async checkDeviceAvailability(){
         let client = this.getClient();
-        if (client != undefined){
+        if (client != undefined && this.entityId != undefined){
             let entity_fan = this._client.getEntity("fan."+this.entityId.split(".")[1]);
             let entity_climate = this._client.getEntity("climate."+this.entityId.split(".")[1]);
             if (entity_fan == null || entity_climate == null){
