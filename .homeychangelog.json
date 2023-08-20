@@ -414,5 +414,9 @@
   "1.4.15": {
     "en": "Fix for crash on device availability check.",
     "de": "Korrektur füe Abbruch in Geräteverfügbarkeits-Prüfung."
+  },
+  "1.4.16": {
+    "en": "Added converter examples. Adjusted API Error handling.",
+    "de": "Konverter-Beispiele ergänzt. API-Fehlerbehandlung angepasst."
   }
 }

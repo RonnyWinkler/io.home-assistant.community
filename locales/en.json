@@ -58,6 +58,13 @@
             "number_range_step": "Step",
             "converter_ha2homey": "Converter function HA->Homey",
             "converter_homey2HA": "Converter function Homey->HA",
+            "converter_example_placeholder": "Select example...",
+            "converter_text_01": "Numeric calculation 0..1 => 0..100 %",
+            "converter_code_01": "(value) => { return parseFloat(value) * 100; }",
+            "converter_text_02": "Numeric calculation 0..100 % => 0..1",
+            "converter_code_02": "(value) => { return parseFloat(value) / 100; }",
+            "converter_text_03": "Date conversion UTC->local",
+            "converter_code_03": "(value) => {\nreturn new Date(value).toLocaleString(\n  'de-DE',\n  {\n    hour12s: false,\n    hour: '2-digit',\n    minute: '2-digit',\n    day: '2-digit',\n    month: '2-digit',\n    year: 'numeric'\n  });\n}",
             "add_as_main_capability": "Add as main capability",
             "result_count_01": "Displaying",
             "result_count_02": "out of",
@@ -78,6 +85,7 @@
         }
     },
     "device_unavailable_reason": {
+        "not_connected": "Home Assistant is not connected",
         "entity_not_found": "Home Assistant entity does not exist",
         "entity_unavailable": "Home Assistant entity has state 'unavailable'"
     },

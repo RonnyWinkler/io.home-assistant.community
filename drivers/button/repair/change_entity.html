@@ -102,13 +102,17 @@
       <div class="info_icon" onClick="onInfoConverter()"> 
         <span class="fa fa-icon fa-info-circle"></span>
       </div>
-      <textarea class="homey-form-textarea"id="converter_ha2homeyChange" rows="5"
-                placeholder="(value) => { return parseFloat(value) * 0.01; }"></textarea>
+      <textarea class="homey-form-textarea" id="converter_ha2homeyChange" rows="5"
+                placeholder="(value) => { return parseFloat(value) * 0.01; }"
+                style="white-space:pre-wrap"></textarea>
+      <input id="entityChangeConverterExamlpe"  class="homey-form-input" type="text" value=""
+                style="margin-top:5px"/>
     </div>
     <div class="homey-form-group" id="divOutputConverter" style="display:none">
       <label for="converter_homey2haChange" class="homey-form-label"><span data-i18n="repair.custom_device.converter_homey2ha"></span></label>
       <textarea class="homey-form-textarea" id="converter_homey2haChange" rows="5"
-                placeholder="(value) => { return value * 100; }"></textarea>
+                placeholder="(value) => { return value * 100; }"
+                style="white-space:pre-wrap"></textarea>
     </div>
     <div class="homey-form-group" id="div_button">
       <button id="btnChangeEntityProcess" class="homey-button-primary-shadow-full" onClick="onChangeEntity()"><span data-i18n="repair.title.change_entity"></span></button>
@@ -215,5 +219,64 @@
               return true; // Search also for empty field
           },
       });
+
+      let autoCompleteJSConverterExample = new autoComplete({
+          selector: "#entityChangeConverterExamlpe",
+          placeHolder: Homey.__("repair.custom_device.converter_example_placeholder"),
+          threshold: 0,
+          data: {
+              src: [
+              {
+                  "text": Homey.__("repair.custom_device.converter_text_01"),
+                  "code": Homey.__("repair.custom_device.converter_code_01")
+                },
+                {
+                  "text": Homey.__("repair.custom_device.converter_text_02"),
+                  "code": Homey.__("repair.custom_device.converter_code_02")
+                },
+                {
+                  "text": Homey.__("repair.custom_device.converter_text_03"),
+                  "code": Homey.__("repair.custom_device.converter_code_03")
+                }
+              ],
+              keys: ["text"],
+              cache: true
+          },
+          resultsList:{
+            maxResults: undefined
+          },
+          resultItem: {
+            element: (item, data) => {
+
+              if (data.key == 'text'){
+                item.innerHTML =  "<span id='spanResultlistName'>"+data.match+"</span>"+
+                                  "<br>"+
+                                  "<span id='spanResultlistEntity'>"+data.value.code+"</span>";
+              }
+              if (data.key == 'code'){
+                item.innerHTML =  "<span id='spanResultlistName'>"+data.value.text+"</span>"+
+                                  "<br>"+
+                                  "<span id='spanResultlistEntity'>"+data.match+"</span>";
+              }
+            },
+            highlight: true
+          },
+          events: {
+              input: {
+                  selection: async (event) => {
+                      let value = event.detail.selection.value.code;
+                      // autoCompleteJSAttribute.input.value = value;
+                      document.getElementById('converter_ha2homeyChange').value = value;
+                  },
+                  focus: () => {
+                    autoCompleteJSConverterExample.start();
+                  }
+              }
+          },
+          trigger: (query) => {
+              return true; // Search also for empty field
+          },
+      });
+
   })();
 </script>

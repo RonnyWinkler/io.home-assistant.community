@@ -254,7 +254,7 @@ class LightDevice extends BaseDevice {
 
     // Flow actions ============================================================================================
     async setHue(args){
-        this._onCapabilitiesSet(args, null);
+        await this._onCapabilitiesSet(args, null);
     }
 
     async setColor(args){
@@ -269,7 +269,7 @@ class LightDevice extends BaseDevice {
             value["duration"] = args.duration; 
         }
         // this.log(value);
-        this._onCapabilitiesSet(value, null);
+        await this._onCapabilitiesSet(value, null);
     }
 
     async setColorName(args){
@@ -288,7 +288,7 @@ class LightDevice extends BaseDevice {
             value["duration"] = args.duration; 
         }
         // this.log(value);
-        this._onCapabilitiesSet(value, null);
+        await this._onCapabilitiesSet(value, null);
     }
 
     async setTemperature(args){
@@ -306,7 +306,7 @@ class LightDevice extends BaseDevice {
                 lightTemperature = 0;
             } 
             args["light_temperature"] = lightTemperature;
-            this._onCapabilitiesSet(args, null);
+            await this._onCapabilitiesSet(args, null);
         }
     }
 

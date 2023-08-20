@@ -11,7 +11,7 @@ const { join } = require('path');
 const Client = require('./lib/Client.js');
 const colors = require('./lib/colors.json');
 const RECONNECT_TIMEOUT = 15;
-const AVAILABILITY_CHECK_TIMEOUT = 30;
+const AVAILABILITY_CHECK_TIMEOUT = 10;
 const LOG_SIZE = 50;
 
 
