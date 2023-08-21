@@ -33,6 +33,7 @@
             "app_restart": "After an icon change, the app must be restarted for the change to take effect.",
             "device_details": "Device details",
             "log": "Application log",
+            "statistics": "Application statistics",
             "update_capabilities_title": "Update/reset device capabilities",
             "update_capabilities_text": "The current device capabilities are removed and re-added dependent on the HomeAssistant entity.",
             "update_capabilities_ready": "Capabilities updated.",
@@ -41,6 +42,15 @@
             "change_entity": "Change Entity",
             "remove_entity": "Remove Entity",
             "maintenance": "Maintenance"
+        },
+        "statistics":{
+            "title_short": "Last 30 seconds",
+            "title_sum": "Overall",
+            "entities": "Entity list updates",
+            "entities_amount": "Entity list entries",
+            "entity_states": "Entity state changes",
+            "events": "Events",
+            "refresh": "Refresh"
         },
         "custom_device": {
             "entity": "Entity",

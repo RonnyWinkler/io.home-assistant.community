@@ -418,5 +418,13 @@
   "1.4.16": {
     "en": "Added converter examples. Adjusted API Error handling.",
     "de": "Konverter-Beispiele ergänzt. API-Fehlerbehandlung angepasst."
+  },
+  "1.4.17": {
+    "en": "Check camera device init is done before using it.",
+    "de": "Prüfe auf abgeschlossene Kamera-Initialisierung vor der Verwendung."
+  },
+  "1.4.18": {
+    "en": "Added app statistics to repair view.",
+    "de": "App-Statistik in Repair-Dialog ergänzt."
   }
 }

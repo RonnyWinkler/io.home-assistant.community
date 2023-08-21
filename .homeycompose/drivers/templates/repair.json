@@ -43,6 +43,13 @@
       }
     },
     {
+      "id": "statistics",
+      "$template": "statistics",
+      "navigation": {
+        "prev": "select"        
+      }
+    },
+    {
       "id": "icon",
       "$template": "icon",
       "navigation": {

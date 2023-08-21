@@ -56,7 +56,7 @@ class CameraDevice extends BaseDevice {
     async onEntityUpdate(data) {
         await super.onEntityUpdate(data);
 
-        if(data && data.entity_id && data.entity_id == this.entityId) {
+        if(data && data.entity_id && data.entity_id == this.entityId && this.mediaImage) {
             switch (data.state){
                 case "on":
                     if (this.hasCapability("onoff")){
@@ -95,13 +95,17 @@ class CameraDevice extends BaseDevice {
                             });
                         }
                     }
-                    await this.mediaImage.update();
+                    if (this.mediaImage){
+                        await this.mediaImage.update();
+                    }
                 }
             }
             else{
                 if (this.mediaCover != null){
-                    this.mediaImage.setUrl(null);
-                    await this.mediaImage.update();
+                    if (this.mediaImage){
+                        this.mediaImage.setUrl(null);
+                        await this.mediaImage.update();
+                    }
                     this.mediaCover = null;
                 }
             }

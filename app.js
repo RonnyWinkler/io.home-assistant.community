@@ -13,6 +13,7 @@ const colors = require('./lib/colors.json');
 const RECONNECT_TIMEOUT = 15;
 const AVAILABILITY_CHECK_TIMEOUT = 10;
 const LOG_SIZE = 50;
+const STATISTICS_TIMEOUT = 30;
 
 
 const logList = [];
@@ -147,6 +148,7 @@ class App extends Homey.App {
 
 		// Init device with a short timeout to wait for initial entities
 		this.timeoutCheckConnection = this.homey.setTimeout(async () => this.onCheckConnection().catch(e => console.log(e)), RECONNECT_TIMEOUT * 60 * 1000 );
+		this.timeoutStatistics = this.homey.setTimeout(async () => this.onStatistics().catch(e => console.log(e)), STATISTICS_TIMEOUT * 1000 );
 		
 	}
 
@@ -1120,6 +1122,10 @@ class App extends Homey.App {
             this.homey.clearTimeout(this.timeoutCheckConnection);
             this.timeoutCheckConnection = null;     
 		}
+		if (this.timeoutStatistics){
+            this.homey.clearTimeout(this.timeoutStatistics);
+            this.timeoutStatistics = null;     
+		}
 		await this._client.close();
 		this._client = null;
 		this.log("App onUninit() - finished");
@@ -1294,6 +1300,20 @@ class App extends Homey.App {
 
 	async clientReconnect(){
 		await this._reconnectClient();
+	}
+
+	async onStatistics(){
+		this.timeoutStatistics = this.homey.setTimeout(async () => this.onStatistics().catch(e => console.log(e)), STATISTICS_TIMEOUT * 1000 );
+		if (this._client){
+			// this.log("Statistics: ", this._client.getStatistics());
+			this._client.clearStatistics();
+		}
+	}
+
+	async getStatistics(){
+		if (this._client){
+			return this._client.getStatistics();
+		}
 	}
 
 	async onCheckConnection(){

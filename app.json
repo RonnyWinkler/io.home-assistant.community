@@ -1,7 +1,7 @@
 {
   "_comment": "This file is generated. Please edit .homeycompose/app.json instead.",
   "id": "io.home-assistant.community",
-  "version": "1.4.16",
+  "version": "1.4.18",
   "compatibility": ">=8.1.0",
   "sdk": 3,
   "brandColor": "#0DA6EA",
@@ -3346,6 +3346,12 @@
           }
         },
         {
+          "id": "statistics",
+          "navigation": {
+            "prev": "select"
+          }
+        },
+        {
           "id": "icon",
           "navigation": {
             "next": "icon_change",
@@ -3507,6 +3513,12 @@
         },
         {
           "id": "log",
+          "navigation": {
+            "prev": "select"
+          }
+        },
+        {
+          "id": "statistics",
           "navigation": {
             "prev": "select"
           }
@@ -3744,6 +3756,12 @@
         },
         {
           "id": "log",
+          "navigation": {
+            "prev": "select"
+          }
+        },
+        {
+          "id": "statistics",
           "navigation": {
             "prev": "select"
           }
@@ -4014,6 +4032,12 @@
         },
         {
           "id": "log",
+          "navigation": {
+            "prev": "select"
+          }
+        },
+        {
+          "id": "statistics",
           "navigation": {
             "prev": "select"
           }
@@ -4324,6 +4348,12 @@
         },
         {
           "id": "log",
+          "navigation": {
+            "prev": "select"
+          }
+        },
+        {
+          "id": "statistics",
           "navigation": {
             "prev": "select"
           }
@@ -4786,6 +4816,12 @@
           }
         },
         {
+          "id": "statistics",
+          "navigation": {
+            "prev": "select"
+          }
+        },
+        {
           "id": "icon",
           "navigation": {
             "next": "icon_change",
@@ -5025,6 +5061,12 @@
         },
         {
           "id": "log",
+          "navigation": {
+            "prev": "select"
+          }
+        },
+        {
+          "id": "statistics",
           "navigation": {
             "prev": "select"
           }
@@ -5432,6 +5474,12 @@
           }
         },
         {
+          "id": "statistics",
+          "navigation": {
+            "prev": "select"
+          }
+        },
+        {
           "id": "icon",
           "navigation": {
             "next": "icon_change",
@@ -5715,6 +5763,12 @@
         },
         {
           "id": "log",
+          "navigation": {
+            "prev": "select"
+          }
+        },
+        {
+          "id": "statistics",
           "navigation": {
             "prev": "select"
           }
@@ -6042,6 +6096,12 @@
           }
         },
         {
+          "id": "statistics",
+          "navigation": {
+            "prev": "select"
+          }
+        },
+        {
           "id": "icon",
           "navigation": {
             "next": "icon_change",
@@ -6204,6 +6264,12 @@
         },
         {
           "id": "log",
+          "navigation": {
+            "prev": "select"
+          }
+        },
+        {
+          "id": "statistics",
           "navigation": {
             "prev": "select"
           }
@@ -6462,6 +6528,12 @@
           }
         },
         {
+          "id": "statistics",
+          "navigation": {
+            "prev": "select"
+          }
+        },
+        {
           "id": "icon",
           "navigation": {
             "next": "icon_change",
@@ -6641,6 +6713,12 @@
           }
         },
         {
+          "id": "statistics",
+          "navigation": {
+            "prev": "select"
+          }
+        },
+        {
           "id": "icon",
           "navigation": {
             "next": "icon_change",
@@ -6787,6 +6865,12 @@
         },
         {
           "id": "log",
+          "navigation": {
+            "prev": "select"
+          }
+        },
+        {
+          "id": "statistics",
           "navigation": {
             "prev": "select"
           }
@@ -7001,6 +7085,12 @@
           }
         },
         {
+          "id": "statistics",
+          "navigation": {
+            "prev": "select"
+          }
+        },
+        {
           "id": "icon",
           "navigation": {
             "next": "icon_change",
@@ -7162,6 +7252,12 @@
         },
         {
           "id": "log",
+          "navigation": {
+            "prev": "select"
+          }
+        },
+        {
+          "id": "statistics",
           "navigation": {
             "prev": "select"
           }
@@ -7459,6 +7555,12 @@
           }
         },
         {
+          "id": "statistics",
+          "navigation": {
+            "prev": "select"
+          }
+        },
+        {
           "id": "icon",
           "navigation": {
             "next": "icon_change",
@@ -7737,6 +7839,12 @@
           }
         },
         {
+          "id": "statistics",
+          "navigation": {
+            "prev": "select"
+          }
+        },
+        {
           "id": "icon",
           "navigation": {
             "next": "icon_change",
@@ -7949,6 +8057,12 @@
         },
         {
           "id": "log",
+          "navigation": {
+            "prev": "select"
+          }
+        },
+        {
+          "id": "statistics",
           "navigation": {
             "prev": "select"
           }
@@ -8209,6 +8323,12 @@
         },
         {
           "id": "log",
+          "navigation": {
+            "prev": "select"
+          }
+        },
+        {
+          "id": "statistics",
           "navigation": {
             "prev": "select"
           }

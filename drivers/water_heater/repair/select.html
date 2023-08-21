@@ -29,6 +29,9 @@
     function onSelectLog(){
         Homey.showView("log");
     }
+    function onSelectStatistics(){
+        Homey.showView("statistics");
+    }
     function onAddEntity(){
         Homey.showView("add_entity");
     }
@@ -70,6 +73,11 @@
         <div>
             <p>
                 <button id="btnLog" class="homey-button-primary-full" onClick="onSelectLog()" visibility = 'hidden'><span data-i18n="repair.title.log"></span></button>
+            </p>
+        </div>
+        <div>
+            <p>
+                <button id="btnStatistics" class="homey-button-primary-full" onClick="onSelectStatistics()" visibility = 'hidden'><span data-i18n="repair.title.statistics"></span></button>
             </p>
         </div>
         <div>

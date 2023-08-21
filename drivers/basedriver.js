@@ -288,6 +288,10 @@ class BaseDriver extends Homey.Driver {
             return this.homey.app.getLog();
         });
 
+        session.setHandler('getStatistics', async () => {
+            return this.homey.app.getStatistics();
+        });
+
         session.setHandler('updateCapabilities', async () => {
             this.log("Updating device cabapilities...");
             await this.updateCapabilities(device); 
