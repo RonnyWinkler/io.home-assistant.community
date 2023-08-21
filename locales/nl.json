@@ -43,6 +43,15 @@
             "remove_entity": "Entiteit verwijderen",
             "maintenance": "Onderhoud"
         },
+        "statistics":{
+            "title_short": "Laatste 30 seconden",
+            "title_sum": "Algemeen",
+            "entities": "Updates van entity lijst",
+            "entities_amount": "Items in de entity lijst",
+            "entity_states": "Entity status verandert",
+            "events": "Evenementen",
+            "refresh": "Vernieuwen"
+        },
         "custom_device": {
             "entity": "Entiteit",
             "entity_placeholder": "Selecteer entiteit...",

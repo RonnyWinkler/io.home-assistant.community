@@ -102,6 +102,7 @@ class App extends Homey.App {
 		// Homey events
 		this.homey.on('unload', async () => await this.onUninit());
 		this.homey.on('memwarn', async (data) => await this.onMemwarn(data));
+		this.homey.on('cpuwarn', async (data) => await this.onCpuwarn(data));
 		// this.homey.on('__log', (...args) => this.onLog(...args));
 		// this.homey.on('__error', (...args) => this.onError(...args));
 		// this.homey.on('__debug', (...args) => this.onDebug(...args));
@@ -840,6 +841,7 @@ class App extends Homey.App {
 	async _registerFlowTriggers(){
 		// Flow Trigger: App
 		this._flowTriggerAppMemwarn = this.homey.flow.getTriggerCard('app_memwarn');
+		this._flowTriggerAppCpuwarn = this.homey.flow.getTriggerCard('app_cpuwarn');
 
 		this._flowTriggerScriptStartedFilter = this.homey.flow.getTriggerCard("script_started_filter");
         this._flowTriggerScriptStartedFilter.registerRunListener(async (args, state) => {
@@ -1140,6 +1142,17 @@ class App extends Homey.App {
 			};
 		}
 		this._flowTriggerAppMemwarn.trigger(data).catch(error => this.log("onMemwarn() flow trigger error: ", error.message));
+	}
+
+	async onCpuwarn(data){
+		this.log("A CPU warning has occured.");
+		if (data == undefined){
+			data = {
+				count: 0,
+				limit: 0
+			};
+		}
+		this._flowTriggerAppCpuwarn.trigger(data).catch(error => this.log("onCpuwarn() flow trigger error: ", error.message));
 	}
 
 	getClient() {

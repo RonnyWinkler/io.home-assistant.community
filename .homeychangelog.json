@@ -426,5 +426,9 @@
   "1.4.18": {
     "en": "Added app statistics to repair view.",
     "de": "App-Statistik in Repair-Dialog ergänzt."
+  },
+  "1.4.19": {
+    "en": "Added app flow trigger for CPU warning. Added conversion °F=>°C for thermostats.",
+    "de": "Flow-Trigger für CPU-Warnung ergänzt. Konvertierung °F=>°C für Thermostate ergänzt."
   }
 }

@@ -1,18 +1,18 @@
 {
     "title": {
-        "en": "Memory warning",
-        "de": "Speicherwarnung",
-        "nl": "Geheugen waarschuwing"
+        "en": "CPU warning",
+        "de": "CPU-Warnung",
+        "nl": "CPU waarschuwing"
     },
     "titleFormatted": {
-        "en": "A memory warning has occurred",
-        "de": "Eine Speicherwarnung ist aufgetreten",
-        "nl": "Er is een geheugenwaarschuwing opgetreden"
+        "en": "A CPU warning has occurred",
+        "de": "Eine CPU-Warnung ist aufgetreten",
+        "nl": "Er is een CPU waarschuwing opgetreden"
     },
     "hint": {
-        "en": "Triggers when the app is consuming too much memory.",
-        "de": "Wird ausgelöst, wenn die App zu viel Speicher verbraucht.",
-        "nl": "Wordt geactiveerd wanneer de app te veel geheugen verbruikt."
+        "en": "Triggers when the app is consuming too much CPU time.",
+        "de": "Wird ausgelöst, wenn die app zu viel CPU-Zeit verbraucht.",
+        "nl": "Wordt geactiveerd wanneer de app te veel CPU-tijd verbruikt."
     },
     "tokens": [
         {

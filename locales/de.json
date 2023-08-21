@@ -43,6 +43,15 @@
             "remove_entity": "Entität entfernen",
             "maintenance": "Wartungs"
         },
+        "statistics":{
+            "title_short": "Letzte 30 Sekunden",
+            "title_sum": "Insgesamt",
+            "entities": "Entity Listenupdates",
+            "entities_amount": "Entity Listeneinträge",
+            "entity_states": "Entity Status.-Änderung",
+            "events": "Ereignisse",
+            "refresh": "Aktualisieren"
+        },
         "custom_device": {
             "entity": "Entität",
             "entity_placeholder": "Wähle eine Entität...",
