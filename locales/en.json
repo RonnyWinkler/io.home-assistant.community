@@ -44,8 +44,10 @@
             "maintenance": "Maintenance"
         },
         "statistics":{
-            "title_short": "Last 30 seconds",
-            "title_sum": "Overall",
+            "title_overview": "Overview",
+            "title_short": "Messages: 30 seconds",
+            "title_sum": "Messages: overall",
+            "entities_monitored": "Monitored entities",
             "entities": "Entity list updates",
             "entities_amount": "Entity list entries",
             "entity_states": "Entity state changes",
@@ -75,6 +77,10 @@
             "converter_code_02": "(value) => { return parseFloat(value) / 100; }",
             "converter_text_03": "Date conversion UTC->local",
             "converter_code_03": "(value) => {\nreturn new Date(value).toLocaleString(\n  'de-DE',\n  {\n    hour12s: false,\n    hour: '2-digit',\n    minute: '2-digit',\n    day: '2-digit',\n    month: '2-digit',\n    year: 'numeric'\n  });\n}",
+            "converter_text_04": "Temperature conversion °F=>°C",
+            "converter_code_04": "(value) => { return (parseFloat(value) - 32) * 5/9; }",
+            "converter_text_05": "Extract value from string: 'In 3 minutes' => 3",
+            "converter_code_05": "(value) => { return value.split(' ')[1]; }",
             "add_as_main_capability": "Add as main capability",
             "result_count_01": "Displaying",
             "result_count_02": "out of",

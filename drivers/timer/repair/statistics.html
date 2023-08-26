@@ -18,6 +18,12 @@
 
 <div>
     <fieldset class="homey-form-fieldset">
+        <legend class="homey-form-legend"><span data-i18n="repair.statistics.entities_monitored"></span></legend>
+        <label class="homey-form-label" for="overview.entities" style="margin-top:0px"><span data-i18n="repair.statistics.entities"></span></label>
+        <input class="homey-form-input" id="overview.entities" type="text" value=""/>
+    </fieldset>
+
+    <fieldset class="homey-form-fieldset">
         <legend class="homey-form-legend"><span data-i18n="repair.statistics.title_short"></span></legend>
         <table>
             <tr>
@@ -50,7 +56,7 @@
             </tr>
         </table>
     </fieldset>
-    <fieldset class="homey-form-fieldset"></fieldset>
+    <fieldset class="homey-form-fieldset">
         <legend class="homey-form-legend"><span data-i18n="repair.statistics.title_sum"></span></legend>
         <table>
             <tr>
@@ -84,7 +90,7 @@
         </table>
     </fieldset>
 
-    <fieldset class="homey-form-fieldset"></fieldset>
+    <fieldset class="homey-form-fieldset">
         <div>
             <button id="btnRefresh" class="homey-button-primary-full" onClick="refresh()"><span data-i18n="repair.statistics.refresh"></span></button>
         </div>
@@ -103,6 +109,8 @@
         if (typeof data == "string"){
             statistics = JSON.parse(data);
         } 
+        document.getElementById('overview.entities').value = statistics.overview.entities;
+
         document.getElementById('short.entities').value = statistics.short.entityUpdates;
         document.getElementById('short.entitiesAmount').value = statistics.short.entityUpdatesElements;
         document.getElementById('short.entityStates').value = statistics.short.entityStates;

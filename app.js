@@ -237,6 +237,32 @@ class App extends Homey.App {
 			
 		});
 
+		this._flowActionGenericSelect = this.homey.flow.getActionCard('genericSelect');
+		this._flowActionGenericSelect.registerRunListener(async (args, state) => {
+			try{
+				await args.device.flowActionSelect(args.capability.entityId, args.value.id);
+				return true;
+			}
+			catch(error){
+				this.error("Error executing flowAction 'genericSelect': "+  error.message);
+				throw new Error(error.message);
+			}
+		});
+		this._flowActionGenericSelect.registerArgumentAutocompleteListener('capability', async (query, args) => {
+			const genericSelectCapabilityList = args.device.getAutocompleteCapabilityList(false, 'select');
+			return genericSelectCapabilityList.filter((result) => { 
+				return ( result.name.toLowerCase().includes(query.toLowerCase()));
+			});
+			
+		});
+		this._flowActionGenericSelect.registerArgumentAutocompleteListener('value', async (query, args) => {
+			const genericSelectValueList = args.device.getAutocompleteSelectValueList(args.capability.entityId, args.value);
+			return genericSelectValueList.filter((result) => { 
+				return ( result.name.toLowerCase().includes(query.toLowerCase()));
+			});
+			
+		});
+
 		// Lock
 		this._flowActionLockOpen = this.homey.flow.getActionCard('lockOpen')
 		this._flowActionLockOpen.registerRunListener(async (args, state) => {

@@ -1,0 +1,33 @@
+1: 
+node_modules/home-assistant-js-websocket/dist/haws.cjs
+line 231: Add "async"
+            // >>> @ronny.winkler@web.de: await call als write log instead of getting unhandled exception
+            // messageGroup.forEach(async (message) => {
+            messageGroup.forEach(async (message) => {
+            // <<<
+line 242: add try/catch and await
+                        else {
+                            console.warn(`Received event for unknown subscription ${message.id}. Unsubscribing.`);
+                            // >>> @ronny.winkler@web.de: await call als write log instead of getting unhandled exception
+                            // this.sendMessagePromise(unsubscribeEvents(message.id));
+                            try{
+                                await this.sendMessagePromise(unsubscribeEvents(message.id));
+                            }
+                            catch(error){
+                                console.error(`Error unsubscribing unknown subscription ${message.id}.`);
+                            }
+                            // <<<
+                        }
+line 522: add try/catch to catch unhandled async exception
+                    if (this.connected) {
+                        // >>> @ronny.winkler@web.de: await call als write log instead of getting unhandled exception
+                        // await this.sendMessagePromise(unsubscribeEvents(commandId));
+                        try{
+                            await this.sendMessagePromise(unsubscribeEvents(commandId));
+                        }
+                        catch(error){
+                            console.error(`Error unsubscribing event, command ID: ${commandId}.`);
+                        }
+                        // <<<
+                    }
+ 

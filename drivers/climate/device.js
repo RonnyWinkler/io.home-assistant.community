@@ -104,7 +104,7 @@ class ClimateDevice extends BaseDevice {
                     data.attributes.temperature != undefined &&
                     data.attributes.temperature != "unavailable"){
                     let temp = data.attributes.temperature;
-                    if (ha_units.temperature == 'F'){
+                    if (ha_units.temperature == '°F'){
                         temp = (temp - 32) * 5/9;
                     }
                     await this.setCapabilityValue("target_temperature", temp);

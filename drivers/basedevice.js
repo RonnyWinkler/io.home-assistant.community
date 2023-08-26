@@ -816,7 +816,7 @@ class BaseDevice extends Homey.Device {
 
     // Generic Flow functions ===========================================================================================
     // Flow Trigger 
-    getAutocompleteCapabilityList(addStandardCapabilities=false){
+    getAutocompleteCapabilityList(addStandardCapabilities=false, domain){
         // get device entities capabilities
         let capabilities = this.getDeviceEntitiesCapabilities();
         let result = [];
@@ -827,6 +827,9 @@ class BaseDevice extends Homey.Device {
             }
             catch(error){continue;}
             try{
+                if (domain != undefined && domain != capabilitiesOptions.entity_id.split('.')[0]){
+                    continue;
+                }
                 let name;
                 if (capabilitiesOptions.title){
                     name = capabilitiesOptions.title;
@@ -834,9 +837,10 @@ class BaseDevice extends Homey.Device {
                 else{
                     name = capabilitiesOptions.entity_id;
                 }
-            result.push({
+                result.push({
                     id: capabilities[i],
-                    name: name
+                    name: name,
+                    entityId: capabilitiesOptions.entity_id
                 })
             }
             catch(error){this.log("getAutocompleteCapabilityList(): "+error.message)}
@@ -919,7 +923,26 @@ class BaseDevice extends Homey.Device {
         }
         return result;
     }
-    
+
+    getAutocompleteSelectValueList(entityId){
+        try{
+            let result = [];
+            let entity = this._client.getEntity(entityId);
+            if (entity && entity.attributes && entity.attributes.options){
+                for (let i=0; i<entity.attributes.options.length; i++){
+                    result.push({
+                        id: entity.attributes.options[i],
+                        name: entity.attributes.options[i]
+                    });
+                }
+            }
+            return result;
+        }
+        catch(error){
+            this.error("Error reading fan list: "+error.message);
+        }   
+    }
+
     async flowActionSwitchAction(capability, action){
         let valueObj = {};
         switch (action){
@@ -990,6 +1013,14 @@ class BaseDevice extends Homey.Device {
             entity_id: sceneId
         }
         await this._client.callService("scene", "turn_on", {}, target);
+    }
+
+    async flowActionSelect(entityId, value){
+        await this._client.callService("select", "select_option", {
+            "entity_id": entityId,
+            "option": value
+        });
+        return true;
     }
 
     // async httpGet(url, options){

@@ -915,7 +915,13 @@ class BaseDriver extends Homey.Driver {
                         capabilitiesOptions.entity_id == data.entity_id &&
                         capabilities[i] == data.capability
                     ){
-                    device.removeCapability(capabilities[i]);
+                    try{
+                        await device.setCapabilityOptions(capabilities[i], {});
+                        await device.removeCapability(capabilities[i]);
+                    }
+                    catch(error){
+                        this.log("Error removing capability");
+                    }
                     // unregister entities
                     device.clientUnregisterDevice();
                     // Reload device (register capability listerner ...)

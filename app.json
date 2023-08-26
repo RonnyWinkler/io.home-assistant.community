@@ -1,7 +1,7 @@
 {
   "_comment": "This file is generated. Please edit .homeycompose/app.json instead.",
   "id": "io.home-assistant.community",
-  "version": "1.4.19",
+  "version": "1.4.20",
   "compatibility": ">=8.1.0",
   "sdk": 3,
   "brandColor": "#0DA6EA",
@@ -2347,6 +2347,62 @@
           }
         ],
         "id": "genericNumberSet"
+      },
+      {
+        "highlight": true,
+        "title": {
+          "en": "Select entity option",
+          "de": "Entitäts-Option wählen",
+          "nl": "Selecteer entity optie"
+        },
+        "titleFormatted": {
+          "en": "Select entity option [[value]] of capability [[capability]].",
+          "de": "Wähle Entitäts-Option [[value]] des Attributs [[capability]].",
+          "nl": "Selecteer entity optie [[value]] van het kenmerk [[capability]]."
+        },
+        "hint": {
+          "en": "This option is applicable to 'select.' entities.",
+          "de": "Diese Option ist anwendbar auf 'select.' Entitäten.",
+          "nl": "Deze optie is van toepassing op 'select.' entiteiten."
+        },
+        "args": [
+          {
+            "type": "autocomplete",
+            "name": "capability",
+            "required": true,
+            "title": {
+              "en": "Capability",
+              "de": "Attribut",
+              "nl": "Capability"
+            },
+            "placeholder": {
+              "en": "Option",
+              "de": "Option",
+              "nl": "Optie"
+            }
+          },
+          {
+            "type": "autocomplete",
+            "name": "value",
+            "required": true,
+            "title": {
+              "en": "Value",
+              "de": "Wert",
+              "nl": "Waarde"
+            },
+            "placeholder": {
+              "en": "Option",
+              "de": "Option",
+              "nl": "Optie"
+            }
+          },
+          {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=custom|climate|climate_fan|fan|water_heater|light|media|sensor|switch|vacuum|cover|camera"
+          }
+        ],
+        "id": "genericSelect"
       },
       {
         "highlight": true,

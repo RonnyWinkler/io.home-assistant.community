@@ -430,5 +430,9 @@
   "1.4.19": {
     "en": "Added app flow trigger for CPU warning. Added conversion °F=>°C for thermostats.",
     "de": "Flow-Trigger für CPU-Warnung ergänzt. Konvertierung °F=>°C für Thermostate ergänzt."
+  },
+  "1.4.20": {
+    "en": "Optimized performance updating compound/custom devices on HA state changes. Added conversion °F=>°C for thermostats target temperature. Added flow action for 'select' Entities.",
+    "de": "Optimierte Verarbeitung bei der Aktualisierung Compound/benutzerdefinierter Geräte bei HA-Statusänderungen. Konvertierung °F=>°C für Thermostat-Zieltemperatur ergänzt. Flow-Aktion für 'select' Entitäten ergänzt."
   }
 }

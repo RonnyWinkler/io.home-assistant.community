@@ -44,8 +44,10 @@
             "maintenance": "Onderhoud"
         },
         "statistics":{
-            "title_short": "Laatste 30 seconden",
-            "title_sum": "Algemeen",
+            "title_overview": "Overzicht",
+            "title_short": "Berichten: 30 seconden",
+            "title_sum": "Berichten: algemeen",
+            "entities_monitored": "Gecontroleerde entities",
             "entities": "Updates van entity lijst",
             "entities_amount": "Items in de entity lijst",
             "entity_states": "Entity status verandert",
@@ -75,6 +77,10 @@
             "converter_code_02": "(value) => { return parseFloat(value) / 100; }",
             "converter_text_03": "Date conversion UTC->local",
             "converter_code_03": "(value) => {\nreturn new Date(value).toLocaleString(\n  'de-DE',\n  {\n    hour12s: false,\n    hour: '2-digit',\n    minute: '2-digit',\n    day: '2-digit',\n    month: '2-digit',\n    year: 'numeric'\n  });\n}",
+            "converter_text_04": "Temperatuur conversie °F=>°C",
+            "converter_code_04": "(value) => { return (parseFloat(value) - 32) * 5/9; }",
+            "converter_text_05": "Waarde uit tekenreeks halen: 'In 3 minutes' => 3",
+            "converter_code_05": "(value) => { return value.split(' ')[1]; }",
             "add_as_main_capability": "Voeg toe als hoofdfunctie",
             "result_count_01": "Show",
             "result_count_02": "van",
