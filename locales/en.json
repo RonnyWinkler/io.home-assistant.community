@@ -48,8 +48,9 @@
             "title_short": "Messages: 30 seconds",
             "title_sum": "Messages: overall",
             "entities_monitored": "Monitored entities",
-            "entities": "Entity list updates",
-            "entities_amount": "Entity list entries",
+            "entities": "Entities",
+            "entity_list_updates": "Entity list updates",
+            "entitiy_list_amount": "Entity list entries",
             "entity_states": "Entity state changes",
             "events": "Events",
             "refresh": "Refresh"

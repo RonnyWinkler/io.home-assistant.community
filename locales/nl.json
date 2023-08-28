@@ -48,8 +48,9 @@
             "title_short": "Berichten: 30 seconden",
             "title_sum": "Berichten: algemeen",
             "entities_monitored": "Gecontroleerde entities",
-            "entities": "Updates van entity lijst",
-            "entities_amount": "Items in de entity lijst",
+            "entities": "Entities",
+            "entity_list_updates": "Updates van entity lijst",
+            "entitiy_list_amount": "Items in de entity lijst",
             "entity_states": "Entity status verandert",
             "events": "Evenementen",
             "refresh": "Vernieuwen"

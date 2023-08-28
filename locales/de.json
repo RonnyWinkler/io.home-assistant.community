@@ -48,8 +48,9 @@
             "title_short": "Nachrichten: 30 Sekunden",
             "title_sum": "Nachrichten: insgesamt",
             "entities_monitored": "Überwachte Entitäten",
-            "entities": "Entität Listenupdates",
-            "entities_amount": "Entität Listeneinträge",
+            "entities": "Entitäten",
+            "entity_list_updates": "Entität Listenupdates",
+            "entitiy_list_amount": "Entität Listeneinträge",
             "entity_states": "Entity Status.-Änderung",
             "events": "Ereignisse",
             "refresh": "Aktualisieren"
