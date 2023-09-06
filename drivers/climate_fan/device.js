@@ -142,7 +142,10 @@ class ClimateFanDevice extends BaseDevice {
     
                     if (data.state != undefined && 
                         data.state != "unavailable"){
-                        await this.setCapabilityValue("climate_mode", data.state);
+                        try{
+                            await this.setCapabilityValue("climate_mode", data.state);
+                        }
+                        catch(error){ }
                     }
                     if (data.attributes.current_temperature != undefined && 
                         data.attributes.current_temperature != "unavailable"){
@@ -200,15 +203,13 @@ class ClimateFanDevice extends BaseDevice {
 
                 if (data.entity_id.startsWith("fan.")){
                     // Fan capabilities
-                    if (data.state != undefined && 
-                        data.state != "unavailable" &&
-                        data.state == "on"){
-                        await this.setCapabilityValue("onoff", true);
-                    }
-                    if (data.state != undefined && 
-                        data.state != "unavailable" &&
-                        data.state == "off"){
-                        await this.setCapabilityValue("onoff", false);
+                    if (data.state != undefined){
+                        if (data.state != "unavailable" || data.state == "off"){
+                            await this.setCapabilityValue("onoff", false);
+                        }
+                        else{
+                            await this.setCapabilityValue("onoff", true);
+                        }
                     }
                     if (data.attributes.percentage != undefined && 
                         data.attributes.percentage != "unavailable"){

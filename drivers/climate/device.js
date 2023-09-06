@@ -82,13 +82,16 @@ class ClimateDevice extends BaseDevice {
 
                 if (data.state != undefined && 
                     data.state != "unavailable"){
-                    await this.setCapabilityValue("climate_mode", data.state);
+                    try{
+                        await this.setCapabilityValue("climate_mode", data.state);
+                    }
+                    catch(error){ }
                 }
                 if (data.state != undefined ){ 
                     if (data.state == "unavailable" || data.state == 'off'){
                         await this.setCapabilityValue("climate_on", false);
                     }
-                    if (data.state == "unavailable" || data.state == 'on'){
+                    else{
                         await this.setCapabilityValue("climate_on", true);
                     }
                 }

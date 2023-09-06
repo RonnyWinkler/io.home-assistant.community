@@ -438,5 +438,9 @@
   "1.4.21": {
     "en": "Add light entity as onoff button via repair view. Fixed descriptions in statistics view",
     "de": "Licht Entität wird in Repair-Dialog als OnOff-Button hinzugefügt. Beschreibungen in Statistik-Seite korrigiert."
+  },
+  "1.4.22": {
+    "en": "Changed on/off behaviour of climate devices.",
+    "de": "An/Aus-Verhalten der Klimageräte angepasst."
   }
 }
