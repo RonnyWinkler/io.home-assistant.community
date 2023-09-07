@@ -132,7 +132,7 @@ class MediaDevice extends BaseDevice {
             if (this.hasCapability("volume_mute") && data.attributes.is_volume_muted != null){
                     this.setCapabilityValue("volume_mute", data.attributes.is_volume_muted);
             }
-            if (this.hasCapability("speaker_playing") && data.state != null){
+            if (this.hasCapability("speaker_playing") && data.state != null && data.state != undefined){
                 switch (data.state){
                     case "playing":
                         await this.setCapabilityValue("speaker_playing", true);
@@ -142,7 +142,7 @@ class MediaDevice extends BaseDevice {
                 }
             }
             if (this.hasCapability("speaker_shuffle")){
-                if (data.attributes.shuffle != null){
+                if (data.attributes.shuffle != null  && data.attributes.shuffle != undefined){
                     await this.setCapabilityValue("speaker_shuffle", data.attributes.shuffle );
                 }
                 else{
@@ -150,7 +150,7 @@ class MediaDevice extends BaseDevice {
                 }
             }
             if (this.hasCapability("speaker_repeat")){
-                if (data.attributes.repeat != null){
+                if (data.attributes.repeat != null  && data.attributes.repeat != undefined){
                     switch (data.attributes.repeat){
                         case "off":
                             await this.setCapabilityValue("speaker_repeat", "none");
@@ -178,10 +178,10 @@ class MediaDevice extends BaseDevice {
                 }
             }
             if (this.hasCapability("speaker_album")){
-                if (data.attributes.media_album_name != null){
+                if (data.attributes.media_album_name != null && data.attributes.media_album_name != undefined){
                     await this.setCapabilityValue("speaker_album", data.attributes.media_album_name);
                 }
-                else if (data.attributes.app_name != null){
+                else if (data.attributes.app_name != null && data.attributes.app_name != undefined){
                     await this.setCapabilityValue("speaker_album", data.attributes.app_name);
                 }
                 else{
@@ -189,7 +189,7 @@ class MediaDevice extends BaseDevice {
                 }
             }
             if (this.hasCapability("speaker_track")){
-                if ( data.attributes.media_title != null){
+                if ( data.attributes.media_title != null && data.attributes.media_title != undefined){
                     await this.setCapabilityValue("speaker_track", data.attributes.media_title);
                 }
                 else{
@@ -197,7 +197,7 @@ class MediaDevice extends BaseDevice {
                 }
             }
             if (this.hasCapability("speaker_duration")){
-                if (data.attributes.media_duration != null){
+                if (data.attributes.media_duration != null && data.attributes.media_duration != undefined){
                     let minutes = Math.floor(data.attributes.media_duration / 60);
                     let seconds = Math.floor(data.attributes.media_duration - minutes * 60);
                     let time = minutes + seconds/100;
@@ -208,7 +208,7 @@ class MediaDevice extends BaseDevice {
                 }
             }
             if (this.hasCapability("speaker_position")){
-                if (data.attributes.media_position != null){
+                if (data.attributes.media_position != null && data.attributes.media_position != undefined){
                     let minutes = Math.floor(data.attributes.media_position / 60);
                     let seconds = Math.floor(data.attributes.media_position - minutes * 60);
                     let time = minutes + seconds/100;
@@ -219,7 +219,7 @@ class MediaDevice extends BaseDevice {
                 }
             }
 
-            if (this.hasCapability("onoff") && data.state != null){
+            if (this.hasCapability("onoff") && data.state != null && data.state != undefined){
                 switch (data.state){
                     case "on":
                     case "idle":
@@ -238,7 +238,7 @@ class MediaDevice extends BaseDevice {
                         await  this.setCapabilityValue("onoff", false);
                 }
             }
-            if (data.attributes.source_list == null){
+            if (data.attributes.source_list == null || data.attributes.source_list == undefined){
                 await this.setStoreValue("sourceList", '');
                 await this.setStoreValue("canSelectSource", false);
             }
@@ -246,7 +246,7 @@ class MediaDevice extends BaseDevice {
                 await this.setStoreValue("sourceList", JSON.stringify(data.attributes.source_list));
                 await this.setStoreValue("canSelectSource", true);
             }
-            if (data.attributes.sound_mode_list == null){
+            if (data.attributes.sound_mode_list == null || data.attributes.sound_mode_list == undefined){
                 await this.setStoreValue("soundModeList", '');
                 await this.setStoreValue("canSelectSoundMode", false);
             }

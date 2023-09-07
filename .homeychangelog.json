@@ -442,5 +442,9 @@
   "1.4.22": {
     "en": "Changed on/off behaviour of climate devices.",
     "de": "An/Aus-Verhalten der Klimageräte angepasst."
+  },
+  "1.4.23": {
+    "en": "Changed on/off behaviour of media devices.",
+    "de": "An/Aus-Verhalten der Mediageräte angepasst."
   }
 }
