@@ -14,6 +14,7 @@
       "windowcoverings_tilt_down",
       "windowcoverings_tilt_set",
       "windowcoverings_opened",
+      "garagedoor_closed",
     
       "button.reconnect"
     ],

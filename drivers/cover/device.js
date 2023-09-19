@@ -10,6 +10,9 @@ class CoverDevice extends BaseDevice {
         this.registerCapabilityListener('windowcoverings_closed', async (value) => {
             await this._onCapabilityWindowcoveringsClosed(value);
         });
+        this.registerCapabilityListener('garagedoor_closed', async (value) => {
+            await this._onCapabilityWindowcoveringsClosed(value);
+        });
         this.registerCapabilityListener('windowcoverings_state', async (value) => {
             await this._onCapabilityWindowcoveringsState(value);
         });
@@ -41,7 +44,11 @@ class CoverDevice extends BaseDevice {
             }
 
             if (!this.hasCapability('windowcoverings_opened') && 
-                ( this.hasCapability('windowcoverings_closed') || this.hasCapability('windowcoverings_state') || this.hasCapability('windowcoverings_set') ) ){
+                (   this.hasCapability('windowcoverings_closed') || 
+                    this.hasCapability('windowcoverings_state') || 
+                    this.hasCapability('windowcoverings_set') ||
+                    this.hasCapability('garagedoor_closed') 
+                    ) ){
                     await this.addCapability('windowcoverings_opened');
                 }
         }
@@ -64,17 +71,25 @@ class CoverDevice extends BaseDevice {
                     }
                 }
                 if (this.hasCapability("windowcoverings_closed")){
-                    if (data.state == "open"){
-                        await this.setCapabilityValue("windowcoverings_closed", false);
-                        if (this.hasCapability("windowcoverings_set")){
-                            await this.setCapabilityValue("windowcoverings_set", 1);
-                        }
-                    }
                     if (data.state == "closed"){
                         await this.setCapabilityValue("windowcoverings_closed", true);
                         if (this.hasCapability("windowcoverings_set")){
                             await this.setCapabilityValue("windowcoverings_set", 0);
                         }
+                    }
+                    else{
+                        await this.setCapabilityValue("windowcoverings_closed", false);
+                        if (this.hasCapability("windowcoverings_set")){
+                            await this.setCapabilityValue("windowcoverings_set", 1);
+                        }
+                    }
+                }
+                if (this.hasCapability("garagedoor_closed")){
+                    if (data.state == "closed"){
+                        await this.setCapabilityValue("garagedoor_closed", true);
+                    }
+                    else{
+                        await this.setCapabilityValue("garagedoor_closed", false);
                     }
                 }
                 if (this.hasCapability("windowcoverings_state")){

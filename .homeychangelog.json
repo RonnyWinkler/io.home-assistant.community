@@ -446,5 +446,9 @@
   "1.4.23": {
     "en": "Changed on/off behaviour of media devices.",
     "de": "An/Aus-Verhalten der Mediageräte angepasst."
+  },
+  "1.4.24": {
+    "en": "Added garage door switch to cover device.",
+    "de": "Garagen-Schalter zu Fensterabdeckungs-Gerät hinzugefügt."
   }
 }
