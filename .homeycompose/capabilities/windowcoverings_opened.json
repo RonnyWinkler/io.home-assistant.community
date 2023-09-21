@@ -10,6 +10,7 @@
     "de": "Fensterabdeckung geöffnet",
     "nl": "Raamafdekking geopend"
   },
+  "preventInsights": true,
   "titleTrue": {
     "en": "Opened",
     "de": "Geöffnet",

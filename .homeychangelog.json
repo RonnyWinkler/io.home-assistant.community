@@ -450,5 +450,9 @@
   "1.4.24": {
     "en": "Added garage door switch to cover device.",
     "de": "Garagen-Schalter zu Fensterabdeckungs-Gerät hinzugefügt."
+  },
+  "1.4.25": {
+    "en": "Prevent insights for tile state of cover device.",
+    "de": "Vermeide Insights für Gerätestatus der Fensterabdeckungs-Geräte."
   }
 }

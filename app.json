@@ -1,7 +1,7 @@
 {
   "_comment": "This file is generated. Please edit .homeycompose/app.json instead.",
   "id": "io.home-assistant.community",
-  "version": "1.4.24",
+  "version": "1.4.25",
   "compatibility": ">=8.1.0",
   "sdk": 3,
   "brandColor": "#0DA6EA",
@@ -9564,6 +9564,7 @@
         "de": "Fensterabdeckung geöffnet",
         "nl": "Raamafdekking geopend"
       },
+      "preventInsights": true,
       "titleTrue": {
         "en": "Opened",
         "de": "Geöffnet",

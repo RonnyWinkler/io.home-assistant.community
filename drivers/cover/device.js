@@ -133,6 +133,10 @@ class CoverDevice extends BaseDevice {
     async _onCapabilityWindowcoveringsClosed(value){
         this.log("Cover closed: "+value);
         let entityId = this.entityId;
+        // Set tile state to be in sync with "closed" button
+        if (this.hasCapability("windowcoverings_opened")){
+            await this.setCapabilityValue("windowcoverings_opened", !value);
+        }
         if (value){
             await this._client.callService("cover", "close_cover", {
                 "entity_id": entityId
