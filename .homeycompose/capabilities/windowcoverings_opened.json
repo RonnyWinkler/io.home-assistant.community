@@ -4,7 +4,7 @@
   "getable": true,
   "setable": false,
   "uiComponent": null,
-  "insights": true,
+  "insights": false,
   "title": {
     "en": "Cover opened",
     "de": "Fensterabdeckung geöffnet",

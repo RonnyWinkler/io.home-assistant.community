@@ -454,5 +454,9 @@
   "1.4.25": {
     "en": "Prevent insights for tile state of cover device.",
     "de": "Vermeide Insights für Gerätestatus der Fensterabdeckungs-Geräte."
+  },
+  "1.4.26": {
+    "en": "Prevent insights for tile state of cover device.",
+    "de": "Vermeide Insights für Gerätestatus der Fensterabdeckungs-Geräte."
   }
 }
