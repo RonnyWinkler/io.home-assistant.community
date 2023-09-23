@@ -217,6 +217,12 @@ class BaseDevice extends Homey.Device {
                 data.state == undefined ){
                 return;
             }
+
+            // Extended app log: log all entity updates
+            if (this.homey.app.getLogSettings()['entityState']){
+                this.log("Entity state changed: Entity: "+data.entity_id+" State: "+data.state+" Attributes:",data.attributes);
+            }
+
             // Availability check for state only for devices based on a entity - and only if this main entity is unavailable
             if (this.entityId == data.entity_id){
                 if (data.state == "unavailable"){

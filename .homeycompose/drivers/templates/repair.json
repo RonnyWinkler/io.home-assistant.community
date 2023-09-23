@@ -43,6 +43,13 @@
       }
     },
     {
+      "id": "log_settings",
+      "$template": "log_settings",
+      "navigation": {
+        "prev": "log"
+      }
+    },
+    {
       "id": "statistics",
       "$template": "statistics",
       "navigation": {

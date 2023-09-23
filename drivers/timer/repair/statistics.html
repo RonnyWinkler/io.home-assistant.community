@@ -9,6 +9,16 @@
         line-height: 1.3;
         user-select: text;
     }
+
+    #divBtnRefreshStatistics {
+        position: sticky;
+        bottom: 0px;
+        /* bottom: calc(var(--homey-su-2) * -1);
+        padding: 0 0 var(--homey-su-2) 0; */
+        background: var(--homey-color-white);
+        border-radius: var(--homey-border-radius);
+        box-shadow: 0 5px 5px 15px var(--homey-color-white);
+    }    
 </style>
 <script type="application/javascript">
 
@@ -89,14 +99,12 @@
             </tr>
         </table>
     </fieldset>
-
-    <fieldset class="homey-form-fieldset">
-        <div>
-            <button id="btnRefresh" class="homey-button-primary-full" onClick="refresh()"><span data-i18n="repair.statistics.refresh"></span></button>
-        </div>
-    </fieldset>
-
 </div>
+<!-- <fieldset class="homey-form-fieldset"> -->
+<div id="divBtnRefreshStatistics">
+    <button id="btnRefresh" class="homey-button-primary-full" onClick="refresh()"><span data-i18n="repair.statistics.refresh"></span></button>
+</div>
+<!-- </fieldset> -->
 
 <script type="application/javascript">
 

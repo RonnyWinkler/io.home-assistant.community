@@ -1,0 +1,34 @@
+<script type="application/javascript">
+    Homey.setTitle(Homey.__("repair.log.settings_title"));
+</script>
+
+<div class="homey-form-group">
+    <fieldset class="homey-form-checkbox-set">
+      <legend class="homey-form-checkbox-set-title"><span data-i18n="repair.log.group_extended"></span></legend>
+  
+      <label class="homey-form-checkbox">
+        <input class="homey-form-checkbox-input" type="checkbox" id="checkboxExtEntityStates" onclick='settingsChanged();'/>
+        <span class="homey-form-checkbox-checkmark"></span>
+        <span class="homey-form-checkbox-text" data-i18n="repair.log.entity_states"></span>
+      </label>
+  
+    </fieldset>
+</div>
+
+<script type="application/javascript">
+
+    Homey.emit('getLogSettings').then((settings) => {
+        if (settings['entityState'] != undefined){
+            document.getElementById('checkboxExtEntityStates').checked = settings['entityState'];
+        }
+        else{
+            document.getElementById('checkboxExtEntityStates').checked = false;
+        }
+    });
+
+    function settingsChanged(){
+        let settings = {};
+        settings['entityState'] = document.getElementById('checkboxExtEntityStates').checked;
+        Homey.emit('setLogSettings', settings);
+    }
+</script>

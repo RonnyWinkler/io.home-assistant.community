@@ -41,7 +41,8 @@
             "add_entity": "Entiteit toevoegen",
             "change_entity": "Entiteit aanpassen",
             "remove_entity": "Entiteit verwijderen",
-            "maintenance": "Onderhoud"
+            "maintenance": "Onderhoud",
+            "refresh": "Vernieuwen"
         },
         "statistics":{
             "title_overview": "Overzicht",

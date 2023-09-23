@@ -99,6 +99,10 @@ class App extends Homey.App {
 			}
 		}
 
+		// app settings
+		this._appSettings = {};
+		this._appSettings['logSettings'] = this.homey.settings.get('logSettings');
+
 		// Homey events
 		this.homey.on('unload', async () => await this.onUninit());
 		this.homey.on('memwarn', async (data) => await this.onMemwarn(data));
@@ -1142,6 +1146,20 @@ class App extends Homey.App {
 
 	getLog(){
 		return logList;
+	}
+
+	setLogSettings(settings){
+		this.homey.settings.set('logSettings', settings);
+		this._appSettings['logSettings'] = settings;
+	}
+
+	getLogSettings(){
+		if (this._appSettings['logSettings'] == undefined){
+			return {};
+		}
+		else{
+			return this._appSettings['logSettings'];
+		}
 	}
 
 	async onUninit(){

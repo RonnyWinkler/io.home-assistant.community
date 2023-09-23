@@ -288,6 +288,14 @@ class BaseDriver extends Homey.Driver {
             return this.homey.app.getLog();
         });
 
+        session.setHandler('setLogSettings', async (settings) => {
+            this.homey.app.setLogSettings(settings);
+        });
+
+        session.setHandler('getLogSettings', async (settings) => {
+            return this.homey.app.getLogSettings();
+        });
+
         session.setHandler('getStatistics', async () => {
             return this.homey.app.getStatistics();
         });

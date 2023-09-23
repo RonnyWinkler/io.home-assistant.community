@@ -1,7 +1,7 @@
 {
   "_comment": "This file is generated. Please edit .homeycompose/app.json instead.",
   "id": "io.home-assistant.community",
-  "version": "1.4.26",
+  "version": "1.4.27",
   "compatibility": ">=8.1.0",
   "sdk": 3,
   "brandColor": "#0DA6EA",
@@ -3442,6 +3442,12 @@
           }
         },
         {
+          "id": "log_settings",
+          "navigation": {
+            "prev": "log"
+          }
+        },
+        {
           "id": "statistics",
           "navigation": {
             "prev": "select"
@@ -3611,6 +3617,12 @@
           "id": "log",
           "navigation": {
             "prev": "select"
+          }
+        },
+        {
+          "id": "log_settings",
+          "navigation": {
+            "prev": "log"
           }
         },
         {
@@ -3854,6 +3866,12 @@
           "id": "log",
           "navigation": {
             "prev": "select"
+          }
+        },
+        {
+          "id": "log_settings",
+          "navigation": {
+            "prev": "log"
           }
         },
         {
@@ -4130,6 +4148,12 @@
           "id": "log",
           "navigation": {
             "prev": "select"
+          }
+        },
+        {
+          "id": "log_settings",
+          "navigation": {
+            "prev": "log"
           }
         },
         {
@@ -4446,6 +4470,12 @@
           "id": "log",
           "navigation": {
             "prev": "select"
+          }
+        },
+        {
+          "id": "log_settings",
+          "navigation": {
+            "prev": "log"
           }
         },
         {
@@ -4912,6 +4942,12 @@
           }
         },
         {
+          "id": "log_settings",
+          "navigation": {
+            "prev": "log"
+          }
+        },
+        {
           "id": "statistics",
           "navigation": {
             "prev": "select"
@@ -5160,6 +5196,12 @@
           "id": "log",
           "navigation": {
             "prev": "select"
+          }
+        },
+        {
+          "id": "log_settings",
+          "navigation": {
+            "prev": "log"
           }
         },
         {
@@ -5571,6 +5613,12 @@
           }
         },
         {
+          "id": "log_settings",
+          "navigation": {
+            "prev": "log"
+          }
+        },
+        {
           "id": "statistics",
           "navigation": {
             "prev": "select"
@@ -5862,6 +5910,12 @@
           "id": "log",
           "navigation": {
             "prev": "select"
+          }
+        },
+        {
+          "id": "log_settings",
+          "navigation": {
+            "prev": "log"
           }
         },
         {
@@ -6193,6 +6247,12 @@
           }
         },
         {
+          "id": "log_settings",
+          "navigation": {
+            "prev": "log"
+          }
+        },
+        {
           "id": "statistics",
           "navigation": {
             "prev": "select"
@@ -6363,6 +6423,12 @@
           "id": "log",
           "navigation": {
             "prev": "select"
+          }
+        },
+        {
+          "id": "log_settings",
+          "navigation": {
+            "prev": "log"
           }
         },
         {
@@ -6625,6 +6691,12 @@
           }
         },
         {
+          "id": "log_settings",
+          "navigation": {
+            "prev": "log"
+          }
+        },
+        {
           "id": "statistics",
           "navigation": {
             "prev": "select"
@@ -6810,6 +6882,12 @@
           }
         },
         {
+          "id": "log_settings",
+          "navigation": {
+            "prev": "log"
+          }
+        },
+        {
           "id": "statistics",
           "navigation": {
             "prev": "select"
@@ -6964,6 +7042,12 @@
           "id": "log",
           "navigation": {
             "prev": "select"
+          }
+        },
+        {
+          "id": "log_settings",
+          "navigation": {
+            "prev": "log"
           }
         },
         {
@@ -7182,6 +7266,12 @@
           }
         },
         {
+          "id": "log_settings",
+          "navigation": {
+            "prev": "log"
+          }
+        },
+        {
           "id": "statistics",
           "navigation": {
             "prev": "select"
@@ -7351,6 +7441,12 @@
           "id": "log",
           "navigation": {
             "prev": "select"
+          }
+        },
+        {
+          "id": "log_settings",
+          "navigation": {
+            "prev": "log"
           }
         },
         {
@@ -7652,6 +7748,12 @@
           }
         },
         {
+          "id": "log_settings",
+          "navigation": {
+            "prev": "log"
+          }
+        },
+        {
           "id": "statistics",
           "navigation": {
             "prev": "select"
@@ -7936,6 +8038,12 @@
           }
         },
         {
+          "id": "log_settings",
+          "navigation": {
+            "prev": "log"
+          }
+        },
+        {
           "id": "statistics",
           "navigation": {
             "prev": "select"
@@ -8156,6 +8264,12 @@
           "id": "log",
           "navigation": {
             "prev": "select"
+          }
+        },
+        {
+          "id": "log_settings",
+          "navigation": {
+            "prev": "log"
           }
         },
         {
@@ -8422,6 +8536,12 @@
           "id": "log",
           "navigation": {
             "prev": "select"
+          }
+        },
+        {
+          "id": "log_settings",
+          "navigation": {
+            "prev": "log"
           }
         },
         {

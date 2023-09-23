@@ -43,6 +43,13 @@
             "remove_entity": "Remove Entity",
             "maintenance": "Maintenance"
         },
+        "log": {
+            "settings_title": "Log settings",
+            "refresh": "Refresh",
+            "settings": "Settings",
+            "group_extended": "Extended logging",
+            "entity_states": "Entity states"
+        },
         "statistics":{
             "title_overview": "Overview",
             "title_short": "Messages: 30 seconds",

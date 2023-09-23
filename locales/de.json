@@ -41,7 +41,8 @@
             "add_entity": "Entität hinzufügen",
             "change_entity": "Entität anpassen",
             "remove_entity": "Entität entfernen",
-            "maintenance": "Wartungs"
+            "maintenance": "Wartungs",
+            "refresh": "Aktualisieren"
         },
         "statistics":{
             "title_overview": "Übersicht",

@@ -458,5 +458,9 @@
   "1.4.26": {
     "en": "Prevent insights for tile state of cover device.",
     "de": "Vermeide Insights für Gerätestatus der Fensterabdeckungs-Geräte."
+  },
+  "1.4.27": {
+    "en": "Activate extended logging in repair view / application log.",
+    "de": "Aktiviere das Erweitertes Protokoll im Reparieren-Dialog / Anwendungs-Log."
   }
 }
