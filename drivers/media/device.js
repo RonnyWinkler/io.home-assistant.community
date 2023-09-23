@@ -118,175 +118,174 @@ class MediaDevice extends BaseDevice {
     // Entity update ============================================================================================
     async onEntityUpdate(data) {
         await super.onEntityUpdate(data);
-        if(data == null || data.entity_id == null && data.entity_id && this.entityId == data.entity_id) {
-            return;
-        }
 
         try{
-            let convert = null;
+            if(data && data.entity_id && this.entityId == data.entity_id) {
+                let convert = null;
 
-            if (this.hasCapability("volume_set") && data.attributes.volume_level != null){
-                convert = this.inputConverter("volume_set");
-                await this.setCapabilityValue("volume_set", Math.round(convert(data.attributes.volume_level)*100)/100);
-            }
-            if (this.hasCapability("volume_mute") && data.attributes.is_volume_muted != null){
-                    this.setCapabilityValue("volume_mute", data.attributes.is_volume_muted);
-            }
-            if (this.hasCapability("speaker_playing") && data.state != null && data.state != undefined){
-                switch (data.state){
-                    case "playing":
-                        await this.setCapabilityValue("speaker_playing", true);
-                        break;
-                    default:
-                        await this.setCapabilityValue("speaker_playing", false);
+                if (this.hasCapability("volume_set") && data.attributes.volume_level != null){
+                    convert = this.inputConverter("volume_set");
+                    await this.setCapabilityValue("volume_set", Math.round(convert(data.attributes.volume_level)*100)/100);
                 }
-            }
-            if (this.hasCapability("speaker_shuffle")){
-                if (data.attributes.shuffle != null  && data.attributes.shuffle != undefined){
-                    await this.setCapabilityValue("speaker_shuffle", data.attributes.shuffle );
+                if (this.hasCapability("volume_mute") && data.attributes.is_volume_muted != null){
+                        this.setCapabilityValue("volume_mute", data.attributes.is_volume_muted);
                 }
-                else{
-                    await this.setCapabilityValue("speaker_shuffle", false );
-                }
-            }
-            if (this.hasCapability("speaker_repeat")){
-                if (data.attributes.repeat != null  && data.attributes.repeat != undefined){
-                    switch (data.attributes.repeat){
-                        case "off":
-                            await this.setCapabilityValue("speaker_repeat", "none");
-                            break;
-                        case "one":
-                            await this.setCapabilityValue("speaker_repeat", "track");
-                            break;
-                        case "all":
-                            await this.setCapabilityValue("speaker_repeat", "playlist");
+                if (this.hasCapability("speaker_playing") && data.state != null && data.state != undefined){
+                    switch (data.state){
+                        case "playing":
+                            await this.setCapabilityValue("speaker_playing", true);
                             break;
                         default:
-                            await this.setCapabilityValue("speaker_repeat", "none");
+                            await this.setCapabilityValue("speaker_playing", false);
                     }
                 }
-                else{
-                    await this.setCapabilityValue("speaker_repeat", "none");
-                }
-            }
-            if (this.hasCapability("speaker_artist")){
-                if ( data.attributes.media_artist != null && data.attributes.media_artist != undefined && typeof data.attributes.media_artist === "string" ){
-                    this.setCapabilityValue("speaker_artist", data.attributes.media_artist);
-                }
-                else{
-                    this.setCapabilityValue("speaker_artist", "");
-                }
-            }
-            if (this.hasCapability("speaker_album")){
-                if (data.attributes.media_album_name != null && data.attributes.media_album_name != undefined){
-                    await this.setCapabilityValue("speaker_album", data.attributes.media_album_name);
-                }
-                else if (data.attributes.app_name != null && data.attributes.app_name != undefined){
-                    await this.setCapabilityValue("speaker_album", data.attributes.app_name);
-                }
-                else{
-                    await this.setCapabilityValue("speaker_album", "");
-                }
-            }
-            if (this.hasCapability("speaker_track")){
-                if ( data.attributes.media_title != null && data.attributes.media_title != undefined){
-                    await this.setCapabilityValue("speaker_track", data.attributes.media_title);
-                }
-                else{
-                    await this.setCapabilityValue("speaker_track", "");
-                }
-            }
-            if (this.hasCapability("speaker_duration")){
-                if (data.attributes.media_duration != null && data.attributes.media_duration != undefined){
-                    let minutes = Math.floor(data.attributes.media_duration / 60);
-                    let seconds = Math.floor(data.attributes.media_duration - minutes * 60);
-                    let time = minutes + seconds/100;
-                    await this.setCapabilityValue("speaker_duration", time);
-                }
-                else{
-                    await this.setCapabilityValue("speaker_duration", 0);
-                }
-            }
-            if (this.hasCapability("speaker_position")){
-                if (data.attributes.media_position != null && data.attributes.media_position != undefined){
-                    let minutes = Math.floor(data.attributes.media_position / 60);
-                    let seconds = Math.floor(data.attributes.media_position - minutes * 60);
-                    let time = minutes + seconds/100;
-                    await this.setCapabilityValue("speaker_position", time);
-                }
-                else{
-                    await this.setCapabilityValue("speaker_position", 0);
-                }
-            }
-
-            if (this.hasCapability("onoff") && data.state != null && data.state != undefined){
-                switch (data.state){
-                    case "on":
-                    case "idle":
-                    case "playing":
-                    case "paused":
-                    case "buffering":
-                        await this.setCapabilityValue("onoff", true);
-                        break;
-                    case "off":
-                    case "standby":
-                        await this.setCapabilityValue("onoff", false);
-                        break;
-                    case "unavailable":
-                        break;
-                    default:
-                        await  this.setCapabilityValue("onoff", false);
-                }
-            }
-            if (data.attributes.source_list == null || data.attributes.source_list == undefined){
-                await this.setStoreValue("sourceList", '');
-                await this.setStoreValue("canSelectSource", false);
-            }
-            else{
-                await this.setStoreValue("sourceList", JSON.stringify(data.attributes.source_list));
-                await this.setStoreValue("canSelectSource", true);
-            }
-            if (data.attributes.sound_mode_list == null || data.attributes.sound_mode_list == undefined){
-                await this.setStoreValue("soundModeList", '');
-                await this.setStoreValue("canSelectSoundMode", false);
-            }
-            else{
-                await this.setStoreValue("soundModeList", JSON.stringify(data.attributes.sound_mode_list));
-                await this.setStoreValue("canSelectSoundMode", true);
-            }
-
-            let entityPicture = null;
-            if (    data.attributes.entity_picture_local != undefined &&
-                    data.attributes.entity_picture_local != null){
-                entityPicture = data.attributes.entity_picture_local;
-            }
-            else if (   data.attributes.entity_picture != undefined &&
-                        data.attributes.entity_picture != null){
-                entityPicture = data.attributes.entity_picture;
-            }
-            if (entityPicture != null && entityPicture != undefined){
-                if (this.mediaCover != entityPicture){
-                    this.mediaCover = entityPicture;
-                    let url = entityPicture;
-                    if ( ! (entityPicture.startsWith("http")) ){
-                        url =  this.homey.settings.get("address") + entityPicture;
-                    }
-                    if (url.startsWith('https')){
-                        this.mediaImage.setUrl(url);
+                if (this.hasCapability("speaker_shuffle")){
+                    if (data.attributes.shuffle != null  && data.attributes.shuffle != undefined){
+                        await this.setCapabilityValue("speaker_shuffle", data.attributes.shuffle );
                     }
                     else{
-                        this.mediaImage.setStream(async (stream) => {
-                            return await this._upateAlbumArtImage(stream);
-                        });
+                        await this.setCapabilityValue("speaker_shuffle", false );
                     }
-                    await this.mediaImage.update();
                 }
-            }
-            else{
-                if (this.mediaCover != null){
-                    this.mediaImage.setUrl(null);
-                    await this.mediaImage.update();
-                    this.mediaCover = null;
+                if (this.hasCapability("speaker_repeat")){
+                    if (data.attributes.repeat != null  && data.attributes.repeat != undefined){
+                        switch (data.attributes.repeat){
+                            case "off":
+                                await this.setCapabilityValue("speaker_repeat", "none");
+                                break;
+                            case "one":
+                                await this.setCapabilityValue("speaker_repeat", "track");
+                                break;
+                            case "all":
+                                await this.setCapabilityValue("speaker_repeat", "playlist");
+                                break;
+                            default:
+                                await this.setCapabilityValue("speaker_repeat", "none");
+                        }
+                    }
+                    else{
+                        await this.setCapabilityValue("speaker_repeat", "none");
+                    }
+                }
+                if (this.hasCapability("speaker_artist")){
+                    if ( data.attributes.media_artist != null && data.attributes.media_artist != undefined && typeof data.attributes.media_artist === "string" ){
+                        this.setCapabilityValue("speaker_artist", data.attributes.media_artist);
+                    }
+                    else{
+                        this.setCapabilityValue("speaker_artist", "");
+                    }
+                }
+                if (this.hasCapability("speaker_album")){
+                    if (data.attributes.media_album_name != null && data.attributes.media_album_name != undefined){
+                        await this.setCapabilityValue("speaker_album", data.attributes.media_album_name);
+                    }
+                    else if (data.attributes.app_name != null && data.attributes.app_name != undefined){
+                        await this.setCapabilityValue("speaker_album", data.attributes.app_name);
+                    }
+                    else{
+                        await this.setCapabilityValue("speaker_album", "");
+                    }
+                }
+                if (this.hasCapability("speaker_track")){
+                    if ( data.attributes.media_title != null && data.attributes.media_title != undefined){
+                        await this.setCapabilityValue("speaker_track", data.attributes.media_title);
+                    }
+                    else{
+                        await this.setCapabilityValue("speaker_track", "");
+                    }
+                }
+                if (this.hasCapability("speaker_duration")){
+                    if (data.attributes.media_duration != null && data.attributes.media_duration != undefined){
+                        let minutes = Math.floor(data.attributes.media_duration / 60);
+                        let seconds = Math.floor(data.attributes.media_duration - minutes * 60);
+                        let time = minutes + seconds/100;
+                        await this.setCapabilityValue("speaker_duration", time);
+                    }
+                    else{
+                        await this.setCapabilityValue("speaker_duration", 0);
+                    }
+                }
+                if (this.hasCapability("speaker_position")){
+                    if (data.attributes.media_position != null && data.attributes.media_position != undefined){
+                        let minutes = Math.floor(data.attributes.media_position / 60);
+                        let seconds = Math.floor(data.attributes.media_position - minutes * 60);
+                        let time = minutes + seconds/100;
+                        await this.setCapabilityValue("speaker_position", time);
+                    }
+                    else{
+                        await this.setCapabilityValue("speaker_position", 0);
+                    }
+                }
+
+                if (this.hasCapability("onoff") && data.state != null && data.state != undefined){
+                    switch (data.state){
+                        case "on":
+                        case "idle":
+                        case "playing":
+                        case "paused":
+                        case "buffering":
+                            await this.setCapabilityValue("onoff", true);
+                            break;
+                        case "off":
+                        case "standby":
+                            await this.setCapabilityValue("onoff", false);
+                            break;
+                        case "unavailable":
+                            break;
+                        default:
+                            await  this.setCapabilityValue("onoff", false);
+                    }
+                }
+                if (data.attributes.source_list == null || data.attributes.source_list == undefined){
+                    await this.setStoreValue("sourceList", '');
+                    await this.setStoreValue("canSelectSource", false);
+                }
+                else{
+                    await this.setStoreValue("sourceList", JSON.stringify(data.attributes.source_list));
+                    await this.setStoreValue("canSelectSource", true);
+                }
+                if (data.attributes.sound_mode_list == null || data.attributes.sound_mode_list == undefined){
+                    await this.setStoreValue("soundModeList", '');
+                    await this.setStoreValue("canSelectSoundMode", false);
+                }
+                else{
+                    await this.setStoreValue("soundModeList", JSON.stringify(data.attributes.sound_mode_list));
+                    await this.setStoreValue("canSelectSoundMode", true);
+                }
+
+                let entityPicture = null;
+                if (    data.attributes.entity_picture_local != undefined &&
+                        data.attributes.entity_picture_local != null){
+                    entityPicture = data.attributes.entity_picture_local;
+                }
+                else if (   data.attributes.entity_picture != undefined &&
+                            data.attributes.entity_picture != null){
+                    entityPicture = data.attributes.entity_picture;
+                }
+                if (entityPicture != null && entityPicture != undefined){
+                    if (this.mediaCover != entityPicture){
+                        this.mediaCover = entityPicture;
+                        let url = entityPicture;
+                        if ( ! (entityPicture.startsWith("http")) ){
+                            url =  this.homey.settings.get("address") + entityPicture;
+                        }
+                        if (url.startsWith('https')){
+                            this.mediaImage.setUrl(url);
+                        }
+                        else{
+                            this.mediaImage.setStream(async (stream) => {
+                                return await this._upateAlbumArtImage(stream);
+                            });
+                        }
+                        await this.mediaImage.update();
+                    }
+                }
+                else{
+                    if (this.mediaCover != null){
+                        this.mediaImage.setUrl(null);
+                        await this.mediaImage.update();
+                        this.mediaCover = null;
+                    }
                 }
             }
         }

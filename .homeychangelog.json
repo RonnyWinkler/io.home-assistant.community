@@ -462,5 +462,9 @@
   "1.4.27": {
     "en": "Activate extended logging in repair view / application log.",
     "de": "Aktiviere das Erweitertes Protokoll im Reparieren-Dialog / Anwendungs-Log."
+  },
+  "1.4.28": {
+    "en": "Fix for cover state update.",
+    "de": "Korrektur für Fensterabdeckungs-Statusänderung."
   }
 }
