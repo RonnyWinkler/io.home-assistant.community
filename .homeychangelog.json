@@ -466,5 +466,9 @@
   "1.4.28": {
     "en": "Fix for cover state update.",
     "de": "Korrektur für Fensterabdeckungs-Statusänderung."
+  },
+  "1.4.29": {
+    "en": "Fix for icon exchange (missing old icon).",
+    "de": "Korrektur für Icon-Tausch (fehlendes vorheriges Icon)."
   }
 }

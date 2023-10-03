@@ -458,9 +458,9 @@ class BaseDriver extends Homey.Driver {
     }
 
     renameFile(id_old, id_new) {
+        const path_old = USERDATA_PATH + id_old + ".svg";
+        const path_new = USERDATA_PATH + id_new + ".svg";
         try {
-            const path_old = USERDATA_PATH + id_old + ".svg";
-            const path_new = USERDATA_PATH + id_new + ".svg";
             fs.renameSync(path_old, path_new);
             this.log("Icon reamed: from "+path_old+" to"+path_new);
         } catch(error) {
@@ -485,10 +485,14 @@ class BaseDriver extends Homey.Driver {
         try {
             // remove original icon
             this.tryRemoveIcon(id);
+        } catch(error) {
+            this.log("Error removing old file. Error: "+error.message);
+        }
+        try {
             // rename temp icon to original name
             this.renameFile( id+"_temp", id);
         } catch(error) {
-            this.log("Error changeing device icon filename. Error: "+error.message);
+            this.log("Error changing device icon filename. Error: "+error.message);
         }
 
     }
