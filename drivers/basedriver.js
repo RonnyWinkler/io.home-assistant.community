@@ -462,7 +462,7 @@ class BaseDriver extends Homey.Driver {
         const path_new = USERDATA_PATH + id_new + ".svg";
         try {
             fs.renameSync(path_old, path_new);
-            this.log("Icon reamed: from "+path_old+" to"+path_new);
+            this.log("Icon renamed: from "+path_old+" to"+path_new);
         } catch(error) {
             this.log("Error renaming device icon: "+path_old+" to"+path_new);
         }

@@ -470,5 +470,9 @@
   "1.4.29": {
     "en": "Fix for icon exchange (missing old icon).",
     "de": "Korrektur für Icon-Tausch (fehlendes vorheriges Icon)."
+  },
+  "1.4.30": {
+    "en": "Added snapshot updated trigger for camera device.",
+    "de": "Trigger für aktualisiertes Kamerafoto ergänzt."
   }
 }

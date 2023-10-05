@@ -865,6 +865,7 @@ class App extends Homey.App {
 				throw new Error(error.message);
 			}
 		});
+
 	}
 
 	// FLOW TRIGGER ======================================================================================

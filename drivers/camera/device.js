@@ -20,6 +20,9 @@ class CameraDevice extends BaseDevice {
         this.registerCapabilityListener('button.reconnect', async () => {
             await this.clientReconnect()
         });
+
+        // Register Flow-Trigger
+        this._flowTriggerSnapshotChanged = this.homey.flow.getDeviceTriggerCard("camera_snapshot_changed");
     }
 
     async updateCapabilities(){
@@ -97,6 +100,7 @@ class CameraDevice extends BaseDevice {
                     }
                     if (this.mediaImage){
                         await this.mediaImage.update();
+                        await this._onSnapshotChanged();
                     }
                 }
             }
@@ -105,6 +109,7 @@ class CameraDevice extends BaseDevice {
                     if (this.mediaImage){
                         this.mediaImage.setUrl(null);
                         await this.mediaImage.update();
+                        await this._onSnapshotChanged();
                     }
                     this.mediaCover = null;
                 }
@@ -140,6 +145,47 @@ class CameraDevice extends BaseDevice {
         }
     }
     
+    async _onSnapshotChanged(){
+        try{
+            // buffer snapshot
+            let localImage = await this.homey.images.createImage();
+            let sourceStream = await this.mediaImage.getStream();
+            let snapshotBuffer = await this.stream2buffer(sourceStream);
+            await localImage.setStream(async stream => {
+                if (snapshotBuffer){
+                    let sourceStream = this.buffer2stream(snapshotBuffer);
+                    return await sourceStream.pipe(stream);
+                }
+            });
+
+            // Trigger flow
+            let tokens = {
+                image: localImage
+            };
+            let state = {};
+            this._flowTriggerSnapshotChanged.trigger(this, tokens, state);
+        }
+        catch(error){
+            this.log("Error triggering 'snapshot updated flow': ", error.message);
+        }
+    }
+
+    stream2buffer(stream) {
+        return new Promise((resolve, reject) => {
+            const _buf = [];
+            stream.on("data", (chunk) => _buf.push(chunk));
+            stream.on("end", () => resolve(Buffer.concat(_buf)));
+            stream.on("error", (err) => reject(err));
+        });
+    } 
+
+    buffer2stream(buffer) {  
+        let stream = new (require('stream').Duplex)();
+        stream.push(buffer);
+        stream.push(null);
+        return stream;
+    }
+
     // Settings ================================================================================================
     async onSettings(settings){
         // try {
