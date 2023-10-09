@@ -44,6 +44,14 @@
             "maintenance": "Wartungs",
             "refresh": "Aktualisieren"
         },
+        "log": {
+            "settings_title": "Log-Einstellungen",
+            "refresh": "Aktualisieren",
+            "settings": "Einstellungen",
+            "group_extended": "Erweiterte protokollierung",
+            "entity_states": "Entity-Status",
+            "events": "Events"
+        },
         "statistics":{
             "title_overview": "Übersicht",
             "title_short": "Nachrichten: 30 Sekunden",

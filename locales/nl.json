@@ -44,6 +44,14 @@
             "maintenance": "Onderhoud",
             "refresh": "Vernieuwen"
         },
+        "log": {
+            "settings_title": "Log-instellingen",
+            "refresh": "Vernieuwen",
+            "settings": "Instellingen",
+            "group_extended": "Uitgebreide logboekregistratie",
+            "entity_states": "Entiteitsstatussen",
+            "events": "Evenementen"
+        },
         "statistics":{
             "title_overview": "Overzicht",
             "title_short": "Berichten: 30 seconden",

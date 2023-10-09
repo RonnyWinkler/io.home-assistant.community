@@ -48,7 +48,8 @@
             "refresh": "Refresh",
             "settings": "Settings",
             "group_extended": "Extended logging",
-            "entity_states": "Entity states"
+            "entity_states": "Entity states",
+            "events": "Events"
         },
         "statistics":{
             "title_overview": "Overview",

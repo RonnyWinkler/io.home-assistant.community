@@ -11,7 +11,13 @@
         <span class="homey-form-checkbox-checkmark"></span>
         <span class="homey-form-checkbox-text" data-i18n="repair.log.entity_states"></span>
       </label>
-  
+
+      <label class="homey-form-checkbox">
+        <input class="homey-form-checkbox-input" type="checkbox" id="checkboxExtEvents" onclick='settingsChanged();'/>
+        <span class="homey-form-checkbox-checkmark"></span>
+        <span class="homey-form-checkbox-text" data-i18n="repair.log.events"></span>
+      </label>
+
     </fieldset>
 </div>
 
@@ -24,11 +30,18 @@
         else{
             document.getElementById('checkboxExtEntityStates').checked = false;
         }
+        if (settings['event'] != undefined){
+            document.getElementById('checkboxExtEvents').checked = settings['event'];
+        }
+        else{
+            document.getElementById('checkboxExtEvents').checked = false;
+        }
     });
 
     function settingsChanged(){
         let settings = {};
         settings['entityState'] = document.getElementById('checkboxExtEntityStates').checked;
+        settings['event'] = document.getElementById('checkboxExtEvents').checked;
         Homey.emit('setLogSettings', settings);
     }
 </script>

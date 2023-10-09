@@ -1187,6 +1187,11 @@ class App extends Homey.App {
 			};
 		}
 		this._flowTriggerAppMemwarn.trigger(data).catch(error => this.log("onMemwarn() flow trigger error: ", error.message));
+
+		// Trigger extended crash log. Call async function without await and raise error...
+		if (data.count == data.limit - 2){
+			this.extendedCrashLog("Memory Warning " + data.count + "/" + data.limit);
+		}
 	}
 
 	async onCpuwarn(data){
@@ -1198,7 +1203,31 @@ class App extends Homey.App {
 			};
 		}
 		this._flowTriggerAppCpuwarn.trigger(data).catch(error => this.log("onCpuwarn() flow trigger error: ", error.message));
+
+		// Trigger extended crash log. Call async function without await and raise error...
+		if (data.count == data.limit - 2){
+			this.extendedCrashLog("CPU Warning " + data.count + "/" + data.limit);
+		}
 	}
+
+	logStatistics(){
+		let statistics = this._client.getStatistics();
+		this.log("Statistics: Entities monitored: " + statistics.overview.entities);
+		this.log("Statistics: Overall EntityListUpdates: " + statistics.sum.entityUpdates + " ENtityLisUpdates: " + statistics.sum.entityUpdatesElements + " EntityStates: " + statistics.sum.entityStates + " Events: " + statistics.sum.events);
+		this.log("Statistics: 30sec   EntityListUpdates: " + statistics.short.entityUpdates + " ENtityLisUpdates: " + statistics.short.entityUpdatesElements + " EntityStates: " + statistics.short.entityStates + " Events: " + statistics.short.events);
+		this.log("Statistics: current EntityListUpdates: " + statistics.current.entityUpdates + " ENtityLisUpdates: " + statistics.current.entityUpdatesElements + " EntityStates: " + statistics.current.entityStates + " Events: " + statistics.current.events);
+	}
+
+	async extendedCrashLog(reason=''){
+		this.log("Trigger extended crash log. Reason: "+reason);
+		this.logStatistics();
+		let log = this.getLog();
+		let logText = '';
+		for (let i=log.length; i>0; i--){
+			logText += log[i-1] + '\n';
+		}
+		throw new Error("Extended crash log...\n" + logText);
+	} 
 
 	getClient() {
 		return this._client;
