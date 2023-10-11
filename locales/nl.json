@@ -56,12 +56,17 @@
             "title_overview": "Overzicht",
             "title_short": "Berichten: 30 seconden",
             "title_sum": "Berichten: algemeen",
+            "title_app": "App",
+            "title_connect": "Koppelingen",
             "entities_monitored": "Gecontroleerde entities",
             "entities": "Entities",
             "entity_list_updates": "Updates van entity lijst",
             "entitiy_list_amount": "Items in de entity lijst",
             "entity_states": "Entity status verandert",
             "events": "Evenementen",
+            "startup": "App starten",
+            "last_connect": "Laatste verbinding",
+            "connects": "Koppelingen",
             "refresh": "Vernieuwen"
         },
         "custom_device": {

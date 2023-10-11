@@ -1213,9 +1213,12 @@ class App extends Homey.App {
 	logStatistics(){
 		let statistics = this._client.getStatistics();
 		this.log("Statistics: Entities monitored: " + statistics.overview.entities);
-		this.log("Statistics: Overall EntityListUpdates: " + statistics.sum.entityUpdates + " ENtityLisUpdates: " + statistics.sum.entityUpdatesElements + " EntityStates: " + statistics.sum.entityStates + " Events: " + statistics.sum.events);
-		this.log("Statistics: 30sec   EntityListUpdates: " + statistics.short.entityUpdates + " ENtityLisUpdates: " + statistics.short.entityUpdatesElements + " EntityStates: " + statistics.short.entityStates + " Events: " + statistics.short.events);
-		this.log("Statistics: current EntityListUpdates: " + statistics.current.entityUpdates + " ENtityLisUpdates: " + statistics.current.entityUpdatesElements + " EntityStates: " + statistics.current.entityStates + " Events: " + statistics.current.events);
+		this.log("Statistics: App start: " + statistics.overview.startup);
+		this.log("Statistics: Last connect: " + statistics.overview.lastConnect);
+		this.log("Statistics: Connects: " + statistics.overview.connects);
+		this.log("Statistics: Overall EntityListUpdates: " + statistics.sum.entityUpdates + " EntityLisUpdates: " + statistics.sum.entityUpdatesElements + " EntityStates: " + statistics.sum.entityStates + " Events: " + statistics.sum.events);
+		this.log("Statistics: 30sec   EntityListUpdates: " + statistics.short.entityUpdates + " EntityLisUpdates: " + statistics.short.entityUpdatesElements + " EntityStates: " + statistics.short.entityStates + " Events: " + statistics.short.events);
+		this.log("Statistics: current EntityListUpdates: " + statistics.current.entityUpdates + " EntityLisUpdates: " + statistics.current.entityUpdatesElements + " EntityStates: " + statistics.current.entityStates + " Events: " + statistics.current.events);
 	}
 
 	async extendedCrashLog(reason=''){

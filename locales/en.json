@@ -55,12 +55,17 @@
             "title_overview": "Overview",
             "title_short": "Messages: 30 seconds",
             "title_sum": "Messages: overall",
+            "title_app": "App",
+            "title_connect": "Connections",
             "entities_monitored": "Monitored entities",
             "entities": "Entities",
             "entity_list_updates": "Entity list updates",
             "entitiy_list_amount": "Entity list entries",
             "entity_states": "Entity state changes",
             "events": "Events",
+            "startup": "App start",
+            "last_connect": "Last connect",
+            "connects": "Connects",
             "refresh": "Refresh"
         },
         "custom_device": {

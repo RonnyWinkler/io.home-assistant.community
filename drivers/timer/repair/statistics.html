@@ -99,6 +99,42 @@
             </tr>
         </table>
     </fieldset>
+    <fieldset class="homey-form-fieldset">
+        <legend class="homey-form-legend"><span data-i18n="repair.statistics.title_app"></span></legend>
+        <table>
+            <tr>
+                <td>
+                    <label class="homey-form-label" for="app.startup" style="margin-top:0px"><span data-i18n="repair.statistics.startup"></span></label>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input class="homey-form-input" id="app.startup" type="text" value=""/>
+                </td>
+            </tr>
+        </table>
+    </fieldset>
+    <fieldset class="homey-form-fieldset">
+        <legend class="homey-form-legend"><span data-i18n="repair.statistics.title_connect"></span></legend>
+        <table>
+            <tr>
+                <td>
+                    <label class="homey-form-label" for="app.lastConnect" style="margin-top:0px"><span data-i18n="repair.statistics.last_connect"></span></label>
+                </td>
+                <td>
+                    <label class="homey-form-label" for="app.connects" style="margin-top:0px"><span data-i18n="repair.statistics.connects"></span></label>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input class="homey-form-input" id="app.lastConnect" type="text" value=""/>
+                </td>
+                <td>
+                    <input class="homey-form-input" id="app.connects" type="text" value=""/>
+                </td>
+            </tr>
+        </table>
+    </fieldset>
 </div>
 <!-- <fieldset class="homey-form-fieldset"> -->
 <div id="divBtnRefreshStatistics">
@@ -118,6 +154,10 @@
             statistics = JSON.parse(data);
         } 
         document.getElementById('overview.entities').value = statistics.overview.entities;
+
+        document.getElementById('app.startup').value = statistics.overview.startup;
+        document.getElementById('app.lastConnect').value = statistics.overview.lastConnect;
+        document.getElementById('app.connects').value = statistics.overview.connects;
 
         document.getElementById('short.entities').value = statistics.short.entityUpdates;
         document.getElementById('short.entitiesAmount').value = statistics.short.entityUpdatesElements;

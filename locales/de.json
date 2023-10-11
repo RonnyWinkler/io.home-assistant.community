@@ -56,12 +56,17 @@
             "title_overview": "Übersicht",
             "title_short": "Nachrichten: 30 Sekunden",
             "title_sum": "Nachrichten: insgesamt",
+            "title_app": "App",
+            "title_connect": "Verbindungen",
             "entities_monitored": "Überwachte Entitäten",
             "entities": "Entitäten",
             "entity_list_updates": "Entität Listenupdates",
             "entitiy_list_amount": "Entität Listeneinträge",
             "entity_states": "Entity Status.-Änderung",
             "events": "Ereignisse",
+            "startup": "App-Start",
+            "last_connect": "Letzte Verbindung",
+            "connects": "Verbindungen",
             "refresh": "Aktualisieren"
         },
         "custom_device": {

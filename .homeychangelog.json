@@ -478,5 +478,9 @@
   "1.4.31": {
     "en": "Added extended log settings for HA events. Added crash log for memory/cpu app crash. Removed snapshot trigger.",
     "de": "Erweiterte Protokollierung für HA-Ereignisse ergänzt. Abbruch-Log für App-Abbruch aufgrund von Speicher/CPU-Warnung ergänzt. Trigger für Kamera-Foto entfernt."
+  },
+  "1.4.32": {
+    "en": "Extended app statistics.",
+    "de": "App-Statistik erweitert."
   }
 }
