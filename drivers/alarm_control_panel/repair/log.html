@@ -1,0 +1,65 @@
+
+<style>
+    .preLog {
+        font-size: 11px;
+        color: inherit;
+        border: initial;
+        padding: initial;
+        font-family: inherit;
+        line-height: 1.3;
+        user-select: text;
+    }
+
+    #divBtnRefreshLog {
+        position: sticky;
+        bottom: 0px;
+        /* bottom: calc(var(--homey-su-2) * -1);
+        padding: 0 0 var(--homey-su-2) 0; */
+        background: var(--homey-color-white);
+        /* border-radius: var(--homey-border-radius); */
+        box-shadow: 5px 5px 5px 15px var(--homey-color-white);
+    }    
+</style>
+<script type="application/javascript">
+
+    Homey.setTitle(Homey.__("repair.title.log"));
+    
+</script>
+
+<div>
+    <fieldset class="homey-form-fieldset">
+        <pre class="preLog" id="log"></pre>
+    </fieldset>
+</div>
+
+<div id="divBtnRefreshLog">
+    <table style="width:100%">
+        <tr>
+            <td>
+                <button id="btnRefreshLog" class="homey-button-primary-shadow-full" onClick="refresh()"><span data-i18n="repair.log.refresh"></span></button>
+            </td>
+            <td>
+                <button id="btnLogSettings" class="homey-button-secondary-shadow-full" onClick="settings()"><span data-i18n="repair.log.settings"></span></button>
+            </td>
+        </tr>
+    </table>
+</div>
+
+
+<script type="application/javascript">
+    function refresh(){
+        Homey.emit('getLog').then((data) => onLogUpdate(data));
+    }
+
+    function settings(){
+        Homey.showView("log_settings");
+    }
+
+    function onLogUpdate(data){
+        var logElement = document.getElementById('log');
+        let string = data.join("\n");
+        logElement.textContent = string;
+    }
+
+    Homey.emit('getLog').then((data) => onLogUpdate(data));
+</script>

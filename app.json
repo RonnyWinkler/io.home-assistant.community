@@ -1,7 +1,7 @@
 {
   "_comment": "This file is generated. Please edit .homeycompose/app.json instead.",
   "id": "io.home-assistant.community",
-  "version": "1.4.32",
+  "version": "1.5.0",
   "compatibility": ">=8.1.0",
   "sdk": 3,
   "brandColor": "#0DA6EA",
@@ -57,6 +57,33 @@
   },
   "flow": {
     "triggers": [
+      {
+        "title": {
+          "en": "Alarm mode changed",
+          "de": "Alarm-Modus hat sich geändert",
+          "nl": "Alarmmodus gewijzigd"
+        },
+        "tokens": [
+          {
+            "name": "alarm_control_panel_mode",
+            "type": "string",
+            "title": {
+              "en": "Mode",
+              "de": "Modus",
+              "nl": "Modus"
+            },
+            "example": "disarmed"
+          }
+        ],
+        "args": [
+          {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=alarm_control_panel"
+          }
+        ],
+        "id": "alarm_control_panel_mode_changed"
+      },
       {
         "highlight": true,
         "title": {
@@ -1640,6 +1667,91 @@
       }
     ],
     "actions": [
+      {
+        "highlight": true,
+        "title": {
+          "en": "Select alarm mode",
+          "de": "Wähle Alarm-Modus",
+          "nl": "Stel alarmmodus in"
+        },
+        "titleFormatted": {
+          "en": "Change to alarm mode [[mode]].",
+          "de": "Wechsel zum Alarm-Modus [[mode]].",
+          "nl": "Stel alarmmodus [[mode]] in."
+        },
+        "args": [
+          {
+            "type": "dropdown",
+            "name": "mode",
+            "title": {
+              "en": "Alarm mode",
+              "de": "Alarm-Modus",
+              "nl": "Alarmmodus"
+            },
+            "placeholder": {
+              "en": "Select the alarm mode",
+              "de": "Wähle den Alarm-Modus",
+              "nl": "Selecteer de alarmmodus"
+            },
+            "values": [
+              {
+                "id": "disarmed",
+                "title": {
+                  "en": "Disarmed",
+                  "de": "Entsichert",
+                  "nl": "Ontgrendeld"
+                }
+              },
+              {
+                "id": "armed_home",
+                "title": {
+                  "en": "Armed at home",
+                  "de": "Gesichert zu Hause",
+                  "nl": "Thuis beveiligd"
+                }
+              },
+              {
+                "id": "armed_away",
+                "title": {
+                  "en": "Armed away",
+                  "de": "Gesichert unterwegs",
+                  "nl": "Veilig onderweg"
+                }
+              },
+              {
+                "id": "armed_night",
+                "title": {
+                  "en": "Armed at night",
+                  "de": "Gesichert nachts",
+                  "nl": "Veilig nacht"
+                }
+              },
+              {
+                "id": "armed_vacation",
+                "title": {
+                  "en": "Armed at vacation",
+                  "de": "Gesichert im Urlaub",
+                  "nl": "Veilig op vakantie"
+                }
+              },
+              {
+                "id": "armed_custom_bypass",
+                "title": {
+                  "en": "Armed custom bypass",
+                  "de": "Gesichert benutzerdefiniert",
+                  "nl": "Veilig aangepast"
+                }
+              }
+            ]
+          },
+          {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=alarm_control_panel"
+          }
+        ],
+        "id": "alarmControlPanelMode"
+      },
       {
         "id": "callService",
         "title": {
@@ -3344,6 +3456,281 @@
     ]
   },
   "drivers": [
+    {
+      "capabilitiesOptions": {
+        "button.reconnect": {
+          "maintenanceAction": true,
+          "title": {
+            "en": "Reconnect",
+            "de": "Neu verbinden",
+            "nl": "Opnieuw verbinden"
+          },
+          "desc": {
+            "en": "Reconnect and reload entities.",
+            "de": "Neu verbinden und Entitäten neu laden.",
+            "nl": "Maak opnieuw verbinding en laad entiteiten opnieuw."
+          }
+        }
+      },
+      "pair": [
+        {
+          "id": "loading",
+          "template": "loading",
+          "navigation": {
+            "next": "list_devices"
+          }
+        },
+        {
+          "id": "login_credentials",
+          "template": "login_credentials",
+          "options": {
+            "logo": "../../../assets/images/logo.png",
+            "usernameLabel": {
+              "en": "Server"
+            },
+            "usernamePlaceholder": {
+              "en": "http://192.168.xxx.xxx:8123"
+            },
+            "passwordLabel": {
+              "en": "Token"
+            },
+            "passwordPlaceholder": {
+              "en": "Long-lived access token"
+            }
+          }
+        },
+        {
+          "id": "list_devices",
+          "options": {
+            "singular": false
+          }
+        },
+        {
+          "id": "icon",
+          "navigation": {
+            "next": "add_devices",
+            "prev": "list_devices"
+          }
+        },
+        {
+          "id": "add_devices"
+        }
+      ],
+      "repair": [
+        {
+          "id": "select",
+          "navigation": {
+            "prev": "done"
+          }
+        },
+        {
+          "id": "add_entity",
+          "navigation": {
+            "prev": "select"
+          }
+        },
+        {
+          "id": "change_entity",
+          "navigation": {
+            "prev": "select"
+          }
+        },
+        {
+          "id": "remove_entity",
+          "navigation": {
+            "prev": "select"
+          }
+        },
+        {
+          "id": "device_details",
+          "navigation": {
+            "prev": "select"
+          }
+        },
+        {
+          "id": "log",
+          "navigation": {
+            "prev": "select"
+          }
+        },
+        {
+          "id": "log_settings",
+          "navigation": {
+            "prev": "log"
+          }
+        },
+        {
+          "id": "statistics",
+          "navigation": {
+            "prev": "select"
+          }
+        },
+        {
+          "id": "icon",
+          "navigation": {
+            "next": "icon_change",
+            "prev": "select"
+          }
+        },
+        {
+          "id": "icon_change",
+          "navigation": {
+            "prev": "icon"
+          }
+        },
+        {
+          "id": "capability_update_dlg",
+          "navigation": {
+            "next": "capability_update",
+            "prev": "select"
+          }
+        },
+        {
+          "id": "capability_update",
+          "navigation": {
+            "prev": "capability_update_dlg"
+          }
+        },
+        {
+          "id": "login_credentials",
+          "template": "login_credentials",
+          "navigation": {
+            "prev": "select"
+          },
+          "options": {
+            "logo": "../../../assets/images/logo.png",
+            "usernameLabel": {
+              "en": "Server"
+            },
+            "usernamePlaceholder": {
+              "en": "http://192.168.xxx.xxx:8123"
+            },
+            "passwordLabel": {
+              "en": "Token"
+            },
+            "passwordPlaceholder": {
+              "en": "Long-lived access token"
+            }
+          }
+        },
+        {
+          "id": "done",
+          "template": "done"
+        }
+      ],
+      "id": "alarm_control_panel",
+      "name": {
+        "en": "Alarm control panel",
+        "de": "Alarmzentrale",
+        "nl": "Alarmbedieningspaneel"
+      },
+      "class": "homealarm",
+      "capabilities": [
+        "alarm_control_panel_mode",
+        "button.reconnect"
+      ],
+      "images": {
+        "large": "/drivers/alarm_control_panel/assets/images/large.png",
+        "small": "/drivers/alarm_control_panel/assets/images/small.png"
+      },
+      "settings": [
+        {
+          "type": "group",
+          "label": {
+            "en": "Device entities",
+            "de": "Geräte-Entitäten",
+            "nl": "Apparaat entiteiten"
+          },
+          "children": [
+            {
+              "id": "add_device_sensor",
+              "type": "checkbox",
+              "value": false,
+              "label": {
+                "en": "Show device sensors",
+                "de": "Zeige Geräte-Sensoren",
+                "nl": "Apparaatsensoren weergeven"
+              },
+              "hint": {
+                "en": "Add sensor entities from HA device where this entity is assigned to.",
+                "de": "Füge Sensor-Entitäten des HA-Gerätes hinzu, dem diese Entität zugeordnet ist.",
+                "nl": "Voeg sensor entiteiten toe vanaf het HA-apparaat waaraan deze entiteit is toegewezen."
+              }
+            },
+            {
+              "id": "add_device_sensor_diagnostic",
+              "type": "checkbox",
+              "value": false,
+              "label": {
+                "en": "Show device diagnostic sensors",
+                "de": "Zeige Geräte-Diagnosesensoren",
+                "nl": "Diagnostische sensoren voor apparaat weergeven"
+              },
+              "hint": {
+                "en": "Add diagnostic sensor entities from HA device where this entity is assigned to.",
+                "de": "Füge Diagnosesensor-Entitäten des HA-Gerätes hinzu, dem diese Entität zugeordnet ist.",
+                "nl": "Voeg diagnostische sensor entiteiten toe vanaf het HA-apparaat waaraan deze entiteit is toegewezen."
+              }
+            },
+            {
+              "id": "add_device_switch",
+              "type": "checkbox",
+              "value": false,
+              "label": {
+                "en": "Show device switches",
+                "de": "Zeige Geräte-Schalter",
+                "nl": "Apparaatschakelaars weergeven"
+              },
+              "hint": {
+                "en": "Add switch entities from HA device where this entity is assigned to.",
+                "de": "Füge Schalter-Entitäten des HA-Gerätes hinzu, dem diese Entität zugeordnet ist.",
+                "nl": "Voeg schakelaar entiteiten toe vanaf het HA-apparaat waaraan deze entiteit is toegewezen."
+              }
+            },
+            {
+              "id": "add_device_button",
+              "type": "checkbox",
+              "value": false,
+              "label": {
+                "en": "Show device buttons",
+                "de": "Zeige Geräte-Buttons",
+                "nl": "Toon apparaatknoppen"
+              },
+              "hint": {
+                "en": "Add button entities from HA device where this entity is assigned to.",
+                "de": "Füge Button-Entitäten des HA-Gerätes hinzu, dem diese Entität zugeordnet ist.",
+                "nl": "Voeg knoppen entiteiten toe vanaf het HA-apparaat waaraan deze entiteit is toegewezen."
+              }
+            }
+          ]
+        },
+        {
+          "type": "group",
+          "label": {
+            "en": "Device settings",
+            "de": "Geräte-Einstellungen",
+            "nl": "Apparaat instellingen"
+          },
+          "children": [
+            {
+              "id": "code",
+              "type": "password",
+              "label": {
+                "en": "Code",
+                "de": "Code",
+                "nl": "Code"
+              },
+              "value": "",
+              "hint": {
+                "en": "The PIN code of your alarm control panel.",
+                "de": "Der PIN-Code Ihrer Alarmzentrale.",
+                "nl": "De pincode van uw alarmcentrale."
+              }
+            }
+          ]
+        }
+      ]
+    },
     {
       "capabilitiesOptions": {
         "button.reconnect": {
@@ -8715,6 +9102,74 @@
     }
   ],
   "capabilities": {
+    "alarm_control_panel_mode": {
+      "type": "enum",
+      "title": {
+        "en": "Mode",
+        "de": "Modus",
+        "nl": "Modus"
+      },
+      "desc": {
+        "en": "Alarm mode",
+        "de": "Alarm-Modus",
+        "nl": "Alarm modus"
+      },
+      "getable": true,
+      "setable": true,
+      "insights": true,
+      "icon": "/assets/capability_icons/alarm_control_panel_mode.svg",
+      "uiComponent": "picker",
+      "values": [
+        {
+          "id": "disarmed",
+          "title": {
+            "en": "Disarmed",
+            "de": "Entsichert",
+            "nl": "Ontgrendeld"
+          }
+        },
+        {
+          "id": "armed_home",
+          "title": {
+            "en": "Armed at home",
+            "de": "Gesichert zu Hause",
+            "nl": "Thuis beveiligd"
+          }
+        },
+        {
+          "id": "armed_away",
+          "title": {
+            "en": "Armed away",
+            "de": "Gesichert unterwegs",
+            "nl": "Veilig onderweg"
+          }
+        },
+        {
+          "id": "armed_night",
+          "title": {
+            "en": "Armed at night",
+            "de": "Gesichert nachts",
+            "nl": "Veilig nacht"
+          }
+        },
+        {
+          "id": "armed_vacation",
+          "title": {
+            "en": "Armed at vacation",
+            "de": "Gesichert im Urlaub",
+            "nl": "Veilig op vakantie"
+          }
+        },
+        {
+          "id": "armed_custom_bypass",
+          "title": {
+            "en": "Armed custom bypass",
+            "de": "Gesichert benutzerdefiniert",
+            "nl": "Veilig aangepast"
+          }
+        }
+      ]
+    },
     "alarm_presence": {
       "type": "boolean",
       "title": {

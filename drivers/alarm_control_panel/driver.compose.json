@@ -1,0 +1,19 @@
+{
+    "id": "switch",
+    "name": {
+      "en": "Alarm control panel",
+      "de": "Alarmzentrale",
+      "nl": "Alarmbedieningspaneel"
+    },
+    "class": "homealarm",
+    "capabilities": [
+      "alarm_control_panel_mode",
+    
+      "button.reconnect"
+    ],
+    "images": {
+      "large": "/drivers/alarm_control_panel/assets/images/large.png",
+      "small": "/drivers/alarm_control_panel/assets/images/small.png"
+  },
+  "$extends": [ "capabilitiesOptions", "pair", "repair" ]
+}

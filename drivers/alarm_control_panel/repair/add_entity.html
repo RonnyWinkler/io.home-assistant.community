@@ -1,0 +1,560 @@
+<link rel="stylesheet" type="text/css" href="../../../assets/css/autoComplete.css"/>
+
+<link rel="stylesheet" type="text/css" href="../../../assets/css/toastmessage.css"/>
+<script src="../../../assets/js/toastmessage.js"></script>
+
+<link rel="stylesheet" type="text/css" href="../../../assets/css/infomessage.css"/>
+<script src="../../../assets/js/infomessage.js"></script>
+
+<style>
+  #div_button {
+    position: sticky;
+    bottom: 0px;
+    /* bottom: calc(var(--homey-su-2) * -1);
+    padding: 0 0 var(--homey-su-2) 0; */
+    background: var(--homey-color-white);
+    border-radius: var(--homey-border-radius);
+    box-shadow: 0 5px 5px 15px var(--homey-color-white);
+  }
+  #spanResultlistEntity {
+    font-size: 12px;
+  }
+  .info_icon{
+    cursor: pointer; 
+    color: darkgray;
+    display: inline;
+  }
+</style>
+
+<script type="application/javascript">
+
+  function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
+
+  Homey.setTitle(Homey.__("repair.title.add_entity"));
+  // Homey.setNavigationClose();
+
+  // Add entity (add button pressed)
+  async function onAddEntity(){
+    document.getElementById('btnAddEntityProcess').classList.add("is-loading");
+    let data = {
+      entity_id: document.getElementById('entityAdd').value,
+      attribute: document.getElementById('entityAttributeAdd').value,
+      capability: document.getElementById('capabilityAdd').value,
+      name: document.getElementById('nameAdd').value,
+      unit: document.getElementById('unitAdd').value,
+      converter_ha2homey: document.getElementById('converter_ha2homeyAdd').value,
+      converter_homey2ha: document.getElementById('converter_homey2haAdd').value,
+      add_as_main_capability: document.getElementById('addAsMainCapabilityAdd').checked,
+      add_as_number_input: document.getElementById('addEntityNumberInput').checked,
+      number_input: {
+        min: document.getElementById('entityNumberRangeMinAdd').value,      
+        max: document.getElementById('entityNumberRangeMaxAdd').value,
+        step: document.getElementById('entityNumberRangeStepAdd').value
+      }
+    };
+    let result = await Homey.emit("addEntity", data);
+    let message = new Message();
+    if (!result.added){
+      message.error(result.message,
+        {
+          duration: 4,
+          closable: true,
+        }
+      );
+
+
+      // Homey.alert( result.message, 'error' );
+    }
+    else{
+      message.success(result.message,
+        {
+          duration: 4,
+          top: 0,
+          closable: true,
+        }
+      );
+
+      // Homey.alert( result.message, 'info' );
+      // Homey.showView("select");
+    }
+    document.getElementById('btnAddEntityProcess').classList.remove("is-loading");
+  }
+
+  function onInfoMainCapability(){
+    let message = new InfoMessage();
+    message.info( 
+        Homey.__("repair.custom_device.info_main_capability"),
+        {
+          duration: 0,
+          closable: true,
+          dangerUseHtml: true
+        }
+      );
+  }
+  function onInfoConverter(){
+    let message = new InfoMessage();
+    message.info( 
+        Homey.__("repair.custom_device.info_converter"),
+        {
+          duration: 0,
+          closable: true,
+          dangerUseHtml: true
+        }
+      );
+  }
+  function onInfoCapability(){
+    let message = new InfoMessage();
+    message.info( 
+        Homey.__("repair.custom_device.info_capability"),
+        {
+          duration: 0,
+          closable: true,
+          dangerUseHtml: true
+        }
+      );
+  }
+  function onInfoEntity(){
+    let message = new InfoMessage();
+    message.info( 
+        Homey.__("repair.custom_device.info_entity"),
+        {
+          duration: 0,
+          closable: true,
+          dangerUseHtml: true
+        }
+      );
+  }
+  function onInfoNumberInput(){
+    let message = new InfoMessage();
+    message.info( 
+        Homey.__("repair.custom_device.info_number_input"),
+        {
+          duration: 0,
+          closable: true,
+          dangerUseHtml: true
+        }
+      );
+  }
+
+  function onAddEntityAttributeClick(){
+    if (document.getElementById("addEntityAttributeAdd").checked){
+      document.getElementById("labelEntityAttributeAdd").style.display = 'unset';
+      document.getElementById("entityAttributeAdd").style.display = 'unset';
+    }
+    else{
+      document.getElementById("labelEntityAttributeAdd").style.display = 'none';
+      document.getElementById("entityAttributeAdd").style.display = 'none';
+      document.getElementById("entityAttributeAdd").value = '';
+    }
+  }
+
+  function onAddEntityNumberInputClick(){
+    // if (document.getElementById("addEntityAttributeAdd").checked){
+    //   document.getElementById("labelEntityAttributeAdd").style.display = 'unset';
+    //   document.getElementById("entityAttributeAdd").style.display = 'unset';
+    // }
+    // else{
+    //   document.getElementById("labelEntityAttributeAdd").style.display = 'none';
+    //   document.getElementById("entityAttributeAdd").style.display = 'none';
+    //   document.getElementById("entityAttributeAdd").value = '';
+    // }
+  }
+
+  function onEntityChanged(value){
+    // clear number range fields if no number domain is set
+    if (! (value.startsWith('number.') || value.startsWith('input_number.'))){
+      document.getElementById('addEntityNumberInput').checked = false;
+      document.getElementById('entityNumberRangeMinAdd').value = '';
+      document.getElementById('entityNumberRangeMaxAdd').value = '';
+      document.getElementById('entityNumberRangeStepAdd').value = '';
+      document.getElementById("divNumberInput").style.display = 'none';
+      document.getElementById("divNumberInputRange").style.display = 'none';
+    }
+  }
+
+  // update visible/invisible fields
+  onAddEntityAttributeClick();
+</script>
+
+<div>
+  <fieldset class="homey-form-fieldset">
+    <div class="homey-form-group">
+      <label for="entityAdd" class="homey-form-label"><span data-i18n="repair.custom_device.entity"></span></label>
+      <!-- <div class="info_icon" onClick="onInfoEntity()"> 
+        <span class="fa fa-icon fa-info-circle"></span>
+      </div> -->
+      <input id="entityAdd"  class="homey-form-input" type="text" value="" onchange="onEntityChanged(this.value)"/>
+    <!-- </div>
+    <div class="homey-form-group"> -->
+      <fieldset class="homey-form-checkbox-set">
+        <label class="homey-form-checkbox">
+          <input class="homey-form-checkbox-input" type="checkbox" id="addEntityAttributeAdd" onclick="onAddEntityAttributeClick()"/>
+          <span class="homey-form-checkbox-checkmark"></span>
+          <span class="homey-form-checkbox-text"><span data-i18n="repair.custom_device.add_entity_attribute"></span></span>
+        </label>
+      </fieldset>
+      <div class="info_icon" onClick="onInfoEntity()"> 
+        <span class="fa fa-icon fa-info-circle"></span>
+      </div>
+    </div>
+    <div class="homey-form-group">
+      <label id="labelEntityAttributeAdd" for="entityAttributeAdd" class="homey-form-label"><span data-i18n="repair.custom_device.entity_attribute"></span></label>
+      <input id="entityAttributeAdd"  class="homey-form-input" type="text" value=""/>
+    </div>
+    <div class="homey-form-group">
+      <label for="nameAdd" class="homey-form-label" style="display: inline;"><span data-i18n="repair.custom_device.name"></span></label>
+      <input id="nameAdd"  class="homey-form-input" type="text" value=""/>
+    </div>
+    <div class="homey-form-group">
+      <label for="unitAdd" class="homey-form-label"><span data-i18n="repair.custom_device.unit"></span></label>
+      <input id="unitAdd"  class="homey-form-input" type="text" value=""/>
+    </div>
+    <div class="homey-form-group">
+      <label for="capabilityAdd" class="homey-form-label" style="display: inline;"><span data-i18n="repair.custom_device.capability"></span></label>
+      <div class="info_icon" onClick="onInfoCapability()"> 
+        <span class="fa fa-icon fa-info-circle"></span>
+      </div>
+      <input id="capabilityAdd"  class="homey-form-input" type="text" value=""/>
+    <!-- </div>
+    <div class="homey-form-group"> -->
+      <fieldset class="homey-form-checkbox-set">
+        <!-- <legend class="homey-form-checkbox-set-title"><span data-i18n="repair.custom_device.add_as_main_capability"></span></legend> -->
+    
+        <label class="homey-form-checkbox">
+          <input class="homey-form-checkbox-input" type="checkbox" id="addAsMainCapabilityAdd"/>
+          <span class="homey-form-checkbox-checkmark"></span>
+          <span class="homey-form-checkbox-text"><span data-i18n="repair.custom_device.add_as_main_capability"></span></span>
+        </label>
+      </fieldset>
+      <div class="info_icon" onClick="onInfoMainCapability()"> 
+        <span class="fa fa-icon fa-info-circle"></span>
+      </div>
+    </div>
+
+    <!-- Number Input options -->
+    <div class="homey-form-group" id="divNumberInput" style="display:none">
+      <fieldset class="homey-form-checkbox-set">
+        <label class="homey-form-checkbox">
+          <input class="homey-form-checkbox-input" type="checkbox" id="addEntityNumberInput" onclick="onAddEntityNumberInputClick()"/>
+          <span class="homey-form-checkbox-checkmark"></span>
+          <span class="homey-form-checkbox-text"><span data-i18n="repair.custom_device.entity_number_input"></span></span>
+        </label>
+      </fieldset>
+      <div class="info_icon" onClick="onInfoNumberInput()"> 
+        <span class="fa fa-icon fa-info-circle"></span>
+      </div>
+    </div>
+    <div class="homey-form-group" id="divNumberInputRange" style="display:none">
+      <table>
+        <tr>
+          <td>
+            <label for="entityNumberRangeMinAdd" class="homey-form-label"><span data-i18n="repair.custom_device.number_range_min"></span></label>
+            <input id="entityNumberRangeMinAdd"  class="homey-form-input" type="text" value=""/>
+          </td>
+          <td>
+            <label for="entityNumberRangeMaxAdd" class="homey-form-label"><span data-i18n="repair.custom_device.number_range_max"></span></label>
+            <input id="entityNumberRangeMaxAdd"  class="homey-form-input" type="text" value=""/>
+          </td>
+          <td>
+            <label for="entityNumberRangeStepnAdd" class="homey-form-label"><span data-i18n="repair.custom_device.number_range_step"></span></label>
+            <input id="entityNumberRangeStepAdd"  class="homey-form-input" type="text" value=""/>
+          </td>
+        </tr>
+      </table>
+    </div>
+
+    <!-- Converter Area -->
+    <div class="homey-form-group" id="divInputConverter">
+      <label for="converter_ha2homeyAdd" class="homey-form-label" style="display: inline;"><span data-i18n="repair.custom_device.converter_ha2homey"></span></label>
+      <div class="info_icon" onClick="onInfoConverter()"> 
+        <span class="fa fa-icon fa-info-circle"></span>
+      </div>
+      <textarea class="homey-form-textarea"id="converter_ha2homeyAdd" rows="5"
+                placeholder="(value) => { return parseFloat(value) * 0.01; }"
+                style="white-space:pre-wrap"></textarea>
+      <input id="entityAddConverterExamlpe"  class="homey-form-input" type="text" value=""
+                style="margin-top:5px"/>
+    </div>
+    <div class="homey-form-group" id="divOutputConverter" style="display:none">
+      <label for="converter_homey2haAdd" class="homey-form-label"><span data-i18n="repair.custom_device.converter_homey2ha"></span></label>
+      <textarea class="homey-form-textarea" id="converter_homey2haAdd" rows="5"
+                placeholder="(value) => { return value * 100; }"
+                style="white-space:pre-wrap"></textarea>
+    </div>
+    <div class="homey-form-group" id="div_button">
+      <button id="btnAddEntityProcess" class="homey-button-primary-shadow-full" onClick="onAddEntity()"><span data-i18n="repair.title.add_entity"></span></button>
+    </div>
+  </fieldset>
+</div>
+
+<script src="../../../assets/js/autoComplete.min.js"></script>
+
+
+<script>
+  (function () {
+      let autoCompleteJS = new autoComplete({
+          selector: "#entityAdd",
+          placeHolder: Homey.__("repair.custom_device.entity_placeholder"),
+          debounce: 300,
+          threshold: 1,
+          data: {
+              src : (query) => {
+                  return Homey.emit("getCustomEntityList", query).then(function (result) {
+                      return result;
+                  });
+              },
+              keys: ["name", "entity_id"],
+              cache: false,
+              filter: (list) => {
+                // Filter duplicates
+                // incase of multiple data keys usage
+                const filteredResults = Array.from(
+                  new Set(list.map((value) => value.value.entity_id))
+                ).map((entity_id) => {
+                  return list.find((value) => value.value.entity_id === entity_id);
+                });
+                return filteredResults;
+              }
+          },
+          resultsList:{
+            element: (list, data) => {
+              const info = document.createElement("p");
+              if (data.results.length > 0) {
+                info.innerHTML = 
+                  Homey.__("repair.custom_device.result_count_01")+
+                  " <strong>"+
+                  data.results.length+
+                  "</strong> "+
+                  Homey.__("repair.custom_device.result_count_02")+
+                  " <strong>"+data.matches.length+"</strong> "+
+                  Homey.__("repair.custom_device.result_count_03");
+              } else {
+                info.innerHTML = 
+                  "<strong>"+
+                  Homey.__("repair.custom_device.result_count_04")+
+                  "</strong>";
+              }
+              list.prepend(info);
+            },
+            maxResults: 100,
+            noResults: true
+          },
+          resultItem: {
+            element: (item, data) => {
+              if (data.key == 'name'){
+                item.innerHTML =  "<span id='spanResultlistName'>"+data.match+"</span>"+
+                                  "<br>"+
+                                  "<span id='spanResultlistEntity'>"+data.value.entity_id+"</span>";
+              }
+              else{
+                item.innerHTML =  "<span id='spanResultlistName'>"+data.value.name+"</span>"+
+                                  "<br>"+
+                                  "<span id='spanResultlistEntity'>"+data.match+"</span>";
+              }
+            },
+            highlight: true
+          },
+          events: {
+              input: {
+                  selection: async (event) => {
+                      let value = event.detail.selection.value.entity_id;
+                      autoCompleteJS.input.value = value;
+                      document.getElementById('nameAdd').value = event.detail.selection.value.name;
+                      document.getElementById('unitAdd').value = event.detail.selection.value.unit;
+                      document.getElementById('capabilityAdd').value = await Homey.emit("getCustomTemplateCapability", event.detail.selection.value.entity_id)
+                      if (event.detail.selection.value.number_range != undefined){
+                        document.getElementById('addEntityNumberInput').checked = false;
+                        if (event.detail.selection.value.number_range.min != undefined){
+                          document.getElementById('entityNumberRangeMinAdd').value = event.detail.selection.value.number_range.min;
+                        }
+                        else{
+                          document.getElementById('entityNumberRangeMinAdd').value = '';
+                        }
+                        if (event.detail.selection.value.number_range.max != undefined){
+                          document.getElementById('entityNumberRangeMaxAdd').value = event.detail.selection.value.number_range.max;
+                        }
+                        else{
+                          document.getElementById('entityNumberRangeMaxAdd').value = '';
+                        }
+                        if (event.detail.selection.value.number_range.step != undefined){
+                          document.getElementById('entityNumberRangeStepAdd').value = event.detail.selection.value.number_range.step;
+                        }
+                        else{
+                          document.getElementById('entityNumberRangeStepAdd').value = '';
+                        }
+                        document.getElementById("divNumberInput").style.display = 'unset';
+                        document.getElementById("divNumberInputRange").style.display = 'unset';
+                        
+                      }
+                      else{
+                        document.getElementById('addEntityNumberInput').checked = false;
+                        document.getElementById('entityNumberRangeMinAdd').value = '';
+                        document.getElementById('entityNumberRangeMaxAdd').value = '';
+                        document.getElementById('entityNumberRangeStepAdd').value = '';
+                        document.getElementById("divNumberInput").style.display = 'none';
+                        document.getElementById("divNumberInputRange").style.display = 'none';
+                      }
+                  },
+                  focus: () => {
+                    // if (autoCompleteJS.input.value.length) autoCompleteJS.start();
+                    autoCompleteJS.start();
+                  }
+              }
+          },
+          trigger: (query) => {
+              return true; // Search also for empty field
+          },
+      });
+
+      let autoCompleteJSCapability = new autoComplete({
+          selector: "#capabilityAdd",
+          placeHolder: Homey.__("repair.custom_device.capability_placeholder"),
+          debounce: 300,
+          threshold: 1,
+          data: {
+              src : (query) => {
+                  return Homey.emit("getCustomTemplateCapabilityList", query).then(function (result) {
+                      return result;
+                  });
+              },
+              keys: ["id"],
+              cache: true
+          },
+          resultsList:{
+            maxResults: 100,
+            noResults: true
+          },
+          resultItem: {
+            element: (item, data) => {
+                item.innerHTML =  "<span id='spanResultlistName'>"+data.match+"</span>";
+            },
+            highlight: true
+          },
+          events: {
+              input: {
+                  selection: (event) => {
+                      let value = event.detail.selection.value.id;
+                      autoCompleteJSCapability.input.value = value;
+                  },
+                  focus: () => {
+                    // if (autoCompleteJS.input.value.length) autoCompleteJS.start();
+                    autoCompleteJSCapability.start();
+                  }
+              }
+          },
+          trigger: (query) => {
+              return true; // Search also for empty field
+          },
+      });
+
+      let autoCompleteJSAttribute = new autoComplete({
+          selector: "#entityAttributeAdd",
+          placeHolder: Homey.__("repair.custom_device.entity_attribute_placeholder"),
+          debounce: 300,
+          threshold: 1,
+          data: {
+              src : (query) => {
+                  return Homey.emit("getCustomEntityAttributeList", document.getElementById('entityAdd').value ).then(function (result) {
+                    return result;
+                  });
+              },
+              keys: ["id"],
+              cache: true
+          },
+          resultsList:{
+            maxResults: 100,
+            noResults: true
+          },
+          resultItem: {
+            element: (item, data) => {
+                item.innerHTML =  "<span id='spanResultlistName'>"+data.match+"</span>";
+            },
+            highlight: true
+          },
+          events: {
+              input: {
+                  selection: async (event) => {
+                      let value = event.detail.selection.value.id;
+                      autoCompleteJSAttribute.input.value = value;
+                      document.getElementById('capabilityAdd').value = await Homey.emit("getCustomTemplateCapability", document.getElementById('entityAdd').value +'.'+ event.detail.selection.value.id)
+                  },
+                  focus: () => {
+                    // if (autoCompleteJS.input.value.length) autoCompleteJS.start();
+                    autoCompleteJSAttribute.start();
+                  }
+              }
+          },
+          trigger: (query) => {
+              return true; // Search also for empty field
+          },
+      });
+
+      let autoCompleteJSConverterExample = new autoComplete({
+          selector: "#entityAddConverterExamlpe",
+          placeHolder: Homey.__("repair.custom_device.converter_example_placeholder"),
+          threshold: 0,
+          data: {
+              src: [
+                {
+                  "text": Homey.__("repair.custom_device.converter_text_01"),
+                  "code": Homey.__("repair.custom_device.converter_code_01")
+                },
+                {
+                  "text": Homey.__("repair.custom_device.converter_text_02"),
+                  "code": Homey.__("repair.custom_device.converter_code_02")
+                },
+                {
+                  "text": Homey.__("repair.custom_device.converter_text_03"),
+                  "code": Homey.__("repair.custom_device.converter_code_03")
+                },
+                {
+                  "text": Homey.__("repair.custom_device.converter_text_04"),
+                  "code": Homey.__("repair.custom_device.converter_code_04")
+                },
+                {
+                  "text": Homey.__("repair.custom_device.converter_text_05"),
+                  "code": Homey.__("repair.custom_device.converter_code_05")
+                }
+              ],
+              keys: ["text"],
+              cache: true
+          },
+          resultsList:{
+            maxResults: undefined
+          },
+          resultItem: {
+            element: (item, data) => {
+
+              if (data.key == 'text'){
+                item.innerHTML =  "<span id='spanResultlistName'>"+data.match+"</span>"+
+                                  "<br>"+
+                                  "<span id='spanResultlistEntity'>"+data.value.code+"</span>";
+              }
+              if (data.key == 'code'){
+                item.innerHTML =  "<span id='spanResultlistName'>"+data.value.text+"</span>"+
+                                  "<br>"+
+                                  "<span id='spanResultlistEntity'>"+data.match+"</span>";
+              }
+            },
+            highlight: true
+          },
+          events: {
+              input: {
+                  selection: async (event) => {
+                      let value = event.detail.selection.value.code;
+                      // autoCompleteJSAttribute.input.value = value;
+                      document.getElementById('converter_ha2homeyAdd').value = value;
+                  },
+                  focus: () => {
+                    autoCompleteJSConverterExample.start();
+                  }
+              }
+          },
+          trigger: (query) => {
+              return true; // Search also for empty field
+          },
+      });
+})();
+</script>

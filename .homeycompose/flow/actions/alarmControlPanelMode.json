@@ -1,0 +1,84 @@
+{
+    "highlight": true,
+    "title": {
+        "en": "Select alarm mode",
+        "de": "Wähle Alarm-Modus",
+        "nl": "Stel alarmmodus in"
+    },
+    "titleFormatted": {
+        "en": "Change to alarm mode [[mode]].",
+        "de": "Wechsel zum Alarm-Modus [[mode]].",
+        "nl": "Stel alarmmodus [[mode]] in."
+    },
+    "args": [
+        {
+            "type": "dropdown",
+            "name": "mode",
+            "title": { 
+                "en": "Alarm mode",
+                "de": "Alarm-Modus",
+                "nl": "Alarmmodus"
+            },
+            "placeholder": { 
+                "en": "Select the alarm mode",
+                "de": "Wähle den Alarm-Modus",
+                "nl": "Selecteer de alarmmodus"
+            },
+            "values": [
+                {
+                  "id": "disarmed",
+                  "title": {
+                    "en": "Disarmed",
+                    "de": "Entsichert",
+                    "nl": "Ontgrendeld"
+                  }
+                },
+                {
+                  "id": "armed_home",
+                  "title": {
+                    "en": "Armed at home",
+                    "de": "Gesichert zu Hause",
+                    "nl": "Thuis beveiligd"
+                  }
+                },
+                {
+                  "id": "armed_away",
+                  "title": {
+                    "en": "Armed away",
+                    "de": "Gesichert unterwegs",
+                    "nl": "Veilig onderweg"
+                  }
+                },
+                {
+                  "id": "armed_night",
+                  "title": {
+                    "en": "Armed at night",
+                    "de": "Gesichert nachts",
+                    "nl": "Veilig nacht"
+                  }
+                },
+                {
+                  "id": "armed_vacation",
+                  "title": {
+                    "en": "Armed at vacation",
+                    "de": "Gesichert im Urlaub",
+                    "nl": "Veilig op vakantie"
+                  }
+                },
+                {
+                  "id": "armed_custom_bypass",
+                  "title": {
+                    "en": "Armed custom bypass",
+                    "de": "Gesichert benutzerdefiniert",
+                    "nl": "Veilig aangepast"
+                  }
+                }
+            ]
+        },
+        {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=alarm_control_panel"
+        }
+    ]
+}

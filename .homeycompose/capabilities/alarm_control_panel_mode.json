@@ -1,0 +1,69 @@
+{
+    "type": "enum",
+    "title": {
+      "en": "Mode",
+      "de": "Modus",
+      "nl": "Modus"
+    },
+    "desc": {
+      "en": "Alarm mode",
+      "de": "Alarm-Modus",
+      "nl": "Alarm modus"
+    },
+    "getable": true,
+    "setable": true,
+    "insights": true,
+    "icon": "/assets/capability_icons/alarm_control_panel_mode.svg",
+    "uiComponent": "picker",
+    "values": [
+      {
+        "id": "disarmed",
+        "title": {
+          "en": "Disarmed",
+          "de": "Entsichert",
+          "nl": "Ontgrendeld"
+        }
+      },
+      {
+        "id": "armed_home",
+        "title": {
+          "en": "Armed at home",
+          "de": "Gesichert zu Hause",
+          "nl": "Thuis beveiligd"
+        }
+      },
+      {
+        "id": "armed_away",
+        "title": {
+          "en": "Armed away",
+          "de": "Gesichert unterwegs",
+          "nl": "Veilig onderweg"
+        }
+      },
+      {
+        "id": "armed_night",
+        "title": {
+          "en": "Armed at night",
+          "de": "Gesichert nachts",
+          "nl": "Veilig nacht"
+        }
+      },
+      {
+        "id": "armed_vacation",
+        "title": {
+          "en": "Armed at vacation",
+          "de": "Gesichert im Urlaub",
+          "nl": "Veilig op vakantie"
+        }
+      },
+      {
+        "id": "armed_custom_bypass",
+        "title": {
+          "en": "Armed custom bypass",
+          "de": "Gesichert benutzerdefiniert",
+          "nl": "Veilig aangepast"
+        }
+      }
+    ]
+  }
+  

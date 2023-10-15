@@ -866,6 +866,20 @@ class App extends Homey.App {
 			}
 		});
 
+		// Alarm control panel
+		this._flowActionAlarmControlPanelMode = this.homey.flow.getActionCard('alarmControlPanelMode');
+		this._flowActionAlarmControlPanelMode.registerRunListener(async (args, state) => {
+			try{
+				await args.device.flowActionAlarmControlPanelMode(args);
+				return true;
+			}
+			catch(error){
+				this.error("Error executing flowAction 'alarmControlPanelMode': "+  error.message);
+				throw new Error(error.message);
+			}
+		});
+
+
 	}
 
 	// FLOW TRIGGER ======================================================================================

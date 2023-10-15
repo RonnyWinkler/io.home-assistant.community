@@ -1,0 +1,23 @@
+{
+    "title": {
+        "en": "Alarm mode changed",
+        "de": "Alarm-Modus hat sich geändert",
+        "nl": "Alarmmodus gewijzigd"
+    },
+    "tokens": [{
+            "name": "alarm_control_panel_mode",
+            "type": "string",
+            "title": {
+                "en": "Mode",
+                "de": "Modus",
+                "nl": "Modus"
+            },
+            "example": "disarmed"
+        }
+    ],
+    "args": [{
+        "name": "device",
+        "type": "device",
+        "filter": "driver_id=alarm_control_panel"
+    }]
+}
