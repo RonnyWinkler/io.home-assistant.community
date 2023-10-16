@@ -1,0 +1,25 @@
+{
+    "type": "boolean",
+    "title": {
+        "en": "Turned on",
+        "de": "Eingeschaltet",
+        "nl": "Aangezet"
+    },
+    "insightsTitleTrue": {
+        "en": "Turned on",
+        "de": "Eingeschaltet",
+        "nl": "Aangezet"
+    },
+    "insightsTitleFalse": {
+        "en": "Turned off",
+        "de": "Ausgeschaltet",
+        "nl": "Uitgezet"
+    },
+    
+    "uiQuickAction": true,
+    "uiComponent": null,
+    "insights": true,
+    "getable": true,
+    "setable": false,
+    "icon": "/assets/capability_icons/onoff_state.svg"
+  }

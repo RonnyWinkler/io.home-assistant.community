@@ -1,7 +1,7 @@
 {
   "_comment": "This file is generated. Please edit .homeycompose/app.json instead.",
   "id": "io.home-assistant.community",
-  "version": "1.5.0",
+  "version": "1.5.1",
   "compatibility": ">=8.1.0",
   "sdk": 3,
   "brandColor": "#0DA6EA",
@@ -9702,6 +9702,30 @@
       "getable": true,
       "setable": true,
       "icon": "/assets/capability_icons/onoff_button.svg"
+    },
+    "onoff_state": {
+      "type": "boolean",
+      "title": {
+        "en": "Turned on",
+        "de": "Eingeschaltet",
+        "nl": "Aangezet"
+      },
+      "insightsTitleTrue": {
+        "en": "Turned on",
+        "de": "Eingeschaltet",
+        "nl": "Aangezet"
+      },
+      "insightsTitleFalse": {
+        "en": "Turned off",
+        "de": "Ausgeschaltet",
+        "nl": "Uitgezet"
+      },
+      "uiQuickAction": true,
+      "uiComponent": null,
+      "insights": true,
+      "getable": true,
+      "setable": false,
+      "icon": "/assets/capability_icons/onoff_state.svg"
     },
     "presence_state": {
       "type": "string",

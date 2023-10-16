@@ -3,6 +3,7 @@
 const customTemplateCapabilities = [
     {id:"onoff"},
     {id:"onoff_button"},
+    {id:"onoff_state"},
     {id:"button"},
     {id:'alarm_generic'},
     {id:'alarm_battery'},

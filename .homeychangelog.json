@@ -486,5 +486,9 @@
   "1.5.0": {
     "en": "Added alarm control panel device.",
     "de": "Alarmzentrale ergänzt."
+  },
+  "1.5.1": {
+    "en": "Added onoff_state capability to show tile state without quick action.",
+    "de": "onoff_state Capability ergänzt, um den Gerätestatus anzuzeigen ohne Quick-Action."
   }
 }
