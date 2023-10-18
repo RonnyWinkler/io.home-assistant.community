@@ -1,0 +1,20 @@
+{
+    "highlight": true,
+    "title": {
+        "en": "Alarm has been activated",
+        "de": "Alarm wurde aktiviert",
+        "nl": "Alarm is geactiveerd"
+    },
+    "hint": {
+        "en": "The device alarm is activated the first time an alarm is triggered.",
+        "de": "Der Geräte-Alarm wird beim ersten auslösen eines Alarms aktiviert.",
+        "nl": "Het apparaatalarm wordt geactiveerd wanneer er voor de eerste keer een alarm wordt geactiveerd."
+    },
+    "args": [
+        {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=alarm_control_panel"
+        }
+      ]
+}

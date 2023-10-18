@@ -1,0 +1,23 @@
+{
+    "title": {
+        "en": "Alarm state changed",
+        "de": "Alarm-Status hat sich geändert",
+        "nl": "Alarm toestand gewijzigd"
+    },
+    "tokens": [{
+            "name": "alarm_control_panel_state",
+            "type": "string",
+            "title": {
+                "en": "State",
+                "de": "Status",
+                "nl": "Toestand"
+            },
+            "example": "disarmed"
+        }
+    ],
+    "args": [{
+        "name": "device",
+        "type": "device",
+        "filter": "driver_id=alarm_control_panel"
+    }]
+}

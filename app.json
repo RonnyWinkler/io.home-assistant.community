@@ -1,7 +1,7 @@
 {
   "_comment": "This file is generated. Please edit .homeycompose/app.json instead.",
   "id": "io.home-assistant.community",
-  "version": "1.5.1",
+  "version": "1.5.2",
   "compatibility": ">=8.1.0",
   "sdk": 3,
   "brandColor": "#0DA6EA",
@@ -58,6 +58,64 @@
   "flow": {
     "triggers": [
       {
+        "highlight": true,
+        "title": {
+          "en": "Alarm has been deactivated",
+          "de": "Alarm wurde deaktiviert",
+          "nl": "Alarm is gedeactiveerd"
+        },
+        "args": [
+          {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=alarm_control_panel"
+          }
+        ],
+        "id": "alarm_control_panel_alarm_false"
+      },
+      {
+        "highlight": true,
+        "title": {
+          "en": "Alarm has been triggered",
+          "de": "Alarm wurde ausgelöst",
+          "nl": "Alarm werd veroorzaakt"
+        },
+        "hint": {
+          "en": "This event is triggered every time an alarm is triggered.",
+          "de": "Dieses Ereignis wird bei jedem Auslösen eines Alarm ausgelöst.",
+          "nl": "Deze gebeurtenis wordt geactiveerd telkens wanneer een alarm wordt geactiveerd."
+        },
+        "args": [
+          {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=alarm_control_panel"
+          }
+        ],
+        "id": "alarm_control_panel_alarm_triggered"
+      },
+      {
+        "highlight": true,
+        "title": {
+          "en": "Alarm has been activated",
+          "de": "Alarm wurde aktiviert",
+          "nl": "Alarm is geactiveerd"
+        },
+        "hint": {
+          "en": "The device alarm is activated the first time an alarm is triggered.",
+          "de": "Der Geräte-Alarm wird beim ersten auslösen eines Alarms aktiviert.",
+          "nl": "Het apparaatalarm wordt geactiveerd wanneer er voor de eerste keer een alarm wordt geactiveerd."
+        },
+        "args": [
+          {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=alarm_control_panel"
+          }
+        ],
+        "id": "alarm_control_panel_alarm_true"
+      },
+      {
         "title": {
           "en": "Alarm mode changed",
           "de": "Alarm-Modus hat sich geändert",
@@ -83,6 +141,33 @@
           }
         ],
         "id": "alarm_control_panel_mode_changed"
+      },
+      {
+        "title": {
+          "en": "Alarm state changed",
+          "de": "Alarm-Status hat sich geändert",
+          "nl": "Alarm toestand gewijzigd"
+        },
+        "tokens": [
+          {
+            "name": "alarm_control_panel_state",
+            "type": "string",
+            "title": {
+              "en": "State",
+              "de": "Status",
+              "nl": "Toestand"
+            },
+            "example": "disarmed"
+          }
+        ],
+        "args": [
+          {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=alarm_control_panel"
+          }
+        ],
+        "id": "alarm_control_panel_state_changed"
       },
       {
         "highlight": true,
@@ -1072,6 +1157,100 @@
       }
     ],
     "conditions": [
+      {
+        "title": {
+          "en": "Alarm !{{is|isn't}} on",
+          "de": "Alarm !{{ist|ist nicht}} an",
+          "nl": "Alarm  !{{is|is niet}} aan"
+        },
+        "args": [
+          {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=alarm_control_panel"
+          }
+        ],
+        "id": "alarm_control_panel_alarm"
+      },
+      {
+        "title": {
+          "en": "Alarm state !{{is|isn't}}",
+          "de": "Alarm-Status !{{ist|ist nicht}}",
+          "nl": "Alarm toestand !{{is|is niet}}"
+        },
+        "titleFormatted": {
+          "en": "Alarm state !{{is|isn't}} [[state]]",
+          "de": "Alarm-Status !{{ist|ist nicht}} [[state]]",
+          "nl": "Alarm toestand !{{is|is niet}} [[state]]"
+        },
+        "args": [
+          {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=alarm_control_panel"
+          },
+          {
+            "name": "state",
+            "type": "dropdown",
+            "title": {
+              "en": "Alarm state",
+              "de": "Alarm-Status",
+              "nl": "Alarm toestand"
+            },
+            "values": [
+              {
+                "id": "disarmed",
+                "title": {
+                  "en": "Disarmed",
+                  "de": "Entsichert",
+                  "nl": "Ontgrendeld"
+                }
+              },
+              {
+                "id": "armed",
+                "title": {
+                  "en": "Armed",
+                  "de": "Gesichert",
+                  "nl": "Beveiligd"
+                }
+              },
+              {
+                "id": "pending",
+                "title": {
+                  "en": "Pending",
+                  "de": "In Verarbeitung",
+                  "nl": "In behandeling"
+                }
+              },
+              {
+                "id": "arming",
+                "title": {
+                  "en": "Arming",
+                  "de": "Aktivieren",
+                  "nl": "Activeren"
+                }
+              },
+              {
+                "id": "disarming",
+                "title": {
+                  "en": "Disarming",
+                  "de": "Deaktivieren",
+                  "nl": "Deactiveren"
+                }
+              },
+              {
+                "id": "triggered",
+                "title": {
+                  "en": "Triggered",
+                  "de": "Ausgelöst",
+                  "nl": "Veroorzaakt"
+                }
+              }
+            ]
+          }
+        ],
+        "id": "alarm_control_panel_state"
+      },
       {
         "title": {
           "en": "Presence alarm !{{is|isn't}} on",
@@ -3627,6 +3806,7 @@
       "class": "homealarm",
       "capabilities": [
         "alarm_control_panel_mode",
+        "alarm_control_panel_state",
         "button.reconnect"
       ],
       "images": {
@@ -9102,6 +9282,55 @@
     }
   ],
   "capabilities": {
+    "alarm_control_panel_alarm": {
+      "type": "boolean",
+      "title": {
+        "en": "Alarm",
+        "de": "Alarm",
+        "nl": "Alarm"
+      },
+      "insights": true,
+      "insightsTitleTrue": {
+        "en": "Alarm turned on",
+        "de": "Alarm ist angegangen",
+        "nl": "Alarm ging af"
+      },
+      "insightsTitleFalse": {
+        "en": "Alarm turned off",
+        "de": "Alarm ist ausgegangen",
+        "nl": "Alarm ging uit"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "/assets/capability_icons/alarm_control_panel_alarm.svg"
+    },
+    "alarm_control_panel_alarm_reset": {
+      "type": "boolean",
+      "title": {
+        "en": "Reset alarm",
+        "de": "Alarm zurücksetzen",
+        "nl": "Alarm opnieuw instellen"
+      },
+      "uiComponent": "button",
+      "insights": false,
+      "getable": false,
+      "setable": true,
+      "icon": "/assets/capability_icons/alarm_control_panel_alarm_reset.svg"
+    },
+    "alarm_control_panel_alarm_trigger": {
+      "type": "boolean",
+      "title": {
+        "en": "Trigger alarm",
+        "de": "Alarm auslösen",
+        "nl": "Alarm activeren"
+      },
+      "uiComponent": "button",
+      "insights": false,
+      "getable": false,
+      "setable": true,
+      "icon": "/assets/capability_icons/alarm_control_panel_alarm_trigger.svg"
+    },
     "alarm_control_panel_mode": {
       "type": "enum",
       "title": {
@@ -9166,6 +9395,74 @@
             "en": "Armed custom bypass",
             "de": "Gesichert benutzerdefiniert",
             "nl": "Veilig aangepast"
+          }
+        }
+      ]
+    },
+    "alarm_control_panel_state": {
+      "type": "enum",
+      "title": {
+        "en": "State",
+        "de": "Status",
+        "nl": "Toestand"
+      },
+      "desc": {
+        "en": "Alarm state",
+        "de": "Alarm-Status",
+        "nl": "Alarm toestand"
+      },
+      "getable": true,
+      "setable": false,
+      "insights": true,
+      "icon": "/assets/capability_icons/alarm_control_panel_state.svg",
+      "uiComponent": "sensor",
+      "values": [
+        {
+          "id": "disarmed",
+          "title": {
+            "en": "Disarmed",
+            "de": "Entsichert",
+            "nl": "Ontgrendeld"
+          }
+        },
+        {
+          "id": "armed",
+          "title": {
+            "en": "Armed",
+            "de": "Gesichert",
+            "nl": "Beveiligd"
+          }
+        },
+        {
+          "id": "pending",
+          "title": {
+            "en": "Pending",
+            "de": "In Verarbeitung",
+            "nl": "In behandeling"
+          }
+        },
+        {
+          "id": "arming",
+          "title": {
+            "en": "Arming",
+            "de": "Aktivieren",
+            "nl": "Activeren"
+          }
+        },
+        {
+          "id": "disarming",
+          "title": {
+            "en": "Disarming",
+            "de": "Deaktivieren",
+            "nl": "Deactiveren"
+          }
+        },
+        {
+          "id": "triggered",
+          "title": {
+            "en": "Triggered",
+            "de": "Ausgelöst",
+            "nl": "Veroorzaakt"
           }
         }
       ]

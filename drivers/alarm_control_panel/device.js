@@ -11,6 +11,12 @@ class AlarmControlPanelDevice extends BaseDevice {
         this.registerCapabilityListener('alarm_control_panel_mode', async (value, opts) => {
             await this._onCapabilityAlarmControlPanelMode(value, opts);
         });
+        this.registerCapabilityListener('alarm_control_panel_alarm_reset', async (value, opts) => {
+            await this._onCapabilityAlarmControlPanelAlarmReset(value, opts);
+        });
+        this.registerCapabilityListener('alarm_control_panel_alarm_trigger', async (value, opts) => {
+            await this._onCapabilityAlarmControlPanelAlarmTrigger(value, opts);
+        });
         
         // maintenance actions
         this.registerCapabilityListener('button.reconnect', async () => {
@@ -23,7 +29,23 @@ class AlarmControlPanelDevice extends BaseDevice {
         try{
             if (!this.hasCapability('button.reconnect'))
             {
-            await this.addCapability('button.reconnect');
+                await this.addCapability('button.reconnect');
+            }
+            if (!this.hasCapability('alarm_control_panel_state'))
+            {
+                await this.addCapability('alarm_control_panel_state');
+            }
+            if (!this.hasCapability('alarm_control_panel_alarm'))
+            {
+                await this.addCapability('alarm_control_panel_alarm');
+            }
+            if (!this.hasCapability('alarm_control_panel_alarm_reset'))
+            {
+                await this.addCapability('alarm_control_panel_alarm_reset');
+            }
+            if (!this.hasCapability('alarm_control_panel_alarm_trigger'))
+            {
+                await this.addCapability('alarm_control_panel_alarm_trigger');
             }
         }
         catch(error){
@@ -41,6 +63,22 @@ class AlarmControlPanelDevice extends BaseDevice {
             }
             catch(error){
                 this.log("Error setting alarm_control_panel_mode" + error.message);
+            }
+            try{
+                let state = data.state;
+                if (state.startsWith('armed')){
+                    state = 'armed';
+                }
+                if (state != 'triggered'){
+                    await this.setCapabilityValue("alarm_control_panel_state", state);
+                }
+                else{
+                    this.homey.app._flowTriggerAlarmControlPanelTriggered.trigger(this, {}, {});
+                    await this.setCapabilityValue("alarm_control_panel_alarm", true);
+                }
+            }
+            catch(error){
+                this.log("Error setting alarm_control_panel_state" + error.message);
             }
         }
     }
@@ -73,7 +111,19 @@ class AlarmControlPanelDevice extends BaseDevice {
             "entity_id": this.entityId,
             "code": code
         });
-}
+    }
+
+    async _onCapabilityAlarmControlPanelAlarmReset( value, opts){
+        await this.setCapabilityValue("alarm_control_panel_alarm", false);
+    }
+
+    async _onCapabilityAlarmControlPanelAlarmTrigger( value, opts){
+        let code = this.getSetting('code');
+        await this._client.callService("alarm_control_panel", 'alarm_trigger', {
+            "entity_id": this.entityId,
+            "code": code
+        });
+    }
 
     // Flow Actions
     async flowActionAlarmControlPanelMode(args){

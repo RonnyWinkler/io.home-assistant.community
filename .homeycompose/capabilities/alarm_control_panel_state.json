@@ -1,0 +1,69 @@
+{
+    "type": "enum",
+    "title": {
+      "en": "State",
+      "de": "Status",
+      "nl": "Toestand"
+    },
+    "desc": {
+      "en": "Alarm state",
+      "de": "Alarm-Status",
+      "nl": "Alarm toestand"
+    },
+    "getable": true,
+    "setable": false,
+    "insights": true,
+    "icon": "/assets/capability_icons/alarm_control_panel_state.svg",
+    "uiComponent": "sensor",
+    "values": [
+      {
+        "id": "disarmed",
+        "title": {
+          "en": "Disarmed",
+          "de": "Entsichert",
+          "nl": "Ontgrendeld"
+        }
+      },
+      {
+        "id": "armed",
+        "title": {
+          "en": "Armed",
+          "de": "Gesichert",
+          "nl": "Beveiligd"
+        }
+      },
+      {
+        "id": "pending",
+        "title": {
+          "en": "Pending",
+          "de": "In Verarbeitung",
+          "nl": "In behandeling"
+        }
+      },
+      {
+        "id": "arming",
+        "title": {
+          "en": "Arming",
+          "de": "Aktivieren",
+          "nl": "Activeren"
+        }
+      },
+      {
+        "id": "disarming",
+        "title": {
+          "en": "Disarming",
+          "de": "Deaktivieren",
+          "nl": "Deactiveren"
+        }
+      },
+      {
+        "id": "triggered",
+        "title": {
+          "en": "Triggered",
+          "de": "Ausgelöst",
+          "nl": "Veroorzaakt"
+        }
+      }
+    ]
+  }
+  

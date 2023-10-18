@@ -1,0 +1,20 @@
+{
+    "highlight": true,
+    "title": {
+        "en": "Alarm has been triggered",
+        "de": "Alarm wurde ausgelöst",
+        "nl": "Alarm werd veroorzaakt"
+    },
+    "hint": {
+        "en": "This event is triggered every time an alarm is triggered.",
+        "de": "Dieses Ereignis wird bei jedem Auslösen eines Alarm ausgelöst.",
+        "nl": "Deze gebeurtenis wordt geactiveerd telkens wanneer een alarm wordt geactiveerd."
+    },
+    "args": [
+        {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=alarm_control_panel"
+        }
+      ]
+}

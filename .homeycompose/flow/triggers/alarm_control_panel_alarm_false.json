@@ -1,0 +1,15 @@
+{
+    "highlight": true,
+    "title": {
+        "en": "Alarm has been deactivated",
+        "de": "Alarm wurde deaktiviert",
+        "nl": "Alarm is gedeactiveerd"
+    },
+    "args": [
+        {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=alarm_control_panel"
+        }
+      ]
+}

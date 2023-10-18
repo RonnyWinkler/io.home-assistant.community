@@ -8,6 +8,7 @@
     "class": "homealarm",
     "capabilities": [
       "alarm_control_panel_mode",
+      "alarm_control_panel_state",
     
       "button.reconnect"
     ],

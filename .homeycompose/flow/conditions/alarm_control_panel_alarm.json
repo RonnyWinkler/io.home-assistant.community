@@ -1,0 +1,13 @@
+{
+    "title": {
+        "en": "Alarm !{{is|isn't}} on",
+        "de": "Alarm !{{ist|ist nicht}} an",
+        "nl": "Alarm  !{{is|is niet}} aan"
+    },
+    "args": [{
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=alarm_control_panel"
+        }
+    ]
+}

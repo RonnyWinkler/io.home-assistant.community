@@ -1,0 +1,23 @@
+{
+  "type": "boolean",
+  "title": {
+    "en": "Alarm",
+    "de": "Alarm",
+    "nl": "Alarm"
+  },
+  "insights": true,
+  "insightsTitleTrue": {
+    "en": "Alarm turned on",
+    "de": "Alarm ist angegangen",
+    "nl": "Alarm ging af"
+  },
+  "insightsTitleFalse": {
+    "en": "Alarm turned off",
+    "de": "Alarm ist ausgegangen",
+    "nl": "Alarm ging uit"
+  },
+  "getable": true,
+  "setable": false,
+  "uiComponent": "sensor",
+  "icon": "/assets/capability_icons/alarm_control_panel_alarm.svg"
+}

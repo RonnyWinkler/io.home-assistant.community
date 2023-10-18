@@ -964,6 +964,8 @@ class App extends Homey.App {
 		this._flowTriggerTimerCancelled = this.homey.flow.getDeviceTriggerCard('timer_cancelled');
 		this._flowTriggerTimerRestarted = this.homey.flow.getDeviceTriggerCard('timer_restarted');
 		this._flowTriggerTimerFinished = this.homey.flow.getDeviceTriggerCard('timer_finished');
+
+		this._flowTriggerAlarmControlPanelTriggered = this.homey.flow.getDeviceTriggerCard('alarm_control_panel_alarm_triggered');
 	}
 
 	// FLOW CONDITIONS ======================================================================================
@@ -1120,6 +1122,14 @@ class App extends Homey.App {
 		this._flowConditionTimerActive = this.homey.flow.getConditionCard('timer_active')
 		.registerRunListener(async (args, state) => {
 			return (args.device.getCapabilityValue('timer_state') == 'active');
+		})
+		this._flowConditionAlarmControlPanelState = this.homey.flow.getConditionCard('alarm_control_panel_state')
+		.registerRunListener(async (args, state) => {
+			return (args.device.getCapabilityValue('alarm_control_panel_state') == args.state);
+		})
+		this._flowConditionAlarmControlPanelAlarm = this.homey.flow.getConditionCard('alarm_control_panel_alarm')
+		.registerRunListener(async (args, state) => {
+			return (args.device.getCapabilityValue('alarm_control_panel_alarm'));
 		})
 	}
 

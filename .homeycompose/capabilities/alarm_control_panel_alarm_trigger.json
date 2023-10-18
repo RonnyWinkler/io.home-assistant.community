@@ -1,0 +1,13 @@
+{
+    "type": "boolean",
+    "title": {
+        "en": "Trigger alarm",
+        "de": "Alarm auslösen",
+        "nl": "Alarm activeren"
+    },
+    "uiComponent": "button",
+    "insights": false,
+    "getable": false,
+    "setable": true,
+    "icon": "/assets/capability_icons/alarm_control_panel_alarm_trigger.svg"
+  }

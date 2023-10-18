@@ -1,0 +1,78 @@
+{
+    "title": {
+        "en": "Alarm state !{{is|isn't}}",
+        "de": "Alarm-Status !{{ist|ist nicht}}",
+        "nl": "Alarm toestand !{{is|is niet}}"
+    },
+    "titleFormatted": {
+        "en": "Alarm state !{{is|isn't}} [[state]]",
+        "de": "Alarm-Status !{{ist|ist nicht}} [[state]]",
+        "nl": "Alarm toestand !{{is|is niet}} [[state]]"
+    },
+    "args": [
+        {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=alarm_control_panel"
+        },
+        {
+            "name": "state",
+            "type": "dropdown",
+            "title": { 
+                "en": "Alarm state",
+                "de": "Alarm-Status",
+                "nl": "Alarm toestand"
+            },
+            "values": [
+                {
+                  "id": "disarmed",
+                  "title": {
+                    "en": "Disarmed",
+                    "de": "Entsichert",
+                    "nl": "Ontgrendeld"
+                  }
+                },
+                {
+                  "id": "armed",
+                  "title": {
+                    "en": "Armed",
+                    "de": "Gesichert",
+                    "nl": "Beveiligd"
+                  }
+                },
+                {
+                  "id": "pending",
+                  "title": {
+                    "en": "Pending",
+                    "de": "In Verarbeitung",
+                    "nl": "In behandeling"
+                  }
+                },
+                {
+                  "id": "arming",
+                  "title": {
+                    "en": "Arming",
+                    "de": "Aktivieren",
+                    "nl": "Activeren"
+                  }
+                },
+                {
+                  "id": "disarming",
+                  "title": {
+                    "en": "Disarming",
+                    "de": "Deaktivieren",
+                    "nl": "Deactiveren"
+                  }
+                },
+                {
+                  "id": "triggered",
+                  "title": {
+                    "en": "Triggered",
+                    "de": "Ausgelöst",
+                    "nl": "Veroorzaakt"
+                  }
+                }
+            ]
+        }
+    ]
+}

@@ -490,5 +490,9 @@
   "1.5.1": {
     "en": "Added onoff_state capability to show tile state without quick action.",
     "de": "onoff_state Capability ergänzt, um den Gerätestatus anzuzeigen ohne Quick-Action."
+  },
+  "1.5.2": {
+    "en": "Extended alarm control panel with state, alarm, flows.",
+    "de": "Alarmzentrale erweitert um Status, Alarm, Flows."
   }
 }

@@ -1,0 +1,13 @@
+{
+    "type": "boolean",
+    "title": {
+        "en": "Reset alarm",
+        "de": "Alarm zurücksetzen",
+        "nl": "Alarm opnieuw instellen"
+    },
+    "uiComponent": "button",
+    "insights": false,
+    "getable": false,
+    "setable": true,
+    "icon": "/assets/capability_icons/alarm_control_panel_alarm_reset.svg"
+  }
