@@ -879,6 +879,19 @@ class App extends Homey.App {
 			}
 		});
 
+		// Generic device actions
+		this._flowActionGenericDeviceUpdate = this.homey.flow.getActionCard('genericDeviceUpdate');
+		this._flowActionGenericDeviceUpdate.registerRunListener(async (args, state) => {
+			try{
+				await args.device.flowActionUpdateDevice();
+				return true;
+			}
+			catch(error){
+				this.error("Error executing flowAction 'genericDeviceUpdate': "+  error.message);
+				throw new Error(error.message);
+			}
+		});
+
 
 	}
 
@@ -1130,6 +1143,10 @@ class App extends Homey.App {
 		this._flowConditionAlarmControlPanelAlarm = this.homey.flow.getConditionCard('alarm_control_panel_alarm')
 		.registerRunListener(async (args, state) => {
 			return (args.device.getCapabilityValue('alarm_control_panel_alarm'));
+		})
+		this._flowConditionAlarmControlPanelMode = this.homey.flow.getConditionCard('alarm_control_panel_mode')
+		.registerRunListener(async (args, state) => {
+			return (args.device.getCapabilityValue('alarm_control_panel_mode') == args.mode);
 		})
 	}
 

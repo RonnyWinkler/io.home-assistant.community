@@ -1,0 +1,24 @@
+{
+    "title": {
+        "en": "Update device data",
+        "de": "Gerätedaten aktualisieren",
+        "nl": "Apparaatgegevens bijwerken"
+    },
+    "titleFormatted": {
+        "en": "Update device data",
+        "de": "Gerätedaten aktualisieren",
+        "nl": "Apparaatgegevens bijwerken"
+    },
+    "hint": {
+        "en": "Updates the device data with the current entity data including conversion.",
+        "de": "Aktualisiert die Gerätedaten mit den aktuellen Entity-Daten incl. Konvertierung.",
+        "nl": "Werkt de apparaatgegevens bij met de huidige entiteitsgegevens, inclusief conversie."
+    },
+    "args": [
+        {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=custom|compound|climate|climate_fan|fan|water_heater|light|media|switch|vacuum|covers|lock"
+        }
+    ]
+}

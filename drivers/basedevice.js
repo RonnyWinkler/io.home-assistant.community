@@ -1029,6 +1029,11 @@ class BaseDevice extends Homey.Device {
         return true;
     }
 
+    async flowActionUpdateDevice(){
+        this.onInitDevice();
+    }
+
+
     // async httpGet(url, options){
     //     return new Promise( ( resolve, reject ) =>
     //         {

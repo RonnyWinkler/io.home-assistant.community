@@ -1,7 +1,7 @@
 {
   "_comment": "This file is generated. Please edit .homeycompose/app.json instead.",
   "id": "io.home-assistant.community",
-  "version": "1.5.2",
+  "version": "1.5.3",
   "compatibility": ">=8.1.0",
   "sdk": 3,
   "brandColor": "#0DA6EA",
@@ -1171,6 +1171,85 @@
           }
         ],
         "id": "alarm_control_panel_alarm"
+      },
+      {
+        "title": {
+          "en": "Alarm mode !{{is|isn't}}",
+          "de": "Alarm-Modus !{{ist|ist nicht}}",
+          "nl": "Alarm modus !{{is|is niet}}"
+        },
+        "titleFormatted": {
+          "en": "Alarm mode !{{is|isn't}} [[mode]]",
+          "de": "Alarm-Modus !{{ist|ist nicht}} [[mode]]",
+          "nl": "Alarm modus !{{is|is niet}} [[mode]]"
+        },
+        "args": [
+          {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=alarm_control_panel"
+          },
+          {
+            "name": "mode",
+            "type": "dropdown",
+            "title": {
+              "en": "Alarm state",
+              "de": "Alarm-Status",
+              "nl": "Alarm toestand"
+            },
+            "values": [
+              {
+                "id": "disarmed",
+                "title": {
+                  "en": "Disarmed",
+                  "de": "Entsichert",
+                  "nl": "Ontgrendeld"
+                }
+              },
+              {
+                "id": "armed_home",
+                "title": {
+                  "en": "Armed at home",
+                  "de": "Gesichert zu Hause",
+                  "nl": "Thuis beveiligd"
+                }
+              },
+              {
+                "id": "armed_away",
+                "title": {
+                  "en": "Armed away",
+                  "de": "Gesichert unterwegs",
+                  "nl": "Veilig onderweg"
+                }
+              },
+              {
+                "id": "armed_night",
+                "title": {
+                  "en": "Armed at night",
+                  "de": "Gesichert nachts",
+                  "nl": "Veilig nacht"
+                }
+              },
+              {
+                "id": "armed_vacation",
+                "title": {
+                  "en": "Armed at vacation",
+                  "de": "Gesichert im Urlaub",
+                  "nl": "Veilig op vakantie"
+                }
+              },
+              {
+                "id": "armed_custom_bypass",
+                "title": {
+                  "en": "Armed custom bypass",
+                  "de": "Gesichert benutzerdefiniert",
+                  "nl": "Veilig aangepast"
+                }
+              }
+            ]
+          }
+        ],
+        "id": "alarm_control_panel_mode"
       },
       {
         "title": {
@@ -2587,6 +2666,31 @@
           }
         ],
         "id": "genericButtonPress"
+      },
+      {
+        "title": {
+          "en": "Update device data",
+          "de": "Gerätedaten aktualisieren",
+          "nl": "Apparaatgegevens bijwerken"
+        },
+        "titleFormatted": {
+          "en": "Update device data",
+          "de": "Gerätedaten aktualisieren",
+          "nl": "Apparaatgegevens bijwerken"
+        },
+        "hint": {
+          "en": "Updates the device data with the current entity data including conversion.",
+          "de": "Aktualisiert die Gerätedaten mit den aktuellen Entity-Daten incl. Konvertierung.",
+          "nl": "Werkt de apparaatgegevens bij met de huidige entiteitsgegevens, inclusief conversie."
+        },
+        "args": [
+          {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=custom|compound|climate|climate_fan|fan|water_heater|light|media|switch|vacuum|covers|lock"
+          }
+        ],
+        "id": "genericDeviceUpdate"
       },
       {
         "highlight": true,

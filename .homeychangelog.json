@@ -494,5 +494,9 @@
   "1.5.2": {
     "en": "Extended alarm control panel with state, alarm, flows.",
     "de": "Alarmzentrale erweitert um Status, Alarm, Flows."
+  },
+  "1.5.3": {
+    "en": "Added alarm control panel mode condition. Added 'update device' flow action. Use this action to update calculated device capabilities (converter).",
+    "de": "Alarmzentrale Modus-Bedingung ergänzt. 'Aktualisiere Gerät' Flow-Aktion ergänzt. Verwende diese Aktion zur Aktualisierung berechneter Geräte-Attribute (Konverter)."
   }
 }
