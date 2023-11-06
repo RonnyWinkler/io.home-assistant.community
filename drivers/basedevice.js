@@ -555,7 +555,7 @@ class BaseDevice extends Homey.Device {
     
                 }
             }
-            catch(error){this.log("deviceEntitiesUpdate(): Error "+error.message)}
+            catch(error){this.log("deviceEntitiesUpdate(): Entity: "+entityId+" Capability: "+keys[i]+" Error "+error.message)}
         }
     }
 
@@ -572,16 +572,33 @@ class BaseDevice extends Homey.Device {
                 let entityId = capabilitiesOptions.entity_id; 
                 if (entityId != undefined){
                     if (key.startsWith("onoff")){
+                        // trigger flow on capability change, because on entity update the capability is already set and flow doesn't get triggered
+                        let tokens = {
+                            capability: keys[i],
+                            value_string: '',
+                            value_number: 0,
+                            value_boolean: valueObj[keys[i]]
+                        };
+                        let state = {
+                            capability: {
+                                id: keys[i]
+                            }
+                        };
+                        await this.homey.app._flowTriggerCapabilityChanged.trigger(this, tokens, state);
+                        // Send state change to HA
                         await this._client.turnOnOff(entityId, valueObj[keys[i]]);
                     }
                     if (key.startsWith("dim")){
+                        // Send state change to HA
                         await this._client.callService(entityId.split(".")[0], "set_value", {"entity_id": entityId, value: valueObj[keys[i]]});
                     }
                     if (key.startsWith("button") && key != "button.reconnect"){
                         if (entityId.startsWith("scene") || entityId.startsWith("script")){
+                            // Send state change to HA
                             await this._client.turnOnOff(entityId, valueObj[keys[i]]);
                         }
                         else{
+                            // Send state change to HA
                             await this._client.callService(entityId.split(".")[0], "press", {"entity_id": entityId});
                         }
                     }
