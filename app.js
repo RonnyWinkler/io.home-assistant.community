@@ -937,7 +937,7 @@ class App extends Homey.App {
 			return ( !args.capability || !args.capability.id || args.capability.id === state.capability.id);
 		});
 		this._flowTriggerCapabilityChanged.registerArgumentAutocompleteListener('capability', async (query, args) => {
-			const capabilityList = args.device.getAutocompleteCapabilityList(true);
+			const capabilityList = args.device.getAutocompleteCapabilityList();
 			return capabilityList.filter((result) => { 
 				return result.name.toLowerCase().includes(query.toLowerCase());
 			});
