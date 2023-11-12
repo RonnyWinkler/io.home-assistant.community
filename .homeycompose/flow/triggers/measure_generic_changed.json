@@ -24,5 +24,6 @@
         "name": "device",
         "type": "device",
         "filter": "driver_id=sensor"
-    }]
+        }
+    ]
 }

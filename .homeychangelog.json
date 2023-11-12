@@ -502,5 +502,9 @@
   "1.5.4": {
     "en": "Added trigger for generic switch capabilities.",
     "de": "Trigger für generische Schalter-Attribute ergänzt."
+  },
+  "1.5.5": {
+    "en": "Added standard capabilities to generic 'capability changed' trigger autocomplete list.",
+    "de": "Standard-Capabilities zur generischen 'Capability geändert'-Trigger Autocomplete-Lsiste hinzugefügt."
   }
 }
