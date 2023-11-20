@@ -438,7 +438,10 @@ class BaseDevice extends Homey.Device {
                         capability: keys[i],
                         value_string: '',
                         value_number: 0,
-                        value_boolean: false
+                        value_boolean: false,
+                        value_string_old: '',
+                        value_number_old: 0,
+                        value_boolean_old: false
                     };
                     let state = {
                         capability: {
@@ -465,6 +468,7 @@ class BaseDevice extends Homey.Device {
                         else{
                             newValue = entityValue;
                         }
+                        tokens.value_string_old = oldValue;
                         tokens.value_string = newValue;
                         await this.setCapabilityValue(keys[i], newValue);
                     }
@@ -484,6 +488,7 @@ class BaseDevice extends Homey.Device {
                             }
                             // newValue = (entityValue == "on");
                         }
+                        tokens.value_boolean_old = oldValue;
                         tokens.value_boolean = newValue;
                         await this.setCapabilityValue(keys[i], newValue );
                     }
@@ -495,6 +500,7 @@ class BaseDevice extends Homey.Device {
                         else{
                             newValue = parseFloat(entityValue);
                         }
+                        tokens.value_number_old = oldValue;
                         tokens.value_number = newValue;
                         await this.setCapabilityValue(keys[i], newValue);
                     }
@@ -514,6 +520,7 @@ class BaseDevice extends Homey.Device {
                             }
                             // newValue = (entityValue == "on");
                         }
+                        tokens.value_boolean_old = oldValue;
                         tokens.value_boolean = newValue;
                         // ignore initial state change from initial state to first read state in onInit()
                         if (oldValue == null){

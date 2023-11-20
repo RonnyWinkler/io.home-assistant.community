@@ -50,6 +50,33 @@
                 "de": "Wert",
                 "nl": "Waarde"
             }
+        },
+        {
+            "name": "value_boolean_old",
+            "type": "boolean",
+            "title": {
+                "en": "Old value",
+                "de": "Alter Wert",
+                "nl": "Oude waarde"
+            }
+        },
+        {
+            "name": "value_string_old",
+            "type": "string",
+            "title": {
+                "en": "Old value",
+                "de": "Alter Wert",
+                "nl": "Oude waarde"
+            }
+        },
+        {
+            "name": "value_number_old",
+            "type": "number",
+            "title": {
+                "en": "Old value",
+                "de": "Alter Wert",
+                "nl": "Oude waarde"
+            }
         }
     ],
     "args": [

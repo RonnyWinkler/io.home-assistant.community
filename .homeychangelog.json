@@ -510,6 +510,10 @@
   "1.5.6": {
     "en": "Changed 'capability changed' trigger autocomplete list.",
     "de": "'Capability geändert'-Trigger Autocomplete-Lsiste angepasst."
+  },
+  "1.5.7": {
+    "en": "Added old entity value tags to 'Value of capability changed' flow card.",
+    "de": "Alte Entitäts-Werte als Tag zur 'Wert des Attributes geändert' Flow-Karte hinzugefügr"
   }
 
 }
