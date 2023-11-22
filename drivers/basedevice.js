@@ -577,11 +577,15 @@ class BaseDevice extends Homey.Device {
                 }
                 catch(error){continue;}
                 let entityId = capabilitiesOptions.entity_id; 
+                let oldValue = this.getCapabilityValue(key);
                 if (entityId != undefined){
                     if (key.startsWith("onoff")){
                         // trigger flow on capability change, because on entity update the capability is already set and flow doesn't get triggered
                         let tokens = {
                             capability: keys[i],
+                            value_string_old: '',
+                            value_number_old: 0,
+                            value_boolean_old: oldValue,
                             value_string: '',
                             value_number: 0,
                             value_boolean: valueObj[keys[i]]

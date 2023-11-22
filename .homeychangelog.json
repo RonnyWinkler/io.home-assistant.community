@@ -514,6 +514,10 @@
   "1.5.7": {
     "en": "Added old entity value tags to 'Value of capability changed' flow card.",
     "de": "Alte Entitäts-Werte als Tag zur 'Wert des Attributes geändert' Flow-Karte hinzugefügr"
+  },
+  "1.5.8": {
+    "en": "Fixed 'Value of capability changed' flow card for switch capabilitites.",
+    "de": "'Wert des Attributes geändert' Flow-Karte korrigiert für Schalter-Attribute"
   }
 
 }
