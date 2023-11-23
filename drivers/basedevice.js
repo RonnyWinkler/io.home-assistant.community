@@ -1026,7 +1026,7 @@ class BaseDevice extends Homey.Device {
                     entities.push(entityId);
                 }    
                 break;     
-            case others:
+            default:
                 // Standard device, use main entity only
                 entities.push(this.entityId);
         }

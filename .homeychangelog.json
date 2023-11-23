@@ -518,6 +518,10 @@
   "1.5.8": {
     "en": "Fixed 'Value of capability changed' flow card for switch capabilitites.",
     "de": "'Wert des Attributes geändert' Flow-Karte korrigiert für Schalter-Attribute"
+  },
+  "1.5.9": {
+    "en": "Fixed 'Create dynamic scene' flow card.",
+    "de": "'Dynamische Szene erstellen' Flow-Karte korrigiert."
   }
 
 }
