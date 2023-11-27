@@ -1,0 +1,30 @@
+{
+    "id": "lightSetEffect",
+    "title": { 
+        "en": "Set light effect",
+        "de": "Lichteffekt einstellen",
+        "nl": "Lichteffect instellen"
+    },
+    "titleFormatted": { 
+        "en": "Set light effect [[light_effect]].",
+        "de": "Lichteffekt [[light_effect]] einstellen.",
+        "nl": "Lichteffect [[light_effect]] instellen."
+    },
+    "duration": true,
+    "args": [
+        {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=light"
+        },
+        {
+            "name": "light_effect",
+            "type": "autocomplete",
+            "title": { 
+                "en": "Light effect",
+                "de": "Lichteffekt",
+                "nl": "Lichteffect"
+            }
+        }
+    ]
+}

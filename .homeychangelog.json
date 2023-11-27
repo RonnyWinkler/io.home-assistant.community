@@ -522,6 +522,10 @@
   "1.5.9": {
     "en": "Fixed 'Create dynamic scene' flow card.",
     "de": "'Dynamische Szene erstellen' Flow-Karte korrigiert."
+  },
+  "1.5.10": {
+    "en": "Added flow action for light device to select light effect.",
+    "de": "Flow-Aktion für Licht ergänzt zur Auswahl eines Lichteffektes."
   }
 
 }

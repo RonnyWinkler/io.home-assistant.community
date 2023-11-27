@@ -11,6 +11,9 @@ class LightDevice extends BaseDevice {
         this._settings = this.getSettings();
         await super.onInit();
 
+        // mode lists
+        this.effects = [];
+
         this._minMireds = 0;
         this._maxMireds = 0;
 
@@ -64,6 +67,10 @@ class LightDevice extends BaseDevice {
 
             this._minMireds = data.attributes["min_mireds"] || 0;
             this._maxMireds = data.attributes["max_mireds"] || 0;
+
+            if ( data.attributes.effect_list ){
+                this.effects = data.attributes.effect_list;
+            } 
 
             let lightOn;
             if (data.state == "on"){
@@ -252,6 +259,19 @@ class LightDevice extends BaseDevice {
     
     }
 
+    // Flow autocomplete ============================================================================================
+	async getAutocompleteLightEffectList(){
+		let result = [];
+		for (let i=0; i<this.effects.length; i++){
+			result.push({
+				id: this.effects[i],
+				name: this.effects[i]
+			})
+		}
+		return result;
+	}
+
+
     // Flow actions ============================================================================================
     async setHue(args){
         await this._onCapabilitiesSet(args, null);
@@ -308,6 +328,14 @@ class LightDevice extends BaseDevice {
             args["light_temperature"] = lightTemperature;
             await this._onCapabilitiesSet(args, null);
         }
+    }
+
+    async setEffect(args){
+        let data = {
+            entity_id: this.entityId,
+            effect: args.light_effect.id
+        };
+        await this._client.updateLight(true, data);
     }
 
     // Settings ================================================================================================

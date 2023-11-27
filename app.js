@@ -439,6 +439,24 @@ class App extends Homey.App {
 			});
 		});
 
+		this._flowActionLightSetEffect = this.homey.flow.getActionCard('lightSetEffect')
+		this._flowActionLightSetEffect.registerRunListener(async (args, state) => {
+			try{
+				await args.device.setEffect(args);
+				return true;
+			}
+			catch(error){
+				this.error("Error executing flowAction 'lightSetEffect': "+  error.message);
+				throw new Error(error.message);
+			}
+		});
+		this._flowActionLightSetEffect.registerArgumentAutocompleteListener('light_effect', async (query, args) => {
+			this.lightEffectList = await args.device.getAutocompleteLightEffectList();
+			return this.lightEffectList.filter((result) => { 
+				return ( result.name.toLowerCase().includes(query.toLowerCase()) );
+			});
+		});
+
 		this._flowActionSendNotificationToService = this.homey.flow.getActionCard('sendNotificationToService');
 		this._flowActionSendNotificationToService.registerRunListener(async (args, state) => {
 			try{
