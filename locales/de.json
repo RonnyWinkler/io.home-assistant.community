@@ -2,7 +2,7 @@
     "pair": {
         "title": {
             "ready": "Fertig",
-            "device_added": "Gerät wurde hinzugefügt",
+            "device_added": "Gerät wird hinzugefügt",
             "icon": "Icon"
         },
         "list_devices":{

@@ -211,17 +211,29 @@ class CompoundDevice extends BaseDevice {
                                 capability: key,
                                 value_string: '',
                                 value_number: 0,
-                                value_boolean: false
+                                value_boolean: false,
+                                value_string_old: '',
+                                value_number_old: 0,
+                                value_boolean_old: false
                             };
                             switch (this.getCapabilityType(key)){
                                 case "string":
                                     tokens.value_string = value;
+                                    if (oldValue != undefined){
+                                        tokens.value_string_old = oldValue;
+                                    }
                                     break;
                                 case "number":
                                     tokens.value_number = value;
+                                    if (oldValue != undefined){
+                                        tokens.value_number_old = oldValue;
+                                    }
                                     break;
                                 case "boolean":
                                     tokens.value_boolean = value;
+                                    if (oldValue != undefined){
+                                        tokens.value_boolean_old = oldValue;
+                                    }
                                     break;
                             }
                             if (this.homey.app){

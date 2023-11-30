@@ -526,6 +526,10 @@
   "1.5.10": {
     "en": "Added flow action for light device to select light effect.",
     "de": "Flow-Aktion für Licht ergänzt zur Auswahl eines Lichteffektes."
+  },
+  "1.5.11": {
+    "en": "Fixed 'Value of capability changed' flow card for compound devices.",
+    "de": "'Wert des Attributes geändert' Flow-Karte korrigiert für Compound-Geräte"
   }
 
 }
