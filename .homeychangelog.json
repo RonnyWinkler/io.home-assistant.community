@@ -530,6 +530,10 @@
   "1.5.11": {
     "en": "Fixed 'Value of capability changed' flow card for compound devices.",
     "de": "'Wert des Attributes geändert' Flow-Karte korrigiert für Compound-Geräte"
+  },
+  "1.5.12": {
+    "en": "Fixed value update for onoff capabilities added in custom devices.",
+    "de": "Wertübernahme korrigiert für onoff Capabilities in benutzerdefinierten Geräten."
   }
 
 }

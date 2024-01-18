@@ -30,6 +30,8 @@ const defaultBooleanConverter = {
                 return true;
             case "off":
                 return false;
+            default:
+                return null;
         }
         // state == "on"
     },
@@ -504,7 +506,7 @@ class BaseDevice extends Homey.Device {
                         tokens.value_number = newValue;
                         await this.setCapabilityValue(keys[i], newValue);
                     }
-                    else if (keys[i].startsWith("switch") || keys[i].startsWith("input_boolean") || keys[i].startsWith("onoff_button") || keys[i].startsWith("onoff_state") ){
+                    else if (keys[i].startsWith("onoff") || keys[i].startsWith("onoff_button") || keys[i].startsWith("onoff_state") ){
                         // boolean capability
                         if (converter != undefined){
                             newValue = converter(entityValue);
