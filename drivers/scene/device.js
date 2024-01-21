@@ -57,7 +57,18 @@ class SceneDevice extends BaseDevice {
     async _onCapabilityButton( value, opts ) {
         await this._client.turnOnOff(this.entityId, true);
     }
-    
+
+    // Flow actions ============================================================================================
+    async flowActionSceneActivate(args){
+        let entityId = this.entityId;
+        let data = {
+            "entity_id": entityId
+        };
+        if (args.duration != undefined){
+            data["transition"] = args.duration / 1000;
+        }
+        await this._client.callService("scene", "turn_on", data );
+    }    
 }
 
 module.exports = SceneDevice;

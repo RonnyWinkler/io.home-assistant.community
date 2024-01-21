@@ -534,6 +534,10 @@
   "1.5.12": {
     "en": "Fixed value update for onoff capabilities added in custom devices.",
     "de": "Wertübernahme korrigiert für onoff Capabilities in benutzerdefinierten Geräten."
+  },
+  "1.5.13": {
+    "en": "Added 'activate scene' flow card with duration for scene device.",
+    "de": "'Aktiviere Szene' Flowkarte mit Dauer ergänzt' für Szenen-Gerät."
   }
 
 }

@@ -1,0 +1,20 @@
+{
+    "title": {
+        "en": "Activate scene",
+        "de": "Szene aktivieren",
+        "nl": "Activeer scène"
+    },
+    "titleFormatted": {
+        "en": "Activate scene",
+        "de": "Szene aktivieren",
+        "nl": "Activeer scène"
+    },
+    "duration": true,
+    "args": [
+        {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=scene"
+        }
+    ]
+}

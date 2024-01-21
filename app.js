@@ -897,6 +897,19 @@ class App extends Homey.App {
 			}
 		});
 
+		// Scene
+		this._flowActionSceneActivate = this.homey.flow.getActionCard('sceneActivate');
+		this._flowActionSceneActivate.registerRunListener(async (args, state) => {
+			try{
+				await args.device.flowActionSceneActivate(args);
+				return true;
+			}
+			catch(error){
+				this.error("Error executing flowAction 'sceneActivate': "+  error.message);
+				throw new Error(error.message);
+			}
+		});
+		
 		// Generic device actions
 		this._flowActionGenericDeviceUpdate = this.homey.flow.getActionCard('genericDeviceUpdate');
 		this._flowActionGenericDeviceUpdate.registerRunListener(async (args, state) => {
