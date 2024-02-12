@@ -62,10 +62,16 @@ class CameraDevice extends BaseDevice {
                     if (this.hasCapability("onoff")){
                         await this.setCapabilityValue("onoff", true);
                     }
+                    if (this.hasCapability("onoff_state")){
+                        await this.setCapabilityValue("onoff_state", true);
+                    }
                     break;
                 case "off":
                     if (this.hasCapability("onoff")){
                         await this.setCapabilityValue("onoff", false);
+                    }
+                    if (this.hasCapability("onoff_state")){
+                        await this.setCapabilityValue("onoff_state", false);
                     }
                     break;            
             }
@@ -158,13 +164,27 @@ class CameraDevice extends BaseDevice {
 
     // Settings ================================================================================================
     async onSettings(settings){
-        // try {
-        //     this._settings = settings.newSettings;
-        //     await this.connectPowerEntity();
-        // }
-        // catch(error) {
-        //     this.error("onSettings error: "+ error.message);
-        // }
+        try {
+            if (settings.changedKeys.find((e) => {return e == 'camera_quickaction_disabled'})){
+                if (settings.newSettings.camera_quickaction_disabled){
+                    // exchange onoff => onoff_state
+                    if (this.hasCapability('onoff')){
+                        await this.removeCapability('onoff');
+                        await this.addCapability('onoff_state');
+                    }
+                }
+                else{
+                    // exchange onoff_state => onoff
+                    if (this.hasCapability('onoff_state')){
+                        await this.removeCapability('onoff_state');
+                        await this.addCapability('onoff');
+                    }
+                }
+            }
+        }
+        catch(error) {
+            this.error("onSettings error: "+ error.message);
+        }
     }
 }
 

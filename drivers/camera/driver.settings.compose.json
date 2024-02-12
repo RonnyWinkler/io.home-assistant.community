@@ -69,5 +69,26 @@
                 }
             }
         ]
+    },
+    {
+        "type": "group",
+        "label": { 
+            "en": "Camera settings",
+            "de": "Kamera-Einstellungen",
+            "nl": "Camera instellingen"
+        },
+        "children": 
+        [
+            {
+                "id": "camera_quickaction_disabled",
+                "type": "checkbox",
+                "value": false,
+                "label": {
+                    "en": "Disable quick action and switch",
+                    "de": "Deaktiviere Schnellaktion und Schalter", 
+                    "nl": "Schakel snelle actie en schakelaars uit"
+                }
+            }
+        ]
     }
 ]

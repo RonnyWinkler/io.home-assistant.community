@@ -4517,6 +4517,26 @@
               }
             }
           ]
+        },
+        {
+          "type": "group",
+          "label": {
+            "en": "Camera settings",
+            "de": "Kamera-Einstellungen",
+            "nl": "Camera instellingen"
+          },
+          "children": [
+            {
+              "id": "camera_quickaction_disabled",
+              "type": "checkbox",
+              "value": false,
+              "label": {
+                "en": "Disable quick action for device tile",
+                "de": "Deaktiviere die Schnellaktion für die Gerätekachel",
+                "nl": "Schakel snelle actie voor apparaattegel uit"
+              }
+            }
+          ]
         }
       ]
     },
