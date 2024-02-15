@@ -551,7 +551,7 @@ class BaseDevice extends Homey.Device {
                             // Standard capaility changed trigger
                             await this.homey.app._flowTriggerCapabilityChanged.trigger(this, tokens, state);
                             // additional alarm on/off trigger
-                            if (keys[i].startsWith("alarm")){
+                            if (keys[i].startsWith("alarm") || keys[i].startsWith("onoff")){
                                 if (newValue){
                                     await this.homey.app._flowTriggerGenericAlarmTrue.trigger(this, tokens, state);
                                 }

@@ -542,6 +542,10 @@
   "1.5.14": {
     "en": "Added switch deactivation for camera device.",
     "de": "Schalter-Deaktivierung für Kamerageräte ergänzt."
+  },
+  "1.5.15": {
+    "en": "Fixed 'The alarm or switch turned on' trigger for onoff/onoff_button capabilities.",
+    "de": "Fehler beim Auslösen des 'Der Alarm oder Schalter ist angegangen' Triggers für onoff/onoff_button Capabilities."
   }
 
 }
