@@ -546,6 +546,10 @@
   "1.5.15": {
     "en": "Fixed 'The alarm or switch turned on' trigger for onoff/onoff_button capabilities.",
     "de": "Fehler beim Auslösen des 'Der Alarm oder Schalter ist angegangen' Triggers für onoff/onoff_button Capabilities."
+  },
+  "1.5.16": {
+    "en": "Fixed 'capability changed trigger' for onoff/onoff_button capabilities.",
+    "de": "Fehler beim Auslösen des 'Capability geändert' Triggers für onoff/onoff_button Capabilities."
   }
 
 }

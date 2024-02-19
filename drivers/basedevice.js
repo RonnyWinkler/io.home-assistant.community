@@ -65,10 +65,11 @@ class BaseDevice extends Homey.Device {
         }
 
         // Init device with a short timeout to wait for initial entities
-        this.timeoutInitDevice = this.homey.setTimeout( async () => 
-            this.onInitDevice().catch(e => console.log(e)), 
-            DEVICE_INIT_TIMEOUT * 1000 );
-
+        // this.timeoutInitDevice = this.homey.setTimeout( async () => 
+        //     this.onInitDevice().catch(e => console.log(e)), 
+        //     DEVICE_INIT_TIMEOUT * 1000 );
+        // Queue device init in a queue to process sequential
+        this.homey.app.enqueueDeviceInit(this.onInitDevice.bind(this));
     }
 
     async onAdded() {
@@ -549,14 +550,14 @@ class BaseDevice extends Homey.Device {
                         // trigger flow
                         if (this.homey.app){
                             // Standard capaility changed trigger
-                            await this.homey.app._flowTriggerCapabilityChanged.trigger(this, tokens, state);
+                            this.homey.app._flowTriggerCapabilityChanged.trigger(this, tokens, state).catch(error => {this.log("Error triggering flow [capability_changed]: "+error.message)});
                             // additional alarm on/off trigger
                             if (keys[i].startsWith("alarm") || keys[i].startsWith("onoff")){
                                 if (newValue){
-                                    await this.homey.app._flowTriggerGenericAlarmTrue.trigger(this, tokens, state);
+                                    this.homey.app._flowTriggerGenericAlarmTrue.trigger(this, tokens, state).catch(error => {this.log("Error triggering flow [generic_alarm_true]: "+error.message)});
                                 }
                                 else{
-                                    await this.homey.app._flowTriggerGenericAlarmFalse.trigger(this, tokens, state);
+                                    this.homey.app._flowTriggerGenericAlarmFalse.trigger(this, tokens, state).catch(error => {this.log("Error triggering flow [generic_alarm_false]: "+error.message)});
                                 }
                             }
                         }
@@ -597,7 +598,15 @@ class BaseDevice extends Homey.Device {
                                 id: keys[i]
                             }
                         };
-                        await this.homey.app._flowTriggerCapabilityChanged.trigger(this, tokens, state);
+                        this.homey.app._flowTriggerCapabilityChanged.trigger(this, tokens, state).catch(error => {this.log("Error triggering flow [capability_changed]: "+error.message)});
+                        // additional alarm on/off trigger
+                        if (valueObj[keys[i]]){
+                            this.homey.app._flowTriggerGenericAlarmTrue.trigger(this, tokens, state).catch(error => {this.log("Error triggering flow [generic_alarm_true]: "+error.message)});
+                        }
+                        else{
+                            this.homey.app._flowTriggerGenericAlarmFalse.trigger(this, tokens, state).catch(error => {this.log("Error triggering flow [generic_alarm_false]: "+error.message)});
+                        }
+                        
                         // Send state change to HA
                         await this._client.turnOnOff(entityId, valueObj[keys[i]]);
                     }

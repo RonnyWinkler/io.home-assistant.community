@@ -10,6 +10,8 @@ const http = require('http');
 const { join } = require('path');
 const Client = require('./lib/Client.js');
 const colors = require('./lib/colors.json');
+const Queue = require('./lib/queue.js');
+
 const RECONNECT_TIMEOUT = 15;
 const AVAILABILITY_CHECK_TIMEOUT = 10;
 const LOG_SIZE = 50;
@@ -127,6 +129,9 @@ class App extends Homey.App {
 			});
 		this.clientReconnect();
 
+		this._queueDeviceInit = new Queue();
+		this._queueDeviceInit.setDelay(200);
+
 		// let address = this.homey.settings.get("address");
 		// let token = this.homey.settings.get("token");
 		// try{
@@ -155,6 +160,10 @@ class App extends Homey.App {
 		this.timeoutCheckConnection = this.homey.setTimeout(async () => this.onCheckConnection().catch(e => console.log(e)), RECONNECT_TIMEOUT * 60 * 1000 );
 		this.timeoutStatistics = this.homey.setTimeout(async () => this.onStatistics().catch(e => console.log(e)), STATISTICS_TIMEOUT * 1000 );
 		
+	}
+
+	enqueueDeviceInit(funct){
+		this._queueDeviceInit.enqueue(funct);
 	}
 
 	// FLOW ACTIONS ======================================================================================
