@@ -554,6 +554,14 @@
   "1.5.17": {
     "en": "Added 'The alarm or switch turned on' trigger to compound device.",
     "de": "'Der Alarm oder Schalter ist angegangen' Trigger zu Compound Gerät hinzugefügt."
+  },
+  "1.5.18": {
+    "en": "Fixed 'triggered' state for alarm panel device.",
+    "de": "'triggered' Status für Alarmpanel-Gerät korrigiert."
+  },
+  "1.5.19": {
+    "en": "Added error handling for invalid entity data in compound device.",
+    "de": "Fehlerbehandlung für ungültige Werte in Compound Gerät ergänzt."
   }
 
 }

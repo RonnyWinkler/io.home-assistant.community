@@ -219,25 +219,25 @@ class CompoundDevice extends BaseDevice {
                             switch (this.getCapabilityType(key)){
                                 case "string":
                                     tokens.value_string = value;
-                                    if (oldValue != undefined){
+                                    if (oldValue != undefined && oldValue != null){
                                         tokens.value_string_old = oldValue;
                                     }
                                     break;
                                 case "number":
                                     tokens.value_number = value;
-                                    if (oldValue != undefined){
+                                    if (oldValue != undefined && oldValue != null){
                                         tokens.value_number_old = oldValue;
                                     }
                                     break;
                                 case "boolean":
                                     tokens.value_boolean = value;
-                                    if (oldValue != undefined){
+                                    if (oldValue != undefined && oldValue != null){
                                         tokens.value_boolean_old = oldValue;
                                     }
                                     break;
                             }
                             if (this.homey.app){
-                                this.homey.app._flowTriggerCapabilityChanged.trigger(this, tokens, state);
+                                this.homey.app._flowTriggerCapabilityChanged.trigger(this, tokens, state).catch(error => {this.log("Error triggering flow [capability_changed]: "+error.message)});
                                 // additional alarm on/off trigger
                                 if (key.startsWith("alarm") || key.startsWith("onoff")){
                                     if (value){
