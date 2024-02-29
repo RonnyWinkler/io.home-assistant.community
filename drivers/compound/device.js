@@ -237,7 +237,16 @@ class CompoundDevice extends BaseDevice {
                                     break;
                             }
                             if (this.homey.app){
-                                await this.homey.app._flowTriggerCapabilityChanged.trigger(this, tokens, state);
+                                this.homey.app._flowTriggerCapabilityChanged.trigger(this, tokens, state);
+                                // additional alarm on/off trigger
+                                if (key.startsWith("alarm") || key.startsWith("onoff")){
+                                    if (value){
+                                        this.homey.app._flowTriggerGenericAlarmTrue.trigger(this, tokens, state).catch(error => {this.log("Error triggering flow [generic_alarm_true]: "+error.message)});
+                                    }
+                                    else{
+                                        this.homey.app._flowTriggerGenericAlarmFalse.trigger(this, tokens, state).catch(error => {this.log("Error triggering flow [generic_alarm_false]: "+error.message)});
+                                    }
+                                }
                             }
                         }
                     }
