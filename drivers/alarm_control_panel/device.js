@@ -74,7 +74,7 @@ class AlarmControlPanelDevice extends BaseDevice {
                 }
                 else{
                     this.homey.app._flowTriggerAlarmControlPanelTriggered.trigger(this, {}, {});
-                    await this.setCapabilityValue("alarm_control_panel_alarm", state);
+                    await this.setCapabilityValue("alarm_control_panel_alarm", true);
                 }
             }
             catch(error){

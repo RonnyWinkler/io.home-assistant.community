@@ -55,14 +55,6 @@
           "de": "Deaktivieren",
           "nl": "Deactiveren"
         }
-      },
-      {
-        "id": "triggered",
-        "title": {
-          "en": "Triggered",
-          "de": "Ausgelöst",
-          "nl": "Veroorzaakt"
-        }
       }
     ]
   }
