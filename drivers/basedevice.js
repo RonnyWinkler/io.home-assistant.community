@@ -232,7 +232,7 @@ class BaseDevice extends Homey.Device {
                     await this.setUnavailable(this.homey.__("device_unavailable_reason.entity_unavailable"));
                 }
                 else{
-                    this.setAvailable();
+                    await this.setAvailable();
                 }
             }
             if (this.hasCapability("measure_power") && 
@@ -240,7 +240,7 @@ class BaseDevice extends Homey.Device {
                 data.entity_id == this.powerEntityId){
                 let convert = this.inputConverter("measure_power");
                 let value = convert(data.state);
-                this.setCapabilityValue("measure_power", value)
+                await this.setCapabilityValue("measure_power", value)
             }
             // Update dynamically added device entities
             await this.deviceEntitiesUpdate(data);

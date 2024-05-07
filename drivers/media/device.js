@@ -128,7 +128,7 @@ class MediaDevice extends BaseDevice {
                     await this.setCapabilityValue("volume_set", Math.round(convert(data.attributes.volume_level)*100)/100);
                 }
                 if (this.hasCapability("volume_mute") && data.attributes.is_volume_muted != null){
-                        this.setCapabilityValue("volume_mute", data.attributes.is_volume_muted);
+                        await this.setCapabilityValue("volume_mute", data.attributes.is_volume_muted);
                 }
                 if (this.hasCapability("speaker_playing") && data.state != null && data.state != undefined){
                     switch (data.state){
@@ -169,10 +169,10 @@ class MediaDevice extends BaseDevice {
                 }
                 if (this.hasCapability("speaker_artist")){
                     if ( data.attributes.media_artist != null && data.attributes.media_artist != undefined && typeof data.attributes.media_artist === "string" ){
-                        this.setCapabilityValue("speaker_artist", data.attributes.media_artist);
+                        await this.setCapabilityValue("speaker_artist", data.attributes.media_artist);
                     }
                     else{
-                        this.setCapabilityValue("speaker_artist", "");
+                        await this.setCapabilityValue("speaker_artist", "");
                     }
                 }
                 if (this.hasCapability("speaker_album")){
