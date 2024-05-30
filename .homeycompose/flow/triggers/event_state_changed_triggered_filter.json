@@ -1,0 +1,54 @@
+{
+    "title": {
+        "en": "Entity state has changed",
+        "de": "Entity-Statue hat sich geändert",
+        "nl": "Entiteitsstatus is gewijzigd"
+    },
+    "titleFormatted":{
+        "en": "The state of entity [[entity]] has changed.",
+        "de": "Der Status der Entität [[entity]] hat sich geändert.",
+        "nl": "De status van entiteit [[entity]] is gewijzigd."
+    },
+    "hint": {
+        "en": "Triggers when the event 'state_changed' was triggered for the entity.",
+        "de": "Wird ausgelöst, wenn das Ereignis 'state_changed' für die Entität ausgelöst wurde.",
+        "nl": "Wordt geactiveerd wanneer het evenement 'state_changed' voor de entiteit is geactiveerd."
+    },
+    "tokens": [
+        {
+            "name": "entity",
+            "type": "string",
+            "title": {
+                "en": "Entity",
+                "de": "Entität",
+                "nl": "Entiteit" 
+            }
+        },
+        {
+            "name": "state",
+            "type": "string",
+            "title": {
+                "en": "Entity state",
+                "de": "Entitätsstatus",
+                "nl": "Entiteitsstatus" 
+            }
+        }
+    ],
+    "args": [
+        {
+            "name": "entity",
+            "type": "text",
+            "required": false,
+            "title": { 
+                "en": "Entity",
+                "de": "Entität",
+                "nl": "Entiteit" 
+            },
+            "placeholder": { 
+                "en": "Entity",
+                "de": "Eintität",
+                "nl": "Entiteit" 
+            }
+        }
+    ]
+}

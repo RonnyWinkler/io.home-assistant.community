@@ -570,6 +570,10 @@
   "1.5.21": {
     "en": "Some technical corrections.",
     "de": "Einige technische Korrekturen."
+  },
+  "1.5.22": {
+    "en": "Added app trigger for entity state changes.",
+    "de": "App-Trigger für Entitäts-Statusänderungen hinzugefügt."
   }
 
 }

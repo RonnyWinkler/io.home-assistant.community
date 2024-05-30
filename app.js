@@ -969,6 +969,18 @@ class App extends Homey.App {
 				return false;
 			}
         });
+		this._flowTriggerEventStateChangedTriggeredFilter = this.homey.flow.getTriggerCard("event_state_changed_triggered_filter");
+        this._flowTriggerEventStateChangedTriggeredFilter.registerRunListener(async (args, state) => {
+			// Check for entity id
+			if (
+				( !args.entity || args.entity === state.entity )	
+			){
+				return true;
+			}
+			else{
+				return false;
+			}
+        });
 
 		// Flow Trigger: Devices
 		// Flow trigger for all capabilities (compound device)
@@ -1199,6 +1211,13 @@ class App extends Homey.App {
 			// args is [{ "my_arg": "user_value" }]
 			await this._registerFlowArgumentsEventTriggeredFilter(args);
 		});
+		await this._registerFlowArgumentsEventStateChangedTriggeredFilter(await this._flowTriggerEventStateChangedTriggeredFilter.getArgumentValues());
+		this._flowTriggerEventStateChangedTriggeredFilter.on("update", async () => {
+			this.log("Trigger argument updated for event_state_changed_triggered_filter.");
+			let args = await this._flowTriggerEventStateChangedTriggeredFilter.getArgumentValues();
+			// args is [{ "my_arg": "user_value" }]
+			await this._registerFlowArgumentsEventStateChangedTriggeredFilter(args);
+		});
 	}
 
 	async _registerFlowArgumentsEventTriggeredFilter(args){
@@ -1215,7 +1234,24 @@ class App extends Homey.App {
 			// 	}
 			// );
 		}
-		this.log(this.flowTriggerArguments);
+		this.log(this.flowTriggerArguments["event_triggered_filter"]);
+	}
+
+	async _registerFlowArgumentsEventStateChangedTriggeredFilter(args){
+		this.log("Trigger arguments read for event_state_changed_triggered_filter");
+		// this.log(args);
+		this.flowTriggerArguments["event_state_changed_triggered_filter"] = {};
+
+		for(let i=0; i<args.length; i++){
+			this.flowTriggerArguments["event_state_changed_triggered_filter"][args[i].entity] = true;
+			// this.flowTriggerArguments["event_triggered_filter"].push(
+			// 	{	
+			// 		event: args[i].event,
+			// 	 	entity: args[i].entity
+			// 	}
+			// );
+		}
+		this.log(this.flowTriggerArguments["event_state_changed_triggered_filter"]);
 	}
 
 	// onLog(...args){
