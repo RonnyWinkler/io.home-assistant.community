@@ -574,6 +574,10 @@
   "1.5.22": {
     "en": "Added app trigger for entity state changes.",
     "de": "App-Trigger für Entitäts-Statusänderungen hinzugefügt."
+  },
+  "1.5.23": {
+    "en": "Changed app trigger 'entity state changed' to autocomplete field.",
+    "de": "App-Trigger 'Entitäts-Status geändert' zu Autocomplete-Feld geändert."
   }
 
 }

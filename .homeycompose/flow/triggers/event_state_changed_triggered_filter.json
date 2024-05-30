@@ -37,8 +37,7 @@
     "args": [
         {
             "name": "entity",
-            "type": "text",
-            "required": false,
+            "type": "autocomplete",
             "title": { 
                 "en": "Entity",
                 "de": "Entität",

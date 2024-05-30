@@ -949,6 +949,7 @@ class App extends Homey.App {
         this._flowTriggerAutomationTriggeredFilter.registerRunListener(async (args, state) => {
             return ( !args.name || args.name === state.name);
         });
+
 		this._flowTriggerEventTriggeredFilter = this.homey.flow.getTriggerCard("event_triggered_filter");
         this._flowTriggerEventTriggeredFilter.registerRunListener(async (args, state) => {
 			// Check for event name and entity id
@@ -969,11 +970,12 @@ class App extends Homey.App {
 				return false;
 			}
         });
+
 		this._flowTriggerEventStateChangedTriggeredFilter = this.homey.flow.getTriggerCard("event_state_changed_triggered_filter");
         this._flowTriggerEventStateChangedTriggeredFilter.registerRunListener(async (args, state) => {
 			// Check for entity id
 			if (
-				( !args.entity || args.entity === state.entity )	
+				( !args.entity || args.entity.id === state.entity )	
 			){
 				return true;
 			}
@@ -981,6 +983,12 @@ class App extends Homey.App {
 				return false;
 			}
         });
+		this._flowTriggerEventStateChangedTriggeredFilter.registerArgumentAutocompleteListener('entity', async (query, args) => {
+			const entityList = await this._getAutocompleteEntityList();
+			return entityList.filter((result) => { 
+				return result.name.toLowerCase().includes(query.toLowerCase());
+			});
+		});
 
 		// Flow Trigger: Devices
 		// Flow trigger for all capabilities (compound device)
@@ -1227,12 +1235,6 @@ class App extends Homey.App {
 
 		for(let i=0; i<args.length; i++){
 			this.flowTriggerArguments["event_triggered_filter"][args[i].event] = true;
-			// this.flowTriggerArguments["event_triggered_filter"].push(
-			// 	{	
-			// 		event: args[i].event,
-			// 	 	entity: args[i].entity
-			// 	}
-			// );
 		}
 		this.log(this.flowTriggerArguments["event_triggered_filter"]);
 	}
@@ -1243,13 +1245,7 @@ class App extends Homey.App {
 		this.flowTriggerArguments["event_state_changed_triggered_filter"] = {};
 
 		for(let i=0; i<args.length; i++){
-			this.flowTriggerArguments["event_state_changed_triggered_filter"][args[i].entity] = true;
-			// this.flowTriggerArguments["event_triggered_filter"].push(
-			// 	{	
-			// 		event: args[i].event,
-			// 	 	entity: args[i].entity
-			// 	}
-			// );
+			this.flowTriggerArguments["event_state_changed_triggered_filter"][args[i].entity.id] = true;
 		}
 		this.log(this.flowTriggerArguments["event_state_changed_triggered_filter"]);
 	}
