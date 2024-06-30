@@ -32,6 +32,15 @@
                 "de": "Entitätsstatus",
                 "nl": "Entiteitsstatus" 
             }
+        },
+        {
+            "name": "state_old",
+            "type": "string",
+            "title": {
+                "en": "Previous entity state",
+                "de": "Vorheriger Entitätsstatus",
+                "nl": "Vorige entiteitsstatus" 
+            }
         }
     ],
     "args": [

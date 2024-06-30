@@ -578,6 +578,10 @@
   "1.5.23": {
     "en": "Changed app trigger 'entity state changed' to autocomplete field.",
     "de": "App-Trigger 'Entitäts-Status geändert' zu Autocomplete-Feld geändert."
+  },
+  "1.5.24": {
+    "en": "Added token for previous state to app trigger 'entity state changed'.",
+    "de": "Token für vorherigen Status zu App-Trigger 'Entitäts-Status geändert' hinzugefügt."
   }
 
 }
