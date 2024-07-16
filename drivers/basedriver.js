@@ -429,7 +429,7 @@ class BaseDriver extends Homey.Driver {
         else{
             devices = await this.getDeviceList(client);
         }
-        this.log("onPairListDevices: size of devices JSON: "+JSON.stringify(devices).length);
+        this.log("onPairListDevices: devices: "+devices.length+"/"+ client.getEntitiesCount() +" entities, size of devices JSON: "+JSON.stringify(devices).length);
         return devices;
     }
 

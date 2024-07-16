@@ -1,0 +1,136 @@
+{
+    "pair": {
+        "title": {
+            "ready": "Готово",
+            "device_added": "Устройство добавлено",
+            "icon": "Иконка"
+        },
+        "list_devices":{
+            "search": "Поиск",
+            "continue": "Продолжить",
+            "select_all": "Выбрать все",
+            "deselect_all": "Убрать все",
+            "title": "Найдены новые устройства",
+            "subtitle": "Выберите устройства, которые вы хотите добавить.",
+            "subtitle_singular": "Выберите устройство, которое хотите добавить.",
+            "loading": "Загрузка...",
+            "nonew": "Новых устройств не найдено."
+        },
+        "custom_device": {
+            "device_name": "Пользовательское устройство",
+            "device_warning": "Начните добавлять объекты HomeAssistant в диалоговом окне восстановления."
+        }
+    },
+    "repair": {
+        "title": {
+            "ready": "Готово",
+            "select": "Выбор функции ремонта",
+            "auth": "Изменить логин",
+            "icon": "Изменить иконку устройства",
+            "icon_deactivated": "Изменить невозможно. Устройство использует стандартную иконку.",
+            "icon_activated": "Возможно изменение. На устройстве уже используется отдельная иконка.",
+            "icon_changed": "Иконка была изменена.",
+            "app_restart": "После изменения иконки, приложение необходимо перезапустить, чтобы изменения вступили в силу.",
+            "device_details": "Сведения об устройстве",
+            "log": "Журнал ошибок приложения",
+            "statistics": "Статистика приложений",
+            "update_capabilities_title": "Обновить/сбросить функции устройства",
+            "update_capabilities_text": "Текущие функции устройства удаляются и добавляются повторно в зависимости от объекта HomeAssistant.",
+            "update_capabilities_ready": "Состояния устройства обновлены.",
+            "adjust_custom_device": "Настроить устройство",
+            "add_entity": "Добавить объект",
+            "change_entity": "Изменить объект",
+            "remove_entity": "Удалить объект",
+            "maintenance": "Обслуживание"
+        },
+        "log": {
+            "settings_title": "Настройки журнала",
+            "refresh": "Обновить",
+            "settings": "Настройки",
+            "group_extended": "Расширенное ведение журнала",
+            "entity_states": "Состояния объектов",
+            "events": "События"
+        },
+        "statistics":{
+            "title_overview": "Обзор",
+            "title_short": "Сообщения: 30 секунд",
+            "title_sum": "Сообщения: все",
+            "title_app": "Приложение",
+            "title_connect": "Подключение",
+            "entities_monitored": "Контролируемые объекты",
+            "entities": "Объекты",
+            "entity_list_updates": "Обновления списка объектов",
+            "entitiy_list_amount": "Записи списка объектов",
+            "entity_states": "Изменения состояния объекта",
+            "events": "События",
+            "startup": "Запуск приложения",
+            "last_connect": "Последнее подключение",
+            "connects": "Подключения",
+            "refresh": "Обновить"
+        },
+        "custom_device": {
+            "entity": "Entity",
+            "entity_placeholder": "Выбрать объект...",
+            "add_entity_attribute": "Выберите атрибут объекта",
+            "entity_attribute": "Атрибут",
+            "entity_attribute_placeholder": "Выберите атрибут...",
+            "entity_number_input": "Добавить изменяемые числовые состояния",
+            "capability": "Состояние",
+            "capability_placeholder": "measure_temperature",
+            "name": "Имя",
+            "unit": "Единица измерения",
+            "number_range_min": "Минимум",
+            "number_range_max": "Максимум",
+            "number_range_step": "Размер шага",
+            "converter_ha2homey": "Функция конвертера HA->Homey",
+            "converter_homey2HA": "Функция конвертера Homey->HA",
+            "converter_example_placeholder": "Выберите пример...",
+            "converter_text_01": "Numeric calculation 0..1 => 0..100 %",
+            "converter_code_01": "(value) => { return parseFloat(value) * 100; }",
+            "converter_text_02": "Numeric calculation 0..100 % => 0..1",
+            "converter_code_02": "(value) => { return parseFloat(value) / 100; }",
+            "converter_text_03": "Date conversion UTC->local",
+            "converter_code_03": "(value) => {\nreturn new Date(value).toLocaleString(\n  'de-DE',\n  {\n    hour12s: false,\n    hour: '2-digit',\n    minute: '2-digit',\n    day: '2-digit',\n    month: '2-digit',\n    year: 'numeric'\n  });\n}",
+            "converter_text_04": "Temperature conversion °F=>°C",
+            "converter_code_04": "(value) => { return (parseFloat(value) - 32) * 5/9; }",
+            "converter_text_05": "Extract value from string: 'In 3 minutes' => 3",
+            "converter_code_05": "(value) => { return value.split(' ')[1]; }",
+            "add_as_main_capability": "Добавить в качестве основного состояния",
+            "result_count_01": "Отображение",
+            "result_count_02": "Снаружи",
+            "result_count_03": "Результаты",
+            "result_count_04": "Результатов не найдено",
+            "entity_not_found": "Объектов не найдено",
+            "capability_not_valid": "Состояние недействительно",
+            "entity_already_added": "Объект уже добавлен",
+            "capability_already_added": "Состояние уже добавлено",
+            "entity_added": "Объект был добавлен",
+            "entity_changed": "Объект был изменен",
+            "entity_removed": "Объект удален",
+            "info_main_capability": "Активируйте этот параметр, чтобы вставить объект в качестве основного состояния.\n\n<strong>Переключатели</strong> добавляются в качестве состояния  включения, включая быстрое действие для плитки устройства..\n\n<strong>Объект мощность</strong> добавлен как состояние Measure_power для включения отображения энергопотребления в обзоре Homey Energy.",
+            "info_converter": "Вы можете добавить <strong>функции JavaScript</strong> чтобы преобразовать параметр <strong>значения</strong> и возврата вычисленного/преобразованного значения, и возврата вычисленного/преобразованного значения состояния устройства Homey.\nИспользуйте правильный тип данных.\n\n<strong>Пример для простого расчета</strong>\n\n(value) => { return value * 100; }\n\nПри этом в качестве значения используется 100-x значение HA.\n\n<strong>Пример преобразования данных</strong> из ISO к местной дате:\n\n(value) => { return new Date(value).toLocaleString('de-DE', {hour12s: false, hour: '2-digit', minute: '2-digit', day: '2-digit', month: '2-digit', year: 'numeric' }); }\n\nЗамените «de-DE» на свою локаль.",
+            "info_capability": "Состояния устройства предварительно назначаются после выбора объекта.\n\nЕсли состояние не может быть определена правильно, вы можете задать пользовательское целевое состояние. В качестве альтернативы вы можете изменить предварительно назначенное название состояния.\n\nВы можете использовать такие названия состояний, как<strong>measure_*, meter_*, alarm_*, onoff, onoff_button or button</strong>. Или выберите одну из функций из списка автозаполнения.\n\nПри использовании имени состояния в устройстве более одного раза вместо этого используйте дополнительные состояния, такие как <strong>onoff.livingroom</strong>.",
+            "info_entity": "Выберите объект из списка, чтобы добавить состояние объекта в качестве состояния устройства.\n\nЕсли вместо этого необходимо добавить <strong>атрибут объекта</strong> то этот флажок можно активировать и выбрать атрибут.\n\nАтрибут также можно указать вручную.\n\nПримеры для объекта weather.home:\n\nПростой атрибут:\ntemperature\n\nArray:\nforecast[0].temperature\n\nВыберите соответствующий объект (возможно, включая дополнительные состояния), если цифровое или буквенно-цифровое состояние неверно и атрибут представляет, например, температуру или двоичный датчик/сигнализацию..",
+            "info_number_input": "Числовой ввод объекта (number или input_number) обычно импортируется как датчик.\n\nЕсли значение этого объекта необходимо изменить в Homey, его можно представить в виде ползунка.\nСвойства объекта (мин, максимум, размер шага) перенимаются.\n\nИспользуйте ползунок, чтобы изменить значение — также в объекте HA."
+        }
+    },
+    "device_unavailable_reason": {
+        "not_connected": "Home Assistant не подключен",
+        "entity_not_found": "Объекта Home Assistant не существует",
+        "entity_unavailable": "Объект Home Assistant имеет состояние "недоступен""
+    },
+    "settings": {
+        "connection": "Настройки подключения",
+        "server": "HomeAssistant сервер",
+        "token": "Токен доступа",
+        "connection_state": "Состояние соединения",
+        "connection_failed": "Не удалось подключиться...",
+        "connection_success": "Успешно подключен",
+        "save_changes": "Сохранить"
+    },
+    "devices": {
+        "custom": {
+            "hint01": "Добавление сущностей (entity)..."
+        }
+    }
+}

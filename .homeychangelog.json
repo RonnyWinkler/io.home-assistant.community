@@ -582,6 +582,10 @@
   "1.5.24": {
     "en": "Added token for previous state to app trigger 'entity state changed'.",
     "de": "Token für vorherigen Status zu App-Trigger 'Entitäts-Status geändert' hinzugefügt."
+  },
+  "1.6.0": {
+    "en": "Enhanced data/entity processing to reduce CPU usage.",
+    "de": "Daten/Entitätsverarbeitung optimiert zur Reduzierung der CPU-Auslastung."
   }
 
 }
