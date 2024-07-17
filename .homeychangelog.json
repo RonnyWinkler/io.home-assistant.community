@@ -586,6 +586,10 @@
   "1.6.0": {
     "en": "Enhanced data/entity processing to reduce CPU usage.",
     "de": "Daten/Entitätsverarbeitung optimiert zur Reduzierung der CPU-Auslastung."
+  },
+  "1.6.1": {
+    "en": "Fixed capability update (manually added, power).",
+    "de": "Capability-Aktualisierung korrigiert (manuell hinzugefügt, Energie)."
   }
 
 }
