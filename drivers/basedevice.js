@@ -7,7 +7,7 @@ const lodashget = require('lodash.get');
 const CAPABILITIES_SET_DEBOUNCE = 100;
 
 // Device init timeout (sec). Reads entity data with a delay to get ready on app start
-const DEVICE_INIT_TIMEOUT = 3;
+const DEVICE_INIT_TIMEOUT = 4;
 const DEVICE_MAX_DEVICE_ENTITIES = 20;
 
 const defaultValueConverter = {
@@ -65,11 +65,13 @@ class BaseDevice extends Homey.Device {
         }
 
         // Init device with a short timeout to wait for initial entities
-        // this.timeoutInitDevice = this.homey.setTimeout( async () => 
-        //     this.onInitDevice().catch(e => console.log(e)), 
-        //     DEVICE_INIT_TIMEOUT * 1000 );
+        this.timeoutInitDevice = this.homey.setTimeout( async () => 
+            // this.onInitDevice().catch(e => console.log(e)), 
+            this.homey.app.enqueueDeviceInit(this.onInitDevice.bind(this)),
+            DEVICE_INIT_TIMEOUT * 1000 );
+
         // Queue device init in a queue to process sequential
-        this.homey.app.enqueueDeviceInit(this.onInitDevice.bind(this));
+        // this.homey.app.enqueueDeviceInit(this.onInitDevice.bind(this));
     }
 
     async onAdded() {
@@ -471,6 +473,12 @@ class BaseDevice extends Homey.Device {
                         else{
                             newValue = entityValue;
                         }
+                        if (newValue == undefined ){
+                            newValue = '';
+                        }
+                        if (oldValue == undefined ){
+                            oldValue = '';
+                        }
                         tokens.value_string_old = oldValue;
                         tokens.value_string = newValue;
                         await this.setCapabilityValue(keys[i], newValue);
@@ -503,8 +511,19 @@ class BaseDevice extends Homey.Device {
                         else{
                             newValue = parseFloat(entityValue);
                         }
-                        tokens.value_number_old = oldValue;
-                        tokens.value_number = newValue;
+                        // set value to "0" to prevent flow trigger error
+                        if (oldValue == null || oldValue == undefined){
+                            tokens.value_number_old = 0;
+                        }
+                        else{
+                            tokens.value_number_old = oldValue;
+                        }
+                        if (newValue == null || newValue == undefined){
+                            tokens.value_number = 0;
+                        }
+                        else{
+                            tokens.value_number = newValue;
+                        }
                         await this.setCapabilityValue(keys[i], newValue);
                     }
                     else if (keys[i].startsWith("onoff") || keys[i].startsWith("onoff_button") || keys[i].startsWith("onoff_state") ){
@@ -550,14 +569,14 @@ class BaseDevice extends Homey.Device {
                         // trigger flow
                         if (this.homey.app){
                             // Standard capaility changed trigger
-                            this.homey.app._flowTriggerCapabilityChanged.trigger(this, tokens, state).catch(error => {this.log("Error triggering flow [capability_changed]: "+error.message)});
+                            this.homey.app._flowTriggerCapabilityChanged.trigger(this, tokens, state).catch(error => {this.log("Error triggering flow [capability_changed] for capability "+tokens.capability+": "+error.message)});
                             // additional alarm on/off trigger
                             if (keys[i].startsWith("alarm") || keys[i].startsWith("onoff")){
                                 if (newValue){
-                                    this.homey.app._flowTriggerGenericAlarmTrue.trigger(this, tokens, state).catch(error => {this.log("Error triggering flow [generic_alarm_true]: "+error.message)});
+                                    this.homey.app._flowTriggerGenericAlarmTrue.trigger(this, tokens, state).catch(error => {this.log("Error triggering flow [generic_alarm_true] for capability "+tokens.capability+": "+error.message)});
                                 }
                                 else{
-                                    this.homey.app._flowTriggerGenericAlarmFalse.trigger(this, tokens, state).catch(error => {this.log("Error triggering flow [generic_alarm_false]: "+error.message)});
+                                    this.homey.app._flowTriggerGenericAlarmFalse.trigger(this, tokens, state).catch(error => {this.log("Error triggering flow [generic_alarm_false] for capability "+tokens.capability+": "+error.message)});
                                 }
                             }
                         }

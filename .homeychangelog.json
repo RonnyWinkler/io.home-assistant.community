@@ -590,6 +590,10 @@
   "1.6.1": {
     "en": "Fixed capability update (manually added, power).",
     "de": "Capability-Aktualisierung korrigiert (manuell hinzugefügt, Energie)."
+  },
+  "1.6.2": {
+    "en": "Small technical fixes.",
+    "de": "Kleine technische Korrekturen."
   }
 
 }
