@@ -594,6 +594,10 @@
   "1.6.2": {
     "en": "Small technical fixes.",
     "de": "Kleine technische Korrekturen."
+  },
+  "1.6.3": {
+    "en": "Added decimals parameter for manually  added entities.",
+    "de": "Dezimalstellen-Parameter für manuell hinzugefügte Entitäten ergänzt."
   }
 
 }

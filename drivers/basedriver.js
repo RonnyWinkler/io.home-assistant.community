@@ -805,6 +805,14 @@ class BaseDriver extends Homey.Driver {
                     capability = 'onoff';
                 }
             }
+
+            // Add decimals for number capability
+            if (data.decimals != undefined){
+                if ( parseInt(data.decimals).par != NaN){
+                    capabilitiesOptions["decimals"] = parseInt(data.decimals);
+                }
+            }
+
             if (!device.hasCapability(capability)){
                 this.log("Adding capability: "+capability);
                 try{

@@ -44,6 +44,7 @@
       capability: document.getElementById('capabilityAdd').value,
       name: document.getElementById('nameAdd').value,
       unit: document.getElementById('unitAdd').value,
+      decimals: document.getElementById('decimalsAdd').value,
       converter_ha2homey: document.getElementById('converter_ha2homeyAdd').value,
       converter_homey2ha: document.getElementById('converter_homey2haAdd').value,
       add_as_main_capability: document.getElementById('addAsMainCapabilityAdd').checked,
@@ -137,7 +138,18 @@
         }
       );
   }
-
+  function onInfoDecimals(){
+    let message = new InfoMessage();
+    message.info( 
+        Homey.__("repair.custom_device.info_decimals"),
+        {
+          duration: 0,
+          closable: true,
+          dangerUseHtml: true
+        }
+      );
+  }
+  
   function onAddEntityAttributeClick(){
     if (document.getElementById("addEntityAttributeAdd").checked){
       document.getElementById("labelEntityAttributeAdd").style.display = 'unset';
@@ -173,6 +185,27 @@
       document.getElementById("divNumberInputRange").style.display = 'none';
     }
   }
+
+  function onCapabilityChanged(){
+    decimalsVisibility();
+  }
+
+  function decimalsVisibility(){  
+    document.getElementById('decimalsAdd').value = '';
+    let capability = document.getElementById('capabilityAdd').value;
+    if (
+        (capability.startsWith('measure') || capability.startsWith('meter'))
+      &&
+        !capability.startsWith('measure_generic')){
+      document.getElementById("divNumberDecimal").style.display = 'unset';
+    }
+    else{
+      document.getElementById("divNumberDecimal").style.display = 'none';
+    }
+  } 
+
+  // update decimal value field
+  decimalsVisibility();
 
   // update visible/invisible fields
   onAddEntityAttributeClick();
@@ -216,7 +249,7 @@
       <div class="info_icon" onClick="onInfoCapability()"> 
         <span class="fa fa-icon fa-info-circle"></span>
       </div>
-      <input id="capabilityAdd"  class="homey-form-input" type="text" value=""/>
+      <input id="capabilityAdd"  class="homey-form-input" type="text" value="" onchange="onCapabilityChanged()" oninput="onCapabilityChanged()"/>
     <!-- </div>
     <div class="homey-form-group"> -->
       <fieldset class="homey-form-checkbox-set">
@@ -233,6 +266,17 @@
       </div>
     </div>
 
+    <!-- Number Decimal options -->
+    <div class="homey-form-group" id="divNumberDecimal" style="display:none"> 
+      <fieldset class="homey-form-checkbox-set">
+        <label for="decimalsAdd" class="homey-form-label" style="display: inline;"><span data-i18n="repair.custom_device.decimals"></span></label>
+        <div class="info_icon" onClick="onInfoDecimals()"> 
+          <span class="fa fa-icon fa-info-circle"></span>
+        </div>
+        <input id="decimalsAdd"  class="homey-form-input" type="number" value=""/>
+      </fieldset>
+    </div>
+    
     <!-- Number Input options -->
     <div class="homey-form-group" id="divNumberInput" style="display:none">
       <fieldset class="homey-form-checkbox-set">
@@ -258,7 +302,7 @@
             <input id="entityNumberRangeMaxAdd"  class="homey-form-input" type="text" value=""/>
           </td>
           <td>
-            <label for="entityNumberRangeStepnAdd" class="homey-form-label"><span data-i18n="repair.custom_device.number_range_step"></span></label>
+            <label for="entityNumberRangeStepAdd" class="homey-form-label"><span data-i18n="repair.custom_device.number_range_step"></span></label>
             <input id="entityNumberRangeStepAdd"  class="homey-form-input" type="text" value=""/>
           </td>
         </tr>
@@ -364,6 +408,7 @@
                       document.getElementById('nameAdd').value = event.detail.selection.value.name;
                       document.getElementById('unitAdd').value = event.detail.selection.value.unit;
                       document.getElementById('capabilityAdd').value = await Homey.emit("getCustomTemplateCapability", event.detail.selection.value.entity_id)
+                      decimalsVisibility();
                       if (event.detail.selection.value.number_range != undefined){
                         document.getElementById('addEntityNumberInput').checked = false;
                         if (event.detail.selection.value.number_range.min != undefined){
