@@ -185,7 +185,7 @@ class BaseDevice extends Homey.Device {
             });
         });
         try{
-            if (this.hasCapability(capability)){
+            if (!this.hasCapability(capability)){
                 await this.addCapability(capability);
             }
             await this.setCapabilityOptions(capability, { values :values});

@@ -1,8 +1,8 @@
 {
   "_comment": "This file is generated. Please edit .homeycompose/app.json instead.",
   "id": "io.home-assistant.community",
-  "version": "1.6.3",
-  "compatibility": ">=12.0.1",
+  "version": "1.7.0",
+  "compatibility": ">=8.1.0",
   "sdk": 3,
   "brandColor": "#0DA6EA",
   "name": {
@@ -5058,6 +5058,7 @@
         "dim",
         "fan_oscillate",
         "fan_reverse",
+        "fan_mode_preset",
         "button.reconnect"
       ],
       "images": {
@@ -6889,6 +6890,7 @@
         "dim",
         "fan_oscillate",
         "fan_reverse",
+        "fan_mode_preset",
         "button.reconnect"
       ],
       "images": {
@@ -9549,6 +9551,7 @@
         "vacuum_clean_spot",
         "vacuum_state",
         "vacuum_state_raw",
+        "vacuum_mode_speed",
         "measure_battery",
         "button.reconnect"
       ],
@@ -10523,6 +10526,33 @@
       "uiComponent": "sensor",
       "icon": "/assets/capability_icons/custom_hint.svg"
     },
+    "fan_mode_preset": {
+      "type": "enum",
+      "title": {
+        "en": "Preset mode",
+        "de": "Voreinstellter Modus",
+        "nl": "Vooraf ingestelde modus"
+      },
+      "desc": {
+        "en": "Preset mode",
+        "de": "Voreinstellter Modus",
+        "nl": "Vooraf ingestelde modus"
+      },
+      "getable": true,
+      "setable": true,
+      "insights": true,
+      "uiComponent": "picker",
+      "values": [
+        {
+          "id": "n/a",
+          "title": {
+            "en": "not available",
+            "de": "nicht verfügbar",
+            "nl": "niet beschikbaar"
+          }
+        }
+      ]
+    },
     "fan_oscillate": {
       "type": "boolean",
       "title": {
@@ -10834,6 +10864,33 @@
       "getable": false,
       "setable": true,
       "icon": "/assets/capability_icons/vacuum_locate.svg"
+    },
+    "vacuum_mode_speed": {
+      "type": "enum",
+      "title": {
+        "en": "Speed mode",
+        "de": "Geschwindigkeitsmodud",
+        "nl": "Snelheid modus"
+      },
+      "desc": {
+        "en": "Speed mode",
+        "de": "Geschwindigkeitsmodud",
+        "nl": "Snelheid modus"
+      },
+      "getable": true,
+      "setable": true,
+      "insights": true,
+      "uiComponent": "picker",
+      "values": [
+        {
+          "id": "n/a",
+          "title": {
+            "en": "not available",
+            "de": "nicht verfügbar",
+            "nl": "niet beschikbaar"
+          }
+        }
+      ]
     },
     "vacuum_pause": {
       "type": "boolean",
