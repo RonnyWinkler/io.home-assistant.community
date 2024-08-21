@@ -1,0 +1,27 @@
+{
+  "type": "enum",
+  "title": {
+    "en": "Speed mode",
+    "de": "Geschwindigkeitsmodud",
+    "nl": "Snelheid modus"
+  },
+  "desc": {
+    "en": "Speed mode",
+    "de": "Geschwindigkeitsmodud",
+    "nl": "Snelheid modus"
+  },
+  "getable": true,
+  "setable": true,
+  "insights": true,
+  "uiComponent": "picker",
+  "values": [
+    {
+      "id": "n/a",
+      "title": {
+        "en": "not available",
+        "de": "nicht verfügbar",
+        "nl": "niet beschikbaar"
+      }
+    }  
+  ]
+}

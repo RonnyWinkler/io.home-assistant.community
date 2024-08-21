@@ -86,8 +86,9 @@ class WaterHeaterDevice extends BaseDevice {
                 }
 
                 // update mode lists
-                if ( data.attributes.operation_list != undefined ){
+                if ( data.attributes.operation_list != undefined && data.attributes.operation_list != this.modesOperation ){
                     this.modesOperation = data.attributes.operation_list;
+                    this.setCapabilityEnumList('water_heater_mode', data.attributes.operation_list);
                 }
             }
         }

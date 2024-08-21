@@ -19,6 +19,8 @@
       "fan_oscillate",
       "fan_reverse",
     
+      "fan_mode_preset",
+      
       "button.reconnect"
     ],
     "images": {

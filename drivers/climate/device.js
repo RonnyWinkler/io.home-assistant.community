@@ -9,6 +9,7 @@ class ClimateDevice extends BaseDevice {
         await super.onInit();
 
         // mode lists
+        this.modesHvac = [];
         this.modesFan = [];
         this.modesPreset = [];
         this.modesSwing = [];
@@ -80,13 +81,6 @@ class ClimateDevice extends BaseDevice {
                 }
                 catch(error){ ha_units = {} }
 
-                if (data.state != undefined && 
-                    data.state != "unavailable"){
-                    try{
-                        await this.setCapabilityValue("climate_mode", data.state);
-                    }
-                    catch(error){ }
-                }
                 if (data.state != undefined ){ 
                     if (data.state == "unavailable" || data.state == 'off'){
                         await this.setCapabilityValue("climate_on", false);
@@ -122,6 +116,34 @@ class ClimateDevice extends BaseDevice {
                     data.attributes.hvac_action != undefined){
                     await this.setCapabilityValue("climate_action", data.attributes.hvac_action);
                 }
+
+                // update mode lists
+                if ( data.attributes.hvac_modes != undefined && data.attributes.hvac_modes != this.modesHvac){
+                    this.modesHvac = data.attributes.hvac_modes;
+                    await this.setCapabilityEnumList('climate_mode', data.attributes.hvac_modes);
+                }
+
+                if ( data.attributes.fan_modes != undefined && data.attributes.fan_modes != this.modesFan){
+                    this.modesFan = data.attributes.fan_modes;
+                    await this.setCapabilityEnumList('climate_mode_fan', data.attributes.fan_modes);
+                }
+                if ( data.attributes.preset_modes != undefined && data.attributes.preset_modes != this.modesPreset){
+                    this.modesPreset = data.attributes.preset_modes;
+                    await this.setCapabilityEnumList('climate_mode_preset', data.attributes.preset_modes);
+                }
+                if ( data.attributes.swing_modes != undefined && data.attributes.swing_modes != this.modesSwing){
+                    this.modesSwing = data.attributes.swing_modes;
+                    await this.setCapabilityEnumList('climate_mode_swing', data.attributes.swing_modes);
+                }
+
+                // update modes
+                if (data.state != undefined && 
+                    data.state != "unavailable"){
+                    try{
+                        await this.setCapabilityValue("climate_mode", data.state);
+                    }
+                    catch(error){ }
+                }
                 if (this.hasCapability("climate_mode_fan") && 
                     data.attributes.fan_mode != undefined &&
                     data.attributes.fan_mode != "unavailable"){
@@ -138,16 +160,6 @@ class ClimateDevice extends BaseDevice {
                     await this.setCapabilityValue("climate_mode_swing", data.attributes.preset_swing);
                 }
 
-                // update mode lists
-                if ( data.attributes.fan_modes != undefined ){
-                    this.modesFan = data.attributes.fan_modes;
-                }
-                if ( data.attributes.preset_modes != undefined ){
-                    this.modesPreset = data.attributes.preset_modes;
-                }
-                if ( data.attributes.swing_modes != undefined ){
-                    this.modesSwing = data.attributes.swing_modes;
-                }
             }
         }
         catch(error){

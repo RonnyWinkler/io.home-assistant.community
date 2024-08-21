@@ -40,6 +40,9 @@ class VacuumDevice extends BaseDevice {
             await this._onCapabilityService('clean_spot');
             await this.setCapabilityValue("vacuum_clean_spot", false);
         });
+        this.registerCapabilityListener('vacuum_mode_speed', async (value) => {
+            await this.setFanSpeed(value);
+        });
         
         // maintenance actions
         this.registerCapabilityListener('button.reconnect', async () => {
@@ -154,12 +157,18 @@ class VacuumDevice extends BaseDevice {
                         await this.setCapabilityValue("measure_battery", data.attributes.battery_level);
                     }
                 }
-                if (data.attributes.fan_speed_list != undefined){
+
+                if (data.attributes.fan_speed_list != undefined && data.attributes.fan_speed_list != this.modesSpeed ){
                     this.modesSpeed = data.attributes.fan_speed_list;
+                    await this.setCapabilityEnumList('vacuum_mode_speed', data.attributes.fan_speed_list);
                 }
-                else{
-                    this.modesSpeed = [];
+
+                if (this.hasCapability("vacuum_mode_speed") && 
+                    data.attributes.fan_speed != undefined &&
+                    data.attributes.fan_speed != "unavailable"){
+                    await this.setCapabilityValue("climate_mode_preset", data.attributes.fan_speed);
                 }
+
             }
         }
         catch(error){

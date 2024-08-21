@@ -24,6 +24,9 @@ class FanDevice extends BaseDevice {
         this.registerCapabilityListener('fan_reverse', async (value) => {
             await this._onCapabilityOnoffReverse(value);
         });
+        this.registerCapabilityListener('fan_mode_preset', async (value) => {
+            await this._onCapabilityFanModePreset(value, opts);
+        });
         
         // maintenance actions
         this.registerCapabilityListener('button.reconnect', async () => {
@@ -95,9 +98,22 @@ class FanDevice extends BaseDevice {
                     }
                 }
 
-                this.modesPreset = data.attributes.preset_modes;
-                this.modesSpeed = data.attributes.speed_list;
+                // update mode lists
+                if (data.attributes.preset_modes != undefined && data.attributes.preset_modes !=  this.modesPreset){
+                    this.modesPreset = data.attributes.preset_modes;
+                    await this.setCapabilityEnumList('fan_mode_preset', data.attributes.preset_modes);
+                }
 
+                if (data.attributes.speed_list != undefined && data.attributes.speed_list !=  this.modesSpeed){
+                    this.modesSpeed = data.attributes.speed_list;
+                }
+
+                // update modes
+                if (this.hasCapability("fan_mode_preset") && 
+                    data.attributes.preset_mode != undefined &&
+                    data.attributes.preset_mode != "unavailable"){
+                    await this.setCapabilityValue("fan_mode_preset", data.attributes.preset_mode);
+                }
             }
         }
         catch(error){
@@ -141,6 +157,14 @@ class FanDevice extends BaseDevice {
             "direction": direction
         });
         return true;
+    }
+
+    async _onCapabilityFanModePreset( value ) {
+        let entityId = this.entityId;
+        await this._client.callService("fan", "set_preset_mode", {
+            "entity_id": entityId,
+            "preset_mode": value
+        });
     }
 
     async _onCapabilityDim( value ) {

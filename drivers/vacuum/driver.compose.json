@@ -18,6 +18,8 @@
     "vacuum_state",
     "vacuum_state_raw",
 
+    "vacuum_mode_speed",
+
     "measure_battery",
   
     "button.reconnect"

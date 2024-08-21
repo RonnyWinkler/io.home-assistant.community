@@ -176,6 +176,22 @@ class BaseDevice extends Homey.Device {
 
     }
 
+    async setCapabilityEnumList(capability, array){
+        let values = [];
+        array.forEach(element => {
+            values.push( {
+                id: element,
+                title: element
+            });
+        });
+        try{
+            if (this.hasCapability(capability)){
+                await this.addCapability(capability);
+            }
+            await this.setCapabilityOptions(capability, { values :values});
+        }catch(error){}
+    }
+
     async onInitDevice(){
         // Init device on satrtup with latest data to have initial values before HA sends updates
         this.homey.clearTimeout(this.timeoutInitDevice);

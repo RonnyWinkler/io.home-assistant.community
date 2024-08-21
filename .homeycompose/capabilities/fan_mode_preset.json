@@ -1,0 +1,27 @@
+{
+  "type": "enum",
+  "title": {
+    "en": "Preset mode",
+    "de": "Voreinstellter Modus",
+    "nl": "Vooraf ingestelde modus"
+  },
+  "desc": {
+    "en": "Preset mode",
+    "de": "Voreinstellter Modus",
+    "nl": "Vooraf ingestelde modus"
+  },
+  "getable": true,
+  "setable": true,
+  "insights": true,
+  "uiComponent": "picker",
+  "values": [
+    {
+      "id": "n/a",
+      "title": {
+        "en": "not available",
+        "de": "nicht verfügbar",
+        "nl": "niet beschikbaar"
+      }
+    }  
+  ]
+}

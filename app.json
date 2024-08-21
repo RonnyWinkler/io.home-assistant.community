@@ -2,7 +2,7 @@
   "_comment": "This file is generated. Please edit .homeycompose/app.json instead.",
   "id": "io.home-assistant.community",
   "version": "1.6.3",
-  "compatibility": ">=8.1.0",
+  "compatibility": ">=12.0.1",
   "sdk": 3,
   "brandColor": "#0DA6EA",
   "name": {
@@ -6321,6 +6321,382 @@
                     "en": "Window Coverings",
                     "nl": "Raambekleding",
                     "de": "Fenster-Abdeckungen"
+                  }
+                },
+                {
+                  "id": "airconditioning",
+                  "label": {
+                    "en": "Air Conditioner",
+                    "nl": "Airconditioner",
+                    "de": "Klimaanlage"
+                  }
+                },
+                {
+                  "id": "bicycle",
+                  "label": {
+                    "en": "Bicycle",
+                    "de": "Fahrrad",
+                    "nl": "Fiets"
+                  }
+                },
+                {
+                  "id": "battery",
+                  "label": {
+                    "en": "Battery",
+                    "de": "Batterie",
+                    "nl": "Batterij"
+                  }
+                },
+                {
+                  "id": "car",
+                  "label": {
+                    "en": "Car",
+                    "nl": "Auto",
+                    "de": "Auto"
+                  }
+                },
+                {
+                  "id": "boiler",
+                  "label": {
+                    "en": "Boiler",
+                    "de": "Heizkessel",
+                    "nl": "Boiler"
+                  }
+                },
+                {
+                  "id": "dehumidifier",
+                  "label": {
+                    "en": "Dehumidifier",
+                    "nl": "Luchtontvochtiger",
+                    "de": "Luftentfeuchter"
+                  }
+                },
+                {
+                  "id": "dishwasher",
+                  "label": {
+                    "en": "Dishwasher",
+                    "nl": "Vaatwasser",
+                    "de": "Geschirrspüler"
+                  }
+                },
+                {
+                  "id": "diffuser",
+                  "label": {
+                    "en": "Diffuser",
+                    "nl": "Diffuser",
+                    "de": "Zerstäuber"
+                  }
+                },
+                {
+                  "id": "evcharger",
+                  "label": {
+                    "en": "EV Charger",
+                    "nl": "EV-lader",
+                    "de": "E-Auto-Ladegerät"
+                  }
+                },
+                {
+                  "id": "dryer",
+                  "label": {
+                    "en": "Dryer",
+                    "nl": "Droger",
+                    "de": "Trockner"
+                  }
+                },
+                {
+                  "id": "cooktop",
+                  "label": {
+                    "en": "Cooktop",
+                    "nl": "Kookplaat",
+                    "de": "Kochfeld"
+                  }
+                },
+                {
+                  "id": "faucet",
+                  "label": {
+                    "en": "Faucet",
+                    "nl": "Kraan",
+                    "de": "Wasserhahn"
+                  }
+                },
+                {
+                  "id": "fireplace",
+                  "label": {
+                    "en": "Fireplace",
+                    "nl": "Open haard",
+                    "de": "Kamin"
+                  }
+                },
+                {
+                  "id": "freezer",
+                  "label": {
+                    "en": "Freezer",
+                    "nl": "Diepvries",
+                    "de": "Gefrierschrank"
+                  }
+                },
+                {
+                  "id": "fridge_and_freezer",
+                  "label": {
+                    "en": "Fridge & Freezer",
+                    "nl": "Koelkast & vriezer",
+                    "de": "Kühl- und Gefrierschrank"
+                  }
+                },
+                {
+                  "id": "fridge",
+                  "label": {
+                    "en": "Fridge",
+                    "de": "Kühlschrank",
+                    "nl": "Koelkast"
+                  }
+                },
+                {
+                  "id": "gameconsole",
+                  "label": {
+                    "en": "Game Console",
+                    "de": "Spielkonsole",
+                    "nl": "Spelcomputer"
+                  }
+                },
+                {
+                  "id": "grill",
+                  "label": {
+                    "en": "Grill",
+                    "de": "Grill",
+                    "nl": "Grill"
+                  }
+                },
+                {
+                  "id": "heatpump",
+                  "label": {
+                    "en": "Heat Pump",
+                    "de": "Wärmepumpe",
+                    "nl": "Warmtepomp"
+                  }
+                },
+                {
+                  "id": "hood",
+                  "label": {
+                    "en": "Hood",
+                    "de": "Abzugshaube",
+                    "nl": "Afzuigkap"
+                  }
+                },
+                {
+                  "id": "humidifier",
+                  "label": {
+                    "en": "Humidifier",
+                    "de": "Luftbefeuchter",
+                    "nl": "Luchtbevochtiger"
+                  }
+                },
+                {
+                  "id": "mediaplayer",
+                  "label": {
+                    "en": "Media Player",
+                    "de": "Medienabspielgerät",
+                    "nl": "Mediaspeler"
+                  }
+                },
+                {
+                  "id": "airtreatment",
+                  "label": {
+                    "en": "Air Treatment",
+                    "de": "Luftbehandlung",
+                    "nl": "Luchtbehandeling"
+                  }
+                },
+                {
+                  "id": "lawnmower",
+                  "label": {
+                    "en": "Lawn Mower",
+                    "de": "Rasenmäher",
+                    "nl": "Grasmaaier"
+                  }
+                },
+                {
+                  "id": "mop",
+                  "label": {
+                    "en": "Mop",
+                    "de": "Mopp",
+                    "nl": "Mop"
+                  }
+                },
+                {
+                  "id": "oven",
+                  "label": {
+                    "en": "Oven",
+                    "de": "Backofen",
+                    "nl": "Oven"
+                  }
+                },
+                {
+                  "id": "multicooker",
+                  "label": {
+                    "en": "Multicooker",
+                    "de": "Multikocher",
+                    "nl": "Multicooker"
+                  }
+                },
+                {
+                  "id": "airpurifier",
+                  "label": {
+                    "en": "Air Purifier",
+                    "de": "Luftreiniger",
+                    "nl": "Luchtreiniger"
+                  }
+                },
+                {
+                  "id": "petfeeder",
+                  "label": {
+                    "en": "Pet Feeder",
+                    "de": "Futterspender",
+                    "nl": "Voerbak"
+                  }
+                },
+                {
+                  "id": "scooter",
+                  "label": {
+                    "en": "Scooter",
+                    "de": "Motorroller",
+                    "nl": "Scooter"
+                  }
+                },
+                {
+                  "id": "radiator",
+                  "label": {
+                    "en": "Radiator",
+                    "de": "Heizkörper",
+                    "nl": "Radiator"
+                  }
+                },
+                {
+                  "id": "settopbox",
+                  "label": {
+                    "en": "Set-top Box",
+                    "de": "Set-Top-Box",
+                    "nl": "Settopbox"
+                  }
+                },
+                {
+                  "id": "shutterblinds",
+                  "label": {
+                    "en": "Shutter Blinds",
+                    "de": "Jalousien",
+                    "nl": "Jaloezieën"
+                  }
+                },
+                {
+                  "id": "fryer",
+                  "label": {
+                    "en": "Fryer",
+                    "de": "Fritteuse",
+                    "nl": "Friteuse"
+                  }
+                },
+                {
+                  "id": "smokealarm",
+                  "label": {
+                    "en": "Smoke Alarm",
+                    "de": "Rauchmelder",
+                    "nl": "Rookmelder"
+                  }
+                },
+                {
+                  "id": "vehicle",
+                  "label": {
+                    "en": "Vehicle",
+                    "de": "Fahrzeug",
+                    "nl": "Voertuig"
+                  }
+                },
+                {
+                  "id": "washer",
+                  "label": {
+                    "en": "Washing Machine",
+                    "de": "Waschmaschine",
+                    "nl": "Wasmachine"
+                  }
+                },
+                {
+                  "id": "airfryer",
+                  "label": {
+                    "en": "Air Fryer",
+                    "de": "Heißluftfritteuse",
+                    "nl": "Airfryer"
+                  }
+                },
+                {
+                  "id": "washer_and_dryer",
+                  "label": {
+                    "en": "Washer & Dryer",
+                    "de": "Waschmaschine mit Trockner",
+                    "nl": "Wasmachine & droger"
+                  }
+                },
+                {
+                  "id": "waterpurifier",
+                  "label": {
+                    "en": "Water Purifier",
+                    "de": "Wasseraufbereiter",
+                    "nl": "Waterzuiveraar"
+                  }
+                },
+                {
+                  "id": "waterheater",
+                  "label": {
+                    "en": "Water Heater",
+                    "de": "Warmwasserbereiter",
+                    "nl": "Boiler"
+                  }
+                },
+                {
+                  "id": "oven_and_microwave",
+                  "label": {
+                    "en": "Combi Microwave Oven",
+                    "de": "Kombi-Mikrowellenherd",
+                    "nl": "Combimagnetron"
+                  }
+                },
+                {
+                  "id": "microwave",
+                  "label": {
+                    "en": "Microwave",
+                    "de": "Mikrowelle",
+                    "nl": "Magnetron"
+                  }
+                },
+                {
+                  "id": "watervalve",
+                  "label": {
+                    "en": "Water Valve",
+                    "de": "Wasserventil",
+                    "nl": "Waterklep"
+                  }
+                },
+                {
+                  "id": "sprinkler",
+                  "label": {
+                    "en": "Sprinkler",
+                    "de": "Sprinkleranlage",
+                    "nl": "Sprinkler"
+                  }
+                },
+                {
+                  "id": "siren",
+                  "label": {
+                    "en": "Siren",
+                    "de": "Sirene",
+                    "nl": "Sirene"
+                  }
+                },
+                {
+                  "id": "networkrouter",
+                  "label": {
+                    "en": "Network Router",
+                    "de": "Netzwerk-Router",
+                    "nl": "Netwerkrouter"
                   }
                 }
               ]
