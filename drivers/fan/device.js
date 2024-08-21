@@ -12,19 +12,19 @@ class FanDevice extends BaseDevice {
         this.modesSpeed = [];
         this.modesPreset = [];
 
-        this.registerCapabilityListener('onoff', async (value) => {
+        this.registerCapabilityListener('onoff', async (value, opts) => {
             await this._onCapabilityOnoff(value);
         });
-        this.registerCapabilityListener('dim', async (value) => {
+        this.registerCapabilityListener('dim', async (value, opts) => {
             await this._onCapabilityDim(value);
         });
-        this.registerCapabilityListener('fan_oscillate', async (value) => {
+        this.registerCapabilityListener('fan_oscillate', async (value, opts) => {
             await this._onCapabilityOnoffOscillate(value);
         });
-        this.registerCapabilityListener('fan_reverse', async (value) => {
+        this.registerCapabilityListener('fan_reverse', async (value, opts) => {
             await this._onCapabilityOnoffReverse(value);
         });
-        this.registerCapabilityListener('fan_mode_preset', async (value) => {
+        this.registerCapabilityListener('fan_mode_preset', async (value, opts) => {
             await this._onCapabilityFanModePreset(value, opts);
         });
         

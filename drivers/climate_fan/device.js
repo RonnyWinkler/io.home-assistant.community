@@ -18,35 +18,35 @@ class ClimateFanDevice extends BaseDevice {
         this.modesFanPreset = [];
 
         // Climate:
-        this.registerCapabilityListener('target_temperature', async (value) => {
+        this.registerCapabilityListener('target_temperature', async (value, opts) => {
             await this._onCapabilityTargetTemperature(value);
         });
-        this.registerCapabilityListener('climate_mode', async (value) => {
+        this.registerCapabilityListener('climate_mode', async (value, opts) => {
             await this._onCapabilityClimateMode(value);
         });
-        this.registerCapabilityListener('climate_mode_fan', async (value) => {
+        this.registerCapabilityListener('climate_mode_fan', async (value, opts) => {
             await this._onCapabilityClimateModeFan(value, opts);
         });
-        this.registerCapabilityListener('climate_mode_preset', async (value) => {
+        this.registerCapabilityListener('climate_mode_preset', async (value, opts) => {
             await this._onCapabilityClimateModePreset(value, opts);
         });
-        this.registerCapabilityListener('climate_mode_swing', async (value) => {
+        this.registerCapabilityListener('climate_mode_swing', async (value, opts) => {
             await this._onCapabilityClimateModeSwing(value, opts);
         });
         // Fan:
-        this.registerCapabilityListener('onoff', async (value) => {
+        this.registerCapabilityListener('onoff', async (value, opts) => {
             await this._onCapabilityOnoff(value);
         });
-        this.registerCapabilityListener('dim', async (value) => {
+        this.registerCapabilityListener('dim', async (value, opts) => {
             await this._onCapabilityDim(value);
         });
-        this.registerCapabilityListener('fan_oscillate', async (value) => {
+        this.registerCapabilityListener('fan_oscillate', async (value, opts) => {
             await this._onCapabilityOnoffOscillate(value);
         });
-        this.registerCapabilityListener('fan_reverse', async (value) => {
+        this.registerCapabilityListener('fan_reverse', async (value, opts) => {
             await this._onCapabilityOnoffReverse(value);
         });
-        this.registerCapabilityListener('fan_mode_preset', async (value) => {
+        this.registerCapabilityListener('fan_mode_preset', async (value, opts) => {
             await this._onCapabilityFanModePreset(value, opts);
         });
 
