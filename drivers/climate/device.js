@@ -21,13 +21,13 @@ class ClimateDevice extends BaseDevice {
             await this._onCapabilityClimateMode(value);
         });
         this.registerCapabilityListener('climate_mode_fan', async (value, opts) => {
-            await this._onCapabilityClimateModeFan(value, opts);
+            await this._onCapabilityClimateModeFan(value);
         });
         this.registerCapabilityListener('climate_mode_preset', async (value, opts) => {
-            await this._onCapabilityClimateModePreset(value, opts);
+            await this._onCapabilityClimateModePreset(value);
         });
         this.registerCapabilityListener('climate_mode_swing', async (value, opts) => {
-            await this._onCapabilityClimateModeSwing(value, opts);
+            await this._onCapabilityClimateModeSwing(value);
         });
         
         // maintenance actions

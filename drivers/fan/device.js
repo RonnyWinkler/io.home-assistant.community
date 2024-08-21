@@ -25,7 +25,7 @@ class FanDevice extends BaseDevice {
             await this._onCapabilityOnoffReverse(value);
         });
         this.registerCapabilityListener('fan_mode_preset', async (value, opts) => {
-            await this._onCapabilityFanModePreset(value, opts);
+            await this._onCapabilityFanModePreset(value);
         });
         
         // maintenance actions

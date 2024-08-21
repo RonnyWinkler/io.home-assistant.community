@@ -25,13 +25,13 @@ class ClimateFanDevice extends BaseDevice {
             await this._onCapabilityClimateMode(value);
         });
         this.registerCapabilityListener('climate_mode_fan', async (value, opts) => {
-            await this._onCapabilityClimateModeFan(value, opts);
+            await this._onCapabilityClimateModeFan(value);
         });
         this.registerCapabilityListener('climate_mode_preset', async (value, opts) => {
-            await this._onCapabilityClimateModePreset(value, opts);
+            await this._onCapabilityClimateModePreset(value);
         });
         this.registerCapabilityListener('climate_mode_swing', async (value, opts) => {
-            await this._onCapabilityClimateModeSwing(value, opts);
+            await this._onCapabilityClimateModeSwing(value);
         });
         // Fan:
         this.registerCapabilityListener('onoff', async (value, opts) => {
@@ -47,7 +47,7 @@ class ClimateFanDevice extends BaseDevice {
             await this._onCapabilityOnoffReverse(value);
         });
         this.registerCapabilityListener('fan_mode_preset', async (value, opts) => {
-            await this._onCapabilityFanModePreset(value, opts);
+            await this._onCapabilityFanModePreset(value);
         });
 
         // maintenance actions

@@ -166,7 +166,7 @@ class VacuumDevice extends BaseDevice {
                 if (this.hasCapability("vacuum_mode_speed") && 
                     data.attributes.fan_speed != undefined &&
                     data.attributes.fan_speed != "unavailable"){
-                    await this.setCapabilityValue("climate_mode_preset", data.attributes.fan_speed);
+                    await this.setCapabilityValue("vacuum_mode_speed", data.attributes.fan_speed);
                 }
 
             }
