@@ -185,10 +185,15 @@ class BaseDevice extends Homey.Device {
             });
         });
         try{
-            if (!this.hasCapability(capability)){
+            if (values.length > 0 && !this.hasCapability(capability)){
                 await this.addCapability(capability);
             }
-            await this.setCapabilityOptions(capability, { values :values});
+            if (values.length == 0 && this.hasCapability(capability)){
+                await this.removeCapability(capability);
+            }
+            if (this.hasCapability(capability)){
+                await this.setCapabilityOptions(capability, { values :values});
+            }
         }catch(error){}
     }
 
