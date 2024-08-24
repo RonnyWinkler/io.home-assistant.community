@@ -1,14 +1,14 @@
 {
   "type": "enum",
   "title": {
-    "en": "Speed mode",
-    "de": "Geschwindigkeitsmodud",
-    "nl": "Snelheid modus"
+    "en": "Mode",
+    "de": "Modud",
+    "nl": "Modus"
   },
   "desc": {
-    "en": "Speed mode",
-    "de": "Geschwindigkeitsmodud",
-    "nl": "Snelheid modus"
+    "en": "Mode",
+    "de": "Modud",
+    "nl": "Modus"
   },
   "getable": true,
   "setable": true,

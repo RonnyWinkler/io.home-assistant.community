@@ -10631,6 +10631,33 @@
       "uiComponent": "button",
       "icon": "/assets/capability_icons/media_unjoin.svg"
     },
+    "mode_select": {
+      "type": "enum",
+      "title": {
+        "en": "Mode",
+        "de": "Modud",
+        "nl": "Modus"
+      },
+      "desc": {
+        "en": "Mode",
+        "de": "Modud",
+        "nl": "Modus"
+      },
+      "getable": true,
+      "setable": true,
+      "insights": true,
+      "uiComponent": "picker",
+      "values": [
+        {
+          "id": "n/a",
+          "title": {
+            "en": "Not available",
+            "de": "Nicht verfügbar",
+            "nl": "Niet beschikbaar"
+          }
+        }
+      ]
+    },
     "onoff_button": {
       "type": "boolean",
       "title": {
@@ -10885,9 +10912,9 @@
         {
           "id": "n/a",
           "title": {
-            "en": "not available",
-            "de": "nicht verfügbar",
-            "nl": "niet beschikbaar"
+            "en": "Not available",
+            "de": "Nicht verfügbar",
+            "nl": "Niet beschikbaar"
           }
         }
       ]

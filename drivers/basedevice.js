@@ -486,7 +486,7 @@ class BaseDevice extends Homey.Device {
                         entityValue = lodashget(data.attributes, attribute, null);
                     }
 
-                    if (keys[i].startsWith("measure_generic")){
+                    if (keys[i].startsWith("measure_generic") || keys[i].startsWith("mode_select")){
                         // String capabilities
                         if (converter != undefined){
                             newValue = converter(entityValue);
@@ -663,6 +663,14 @@ class BaseDevice extends Homey.Device {
                             // Send state change to HA
                             await this._client.callService(entityId.split(".")[0], "press", {"entity_id": entityId});
                         }
+                    }
+                    if (key.startsWith("mode_select")){
+                        // Send mode state change to HA
+                        await this._client.callService(entityId.split(".")[0], "select_option", {"entity_id": entityId, "option": valueObj[keys[i]]});
+                        // await this._client.callService("select", "select_option", {
+                        //     "entity_id": entityId,
+                        //     "option": value
+                        // });
                     }
                 }
             }
@@ -1024,7 +1032,7 @@ class BaseDevice extends Homey.Device {
             return result;
         }
         catch(error){
-            this.error("Error reading fan list: "+error.message);
+            this.error("Error reading select entity value list: "+error.message);
         }   
     }
 

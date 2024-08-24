@@ -813,6 +813,27 @@ class BaseDriver extends Homey.Driver {
                 }
             }
 
+            // Add mode list for mode_select capability (select entity)
+            if (data.entity_id.startsWith('select.') && capability.startsWith('mode_select.')){
+                try{
+                    let values = [];
+                    let entity = client.getEntity(data.entity_id);
+                    if (entity && entity.attributes && entity.attributes.options){
+                        for (let i=0; i<entity.attributes.options.length; i++){
+                            values.push({
+                                id: entity.attributes.options[i],
+                                title: entity.attributes.options[i]
+                            });
+                        }
+                        capabilitiesOptions["values"] = values;
+                    }
+                }
+                catch(error){
+                    this.log("Error getting select entity mode list. Error: "+error.message);
+                }
+            }
+
+
             if (!device.hasCapability(capability)){
                 this.log("Adding capability: "+capability);
                 try{
