@@ -598,6 +598,10 @@
   "1.6.3": {
     "en": "Added decimals parameter for manually  added entities.",
     "de": "Dezimalstellen-Parameter für manuell hinzugefügte Entitäten ergänzt."
+  },
+  "1.7.0": {
+    "en": "Added dynamic mode lists (climate, vacuum, custom select entity).",
+    "de": "Dynamische Modus-Listen hinzugefügt (Klima, Staubsauger, benutzerdefinierte Select-Entität)."
   }
 
 }
