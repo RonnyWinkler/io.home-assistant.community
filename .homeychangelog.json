@@ -602,6 +602,10 @@
   "1.7.0": {
     "en": "Added dynamic mode lists (climate, vacuum, custom select entity).",
     "de": "Dynamische Modus-Listen hinzugefügt (Klima, Staubsauger, benutzerdefinierte Select-Entität)."
+  },
+  "1.7.1": {
+    "en": "Small logging changes.",
+    "de": "Kleine Logging-Änderungen."
   }
 
 }

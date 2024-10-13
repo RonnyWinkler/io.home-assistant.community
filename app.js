@@ -1301,9 +1301,9 @@ class App extends Homey.App {
 		}
 		this._flowTriggerAppMemwarn.trigger(data).catch(error => this.log("onMemwarn() flow trigger error: ", error.message));
 
-		// Trigger extended crash log. Call async function without await and raise error...
-		if (data.count == data.limit - 2){
-			this.extendedCrashLog("Memory Warning " + data.count + "/" + data.limit);
+		// Trigger extended crash log.
+		if (data.count == data.limit - 1){
+			await this.extendedCrashLog("Memory Warning " + data.count + "/" + data.limit);
 		}
 	}
 
@@ -1317,9 +1317,9 @@ class App extends Homey.App {
 		}
 		this._flowTriggerAppCpuwarn.trigger(data).catch(error => this.log("onCpuwarn() flow trigger error: ", error.message));
 
-		// Trigger extended crash log. Call async function without await and raise error...
-		if (data.count == data.limit - 2){
-			this.extendedCrashLog("CPU Warning " + data.count + "/" + data.limit);
+		// Trigger extended crash log. 
+		if (data.count == data.limit - 1){
+			await this.extendedCrashLog("CPU Warning " + data.count + "/" + data.limit);
 		}
 	}
 
@@ -1329,20 +1329,20 @@ class App extends Homey.App {
 		this.log("Statistics: App start: " + statistics.overview.startup);
 		this.log("Statistics: Last connect: " + statistics.overview.lastConnect);
 		this.log("Statistics: Connects: " + statistics.overview.connects);
-		this.log("Statistics: Overall EntityListUpdates: " + statistics.sum.entityUpdates + " EntityLisUpdates: " + statistics.sum.entityUpdatesElements + " EntityStates: " + statistics.sum.entityStates + " Events: " + statistics.sum.events);
-		this.log("Statistics: 30sec   EntityListUpdates: " + statistics.short.entityUpdates + " EntityLisUpdates: " + statistics.short.entityUpdatesElements + " EntityStates: " + statistics.short.entityStates + " Events: " + statistics.short.events);
-		this.log("Statistics: current EntityListUpdates: " + statistics.current.entityUpdates + " EntityLisUpdates: " + statistics.current.entityUpdatesElements + " EntityStates: " + statistics.current.entityStates + " Events: " + statistics.current.events);
+		this.log("Statistics: Overall EntityListUpdates: " + statistics.sum.entityUpdates + " EntityListEntries: " + statistics.sum.entityUpdatesElements + " EntityStates: " + statistics.sum.entityStates + " Events: " + statistics.sum.events);
+		this.log("Statistics: 30sec   EntityListUpdates: " + statistics.short.entityUpdates + " EntityListEntries: " + statistics.short.entityUpdatesElements + " EntityStates: " + statistics.short.entityStates + " Events: " + statistics.short.events);
+		this.log("Statistics: current EntityListUpdates: " + statistics.current.entityUpdates + " EntityListEntries: " + statistics.current.entityUpdatesElements + " EntityStates: " + statistics.current.entityStates + " Events: " + statistics.current.events);
 	}
 
 	async extendedCrashLog(reason=''){
 		this.log("Trigger extended crash log. Reason: "+reason);
 		this.logStatistics();
-		let log = this.getLog();
-		let logText = '';
-		for (let i=log.length; i>0; i--){
-			logText += log[i-1] + '\n';
-		}
-		throw new Error("Extended crash log...\n" + logText);
+		// let log = this.getLog();
+		// let logText = '';
+		// for (let i=log.length; i>0; i--){
+		// 	logText += log[i-1] + '\n';
+		// }
+		// throw new Error("Extended crash log...\n" + logText);
 	} 
 
 	getClient() {
