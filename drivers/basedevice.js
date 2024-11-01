@@ -179,10 +179,15 @@ class BaseDevice extends Homey.Device {
     async setCapabilityEnumList(capability, array){
         let values = [];
         array.forEach(element => {
-            values.push( {
-                id: element,
-                title: element
-            });
+            if (element.id && element.title){
+                values.push( element );
+            }
+            else{
+                values.push( {
+                    id: element,
+                    title: element
+                });
+            }
         });
         try{
             if (values.length > 0 && !this.hasCapability(capability)){

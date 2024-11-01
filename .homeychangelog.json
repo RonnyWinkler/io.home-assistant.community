@@ -606,6 +606,10 @@
   "1.7.1": {
     "en": "Small logging changes.",
     "de": "Kleine Logging-Änderungen."
+  },
+  "1.7.2": {
+    "en": "Dynamic modes for alarm control panel.",
+    "de": "Dynamische Modi für Alarmzentrale."
   }
 
 }

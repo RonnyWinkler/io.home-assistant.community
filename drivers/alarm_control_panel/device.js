@@ -7,6 +7,8 @@ class AlarmControlPanelDevice extends BaseDevice {
     async onInit() {
         await super.onInit();
 
+        this.features = undefined;
+
         // Capability listener for device capabilities
         this.registerCapabilityListener('alarm_control_panel_mode', async (value, opts) => {
             await this._onCapabilityAlarmControlPanelMode(value, opts);
@@ -53,11 +55,58 @@ class AlarmControlPanelDevice extends BaseDevice {
         }
     }
 
+
+    // Device update ============================================================================================
+    async _checkFeatures(features){
+        // check features
+        // https://github.com/home-assistant/core/blob/4da93f6a5ed4079ae292a1908d2b798a8a0e7fac/homeassistant/components/alarm_control_panel/const.py#L49
+        // ARM_HOME = 1
+        // ARM_AWAY = 2
+        // ARM_NIGHT = 4
+        // TRIGGER = 8
+        // ARM_CUSTOM_BYPASS = 16
+        // ARM_VACATION = 32
+
+        if (features != undefined && this.features != features){
+            this.features = features;
+            try{
+                let modes = [];
+                if ((features & 1) == 1) {
+                    modes.push( this.homey.app.manifest.capabilities.alarm_control_panel_mode.values.find(u => u.id === 'armed_home'));
+                }
+                if ((features & 2) == 2) {
+                    modes.push( this.homey.app.manifest.capabilities.alarm_control_panel_mode.values.find(u => u.id === 'armed_away') );
+                }
+                if ((features & 4) == 4) {
+                    modes.push( this.homey.app.manifest.capabilities.alarm_control_panel_mode.values.find(u => u.id === 'armed_night') );
+                }
+                if ((features & 16) == 16) {
+                    modes.push( this.homey.app.manifest.capabilities.alarm_control_panel_mode.values.find(u => u.id === 'armed_custom_bypass') );
+                }
+                if ((features & 32) == 32) {
+                    modes.push( this.homey.app.manifest.capabilities.alarm_control_panel_mode.values.find(u => u.id === 'armed_vacation') );
+                }
+                await this.setCapabilityEnumList("alarm_control_panel_mode", modes);
+
+                if ((features & 8) != 8 && this.hasCapability('alarm_control_panel_alarm_trigger')){
+                    this.removeCapability('alarm_control_panel_alarm_trigger');
+                }
+            }
+            catch(error){
+                this.log("AlarmPanel onInitDevice() Error updating features: "+error.message);
+            }
+            
+        }
+    }
+
     // Entity update ============================================================================================
     async onEntityUpdate(data) {
         await super.onEntityUpdate(data);
 
         if(data && data.entity_id && data.entity_id == this.entityId) {
+            // store feature
+            this._checkFeatures(data.attributes.supported_features);
+
             try{
                 await this.setCapabilityValue("alarm_control_panel_mode", data.state);
             }
