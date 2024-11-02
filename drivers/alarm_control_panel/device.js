@@ -5,9 +5,9 @@ const BaseDevice = require('../basedevice');
 class AlarmControlPanelDevice extends BaseDevice {
 
     async onInit() {
-        await super.onInit();
+        this.features = this.getStoreValue('features') || undefined;
 
-        this.features = undefined;
+        await super.onInit();
 
         // Capability listener for device capabilities
         this.registerCapabilityListener('alarm_control_panel_mode', async (value, opts) => {
@@ -69,6 +69,7 @@ class AlarmControlPanelDevice extends BaseDevice {
 
         if (features != undefined && this.features != features){
             this.features = features;
+            await this.setStoreValue('features', features);
             try{
                 let modes = [];
                 if ((features & 1) == 1) {
@@ -90,6 +91,9 @@ class AlarmControlPanelDevice extends BaseDevice {
 
                 if ((features & 8) != 8 && this.hasCapability('alarm_control_panel_alarm_trigger')){
                     this.removeCapability('alarm_control_panel_alarm_trigger');
+                }
+                if ((features & 8) == 8 && !this.hasCapability('alarm_control_panel_alarm_trigger')){
+                    this.addCapability('alarm_control_panel_alarm_trigger');
                 }
             }
             catch(error){
