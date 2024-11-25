@@ -614,6 +614,14 @@
   "1.7.3": {
     "en": "Dynamic modes for alarm control panel.",
     "de": "Dynamische Modi für Alarmzentrale."
+  },
+  "1.8.0": {
+    "en": "Added new capabilities (Min.FW >= 12.2.0).",
+    "de": "Neue Capabilities ergänzt (Min.FW >= 12.2.0)."
+  },
+  "1.8.1": {
+    "en": "Internal change for capability update (type check).",
+    "de": "Interner Änderungen zur Capability-Aktualisierung (Typ-Check)."
   }
 
 }

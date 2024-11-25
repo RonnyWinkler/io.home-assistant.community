@@ -6,8 +6,9 @@ const Homey = require('homey');
 const http = require('http');
 const https = require('https');
 const fs = require('fs');
+const Capability = require('../lib/homey/capability');
 
-const customTemplateCapabilities = require('../assets/const/customTemplateCapabilities');
+// const customTemplateCapabilities = require('../assets/const/customTemplateCapabilities');
 
 const USERDATA_PATH = "/userdata/";
 const USERDATA_PATH_PREFIX = "../../..";
@@ -37,9 +38,7 @@ function download(url, path, encoding){
     });
 }
 
-
-class BaseDriver extends Homey.Driver {
-
+class BaseDriver extends Homey.Driver {    
     onPair(session) {
         this.log("onPair()");
         this.selectedDevices = [];
@@ -723,7 +722,29 @@ class BaseDriver extends Homey.Driver {
     }
 
     async getCustomTemplateCapabilityList(device){
-        return customTemplateCapabilities;
+        let result = [];
+        let capabilities = Capability.getCapabilities();
+        let keys = Object.keys(capabilities);
+        keys.forEach(key => {
+            let capability = capabilities[key];
+            result.push({ 
+                id: key,
+                type: capability.type,
+                title: capability.title[this.homey.i18n.getLanguage()] || capability.title['en'] || capability.title,
+                uiComponent: capability.uiComponent
+            });
+        }) 
+
+            // capabilities.forEach(capability => {
+        //         result.push({ 
+        //             id: capability.id,
+        //             name: capability.id,
+        //             type: capability.type
+        //         }
+        //     );
+        // }) 
+
+        return result;
     }
 
     async getCustomTemplateCapability(device, entity_id){

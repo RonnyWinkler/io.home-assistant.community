@@ -1,0 +1,20 @@
+{
+  "title": {
+    "en": "Position",
+    "nl": "Positie",
+    "de": "Position",
+    "fr": "Position",
+    "it": "Posizione",
+    "sv": "Position",
+    "no": "Posisjon",
+    "es": "Posición",
+    "da": "Position",
+    "ru": "Позиция",
+    "pl": "Pozycja",
+    "ko": "위치"
+  },
+  "type": "number",
+  "getable": true,
+  "setable": false,
+  "uiComponent": "media"
+}

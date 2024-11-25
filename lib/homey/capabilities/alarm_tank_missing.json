@@ -1,0 +1,115 @@
+{
+  "type": "boolean",
+  "title": {
+    "en": "Tank missing alarm",
+    "nl": "Waarschuwing voor ontbrekende tank",
+    "da": "Alarm for manglende tank",
+    "it": "Allarme mancanza serbatoio",
+    "ko": "탱크 누락 알람",
+    "no": "Alarm om manglende tank",
+    "pl": "Alarm braku zbiornika",
+    "ru": "Сигнал об отсутствии резервуара",
+    "sv": "Larm för saknad tank",
+    "es": "Alarma de depósito no presente",
+    "fr": "Alarme de réservoir manquant"
+  },
+  "desc": {
+    "en": "True when the tank is missing.",
+    "nl": "Wordt geactiveerd wanneer de tank ontbreekt.",
+    "da": "Det er sandt, når tanken mangler.",
+    "it": "Vero quando manca il serbatoio.",
+    "ko": "탱크가 누락되면 참입니다.",
+    "no": "Sann når tanken mangler.",
+    "pl": "Prawda, gdy brakuje zbiornika.",
+    "ru": "Значение «истина», когда резервуар отсутствует.",
+    "sv": "Sant när tanken saknas.",
+    "es": "Activado cuando el depósito no está presente.",
+    "fr": "Se déclenche lorsque le réservoir est manquant."
+  },
+  "insights": true,
+  "insightsTitleTrue": {
+    "en": "Tank was missing",
+    "nl": "Tank ontbrak",
+    "da": "Tanken manglede",
+    "it": "Mancava il serbatoio",
+    "ko": "탱크 누락됨",
+    "no": "Tanken manglet",
+    "pl": "Brakowało zbiornika",
+    "ru": "Резервуар отсутствовал",
+    "sv": "Tank saknades",
+    "es": "El depósito no estaba presente",
+    "fr": "Le réservoir était manquant"
+  },
+  "insightsTitleFalse": {
+    "en": "Tank was not missing",
+    "nl": "Tank was geplaatst",
+    "da": "Tanken manglede ikke",
+    "it": "Il serbatoio non mancava",
+    "ko": "탱크가 누락되어 있지 않음",
+    "no": "Tanken manglet ikke",
+    "pl": "Nie brakowało zbiornika",
+    "ru": "Резервуар не отсутствовал",
+    "sv": "Tanken saknades inte",
+    "es": "El depósito estaba colocado",
+    "fr": "Le réservoir n'était pas manquant"
+  },
+  "getable": true,
+  "setable": false,
+  "uiComponent": "sensor",
+  "$flow": {
+    "triggers": [
+      {
+        "id": "alarm_tank_missing_true",
+        "highlight": true,
+        "title": {
+          "en": "The tank is missing",
+          "nl": "De tank ontbreekt",
+          "da": "Tanken mangler",
+          "it": "Manca il serbatoio",
+          "ko": "탱크 누락",
+          "no": "Tanken mangler",
+          "pl": "Brakuje zbiornika",
+          "ru": "Резервуар отсутствует",
+          "sv": "Tanken saknas",
+          "es": "El depósito no está presente",
+          "fr": "Le réservoir est manquant"
+        }
+      },
+      {
+        "id": "alarm_tank_missing_false",
+        "title": {
+          "en": "The tank is placed",
+          "nl": "De tank is geplaatst",
+          "da": "Tanken er placeret",
+          "it": "Il serbatoio è presente",
+          "ko": "탱크 배치됨",
+          "no": "Tanken er på plass",
+          "pl": "Zbiornik jest umieszczony",
+          "ru": "Резервуар размещен",
+          "sv": "Tanken är på plats",
+          "es": "El depósito está colocado",
+          "fr": "Le réservoir est placé"
+        }
+      }
+    ],
+    "conditions": [
+      {
+        "id": "alarm_tank_missing",
+        "title": {
+          "en": "Tank !{{is|is not}} missing",
+          "nl": "De tank !{{ontbreekt|is geplaatst}}",
+          "da": "Tanken !{{er|er ikke}}  manglende",
+          "it": "Il serbatoio è !{{assente|presente}}",
+          "ko": "탱크가 !{{누락됨|배치됨}}",
+          "no": "Tanken !{{er|er ikke}} borte",
+          "pl": "Zbiornik jest !{{brakujący|obecny}}",
+          "ru": "Резервуар ! {{отсутствует|в наличии}}",
+          "sv": "Tanken !{{saknas|är på plats}}",
+          "es": "El depósito !{{está|no está}} presente",
+          "fr": "Le réservoir est !{{manquant|présent}}"
+        }
+      }
+    ]
+  },
+  "minCompatibility": "12.2.0"
+}

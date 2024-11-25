@@ -3,6 +3,7 @@
 const Homey = require('homey');
 const https = require('https');
 const lodashget = require('lodash.get');
+const Capability = require('../lib/homey/capability');
 
 const CAPABILITIES_SET_DEBOUNCE = 100;
 
@@ -491,45 +492,108 @@ class BaseDevice extends Homey.Device {
                         entityValue = lodashget(data.attributes, attribute, null);
                     }
 
-                    if (keys[i].startsWith("measure_generic") || keys[i].startsWith("mode_select")){
-                        // String capabilities
-                        if (converter != undefined){
-                            newValue = converter(entityValue);
-                        }
-                        else{
-                            newValue = entityValue;
-                        }
-                        if (newValue == undefined ){
-                            newValue = '';
-                        }
-                        if (oldValue == undefined ){
-                            oldValue = '';
-                        }
-                        tokens.value_string_old = oldValue;
-                        tokens.value_string = newValue;
-                        await this.setCapabilityValue(keys[i], newValue);
-                    }
-                    else if (keys[i].startsWith("alarm")){
-                        // boolean capability
-                        if (converter != undefined){
-                            newValue = converter(entityValue);
-                        }
-                        else{
-                            switch (entityValue){
-                                case "on":
-                                    newValue = true;
-                                    break;
-                                case "off":
-                                    newValue = false;
-                                    break;            
-                            }
-                            // newValue = (entityValue == "on");
-                        }
-                        tokens.value_boolean_old = oldValue;
-                        tokens.value_boolean = newValue;
-                        await this.setCapabilityValue(keys[i], newValue );
-                    }
-                    else if (keys[i].startsWith("measure") || keys[i].startsWith("meter") || keys[i].startsWith("dim")){
+                    // if (keys[i].startsWith("measure") || keys[i].startsWith("meter") || keys[i].startsWith("dim")){
+                    //     // numeric capability
+                    //     if (converter != undefined){
+                    //         newValue = converter(entityValue);
+                    //     }
+                    //     else{
+                    //         newValue = parseFloat(entityValue);
+                    //     }
+                    //     // set value to "0" to prevent flow trigger error
+                    //     if (oldValue == null || oldValue == undefined){
+                    //         tokens.value_number_old = 0;
+                    //     }
+                    //     else{
+                    //         tokens.value_number_old = oldValue;
+                    //     }
+                    //     if (newValue == null || newValue == undefined){
+                    //         tokens.value_number = 0;
+                    //     }
+                    //     else{
+                    //         tokens.value_number = newValue;
+                    //     }
+                    //     await this.setCapabilityValue(keys[i], newValue);
+                    // }
+                    // else if (keys[i].startsWith("alarm")){
+                    //     // boolean capability
+                    //     if (converter != undefined){
+                    //         newValue = converter(entityValue);
+                    //     }
+                    //     else{
+                    //         switch (entityValue){
+                    //             case "on":
+                    //                 newValue = true;
+                    //                 break;
+                    //             case "off":
+                    //                 newValue = false;
+                    //                 break;            
+                    //         }
+                    //         // newValue = (entityValue == "on");
+                    //     }
+                    //     tokens.value_boolean_old = oldValue;
+                    //     tokens.value_boolean = newValue;
+                    //     await this.setCapabilityValue(keys[i], newValue );
+                    // }
+                    // else if (keys[i].startsWith("onoff") || keys[i].startsWith("onoff_button") || keys[i].startsWith("onoff_state") ){
+                    //     // boolean capability
+                    //     if (converter != undefined){
+                    //         newValue = converter(entityValue);
+                    //     }
+                    //     else{
+                    //         switch (entityValue){
+                    //             case "on":
+                    //                 newValue = true;
+                    //                 break;
+                    //             case "off":
+                    //                 newValue = false;
+                    //                 break;            
+                    //         }
+                    //         // newValue = (entityValue == "on");
+                    //     }
+                    //     tokens.value_boolean_old = oldValue;
+                    //     tokens.value_boolean = newValue;
+                    //     // ignore initial state change from initial state to first read state in onInit()
+                    //     if (oldValue == null){
+                    //         oldValue = newValue;
+                    //     }
+                    //     await this.setCapabilityValue(keys[i], newValue );
+                    // }
+                    // else if (keys[i].startsWith("button") || keys[i].startsWith("input_button")){
+                    //     if (converter != undefined){
+                    //         newValue = converter(entityValue);
+                    //     }
+                    //     else{
+                    //         newValue = entityValue;
+                    //     }
+                    //     oldValue = this._buttonState[keys[i]];
+                    //     this._buttonState[keys[i]] = newValue;
+                    //     if (oldValue == undefined){
+                    //         oldValue = newValue;
+                    //     }
+                    // }
+                    // // else if (keys[i].startsWith("measure_generic") || keys[i].startsWith("mode_select")){
+                    // else{
+                    //     // String capabilities
+                    //     if (converter != undefined){
+                    //         newValue = converter(entityValue);
+                    //     }
+                    //     else{
+                    //         newValue = entityValue;
+                    //     }
+                    //     if (newValue == undefined ){
+                    //         newValue = '';
+                    //     }
+                    //     if (oldValue == undefined ){
+                    //         oldValue = '';
+                    //     }
+                    //     tokens.value_string_old = oldValue;
+                    //     tokens.value_string = newValue;
+                    //     await this.setCapabilityValue(keys[i], newValue);
+                    // }
+
+                    let capabilityType = Capability.getCapabilityType(keys[i]);
+                    if (capabilityType == 'number'){ // (keys[i].startsWith("measure") || keys[i].startsWith("meter") || keys[i].startsWith("dim")){
                         // numeric capability
                         if (converter != undefined){
                             newValue = converter(entityValue);
@@ -552,7 +616,7 @@ class BaseDevice extends Homey.Device {
                         }
                         await this.setCapabilityValue(keys[i], newValue);
                     }
-                    else if (keys[i].startsWith("onoff") || keys[i].startsWith("onoff_button") || keys[i].startsWith("onoff_state") ){
+                    else if (capabilityType == 'boolean'){ // (keys[i].startsWith("alarm")){
                         // boolean capability
                         if (converter != undefined){
                             newValue = converter(entityValue);
@@ -564,32 +628,49 @@ class BaseDevice extends Homey.Device {
                                     break;
                                 case "off":
                                     newValue = false;
-                                    break;            
+                                    break;           
+                                default:
+                                    newValue = entityValue;
                             }
                             // newValue = (entityValue == "on");
                         }
                         tokens.value_boolean_old = oldValue;
                         tokens.value_boolean = newValue;
                         // ignore initial state change from initial state to first read state in onInit()
-                        if (oldValue == null){
-                            oldValue = newValue;
+                        if (keys[i].startsWith("onoff") || keys[i].startsWith("onoff_button") || keys[i].startsWith("onoff_state") ){
+                            if (oldValue == null || oldValue == undefined){
+                                oldValue = newValue;
+                            }
+                        }
+                        if (keys[i].startsWith("button") || keys[i].startsWith("input_button")){
+                            oldValue = this._buttonState[keys[i]];
+                            this._buttonState[keys[i]] = newValue;
+                            if (oldValue == null || oldValue == undefined){
+                                oldValue = newValue;
+                            }
                         }
                         await this.setCapabilityValue(keys[i], newValue );
                     }
-                    else if (keys[i].startsWith("button") || keys[i].startsWith("input_button")){
+                    // else if (keys[i].startsWith("measure_generic") || keys[i].startsWith("mode_select")){
+                    // all string & enum capabilities
+                    else{
+                        // String capabilities
                         if (converter != undefined){
                             newValue = converter(entityValue);
                         }
                         else{
                             newValue = entityValue;
                         }
-                        oldValue = this._buttonState[keys[i]];
-                        this._buttonState[keys[i]] = newValue;
-                        if (oldValue == undefined){
-                            oldValue = newValue;
+                        if (newValue == undefined ){
+                            newValue = '';
                         }
+                        if (oldValue == undefined ){
+                            oldValue = '';
+                        }
+                        tokens.value_string_old = oldValue;
+                        tokens.value_string = newValue;
+                        await this.setCapabilityValue(keys[i], newValue);
                     }
-                    else{continue;}
 
                     if (oldValue!=newValue){
                         // trigger flow

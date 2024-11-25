@@ -1,0 +1,41 @@
+{
+  "title": {
+    "en": "Next",
+    "nl": "Volgende",
+    "de": "Weiter",
+    "fr": "Suivant",
+    "it": "Successivo",
+    "sv": "Nästa",
+    "no": "Neste",
+    "es": "Siguiente",
+    "da": "Næste",
+    "ru": "Дальше",
+    "pl": "Dalej",
+    "ko": "다음"
+  },
+  "type": "boolean",
+  "getable": false,
+  "setable": true,
+  "uiComponent": "media",
+  "$flow": {
+    "actions": [
+      {
+        "id": "next",
+        "title": {
+          "en": "Next",
+          "nl": "Volgende",
+          "de": "Weiter",
+          "fr": "Suivant",
+          "it": "Successivo",
+          "sv": "Nästa",
+          "no": "Neste",
+          "es": "Siguiente",
+          "da": "Næste",
+          "ru": "Дальше",
+          "pl": "Dalej",
+          "ko": "다음"
+        }
+      }
+    ]
+  }
+}

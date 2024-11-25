@@ -85,6 +85,8 @@
             "converter_ha2homey": "Converter function HA->Homey",
             "converter_homey2HA": "Converter function Homey->HA",
             "converter_example_placeholder": "Select example...",
+            "converter_text_00": "Standard template",
+            "converter_code_00": "(value) => { return value }",
             "converter_text_01": "Numeric calculation 0..1 => 0..100 %",
             "converter_code_01": "(value) => { return parseFloat(value) * 100; }",
             "converter_text_02": "Numeric calculation 0..100 % => 0..1",

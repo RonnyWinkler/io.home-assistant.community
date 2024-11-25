@@ -464,8 +464,19 @@
                       return result;
                   });
               },
-              keys: ["id"],
-              cache: true
+              keys: ["id", "title"],
+              cache: true,
+              filter: (list) => {
+                // Filter duplicates
+                // incase of multiple data keys usage
+                const filteredResults = Array.from(
+                  new Set(list.map((value) => value.value.id))
+                ).map((id) => {
+                  return list.find((value) => value.value.id === id);
+                });
+                return filteredResults;
+              }
+
           },
           resultsList:{
             maxResults: 100,
@@ -473,7 +484,17 @@
           },
           resultItem: {
             element: (item, data) => {
-                item.innerHTML =  "<span id='spanResultlistName'>"+data.match+"</span>";
+                // item.innerHTML =  "<span id='spanResultlistName'>"+data.match+"</span>";
+                if (data.key == 'title'){
+                item.innerHTML =  "<span id='spanResultlistName'>"+data.value.id+"</span>"+
+                                  "<br>"+
+                                  "<span id='spanResultlistEntity'>"+data.match+"</span>";
+              }
+              if (data.key == 'id'){
+                item.innerHTML =  "<span id='spanResultlistName'>"+data.match+"</span>"+
+                                  "<br>"+
+                                  "<span id='spanResultlistEntity'>"+data.value.title+"</span>";
+              }
             },
             highlight: true
           },
@@ -542,6 +563,10 @@
           threshold: 0,
           data: {
               src: [
+                {
+                  "text": Homey.__("repair.custom_device.converter_text_00"),
+                  "code": Homey.__("repair.custom_device.converter_code_00")
+                },
                 {
                   "text": Homey.__("repair.custom_device.converter_text_01"),
                   "code": Homey.__("repair.custom_device.converter_code_01")

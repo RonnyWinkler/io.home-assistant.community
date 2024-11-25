@@ -1,0 +1,20 @@
+{
+  "title": {
+    "en": "Duration",
+    "nl": "Lengte",
+    "de": "Länge",
+    "fr": "Durée",
+    "it": "Durata",
+    "sv": "Längd",
+    "no": "Varighet",
+    "es": "Duración",
+    "da": "Varighed",
+    "ru": "Продолжительность",
+    "pl": "Czas trwania",
+    "ko": "기간"
+  },
+  "type": "number",
+  "getable": true,
+  "setable": false,
+  "uiComponent": "media"
+}
