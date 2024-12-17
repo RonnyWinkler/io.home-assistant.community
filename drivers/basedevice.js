@@ -774,6 +774,12 @@ class BaseDevice extends Homey.Device {
         );
     }
 
+    async setEnergyHomeBattery(value = false){
+        await this.setEnergy(
+            { "homeBattery": value }
+        );
+    }
+
     // Settings ================================================================================================
     async onSettings(settings){
         try {
@@ -832,6 +838,16 @@ class BaseDevice extends Homey.Device {
                 else{
                     this.log("onSettings(): set_energy_cumulative UNSET");
                     await this.setEnergyCumulative(false);
+                } 
+            }
+            if (settings.changedKeys.indexOf('set_energy_home_battery') > -1){
+                if (settings.newSettings['set_energy_home_battery']){
+                    this.log("onSettings(): set_energy_home_battery SET");
+                    await this.setEnergyHomeBattery(true);
+                }
+                else{
+                    this.log("onSettings(): set_energy_home_battery UNSET");
+                    await this.setEnergyHomeBattery(false);
                 } 
             }
         }

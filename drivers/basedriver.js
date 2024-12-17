@@ -889,6 +889,20 @@ class BaseDriver extends Homey.Driver {
                 }
                 this.log("Capability added.");
                 
+                // Set energy options
+                if (data.energy && data.energy.cumulativeCapabilityOption != 'default'){
+                    let energy = { };
+                    switch (data.energy.cumulativeCapabilityOption){
+                        case 'imported':
+                            energy["cumulativeImportedCapability"] = capability;
+                            break;
+                        case 'exported':
+                            energy["cumulativeExportedCapability"] = capability;
+                            break;
+                    }
+                    await device.setEnergy( energy );
+                }
+
                 // Reload device (register capability listerner ...)
                 device.onInit();
             }

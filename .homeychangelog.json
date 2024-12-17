@@ -622,6 +622,10 @@
   "1.8.1": {
     "en": "Internal change for capability update (type check).",
     "de": "Interner Änderungen zur Capability-Aktualisierung (Typ-Check)."
+  },
+  "1.8.2": {
+    "en": "HomeyEnergy: Choose meter type adding capability to custom devices.",
+    "de": "HomeyEnergy: Wähle Zählertyp bein Hinzufügen von Capabilities in benutzerdefiniertee Geräte."
   }
 
 }

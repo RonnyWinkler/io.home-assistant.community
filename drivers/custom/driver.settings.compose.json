@@ -618,6 +618,31 @@
                     "de": "Aktivieren Sie diese Einstellung, wenn das Gerät den kumulativen Energieverbrauch misst.", 
                     "nl": "Schakel deze instelling in als het apparaat het cumulatieve energieverbruik meet."
                 }
+            },
+            {
+                "id": "energy_cumulative_include",
+                "type": "checkbox",
+                "value": false,
+                "label": {
+                    "en": "Include in total energy",
+                    "de": "In Gesamtenergie einbeziehen", 
+                    "nl": "In totale energie opnemen"
+                }
+            },
+            {
+                "id": "set_energy_home_battery",
+                "type": "checkbox",
+                "value": false,
+                "label": {
+                    "en": "Home Battery",
+                    "de": "Hausbatterie", 
+                    "nl": "Huisbatterij"
+                },
+                "hint": {
+                    "en": "Define a device with class=battery having a measure_power capability as home battery. Provide positive values to indicate the battery is consuming energy (charging), provide negative values to indicate the battery is delivering energy back to the home (discharging)",
+                    "de": "Definiere ein Gerät mit der Klasse 'battery' und der Capability 'measure_power' als Hausbatterie. Gib positive Werte an, um anzuzeigen, dass die Batterie Energie verbraucht (lädt), und negative Werte, um anzuzeigen, dass die Batterie Energie an das Haus zurückgibt (entlädt).",
+                    "nl": "Definieer een apparaat met class=battery met een measure_power-mogelijkheid als thuisbatterij. Geef positieve waarden om aan te geven dat de batterij energie verbruikt (opladen), geef negatieve waarden om aan te geven dat de batterij energie teruglevert aan het huis (ontladen)"
+                }
             }
        ]
     }
