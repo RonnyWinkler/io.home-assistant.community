@@ -626,6 +626,10 @@
   "1.8.2": {
     "en": "HomeyEnergy: Choose meter type adding capability to custom devices.",
     "de": "HomeyEnergy: Wähle Zählertyp bein Hinzufügen von Capabilities in benutzerdefiniertee Geräte."
+  },
+  "1.8.3": {
+    "en": "HomeyEnergy: Set energy options in devcice settings and for adding/changing entities.",
+    "de": "HomeyEnergy: Energieoptionen in Geräte-Einstellungen und beim Hinzufügen/Ändern von Entitaten setzen."
   }
 
 }

@@ -902,7 +902,7 @@ class BaseDriver extends Homey.Driver {
                 
                 // Set energy options
                 if (data.energy && data.energy.cumulativeCapabilityOption != 'default'){
-                    let energy = device.getEnergy( ) || {};
+                    let energy = JSON.parse(JSON.stringify(device.getEnergy())) || {};
                     let settings = {};
                     switch (data.energy.cumulativeCapabilityOption){
                         case 'imported':
@@ -979,8 +979,8 @@ class BaseDriver extends Homey.Driver {
 
 
                     // Set energy options
-                    if (data.energy && data.energy.cumulativeCapabilityOption != 'default'){
-                        let energy = JSON.parse(JSON.stringify(this.getEnergy()));
+                    // if (data.energy && data.energy.cumulativeCapabilityOption != 'default'){
+                        let energy = JSON.parse(JSON.stringify(device.getEnergy())) || {};
                         let settings = {};
                         switch (data.energy.cumulativeCapabilityOption){
                             case 'imported':
@@ -988,16 +988,24 @@ class BaseDriver extends Homey.Driver {
                                 energy["cumulative"] = true;
                                 settings["set_energy_cumulative_imported_capability"] = capabilities[i];
                                 settings["set_energy_cumulative"] = true;
+                                if (energy["cumulativeExportedCapability"] == capabilities[i]){
+                                    delete energy["cumulativeExportedCapability"];
+                                    settings["set_energy_cumulative_exported_capability"] = '';
+                                }
                                 break;
                             case 'exported':
                                 energy["cumulativeExportedCapability"] = capabilities[i];
                                 energy["cumulative"] = true;
                                 settings["set_energy_cumulative_exported_capability"] = capabilities[i];
                                 settings["set_energy_cumulative"] = true;
+                                if (energy["cumulativeImportedCapability"] == capabilities[i]){
+                                    delete energy["cumulativeImportedCapability"];
+                                    settings["set_energy_cumulative_imported_capability"] = '';
+                                }
                                 break;
                             case 'default':
                                 if (energy["cumulativeImportedCapability"] == capabilities[i]){
-                                    energy["cumulativeImportedCapability"] = null;
+                                    delete energy["cumulativeImportedCapability"];
                                     settings["set_energy_cumulative_imported_capability"] = '';
                                     if (energy["cumulativeExportedCapability"] == undefined){
                                         energy["cumulative"] = false;
@@ -1005,7 +1013,7 @@ class BaseDriver extends Homey.Driver {
                                     }
                                 }
                                 if (energy["cumulativeExportedCapability"] == capabilities[i]){
-                                    energy["cumulativeExportedCapability"] = null;
+                                    delete energy["cumulativeExportedCapability"];
                                     settings["set_energy_cumulative_exported_capability"] = '';
                                     if (energy["cumulativeImportedCapability"] == undefined){
                                         energy["cumulative"] = false;
@@ -1015,7 +1023,7 @@ class BaseDriver extends Homey.Driver {
                         }
                         await device.setEnergy( energy );
                         await device.setSettings(settings);
-                    }
+                    // }
 
                     // unregister entities
                     device.clientUnregisterDevice();
