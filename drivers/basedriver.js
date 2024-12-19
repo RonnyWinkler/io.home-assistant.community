@@ -715,6 +715,17 @@ class BaseDriver extends Homey.Driver {
                 else{
                     entity["converter_homey2ha"] = '';
                 }
+                let energy = device.getEnergy();
+                if (energy && energy.cumulativeImportedCapability == capability){
+                    entity["energy"] = "imported";
+                }
+                else if (energy && energy.cumulativeExportedCapability == capability){
+                    entity["energy"] = "exported";
+                }
+                else{
+                    entity["energy"] = "default";
+                }
+
                 result.push( entity );
             }
         };
@@ -891,16 +902,25 @@ class BaseDriver extends Homey.Driver {
                 
                 // Set energy options
                 if (data.energy && data.energy.cumulativeCapabilityOption != 'default'){
-                    let energy = { };
+                    let energy = device.getEnergy( ) || {};
+                    let settings = {};
                     switch (data.energy.cumulativeCapabilityOption){
                         case 'imported':
                             energy["cumulativeImportedCapability"] = capability;
+                            energy["cumulative"] = true;
+                            settings["set_energy_cumulative_imported_capability"] = capability;
+                            settings["set_energy_cumulative"] = true;
                             break;
                         case 'exported':
                             energy["cumulativeExportedCapability"] = capability;
+                            energy["cumulative"] = true;
+                            settings["set_energy_cumulative_exported_capability"] = capability;
+                            settings["set_energy_cumulative"] = true;
                             break;
                     }
                     await device.setEnergy( energy );
+                    await device.setSettings(settings);
+                    let energyTemp = device.getEnergy();
                 }
 
                 // Reload device (register capability listerner ...)
@@ -957,6 +977,45 @@ class BaseDriver extends Homey.Driver {
                     this.log("CapabilityOptions:", capabilitiesOptions);
                     await device.setCapabilityOptions(capabilities[i], capabilitiesOptions);
 
+
+                    // Set energy options
+                    if (data.energy && data.energy.cumulativeCapabilityOption != 'default'){
+                        let energy = device.getEnergy( );
+                        let settings = {};
+                        switch (data.energy.cumulativeCapabilityOption){
+                            case 'imported':
+                                energy["cumulativeImportedCapability"] = capabilities[i];
+                                energy["cumulative"] = true;
+                                settings["set_energy_cumulative_imported_capability"] = capabilities[i];
+                                settings["set_energy_cumulative"] = true;
+                                break;
+                            case 'exported':
+                                energy["cumulativeExportedCapability"] = capabilities[i];
+                                energy["cumulative"] = true;
+                                settings["set_energy_cumulative_exported_capability"] = capabilities[i];
+                                settings["set_energy_cumulative"] = true;
+                                break;
+                            case 'default':
+                                if (energy["cumulativeImportedCapability"] == capabilities[i]){
+                                    energy["cumulativeImportedCapability"] = null;
+                                    settings["set_energy_cumulative_imported_capability"] = '';
+                                    if (energy["cumulativeExportedCapability"] == undefined){
+                                        energy["cumulative"] = false;
+                                        settings["set_energy_cumulative"] = false;
+                                    }
+                                }
+                                if (energy["cumulativeExportedCapability"] == capabilities[i]){
+                                    energy["cumulativeExportedCapability"] = null;
+                                    settings["set_energy_cumulative_exported_capability"] = '';
+                                    if (energy["cumulativeImportedCapability"] == undefined){
+                                        energy["cumulative"] = false;
+                                        settings["set_energy_cumulative"] = false;
+                                    }
+                                }
+                        }
+                        await device.setEnergy( energy );
+                        await device.setSettings(settings);
+                    }
 
                     // unregister entities
                     device.clientUnregisterDevice();

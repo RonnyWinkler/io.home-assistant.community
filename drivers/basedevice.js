@@ -44,6 +44,20 @@ class BaseDevice extends Homey.Device {
     async onInit() {
         await this.updateCapabilities();
 
+        // // update settings from device attributes
+        try{
+            let energy = this.getEnergy();
+            let settings = {};
+            settings["set_energy_cumulative"] =  energy["cumulative"] != undefined ? energy["cumulative"] : false;
+            settings["set_energy_home_battery"] = energy["homeBattery"] != undefined ? energy["homeBattery"] : false;
+            settings["set_energy_cumulative_imported_capability"] = energy["cumulativeImportedCapability"] != undefined ? energy["cumulativeImportedCapability"] : "";
+            settings["set_energy_cumulative_exported_capability"] = energy["cumulativeExportedCapability"] != undefined ? energy["cumulativeExportedCapability"] : "";
+            await this.setSettings(settings);
+        }
+        catch(error){
+            this.error("Error updating device enrergy settings: "+error.message);
+        }
+        
         // temporary state buffer
         this._buttonState = {};
 
@@ -769,15 +783,45 @@ class BaseDevice extends Homey.Device {
 
     // Energy settings ================================================================================================
     async setEnergyCumulative(value = false){
-        await this.setEnergy(
-            { "cumulative": value }
-        );
+        // let energy = this.getEnergy();
+        // energy["cumulative"] =  value;
+        // await this.setEnergy( energy );
+
+        let energy = this.getEnergy();
+        let energySet = {};
+        energySet = JSON.parse(JSON.stringify(energy));
+        energySet["cumulative"] =  value;
+        await this.setEnergy( energySet );
     }
 
     async setEnergyHomeBattery(value = false){
-        await this.setEnergy(
-            { "homeBattery": value }
-        );
+        let energy = this.getEnergy();
+        energy["homeBattery"] =  value;
+        await this.setEnergy( energy );
+    }
+
+    async setEnergyCumulativeImportedCapability(value){
+        let energy = this.getEnergy();
+        if (value == ''){
+            delete  energy["cumulativeImportedCapability"];
+        }
+        else{
+            energy["cumulativeImportedCapability"] =  value;
+        }
+        await this.setEnergy( energy );
+        let energyTemp = this.getEnergy();
+    }
+
+    async setEnergyCumulativeExportedCapability(value){
+        let energy = this.getEnergy();
+        if (value == ''){
+            delete energy["cumulativeExportedCapability"];
+        }
+        else{
+            energy["cumulativeExportedCapability"] =  value;
+        }
+        await this.setEnergy( energy );
+        let energyTemp = this.getEnergy();
     }
 
     // Settings ================================================================================================
@@ -849,6 +893,18 @@ class BaseDevice extends Homey.Device {
                     this.log("onSettings(): set_energy_home_battery UNSET");
                     await this.setEnergyHomeBattery(false);
                 } 
+            }
+            if (settings.changedKeys.indexOf('set_energy_cumulative_imported_capability') > -1){
+                if (settings.newSettings['set_energy_cumulative_imported_capability'] != undefined){
+                    this.log("onSettings(): set_energy_cumulative_imported_capability: "+settings.newSettings['set_energy_cumulative_imported_capability']);
+                    await this.setEnergyCumulativeImportedCapability(settings.newSettings['set_energy_cumulative_imported_capability']);
+                }
+            }
+            if (settings.changedKeys.indexOf('set_energy_cumulative_exported_capability') > -1){
+                if (settings.newSettings['set_energy_cumulative_exported_capability'] != undefined){
+                    this.log("onSettings(): set_energy_cumulative_exported_capability: "+settings.newSettings['set_energy_cumulative_exported_capability']);
+                    await this.setEnergyCumulativeExportedCapability(settings.newSettings['set_energy_cumulative_exported_capability']);
+                }
             }
         }
         catch(error) {

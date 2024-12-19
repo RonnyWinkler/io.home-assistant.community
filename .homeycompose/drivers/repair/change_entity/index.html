@@ -39,6 +39,9 @@
       capability: document.getElementById('capabilityChange').value,
       name: document.getElementById('nameChange').value,
       unit: document.getElementById('unitChange').value,
+      energy: {
+        cumulativeCapabilityOption: document.getElementById('cumulativeCapabilityOptionChange').value
+      },
       converter_ha2homey: document.getElementById('converter_ha2homeyChange').value,
       converter_homey2ha: document.getElementById('converter_homey2haChange').value
     };
@@ -97,6 +100,19 @@
       <label for="unitChange" class="homey-form-label"><span data-i18n="repair.custom_device.unit"></span></label>
       <input id="unitChange"  class="homey-form-input" type="text" value=""/>
     </div>
+
+    <!-- Energy options for meter_power -->
+    <div class="homey-form-group" id="divCumulativeCapabilityOptionChange" style="display:none"> 
+      <fieldset class="homey-form-fieldset">
+        <label class="homey-form-label" for="cumulativeCapabilityOption"><span data-i18n="repair.custom_device.cumulative_capability_option"></span></label>
+        <select class="homey-form-select" id="cumulativeCapabilityOptionChange">
+          <option value="default" data-i18n="repair.custom_device.cumulative_capability_option_default"></option>
+          <option value="imported" data-i18n="repair.custom_device.cumulative_capability_option_imported"></option>
+          <option value="exported" data-i18n="repair.custom_device.cumulative_capability_option_exported"></option>
+        </select>
+      </fieldset>
+    </div>
+
     <div class="homey-form-group" id="divInputConverter">
       <label for="converter_ha2homeyChange" class="homey-form-label" style="display: inline;"><span data-i18n="repair.custom_device.converter_ha2homey"></span></label>
       <div class="info_icon" onClick="onInfoConverter()"> 
@@ -208,6 +224,13 @@
                       document.getElementById('unitChange').value = event.detail.selection.value.unit;
                       document.getElementById('converter_ha2homeyChange').value = event.detail.selection.value.converter_ha2homey;
                       document.getElementById('converter_homey2haChange').value = event.detail.selection.value.converter_homey2ha;
+                      document.getElementById('cumulativeCapabilityOptionChange').value = event.detail.selection.value.energy;
+                      if (event.detail.selection.value.capability.startsWith("meter_power")) {
+                        document.getElementById('divCumulativeCapabilityOptionChange').style.display = 'unset';
+                      }
+                      else{
+                        document.getElementById('divCumulativeCapabilityOptionChange').style.display = 'none';
+                      }
                   },
                   focus: () => {
                     // if (autoCompleteJS.input.value.length) autoCompleteJS.start();

@@ -55,7 +55,7 @@
         step: document.getElementById('entityNumberRangeStepAdd').value
       },
       energy: {
-        cumulativeCapabilityOption: document.getElementById('cumulativeCapabilityOption').value
+        cumulativeCapabilityOption: document.getElementById('cumulativeCapabilityOptionAdd').value
       }
     };
     let result = await Homey.emit("addEntity", data);
@@ -209,13 +209,13 @@
   } 
 
   function cumulativeCapabilityOptionsVisibility(){  
-    document.getElementById('divCumulativeCapabilityOption').value = 'default';
+    document.getElementById('cumulativeCapabilityOptionAdd').value = 'default';
     let capability = document.getElementById('capabilityAdd').value;
     if ( capability.startsWith('meter_power') ){
-      document.getElementById("divCumulativeCapabilityOption").style.display = 'unset';
+      document.getElementById("divCumulativeCapabilityOptionAdd").style.display = 'unset';
     }
     else{
-      document.getElementById("divCumulativeCapabilityOption").style.display = 'none';
+      document.getElementById("divCumulativeCapabilityOptionAdd").style.display = 'none';
     }
   } 
 
@@ -282,10 +282,10 @@
     </div>
 
     <!-- Energy options for meter_power -->
-    <div class="homey-form-group" id="divCumulativeCapabilityOption" style="display:none"> 
+    <div class="homey-form-group" id="divCumulativeCapabilityOptionAdd" style="display:none"> 
       <fieldset class="homey-form-fieldset">
         <label class="homey-form-label" for="cumulativeCapabilityOption"><span data-i18n="repair.custom_device.cumulative_capability_option"></span></label>
-        <select class="homey-form-select" name="cumulativeCapabilityOption" id="cumulativeCapabilityOption">
+        <select class="homey-form-select" name="cumulativeCapabilityOption" id="cumulativeCapabilityOptionAdd">
           <option value="default" data-i18n="repair.custom_device.cumulative_capability_option_default"></option>
           <option value="imported" data-i18n="repair.custom_device.cumulative_capability_option_imported"></option>
           <option value="exported" data-i18n="repair.custom_device.cumulative_capability_option_exported"></option>
