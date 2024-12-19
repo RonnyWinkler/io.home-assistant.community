@@ -980,7 +980,7 @@ class BaseDriver extends Homey.Driver {
 
                     // Set energy options
                     if (data.energy && data.energy.cumulativeCapabilityOption != 'default'){
-                        let energy = device.getEnergy( );
+                        let energy = JSON.parse(JSON.stringify(this.getEnergy()));
                         let settings = {};
                         switch (data.energy.cumulativeCapabilityOption){
                             case 'imported':

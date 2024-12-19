@@ -787,21 +787,19 @@ class BaseDevice extends Homey.Device {
         // energy["cumulative"] =  value;
         // await this.setEnergy( energy );
 
-        let energy = this.getEnergy();
-        let energySet = {};
-        energySet = JSON.parse(JSON.stringify(energy));
-        energySet["cumulative"] =  value;
-        await this.setEnergy( energySet );
+        let energy = JSON.parse(JSON.stringify(this.getEnergy()));
+        energy["cumulative"] =  value;
+        await this.setEnergy( energy );
     }
 
     async setEnergyHomeBattery(value = false){
-        let energy = this.getEnergy();
+        let energy = JSON.parse(JSON.stringify(this.getEnergy()));
         energy["homeBattery"] =  value;
         await this.setEnergy( energy );
     }
 
     async setEnergyCumulativeImportedCapability(value){
-        let energy = this.getEnergy();
+        let energy = JSON.parse(JSON.stringify(this.getEnergy()));
         if (value == ''){
             delete  energy["cumulativeImportedCapability"];
         }
@@ -809,11 +807,10 @@ class BaseDevice extends Homey.Device {
             energy["cumulativeImportedCapability"] =  value;
         }
         await this.setEnergy( energy );
-        let energyTemp = this.getEnergy();
     }
 
     async setEnergyCumulativeExportedCapability(value){
-        let energy = this.getEnergy();
+        let energy = JSON.parse(JSON.stringify(this.getEnergy()));
         if (value == ''){
             delete energy["cumulativeExportedCapability"];
         }
@@ -821,7 +818,6 @@ class BaseDevice extends Homey.Device {
             energy["cumulativeExportedCapability"] =  value;
         }
         await this.setEnergy( energy );
-        let energyTemp = this.getEnergy();
     }
 
     // Settings ================================================================================================
