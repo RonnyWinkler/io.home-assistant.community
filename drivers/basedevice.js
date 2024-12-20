@@ -46,7 +46,8 @@ class BaseDevice extends Homey.Device {
 
         // // update settings from device attributes
         try{
-            let energy = this.getEnergy();
+            this.setSettings({class: this.getClass()});
+            let energy = this.getEnergy() || {};
             let settings = {};
             settings["set_energy_cumulative"] =  energy["cumulative"] != undefined ? energy["cumulative"] : false;
             settings["set_energy_home_battery"] = energy["homeBattery"] != undefined ? energy["homeBattery"] : false;
@@ -787,21 +788,23 @@ class BaseDevice extends Homey.Device {
         // energy["cumulative"] =  value;
         // await this.setEnergy( energy );
 
-        let energy = JSON.parse(JSON.stringify(this.getEnergy()));
+        let energy = JSON.parse(JSON.stringify(this.getEnergy())) || {};
         energy["cumulative"] =  value;
         await this.setEnergy( energy );
     }
 
     async setEnergyHomeBattery(value = false){
-        let energy = JSON.parse(JSON.stringify(this.getEnergy()));
+        let energy = JSON.parse(JSON.stringify(this.getEnergy())) || {};
         energy["homeBattery"] =  value;
         await this.setEnergy( energy );
     }
 
     async setEnergyCumulativeImportedCapability(value){
-        let energy = JSON.parse(JSON.stringify(this.getEnergy()));
+        let energy = JSON.parse(JSON.stringify(this.getEnergy())) || {};
         if (value == ''){
-            delete  energy["cumulativeImportedCapability"];
+            if (energy["cumulativeImportedCapability"]){
+                delete  energy["cumulativeImportedCapability"];
+            }
         }
         else{
             energy["cumulativeImportedCapability"] =  value;
@@ -810,9 +813,11 @@ class BaseDevice extends Homey.Device {
     }
 
     async setEnergyCumulativeExportedCapability(value){
-        let energy = JSON.parse(JSON.stringify(this.getEnergy()));
+        let energy = JSON.parse(JSON.stringify(this.getEnergy())) || {};
         if (value == ''){
-            delete energy["cumulativeExportedCapability"];
+            if (energy["cumulativeExportedCapability"]){
+                delete energy["cumulativeExportedCapability"];
+            }
         }
         else{
             energy["cumulativeExportedCapability"] =  value;

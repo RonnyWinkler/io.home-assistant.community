@@ -630,6 +630,10 @@
   "1.8.3": {
     "en": "HomeyEnergy: Set energy options in devcice settings and for adding/changing entities.",
     "de": "HomeyEnergy: Energieoptionen in Geräte-Einstellungen und beim Hinzufügen/Ändern von Entitaten setzen."
+  },
+  "1.8.4": {
+    "en": "Fix for reading initial energy settings for new devices.",
+    "de": "Korrektur beim Lesen der Energie-Einstellungen für neue Geräte."
   }
 
 }
