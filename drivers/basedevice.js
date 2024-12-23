@@ -9,6 +9,7 @@ const CAPABILITIES_SET_DEBOUNCE = 100;
 
 // Device init timeout (sec). Reads entity data with a delay to get ready on app start
 const DEVICE_INIT_TIMEOUT = 4;
+const DEVICE_ONSETTINGS_TIMEOUT = 2;
 const DEVICE_MAX_DEVICE_ENTITIES = 20;
 
 const defaultValueConverter = {
@@ -46,14 +47,26 @@ class BaseDevice extends Homey.Device {
 
         // // update settings from device attributes
         try{
-            this.setSettings({class: this.getClass()});
+            try{
+                await this.setSettings({class: this.getClass()});
+            }
+            catch(error){
+                // catch error for setSettings() while onSettings() is still pending
+                this.log("basedevice.onInit(): Error setting device class: "+error.message);
+            }
             let energy = this.getEnergy() || {};
             let settings = {};
             settings["set_energy_cumulative"] =  energy["cumulative"] != undefined ? energy["cumulative"] : false;
             settings["set_energy_home_battery"] = energy["homeBattery"] != undefined ? energy["homeBattery"] : false;
             settings["set_energy_cumulative_imported_capability"] = energy["cumulativeImportedCapability"] != undefined ? energy["cumulativeImportedCapability"] : "";
             settings["set_energy_cumulative_exported_capability"] = energy["cumulativeExportedCapability"] != undefined ? energy["cumulativeExportedCapability"] : "";
-            await this.setSettings(settings);
+            try{
+                await this.setSettings(settings);
+            }
+            catch(error){
+                // catch error for setSettings() while onSettings() is still pending
+                this.log("basedevice.onInit(): Error setting device class: "+error.message);
+            }
         }
         catch(error){
             this.error("Error updating device enrergy settings: "+error.message);
@@ -430,7 +443,16 @@ class BaseDevice extends Homey.Device {
             }
         }
 
-        await this.onInit();
+        this.homey.setTimeout( async () => 
+            {
+                try{
+                    await this.onInit();
+                }
+                catch(error){
+                    this.log("baseDevice.addDeviceEntities() onInit() error: "+error.message);
+                }
+            },
+            DEVICE_ONSETTINGS_TIMEOUT * 1000 );
     }
 
     async removeDeviceEntities(type=null){

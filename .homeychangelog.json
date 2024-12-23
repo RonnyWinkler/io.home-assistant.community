@@ -634,6 +634,10 @@
   "1.8.4": {
     "en": "Fix for reading initial energy settings for new devices.",
     "de": "Korrektur beim Lesen der Energie-Einstellungen für neue Geräte."
+  },
+  "1.8.5": {
+    "en": "Fixed error on device init after changing device entities.",
+    "de": "Fehler beim Initialisieren eines Gerätes nach einer Entitaten-Aktualisierung korrigiert."
   }
 
 }
