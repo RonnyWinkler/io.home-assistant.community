@@ -638,6 +638,10 @@
   "1.8.5": {
     "en": "Fixed error on device init after changing device entities.",
     "de": "Fehler beim Initialisieren eines Gerätes nach einer Entitaten-Aktualisierung korrigiert."
+  },
+  "1.8.6": {
+    "en": "Internal optimization.",
+    "de": "Interne Optimierung."
   }
 
 }
