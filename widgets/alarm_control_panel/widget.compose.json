@@ -1,0 +1,32 @@
+{
+    "name": {
+        "en": "Alarm control panel",
+        "de": "Alarmzentrale",
+        "nl": "Alarmbedieningspaneel"
+      },
+    "settings": [
+        {
+            "id": "device",
+            "type": "autocomplete",
+            "title": {
+                "en": "Gerät",
+                "de": "Device"
+            }
+        }
+    ],
+    "height": 226,
+    "api": {
+        "apiWidgetUpdate": {
+            "method": "GET",
+            "path": "/widget_update"
+        },
+        "apiWidgetPost": {
+            "method": "POST",
+            "path": "/widget_post"
+        },
+        "apiWidgetGet": {
+            "method": "GET",
+            "path": "/widget_get"
+        }
+    }
+  }

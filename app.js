@@ -147,6 +147,8 @@ class App extends Homey.App {
 		await this._registerFlowTriggers();
 		await this._registerFlowConditions();
 		await this._registerFlowArguments();
+		// register widgets
+		await this._registerWidgets();
 
 		// App events
 		this.homey.settings.on("set", async (key) =>  {
@@ -1608,7 +1610,64 @@ class App extends Homey.App {
 			}
 		});
 	  }
-	
+	  // WIDGETS ==============================================================================
+	  async _registerWidgets(){
+		this.homey.dashboards.getWidget('alarm_control_panel').registerSettingAutocompleteListener('device', async (query, settings) => {
+		  let devices = [];
+		  let alarm_devices = this.homey.drivers.getDriver('alarm_control_panel').getDevices();
+		  alarm_devices.forEach(device => {
+			  devices.push({
+				name: device.getName(),
+				device_id: device.getData().id,
+				driver_id: 'alarm_control_panel'
+			  })
+		  });
+		  return devices.filter((item) => item.name.toLowerCase().includes(query.toLowerCase()));
+		});
+	  }
+	  
+	  // WIDGET API ============================================================================
+	async apiWidgetUpdate(driver_id, device_id){
+		let device = this.homey.drivers.getDriver(driver_id).getDevices().filter(e=>{ return ( e.getData().id == device_id ) })[0];
+		await device.widgetUpdate( );
+	}
+
+	async apiWidgetPost(driver_id, device_id, body){
+		if (!device_id || !driver_id){
+			throw new Error("Device not set in widget settings");
+		}
+		try{
+			let device = this.homey.drivers.getDriver(driver_id).getDevices().filter(e=>{ return ( e.getData().id == device_id ) })[0];
+			await device.widgetPost( body );
+		}
+		catch(error){
+			try{
+				let message = JSON.parse(error.message)
+				throw new Error(message.message);
+			}
+			catch(error){
+				throw new Error(error.message);
+			}
+		}
+	}
+	async apiWidgetGet(driver_id, device_id, command){
+		if (!device_id || !driver_id){
+			throw new Error("Device not set in widget settings");
+		}
+		try{
+			let device = this.homey.drivers.getDriver(driver_id).getDevices().filter(e=>{ return ( e.getData().id == device_id ) })[0];
+			await device.widgetGet( command );
+		}
+		catch(error){
+			try{
+				let message = JSON.parse(error.message)
+				throw new Error(message.message);
+			}
+			catch(error){
+				throw new Error(error.message);
+			}
+		}
+	}
 }
 
 module.exports = App;

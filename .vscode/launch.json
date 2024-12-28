@@ -29,8 +29,8 @@
             "type": "node",
             "request": "attach",
             "restart": true,
-            "name": "Attach HA to Homey23 DEV Docker",
-            "address": "192.168.1.16",
+            "name": "Attach HA to Homey 23 DEV Docker",
+            "address": "192.168.1.42",
             "port": 9229,
             "localRoot": "${workspaceFolder}",
             "remoteRoot": "/app/"

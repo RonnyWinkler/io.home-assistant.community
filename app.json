@@ -1,7 +1,7 @@
 {
   "_comment": "This file is generated. Please edit .homeycompose/app.json instead.",
   "id": "io.home-assistant.community",
-  "version": "1.8.6",
+  "version": "1.9.0",
   "compatibility": ">=12.2.0",
   "sdk": 3,
   "brandColor": "#0DA6EA",
@@ -9962,6 +9962,41 @@
       ]
     }
   ],
+  "widgets": {
+    "alarm_control_panel": {
+      "name": {
+        "en": "Alarm control panel",
+        "de": "Alarmzentrale",
+        "nl": "Alarmbedieningspaneel"
+      },
+      "settings": [
+        {
+          "id": "device",
+          "type": "autocomplete",
+          "title": {
+            "en": "Gerät",
+            "de": "Device"
+          }
+        }
+      ],
+      "height": 226,
+      "api": {
+        "apiWidgetUpdate": {
+          "method": "GET",
+          "path": "/widget_update"
+        },
+        "apiWidgetPost": {
+          "method": "POST",
+          "path": "/widget_post"
+        },
+        "apiWidgetGet": {
+          "method": "GET",
+          "path": "/widget_get"
+        }
+      },
+      "id": "alarm_control_panel"
+    }
+  },
   "capabilities": {
     "alarm_control_panel_alarm": {
       "type": "boolean",

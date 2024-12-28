@@ -642,6 +642,10 @@
   "1.8.6": {
     "en": "Internal optimization.",
     "de": "Interne Optimierung."
+  },
+  "1.9.0": {
+    "en": "Added widget for alarm control panel.",
+    "de": "Widget für Alarmzentrale hinzugefügt."
   }
 
 }

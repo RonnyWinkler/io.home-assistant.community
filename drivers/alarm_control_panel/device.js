@@ -87,6 +87,7 @@ class AlarmControlPanelDevice extends BaseDevice {
                 if ((features & 32) == 32) {
                     modes.push( this.homey.app.manifest.capabilities.alarm_control_panel_mode.values.find(u => u.id === 'armed_vacation') );
                 }
+                modes.push( this.homey.app.manifest.capabilities.alarm_control_panel_mode.values.find(u => u.id === 'disarmed') );
                 await this.setCapabilityEnumList("alarm_control_panel_mode", modes);
 
                 if ((features & 8) != 8 && this.hasCapability('alarm_control_panel_alarm_trigger')){
@@ -113,6 +114,8 @@ class AlarmControlPanelDevice extends BaseDevice {
 
             try{
                 await this.setCapabilityValue("alarm_control_panel_mode", data.state);
+                // Realtime event - Widget update 
+                await this.widgetUpdate();
             }
             catch(error){
                 this.log("Error setting alarm_control_panel_mode" + error.message);
@@ -139,6 +142,9 @@ class AlarmControlPanelDevice extends BaseDevice {
     // Capabilities ===========================================================================================
     async _onCapabilityAlarmControlPanelMode( value, opts ) {
         let code = this.getSetting('code');
+        if (opts.code){
+            code = opts.code;
+        }
         let service = '';
         switch (value){
             case 'disarmed':
@@ -183,6 +189,29 @@ class AlarmControlPanelDevice extends BaseDevice {
         await this._onCapabilityAlarmControlPanelMode( args.mode, {});
     }
 
+    // Widget Actions
+    async widgetUpdate(){
+        // Redefinition: Trigger Widget update by sending a realtime event
+        let modes = [];
+        try{
+            modes = await this.getCapabilityEnumList("alarm_control_panel_mode");
+        }
+        catch(error){}
+        await this.homey.api.realtime("alarm_control_panel_state_changed", {driver_id:'alarm_control_panel', device_id: this.getData().id, 
+            mode: this.getCapabilityValue("alarm_control_panel_mode"),
+            modes: modes 
+        } );
+    }
+
+    async widgetPost(body){
+        // Redefinition: Process HTTP POST from Widget
+        switch (body.command){
+            case 'set_alarm_control_panel_mode':
+                await this._onCapabilityAlarmControlPanelMode( body.mode, {code: body.code});
+                break;
+        }
+    }
+    
 }
 
 module.exports = AlarmControlPanelDevice;

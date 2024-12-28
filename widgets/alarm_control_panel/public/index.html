@@ -1,0 +1,210 @@
+<html id="html">
+
+<head>
+    <link rel="stylesheet" href="index.css" type="text/css">
+</head>
+
+<!-- <body class="homey-widget-small"> -->
+<body id="body" class="homey-widget-full">
+
+    <div id="div_panel">
+        <div id="div_commands" class="div_commands">
+            <div id="armed_home" class="homey-custom-icon-armed_home icon_command" onclick="selectMode('armed_home')"></div>
+            <div id="armed_away" class="homey-custom-icon-armed_away icon_command" onclick="selectMode('armed_away')"></div>
+            <div id="armed_night" class="homey-custom-icon-armed_night icon_command" onclick="selectMode('armed_night')"></div>
+            <div id="armed_vacation" class="homey-custom-icon-armed_vacation icon_command" onclick="selectMode('armed_vacation')"></div>
+            <div id="armed_custom_bypass" class="homey-custom-icon-armed_custom_bypass icon_command" onclick="selectMode('armed_custom_bypass')"></div>
+            <div id="disarmed" class="homey-custom-icon-disarmed icon_command" onclick="selectMode('disarmed')"></div>
+        </div>
+        <div id="div_buttons" class ="div_buttons">
+            <div class ="div_grid">
+                <div class ="div_line">
+                    <div id="1" class="homey-custom-icon-1 icon_button" onclick="addPin('1')"></div>
+                    <div id="2" class="homey-custom-icon-2 icon_button" onclick="addPin('2')"></div>
+                    <div id="3" class="homey-custom-icon-3 icon_button" onclick="addPin('3')"></div>
+                </div>
+                <div class ="div_line">
+                    <div id="4" class="homey-custom-icon-4 icon_button" onclick="addPin('4')"></div>
+                    <div id="5" class="homey-custom-icon-5 icon_button" onclick="addPin('5')"></div>
+                    <div id="6" class="homey-custom-icon-6 icon_button" onclick="addPin('6')"></div>
+                </div>
+                <div class ="div_line">
+                    <div id="7" class="homey-custom-icon-7 icon_button" onclick="addPin('7')"></div>
+                    <div id="8" class="homey-custom-icon-8 icon_button" onclick="addPin('8')"></div>
+                    <div id="9" class="homey-custom-icon-9 icon_button" onclick="addPin('9')"></div>
+                </div>
+                <div class ="div_line">
+                    <div id="clear" class="homey-custom-icon-clear icon_button inactive" onclick="clearPin()"></div>
+                    <div id="0" class="homey-custom-icon-0 icon_button" onclick="addPin('0')"></div>
+                    <div id="ok" class="homey-custom-icon-ok icon_button" onclick="sendCommand()"></div>
+                </div>
+            </div>
+            <div id="div_message" class ="div_message">
+                <span id="text_message" class="homey-text-regular text_message"></span>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        let current_mode = '';
+        let pin = '';
+        const MODES = [
+            {
+                "id": "disarmed",
+                "title": {
+                "en": "Disarmed",
+                "de": "Entsichert",
+                "nl": "Ontgrendeld"
+                }
+            },
+            {
+                "id": "armed_home",
+                "title": {
+                "en": "Armed at home",
+                "de": "Gesichert zu Hause",
+                "nl": "Thuis beveiligd"
+                }
+            },
+            {
+                "id": "armed_away",
+                "title": {
+                "en": "Armed away",
+                "de": "Gesichert unterwegs",
+                "nl": "Veilig onderweg"
+                }
+            },
+            {
+                "id": "armed_night",
+                "title": {
+                "en": "Armed at night",
+                "de": "Gesichert nachts",
+                "nl": "Veilig nacht"
+                }
+            },
+            {
+                "id": "armed_vacation",
+                "title": {
+                "en": "Armed at vacation",
+                "de": "Gesichert im Urlaub",
+                "nl": "Veilig op vakantie"
+                }
+            },
+            {
+                "id": "armed_custom_bypass",
+                "title": {
+                "en": "Armed custom bypass",
+                "de": "Gesichert benutzerdefiniert",
+                "nl": "Veilig aangepast"
+                }
+            }
+        ];
+
+        const sleep = (delay) => new Promise((resolve) => setTimeout(resolve, delay))
+
+        async function onHomeyReady(Homey) {
+            Homey.ready({ height: 226 });
+
+            console.log('instanceId: ', Homey.getWidgetInstanceId());
+            console.log('settings', Homey.getSettings());
+            // await Homey.setHeight(document.getElementById('body').offsetHeight + 5);
+
+            // Realtime event for changed car data
+            Homey.on('alarm_control_panel_state_changed', ({driver_id, device_id, mode, modes})=> setMode(driver_id, device_id, mode, modes));
+            // initial data reading
+            await widgetUpdate();
+        }
+
+        function setMode(driver_id, device_id, mode, modes){
+            console.log("Mode changed: "+mode, "driver_id: "+driver_id, "device_id: "+device_id);
+            console.log("Settings: ", Homey.getSettings());
+            if (driver_id != 'alarm_control_panel' || !Homey.getSettings() || !Homey.getSettings().device || device_id != Homey.getSettings().device.device_id){
+                return;   
+            } 
+            selectMode(mode);
+            // hide non active modes
+            // console.log(modes);
+            MODES.forEach(element => {
+                if (modes.find(m => m.id == element.id) != undefined){
+                    // console.log("found: "+element.id);
+                    document.getElementById(element.id).style.display = 'flex';
+                }
+                else{
+                    document.getElementById(element.id).style.display = 'none';
+                    // console.log("not found: "+element.id);
+                }                    
+            })
+        }
+
+        function selectMode(mode){
+            console.log("Mode selected: "+mode)
+            current_mode = mode;
+            MODES.forEach(element => {
+                if (element.id == mode){
+                    document.getElementById(element.id).classList.add('selected');
+                }
+                else{
+                    document.getElementById(element.id).classList.remove('selected');
+                }
+            })
+        }
+
+        async function clearPin(){
+            pin = '';
+            document.getElementById('clear').classList.add('success');
+            await sleep(200);
+            document.getElementById('clear').classList.remove('success');
+            document.getElementById('clear').classList.add('inactive');
+        }
+
+        async function addPin(number){
+            pin = pin + number;
+            document.getElementById(number).classList.add('selected');
+            await sleep(200);
+            document.getElementById(number).classList.remove('selected');
+            document.getElementById('clear').classList.remove('inactive');
+        }
+
+        async function sendCommand(){
+            try{
+                console.log("request API: POST /widget_post");
+                
+                if (!Homey.getSettings() || !Homey.getSettings().device || !Homey.getSettings().device.device_id || !Homey.getSettings().device.driver_id){
+                    throw new Error("Device not set in widget settings");
+                }
+                let device_id = Homey.getSettings().device.device_id;
+                let driver_id = Homey.getSettings().device.driver_id;
+                let result = await Homey.api('POST', '/widget_post?driver_id='+driver_id+'&device_id='+device_id, { 
+                    command: 'set_alarm_control_panel_mode',
+                    mode: current_mode,
+                    code: pin
+                });
+                document.getElementById('text_message').innerText = '';
+                document.getElementById('text_message').classList.remove('text_message_error');
+                document.getElementById('ok').classList.add('success');
+                await sleep(1000);
+                document.getElementById('ok').classList.remove('success');
+            }
+            catch(error){
+                console.log(error);
+                document.getElementById('text_message').innerText = error.message;
+                document.getElementById('text_message').classList.add('text_message_error');
+                document.getElementById('ok').classList.add('error');
+                await sleep(1000);
+                document.getElementById('ok').classList.remove('error');
+                await widgetUpdate();
+            }
+            pin = '';
+        }
+
+        async function widgetUpdate(){
+            if (Homey.getSettings() && Homey.getSettings().device && Homey.getSettings().device.device_id && Homey.getSettings().device.driver_id){
+                // Get widget data by triggering realtime event for assigned device
+                let device_id = Homey.getSettings().device.device_id;
+                let driver_id = Homey.getSettings().device.driver_id;
+                await Homey.api('GET', '/widget_update?driver_id='+driver_id+'&device_id='+device_id);
+            }
+        }
+    </script>
+</body>
+
+</html>

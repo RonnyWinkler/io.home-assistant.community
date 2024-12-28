@@ -234,6 +234,27 @@ class BaseDevice extends Homey.Device {
         }catch(error){}
     }
 
+    async getCapabilityEnumList(capability){
+        let values = [];
+        if (this.hasCapability(capability)){
+            try{
+                let capabilityOptions =  this.getCapabilityOptions(capability);
+                if (capabilityOptions.values){
+                    values = capabilityOptions.values;
+                }                          
+            }
+            catch(error){
+                this.log("getCapabilityEnumList(): Error getting capabilityOptions: "+error.message);
+                // Read capability definition if no options are set
+                let capabilityDef = Capability.getCapability(capability);
+                if (capabilityDef.values){
+                    values = capabilityDef.values;
+                }          
+            }
+        }
+        return values;
+    }
+
     async onInitDevice(){
         // Init device on satrtup with latest data to have initial values before HA sends updates
         this.homey.clearTimeout(this.timeoutInitDevice);
@@ -1348,6 +1369,17 @@ class BaseDevice extends Homey.Device {
     //             }
     //         });
     //   }
+
+    // Widget functions ===========================================================================================
+    async widgetUpdate(){
+        // Redefine in subclass. Trigger widget update by sending a realtime event
+    }
+    async widgetPost(body){
+        // Redefine in subclass. Process HTTP POST message in the device
+    }
+    async widgetGet(command){
+        // Redefine in subclass. Process HTTP GET message in the device
+    }
 }
 
 module.exports = BaseDevice;
