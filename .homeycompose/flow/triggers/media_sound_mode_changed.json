@@ -1,0 +1,23 @@
+{
+    "title": {
+        "en": "Media sound mode changed",
+        "de": "Medien-Klangmodus hat sich geændert",
+        "nl": "Geluidsmodus gewijzigd"
+    },
+    "tokens": [{
+            "name": "media_sound_mode",
+            "type": "string",
+            "title": {
+                "en": "Sound mode",
+                "de": "Klangmodus",
+                "nl": "Geluidsmodus"
+            },
+            "example": "5ch Stereo"
+        }
+    ],
+    "args": [{
+        "name": "device",
+        "type": "device",
+        "filter": "driver_id=media"
+    }]
+}

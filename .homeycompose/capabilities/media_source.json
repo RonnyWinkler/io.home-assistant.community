@@ -1,0 +1,21 @@
+{
+  "highlight": true,
+  "type": "enum",
+  "title": {
+    "en": "Source",
+    "de": "Quelle",
+    "nl": "Bron"
+  },
+  "desc": {
+    "en": "Source (input)",
+    "de": "Quelle (Eingang)",
+    "nl": "Bron (invoer)"
+  },
+  "getable": true,
+  "setable": true,
+  "insights": true,
+  "icon": "/assets/capability_icons/media_source.svg",
+  "uiComponent": "picker",
+  "values": [
+  ]
+}

@@ -66,6 +66,16 @@ class MediaDevice extends BaseDevice {
                 await this._onCapabilityMediaUnjoin(value, opts)
             });
         }
+        if(this.hasCapability("media_source")) {
+            this.registerCapabilityListener('media_source', async (value, opts) => {
+                await this._onCapabilityMediaSource(value, opts)
+            });
+        }
+        if(this.hasCapability("media_sound_mode")) {
+            this.registerCapabilityListener('media_sound_mode', async (value, opts) => {
+                await this._onCapabilityMediaSoundMode(value, opts)
+            });
+        }
         
         // maintenance actions
         this.registerCapabilityListener('button.reconnect', async () => {
@@ -78,6 +88,17 @@ class MediaDevice extends BaseDevice {
     async updateCapabilities(){
         // Add new capabilities (if not already added)
         try{
+
+            if (this.hasCapability('media_source'))
+            {
+                await this.removeCapability('media_source');
+            }
+            if (this.hasCapability('media_sound_mode'))
+            {
+                await this.removeCapability('media_sound_mode');
+            }
+        
+
             if (!this.hasCapability('button.reconnect'))
             {
                 await this.addCapability('button.reconnect');
@@ -85,6 +106,16 @@ class MediaDevice extends BaseDevice {
             if (!this.hasCapability('media_unjoin'))
             {
                 await this.addCapability('media_unjoin');
+            }
+            if (!this.hasCapability('media_source'))
+            {
+                await this.addCapability('media_source');
+                await this.setStoreValue("sourceList", '');
+            }
+            if (!this.hasCapability('media_sound_mode'))
+            {
+                await this.addCapability('media_sound_mode');
+                await this.setStoreValue("soundModeList", '');
             }
         }
         catch(error){
@@ -237,20 +268,55 @@ class MediaDevice extends BaseDevice {
                     }
                 }
                 if (data.attributes.source_list == null || data.attributes.source_list == undefined){
-                    await this.setStoreValue("sourceList", '');
-                    await this.setStoreValue("canSelectSource", false);
+                    if (this.getStoreValue("sourceList") != ''){
+                        await this.setStoreValue("sourceList", '');
+                        await this.setStoreValue("canSelectSource", false);
+                        await this.setCapabilityEnumList('media_source', []);
+                        await this.setCapabilityValue('media_source', null);
+                    }                    
                 }
                 else{
-                    await this.setStoreValue("sourceList", JSON.stringify(data.attributes.source_list));
-                    await this.setStoreValue("canSelectSource", true);
+                    if (this.getStoreValue("sourceList") != JSON.stringify(data.attributes.source_list)){
+                        await this.setStoreValue("sourceList", JSON.stringify(data.attributes.source_list));
+                        await this.setStoreValue("canSelectSource", true);
+                        await this.setCapabilityEnumList('media_source', data.attributes.source_list);
+                    }
+                    if (this.hasCapability('media_source') && data.attributes.source){
+                        try{
+                            await this.setCapabilityValue('media_source', data.attributes.source);
+                        }
+                        catch(error){
+                            this.log("Error changing capability 'media_source' to: "+data.attributes.source);
+                        }
+                    }
+                    else{
+                        await this.setCapabilityValue('media_source', null);
+                    }
                 }
                 if (data.attributes.sound_mode_list == null || data.attributes.sound_mode_list == undefined){
-                    await this.setStoreValue("soundModeList", '');
-                    await this.setStoreValue("canSelectSoundMode", false);
+                    if (this.getStoreValue("soundModeList") != ''){
+                        await this.setStoreValue("soundModeList", '');
+                        await this.setStoreValue("canSelectSoundMode", false);
+                        await this.setCapabilityEnumList('soundModeList', []);
+                    }
                 }
                 else{
-                    await this.setStoreValue("soundModeList", JSON.stringify(data.attributes.sound_mode_list));
-                    await this.setStoreValue("canSelectSoundMode", true);
+                    if (this.getStoreValue("soundModeList") != JSON.stringify(data.attributes.sound_mode_list)){
+                        await this.setStoreValue("soundModeList", JSON.stringify(data.attributes.sound_mode_list));
+                        await this.setStoreValue("canSelectSoundMode", true);
+                        await this.setCapabilityEnumList('media_sound_mode', data.attributes.sound_mode_list);
+                    }
+                    if (this.hasCapability('media_sound_mode') && data.attributes.sound_mode){
+                        try{
+                            await this.setCapabilityValue('media_sound_mode', data.attributes.sound_mode);
+                        }
+                        catch(error){
+                            this.log("Error changing capability 'media_sound_mode' to: "+data.attributes.sound_mode);
+                        }
+                    }
+                    else{
+                        await this.setCapabilityValue('media_sound_mode', null);
+                    }
                 }
 
                 let entityPicture = null;
@@ -413,7 +479,15 @@ class MediaDevice extends BaseDevice {
         });
 
     }
-    
+
+    async _onCapabilityMediaSource( value, opts ){
+        await this.setSource(value);
+    }
+
+    async _onCapabilityMediaSoundMode( value, opts ){
+        await this.setSoundMode(value);
+    }
+
     // Autocompletion lists & Flow actions ===========================================================================================
     getSourceList(){
         if (this.getStoreValue("canSelectSource") == true){

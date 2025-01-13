@@ -1,0 +1,20 @@
+{
+  "type": "enum",
+  "title": {
+    "en": "Sound mode",
+    "de": "Klangmodus",
+    "nl": "Geluidsmodus"
+  },
+  "desc": {
+    "en": "Sound mode",
+    "de": "Klangmodus",
+    "nl": "Geluidsmodus"
+  },
+  "getable": true,
+  "setable": true,
+  "insights": true,
+  "icon": "/assets/capability_icons/media_sound_mode.svg",
+  "uiComponent": "picker",
+  "values": [
+  ]
+}

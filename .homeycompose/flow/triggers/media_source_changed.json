@@ -1,0 +1,23 @@
+{
+    "title": {
+        "en": "Media source changed",
+        "de": "Medien-Quelle hat sich geändert",
+        "nl": "Mediabron gewijzigd"
+    },
+    "tokens": [{
+            "name": "media_source",
+            "type": "string",
+            "title": {
+                "en": "Source",
+                "de": "Quelle",
+                "nl": "Bron"
+            },
+            "example": "HDMI 1"
+        }
+    ],
+    "args": [{
+        "name": "device",
+        "type": "device",
+        "filter": "driver_id=media"
+    }]
+}

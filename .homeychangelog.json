@@ -646,6 +646,10 @@
   "1.9.0": {
     "en": "Added widget for alarm control panel.",
     "de": "Widget für Alarmzentrale hinzugefügt."
+  },
+  "1.10.0": {
+    "en": "Added dynamic mode lists for media device (source/sound mode)",
+    "de": "Dynamische Modi für Medien-Geräte (Quell/Sound-Modus) hinzugefügt."
   }
 
 }

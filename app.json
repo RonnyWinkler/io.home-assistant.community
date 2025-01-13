@@ -1,7 +1,7 @@
 {
   "_comment": "This file is generated. Please edit .homeycompose/app.json instead.",
   "id": "io.home-assistant.community",
-  "version": "1.9.0",
+  "version": "1.10.0",
   "compatibility": ">=12.2.0",
   "sdk": 3,
   "brandColor": "#0DA6EA",
@@ -993,6 +993,60 @@
           }
         ],
         "id": "measure_numeric_changed"
+      },
+      {
+        "title": {
+          "en": "Media sound mode changed",
+          "de": "Medien-Klangmodus hat sich geændert",
+          "nl": "Geluidsmodus gewijzigd"
+        },
+        "tokens": [
+          {
+            "name": "media_sound_mode",
+            "type": "string",
+            "title": {
+              "en": "Sound mode",
+              "de": "Klangmodus",
+              "nl": "Geluidsmodus"
+            },
+            "example": "5ch Stereo"
+          }
+        ],
+        "args": [
+          {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=media"
+          }
+        ],
+        "id": "media_sound_mode_changed"
+      },
+      {
+        "title": {
+          "en": "Media source changed",
+          "de": "Medien-Quelle hat sich geändert",
+          "nl": "Mediabron gewijzigd"
+        },
+        "tokens": [
+          {
+            "name": "media_source",
+            "type": "string",
+            "title": {
+              "en": "Source",
+              "de": "Quelle",
+              "nl": "Bron"
+            },
+            "example": "HDMI 1"
+          }
+        ],
+        "args": [
+          {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=media"
+          }
+        ],
+        "id": "media_source_changed"
       },
       {
         "title": {
@@ -10698,6 +10752,45 @@
       "setable": false,
       "insights": true,
       "icon": "/assets/capability_icons/measure_numeric.svg"
+    },
+    "media_sound_mode": {
+      "type": "enum",
+      "title": {
+        "en": "Sound mode",
+        "de": "Klangmodus",
+        "nl": "Geluidsmodus"
+      },
+      "desc": {
+        "en": "Sound mode",
+        "de": "Klangmodus",
+        "nl": "Geluidsmodus"
+      },
+      "getable": true,
+      "setable": true,
+      "insights": true,
+      "icon": "/assets/capability_icons/media_sound_mode.svg",
+      "uiComponent": "picker",
+      "values": []
+    },
+    "media_source": {
+      "highlight": true,
+      "type": "enum",
+      "title": {
+        "en": "Source",
+        "de": "Quelle",
+        "nl": "Bron"
+      },
+      "desc": {
+        "en": "Source (input)",
+        "de": "Quelle (Eingang)",
+        "nl": "Bron (invoer)"
+      },
+      "getable": true,
+      "setable": true,
+      "insights": true,
+      "icon": "/assets/capability_icons/media_source.svg",
+      "uiComponent": "picker",
+      "values": []
     },
     "media_unjoin": {
       "type": "boolean",
