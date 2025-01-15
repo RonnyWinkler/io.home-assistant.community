@@ -650,6 +650,10 @@
   "1.10.0": {
     "en": "Added dynamic mode lists for media device (source/sound mode)",
     "de": "Dynamische Modi für Medien-Geräte (Quell/Sound-Modus) hinzugefügt."
+  },
+  "1.10.1": {
+    "en": "Fixed converter example for date/time.",
+    "de": "Datum/Zeit-Converter-Beispiel korrigiert."
   }
 
 }
