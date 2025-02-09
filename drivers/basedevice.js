@@ -246,13 +246,17 @@ class BaseDevice extends Homey.Device {
             catch(error){
                 this.log("getCapabilityEnumList(): Error getting capabilityOptions: "+error.message);
                 // Read capability definition if no options are set
-                let capabilityDef = Capability.getCapability(capability);
+                let capabilityDef = this.getCapabilityType(capability); //Capability.getCapability(capability);
                 if (capabilityDef.values){
                     values = capabilityDef.values;
                 }          
             }
         }
         return values;
+    }
+
+    getCapabilityType(capability){
+        return Capability.getCapability(capability);
     }
 
     async onInitDevice(){
@@ -644,7 +648,7 @@ class BaseDevice extends Homey.Device {
                     //     await this.setCapabilityValue(keys[i], newValue);
                     // }
 
-                    let capabilityType = Capability.getCapabilityType(keys[i]);
+                    let capabilityType = this.getCapabilityType(keys[i]);
                     if (capabilityType == 'number'){ // (keys[i].startsWith("measure") || keys[i].startsWith("meter") || keys[i].startsWith("dim")){
                         // numeric capability
                         if (converter != undefined){

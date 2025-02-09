@@ -96,7 +96,7 @@ class App extends Homey.App {
 					require('inspector').waitForDebugger();
 				}
 				catch(error){
-					require('inspector').open(9225, '0.0.0.0', true);
+					require('inspector').open(9901, '0.0.0.0', true);
 				}
 			}
 		}

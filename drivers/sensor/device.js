@@ -48,11 +48,8 @@ class SensorDevice extends BaseDevice {
             //         break;
             // }
             if (data && data.entity_id && this.entityId == data.entity_id){
-                if (this.capability == "measure_generic"){
-                    // String capabilities
-                    await this.setCapabilityValue(this.capability, data.state);
-                }
-                else if (this.capability.startsWith("alarm")){
+                let capabilityType = this.getCapabilityType(this.capability);
+                if (capabilityType == "boolean"){
                     // boolean capability
                     if (data.state == "on"){
                         await this.setCapabilityValue(this.capability, true);
@@ -61,9 +58,19 @@ class SensorDevice extends BaseDevice {
                         await this.setCapabilityValue(this.capability, false);
                     }
                 }
-                else{
+                else if (capabilityType == "number"){
                     // numeric capability
-                    await this.setCapabilityValue(this.capability, parseFloat(data.state));
+                    let value = parseFloat(data.state);
+                    // Convert data to Homey internal unit based on HA unit
+                    // °F => °C
+                    if (data.attributes.unit_of_measurement == '°F'){
+                        value = (value - 32) * 5/9;
+                    }
+                    await this.setCapabilityValue(this.capability, value);
+                }
+                else {
+                    // String capabilities
+                    await this.setCapabilityValue(this.capability, data.state);
                 }
             }
         }
