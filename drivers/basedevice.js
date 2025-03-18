@@ -670,7 +670,9 @@ class BaseDevice extends Homey.Device {
                         else{
                             tokens.value_number = newValue;
                         }
-                        await this.setCapabilityValue(keys[i], newValue);
+                        if (oldValue!=newValue){
+                          await this.setCapabilityValue(keys[i], newValue);
+                        }
                     }
                     else if (capabilityType == 'boolean'){ // (keys[i].startsWith("alarm")){
                         // boolean capability
@@ -686,7 +688,8 @@ class BaseDevice extends Homey.Device {
                                     newValue = false;
                                     break;           
                                 default:
-                                    newValue = entityValue;
+                                    // Ignore new value for invalid state
+                                    newValue = oldValue;
                             }
                             // newValue = (entityValue == "on");
                         }
@@ -705,7 +708,9 @@ class BaseDevice extends Homey.Device {
                                 oldValue = newValue;
                             }
                         }
-                        await this.setCapabilityValue(keys[i], newValue );
+                        if (oldValue!=newValue){
+                          await this.setCapabilityValue(keys[i], newValue );
+                        }
                     }
                     // else if (keys[i].startsWith("measure_generic") || keys[i].startsWith("mode_select")){
                     // all string & enum capabilities
@@ -725,7 +730,9 @@ class BaseDevice extends Homey.Device {
                         }
                         tokens.value_string_old = oldValue;
                         tokens.value_string = newValue;
-                        await this.setCapabilityValue(keys[i], newValue);
+                        if (oldValue!=newValue){
+                          await this.setCapabilityValue(keys[i], newValue);
+                        }
                     }
 
                     if (oldValue!=newValue){

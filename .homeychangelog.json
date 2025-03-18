@@ -658,6 +658,10 @@
   "1.10.2": {
     "en": "Added temperature conversion for sensor device (°F->°C).",
     "de": "Temperatur-Konvertierung für Sensor-Geräte hinzugefügt (°F->°C)."
+  },
+  "1.10.3": {
+    "en": "Avoid unnecessary capability updates.",
+    "de": "Vermeide unnötige Capability-Aktualisierungen."
   }
 
 }
