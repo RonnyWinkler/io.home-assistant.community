@@ -99,6 +99,8 @@ class BaseDevice extends Homey.Device {
             settings["set_energy_home_battery"] = energy["homeBattery"] != undefined ? energy["homeBattery"] : false;
             settings["set_energy_cumulative_imported_capability"] = energy["cumulativeImportedCapability"] != undefined ? energy["cumulativeImportedCapability"] : "";
             settings["set_energy_cumulative_exported_capability"] = energy["cumulativeExportedCapability"] != undefined ? energy["cumulativeExportedCapability"] : "";
+            settings["set_energy_battery_charged_capability"] = energy["meterPowerImportedCapability"] != undefined ? energy["meterPowerImportedCapability"] : "";
+            settings["set_energy_battery_discharged_capability"] = energy["meterPowerExportedCapability"] != undefined ? energy["meterPowerExportedCapability"] : "";
             await this.setSettings(settings);
         }
         catch(error){
@@ -873,6 +875,32 @@ class BaseDevice extends Homey.Device {
         await this.setEnergy( energy );
     }
 
+    async setEnergyBatteryChargedCapability(value){
+      let energy = JSON.parse(JSON.stringify(this.getEnergy())) || {};
+      if (value == ''){
+          if (energy["meterPowerImportedCapability"]){
+              delete energy["meterPowerImportedCapability"];
+          }
+      }
+      else{
+          energy["meterPowerImportedCapability"] =  value;
+      }
+      await this.setEnergy( energy );
+    }
+
+    async setEnergyBatteryDischargedCapability(value){
+      let energy = JSON.parse(JSON.stringify(this.getEnergy())) || {};
+      if (value == ''){
+          if (energy["meterPowerExportedCapability"]){
+              delete energy["meterPowerExportedCapability"];
+          }
+      }
+      else{
+          energy["meterPowerExportedCapability"] =  value;
+      }
+      await this.setEnergy( energy );
+    }
+  
     // Settings ================================================================================================
     async onSettings(settings){
         try {
@@ -955,7 +983,19 @@ class BaseDevice extends Homey.Device {
                     await this.setEnergyCumulativeExportedCapability(settings.newSettings['set_energy_cumulative_exported_capability']);
                 }
             }
-        }
+            if (settings.changedKeys.indexOf('set_energy_battery_charged_capability') > -1){
+              if (settings.newSettings['set_energy_battery_charged_capability'] != undefined){
+                  this.log("onSettings(): set_energy_battery_charged_capability: "+settings.newSettings['set_energy_battery_charged_capability']);
+                  await this.setEnergyBatteryChargedCapability(settings.newSettings['set_energy_battery_charged_capability']);
+              }
+            }
+            if (settings.changedKeys.indexOf('set_energy_battery_discharged_capability') > -1){
+                if (settings.newSettings['set_energy_battery_discharged_capability'] != undefined){
+                    this.log("onSettings(): set_energy_battery_discharged_capability: "+settings.newSettings['set_energy_battery_discharged_capability']);
+                    await this.setEnergyBatteryDischargedCapability(settings.newSettings['set_energy_battery_discharged_capability']);
+                }
+            }
+      }
         catch(error) {
             this.error("onSettings error: "+ error.message);
             return error.message;

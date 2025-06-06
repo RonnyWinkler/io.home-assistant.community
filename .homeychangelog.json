@@ -662,6 +662,10 @@
   "1.10.3": {
     "en": "Avoid unnecessary capability updates.",
     "de": "Vermeide unnötige Capability-Aktualisierungen."
+  },
+  "1.11.0": {
+    "en": "Added home battery charging/discharging data for HomeyEnergy.",
+    "de": "Heim-Batterie Ladung/Entladungsdaten für HomeyEnergy hinzugefügt."
   }
 
 }

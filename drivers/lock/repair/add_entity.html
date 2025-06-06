@@ -55,7 +55,7 @@
         step: document.getElementById('entityNumberRangeStepAdd').value
       },
       energy: {
-        cumulativeCapabilityOption: document.getElementById('cumulativeCapabilityOptionAdd').value
+        capabilityOption: document.getElementById('cumulativeCapabilityOptionAdd').value
       }
     };
     let result = await Homey.emit("addEntity", data);
@@ -287,8 +287,10 @@
         <label class="homey-form-label" for="cumulativeCapabilityOption"><span data-i18n="repair.custom_device.cumulative_capability_option"></span></label>
         <select class="homey-form-select" name="cumulativeCapabilityOption" id="cumulativeCapabilityOptionAdd">
           <option value="default" data-i18n="repair.custom_device.cumulative_capability_option_default"></option>
-          <option value="imported" data-i18n="repair.custom_device.cumulative_capability_option_imported"></option>
-          <option value="exported" data-i18n="repair.custom_device.cumulative_capability_option_exported"></option>
+          <option value="meter_imported" data-i18n="repair.custom_device.cumulative_capability_option_imported"></option>
+          <option value="meter_exported" data-i18n="repair.custom_device.cumulative_capability_option_exported"></option>
+          <option value="battery_charged" data-i18n="repair.custom_device.battery_capability_option_charged"></option>
+          <option value="battery_discharged" data-i18n="repair.custom_device.battery_capability_option_discharged"></option>
         </select>
       </fieldset>
     </div>

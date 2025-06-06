@@ -26,6 +26,16 @@
             "remoteRoot": "/app/"
         },
         {
+          "type": "node",
+          "request": "attach",
+          "restart": true,
+          "name": "Attach HA to Homey Pro 23 DEV Wifi",
+          "address": "192.168.1.17",
+          "port": 9901,
+          "localRoot": "${workspaceFolder}",
+          "remoteRoot": "/app/"
+      },
+      {
             "type": "node",
             "request": "attach",
             "restart": true,

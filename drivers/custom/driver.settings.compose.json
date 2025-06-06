@@ -663,7 +663,27 @@
                     "de": "Zähler-Capability für exportierte Energie",
                     "nl": "Meter capability voor exporteerde energie"
                 }
+            },
+            {
+              "id": "set_energy_battery_charged_capability",
+              "type": "text",
+              "value": "",
+              "label": {
+                  "en": "Battery capability for charged energy",
+                  "de": "Batterie-Capability für geladene Energie",
+                  "nl": "Batterij capability voor opgeladen energie"
+              }
+            },
+            {
+                "id": "set_energy_battery_discharged_capability",
+                "type": "text",
+                "value": "",
+                "label": {
+                    "en": "Battery capability for discharged energy",
+                    "de": "Batterie-Capability für entladene Energie",
+                    "nl": "Batterij capability voor ontladen energie"
+                }
             }
-       ]
+        ]
     }
 ]

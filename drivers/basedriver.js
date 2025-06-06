@@ -901,23 +901,35 @@ class BaseDriver extends Homey.Driver {
                 this.log("Capability added.");
                 
                 // Set energy options
-                if (data.energy && data.energy.cumulativeCapabilityOption != 'default'){
+                if (data.energy && data.energy.capabilityOption != 'default'){
                     let energy = JSON.parse(JSON.stringify(device.getEnergy())) || {};
                     let settings = {};
-                    switch (data.energy.cumulativeCapabilityOption){
-                        case 'imported':
+                    switch (data.energy.capabilityOption){
+                        case 'meter_imported':
                             energy["cumulativeImportedCapability"] = capability;
                             energy["cumulative"] = true;
                             settings["set_energy_cumulative_imported_capability"] = capability;
                             settings["set_energy_cumulative"] = true;
                             break;
-                        case 'exported':
+                        case 'meter_exported':
                             energy["cumulativeExportedCapability"] = capability;
                             energy["cumulative"] = true;
                             settings["set_energy_cumulative_exported_capability"] = capability;
                             settings["set_energy_cumulative"] = true;
                             break;
-                    }
+                        case 'battery_charged':
+                            energy["meterPowerImportedCapability"] = capability;
+                            energy['homeBattery'] = true;
+                            settings["set_energy_battery_charged_capability"] = capability;
+                            settings['set_energy_home_battery'] = true;
+                            break;
+                        case 'battery_discharged':
+                            energy["meterPowerExportedCapability"] = capability;
+                            energy['homeBattery'] = true;
+                            settings["set_energy_battery_discharged_capability"] = capability;
+                            settings['set_energy_home_battery'] = true;
+                            break;
+                      }
                     await device.setEnergy( energy );
                     await device.setSettings(settings);
                     let energyTemp = device.getEnergy();

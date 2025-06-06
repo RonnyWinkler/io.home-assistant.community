@@ -1,8 +1,8 @@
 {
   "_comment": "This file is generated. Please edit .homeycompose/app.json instead.",
   "id": "io.home-assistant.community",
-  "version": "1.10.3",
-  "compatibility": ">=12.2.0",
+  "version": "1.11.0",
+  "compatibility": ">=12.4.5",
   "sdk": 3,
   "brandColor": "#0DA6EA",
   "name": {
@@ -6824,6 +6824,26 @@
                 "en": "Meter capability for exported energy",
                 "de": "Zähler-Capability für exportierte Energie",
                 "nl": "Meter capability voor exporteerde energie"
+              }
+            },
+            {
+              "id": "set_energy_battery_charged_capability",
+              "type": "text",
+              "value": "",
+              "label": {
+                "en": "Battery capability for charged energy",
+                "de": "Batterie-Capability für geladene Energie",
+                "nl": "Batterij capability voor opgeladen energie"
+              }
+            },
+            {
+              "id": "set_energy_battery_discharged_capability",
+              "type": "text",
+              "value": "",
+              "label": {
+                "en": "Battery capability for discharged energy",
+                "de": "Batterie-Capability für entladene Energie",
+                "nl": "Batterij capability voor ontladen energie"
               }
             }
           ]
