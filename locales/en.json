@@ -85,6 +85,8 @@
             "cumulative_capability_option_exported": "Main meter: Exported energy",
             "battery_capability_option_charged": "Battery: Charged energy",
             "battery_capability_option_discharged": "Battery: Discharged energy",
+            "ev_charger_capability_option_charged": "EV charger: Charged energy",
+            "ev_charger_capability_option_discharged": "EV charger: Discharged energy",
             "number_range_min": "Minimun",
             "number_range_max": "Maximum",
             "number_range_step": "Step",

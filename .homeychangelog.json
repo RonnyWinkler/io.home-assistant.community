@@ -666,6 +666,10 @@
   "1.11.0": {
     "en": "Added home battery charging/discharging data for HomeyEnergy.",
     "de": "Heim-Batterie Ladung/Entladungsdaten für HomeyEnergy hinzugefügt."
+  },
+  "1.12.0": {
+    "en": "Added EV chargersettings for HomeyEnergy including optional charging/discharging data (V2G).",
+    "de": "EV-Ladeparameter hinzugefügt für HomeyEnergy inklusive optionaler Ladungs-/Entladungsdaten (V2G)."
   }
 
 }

@@ -1,7 +1,7 @@
 {
   "_comment": "This file is generated. Please edit .homeycompose/app.json instead.",
   "id": "io.home-assistant.community",
-  "version": "1.11.0",
+  "version": "1.12.0",
   "compatibility": ">=12.4.5",
   "sdk": 3,
   "brandColor": "#0DA6EA",
@@ -368,9 +368,9 @@
           "nl": "Waarde van capability [[capability]] gewijzigd"
         },
         "hint": {
-          "en": "Triggers when the value of capability [[capability]] changes. Select one of the capabilities defined in compound definition and use the result token of the corresponding type",
-          "de": "Wird ausgelöst, wenn sich der Wert des Attributs [[capability]] ändert. Wähle eines der in der Compound-Definition definierten Attribute aus und verwende den Ergebnistoken des entsprechenden Typs.",
-          "nl": "Wordt geactiveerd wanneer de waarde van capability [[capability]] verandert. Selecteer een van de mogelijkheden die zijn gedefinieerd in de compound definitie en gebruik het resultaattoken van het overeenkomstige type"
+          "en": "Triggers when the value of capability [[capability]] changes. Select one of the device capabilities and use the result token of the corresponding type",
+          "de": "Wird ausgelöst, wenn sich der Wert des Attributs [[capability]] ändert. Wähle eines Geräte-Attribute aus und verwende den Ergebnistoken des entsprechenden Typs.",
+          "nl": "Wordt geactiveerd wanneer de waarde van capability [[capability]] verandert. Selecteer een van de apparaatmogelijkheden en gebruik het resultaattoken van het overeenkomstige type"
         },
         "tokens": [
           {
@@ -6790,22 +6790,17 @@
                 "de": "In Gesamtenergie einbeziehen",
                 "nl": "In totale energie opnemen"
               }
-            },
-            {
-              "id": "set_energy_home_battery",
-              "type": "checkbox",
-              "value": false,
-              "label": {
-                "en": "Home Battery",
-                "de": "Hausbatterie",
-                "nl": "Huisbatterij"
-              },
-              "hint": {
-                "en": "Define a device with class=battery having a measure_power capability as home battery. Provide positive values to indicate the battery is consuming energy (charging), provide negative values to indicate the battery is delivering energy back to the home (discharging)",
-                "de": "Definiere ein Gerät mit der Klasse 'battery' und der Capability 'measure_power' als Hausbatterie. Gib positive Werte an, um anzuzeigen, dass die Batterie Energie verbraucht (lädt), und negative Werte, um anzuzeigen, dass die Batterie Energie an das Haus zurückgibt (entlädt).",
-                "nl": "Definieer een apparaat met class=battery met een measure_power-mogelijkheid als thuisbatterij. Geef positieve waarden om aan te geven dat de batterij energie verbruikt (opladen), geef negatieve waarden om aan te geven dat de batterij energie teruglevert aan het huis (ontladen)"
-              }
-            },
+            }
+          ]
+        },
+        {
+          "type": "group",
+          "label": {
+            "en": "Electricity Meter",
+            "de": "Stromzähler",
+            "nl": "Elektriciteitsmeter"
+          },
+          "children": [
             {
               "id": "set_energy_cumulative_imported_capability",
               "type": "text",
@@ -6825,25 +6820,84 @@
                 "de": "Zähler-Capability für exportierte Energie",
                 "nl": "Meter capability voor exporteerde energie"
               }
+            }
+          ]
+        },
+        {
+          "type": "group",
+          "label": {
+            "en": "HomeyEnergy",
+            "de": "HomeyEnergy",
+            "nl": "HomeyEnergy"
+          },
+          "children": [
+            {
+              "id": "set_energy_type",
+              "type": "dropdown",
+              "value": "",
+              "label": {
+                "en": "HomeyEnergy device type",
+                "de": "HomeyEnergy-Gerätetyp",
+                "nl": "HomeyEnergy-apparaattype"
+              },
+              "hint": {
+                "en": "Choose an device type for HomeyEnergy. Fill the meter capabilities for imported and exported energy.",
+                "de": "Wählen Sie ein Geräte-Typ für HomeyEnergy. Füllen Sie die Zähler-Capabilities für importierte und exportierte Energie.",
+                "nl": "Kies een apparaattype voor HomeyEnergy. Vul de meter capabilities voor importeerde en exporteerde energie."
+              },
+              "values": [
+                {
+                  "id": "",
+                  "label": {
+                    "en": "No HomeyEnergy device",
+                    "de": "Kein HomeyEnergy-Gerät",
+                    "nl": "Geen HomeyEnergy-apparaat"
+                  }
+                },
+                {
+                  "id": "homeBattery",
+                  "label": {
+                    "en": "Home Battery",
+                    "de": "Hausbatterie",
+                    "nl": "Huisbatterij"
+                  }
+                },
+                {
+                  "id": "evCharger",
+                  "label": {
+                    "en": "EV Charger",
+                    "de": "EV-Ladegerät",
+                    "nl": "EV-lader"
+                  }
+                },
+                {
+                  "id": "electricCar",
+                  "label": {
+                    "en": "Electric car",
+                    "de": "E-Auto",
+                    "nl": "Elektrische auto"
+                  }
+                }
+              ]
             },
             {
-              "id": "set_energy_battery_charged_capability",
+              "id": "set_energy_meter_power_imported_capability",
               "type": "text",
               "value": "",
               "label": {
-                "en": "Battery capability for charged energy",
-                "de": "Batterie-Capability für geladene Energie",
-                "nl": "Batterij capability voor opgeladen energie"
+                "en": "Capability for imported/charged energy",
+                "de": "Capability für importierte/geladene Energie",
+                "nl": "Capability voor importeerde/opgeladen energie"
               }
             },
             {
-              "id": "set_energy_battery_discharged_capability",
+              "id": "set_energy_meter_power_exported_capability",
               "type": "text",
               "value": "",
               "label": {
-                "en": "Battery capability for discharged energy",
-                "de": "Batterie-Capability für entladene Energie",
-                "nl": "Batterij capability voor ontladen energie"
+                "en": "Capability for exported/discharged energy",
+                "de": "Capability für exportierte/entladene Energie",
+                "nl": "Capability voor exporteerde/opgeladen energie"
               }
             }
           ]

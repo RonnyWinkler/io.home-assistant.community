@@ -10,9 +10,9 @@
         "nl": "Waarde van capability [[capability]] gewijzigd"
     },
     "hint": {
-        "en": "Triggers when the value of capability [[capability]] changes. Select one of the capabilities defined in compound definition and use the result token of the corresponding type",
-        "de": "Wird ausgelöst, wenn sich der Wert des Attributs [[capability]] ändert. Wähle eines der in der Compound-Definition definierten Attribute aus und verwende den Ergebnistoken des entsprechenden Typs.",
-        "nl": "Wordt geactiveerd wanneer de waarde van capability [[capability]] verandert. Selecteer een van de mogelijkheden die zijn gedefinieerd in de compound definitie en gebruik het resultaattoken van het overeenkomstige type"
+        "en": "Triggers when the value of capability [[capability]] changes. Select one of the device capabilities and use the result token of the corresponding type",
+        "de": "Wird ausgelöst, wenn sich der Wert des Attributs [[capability]] ändert. Wähle eines Geräte-Attribute aus und verwende den Ergebnistoken des entsprechenden Typs.",
+        "nl": "Wordt geactiveerd wanneer de waarde van capability [[capability]] verandert. Selecteer een van de apparaatmogelijkheden en gebruik het resultaattoken van het overeenkomstige type"
     },
     "tokens": [
         {

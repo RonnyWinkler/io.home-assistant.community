@@ -717,10 +717,22 @@ class BaseDriver extends Homey.Driver {
                 }
                 let energy = device.getEnergy();
                 if (energy && energy.cumulativeImportedCapability == capability){
-                    entity["energy"] = "imported";
+                    entity["energy"] = "meter_imported";
                 }
                 else if (energy && energy.cumulativeExportedCapability == capability){
-                    entity["energy"] = "exported";
+                    entity["energy"] = "meter_exported";
+                }
+                else if (energy && energy.meterPowerImportedCapability == capability && energy.homeBattery == true){
+                    entity["energy"] = "battery_charged";
+                }
+                else if (energy && energy.meterPowerExportedCapability == capability && energy.homeBattery == true){
+                    entity["energy"] = "battery_discharged";
+                }
+                else if (energy && energy.meterPowerImportedCapability == capability && energy.evCharger == true){
+                    entity["energy"] = "ev_charger_charged";
+                }
+                else if (energy && energy.meterPowerExportedCapability == capability && energy.evCharger == true){
+                    entity["energy"] = "ev_charger_discharged";
                 }
                 else{
                     entity["energy"] = "default";
@@ -920,14 +932,34 @@ class BaseDriver extends Homey.Driver {
                         case 'battery_charged':
                             energy["meterPowerImportedCapability"] = capability;
                             energy['homeBattery'] = true;
-                            settings["set_energy_battery_charged_capability"] = capability;
-                            settings['set_energy_home_battery'] = true;
+                            delete energy['evCharger'];
+                            delete energy['electricCar'];
+                            settings["set_energy_meter_power_imported_capability"] = capability;
+                            settings['set_energy_type'] = 'homeBattery';
                             break;
                         case 'battery_discharged':
                             energy["meterPowerExportedCapability"] = capability;
                             energy['homeBattery'] = true;
-                            settings["set_energy_battery_discharged_capability"] = capability;
-                            settings['set_energy_home_battery'] = true;
+                            delete energy['evCharger'];
+                            delete energy['electricCar'];
+                            settings["set_energy_meter_power_exported_capability"] = capability;
+                            settings['set_energy_type'] = 'homeBattery';
+                            break;
+                        case 'ev_charger_charged':
+                            energy["meterPowerImportedCapability"] = capability;
+                            energy['evCharger'] = true;
+                            delete energy['homeBattery'];
+                            delete energy['electricCar'];
+                            settings["set_energy_meter_power_imported_capability"] = capability;
+                            settings['set_energy_type'] = 'evCharger';
+                            break;
+                        case 'battery_discharged':
+                            energy["meterPowerExportedCapability"] = capability;
+                            energy['evCharger'] = true;
+                            delete energy['homeBattery'];
+                            delete energy['electricCar'];
+                            settings["set_energy_meter_power_exported_capability"] = capability;
+                            settings['set_energy_type'] = 'evCharger';
                             break;
                       }
                     await device.setEnergy( energy );
@@ -995,7 +1027,7 @@ class BaseDriver extends Homey.Driver {
                         let energy = JSON.parse(JSON.stringify(device.getEnergy())) || {};
                         let settings = {};
                         switch (data.energy.cumulativeCapabilityOption){
-                            case 'imported':
+                            case 'meter_imported':
                                 energy["cumulativeImportedCapability"] = capabilities[i];
                                 energy["cumulative"] = true;
                                 settings["set_energy_cumulative_imported_capability"] = capabilities[i];
@@ -1005,7 +1037,7 @@ class BaseDriver extends Homey.Driver {
                                     settings["set_energy_cumulative_exported_capability"] = '';
                                 }
                                 break;
-                            case 'exported':
+                            case 'meter_exported':
                                 energy["cumulativeExportedCapability"] = capabilities[i];
                                 energy["cumulative"] = true;
                                 settings["set_energy_cumulative_exported_capability"] = capabilities[i];
@@ -1013,6 +1045,54 @@ class BaseDriver extends Homey.Driver {
                                 if (energy["cumulativeImportedCapability"] == capabilities[i]){
                                     delete energy["cumulativeImportedCapability"];
                                     settings["set_energy_cumulative_imported_capability"] = '';
+                                }
+                                break;
+                            case 'battery_charged':
+                                energy["meterPowerImportedCapability"] = capabilities[i];
+                                energy["homeBattery"] = true;
+                                delete energy["evCharger"];
+                                delete energy["electricCar"];
+                                settings["set_energy_meter_power_imported_capability"] = capabilities[i];
+                                settings["set_energy_type"] = 'homeBattery';
+                                if (energy["meterPowerExportedCapability"] == capabilities[i]){
+                                    delete energy["meterPowerExportedCapability"];
+                                    settings["set_energy_meter_power_exported_capability"] = '';
+                                }
+                                break;
+                            case 'battery_discharged':
+                                energy["meterPowerExportedCapability"] = capabilities[i];
+                                energy["homeBattery"] = true;
+                                delete energy["evCharger"];
+                                delete energy["electricCar"];
+                                settings["set_energy_meter_power_exported_capability"] = capabilities[i];
+                                settings["set_energy_type"] = 'homeBattery';
+                                if (energy["meterPowerImportedCapability"] == capabilities[i]){
+                                    delete energy["meterPowerImportedCapability"];
+                                    settings["set_energy_meter_power_imported_capability"] = '';
+                                }
+                                break;
+                            case 'ev_charge_charged':
+                                energy["meterPowerImportedCapability"] = capabilities[i];
+                                energy["evCharger"] = true;
+                                delete energy["homeBattery"];
+                                delete energy["electricCar"];
+                                settings["set_energy_meter_power_imported_capability"] = capabilities[i];
+                                settings["set_energy_type"] = 'evCharger';
+                                if (energy["meterPowerExportedCapability"] == capabilities[i]){
+                                    delete energy["meterPowerExportedCapability"];
+                                    settings["set_energy_meter_power_exported_capability"] = '';
+                                }
+                                break;
+                            case 'ev_charge_discharged':
+                                energy["meterPowerExportedCapability"] = capabilities[i];
+                                energy["evCharger"] = true;
+                                delete energy["homeBattery"];
+                                delete energy["electricCar"];
+                                settings["set_energy_meter_power_exported_capability"] = capabilities[i];
+                                settings["set_energy_type"] = 'evCharger';
+                                if (energy["meterPowerImportedCapability"] == capabilities[i]){
+                                    delete energy["meterPowerImportedCapability"];
+                                    settings["set_energy_meter_power_imported_capability"] = '';
                                 }
                                 break;
                             case 'default':

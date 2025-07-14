@@ -95,12 +95,26 @@ class BaseDevice extends Homey.Device {
             // update energy object in settings
             let energy = this.getEnergy() || {};
             let settings = {};
+            if (energy["homeBattery"] != undefined && energy["homeBattery"] == true){
+                settings["set_energy_type"] = 'homeBattery';
+            }
+            else if (energy["evCharger"] != undefined && energy["evCharger"] == true){
+                settings["set_energy_type"] = 'evCharger';
+            }
+            else if (energy["electricCar"] != undefined && energy["electricCar"] == true){
+                settings["set_energy_type"] = 'electricCar';
+            }
+            else{
+                settings["set_energy_type"] = '';
+            }
             settings["set_energy_cumulative"] =  energy["cumulative"] != undefined ? energy["cumulative"] : false;
-            settings["set_energy_home_battery"] = energy["homeBattery"] != undefined ? energy["homeBattery"] : false;
+            // settings["set_energy_home_battery"] = energy["homeBattery"] != undefined ? energy["homeBattery"] : false;
+            // settings["set_energy_ev_charger"] = energy["evCharger"] != undefined ? energy["evCharger"] : false;
+            // settings["set_energy_electric_car"] = energy["electricCar"] != undefined ? energy["electricCar"] : false;
             settings["set_energy_cumulative_imported_capability"] = energy["cumulativeImportedCapability"] != undefined ? energy["cumulativeImportedCapability"] : "";
             settings["set_energy_cumulative_exported_capability"] = energy["cumulativeExportedCapability"] != undefined ? energy["cumulativeExportedCapability"] : "";
-            settings["set_energy_battery_charged_capability"] = energy["meterPowerImportedCapability"] != undefined ? energy["meterPowerImportedCapability"] : "";
-            settings["set_energy_battery_discharged_capability"] = energy["meterPowerExportedCapability"] != undefined ? energy["meterPowerExportedCapability"] : "";
+            settings["set_energy_meter_power_imported_capability"] = energy["meterPowerImportedCapability"] != undefined ? energy["meterPowerImportedCapability"] : "";
+            settings["set_energy_meter_power_exported_capability"] = energy["meterPowerExportedCapability"] != undefined ? energy["meterPowerExportedCapability"] : "";
             await this.setSettings(settings);
         }
         catch(error){
@@ -843,9 +857,47 @@ class BaseDevice extends Homey.Device {
         await this.setEnergy( energy );
     }
 
-    async setEnergyHomeBattery(value = false){
+    // async setEnergyHomeBattery(value = false){
+    //     let energy = JSON.parse(JSON.stringify(this.getEnergy())) || {};
+    //     energy["homeBattery"] =  value;
+    //     await this.setEnergy( energy );
+    // }
+
+    // async setEnergyEvCharger(value = false){
+    //     let energy = JSON.parse(JSON.stringify(this.getEnergy())) || {};
+    //     energy["evCharger"] =  value;
+    //     await this.setEnergy( energy );
+    // }
+
+    // async setEnergyElectricCar(value = false){
+    //     let energy = JSON.parse(JSON.stringify(this.getEnergy())) || {};
+    //     energy["electricCar"] =  value;
+    //     await this.setEnergy( energy );
+    // }
+
+    async setEnergyType(type){
         let energy = JSON.parse(JSON.stringify(this.getEnergy())) || {};
-        energy["homeBattery"] =  value;
+        switch (type){
+            case 'homeBattery':
+                energy["homeBattery"] =  true;
+                delete energy["evCharger"];
+                delete energy["electricCar"];
+                break;
+            case 'evCharger':
+                delete energy["homeBattery"];
+                energy["evCharger"] =  true;
+                delete energy["electricCar"];
+                break;
+            case 'electricCar':
+                delete energy["homeBattery"];
+                delete energy["evCharger"];
+                energy["electricCar"] =  true;
+                break;
+            default:
+                delete energy["homeBattery"];
+                delete energy["evCharger"];
+                delete energy["electricCar"];
+        }
         await this.setEnergy( energy );
     }
 
@@ -875,28 +927,28 @@ class BaseDevice extends Homey.Device {
         await this.setEnergy( energy );
     }
 
-    async setEnergyBatteryChargedCapability(value){
+    async setEnergyMeterPowerImportedCapability(value){
       let energy = JSON.parse(JSON.stringify(this.getEnergy())) || {};
       if (value == ''){
-          if (energy["meterPowerImportedCapability"]){
-              delete energy["meterPowerImportedCapability"];
+          if (energy["set_energy_meter_power_imported_capability"]){
+              delete energy["set_energy_meter_power_imported_capability"];
           }
       }
       else{
-          energy["meterPowerImportedCapability"] =  value;
+          energy["set_energy_meter_power_imported_capability"] =  value;
       }
       await this.setEnergy( energy );
     }
 
-    async setEnergyBatteryDischargedCapability(value){
+    async setEnergyMeterPowerExportedCapability(value){
       let energy = JSON.parse(JSON.stringify(this.getEnergy())) || {};
       if (value == ''){
-          if (energy["meterPowerExportedCapability"]){
-              delete energy["meterPowerExportedCapability"];
+          if (energy["set_energy_meter_power_exported_capability"]){
+              delete energy["set_energy_meter_power_exported_capability"];
           }
       }
       else{
-          energy["meterPowerExportedCapability"] =  value;
+          energy["set_energy_meter_power_exported_capability"] =  value;
       }
       await this.setEnergy( energy );
     }
@@ -961,16 +1013,39 @@ class BaseDevice extends Homey.Device {
                     await this.setEnergyCumulative(false);
                 } 
             }
-            if (settings.changedKeys.indexOf('set_energy_home_battery') > -1){
-                if (settings.newSettings['set_energy_home_battery']){
-                    this.log("onSettings(): set_energy_home_battery SET");
-                    await this.setEnergyHomeBattery(true);
-                }
-                else{
-                    this.log("onSettings(): set_energy_home_battery UNSET");
-                    await this.setEnergyHomeBattery(false);
-                } 
+            if (settings.changedKeys.indexOf('set_energy_type') > -1){
+                await this.setEnergyType(settings.newSettings['set_energy_type']);
             }
+            // if (settings.changedKeys.indexOf('set_energy_home_battery') > -1){
+            //     if (settings.newSettings['set_energy_home_battery']){
+            //         this.log("onSettings(): set_energy_home_battery SET");
+            //         await this.setEnergyHomeBattery(true);
+            //     }
+            //     else{
+            //         this.log("onSettings(): set_energy_home_battery UNSET");
+            //         await this.setEnergyHomeBattery(false);
+            //     } 
+            // }
+            // if (settings.changedKeys.indexOf('set_energy_ev_charger') > -1){
+            //     if (settings.newSettings['set_energy_ev_charger']){
+            //         this.log("onSettings(): set_energy_ev_charger SET");
+            //         await this.setEnergyEvCharger(true);
+            //     }
+            //     else{
+            //         this.log("onSettings(): set_energy_ev_charger UNSET");
+            //         await this.setEnergyEvCharger(false);
+            //     } 
+            // }
+            // if (settings.changedKeys.indexOf('set_energy_electric_car') > -1){
+            //     if (settings.newSettings['set_energy_electric_car']){
+            //         this.log("onSettings(): set_energy_electric_car SET");
+            //         await this.setEnergyElectricCar(true);
+            //     }
+            //     else{
+            //         this.log("onSettings(): set_energy_electric_car UNSET");
+            //         await this.setEnergyElectricCar(false);
+            //     } 
+            // }
             if (settings.changedKeys.indexOf('set_energy_cumulative_imported_capability') > -1){
                 if (settings.newSettings['set_energy_cumulative_imported_capability'] != undefined){
                     this.log("onSettings(): set_energy_cumulative_imported_capability: "+settings.newSettings['set_energy_cumulative_imported_capability']);
@@ -983,16 +1058,16 @@ class BaseDevice extends Homey.Device {
                     await this.setEnergyCumulativeExportedCapability(settings.newSettings['set_energy_cumulative_exported_capability']);
                 }
             }
-            if (settings.changedKeys.indexOf('set_energy_battery_charged_capability') > -1){
-              if (settings.newSettings['set_energy_battery_charged_capability'] != undefined){
-                  this.log("onSettings(): set_energy_battery_charged_capability: "+settings.newSettings['set_energy_battery_charged_capability']);
-                  await this.setEnergyBatteryChargedCapability(settings.newSettings['set_energy_battery_charged_capability']);
+            if (settings.changedKeys.indexOf('set_energy_meter_power_imported_capability') > -1){
+              if (settings.newSettings['set_energy_meter_power_imported_capability'] != undefined){
+                  this.log("onSettings(): set_energy_meter_power_imported_capability: "+settings.newSettings['set_energy_meter_power_imported_capability']);
+                  await this.setEnergyMeterPowerImportedCapability(settings.newSettings['set_energy_meter_power_imported_capability']);
               }
             }
-            if (settings.changedKeys.indexOf('set_energy_battery_discharged_capability') > -1){
-                if (settings.newSettings['set_energy_battery_discharged_capability'] != undefined){
-                    this.log("onSettings(): set_energy_battery_discharged_capability: "+settings.newSettings['set_energy_battery_discharged_capability']);
-                    await this.setEnergyBatteryDischargedCapability(settings.newSettings['set_energy_battery_discharged_capability']);
+            if (settings.changedKeys.indexOf('set_energy_meter_power_exported_capability') > -1){
+                if (settings.newSettings['set_energy_meter_power_exported_capability'] != undefined){
+                    this.log("onSettings(): set_energy_meter_power_exported_capability: "+settings.newSettings['set_energy_meter_power_exported_capability']);
+                    await this.setEnergyMeterPowerExportedCapability(settings.newSettings['set_energy_meter_power_exported_capability']);
                 }
             }
       }
