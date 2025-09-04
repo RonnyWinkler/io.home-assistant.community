@@ -858,7 +858,7 @@ class BaseDriver extends Homey.Driver {
             }
 
             // Add mode list for mode_select capability (select entity)
-            if (data.entity_id.startsWith('select.') && capability.startsWith('mode_select.')){
+            if ( ( data.entity_id.startsWith('select.') || data.entity_id.startsWith('input_select.') ) && capability.startsWith('mode_select.')){
                 try{
                     let values = [];
                     let entity = client.getEntity(data.entity_id);

@@ -670,6 +670,10 @@
   "1.12.0": {
     "en": "Added EV chargersettings for HomeyEnergy including optional charging/discharging data (V2G).",
     "de": "EV-Ladeparameter hinzugefügt für HomeyEnergy inklusive optionaler Ladungs-/Entladungsdaten (V2G)."
+  },
+  "1.12.1": {
+    "en": "Custom device: added mode list option for input_select domain.",
+    "de": "Benutzerdefiniertes Gerät: Modus-Option für input_select Domain hinzugefügt."
   }
 
 }
