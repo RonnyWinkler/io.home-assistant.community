@@ -674,6 +674,10 @@
   "1.12.1": {
     "en": "Custom device: added mode list option for input_select domain.",
     "de": "Benutzerdefiniertes Gerät: Modus-Option für input_select Domain hinzugefügt."
+  },
+  "1.13.0": {
+    "en": "Camera device: added live video support for Homey Dashboard (for HSL converted HA streams).",
+    "de": "Kamera-Gerät: Live-Video-Unterstutzung für Homey-Dashboard (für HSL konvertierte HA Streams)."
   }
 
 }

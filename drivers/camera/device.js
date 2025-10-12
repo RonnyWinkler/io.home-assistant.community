@@ -11,6 +11,12 @@ class CameraDevice extends BaseDevice {
         this.mediaImage = await this.homey.images.createImage();
         await this.setCameraImage('entity_picture', '',  this.mediaImage);
 
+        this.mediaVideo = await this.homey.videos.createVideoHLS();
+        this.mediaVideo.registerVideoUrlListener( async () => {         
+                return await this._getVideoUrl();
+        });
+        await this.setCameraVideo('entity_video', 'Video', this.mediaVideo);
+
         // Capability listener for device capabilities
         this.registerCapabilityListener('onoff', async (value, opts) => {
             await this._onCapabilityOnoff(value, opts);
@@ -20,6 +26,15 @@ class CameraDevice extends BaseDevice {
         this.registerCapabilityListener('button.reconnect', async () => {
             await this.clientReconnect()
         });
+
+        // Get camera URLs
+        // try{
+        //     this._streamUrl = await this._getStreamUrl();
+        //     this._snapshotUrl = await this._getSnapshotUrl();
+        // }
+        // catch(error){
+        //     this.error("Error getting camera urls: "+error.message);
+        // }
     }
 
     async updateCapabilities(){
@@ -160,6 +175,44 @@ class CameraDevice extends BaseDevice {
         stream.push(buffer);
         stream.push(null);
         return stream;
+    }
+
+    async _getVideoUrl(){
+        let url = await this._getStreamUrl();
+        url = url.url;
+        if ( ! (url.startsWith("http")) ){
+            url =  this.homey.settings.get("address") + url;
+        }
+
+        return {
+            url: url
+        }    
+    }
+
+    async _getStreamUrl(){
+        if (!this._client){
+            throw new Error("HA not connected");
+        }
+        return await this._client.sendMessage(
+            {
+                "id": 19,
+                "type": "camera/stream",
+                "entity_id": this.entityId
+            }
+        )
+    }
+
+    async _getSnapshotUrl(){
+        if (!this._client){
+            throw new Error("HA not connected");
+        }
+        return await this._client.sendMessage(
+            {
+                "id": 19,
+                "type": "camera_thumbnail",
+                "entity_id": this.entityId
+            }
+        )
     }
 
     // Settings ================================================================================================
