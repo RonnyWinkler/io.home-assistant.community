@@ -678,6 +678,10 @@
   "1.13.0": {
     "en": "Camera device: added live video support for Homey Dashboard (for HSL converted HA streams).",
     "de": "Kamera-Gerät: Live-Video-Unterstutzung für Homey-Dashboard (für HSL konvertierte HA Streams)."
+  },
+  "1.13.1": {
+    "en": "Added check for HP19 and missing video support.",
+    "de": "Prüfung ergänzt für HP19 und fehlende Video-Unterstutzung."
   }
 
 }

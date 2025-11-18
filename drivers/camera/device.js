@@ -7,16 +7,6 @@ class CameraDevice extends BaseDevice {
     async onInit() {
         await super.onInit();
 
-        this.mediaCover = null;
-        this.mediaImage = await this.homey.images.createImage();
-        await this.setCameraImage('entity_picture', '',  this.mediaImage);
-
-        this.mediaVideo = await this.homey.videos.createVideoHLS();
-        this.mediaVideo.registerVideoUrlListener( async () => {         
-                return await this._getVideoUrl();
-        });
-        await this.setCameraVideo('entity_video', 'Video', this.mediaVideo);
-
         // Capability listener for device capabilities
         this.registerCapabilityListener('onoff', async (value, opts) => {
             await this._onCapabilityOnoff(value, opts);
@@ -26,6 +16,22 @@ class CameraDevice extends BaseDevice {
         this.registerCapabilityListener('button.reconnect', async () => {
             await this.clientReconnect()
         });
+
+        // Add image 
+        this.mediaCover = null;
+        this.mediaImage = await this.homey.images.createImage();
+        await this.setCameraImage('entity_picture', '',  this.mediaImage);
+
+        try{
+            this.mediaVideo = await this.homey.videos.createVideoHLS();
+            this.mediaVideo.registerVideoUrlListener( async () => {         
+                    return await this._getVideoUrl();
+            });
+            await this.setCameraVideo('entity_video', 'Video', this.mediaVideo);
+        }
+        catch(error){
+            this.error("Error creating camera video: "+error.message);
+        }
 
         // Get camera URLs
         // try{
