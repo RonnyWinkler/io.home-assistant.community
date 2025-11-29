@@ -1,0 +1,19 @@
+{
+    "title": {
+        "en": "Turn off",
+        "de": "Ausschalten",
+        "nl": "Uit"
+    },
+    "titleFormatted": {
+        "en": "Turn off",
+        "de": "Ausschalten",
+        "nl": "Uit"
+    },
+    "args": [
+        {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=media"
+        }
+    ]
+}

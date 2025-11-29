@@ -16,6 +16,16 @@ class MediaDevice extends BaseDevice {
                 await this._onCapabilityOnoff(value, opts)
             });
         }
+        if(this.hasCapability("on_button")) {
+            this.registerCapabilityListener('on_button', async (value, opts) => {
+                await this._onCapabilityOnoff(true, opts)
+            });
+        }
+        if(this.hasCapability("off_button")) {
+            this.registerCapabilityListener('off_button', async (value, opts) => {
+                await this._onCapabilityOnoff(false, opts)
+            });
+        }
         if(this.hasCapability("volume_set")) {
             this.registerCapabilityListener('volume_set', async (value, opts) => {
                 await this._onCapabilityVolumeSet(value, opts)
@@ -248,25 +258,42 @@ class MediaDevice extends BaseDevice {
                     }
                 }
 
-                if (this.hasCapability("onoff") && data.state != null && data.state != undefined){
+                if ( ( this.hasCapability("onoff") || this.hasCapability("onoff_state") )  && data.state != null && data.state != undefined){
                     switch (data.state){
                         case "on":
                         case "idle":
                         case "playing":
                         case "paused":
                         case "buffering":
-                            await this.setCapabilityValue("onoff", true);
+                            if (this.hasCapability("onoff")){
+                                await this.setCapabilityValue("onoff", true);
+                            }
+                            if (this.hasCapability("onoff_state")){
+                                await this.setCapabilityValue("onoff_state", true);
+                            } 
                             break;
                         case "off":
                         case "standby":
-                            await this.setCapabilityValue("onoff", false);
+                            if (this.hasCapability("onoff")){
+                                await this.setCapabilityValue("onoff", false);
+                            }
+                            if (this.hasCapability("onoff_state")){
+                                await this.setCapabilityValue("onoff_state", false);
+                            } 
                             break;
                         case "unavailable":
                             break;
                         default:
-                            await  this.setCapabilityValue("onoff", false);
+                            if (this.hasCapability("onoff")){
+                                await  this.setCapabilityValue("onoff", false);
+                            }
+                            if (this.hasCapability("onoff_state")){
+                                await this.setCapabilityValue("onoff_state", false);
+                            } 
+
                     }
                 }
+
                 if (data.attributes.source_list == null || data.attributes.source_list == undefined){
                     if (this.getStoreValue("sourceList") != ''){
                         await this.setStoreValue("sourceList", '');
@@ -577,6 +604,14 @@ class MediaDevice extends BaseDevice {
         catch(error){
             throw error;
         }
+    }
+
+    async turnOn(){
+        this._onCapabilityOnoff(true, null);
+    }
+
+    async turnOff(){
+        this._onCapabilityOnoff(false, null);
     }
 
 }

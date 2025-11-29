@@ -682,6 +682,10 @@
   "1.13.1": {
     "en": "Added check for HP19 and missing video support.",
     "de": "Prüfung ergänzt für HP19 und fehlende Video-Unterstutzung."
+  },
+  "1.14.0": {
+    "en": "Added single on/off buttons for Media device based on HA features.",
+    "de": "Einzelne On/Off-Buttons für Medien-Geräte basierend auf HA-Funktionen hinzugefügt."
   }
 
 }

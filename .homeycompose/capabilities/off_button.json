@@ -1,0 +1,15 @@
+{
+    "type": "boolean",
+    "title": {
+        "en": "Turn off",
+        "de": "Ausschalten",
+        "nl": "Uit"
+    },
+    
+    "uiQuickAction": false,
+    "uiComponent": "button",
+    "insights": true,
+    "getable": false,
+    "setable": true,
+    "icon": "/assets/capability_icons/off_button.svg"
+  }

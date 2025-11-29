@@ -1,0 +1,12 @@
+{
+    "title": {
+        "en": "Device turned on",
+        "de": "Geräte wurde angeschaltet",
+        "nl": "Apparaat is aangezet"
+    },
+    "args": [{
+        "name": "device",
+        "type": "device",
+        "filter": "driver_id=media&capabilities=onoff_state"
+    }]
+}

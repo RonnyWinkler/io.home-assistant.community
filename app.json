@@ -1,7 +1,7 @@
 {
   "_comment": "This file is generated. Please edit .homeycompose/app.json instead.",
   "id": "io.home-assistant.community",
-  "version": "1.13.1",
+  "version": "1.14.0",
   "compatibility": ">=12.4.5",
   "sdk": 3,
   "brandColor": "#0DA6EA",
@@ -1047,6 +1047,36 @@
           }
         ],
         "id": "media_source_changed"
+      },
+      {
+        "title": {
+          "en": "Device turned off",
+          "de": "Geräte wurde ausgeschaltet",
+          "nl": "Apparaat is uitgeschakeld"
+        },
+        "args": [
+          {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=media&capabilities=onoff_state"
+          }
+        ],
+        "id": "onoff_state_false"
+      },
+      {
+        "title": {
+          "en": "Device turned on",
+          "de": "Geräte wurde angeschaltet",
+          "nl": "Apparaat is aangezet"
+        },
+        "args": [
+          {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=media&capabilities=onoff_state"
+          }
+        ],
+        "id": "onoff_state_true"
       },
       {
         "title": {
@@ -3682,6 +3712,46 @@
           }
         ],
         "id": "timerStop"
+      },
+      {
+        "title": {
+          "en": "Turn off",
+          "de": "Ausschalten",
+          "nl": "Uit"
+        },
+        "titleFormatted": {
+          "en": "Turn off",
+          "de": "Ausschalten",
+          "nl": "Uit"
+        },
+        "args": [
+          {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=media"
+          }
+        ],
+        "id": "turnOff"
+      },
+      {
+        "title": {
+          "en": "Turn on",
+          "de": "Einschalten",
+          "nl": "Aan"
+        },
+        "titleFormatted": {
+          "en": "Turn on",
+          "de": "Einschalten",
+          "nl": "Aan"
+        },
+        "args": [
+          {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=media"
+          }
+        ],
+        "id": "turnOn"
       },
       {
         "title": {
@@ -10904,6 +10974,34 @@
           }
         }
       ]
+    },
+    "off_button": {
+      "type": "boolean",
+      "title": {
+        "en": "Turn off",
+        "de": "Ausschalten",
+        "nl": "Uit"
+      },
+      "uiQuickAction": false,
+      "uiComponent": "button",
+      "insights": true,
+      "getable": false,
+      "setable": true,
+      "icon": "/assets/capability_icons/off_button.svg"
+    },
+    "on_button": {
+      "type": "boolean",
+      "title": {
+        "en": "Turn on",
+        "de": "Einschalten",
+        "nl": "Aan"
+      },
+      "uiQuickAction": false,
+      "uiComponent": "button",
+      "insights": true,
+      "getable": false,
+      "setable": true,
+      "icon": "/assets/capability_icons/on_button.svg"
     },
     "onoff_button": {
       "type": "boolean",

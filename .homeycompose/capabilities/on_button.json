@@ -1,0 +1,15 @@
+{
+    "type": "boolean",
+    "title": {
+        "en": "Turn on",
+        "de": "Einschalten",
+        "nl": "Aan"
+    },
+    
+    "uiQuickAction": false,
+    "uiComponent": "button",
+    "insights": true,
+    "getable": false,
+    "setable": true,
+    "icon": "/assets/capability_icons/on_button.svg"
+  }

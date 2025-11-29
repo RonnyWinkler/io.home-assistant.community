@@ -1,0 +1,19 @@
+{
+    "title": {
+        "en": "Turn on",
+        "de": "Einschalten",
+        "nl": "Aan"
+    },
+    "titleFormatted": {
+        "en": "Turn on",
+        "de": "Einschalten",
+        "nl": "Aan"
+    },
+    "args": [
+        {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=media"
+        }
+    ]
+}

@@ -572,6 +572,31 @@ class App extends Homey.App {
 			});
 		});
 
+		this._flowActionLockOpen = this.homey.flow.getActionCard('turnOn')
+		this._flowActionLockOpen.registerRunListener(async (args, state) => {
+			try{
+				await args.device.turnOn();
+				return true;
+			}
+			catch(error){
+				this.error("Error executing flowAction 'turnOn': "+  error.message);
+				throw new Error(error.message);
+			}
+		});
+
+		this._flowActionLockOpen = this.homey.flow.getActionCard('turnOff')
+		this._flowActionLockOpen.registerRunListener(async (args, state) => {
+			try{
+				await args.device.turnOff();
+				return true;
+			}
+			catch(error){
+				this.error("Error executing flowAction 'turnOff': "+  error.message);
+				throw new Error(error.message);
+			}
+		});
+
+
 		// Climate
 		this._flowActionClimateMode = this.homey.flow.getActionCard('climateMode');
 		this._flowActionClimateMode.registerRunListener(async (args, state) => {
