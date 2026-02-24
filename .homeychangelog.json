@@ -686,6 +686,10 @@
   "1.14.0": {
     "en": "Added single on/off buttons for Media device based on HA features.",
     "de": "Einzelne On/Off-Buttons für Medien-Geräte basierend auf HA-Funktionen hinzugefügt."
+  },
+  "1.15.0": {
+    "en": "Added Homey Thermostat capability support for input_number entities.",
+    "de": "Homey Thermostat-Capability-Unterstützung für input_number Entitaten hinzugefügt."
   }
 
 }

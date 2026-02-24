@@ -824,11 +824,11 @@ class BaseDriver extends Homey.Driver {
             if (data.add_as_number_input == true){
                 if (data.entity_id.startsWith('number.') || data.entity_id.startsWith('input_number.')){
                     let capabilityArray = capability.split(/\.(.*)/s);
-                    if (capabilityArray.length > 1){
-                        capability = 'dim.' + capabilityArray[1];
+                    if (capabilityArray.length > 1 && data.number_input.capability == 'dim'){
+                        capability = data.number_input.capability + '.' + capabilityArray[1];                        
                     }
                     else{
-                        capability = 'dim';
+                        capability = data.number_input.capability;
                     }
                     if (!isNaN(Number(data.number_input.min))){
                         capabilitiesOptions["min"] = Number(data.number_input.min);

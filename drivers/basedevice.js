@@ -815,7 +815,7 @@ class BaseDevice extends Homey.Device {
                         // Send state change to HA
                         await this._client.turnOnOff(entityId, valueObj[keys[i]]);
                     }
-                    if (key.startsWith("dim")){
+                    if (key.startsWith("dim") || key.startsWith("target_temperature")){
                         // Send state change to HA
                         await this._client.callService(entityId.split(".")[0], "set_value", {"entity_id": entityId, value: valueObj[keys[i]]});
                     }

@@ -24,6 +24,10 @@
     color: darkgray;
     display: inline;
   }
+
+  .homey-form-label.no_top_margin{
+    margin-top: 0px;
+  }
 </style>
 
 <script type="application/javascript">
@@ -50,6 +54,7 @@
       add_as_main_capability: document.getElementById('addAsMainCapabilityAdd').checked,
       add_as_number_input: document.getElementById('addEntityNumberInput').checked,
       number_input: {
+        capability: document.getElementById('entityNumberCapabilityAdd').value,
         min: document.getElementById('entityNumberRangeMinAdd').value,      
         max: document.getElementById('entityNumberRangeMaxAdd').value,
         step: document.getElementById('entityNumberRangeStepAdd').value
@@ -185,7 +190,7 @@
       document.getElementById('entityNumberRangeMaxAdd').value = '';
       document.getElementById('entityNumberRangeStepAdd').value = '';
       document.getElementById("divNumberInput").style.display = 'none';
-      document.getElementById("divNumberInputRange").style.display = 'none';
+      // document.getElementById("divNumberInputRange").style.display = 'none';
     }
   }
 
@@ -311,33 +316,40 @@
     <!-- Number Input options -->
     <div class="homey-form-group" id="divNumberInput" style="display:none">
       <fieldset class="homey-form-fieldset">
-        <label class="homey-form-checkbox">
-          <input class="homey-form-checkbox-input" type="checkbox" id="addEntityNumberInput" onclick="onAddEntityNumberInputClick()"/>
-          <span class="homey-form-checkbox-checkmark"></span>
-          <span class="homey-form-checkbox-text"><span data-i18n="repair.custom_device.entity_number_input"></span></span>
-        </label>
+        <div class="homey-form-group" id="divNumberInputSettings">
+          <label class="homey-form-checkbox" style="display:inline-flex;">
+            <input class="homey-form-checkbox-input" type="checkbox" id="addEntityNumberInput" onclick="onAddEntityNumberInputClick()"/>
+            <span class="homey-form-checkbox-checkmark"></span>
+            <span class="homey-form-checkbox-text"><span data-i18n="repair.custom_device.entity_number_input"></span></span>
+          </label>
+          <div class="info_icon" onClick="onInfoNumberInput()"> 
+            <span class="fa fa-icon fa-info-circle"></span>
+          </div>
+            <label class="homey-form-label no_top_margin" for="entityNumberCapabilityAdd"><span data-i18n="repair.custom_device.entity_number_input_capapility"></span></label>
+            <select class="homey-form-select" name="entityNumberCapabilityAdd" id="entityNumberCapabilityAdd">
+              <option value="dim"                 data-i18n="repair.custom_device.entity_number_input_capapility_dim"></option>
+              <option value="target_temperature"  data-i18n="repair.custom_device.entity_number_input_capapility_target_temperature"></option>
+            </select>
+        </div>
+        <div class="homey-form-group" id="divNumberInputRange">
+          <table>
+            <tr>
+              <td>
+                <label for="entityNumberRangeMinAdd" class="homey-form-label no_top_margin"><span data-i18n="repair.custom_device.number_range_min"></span></label>
+                <input id="entityNumberRangeMinAdd"  class="homey-form-input" type="text" value=""/>
+              </td>
+              <td>
+                <label for="entityNumberRangeMaxAdd" class="homey-form-label no_top_margin"><span data-i18n="repair.custom_device.number_range_max"></span></label>
+                <input id="entityNumberRangeMaxAdd"  class="homey-form-input" type="text" value=""/>
+              </td>
+              <td>
+                <label for="entityNumberRangeStepAdd" class="homey-form-label no_top_margin"><span data-i18n="repair.custom_device.number_range_step"></span></label>
+                <input id="entityNumberRangeStepAdd"  class="homey-form-input" type="text" value=""/>
+              </td>
+            </tr>
+          </table>
+        </div>
       </fieldset>
-      <div class="info_icon" onClick="onInfoNumberInput()"> 
-        <span class="fa fa-icon fa-info-circle"></span>
-      </div>
-    </div>
-    <div class="homey-form-group" id="divNumberInputRange" style="display:none">
-      <table>
-        <tr>
-          <td>
-            <label for="entityNumberRangeMinAdd" class="homey-form-label"><span data-i18n="repair.custom_device.number_range_min"></span></label>
-            <input id="entityNumberRangeMinAdd"  class="homey-form-input" type="text" value=""/>
-          </td>
-          <td>
-            <label for="entityNumberRangeMaxAdd" class="homey-form-label"><span data-i18n="repair.custom_device.number_range_max"></span></label>
-            <input id="entityNumberRangeMaxAdd"  class="homey-form-input" type="text" value=""/>
-          </td>
-          <td>
-            <label for="entityNumberRangeStepAdd" class="homey-form-label"><span data-i18n="repair.custom_device.number_range_step"></span></label>
-            <input id="entityNumberRangeStepAdd"  class="homey-form-input" type="text" value=""/>
-          </td>
-        </tr>
-      </table>
     </div>
 
     <!-- Converter Area -->
@@ -461,7 +473,7 @@
                           document.getElementById('entityNumberRangeStepAdd').value = '';
                         }
                         document.getElementById("divNumberInput").style.display = 'unset';
-                        document.getElementById("divNumberInputRange").style.display = 'unset';
+                        // document.getElementById("divNumberInputRange").style.display = 'unset';
                         
                       }
                       else{
@@ -470,7 +482,7 @@
                         document.getElementById('entityNumberRangeMaxAdd').value = '';
                         document.getElementById('entityNumberRangeStepAdd').value = '';
                         document.getElementById("divNumberInput").style.display = 'none';
-                        document.getElementById("divNumberInputRange").style.display = 'none';
+                        // document.getElementById("divNumberInputRange").style.display = 'none';
                       }
                   },
                   focus: () => {
