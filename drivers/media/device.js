@@ -303,11 +303,11 @@ class MediaDevice extends BaseDevice {
                     }                    
                 }
                 else{
-                    if (this.getStoreValue("sourceList") != JSON.stringify(data.attributes.source_list)){
+                    // if (this.getStoreValue("sourceList") != JSON.stringify(data.attributes.source_list)){
                         await this.setStoreValue("sourceList", JSON.stringify(data.attributes.source_list));
                         await this.setStoreValue("canSelectSource", true);
                         await this.setCapabilityEnumList('media_source', data.attributes.source_list);
-                    }
+                    // }
                     if (this.hasCapability('media_source') && data.attributes.source){
                         try{
                             await this.setCapabilityValue('media_source', data.attributes.source);

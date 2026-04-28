@@ -238,6 +238,9 @@ class BaseDevice extends Homey.Device {
             }
         });
         try{
+            if ( this.arraysEqual(values, this.getCapabilityEnumList(capability)) ){
+                return;
+            }
             if (values.length > 0 && !this.hasCapability(capability)){
                 await this.addCapability(capability);
             }
@@ -250,7 +253,7 @@ class BaseDevice extends Homey.Device {
         }catch(error){}
     }
 
-    async getCapabilityEnumList(capability){
+    getCapabilityEnumList(capability){
         let values = [];
         if (this.hasCapability(capability)){
             try{
@@ -269,6 +272,18 @@ class BaseDevice extends Homey.Device {
             }
         }
         return values;
+    }
+
+    arraysEqual(arr1, arr2) {
+        // 1. Compare length
+        if (arr1.length !== arr2.length) {
+            return false;
+        }
+        // 2. Extract IDs
+        const ids1 = arr1.map(obj => obj.id).sort();
+        const ids2 = arr2.map(obj => obj.id).sort();
+        // 3. Compare IDs
+        return JSON.stringify(ids1) === JSON.stringify(ids2);
     }
 
     getCapabilityType(capability){
