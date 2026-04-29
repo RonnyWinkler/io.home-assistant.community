@@ -698,6 +698,10 @@
   "1.15.2": {
     "en": "Reduced updates for mode lists.",
     "de": "Aktualisierungen von Modus-Listen reduziert."
+  },
+  "1.16.0": {
+    "en": "Added Kelvin support for light temperature.",
+    "de": "Kelvin-Unterstutzung für Lichttemperatur hinzugefügt."
   }
 
 }

@@ -16,6 +16,9 @@ class LightDevice extends BaseDevice {
 
         this._minMireds = 0;
         this._maxMireds = 0;
+        this._minKelvin = 0;
+        this._maxKelvin = 0;
+        this._tempType = 'M'; // M = mireds, K = Kelvin
 
         this.registerMultipleCapabilityListener(this.getCapabilities(), async (value, opts) => {
             await this._onCapabilitiesSet(value, opts)
@@ -65,8 +68,16 @@ class LightDevice extends BaseDevice {
             // this.log("Light update from HA: ");
             // this.log(JSON.stringify(data, null, "  "));
 
-            this._minMireds = data.attributes["min_mireds"] || 0;
-            this._maxMireds = data.attributes["max_mireds"] || 0;
+            if ( data.attributes.min_color_temp_kelvin !== undefined && data.attributes.max_color_temp_kelvin !== undefined ){
+                this._minKelvin = data.attributes["min_color_temp_kelvin"] || 0;
+                this._maxKelvin = data.attributes["max_color_temp_kelvin"] || 0;
+                this._tempType = 'K';                
+            }
+            else{
+                this._minMireds = data.attributes["min_mireds"] || 0;
+                this._maxMireds = data.attributes["max_mireds"] || 0;
+                this._tempType = 'M';
+            }
 
             if ( data.attributes.effect_list ){
                 this.effects = data.attributes.effect_list;
@@ -115,9 +126,22 @@ class LightDevice extends BaseDevice {
                 }
     
                 if(this.hasCapability("light_temperature")) {
-                    let temperature = data.attributes["color_temp"];
+                    let temperature = 0;
+                    if (this._tempType == 'K') {
+                        temperature = data.attributes["color_temp_kelvin"];
+                    }
+                    else{
+                        temperature = data.attributes["color_temp"];
+                    }
                     if(temperature) {
-                        let temp = 1.0 / (this._maxMireds - this._minMireds) * (temperature - this._minMireds);
+                        let temp = 0;
+                        if (this._tempType == 'K') {
+                            temp = (this._maxKelvin - temperature) / (this._maxKelvin - this._minKelvin);
+                            temp = Math.max(0, Math.min(1, temp));
+                        }
+                        else{
+                            temp = 1.0 / (this._maxMireds - this._minMireds) * (temperature - this._minMireds);
+                        }
                         await this.setCapabilityValue("light_temperature", temp);
                             // .catch(error => {
                             //     this.error("Device "+this.getName()+": Error set light_temperature capability, value: "+temp+" Error: "+error.message);
@@ -126,7 +150,7 @@ class LightDevice extends BaseDevice {
                 }
     
                 if(hasLightMode) {
-                    let light_mode = hs ? "color" : "temperature";
+                    // let light_mode = hs ? "color" : "temperature";
                     
                     await this.setCapabilityValue("light_mode", hs ? "color" : "temperature");
                         // .catch(error => {
@@ -227,7 +251,16 @@ class LightDevice extends BaseDevice {
                     let tmp = this._getCapabilityUpdate(valueObj, "light_temperature");
 
                     if(tmp != this.getCapabilityValue("light_temperature")) {
-                        data["color_temp"] = ((this._maxMireds - this._minMireds) * tmp) + this._minMireds;
+                        if ( this._tempType == 'K') {
+                            data["color_temp_kelvin"] = this._maxKelvin - tmp * (this._maxKelvin - this._minKelvin);
+                            // 0 is not allowed (division/0 at HA service call)
+                            if (data["color_temp_kelvin"] == 0){
+                                data["color_temp_kelvin"] = 1;
+                            }
+                        }
+                        else{
+                            data["color_temp"] = ((this._maxMireds - this._minMireds) * tmp) + this._minMireds;
+                        }
 
                         await this.setCapabilityValue("light_temperature", tmp);
                     }
