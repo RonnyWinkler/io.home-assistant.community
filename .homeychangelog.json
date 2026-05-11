@@ -702,6 +702,10 @@
   "1.16.0": {
     "en": "Added Kelvin support for light temperature.",
     "de": "Kelvin-Unterstutzung für Lichttemperatur hinzugefügt."
+  },
+  "1.16.1": {
+    "en": "Fixed color mode update.",
+    "de": "Farbmodus-Aktualisierung korrigiert."
   }
 
 }

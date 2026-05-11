@@ -150,9 +150,9 @@ class LightDevice extends BaseDevice {
                 }
     
                 if(hasLightMode) {
-                    // let light_mode = hs ? "color" : "temperature";
+                    let light_mode = data.attributes["color_mode"];
                     
-                    await this.setCapabilityValue("light_mode", hs ? "color" : "temperature");
+                    await this.setCapabilityValue("light_mode", light_mode === 'color_temp' ? "temperature": "color");
                         // .catch(error => {
                         //     this.error("Device "+this.getName()+": Error set light_mode capability, value: "+hs+" Error: "+error.message);
                         // });
