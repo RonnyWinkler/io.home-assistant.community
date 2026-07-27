@@ -1,0 +1,19 @@
+{
+  "id": "lawn_mower",
+  "name": {
+    "en": "Lawn Mower",
+    "de": "Rasenmäher",
+    "nl": "Grasmaaier"
+  },
+  "class": "lawnmower",
+  "capabilities": [
+    "mower_state",
+  
+    "button.reconnect"
+  ],
+  "images": {
+    "large": "/drivers/lawn_mower/assets/images/large.png",
+    "small": "/drivers/lawn_mower/assets/images/small.png"
+  },
+  "$extends": [ "capabilitiesOptions", "pair", "repair" ]
+}

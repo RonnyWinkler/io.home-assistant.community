@@ -706,6 +706,10 @@
   "1.16.1": {
     "en": "Fixed color mode update.",
     "de": "Farbmodus-Aktualisierung korrigiert."
+  },
+  "1.17.0": {
+    "en": "Added Lawn Mower.",
+    "de": "Rasenmäher hinzugefügt."
   }
 
 }

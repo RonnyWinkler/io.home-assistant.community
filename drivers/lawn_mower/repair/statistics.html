@@ -1,0 +1,174 @@
+
+<style>
+    .preLog {
+        font-size: 11px;
+        color: inherit;
+        border: initial;
+        padding: initial;
+        font-family: inherit;
+        line-height: 1.3;
+        user-select: text;
+    }
+
+    #divBtnRefreshStatistics {
+        position: sticky;
+        bottom: 0px;
+        /* bottom: calc(var(--homey-su-2) * -1);
+        padding: 0 0 var(--homey-su-2) 0; */
+        background: var(--homey-color-white);
+        border-radius: var(--homey-border-radius);
+        box-shadow: 0 5px 5px 15px var(--homey-color-white);
+    }    
+</style>
+<script type="application/javascript">
+
+    Homey.setTitle(Homey.__("repair.title.statistics"));
+    
+</script>
+
+<div>
+    <fieldset class="homey-form-fieldset">
+        <legend class="homey-form-legend"><span data-i18n="repair.statistics.entities_monitored"></span></legend>
+        <label class="homey-form-label" for="overview.entities" style="margin-top:0px"><span data-i18n="repair.statistics.entities"></span></label>
+        <input class="homey-form-input" id="overview.entities" type="text" value=""/>
+    </fieldset>
+
+    <fieldset class="homey-form-fieldset">
+        <legend class="homey-form-legend"><span data-i18n="repair.statistics.title_short"></span></legend>
+        <table>
+            <tr>
+                <td>
+                    <label class="homey-form-label" for="short.entities" style="margin-top:0px"><span data-i18n="repair.statistics.entity_list_updates"></span></label>
+                </td>
+                <td>
+                    <label class="homey-form-label" for="short.entitiesAmount" style="margin-top:0px"><span data-i18n="repair.statistics.entitiy_list_amount"></span></label>
+                </td>
+                <td>
+                    <label class="homey-form-label" for="short.entityStates" style="margin-top:0px"><span data-i18n="repair.statistics.entity_states"></span></label>
+                </td>
+                <td>
+                    <label class="homey-form-label" for="short.events" style="margin-top:0px"><span data-i18n="repair.statistics.events"></span></label>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input class="homey-form-input" id="short.entities" type="text" value=""/>
+                </td>
+                <td>
+                    <input class="homey-form-input" id="short.entitiesAmount" type="text" value=""/>
+                </td>
+                <td>
+                    <input class="homey-form-input" id="short.entityStates" type="text" value=""/>
+                </td>
+                <td>
+                    <input class="homey-form-input" id="short.events" type="text" value=""/>
+                </td>
+            </tr>
+        </table>
+    </fieldset>
+    <fieldset class="homey-form-fieldset">
+        <legend class="homey-form-legend"><span data-i18n="repair.statistics.title_sum"></span></legend>
+        <table>
+            <tr>
+                <td>
+                    <label class="homey-form-label" for="sum.entities" style="margin-top:0px"><span data-i18n="repair.statistics.entity_list_updates"></span></label>
+                </td>
+                <td>
+                    <label class="homey-form-label" for="sum.entitiesAmount" style="margin-top:0px"><span data-i18n="repair.statistics.entitiy_list_amount"></span></label>
+                </td>
+                <td>
+                    <label class="homey-form-label" for="sum.entityStates" style="margin-top:0px"><span data-i18n="repair.statistics.entity_states"></span></label>
+                </td>
+                <td>
+                    <label class="homey-form-label" for="sum.events" style="margin-top:0px"><span data-i18n="repair.statistics.events"></span></label>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input class="homey-form-input" id="sum.entities" type="text" value=""/>
+                </td>
+                <td>
+                    <input class="homey-form-input" id="sum.entitiesAmount" type="text" value=""/>
+                </td>
+                <td>
+                    <input class="homey-form-input" id="sum.entityStates" type="text" value=""/>
+                </td>
+                <td>
+                    <input class="homey-form-input" id="sum.events" type="text" value=""/>
+                </td>
+            </tr>
+        </table>
+    </fieldset>
+    <fieldset class="homey-form-fieldset">
+        <legend class="homey-form-legend"><span data-i18n="repair.statistics.title_app"></span></legend>
+        <table>
+            <tr>
+                <td>
+                    <label class="homey-form-label" for="app.startup" style="margin-top:0px"><span data-i18n="repair.statistics.startup"></span></label>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input class="homey-form-input" id="app.startup" type="text" value=""/>
+                </td>
+            </tr>
+        </table>
+    </fieldset>
+    <fieldset class="homey-form-fieldset">
+        <legend class="homey-form-legend"><span data-i18n="repair.statistics.title_connect"></span></legend>
+        <table>
+            <tr>
+                <td>
+                    <label class="homey-form-label" for="app.lastConnect" style="margin-top:0px"><span data-i18n="repair.statistics.last_connect"></span></label>
+                </td>
+                <td>
+                    <label class="homey-form-label" for="app.connects" style="margin-top:0px"><span data-i18n="repair.statistics.connects"></span></label>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input class="homey-form-input" id="app.lastConnect" type="text" value=""/>
+                </td>
+                <td>
+                    <input class="homey-form-input" id="app.connects" type="text" value=""/>
+                </td>
+            </tr>
+        </table>
+    </fieldset>
+</div>
+<!-- <fieldset class="homey-form-fieldset"> -->
+<div id="divBtnRefreshStatistics">
+    <button id="btnRefresh" class="homey-button-primary-full" onClick="refresh()"><span data-i18n="repair.statistics.refresh"></span></button>
+</div>
+<!-- </fieldset> -->
+
+<script type="application/javascript">
+
+    function refresh(){
+        Homey.emit('getStatistics').then((data) => onStatisticsUpdate(data));
+    }
+
+    function onStatisticsUpdate(data){
+        let statistics = data;
+        if (typeof data == "string"){
+            statistics = JSON.parse(data);
+        } 
+        document.getElementById('overview.entities').value = statistics.overview.entities;
+
+        document.getElementById('app.startup').value = statistics.overview.startup;
+        document.getElementById('app.lastConnect').value = statistics.overview.lastConnect;
+        document.getElementById('app.connects').value = statistics.overview.connects;
+
+        document.getElementById('short.entities').value = statistics.short.entityUpdates;
+        document.getElementById('short.entitiesAmount').value = statistics.short.entityUpdatesElements;
+        document.getElementById('short.entityStates').value = statistics.short.entityStates;
+        document.getElementById('short.events').value = statistics.short.events;
+        document.getElementById('sum.entities').value = statistics.sum.entityUpdates;
+        document.getElementById('sum.entitiesAmount').value = statistics.sum.entityUpdatesElements;
+        document.getElementById('sum.entityStates').value = statistics.sum.entityStates;
+        document.getElementById('sum.events').value = statistics.sum.events;
+    }
+
+    Homey.emit('getStatistics').then((data) => onStatisticsUpdate(data));
+
+</script>

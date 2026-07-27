@@ -1,0 +1,171 @@
+<link rel="stylesheet" type="text/css" href="../../../assets/css/autoComplete.css"/>
+
+<link rel="stylesheet" type="text/css" href="../../../assets/css/toastmessage.css"/>
+<script src="../../../assets/js/toastmessage.js"></script>
+
+<style>
+  #div_button {
+    position: sticky;
+    bottom: 0px;
+    /* bottom: calc(var(--homey-su-2) * -1);
+    padding: 0 0 var(--homey-su-2) 0; */
+    background: var(--homey-color-white);
+    border-radius: var(--homey-border-radius);
+    box-shadow: 0 5px 5px 15px var(--homey-color-white);
+  }
+  #spanResultlistEntity {
+    font-size: 12px;
+  }
+</style>
+
+<script type="application/javascript">
+  Homey.setTitle(Homey.__("repair.title.remove_entity"));
+  // Homey.setNavigationClose();
+
+  async function onRemoveEntity(){
+    document.getElementById('btnRemoveEntityProcess').classList.add("is-loading");
+    let data = {
+      entity_id: document.getElementById('entityRemove').value,
+      capability: document.getElementById('capabilityRemove').value
+    };
+    let result = await Homey.emit("removeEntity", data);
+    let message = new Message();
+    if (!result.removed){
+      message.error(result.message,
+        {
+          duration: 4,
+          closable: true,
+        }
+      );
+      // Homey.alert( result.message, 'error' );
+    }
+    else{
+      message.success(result.message,
+        {
+          duration: 4,
+          closable: true,
+        }
+      );
+      // Homey.alert( result.message, 'info' );
+      // Homey.showView("select");
+    }
+    document.getElementById('btnRemoveEntityProcess').classList.remove("is-loading");
+
+
+  }
+</script>
+
+<div>
+  <fieldset class="homey-form-fieldset">
+    <div class="homey-form-group">
+      <label for="entityRemove" class="homey-form-label"><span data-i18n="repair.custom_device.entity"></span></label>
+      <input id="entityRemove"  class="homey-form-input" type="text" value=""/>
+    </div>
+    <div class="homey-form-group">
+      <label for="capabilityRemove" class="homey-form-label"><span data-i18n="repair.custom_device.capability"></span></label>
+      <input id="capabilityRemove"  class="homey-form-input" type="text" value="" readonly="readonly" style="color: var(--homey-color-text-light);"/>
+    </div>
+    <div class="homey-form-group" id="div_button">
+      <button id="btnRemoveEntityProcess" class="homey-button-danger-shadow-full" onClick="onRemoveEntity()"><span data-i18n="repair.title.remove_entity"></span></button>
+    </div>
+  </fieldset>
+</div>
+
+
+<script src="../../../assets/js/autoComplete.min.js"></script>
+
+
+<script>
+  (function () {
+      let autoCompleteJS = new autoComplete({
+          selector: "#entityRemove",
+          placeHolder: Homey.__("repair.custom_device.entity_placeholder"),
+          debounce: 300,
+          threshold: 1,
+          data: {
+              src : (query) => {
+                  return Homey.emit("getCustomCapabilityList", query).then(function (result) {
+                      return result;
+                  });
+              },
+              keys: ["name", "entity_id", "capability"],
+              cache: false,
+              filter: (list) => {
+                // Filter duplicates
+                // incase of multiple data keys usage
+                const filteredResults = Array.from(
+                  new Set(list.map((value) => value.value.capability))
+                ).map((capability) => {
+                  return list.find((value) => value.value.capability === capability);
+                });
+                return filteredResults;
+              }
+          },
+          resultsList:{
+            element: (list, data) => {
+              const info = document.createElement("p");
+              if (data.results.length > 0) {
+                info.innerHTML = 
+                  Homey.__("repair.custom_device.result_count_01")+
+                  " <strong>"+
+                  data.results.length+
+                  "</strong> "+
+                  Homey.__("repair.custom_device.result_count_02")+
+                  " <strong>"+data.matches.length+"</strong> "+
+                  Homey.__("repair.custom_device.result_count_03");
+              } else {
+                info.innerHTML = 
+                  "<strong>"+
+                  Homey.__("repair.custom_device.result_count_04")+
+                  "</strong>";
+              }
+              list.prepend(info);
+            },
+            maxResults: 100,
+            noResults: true
+          },
+          resultItem: {
+            element: (item, data) => {
+              if (data.key == 'name'){
+                item.innerHTML =  "<span id='spanResultlistName'>"+data.match+"</span>"+
+                                  "<br>"+
+                                  "<span id='spanResultlistEntity'>"+data.value.entity_id+"</span>"+
+                                  "<br>"+
+                                  "<span id='spanResultlistEntity'>"+data.value.capability+"</span>";
+              }
+              if (data.key == 'entity_id'){
+                item.innerHTML =  "<span id='spanResultlistName'>"+data.value.name+"</span>"+
+                                  "<br>"+
+                                  "<span id='spanResultlistEntity'>"+data.match+"</span>"+
+                                  "<br>"+
+                                  "<span id='spanResultlistEntity'>"+data.value.capability+"</span>";
+              }
+              if (data.key == 'capability'){
+                item.innerHTML =  "<span id='spanResultlistName'>"+data.value.name+"</span>"+
+                                  "<br>"+
+                                  "<span id='spanResultlistEntity'>"+data.entity_id+"</span>"+
+                                  "<br>"+
+                                  "<span id='spanResultlistEntity'>"+data.match+"</span>";
+              }
+            },
+            highlight: true
+          },
+          events: {
+              input: {
+                  selection: (event) => {
+                      let value = event.detail.selection.value.entity_id;
+                      autoCompleteJS.input.value = value;
+                      document.getElementById('capabilityRemove').value = event.detail.selection.value.capability;
+                  },
+                  focus: () => {
+                    // if (autoCompleteJS.input.value.length) autoCompleteJS.start();
+                    autoCompleteJS.start();
+                  }
+              }
+          },
+          trigger: (query) => {
+              return true; // Search also for empty field
+          },
+      });
+  })();
+</script>
