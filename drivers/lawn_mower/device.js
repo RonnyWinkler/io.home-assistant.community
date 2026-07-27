@@ -34,8 +34,8 @@ class LawnmowerDevice extends BaseDevice {
     // Entity update ============================================================================================
     async onEntityUpdate(data) {
         await super.onEntityUpdate(data);
-        if(data && data.entity_id && data.entity_id == this.entityId && data.attributes != undefined && data.attributes.activity != undefined){
-            switch ( data.attributes.activity ){
+        if(data && data.entity_id && data.entity_id == this.entityId && data.state != undefined ){
+            switch ( data.state ){
                 case 'mowing':
                     await this.setCapabilityValue("mower_state", 'mowing');
                     break;
