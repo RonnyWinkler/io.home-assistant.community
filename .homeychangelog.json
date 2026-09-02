@@ -714,6 +714,10 @@
   "1.17.1": {
     "en": "Updated Lawn Mower.",
     "de": "Rasenmäher aktualisiert."
+  },
+  "1.17.2": {
+    "en": "Fixed lock state.",
+    "de": "Schloss-Status korrigiert."
   }
 
 }
