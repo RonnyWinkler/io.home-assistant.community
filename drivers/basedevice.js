@@ -701,6 +701,18 @@ class BaseDevice extends Homey.Device {
                         else{
                             tokens.value_number = newValue;
                         }
+
+                        if (keys[i].startsWith("target_temperature") || keys[i].startsWith("measure_temperature")){
+                            let ha_units = {};
+                            try{
+                                ha_units = this.getClient().getConfig().unit_system;
+                            }
+                            catch(error){ ha_units = {} }
+                            if (ha_units.temperature == '°F'){
+                                newValue = (newValue - 32) * 5/9;
+                            }
+                        }
+
                         if (oldValue!=newValue){
                           await this.setCapabilityValue(keys[i], newValue);
                         }
@@ -800,6 +812,8 @@ class BaseDevice extends Homey.Device {
                 }
                 catch(error){continue;}
                 let entityId = capabilitiesOptions.entity_id; 
+                // remote attribute
+                entityId = this.getEntityId(entityId);
                 let oldValue = this.getCapabilityValue(key);
                 if (entityId != undefined){
                     if (key.startsWith("onoff")){
@@ -830,10 +844,28 @@ class BaseDevice extends Homey.Device {
                         // Send state change to HA
                         await this._client.turnOnOff(entityId, valueObj[keys[i]]);
                     }
-                    if (key.startsWith("dim") || key.startsWith("target_temperature")){
+                    if (key.startsWith("dim")){
                         // Send state change to HA
                         await this._client.callService(entityId.split(".")[0], "set_value", {"entity_id": entityId, value: valueObj[keys[i]]});
                     }
+                    if (key.startsWith("target_temperature")){
+                        // Send state change to HA
+                        let ha_units = {};
+                        try{
+                            ha_units = this.getClient().getConfig().unit_system;
+                        }
+                        catch(error){ ha_units = {} }
+                        let temp = valueObj[keys[i]];
+                        if (ha_units.temperature == '°F'){
+                            temp = temp * 9/5 + 32;
+                        }
+                        // await this._client.callService(entityId.split(".")[0], "set_value", {"entity_id": entityId, value: valueObj[keys[i]]});
+                        await this._client.callService("climate", "set_temperature", {
+                            "entity_id": entityId,
+                            "temperature": temp
+                        });
+                    }
+
                     if (key.startsWith("button") && key != "button.reconnect"){
                         if (entityId.startsWith("scene") || entityId.startsWith("script")){
                             // Send state change to HA

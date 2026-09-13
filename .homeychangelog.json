@@ -718,6 +718,10 @@
   "1.17.2": {
     "en": "Fixed lock state.",
     "de": "Schloss-Status korrigiert."
+  },
+  "1.18.0": {
+    "en": "Added climate support for device entities. Added high/low target temperature for climate devices.",
+    "de": "Klima-Unterstutzung für Geräte-Entitaten hinzugefügt. Hoch-/Niedertemperatur für Klima-Geräte hinzugefügt."
   }
 
 }

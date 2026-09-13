@@ -8,6 +8,19 @@ class ClimateDevice extends BaseDevice {
         this._settings = this.getSettings();
         await super.onInit();
 
+        if (!this.hasCapability("target_temperature.high")){
+            await this.addCapability("target_temperature.high");
+        }
+        if (!this.hasCapability("target_temperature.low")){
+            await this.addCapability("target_temperature.low");
+        }
+        if (!this.hasCapability("measure_temperature.high")){
+            await this.addCapability("measure_temperature.high");
+        }
+        if (!this.hasCapability("measure_temperature.low")){
+            await this.addCapability("measure_temperature.low");
+        }
+
         // mode lists
         this.modesHvac = [];
         this.modesFan = [];
@@ -16,6 +29,12 @@ class ClimateDevice extends BaseDevice {
 
         this.registerCapabilityListener('target_temperature', async (value, opts) => {
             await this._onCapabilityTargetTemperature(value);
+        });
+        this.registerCapabilityListener('target_temperature.high', async (value, opts) => {
+            await this._onCapabilityTargetTemperatureHigh(value);
+        });
+        this.registerCapabilityListener('target_temperature.low', async (value, opts) => {
+            await this._onCapabilityTargetTemperatureLow(value);
         });
         this.registerCapabilityListener('climate_mode', async (value, opts) => {
             await this._onCapabilityClimateMode(value);
@@ -96,16 +115,70 @@ class ClimateDevice extends BaseDevice {
                         temp = (temp - 32) * 5/9;
                     }
                     await this.setCapabilityValue("measure_temperature", temp);
+                    await this.setCapabilityValue("measure_temperature.high", temp);
+                    await this.setCapabilityValue("measure_temperature.low", temp);
                 }
-                if (this.hasCapability("target_temperature") && 
-                    data.attributes.temperature != undefined &&
-                    data.attributes.temperature != "unavailable"){
-                    let temp = data.attributes.temperature;
-                    if (ha_units.temperature == '°F'){
-                        temp = (temp - 32) * 5/9;
+
+                if (data.state != undefined && data.state != this.getStoreValue("last_state")){
+                    this.setStoreValue("last_state", data.state);
+                    if (data.state == "heat_cool"){
+                        // activate high/low target temperatures
+                        this.setCapabilityOptions("target_temperature.high", { uiComponent: "thermostat" });
+                        this.setCapabilityOptions("target_temperature.low", { uiComponent: "thermostat" });
+                        this.setCapabilityOptions("measure_temperature.high", { uiComponent: "thermostat" });
+                        this.setCapabilityOptions("measure_temperature.low", { uiComponent: "thermostat" });
+                        this.setCapabilityOptions("target_temperature", { uiComponent: null });
                     }
-                    await this.setCapabilityValue("target_temperature", temp);
+                    else{
+                        // deactivate high/low target temperatures
+                        this.setCapabilityOptions("target_temperature.high", { uiComponent: null });
+                        this.setCapabilityOptions("target_temperature.low", { uiComponent: null });
+                        this.setCapabilityOptions("measure_temperature.high", { uiComponent: null });
+                        this.setCapabilityOptions("measure_temperature.low", { uiComponent: null });
+                        this.setCapabilityOptions("target_temperature", { uiComponent: "thermostat" });
+                    }
                 }
+
+                if (this.hasCapability("target_temperature")){
+                    if(data.attributes.temperature != undefined &&
+                        data.attributes.temperature != "unavailable"){
+                        let temp = data.attributes.temperature;
+                        if (ha_units.temperature == '°F'){
+                            temp = (temp - 32) * 5/9;
+                        }
+                        await this.setCapabilityValue("target_temperature", temp);
+                    }
+                    else{
+                        await this.setCapabilityValue("target_temperature", null);
+                    }
+                }
+                if (this.hasCapability("target_temperature.high")){ 
+                    if (data.attributes.target_temp_high != undefined &&
+                        data.attributes.target_temp_high != "unavailable"){
+                        let temp = data.attributes.target_temp_high;
+                        if (ha_units.temperature == '°F'){
+                            temp = (temp - 32) * 5/9;
+                        }
+                        await this.setCapabilityValue("target_temperature.high", temp);
+                    }
+                    else{
+                        await this.setCapabilityValue("target_temperature.high", null);
+                    }
+                }
+                if (this.hasCapability("target_temperature.low")){ 
+                    if (data.attributes.target_temp_low != undefined &&
+                        data.attributes.target_temp_low != "unavailable"){
+                        let temp = data.attributes.target_temp_low;
+                        if (ha_units.temperature == '°F'){
+                            temp = (temp - 32) * 5/9;
+                        }
+                        await this.setCapabilityValue("target_temperature.low", temp);
+                    }
+                    else{
+                        await this.setCapabilityValue("target_temperature.low", null);
+                    }
+                }
+
                 if (this.hasCapability("measure_humidity") && 
                     data.attributes.current_humidity != undefined &&
                     data.attributes.current_humidity != "off" &&
@@ -204,9 +277,60 @@ class ClimateDevice extends BaseDevice {
 
     async _onCapabilityTargetTemperature( value ) {
         let entityId = this.entityId;
+        let ha_units = {};
+        try{
+            ha_units = this.getClient().getConfig().unit_system;
+        }
+        catch(error){ ha_units = {} }
+        let temp = value;
+        let temp_high = this.getCapabilityValue("target_temperature.high");
+        let temp_low = this.getCapabilityValue("target_temperature.low");
+        if (ha_units.temperature == '°F'){
+            temp = temp * 9/5 + 32;
+            temp_high = temp_high * 9/5 + 32;
+            temp_low = temp_low * 9/5 + 32;
+        }
         await this._client.callService("climate", "set_temperature", {
             "entity_id": entityId,
-            "temperature": value
+            "temperature": temp,
+            "target_temp_high": temp_high,
+            "target_temp_low": temp_low
+        });
+    }
+
+    async _onCapabilityTargetTemperatureHigh( value ) {
+        let entityId = this.entityId;
+        let temp = this.getCapabilityValue("target_temperature");
+        let temp_high =  value;
+        let temp_low = this.getCapabilityValue("target_temperature.low");
+        if (ha_units.temperature == '°F'){
+            temp = temp * 9/5 + 32;
+            temp_high = temp_high * 9/5 + 32;
+            temp_low = temp_low * 9/5 + 32;
+        }
+        await this._client.callService("climate", "set_temperature", {
+            "entity_id": entityId,
+            "temperature": temp,
+            "target_temp_high": temp_high,
+            "target_temp_low": temp_low
+        });
+    }
+
+    async _onCapabilityTargetTemperatureLow( value ) {
+        let entityId = this.entityId;
+        let temp = this.getCapabilityValue("target_temperature");
+        let temp_high = this.getCapabilityValue("target_temperature.high");
+        let temp_low = value;
+        if (ha_units.temperature == '°F'){
+            temp = temp * 9/5 + 32;
+            temp_high = temp_high * 9/5 + 32;
+            temp_low = temp_low * 9/5 + 32;
+        }
+        await this._client.callService("climate", "set_temperature", {
+            "entity_id": entityId,
+            "temperature": temp,
+            "target_temp_high": temp_high,
+            "target_temp_low": temp_low
         });
     }
 

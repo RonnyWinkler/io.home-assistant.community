@@ -9,6 +9,10 @@
     "capabilities": [
       "measure_temperature",
       "target_temperature",
+      "measure_temperature.high",
+      "target_temperature.high",
+      "measure_temperature.low",
+      "target_temperature.low",
       "measure_humidity",
       "climate_mode",
       "climate_mode_fan",
@@ -18,6 +22,34 @@
     
       "button.reconnect"
     ],
+    "capabilitiesOptions": {
+      "target_temperature": {
+        "uiComponent": null
+      },
+      "target_temperature.high": {
+        "title": {
+          "en": "High target temperature",
+          "de": "Zieltemperatur hoch",
+          "nl": "Doeltemperatuur hoog"
+        },
+        "uiComponent": null
+      },
+      "target_temperature.low": {
+        "title": {
+          "en": "Low target temperature",
+          "de": "Zieltemperatur niedrig",
+          "nl": "Doeltemperatuur laag"
+        },
+        "uiComponent": null
+      },
+      "measure_temperature.high": {
+        "uiComponent": null
+      },
+      "measure_temperature.low": {
+        "uiComponent": null
+      }
+
+    },
     "images": {
       "large": "/drivers/climate/assets/images/large.png",
       "small": "/drivers/climate/assets/images/small.png"
