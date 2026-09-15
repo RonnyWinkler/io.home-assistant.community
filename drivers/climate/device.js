@@ -246,19 +246,26 @@ class ClimateDevice extends BaseDevice {
                     data.attributes.target_temp_step != this.getCapabilityOptions("target_temperature.min").step ||
                     data.attributes.target_temp_step != this.getCapabilityOptions("target_temperature.max").step
                 ){
+                    let min = data.attributes.min_temp;
+                    let max = data.attributes.max_temp;
+                    if (ha_units.temperature == '°F'){ 
+                        min = (min - 32) * 5/9;
+                        max = (max - 32) * 5/9;
+                    }
+
                     this.setCapabilityOptions("target_temperature", {
-                        "min": data.attributes.min_temp,
-                        "max": data.attributes.max_temp,
+                        "min": min,
+                        "max": max,
                         "step": data.attributes.target_temp_step
                     });
                     this.setCapabilityOptions("target_temperature.min", {
-                        "min": data.attributes.min_temp,
-                        "max": data.attributes.max_temp,
+                        "min": min,
+                        "max": max,
                         "step": data.attributes.target_temp_step
                     });
                     this.setCapabilityOptions("target_temperature.max", {
-                        "min": data.attributes.min_temp,
-                        "max": data.attributes.max_temp,
+                        "min": min,
+                        "max": max,
                         "step": data.attributes.target_temp_step
                     });
                 }

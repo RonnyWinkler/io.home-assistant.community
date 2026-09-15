@@ -734,6 +734,10 @@
   "1.18.3": {
     "en": "Added min/max/temp update for climate devices.",
     "de": "Min./Max./Zieltemperatur-Aktualisierung für Klima-Geräte hinzugefügt."
+  },
+  "1.18.4": {
+    "en": "Fixed min/max °F values.",
+    "de": "Min./Max.-Werte für °F korrigiert."
   }
 
 }
