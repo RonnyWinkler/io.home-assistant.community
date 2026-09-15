@@ -283,34 +283,26 @@ class ClimateDevice extends BaseDevice {
         }
         catch(error){ ha_units = {} }
         let temp = value;
-        let temp_high = this.getCapabilityValue("target_temperature.high");
-        let temp_low = this.getCapabilityValue("target_temperature.low");
         if (ha_units.temperature == '°F'){
             temp = temp * 9/5 + 32;
-            temp_high = temp_high * 9/5 + 32;
-            temp_low = temp_low * 9/5 + 32;
         }
         await this._client.callService("climate", "set_temperature", {
             "entity_id": entityId,
-            "temperature": temp,
-            "target_temp_high": temp_high,
-            "target_temp_low": temp_low
+            "temperature": temp
         });
     }
 
     async _onCapabilityTargetTemperatureHigh( value ) {
         let entityId = this.entityId;
-        let temp = this.getCapabilityValue("target_temperature");
         let temp_high =  value;
         let temp_low = this.getCapabilityValue("target_temperature.low");
+        if (temp_high == undefined || temp_low == undefined){ return; }
         if (ha_units.temperature == '°F'){
-            temp = temp * 9/5 + 32;
             temp_high = temp_high * 9/5 + 32;
             temp_low = temp_low * 9/5 + 32;
         }
         await this._client.callService("climate", "set_temperature", {
             "entity_id": entityId,
-            "temperature": temp,
             "target_temp_high": temp_high,
             "target_temp_low": temp_low
         });
@@ -318,17 +310,15 @@ class ClimateDevice extends BaseDevice {
 
     async _onCapabilityTargetTemperatureLow( value ) {
         let entityId = this.entityId;
-        let temp = this.getCapabilityValue("target_temperature");
         let temp_high = this.getCapabilityValue("target_temperature.high");
         let temp_low = value;
+        if (temp_high == undefined || temp_low == undefined){ return; }
         if (ha_units.temperature == '°F'){
-            temp = temp * 9/5 + 32;
             temp_high = temp_high * 9/5 + 32;
             temp_low = temp_low * 9/5 + 32;
         }
         await this._client.callService("climate", "set_temperature", {
             "entity_id": entityId,
-            "temperature": temp,
             "target_temp_high": temp_high,
             "target_temp_low": temp_low
         });

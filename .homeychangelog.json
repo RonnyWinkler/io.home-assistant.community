@@ -722,6 +722,10 @@
   "1.18.0": {
     "en": "Added climate support for device entities. Added high/low target temperature for climate devices.",
     "de": "Klima-Unterstutzung für Geräte-Entitaten hinzugefügt. Hoch-/Niedertemperatur für Klima-Geräte hinzugefügt."
+  },
+  "1.18.1": {
+    "en": "Fixed target temperature issue for climate devices.",
+    "de": "Zieltemperatur-Fehler bei Klima-Geräten korrigiert."
   }
 
 }
