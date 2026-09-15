@@ -726,6 +726,10 @@
   "1.18.1": {
     "en": "Fixed target temperature issue for climate devices.",
     "de": "Zieltemperatur-Fehler bei Klima-Geräten korrigiert."
+  },
+  "1.18.2": {
+    "en": "Added min/max/temp update for climate devices.",
+    "de": "Min./Max./Zieltemperatur-Aktualisierung für Klima-Geräte hinzugefügt."
   }
 
 }

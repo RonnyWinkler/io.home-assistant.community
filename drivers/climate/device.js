@@ -107,6 +107,7 @@ class ClimateDevice extends BaseDevice {
                     else{
                         await this.setCapabilityValue("climate_on", true);
                     }
+
                 }
                 if (data.attributes.current_temperature != undefined && 
                     data.attributes.current_temperature != "unavailable"){
@@ -233,6 +234,35 @@ class ClimateDevice extends BaseDevice {
                     await this.setCapabilityValue("climate_mode_swing", data.attributes.preset_swing);
                 }
 
+                // Update capability options
+                if (    
+                    data.attributes.min_temp != this.getCapabilityOptions("target_temperature").min ||
+                    data.attributes.min_temp != this.getCapabilityOptions("target_temperature.min").min ||
+                    data.attributes.min_temp != this.getCapabilityOptions("target_temperature.max").min ||
+                    data.attributes.max_max != this.getCapabilityOptions("target_temperature").max ||
+                    data.attributes.max_max != this.getCapabilityOptions("target_temperature.min").max ||
+                    data.attributes.max_max != this.getCapabilityOptions("target_temperature.max").max ||
+                    data.attributes.target_temp_step != this.getCapabilityOptions("target_temperature").steps ||
+                    data.attributes.target_temp_step != this.getCapabilityOptions("target_temperature.min").steps ||
+                    data.attributes.target_temp_step != this.getCapabilityOptions("target_temperature.max").steps
+                ){
+                    this.setCapabilityOptions("target_temperature", {
+                        "min": data.attributes.min_temp,
+                        "max": data.attributes.max_temp,
+                        "steps": data.attributes.target_temp_step
+                    });
+                    this.setCapabilityOptions("target_temperature.min", {
+                        "min": data.attributes.min_temp,
+                        "max": data.attributes.max_temp,
+                        "steps": data.attributes.target_temp_step
+                    });
+                    this.setCapabilityOptions("target_temperature.max", {
+                        "min": data.attributes.min_temp,
+                        "max": data.attributes.max_temp,
+                        "steps": data.attributes.target_temp_step
+                    });
+                }
+
             }
         }
         catch(error){
@@ -279,7 +309,7 @@ class ClimateDevice extends BaseDevice {
         let entityId = this.entityId;
         let ha_units = {};
         try{
-            ha_units = this.getClient().getConfig().unit_system;
+            ha_units = this.getClient().getConfig().unit_system || {};
         }
         catch(error){ ha_units = {} }
         let temp = value;
@@ -296,6 +326,11 @@ class ClimateDevice extends BaseDevice {
         let entityId = this.entityId;
         let temp_high =  value;
         let temp_low = this.getCapabilityValue("target_temperature.low");
+        let ha_units = {};
+        try{
+            ha_units = this.getClient().getConfig().unit_system || {};
+        }
+        catch(error){ ha_units = {} }
         if (temp_high == undefined || temp_low == undefined){ return; }
         if (ha_units.temperature == '°F'){
             temp_high = temp_high * 9/5 + 32;
@@ -312,6 +347,11 @@ class ClimateDevice extends BaseDevice {
         let entityId = this.entityId;
         let temp_high = this.getCapabilityValue("target_temperature.high");
         let temp_low = value;
+        let ha_units = {};
+        try{
+            ha_units = this.getClient().getConfig().unit_system || {};
+        }
+        catch(error){ ha_units = {} }
         if (temp_high == undefined || temp_low == undefined){ return; }
         if (ha_units.temperature == '°F'){
             temp_high = temp_high * 9/5 + 32;
