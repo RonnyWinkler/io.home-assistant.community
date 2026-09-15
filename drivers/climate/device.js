@@ -242,24 +242,24 @@ class ClimateDevice extends BaseDevice {
                     data.attributes.max_max != this.getCapabilityOptions("target_temperature").max ||
                     data.attributes.max_max != this.getCapabilityOptions("target_temperature.min").max ||
                     data.attributes.max_max != this.getCapabilityOptions("target_temperature.max").max ||
-                    data.attributes.target_temp_step != this.getCapabilityOptions("target_temperature").steps ||
-                    data.attributes.target_temp_step != this.getCapabilityOptions("target_temperature.min").steps ||
-                    data.attributes.target_temp_step != this.getCapabilityOptions("target_temperature.max").steps
+                    data.attributes.target_temp_step != this.getCapabilityOptions("target_temperature").step ||
+                    data.attributes.target_temp_step != this.getCapabilityOptions("target_temperature.min").step ||
+                    data.attributes.target_temp_step != this.getCapabilityOptions("target_temperature.max").step
                 ){
                     this.setCapabilityOptions("target_temperature", {
                         "min": data.attributes.min_temp,
                         "max": data.attributes.max_temp,
-                        "steps": data.attributes.target_temp_step
+                        "step": data.attributes.target_temp_step
                     });
                     this.setCapabilityOptions("target_temperature.min", {
                         "min": data.attributes.min_temp,
                         "max": data.attributes.max_temp,
-                        "steps": data.attributes.target_temp_step
+                        "step": data.attributes.target_temp_step
                     });
                     this.setCapabilityOptions("target_temperature.max", {
                         "min": data.attributes.min_temp,
                         "max": data.attributes.max_temp,
-                        "steps": data.attributes.target_temp_step
+                        "step": data.attributes.target_temp_step
                     });
                 }
 
