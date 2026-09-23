@@ -79,7 +79,40 @@ class SensorDevice extends BaseDevice {
         }
     }
 
+    async onSettings(settings){
+        super.onSettings(settings);
 
+        try {
+            let capabilityType = this.getCapabilityType(this.capability);
+            if (capabilityType == "number"){
+                if (settings.changedKeys.indexOf('unit') > -1){
+                    if (settings.newSettings['unit'] != undefined){
+                        this.log("onSettings(): Set UNIT: " + settings.newSettings['unit']);
+                        if (settings.newSettings['unit'] == ''){
+                            await this.setCapabilityOptions(this.capability, { units: null });
+                        }
+                        else{
+                            await this.setCapabilityOptions(this.capability, { units: settings.newSettings['unit'] });
+                        }
+                    }
+                }
+                if (settings.changedKeys.indexOf('decimals') > -1){
+                    if (settings.newSettings['decimals'] != undefined){
+                        this.log("onSettings(): Set DECIMALS: " + settings.newSettings['decimals']);
+                        if (settings.newSettings['decimals'] == '' || isNaN(settings.newSettings['decimals'])){
+                            await this.setCapabilityOptions(this.capability, { decimals: null });
+                        }
+                        else{
+                            await this.setCapabilityOptions(this.capability, { decimals: Number(settings.newSettings['decimals']) });
+                        }
+                    }
+                }
+            }
+        }
+        catch(error) {
+            this.error("onSettings error: "+ error.message);
+        }
+    }
 }
 
 module.exports = SensorDevice;

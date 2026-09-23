@@ -1,7 +1,7 @@
 {
   "_comment": "This file is generated. Please edit .homeycompose/app.json instead.",
   "id": "io.home-assistant.community",
-  "version": "1.18.4",
+  "version": "1.18.5",
   "compatibility": ">=12.4.5",
   "sdk": 3,
   "brandColor": "#0DA6EA",
@@ -9271,6 +9271,46 @@
                 "en": "Add button entities from HA device where this entity is assigned to.",
                 "de": "Füge Button-Entitäten des HA-Gerätes hinzu, dem diese Entität zugeordnet ist.",
                 "nl": "Voeg knoppen entiteiten toe vanaf het HA-apparaat waaraan deze entiteit is toegewezen."
+              }
+            }
+          ]
+        },
+        {
+          "type": "group",
+          "label": {
+            "en": "Options",
+            "de": "Optionen",
+            "nl": "Opties"
+          },
+          "children": [
+            {
+              "id": "unit",
+              "type": "text",
+              "value": "",
+              "label": {
+                "en": "Unit",
+                "de": "Einheit",
+                "nl": "Eenheid"
+              },
+              "hint": {
+                "en": "Specify the unit of measurement for this sensor.",
+                "de": "Geben Sie die Maßeinheit für diesen Sensor an.",
+                "nl": "Geef de eenheid van meting voor deze sensor op."
+              }
+            },
+            {
+              "id": "decimals",
+              "type": "text",
+              "value": "",
+              "label": {
+                "en": "Decimals",
+                "de": "Dezimalstellen",
+                "nl": "Decimalen"
+              },
+              "hint": {
+                "en": "Specify the number of decimal places for this sensor.",
+                "de": "Geben Sie die Anzahl der Dezimalstellen für diesen Sensor an.",
+                "nl": "Geef het aantal decimalen voor deze sensor op."
               }
             }
           ]

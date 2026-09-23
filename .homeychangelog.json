@@ -738,6 +738,10 @@
   "1.18.4": {
     "en": "Fixed min/max °F values.",
     "de": "Min./Max.-Werte für °F korrigiert."
+  },
+  "1.18.5": {
+    "en": "Unit/decimals settings added to sensor device.",
+    "de": "Einheit/Dezimalstellen-Einstellungen zum Sensor-Gerät hinzugefügt."
   }
 
 }
